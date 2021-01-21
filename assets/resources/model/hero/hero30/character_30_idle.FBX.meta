@@ -2,12 +2,12 @@
   "ver": "2.0.2",
   "importer": "fbx",
   "imported": true,
-  "uuid": "be70461b-47f2-4ac9-82d3-3798961bb7d1",
+  "uuid": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c",
   "files": [],
   "subMetas": {
     "fb329": {
       "importer": "gltf-mesh",
-      "uuid": "be70461b-47f2-4ac9-82d3-3798961bb7d1@fb329",
+      "uuid": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@fb329",
       "displayName": "",
       "id": "fb329",
       "name": "Sphere001.mesh",
@@ -24,7 +24,7 @@
     },
     "72dc7": {
       "importer": "gltf-mesh",
-      "uuid": "be70461b-47f2-4ac9-82d3-3798961bb7d1@72dc7",
+      "uuid": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@72dc7",
       "displayName": "",
       "id": "72dc7",
       "name": "Box010.mesh",
@@ -41,7 +41,7 @@
     },
     "73b7f": {
       "importer": "gltf-animation",
-      "uuid": "be70461b-47f2-4ac9-82d3-3798961bb7d1@73b7f",
+      "uuid": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@73b7f",
       "displayName": "",
       "id": "73b7f",
       "name": "Take 001.animation",
@@ -51,9 +51,10 @@
         "sample": 30,
         "span": {
           "from": 0,
-          "to": 1.9583333730697632
+          "to": 2.125
         },
-        "events": []
+        "events": [],
+        "speed": 1
       },
       "ver": "1.0.14",
       "imported": true,
@@ -65,7 +66,7 @@
     },
     "438fe": {
       "importer": "gltf-skeleton",
-      "uuid": "be70461b-47f2-4ac9-82d3-3798961bb7d1@438fe",
+      "uuid": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@438fe",
       "displayName": "",
       "id": "438fe",
       "name": "UnnamedSkeleton.skeleton",
@@ -82,7 +83,7 @@
     },
     "2da38": {
       "importer": "gltf-embeded-image",
-      "uuid": "be70461b-47f2-4ac9-82d3-3798961bb7d1@2da38",
+      "uuid": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@2da38",
       "displayName": "",
       "id": "2da38",
       "name": "Map #50.image",
@@ -99,7 +100,7 @@
     },
     "befa0": {
       "importer": "gltf-embeded-image",
-      "uuid": "be70461b-47f2-4ac9-82d3-3798961bb7d1@befa0",
+      "uuid": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@befa0",
       "displayName": "",
       "id": "befa0",
       "name": "Map #51.image",
@@ -116,7 +117,7 @@
     },
     "9a9bb": {
       "importer": "texture",
-      "uuid": "be70461b-47f2-4ac9-82d3-3798961bb7d1@9a9bb",
+      "uuid": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@9a9bb",
       "displayName": "",
       "id": "9a9bb",
       "name": "Map #50.texture",
@@ -128,7 +129,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": false,
-        "imageUuidOrDatabaseUri": "db://assets/res/model/roles/hero30/character_30.tga"
+        "imageUuidOrDatabaseUri": "db://assets/resources/model/hero/hero30/character_30.tga"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -139,7 +140,7 @@
     },
     "9a6d2": {
       "importer": "texture",
-      "uuid": "be70461b-47f2-4ac9-82d3-3798961bb7d1@9a6d2",
+      "uuid": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@9a6d2",
       "displayName": "",
       "id": "9a6d2",
       "name": "Map #51.texture",
@@ -151,7 +152,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": false,
-        "imageUuidOrDatabaseUri": "db://assets/res/model/roles/hero30/character_wp_30.tga"
+        "imageUuidOrDatabaseUri": "db://assets/resources/model/hero/hero30/character_wp_30.tga"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -162,7 +163,7 @@
     },
     "10ef3": {
       "importer": "gltf-material",
-      "uuid": "be70461b-47f2-4ac9-82d3-3798961bb7d1@10ef3",
+      "uuid": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@10ef3",
       "displayName": "",
       "id": "10ef3",
       "name": "Material #585.material",
@@ -178,7 +179,7 @@
     },
     "7c27d": {
       "importer": "gltf-material",
-      "uuid": "be70461b-47f2-4ac9-82d3-3798961bb7d1@7c27d",
+      "uuid": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@7c27d",
       "displayName": "",
       "id": "7c27d",
       "name": "Material #586.material",
@@ -192,12 +193,12 @@
       ],
       "subMetas": {}
     },
-    "1be60": {
+    "77d16": {
       "importer": "gltf-scene",
-      "uuid": "be70461b-47f2-4ac9-82d3-3798961bb7d1@1be60",
+      "uuid": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@77d16",
       "displayName": "",
-      "id": "1be60",
-      "name": "character_30_skill.prefab",
+      "id": "77d16",
+      "name": "character_30_idle.prefab",
       "userData": {
         "gltfIndex": 0
       },
@@ -213,50 +214,50 @@
     "imageMetas": [
       {
         "name": "Map #50",
-        "remap": "db://assets/res/model/roles/hero30/character_30.tga",
-        "uri": "be70461b-47f2-4ac9-82d3-3798961bb7d1@2da38"
+        "remap": "db://assets/resources/model/hero/hero30/character_30.tga",
+        "uri": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@2da38"
       },
       {
         "name": "Map #51",
-        "remap": "db://assets/res/model/roles/hero30/character_wp_30.tga",
-        "uri": "be70461b-47f2-4ac9-82d3-3798961bb7d1@befa0"
+        "remap": "db://assets/resources/model/hero/hero30/character_wp_30.tga",
+        "uri": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@befa0"
       }
     ],
     "legacyFbxImporter": false,
     "animationImportSettings": [
       {
         "name": "Take 001",
-        "duration": 1.9583333730697632,
+        "duration": 2.125,
         "fps": 30,
         "splits": [
           {
             "name": "Take 001",
             "from": 0,
-            "to": 1.9583333730697632,
+            "to": 2.125,
             "wrapMode": 2
           }
         ]
       }
     ],
-    "redirect": "be70461b-47f2-4ac9-82d3-3798961bb7d1@1be60",
+    "redirect": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@77d16",
     "assetFinder": {
       "meshes": [
-        "be70461b-47f2-4ac9-82d3-3798961bb7d1@fb329",
-        "be70461b-47f2-4ac9-82d3-3798961bb7d1@72dc7"
+        "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@fb329",
+        "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@72dc7"
       ],
       "skeletons": [
-        "be70461b-47f2-4ac9-82d3-3798961bb7d1@438fe"
+        "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@438fe"
       ],
       "textures": [
-        "be70461b-47f2-4ac9-82d3-3798961bb7d1@9a9bb",
-        "be70461b-47f2-4ac9-82d3-3798961bb7d1@9a6d2"
+        "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@9a9bb",
+        "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@9a6d2"
       ],
       "materials": [
-        "be70461b-47f2-4ac9-82d3-3798961bb7d1@10ef3",
-        "be70461b-47f2-4ac9-82d3-3798961bb7d1@7c27d"
+        "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@10ef3",
+        "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@7c27d"
       ],
       "scenes": [
-        "be70461b-47f2-4ac9-82d3-3798961bb7d1@1be60"
+        "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@77d16"
       ]
     }
   }
