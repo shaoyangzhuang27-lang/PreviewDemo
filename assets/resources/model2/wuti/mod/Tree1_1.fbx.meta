@@ -1,0 +1,187 @@
+{
+  "ver": "2.0.2",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "d4fe3087-d06a-4f41-8fab-003bd141d370",
+  "files": [],
+  "subMetas": {
+    "15805": {
+      "importer": "gltf-mesh",
+      "uuid": "d4fe3087-d06a-4f41-8fab-003bd141d370@15805",
+      "displayName": "",
+      "id": "15805",
+      "name": "polySurface37_Material0.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "49010": {
+      "importer": "gltf-embeded-image",
+      "uuid": "d4fe3087-d06a-4f41-8fab-003bd141d370@49010",
+      "displayName": "",
+      "id": "49010",
+      "name": "file10.image",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "adacb": {
+      "importer": "gltf-embeded-image",
+      "uuid": "d4fe3087-d06a-4f41-8fab-003bd141d370@adacb",
+      "displayName": "",
+      "id": "adacb",
+      "name": "file2.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e873a": {
+      "importer": "texture",
+      "uuid": "d4fe3087-d06a-4f41-8fab-003bd141d370@e873a",
+      "displayName": "",
+      "id": "e873a",
+      "name": "file2.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/model/wuti/tex/Trees_01.png"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "a39a5": {
+      "importer": "texture",
+      "uuid": "d4fe3087-d06a-4f41-8fab-003bd141d370@a39a5",
+      "displayName": "",
+      "id": "a39a5",
+      "name": "file10.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/model/wuti/tex/Trees_01.png"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c078d": {
+      "importer": "gltf-material",
+      "uuid": "d4fe3087-d06a-4f41-8fab-003bd141d370@c078d",
+      "displayName": "",
+      "id": "c078d",
+      "name": "Trees1_Alpha.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "5ba40": {
+      "importer": "gltf-material",
+      "uuid": "d4fe3087-d06a-4f41-8fab-003bd141d370@5ba40",
+      "displayName": "",
+      "id": "5ba40",
+      "name": "Tree1.material",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "08484": {
+      "importer": "gltf-scene",
+      "uuid": "d4fe3087-d06a-4f41-8fab-003bd141d370@08484",
+      "displayName": "",
+      "id": "08484",
+      "name": "Tree1_1.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "file2",
+        "remap": "db://assets/resources/model/wuti/tex/Trees_01.png",
+        "uri": "d4fe3087-d06a-4f41-8fab-003bd141d370@adacb"
+      },
+      {
+        "name": "file10",
+        "remap": "db://assets/resources/model/wuti/tex/Trees_01.png",
+        "uri": "d4fe3087-d06a-4f41-8fab-003bd141d370@49010"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "redirect": "d4fe3087-d06a-4f41-8fab-003bd141d370@08484",
+    "assetFinder": {
+      "meshes": [
+        "d4fe3087-d06a-4f41-8fab-003bd141d370@15805"
+      ],
+      "skeletons": [],
+      "textures": [
+        "d4fe3087-d06a-4f41-8fab-003bd141d370@e873a",
+        "d4fe3087-d06a-4f41-8fab-003bd141d370@a39a5"
+      ],
+      "materials": [
+        "d4fe3087-d06a-4f41-8fab-003bd141d370@c078d",
+        "d4fe3087-d06a-4f41-8fab-003bd141d370@5ba40"
+      ],
+      "scenes": [
+        "d4fe3087-d06a-4f41-8fab-003bd141d370@08484"
+      ]
+    }
+  }
+}

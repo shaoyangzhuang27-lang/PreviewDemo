@@ -1,0 +1,124 @@
+{
+  "ver": "2.0.2",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "eab88421-f3c3-4484-be29-d5db05901257",
+  "files": [],
+  "subMetas": {
+    "33102": {
+      "importer": "gltf-scene",
+      "uuid": "eab88421-f3c3-4484-be29-d5db05901257@33102",
+      "displayName": "",
+      "id": "33102",
+      "name": "building_05.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "89291": {
+      "importer": "gltf-mesh",
+      "uuid": "eab88421-f3c3-4484-be29-d5db05901257@89291",
+      "displayName": "",
+      "id": "89291",
+      "name": "Box005.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "4b934": {
+      "importer": "gltf-embeded-image",
+      "uuid": "eab88421-f3c3-4484-be29-d5db05901257@4b934",
+      "displayName": "",
+      "id": "4b934",
+      "name": "Map #9.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d4958": {
+      "importer": "texture",
+      "uuid": "eab88421-f3c3-4484-be29-d5db05901257@d4958",
+      "displayName": "",
+      "id": "d4958",
+      "name": "Map #9.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/model2/building/tex/building_05.tga"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "b32ec": {
+      "importer": "gltf-material",
+      "uuid": "eab88421-f3c3-4484-be29-d5db05901257@b32ec",
+      "displayName": "",
+      "id": "b32ec",
+      "name": "Material #416.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #9",
+        "remap": "db://assets/resources/model2/building/tex/building_05.tga",
+        "uri": "eab88421-f3c3-4484-be29-d5db05901257@4b934"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "redirect": "eab88421-f3c3-4484-be29-d5db05901257@33102",
+    "assetFinder": {
+      "meshes": [
+        "eab88421-f3c3-4484-be29-d5db05901257@89291"
+      ],
+      "skeletons": [],
+      "textures": [
+        "eab88421-f3c3-4484-be29-d5db05901257@d4958"
+      ],
+      "materials": [
+        "eab88421-f3c3-4484-be29-d5db05901257@b32ec"
+      ],
+      "scenes": [
+        "eab88421-f3c3-4484-be29-d5db05901257@33102"
+      ]
+    }
+  }
+}

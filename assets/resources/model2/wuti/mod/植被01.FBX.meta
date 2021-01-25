@@ -1,0 +1,124 @@
+{
+  "ver": "2.0.2",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "988bd456-3a42-4c5f-b811-2f9a5e00ae2d",
+  "files": [],
+  "subMetas": {
+    "77e73": {
+      "importer": "gltf-mesh",
+      "uuid": "988bd456-3a42-4c5f-b811-2f9a5e00ae2d@77e73",
+      "displayName": "",
+      "id": "77e73",
+      "name": "polySurface942.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "8245f": {
+      "importer": "gltf-embeded-image",
+      "uuid": "988bd456-3a42-4c5f-b811-2f9a5e00ae2d@8245f",
+      "displayName": "",
+      "id": "8245f",
+      "name": "file16.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "05fc7": {
+      "importer": "texture",
+      "uuid": "988bd456-3a42-4c5f-b811-2f9a5e00ae2d@05fc7",
+      "displayName": "",
+      "id": "05fc7",
+      "name": "file16.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/model/wuti/tex/zhibei-秋-2.png"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "9dfe7": {
+      "importer": "gltf-material",
+      "uuid": "988bd456-3a42-4c5f-b811-2f9a5e00ae2d@9dfe7",
+      "displayName": "",
+      "id": "9dfe7",
+      "name": "Trees3_alpha.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d7371": {
+      "importer": "gltf-scene",
+      "uuid": "988bd456-3a42-4c5f-b811-2f9a5e00ae2d@d7371",
+      "displayName": "",
+      "id": "d7371",
+      "name": "植被01.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "file16",
+        "remap": "db://assets/resources/model/wuti/tex/zhibei-秋-2.png",
+        "uri": "988bd456-3a42-4c5f-b811-2f9a5e00ae2d@8245f"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "redirect": "988bd456-3a42-4c5f-b811-2f9a5e00ae2d@d7371",
+    "assetFinder": {
+      "meshes": [
+        "988bd456-3a42-4c5f-b811-2f9a5e00ae2d@77e73"
+      ],
+      "skeletons": [],
+      "textures": [
+        "988bd456-3a42-4c5f-b811-2f9a5e00ae2d@05fc7"
+      ],
+      "materials": [
+        "988bd456-3a42-4c5f-b811-2f9a5e00ae2d@9dfe7"
+      ],
+      "scenes": [
+        "988bd456-3a42-4c5f-b811-2f9a5e00ae2d@d7371"
+      ]
+    }
+  }
+}

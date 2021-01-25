@@ -1,0 +1,73 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "590c254f-1b68-4373-92fd-9f24543d193f",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "590c254f-1b68-4373-92fd-9f24543d193f@6c48a",
+      "displayName": "大弹板2",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "590c254f-1b68-4373-92fd-9f24543d193f"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "590c254f-1b68-4373-92fd-9f24543d193f@f9941",
+      "displayName": "大弹板2",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": -4.5,
+        "offsetY": 3.5,
+        "trimX": 1,
+        "trimY": 1,
+        "width": 207,
+        "height": 305,
+        "rawWidth": 218,
+        "rawHeight": 314,
+        "borderTop": 80,
+        "borderBottom": 73,
+        "borderLeft": 77,
+        "borderRight": 67,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "590c254f-1b68-4373-92fd-9f24543d193f@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.8",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "590c254f-1b68-4373-92fd-9f24543d193f@f9941"
+  }
+}

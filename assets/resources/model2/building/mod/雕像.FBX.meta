@@ -1,0 +1,160 @@
+{
+  "ver": "2.0.2",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "dd8d2a61-bfe6-4140-bb31-6080da48f52e",
+  "files": [],
+  "subMetas": {
+    "23139": {
+      "importer": "gltf-scene",
+      "uuid": "dd8d2a61-bfe6-4140-bb31-6080da48f52e@23139",
+      "displayName": "",
+      "id": "23139",
+      "name": "雕像.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "71741": {
+      "importer": "gltf-mesh",
+      "uuid": "dd8d2a61-bfe6-4140-bb31-6080da48f52e@71741",
+      "displayName": "",
+      "id": "71741",
+      "name": "雕像底托.mesh",
+      "userData": {
+        "gltfIndex": 2
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "8635d": {
+      "importer": "gltf-mesh",
+      "uuid": "dd8d2a61-bfe6-4140-bb31-6080da48f52e@8635d",
+      "displayName": "",
+      "id": "8635d",
+      "name": "雕像.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "948d6": {
+      "importer": "gltf-mesh",
+      "uuid": "dd8d2a61-bfe6-4140-bb31-6080da48f52e@948d6",
+      "displayName": "",
+      "id": "948d6",
+      "name": "火盆.mesh",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "4b934": {
+      "importer": "gltf-embeded-image",
+      "uuid": "dd8d2a61-bfe6-4140-bb31-6080da48f52e@4b934",
+      "displayName": "",
+      "id": "4b934",
+      "name": "Map #9.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d4958": {
+      "importer": "texture",
+      "uuid": "dd8d2a61-bfe6-4140-bb31-6080da48f52e@d4958",
+      "displayName": "",
+      "id": "d4958",
+      "name": "Map #9.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/model2/building/tex/雕像_b.PNG"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "30fdd": {
+      "importer": "gltf-material",
+      "uuid": "dd8d2a61-bfe6-4140-bb31-6080da48f52e@30fdd",
+      "displayName": "",
+      "id": "30fdd",
+      "name": "Material #223.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #9",
+        "remap": "db://assets/resources/model2/building/tex/雕像_b.PNG",
+        "uri": "dd8d2a61-bfe6-4140-bb31-6080da48f52e@4b934"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "redirect": "dd8d2a61-bfe6-4140-bb31-6080da48f52e@23139",
+    "assetFinder": {
+      "meshes": [
+        "dd8d2a61-bfe6-4140-bb31-6080da48f52e@8635d",
+        "dd8d2a61-bfe6-4140-bb31-6080da48f52e@948d6",
+        "dd8d2a61-bfe6-4140-bb31-6080da48f52e@71741"
+      ],
+      "skeletons": [],
+      "textures": [
+        "dd8d2a61-bfe6-4140-bb31-6080da48f52e@d4958"
+      ],
+      "materials": [
+        "dd8d2a61-bfe6-4140-bb31-6080da48f52e@30fdd"
+      ],
+      "scenes": [
+        "dd8d2a61-bfe6-4140-bb31-6080da48f52e@23139"
+      ]
+    }
+  }
+}
