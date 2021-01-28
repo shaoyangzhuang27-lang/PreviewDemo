@@ -42,10 +42,10 @@ export class PopBase extends Component {
     //弹窗初始化-----
     start () {
         // Your initialization goes here.
-        this.btn_close.on(cc.Node.EventType.MOUSE_UP, this.closeHandle, this);
-        this.btn_submit.on(cc.Node.EventType.MOUSE_UP, this.submitHandle, this);
-        this.btn_cancel.on(cc.Node.EventType.MOUSE_UP, this.closeHandle, this);
-        this.mask.on(cc.Node.EventType.MOUSE_UP, this.maskHandle, this);
+        this.btn_close.on(cc.Node.EventType.TOUCH_END, this.closeHandle, this);
+        this.btn_submit.on(cc.Node.EventType.TOUCH_END, this.submitHandle, this);
+        this.btn_cancel.on(cc.Node.EventType.TOUCH_END, this.closeHandle, this);
+        this.mask.on(cc.Node.EventType.TOUCH_END, this.maskHandle, this);
 
         this.show();
         this.mask.active = true
