@@ -28,7 +28,7 @@ export class PopSimple extends Component {
     private submitCallFun:Function = null;
 
     start () {
-        this.btn_submit.on(cc.Node.EventType.MOUSE_UP, this.submitHandle, this);
+        this.btn_submit.on(cc.Node.EventType.TOUCH_END, this.submitHandle, this);
     }
     submitHandle(){
         console.log("submit")
