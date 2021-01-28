@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Vec3, Quat, Canvas, Prefab, instantiate, Camera } from 'cc';
+import { _decorator, Component, Node, Vec3, Quat, Canvas, Prefab, instantiate, Camera, director } from 'cc';
 const { ccclass, property } = _decorator;
 
 import {HeroBase} from "./HeroBase";
@@ -193,8 +193,8 @@ export class BattleCtrl extends Component {
                 type: HeroBase.HeroType.LEADER,
                 embattleedSite: 1,
                 hp: 100,
-                atk: 4,
-                hitTime: 0.5,
+                atk: 5,
+                hitTime: 0.6,
                 atkRange: 3
             },
             {
@@ -394,6 +394,11 @@ export class BattleCtrl extends Component {
                 , 0 
                 , enemyZ - BattleCtrl.EmbattleCfg[i][1]));
         }
+    }
+
+
+    onClickMainCity(): void {
+        director.loadScene("main");
     }
 
 }

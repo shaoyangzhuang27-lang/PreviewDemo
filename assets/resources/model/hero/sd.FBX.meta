@@ -1,0 +1,62 @@
+{
+  "ver": "2.0.2",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "d524359b-0533-49d9-ba46-7c35af86572b",
+  "files": [],
+  "subMetas": {
+    "63377": {
+      "importer": "gltf-scene",
+      "uuid": "d524359b-0533-49d9-ba46-7c35af86572b@63377",
+      "displayName": "",
+      "id": "63377",
+      "name": "sd.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c6160": {
+      "importer": "gltf-mesh",
+      "uuid": "d524359b-0533-49d9-ba46-7c35af86572b@c6160",
+      "displayName": "",
+      "id": "c6160",
+      "name": "Cylinder001.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "legacyFbxImporter": false,
+    "redirect": "d524359b-0533-49d9-ba46-7c35af86572b@63377",
+    "assetFinder": {
+      "meshes": [
+        "d524359b-0533-49d9-ba46-7c35af86572b@c6160"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "e7bd3e19-4c5d-4352-b902-ee8f7b59112b"
+      ],
+      "scenes": [
+        "d524359b-0533-49d9-ba46-7c35af86572b@63377"
+      ]
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/resources/model/hero/Materials_sd"
+  }
+}

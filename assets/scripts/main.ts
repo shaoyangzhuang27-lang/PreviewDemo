@@ -5,7 +5,7 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, director } from 'cc';
 import { Basescene } from "../base/basescene";
 import { PopBase } from "./manager/popBase";
 import { PopManager } from "./manager/popManager";
@@ -106,6 +106,13 @@ export class Main extends Component {
                 console.log("提交内容!")
             });
         });
+    }
+
+
+    onClickMenu(e: any, k: any): void {
+        console.log(e)
+        console.log(k)
+        director.loadScene("battle");
     }
 
     // update (deltaTime: number) {
