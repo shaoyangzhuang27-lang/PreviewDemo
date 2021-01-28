@@ -41,11 +41,11 @@ export class Main extends Component {
     private _ray:cc.geometry.ray = new cc.geometry.ray();
     start () {
 
-        console.log("start!!!")
+        // console.log("start!!!")
         DataManager.getInstance().loadAllData((loadTotal,loadIndex)=>{
-            console.log("loadPro!!!")
-            console.log(loadTotal);
-            console.log(loadIndex);
+            // console.log("loadPro!!!")
+            // console.log(loadTotal);
+            // console.log(loadIndex);
 
         });
     }

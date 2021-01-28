@@ -7,6 +7,17 @@
 
 import { _decorator, Component, Node } from 'cc';
 const { ccclass, property } = _decorator;
+import {MsgManager} from "./network/msgManager";
+
+import {NotifyManager} from "./network/notifyManager";
+
+//网络相关
+// import { WebSock } from "./network/WebSock";
+// import { NetManager } from "./network/NetManager";
+// import { NetNode } from "./network/NetNode";
+// import { DefStringProtocol, NetData, INetworkTips,SupperProtocol } from "./network/NetInterface";
+
+
 
 @ccclass('Basescene')
 export class Basescene extends Component {
@@ -19,8 +30,30 @@ export class Basescene extends Component {
 
     start () {
         // Your initialization goes here.
+        // this.initNet()
+        MsgManager.getInstance().initNet();
+        MsgManager.getInstance().requestDataExample();
+
+        // //编码
+        // const msg = Msg.DeviceLoginR.encode({deviceId: "hello world", region: "ppppppp"}).finish();
+        // console.log(msg);
+        // //解码
+        // const hello = Msg.DeviceLoginR.decode(msg);
+        // console.log(hello);
+        NotifyManager.getInstance().addNotifyHandler("test",this.notifyTest,this);
+    }
+    notifyTest(data){
+        console.log("basescene notifyTest!!");
+        console.log(data);
     }
 
+    // initNet(){
+    //     console.log("initNet!!")
+    // }
+
+    // private showGetMsg(data: string){
+    //     console.log(data);
+    // }
     // update (deltaTime: number) {
     //     // Your update function goes here.
     // }
