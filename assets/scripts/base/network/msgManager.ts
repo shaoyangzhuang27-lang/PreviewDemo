@@ -58,8 +58,8 @@ export class MsgManager{
     }
 
     public initNet(){
-        this.initLogicServer();
-        this.connectLogicServer();
+        // this.initLogicServer();
+        // this.connectLogicServer();
     }
     public dataExampleHandle(cmd: number, data: NetData){
         console.log("respone");
@@ -90,7 +90,7 @@ export class MsgManager{
     }
 
     public connectLogicServer(){
-        NetManager.getInstance().connect({ url: "ws://echo.websocket.org" });//开启连接
+        // NetManager.getInstance().connect({ url: "ws://echo.websocket.org" });//开启连接
         // NetManager.getInstance().connect({ url: "ws://121.40.165.18:8800" });//开启连接
         // NetManager.getInstance().close();//关闭连接
     }
