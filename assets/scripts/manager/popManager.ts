@@ -1,7 +1,6 @@
 
 import { PopBase } from "./popBase";
 import { PopSimple } from "./popSimple";
-
 export class PopManager {
 
     private static _instance: PopManager = new PopManager();
@@ -80,6 +79,27 @@ export class PopManager {
             script.setSubmitCallBack(submitCallBack)
 
         } );
+    }
+    public popupPrompt(content){
+
+        cc.loader.loadRes('pre/pop_prompt', (err,res)=>{
+            let p = cc.instantiate( res );
+            this.parent.addChild(p,1)
+            let lab = p.getChildByName('content');
+            let labcom = lab.getComponent(cc.LabelComponent);
+            labcom.string = content;
+            let curpos = lab.position
+            labcom.node.opacity = 10
+            cc.tween(lab)
+            .to(0.1,{position:new cc.Vec3(curpos.x,curpos.y+100,curpos.z)})
+            .delay(2)
+            .to(0.1,{position:new cc.Vec3(curpos.x,curpos.y+200,curpos.z)})
+            .call(() => {
+                // lab.active = false;
+                p.destroy();
+            })
+            .start()
+        })
     }
     // public Update(dt: number) {
 
