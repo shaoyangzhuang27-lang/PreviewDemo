@@ -1,0 +1,123 @@
+{
+  "ver": "2.0.2",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "c5a7f182-a529-4831-9a1b-4a6d1dd21257",
+  "files": [],
+  "subMetas": {
+    "14579": {
+      "importer": "texture",
+      "uuid": "c5a7f182-a529-4831-9a1b-4a6d1dd21257@14579",
+      "displayName": "",
+      "id": "14579",
+      "name": "file33.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "c5a7f182-a529-4831-9a1b-4a6d1dd21257@676a8"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "b78f7": {
+      "importer": "gltf-mesh",
+      "uuid": "c5a7f182-a529-4831-9a1b-4a6d1dd21257@b78f7",
+      "displayName": "",
+      "id": "b78f7",
+      "name": "pCube69.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "676a8": {
+      "importer": "gltf-embeded-image",
+      "uuid": "c5a7f182-a529-4831-9a1b-4a6d1dd21257@676a8",
+      "displayName": "",
+      "id": "676a8",
+      "name": "file33.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "b63a9": {
+      "importer": "gltf-material",
+      "uuid": "c5a7f182-a529-4831-9a1b-4a6d1dd21257@b63a9",
+      "displayName": "",
+      "id": "b63a9",
+      "name": "Waterfall.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "8abc3": {
+      "importer": "gltf-scene",
+      "uuid": "c5a7f182-a529-4831-9a1b-4a6d1dd21257@8abc3",
+      "displayName": "",
+      "id": "8abc3",
+      "name": "Waterfall2.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "file33",
+        "uri": "c5a7f182-a529-4831-9a1b-4a6d1dd21257@676a8"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "redirect": "c5a7f182-a529-4831-9a1b-4a6d1dd21257@8abc3",
+    "assetFinder": {
+      "meshes": [
+        "c5a7f182-a529-4831-9a1b-4a6d1dd21257@b78f7"
+      ],
+      "skeletons": [],
+      "textures": [
+        "c5a7f182-a529-4831-9a1b-4a6d1dd21257@14579"
+      ],
+      "materials": [
+        "c5a7f182-a529-4831-9a1b-4a6d1dd21257@b63a9"
+      ],
+      "scenes": [
+        "c5a7f182-a529-4831-9a1b-4a6d1dd21257@8abc3"
+      ]
+    }
+  }
+}

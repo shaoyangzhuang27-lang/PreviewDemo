@@ -1,0 +1,124 @@
+{
+  "ver": "2.0.2",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "00ac757f-cea1-4dd9-80a1-306bb5c5afd5",
+  "files": [],
+  "subMetas": {
+    "3f0c5": {
+      "importer": "gltf-mesh",
+      "uuid": "00ac757f-cea1-4dd9-80a1-306bb5c5afd5@3f0c5",
+      "displayName": "",
+      "id": "3f0c5",
+      "name": "Box002.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ace8f": {
+      "importer": "gltf-embeded-image",
+      "uuid": "00ac757f-cea1-4dd9-80a1-306bb5c5afd5@ace8f",
+      "displayName": "",
+      "id": "ace8f",
+      "name": "Map #4.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f8008": {
+      "importer": "texture",
+      "uuid": "00ac757f-cea1-4dd9-80a1-306bb5c5afd5@f8008",
+      "displayName": "",
+      "id": "f8008",
+      "name": "Map #4.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/model2/building/tex/building_02.tga"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1d6cd": {
+      "importer": "gltf-material",
+      "uuid": "00ac757f-cea1-4dd9-80a1-306bb5c5afd5@1d6cd",
+      "displayName": "",
+      "id": "1d6cd",
+      "name": "Material #119.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "460a6": {
+      "importer": "gltf-scene",
+      "uuid": "00ac757f-cea1-4dd9-80a1-306bb5c5afd5@460a6",
+      "displayName": "",
+      "id": "460a6",
+      "name": "塔楼.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #4",
+        "remap": "db://assets/resources/model2/building/tex/building_02.tga",
+        "uri": "00ac757f-cea1-4dd9-80a1-306bb5c5afd5@ace8f"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "redirect": "00ac757f-cea1-4dd9-80a1-306bb5c5afd5@460a6",
+    "assetFinder": {
+      "meshes": [
+        "00ac757f-cea1-4dd9-80a1-306bb5c5afd5@3f0c5"
+      ],
+      "skeletons": [],
+      "textures": [
+        "00ac757f-cea1-4dd9-80a1-306bb5c5afd5@f8008"
+      ],
+      "materials": [
+        "00ac757f-cea1-4dd9-80a1-306bb5c5afd5@1d6cd"
+      ],
+      "scenes": [
+        "00ac757f-cea1-4dd9-80a1-306bb5c5afd5@460a6"
+      ]
+    }
+  }
+}

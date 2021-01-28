@@ -1,0 +1,124 @@
+{
+  "ver": "2.0.2",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "5be72076-e858-4638-8d8a-2bb6f7e611c9",
+  "files": [],
+  "subMetas": {
+    "83e22": {
+      "importer": "gltf-mesh",
+      "uuid": "5be72076-e858-4638-8d8a-2bb6f7e611c9@83e22",
+      "displayName": "",
+      "id": "83e22",
+      "name": "Cylinder004.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "4b934": {
+      "importer": "gltf-embeded-image",
+      "uuid": "5be72076-e858-4638-8d8a-2bb6f7e611c9@4b934",
+      "displayName": "",
+      "id": "4b934",
+      "name": "Map #9.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d4958": {
+      "importer": "texture",
+      "uuid": "5be72076-e858-4638-8d8a-2bb6f7e611c9@d4958",
+      "displayName": "",
+      "id": "d4958",
+      "name": "Map #9.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/model2/building/tex/雕像_b.PNG"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "30fdd": {
+      "importer": "gltf-material",
+      "uuid": "5be72076-e858-4638-8d8a-2bb6f7e611c9@30fdd",
+      "displayName": "",
+      "id": "30fdd",
+      "name": "Material #223.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "edaf8": {
+      "importer": "gltf-scene",
+      "uuid": "5be72076-e858-4638-8d8a-2bb6f7e611c9@edaf8",
+      "displayName": "",
+      "id": "edaf8",
+      "name": "雕像围.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #9",
+        "remap": "db://assets/resources/model2/building/tex/雕像_b.PNG",
+        "uri": "5be72076-e858-4638-8d8a-2bb6f7e611c9@4b934"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "redirect": "5be72076-e858-4638-8d8a-2bb6f7e611c9@edaf8",
+    "assetFinder": {
+      "meshes": [
+        "5be72076-e858-4638-8d8a-2bb6f7e611c9@83e22"
+      ],
+      "skeletons": [],
+      "textures": [
+        "5be72076-e858-4638-8d8a-2bb6f7e611c9@d4958"
+      ],
+      "materials": [
+        "5be72076-e858-4638-8d8a-2bb6f7e611c9@30fdd"
+      ],
+      "scenes": [
+        "5be72076-e858-4638-8d8a-2bb6f7e611c9@edaf8"
+      ]
+    }
+  }
+}

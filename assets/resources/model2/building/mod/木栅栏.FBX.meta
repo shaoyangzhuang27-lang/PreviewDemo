@@ -1,0 +1,124 @@
+{
+  "ver": "2.0.2",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "fdd0386a-d1a8-421b-8494-e75b10701069",
+  "files": [],
+  "subMetas": {
+    "af529": {
+      "importer": "gltf-mesh",
+      "uuid": "fdd0386a-d1a8-421b-8494-e75b10701069@af529",
+      "displayName": "",
+      "id": "af529",
+      "name": "Object002.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "4b934": {
+      "importer": "gltf-embeded-image",
+      "uuid": "fdd0386a-d1a8-421b-8494-e75b10701069@4b934",
+      "displayName": "",
+      "id": "4b934",
+      "name": "Map #9.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d4958": {
+      "importer": "texture",
+      "uuid": "fdd0386a-d1a8-421b-8494-e75b10701069@d4958",
+      "displayName": "",
+      "id": "d4958",
+      "name": "Map #9.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/model2/building/tex/building_14.tga"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d489c": {
+      "importer": "gltf-material",
+      "uuid": "fdd0386a-d1a8-421b-8494-e75b10701069@d489c",
+      "displayName": "",
+      "id": "d489c",
+      "name": "Material #201.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c1cc7": {
+      "importer": "gltf-scene",
+      "uuid": "fdd0386a-d1a8-421b-8494-e75b10701069@c1cc7",
+      "displayName": "",
+      "id": "c1cc7",
+      "name": "木栅栏.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #9",
+        "remap": "db://assets/resources/model2/building/tex/building_14.tga",
+        "uri": "fdd0386a-d1a8-421b-8494-e75b10701069@4b934"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "redirect": "fdd0386a-d1a8-421b-8494-e75b10701069@c1cc7",
+    "assetFinder": {
+      "meshes": [
+        "fdd0386a-d1a8-421b-8494-e75b10701069@af529"
+      ],
+      "skeletons": [],
+      "textures": [
+        "fdd0386a-d1a8-421b-8494-e75b10701069@d4958"
+      ],
+      "materials": [
+        "fdd0386a-d1a8-421b-8494-e75b10701069@d489c"
+      ],
+      "scenes": [
+        "fdd0386a-d1a8-421b-8494-e75b10701069@c1cc7"
+      ]
+    }
+  }
+}

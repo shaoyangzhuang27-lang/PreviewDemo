@@ -1,0 +1,124 @@
+{
+  "ver": "2.0.2",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "b6d1c1e7-54b7-4793-a2a9-382bbd9d2148",
+  "files": [],
+  "subMetas": {
+    "72dc7": {
+      "importer": "gltf-mesh",
+      "uuid": "b6d1c1e7-54b7-4793-a2a9-382bbd9d2148@72dc7",
+      "displayName": "",
+      "id": "72dc7",
+      "name": "Box010.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "915b2": {
+      "importer": "gltf-embeded-image",
+      "uuid": "b6d1c1e7-54b7-4793-a2a9-382bbd9d2148@915b2",
+      "displayName": "",
+      "id": "915b2",
+      "name": "Map #5.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f3416": {
+      "importer": "texture",
+      "uuid": "b6d1c1e7-54b7-4793-a2a9-382bbd9d2148@f3416",
+      "displayName": "",
+      "id": "f3416",
+      "name": "Map #5.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/model2/building/tex/arena.tga"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "8b71c": {
+      "importer": "gltf-material",
+      "uuid": "b6d1c1e7-54b7-4793-a2a9-382bbd9d2148@8b71c",
+      "displayName": "",
+      "id": "8b71c",
+      "name": "Material #213.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "dc269": {
+      "importer": "gltf-scene",
+      "uuid": "b6d1c1e7-54b7-4793-a2a9-382bbd9d2148@dc269",
+      "displayName": "",
+      "id": "dc269",
+      "name": "arena_8.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #5",
+        "remap": "db://assets/resources/model2/building/tex/arena.tga",
+        "uri": "b6d1c1e7-54b7-4793-a2a9-382bbd9d2148@915b2"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "redirect": "b6d1c1e7-54b7-4793-a2a9-382bbd9d2148@dc269",
+    "assetFinder": {
+      "meshes": [
+        "b6d1c1e7-54b7-4793-a2a9-382bbd9d2148@72dc7"
+      ],
+      "skeletons": [],
+      "textures": [
+        "b6d1c1e7-54b7-4793-a2a9-382bbd9d2148@f3416"
+      ],
+      "materials": [
+        "b6d1c1e7-54b7-4793-a2a9-382bbd9d2148@8b71c"
+      ],
+      "scenes": [
+        "b6d1c1e7-54b7-4793-a2a9-382bbd9d2148@dc269"
+      ]
+    }
+  }
+}

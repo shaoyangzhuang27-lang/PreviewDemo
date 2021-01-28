@@ -1,0 +1,124 @@
+{
+  "ver": "2.0.2",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "190622e6-7bd7-404e-9b33-76c4a09a93db",
+  "files": [],
+  "subMetas": {
+    "9259d": {
+      "importer": "gltf-mesh",
+      "uuid": "190622e6-7bd7-404e-9b33-76c4a09a93db@9259d",
+      "displayName": "",
+      "id": "9259d",
+      "name": "Box008.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d6386": {
+      "importer": "gltf-embeded-image",
+      "uuid": "190622e6-7bd7-404e-9b33-76c4a09a93db@d6386",
+      "displayName": "",
+      "id": "d6386",
+      "name": "Map #8.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "a0427": {
+      "importer": "texture",
+      "uuid": "190622e6-7bd7-404e-9b33-76c4a09a93db@a0427",
+      "displayName": "",
+      "id": "a0427",
+      "name": "Map #8.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/model2/building/tex/building_09.tga"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "00eb1": {
+      "importer": "gltf-material",
+      "uuid": "190622e6-7bd7-404e-9b33-76c4a09a93db@00eb1",
+      "displayName": "",
+      "id": "00eb1",
+      "name": "Material #202.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "7acb3": {
+      "importer": "gltf-scene",
+      "uuid": "190622e6-7bd7-404e-9b33-76c4a09a93db@7acb3",
+      "displayName": "",
+      "id": "7acb3",
+      "name": "building_09.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #8",
+        "remap": "db://assets/resources/model2/building/tex/building_09.tga",
+        "uri": "190622e6-7bd7-404e-9b33-76c4a09a93db@d6386"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "redirect": "190622e6-7bd7-404e-9b33-76c4a09a93db@7acb3",
+    "assetFinder": {
+      "meshes": [
+        "190622e6-7bd7-404e-9b33-76c4a09a93db@9259d"
+      ],
+      "skeletons": [],
+      "textures": [
+        "190622e6-7bd7-404e-9b33-76c4a09a93db@a0427"
+      ],
+      "materials": [
+        "190622e6-7bd7-404e-9b33-76c4a09a93db@00eb1"
+      ],
+      "scenes": [
+        "190622e6-7bd7-404e-9b33-76c4a09a93db@7acb3"
+      ]
+    }
+  }
+}
