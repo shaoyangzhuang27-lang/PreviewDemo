@@ -1,0 +1,231 @@
+{
+  "ver": "2.0.2",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "a733bf19-0c6b-4156-8f8a-c46ebd1b080b",
+  "files": [],
+  "subMetas": {
+    "47e89": {
+      "importer": "gltf-mesh",
+      "uuid": "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@47e89",
+      "displayName": "",
+      "id": "47e89",
+      "name": "Box016.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "604e5": {
+      "importer": "gltf-mesh",
+      "uuid": "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@604e5",
+      "displayName": "",
+      "id": "604e5",
+      "name": "Box022.mesh",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "73b7f": {
+      "importer": "gltf-animation",
+      "uuid": "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@73b7f",
+      "displayName": "",
+      "id": "73b7f",
+      "name": "Take 001.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.125
+        },
+        "events": []
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "438fe": {
+      "importer": "gltf-skeleton",
+      "uuid": "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@438fe",
+      "displayName": "",
+      "id": "438fe",
+      "name": "UnnamedSkeleton.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 54
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "baf20": {
+      "importer": "gltf-embeded-image",
+      "uuid": "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@baf20",
+      "displayName": "",
+      "id": "baf20",
+      "name": "Map #58.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "10ed8": {
+      "importer": "gltf-embeded-image",
+      "uuid": "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@10ed8",
+      "displayName": "",
+      "id": "10ed8",
+      "name": "Map #59.image",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "35edc": {
+      "importer": "texture",
+      "uuid": "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@35edc",
+      "displayName": "",
+      "id": "35edc",
+      "name": "Map #58.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@baf20"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "26d11": {
+      "importer": "texture",
+      "uuid": "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@26d11",
+      "displayName": "",
+      "id": "26d11",
+      "name": "Map #59.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@10ed8"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e4997": {
+      "importer": "gltf-scene",
+      "uuid": "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@e4997",
+      "displayName": "",
+      "id": "e4997",
+      "name": "character_25_victory.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #58",
+        "uri": "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@baf20"
+      },
+      {
+        "name": "Map #59",
+        "uri": "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@10ed8"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 1.125,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "Take 001",
+            "from": 0,
+            "to": 1.125,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@e4997",
+    "assetFinder": {
+      "meshes": [
+        "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@47e89",
+        "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@604e5"
+      ],
+      "skeletons": [
+        "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@438fe"
+      ],
+      "textures": [
+        "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@35edc",
+        "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@26d11"
+      ],
+      "materials": [
+        "14d5406f-4956-4e9a-9671-e57f942223ac",
+        "ee45eef4-1952-4f5b-85bf-6b026666907e"
+      ],
+      "scenes": [
+        "a733bf19-0c6b-4156-8f8a-c46ebd1b080b@e4997"
+      ]
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/resources/model/hero/hero25/mat"
+  }
+}
