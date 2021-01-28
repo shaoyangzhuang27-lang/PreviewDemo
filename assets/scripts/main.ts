@@ -103,9 +103,11 @@ export class Main extends Component {
         beast.popupSimpleWindow("建筑:"+buildName,"我是内容"+buildName,()=>{
             console.log("提交内容!")
             beast.popupSimpleWindow("删除建筑?","删除",()=>{
-                console.log("提交内容!")
+                // console.log("提交内容!")
+                beast.popupPrompt("无法删除");
             });
         });
+
     }
 
     // update (deltaTime: number) {
