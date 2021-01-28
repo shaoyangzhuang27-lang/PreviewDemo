@@ -1,0 +1,252 @@
+{
+  "ver": "2.0.2",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b",
+  "files": [],
+  "subMetas": {
+    "af4b2": {
+      "importer": "gltf-mesh",
+      "uuid": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@af4b2",
+      "displayName": "",
+      "id": "af4b2",
+      "name": "pingtai10_02_Material0.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d6386": {
+      "importer": "gltf-embeded-image",
+      "uuid": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@d6386",
+      "displayName": "",
+      "id": "d6386",
+      "name": "Map #8.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1fda3": {
+      "importer": "gltf-embeded-image",
+      "uuid": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@1fda3",
+      "displayName": "",
+      "id": "1fda3",
+      "name": "Map #10.image",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "07e60": {
+      "importer": "gltf-embeded-image",
+      "uuid": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@07e60",
+      "displayName": "",
+      "id": "07e60",
+      "name": "Map #11.image",
+      "userData": {
+        "gltfIndex": 2
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "a0427": {
+      "importer": "texture",
+      "uuid": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@a0427",
+      "displayName": "",
+      "id": "a0427",
+      "name": "Map #8.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/model/map/idle/ground02.tga"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "0edaf": {
+      "importer": "texture",
+      "uuid": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@0edaf",
+      "displayName": "",
+      "id": "0edaf",
+      "name": "Map #10.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/model/map/idle/ground.tga"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "b68c0": {
+      "importer": "texture",
+      "uuid": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@b68c0",
+      "displayName": "",
+      "id": "b68c0",
+      "name": "Map #11.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/model/map/idle/ground04.tga"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "797d0": {
+      "importer": "gltf-material",
+      "uuid": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@797d0",
+      "displayName": "",
+      "id": "797d0",
+      "name": "Material #806.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c7729": {
+      "importer": "gltf-material",
+      "uuid": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@c7729",
+      "displayName": "",
+      "id": "c7729",
+      "name": "Material #808.material",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d0a36": {
+      "importer": "gltf-material",
+      "uuid": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@d0a36",
+      "displayName": "",
+      "id": "d0a36",
+      "name": "Material #857.material",
+      "userData": {
+        "gltfIndex": 2
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ff6f4": {
+      "importer": "gltf-scene",
+      "uuid": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@ff6f4",
+      "displayName": "",
+      "id": "ff6f4",
+      "name": "pingtai10_02.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #8",
+        "remap": "db://assets/resources/model/map/idle/ground02.tga",
+        "uri": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@d6386"
+      },
+      {
+        "name": "Map #10",
+        "remap": "db://assets/resources/model/map/idle/ground.tga",
+        "uri": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@1fda3"
+      },
+      {
+        "name": "Map #11",
+        "remap": "db://assets/resources/model/map/idle/ground04.tga",
+        "uri": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@07e60"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "redirect": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@ff6f4",
+    "assetFinder": {
+      "meshes": [
+        "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@af4b2"
+      ],
+      "skeletons": [],
+      "textures": [
+        "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@a0427",
+        "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@0edaf",
+        "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@b68c0"
+      ],
+      "materials": [
+        "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@797d0",
+        "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@c7729",
+        "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@d0a36"
+      ],
+      "scenes": [
+        "27ee1dc4-6bf3-447b-ad8f-7666c25b724b@ff6f4"
+      ]
+    },
+    "dumpMaterials": false,
+    "materialDumpDir": "db://assets/resources/model/map/idle/groundMat"
+  }
+}

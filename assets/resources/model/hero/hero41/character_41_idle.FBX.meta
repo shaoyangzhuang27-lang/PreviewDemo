@@ -1,0 +1,249 @@
+{
+  "ver": "2.0.2",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "efca5ae6-8b4c-4438-86b0-30ca4e467158",
+  "files": [],
+  "subMetas": {
+    "36565": {
+      "importer": "gltf-embeded-image",
+      "uuid": "efca5ae6-8b4c-4438-86b0-30ca4e467158@36565",
+      "displayName": "",
+      "id": "36565",
+      "name": "Map #35.image",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "af529": {
+      "importer": "gltf-mesh",
+      "uuid": "efca5ae6-8b4c-4438-86b0-30ca4e467158@af529",
+      "displayName": "",
+      "id": "af529",
+      "name": "Object002.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "fb9de": {
+      "importer": "gltf-mesh",
+      "uuid": "efca5ae6-8b4c-4438-86b0-30ca4e467158@fb9de",
+      "displayName": "",
+      "id": "fb9de",
+      "name": "Box013.mesh",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "dec11": {
+      "importer": "gltf-mesh",
+      "uuid": "efca5ae6-8b4c-4438-86b0-30ca4e467158@dec11",
+      "displayName": "",
+      "id": "dec11",
+      "name": "Cylinder003.mesh",
+      "userData": {
+        "gltfIndex": 2
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "73b7f": {
+      "importer": "gltf-animation",
+      "uuid": "efca5ae6-8b4c-4438-86b0-30ca4e467158@73b7f",
+      "displayName": "",
+      "id": "73b7f",
+      "name": "Take 001.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.9583333730697632
+        },
+        "events": []
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "438fe": {
+      "importer": "gltf-skeleton",
+      "uuid": "efca5ae6-8b4c-4438-86b0-30ca4e467158@438fe",
+      "displayName": "",
+      "id": "438fe",
+      "name": "UnnamedSkeleton.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 29
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "0b0fb": {
+      "importer": "gltf-embeded-image",
+      "uuid": "efca5ae6-8b4c-4438-86b0-30ca4e467158@0b0fb",
+      "displayName": "",
+      "id": "0b0fb",
+      "name": "Map #34.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "fb79c": {
+      "importer": "texture",
+      "uuid": "efca5ae6-8b4c-4438-86b0-30ca4e467158@fb79c",
+      "displayName": "",
+      "id": "fb79c",
+      "name": "Map #34.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "efca5ae6-8b4c-4438-86b0-30ca4e467158@0b0fb"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "764f4": {
+      "importer": "texture",
+      "uuid": "efca5ae6-8b4c-4438-86b0-30ca4e467158@764f4",
+      "displayName": "",
+      "id": "764f4",
+      "name": "Map #35.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "efca5ae6-8b4c-4438-86b0-30ca4e467158@36565"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f45f3": {
+      "importer": "gltf-scene",
+      "uuid": "efca5ae6-8b4c-4438-86b0-30ca4e467158@f45f3",
+      "displayName": "",
+      "id": "f45f3",
+      "name": "character_41_idle.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #34",
+        "uri": "efca5ae6-8b4c-4438-86b0-30ca4e467158@0b0fb"
+      },
+      {
+        "name": "Map #35",
+        "uri": "efca5ae6-8b4c-4438-86b0-30ca4e467158@36565"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 1.9583333730697632,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "Take 001",
+            "from": 0,
+            "to": 1.9583333730697632,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "efca5ae6-8b4c-4438-86b0-30ca4e467158@f45f3",
+    "assetFinder": {
+      "meshes": [
+        "efca5ae6-8b4c-4438-86b0-30ca4e467158@af529",
+        "efca5ae6-8b4c-4438-86b0-30ca4e467158@fb9de",
+        "efca5ae6-8b4c-4438-86b0-30ca4e467158@dec11"
+      ],
+      "skeletons": [
+        "efca5ae6-8b4c-4438-86b0-30ca4e467158@438fe"
+      ],
+      "textures": [
+        "efca5ae6-8b4c-4438-86b0-30ca4e467158@fb79c",
+        "efca5ae6-8b4c-4438-86b0-30ca4e467158@764f4"
+      ],
+      "materials": [
+        "d3a13698-f834-49ad-bc27-a8c4c532d244",
+        "d89b1d8b-d34f-492d-aa78-0df77941d4cb"
+      ],
+      "scenes": [
+        "efca5ae6-8b4c-4438-86b0-30ca4e467158@f45f3"
+      ]
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/resources/model/hero/hero41/mat"
+  }
+}

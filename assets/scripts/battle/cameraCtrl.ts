@@ -1,8 +1,8 @@
 
-import { _decorator, Component, Node, Vec2, Vec3, Quat, systemEvent, Touch, EventTouch, SystemEventType } from 'cc';
+import { _decorator, Component, Vec2, Vec3, Quat, systemEvent, Touch, EventTouch, SystemEventType } from 'cc';
 const { ccclass, property } = _decorator;
 
-let v2_1 = new Vec2();
+// let v2_1 = new Vec2();
 let v2_2 = new Vec2();
 let qt_1 = new Quat();
 
@@ -23,11 +23,13 @@ export class CameraCtrl extends Component {
         // systemEvent.on(SystemEvent.EventType.TOUCH_END, this.onTouchEnd, this);
 
         this._dis = this.node.position.z;
-        this.node.lookAt(Vec3.ZERO)
+        // this.node.lookAt(Vec3.ZERO)
         Vec3.copy(this._euler, this.node.eulerAngles);
         Vec3.copy(this._position, this.node.position);
 
-        console.log("this._position", this._position)
+        // console.log("this._position", this._position) 
+
+
     }
  
     onDestroy() {
@@ -59,23 +61,24 @@ export class CameraCtrl extends Component {
         }
 
         this.node.setPosition(this._position);
-        console.log(this._euler, this.node.eulerAngles)
+        // console.log(this._euler, this.node.eulerAngles)
     }
 
     
-    // onTouchStart() {
+    // onTouchStart(e) {
         // if (cc.game.canvas.requestPointerLock) cc.game.canvas.requestPointerLock();
-        // let location = _e.getLocation();// 获取节点坐标
+        // let location = e.getLocation();// 获取节点坐标
     // }
 
-    onTouchMove(e?: Touch, even?: EventTouch) {
+    onTouchMove(e?: Touch, even?: EventTouch): void {
         // console.log("++++++++++++++++++")
         let touches = even?.getTouches();
  
         if (touches?.length == 1) {
-            e?.getStartLocation(v2_1);
+            // e?.getStartLocation(v2_1);
             e?.getDelta(v2_2);
             this._euler.y -= v2_2.x * this._rotateSpeed; // 可能需要根据屏幕宽度微调
+            // this._euler.x -= v2_2.y * this._rotateSpeed; // 可能需要根据屏幕宽度微调
 
             if (this._euler.y > 180) {
                 this._euler.y -= 360
