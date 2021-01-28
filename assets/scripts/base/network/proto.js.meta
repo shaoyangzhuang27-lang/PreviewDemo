@@ -14,6 +14,9 @@
     "isPlugin": true,
     "loadPluginInWeb": true,
     "loadPluginInNative": true,
-    "loadPluginInEditor": false
+    "loadPluginInEditor": false,
+    "dependencies": [
+      "2d8c17d3-4b17-4d97-aedc-b341c31bcca4"
+    ]
   }
 }
