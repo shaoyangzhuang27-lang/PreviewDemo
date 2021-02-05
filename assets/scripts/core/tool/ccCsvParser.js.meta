@@ -1,8 +1,8 @@
 {
   "ver": "4.0.9",
-  "importer": "typescript",
+  "importer": "javascript",
   "imported": true,
-  "uuid": "dcd95fcb-3795-4e42-924f-741ebe8984b0",
+  "uuid": "7e96ee45-5c41-47d3-a48f-71a27b641c16",
   "files": [
     ".js",
     "editor.js",
@@ -11,7 +11,7 @@
   "subMetas": {},
   "userData": {
     "importAsPlugin": false,
-    "moduleId": "project:///assets/scripts/battle/battleCtrl.js",
+    "moduleId": "project:///assets/scripts/core/tool/ccCsvParser.js",
     "importerSettings": 7
   }
 }
