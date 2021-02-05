@@ -2,7 +2,7 @@
   "ver": "4.0.9",
   "importer": "typescript",
   "imported": true,
-  "uuid": "dcd95fcb-3795-4e42-924f-741ebe8984b0",
+  "uuid": "0f98ef1e-cef7-4e4e-9feb-5914974833c0",
   "files": [
     ".js",
     "editor.js",
@@ -11,7 +11,7 @@
   "subMetas": {},
   "userData": {
     "importAsPlugin": false,
-    "moduleId": "project:///assets/scripts/battle/battleCtrl.js",
+    "moduleId": "project:///assets/scripts/game/control/MsgMgr.js",
     "importerSettings": 7
   }
 }

@@ -2,7 +2,7 @@
   "ver": "4.0.9",
   "importer": "typescript",
   "imported": true,
-  "uuid": "dcd95fcb-3795-4e42-924f-741ebe8984b0",
+  "uuid": "1528f115-b9f7-4de8-ae46-c1adc1ff511b",
   "files": [
     ".js",
     "editor.js",
@@ -11,7 +11,7 @@
   "subMetas": {},
   "userData": {
     "importAsPlugin": false,
-    "moduleId": "project:///assets/scripts/battle/battleCtrl.js",
+    "moduleId": "project:///assets/scripts/game/view/SceneMain.js",
     "importerSettings": 7
   }
 }

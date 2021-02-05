@@ -2,7 +2,7 @@
   "ver": "4.0.9",
   "importer": "typescript",
   "imported": true,
-  "uuid": "dcd95fcb-3795-4e42-924f-741ebe8984b0",
+  "uuid": "0713f02f-95a8-4d06-87ba-8bf72789344f",
   "files": [
     ".js",
     "editor.js",
@@ -11,7 +11,7 @@
   "subMetas": {},
   "userData": {
     "importAsPlugin": false,
-    "moduleId": "project:///assets/scripts/battle/battleCtrl.js",
+    "moduleId": "project:///assets/scripts/game/view/MainCity.js",
     "importerSettings": 7
   }
 }

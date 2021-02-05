@@ -2,7 +2,7 @@
   "ver": "4.0.9",
   "importer": "typescript",
   "imported": true,
-  "uuid": "dcd95fcb-3795-4e42-924f-741ebe8984b0",
+  "uuid": "d17d8c8b-ef93-44d1-9a72-5ea9a04405ed",
   "files": [
     ".js",
     "editor.js",
@@ -11,7 +11,7 @@
   "subMetas": {},
   "userData": {
     "importAsPlugin": false,
-    "moduleId": "project:///assets/scripts/battle/battleCtrl.js",
+    "moduleId": "project:///assets/scripts/core/network/MsgCore.js",
     "importerSettings": 7
   }
 }
