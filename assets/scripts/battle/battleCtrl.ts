@@ -1,20 +1,17 @@
 
-import { _decorator, Component, Node, Vec3, Quat, Canvas, Prefab, instantiate, Camera, director } from 'cc';
+import { _decorator, Component, Node, Vec3, Canvas, Prefab, instantiate, director, resources } from 'cc';
 const { ccclass, property } = _decorator;
 
-import {HeroBase} from "./HeroBase";
+import {BattlerHero} from "./BattlerHero";
 
+let bLoadMain = false;
 
 const GroundLen = 300;
 
+let oldMainLoop: any = null;
+
 @ccclass('BattleCtrl')
 export class BattleCtrl extends Component {
-    /* class member could be defined like this */
-    // dummy = '';
-
-    /* use `property` decorator if your want the member to be serializable */
-    @property(Canvas)
-    private canvas: Canvas = null
 
     @property(Prefab)
     private hero00Prefab: Prefab = null
@@ -60,17 +57,39 @@ export class BattleCtrl extends Component {
     private _battleGrounds: Array<Node> = []
     private _nextGroundIdx: number = 0
 
-    private _army: Array<Node> = []
-    private _enemy: Array<Node> = []
+    private _army: Array<BattlerHero> = []
+    private _enemy: Array<BattlerHero> = []
 
     private _leaderNode: Node = null
 
 
-    private _canvas: any = null
-    private _camera: any = null
-    private _cameraNode: any = null
+    public canvas: any = null
+    public camera: any = null
+    public cameraNode: any = null
+
+
+    // private _goundPrefab: Prefab = null;
+
+    onLoad() {
+        // resources.load("prefabs/battle/pingtai01", Prefab, function name(e, res) {
+        //     console.log("1111111111111")
+        //     this._goundPrefab = res;
+        // }.bind(this));
+
+        // if(oldMainLoop == null) {
+        //     oldMainLoop = director.mainLoop
+        //     director.mainLoop = function(time) {
+        //         oldMainLoop.call(director, time*0.2);
+        //     }
+        // }
+
+        this.cameraNode = this.node.getChildByName("cameraNode");
+        this.camera = this.cameraNode.getChildByName("Main Camera");
+        this.canvas = this.node.getParent()?.getChildByName("Canvas");
+    }
 
     start() {
+
         this.initMap();
         this.initHeros();
         
@@ -80,9 +99,13 @@ export class BattleCtrl extends Component {
     }
 
     update(dt: number) {
-        // this._cameraNode.setPosition(this._leaderNode.position.x, 0, this._leaderNode.position.z);
-        // console.log(this._cameraNode.position)
+        // this.cameraNode.setPosition(this._leaderNode.position.x, 0, this._leaderNode.position.z);
+        // console.log(this.cameraNode.position)
 
+        if(!this._leaderNode) {
+            return;
+        }
+        // console.log(director.getScheduler().getTimeScale());
 
         if (this._curActFunc) {
             this._curActFunc.call(this, dt);
@@ -100,7 +123,10 @@ export class BattleCtrl extends Component {
     }
 
     lateUpdate(): void {
-        this._cameraNode.setPosition(this._leaderNode.position.x, 0, this._leaderNode.position.z);
+        // if(!this.cameraNode) {
+        //     return;
+        // }
+        this.cameraNode.setPosition(this._leaderNode.position.x, 0, this._leaderNode.position.z);
     }
 
     initMap(): void {
@@ -110,6 +136,13 @@ export class BattleCtrl extends Component {
             ground.setPosition(new Vec3(0, 0 , -GroundLen*i))
             this._battleGrounds.push(ground);
         }
+
+        // for(let i = 0; i < 3; i++) {
+        //     let ground = instantiate(this._goundPrefab);
+        //     this.node.addChild(ground);
+        //     ground.setPosition(new Vec3(0, 0 , -GroundLen*i))
+        //     this._battleGrounds.push(ground);
+        // }
         this._nextGroundIdx = 2;
     }
 
@@ -118,57 +151,65 @@ export class BattleCtrl extends Component {
         this._enemyInfo = [
             {
                 id: 40,
-                type: HeroBase.HeroType.MONSTER,
+                type: BattlerHero.HeroType.MONSTER,
                 hp: 30,
                 atk: 2,
                 hitTime: 0.5,
-                atkRange: 3
+                range: 3,
+                speed: 1.3,
+                normal_attack: "0",
             },
             {
                 id: 44,
-                type: HeroBase.HeroType.MONSTER,
+                type: BattlerHero.HeroType.MONSTER,
                 hp: 50,
                 atk: 2,
                 hitTime: 0.5,
-                atkRange: 3
+                range: 3,
+                speed: 1.3,
+                normal_attack: "0",
             },
             {
                 id: 45,
-                type: HeroBase.HeroType.MONSTER,
+                type: BattlerHero.HeroType.MONSTER,
                 hp: 40,
                 atk: 2,
                 hitTime: 0.5,
-                atkRange: 3
+                range: 3,
+                speed: 1.3,
+                normal_attack: "0",
             },
             {
                 id: 41,
-                type: HeroBase.HeroType.MONSTER,
+                type: BattlerHero.HeroType.MONSTER,
                 hp: 20,
                 atk: 3,
                 hitTime: 0.5,
-                atkRange: 7
+                range: 7,
+                speed: 1.3,
+                normal_attack: "0",
             },
             {
                 id: 42,
-                type: HeroBase.HeroType.MONSTER,
+                type: BattlerHero.HeroType.MONSTER,
                 hp: 15,
                 atk: 3,
                 hitTime: 0.5,
-                atkRange: 7
+                range: 7,
+                speed: 1.3,
+                normal_attack: "0",
             },
             {
                 id: 46,
-                type: HeroBase.HeroType.MONSTER,
+                type: BattlerHero.HeroType.MONSTER,
                 hp: 50,
                 atk: 3,
                 hitTime: 0.5,
-                atkRange: 7
+                range: 7,
+                speed: 1.3,
+                normal_attack: "0",
             },
         ]
-
-        this._cameraNode = this.node.getChildByName("cameraNode");
-        this._camera = this._cameraNode.getChildByName("Main Camera");
-        this._canvas = this.node.getParent().getChildByName("Canvas");
 
         this._HeroCfg = {
             0: this.hero00Prefab,
@@ -190,79 +231,91 @@ export class BattleCtrl extends Component {
         let armyInfo = [
             {
                 id: 0,
-                type: HeroBase.HeroType.LEADER,
+                type: BattlerHero.HeroType.LEADER,
                 embattleedSite: 1,
                 hp: 100,
                 atk: 5,
                 hitTime: 0.6,
-                atkRange: 3
+                range: 3,
+                speed: 1.3,
+                normal_attack: "0",
             },
             {
                 id: 29,
-                type: HeroBase.HeroType.LEADER,
+                type: BattlerHero.HeroType.LEADER,
                 embattleedSite: 0,
                 hp: 100,
                 atk: 4,
                 hitTime: 0.5,
-                atkRange: 3
+                range: 3,
+                speed: 1.3,
+                normal_attack: "0",
             },
             {
                 id: 30,
-                type: HeroBase.HeroType.LEADER,
+                type: BattlerHero.HeroType.LEADER,
                 embattleedSite: 2,
                 hp: 100,
                 atk: 4,
                 hitTime: 0.5,
-                atkRange: 3
+                range: 3,
+                speed: 1.3,
+                normal_attack: "0",
             },
             {
                 id: 25,
-                type: HeroBase.HeroType.LEADER,
+                type: BattlerHero.HeroType.LEADER,
                 embattleedSite: 3,
                 hp: 100,
                 atk: 6,
                 hitTime: 0.5,
-                atkRange: 7
+                range: 7,
+                speed: 1.3,
+                normal_attack: "0",
             },
             {
                 id: 26,
-                type: HeroBase.HeroType.LEADER,
+                type: BattlerHero.HeroType.LEADER,
                 embattleedSite: 4,
                 hp: 100,
                 atk: 6,
                 hitTime: 0.5,
-                atkRange: 7
+                range: 7,
+                speed: 1.3,
+                normal_attack: "0",
             },
             {
                 id: 33,
-                type: HeroBase.HeroType.LEADER,
+                type: BattlerHero.HeroType.LEADER,
                 embattleedSite: 5,
                 hp: 100,
                 atk: 6,
                 hitTime: 0.5,
-                atkRange: 7
+                range: 7,
+                speed: 1.3,
+                normal_attack: "0",
             },
         ]
         
         this._leaderNode = instantiate(this._HeroCfg[armyInfo[0].id]);
-        // this._camera.removeFromParent();
-        // this._leaderNode.addChild(this._camera);
+        // this.camera.removeFromParent();
+        // this._leaderNode.addChild(this.camera);
         this.node.addChild(this._leaderNode);
-        let hero: any = this._leaderNode.getComponent("HeroBase")
-        hero.initHero(this._camera, this._canvas, armyInfo[0]);
-        this._army[armyInfo[0].embattleedSite] = this._leaderNode
+        let hero: BattlerHero = this._leaderNode.getComponent("BattlerHero") as BattlerHero;
+        hero.initHero(this, armyInfo[0]);
+        this._army[armyInfo[0].embattleedSite] = hero
 
 
         for (let i = 1; i < armyInfo.length; i++) {
             let heroNode = instantiate(this._HeroCfg[armyInfo[i].id]);
             this.node.addChild(heroNode);
-            hero = heroNode.getComponent("HeroBase"); 
-            hero.initHero(this._camera, this._canvas, armyInfo[i], this._leaderNode);
-            this._army[armyInfo[i].embattleedSite] = heroNode;
+            hero = heroNode.getComponent("BattlerHero"); 
+            hero.initHero(this, armyInfo[i], this._leaderNode);
+            this._army[armyInfo[i].embattleedSite] = hero;
         }
 
         for (let i = 0; i < 6; i++) {
-            this._army[i].setPosition(new Vec3(BattleCtrl.EmbattleCfg[i][0]
+            this._army[i].node.setPosition(new Vec3(BattleCtrl.EmbattleCfg[i][0]
                 , 0 
                 , this._battleGrounds[this._nextGroundIdx - 1].position.z - 10 + BattleCtrl.EmbattleCfg[i][1]))
 
@@ -274,9 +327,9 @@ export class BattleCtrl extends Component {
             let heroNode = instantiate(this._HeroCfg[this._enemyInfo[i].id]);
             this.node.addChild(heroNode);
             heroNode.setRotationFromEuler(0, 180, 0);
-            let hero = heroNode.getComponent("HeroBase"); 
-            hero.initHero(this._camera, this._canvas, this._enemyInfo[i]);
-            this._enemy[i] = heroNode;
+            hero = heroNode.getComponent("BattlerHero"); 
+            hero.initHero(this, this._enemyInfo[i]);
+            this._enemy[i] = hero;
             heroNode.setPosition(0, 0, 0);
             hero.setVisible(false);
         }
@@ -286,7 +339,7 @@ export class BattleCtrl extends Component {
         this._actTime = 10 + Math.random() * 2;
         this._curActFunc = this.doSeekEnemy;
         for(let i = 0; i < 6; i++) {
-            this._army[i].getComponent("HeroBase")?.startSeekEnemy();
+            this._army[i].startSeekEnemy();
         }
     }
 
@@ -307,7 +360,7 @@ export class BattleCtrl extends Component {
 
         enemyZ += 20;
         for(let i = 0; i < 6; i++) {
-            this._army[i].getComponent("HeroBase")?.startEmbattle(
+            this._army[i].startEmbattle(
                 new Vec3(BattleCtrl.EmbattleCfg[i][0]
                 , 0 
                 , enemyZ + BattleCtrl.EmbattleCfg[i][1]), this._actTime - 0.03);
@@ -324,12 +377,17 @@ export class BattleCtrl extends Component {
 
 
     runToBattle(): void {
-        this._actTime = 2.5
+        this._actTime = 1.5
         this._curActFunc = this.doRunToBattle;
 
-        let enemyZ = -20 + 3;
+        let enemyZ = (-20 + 3)/2;
         for(let i = 0; i < 6; i++) {
-            this._army[i].getComponent("HeroBase")?.startRunToBattle(enemyZ, this._actTime - 0.03);
+            this._army[i].startRunToBattle(enemyZ, this._actTime - 0.03);
+        }
+
+        enemyZ = -enemyZ;
+        for(let i = 0; i < 6; i++) {
+            this._enemy[i].startRunToBattle(enemyZ, this._actTime - 0.03);
         }
     }
 
@@ -342,28 +400,33 @@ export class BattleCtrl extends Component {
     }
 
     battle(): void {
-        this._curActFunc = this.doBattle;
+        // this._curActFunc = this.doBattle;
+        this._curActFunc = null;
         for(let i = 0; i < 6; i++) {
-            this._army[i].getComponent("HeroBase")?.startBattle(this._enemy);
+            this._army[i].startBattle(this._enemy);
         }
 
         for(let i = 0; i < 6; i++) {
-            this._enemy[i].getComponent("HeroBase")?.startBattle(this._army);
+            this._enemy[i].startBattle(this._army);
         }
     }
 
-    // TODO 走事件触发
-    doBattle(): void {
-        let isAllDie = true;
-        for(let i = 0; i < 6; i++) {
-            if (!this._enemy[i].getComponent("HeroBase").isDie()) {
-                isAllDie = false;
-                break;
-            }
-        }
+    // doBattle(): void {
+    // }
 
-        if (isAllDie) {
-            this.wait();
+    onHeroDie(hero: BattlerHero) {
+        if (hero.isEnemy()) {
+            let isAllDie = true;
+            for(let i = 0; i < 6; i++) {
+                if (!this._enemy[i].isDie()) {
+                    isAllDie = false;
+                    break;
+                }
+            }
+
+            if (isAllDie) {
+                this.wait();
+            }
         }
     }
 
@@ -376,11 +439,11 @@ export class BattleCtrl extends Component {
         this._actTime -= dt;
         if (this._actTime <= 0) {
             for(let i = 0; i < 6; i++) {
-                this._enemy[i].getComponent("HeroBase").setVisible(false);
+                this._enemy[i].setVisible(false);
             }
 
             for(let i = 0; i < 6; i++) {
-                this._army[i].getComponent("HeroBase").refreshData();
+                this._army[i].refreshData();
             }
             this.seekEnemy();
         }
@@ -388,9 +451,10 @@ export class BattleCtrl extends Component {
 
     refreshEnemy(enemyZ: number): void {
         for (let i = 0; i < 6; i++) {
-            this._enemy[i].getComponent("HeroBase").setVisible(true);
-            this._enemy[i].getComponent("HeroBase").revive();
-            this._enemy[i].setPosition(new Vec3(BattleCtrl.EmbattleCfg[i][0]
+            this._enemy[i].setVisible(true);
+            this._enemy[i].node.setRotationFromEuler(0, 180);
+            this._enemy[i].revive();
+            this._enemy[i].node.setPosition(new Vec3(BattleCtrl.EmbattleCfg[i][0]
                 , 0 
                 , enemyZ - BattleCtrl.EmbattleCfg[i][1]));
         }
@@ -398,7 +462,14 @@ export class BattleCtrl extends Component {
 
 
     onClickMainCity(): void {
-        director.loadScene("main");
+        if (bLoadMain) {
+            director.loadScene("main");
+        } else {
+            director.loadScene("loading", function (e, s) {
+                bLoadMain = true;
+            });
+        }
+        
     }
 
 }

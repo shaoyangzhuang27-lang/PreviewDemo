@@ -48,7 +48,7 @@ export class BattleTitleBar extends Component {
     // }
 
     lateUpdate(): void {
-        if (!this._titleBar && !this._titleBar.active) {
+        if (!this._titleBar || !this._titleBar.active) {
             return;
         }
 

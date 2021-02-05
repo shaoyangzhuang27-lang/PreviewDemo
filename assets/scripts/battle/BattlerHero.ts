@@ -1,11 +1,20 @@
-import { _decorator, Component, Node, SkeletalAnimation, Camera, Vec3, BoxCollider, RigidBody, TERRAIN_HEIGHT_BASE } from 'cc';
+import { _decorator, Component, Node, SkeletalAnimation, AnimationState, Vec3, BoxCollider, RigidBody } from 'cc';
 const { ccclass, property } = _decorator;
+
+import {BattleCtrl} from "./BattleCtrl";
+import {BattleTitleBar} from "./BattleTitleBar";
 
 
 const RunSpeed = 7;
 
-@ccclass('HeroBase')
-export class HeroBase extends Component {
+/*
+TODO
+1.  目标找完后，正在接近目标时候，目标发生移动或死了。
+2.  找完目标后，锁定的移动位置可能已被占用。
+*/
+
+@ccclass('BattlerHero')
+export class BattlerHero extends Component {
 
     public static STATUS = {
         NONE: 0,    // 无动作
@@ -38,16 +47,18 @@ export class HeroBase extends Component {
     @property(Node)
     private victoryNode: Node = null
 
+    private _attackStatus: AnimationState = null
 
 
-    private _battleTitleBar: any = null
+
+    private _battleTitleBar: BattleTitleBar = null
 
     private _tmpPos: Vec3 = new Vec3()
     private _targetPos: Vec3 = new Vec3()
     private _dirVector: Vec3 = new Vec3()
 
-    private _targetList: any = null
-    private _targetNode: any = null
+    private _targetList: Array<BattlerHero> = []
+    private _target: BattlerHero | null = null
 
     private _curNode: any = null
     private _heroInfo: any = null
@@ -65,6 +76,16 @@ export class HeroBase extends Component {
     private _pow: number = 0
 
 
+    private _tmpSpeed: number = 0
+
+
+
+    private _battleCtrl: BattleCtrl = null
+
+    public static Event = {
+        DIE: "DIE",
+    }
+    private _battleEvents = {}
     onLoad() {
         
         this.attackNode.active = false;
@@ -74,7 +95,7 @@ export class HeroBase extends Component {
         this.victoryNode.active = false;
 
         this._curNode = this.idleNode;
-        this.playAnim(HeroBase.STATUS.IDLE);
+        this.playAnim(BattlerHero.STATUS.IDLE);
 
         // this.startSeekEnemy()
     }
@@ -108,10 +129,11 @@ export class HeroBase extends Component {
     }
 
     startSeekEnemy(): void {
-        this.playAnim(HeroBase.STATUS.RUN);
+        this.playAnim(BattlerHero.STATUS.RUN);
         // this.node.getComponent(RigidBody)?.wakeUp();
         this.node.getComponent(BoxCollider).enabled = true;
         this.node.getComponent(RigidBody).enabled = true;
+        this._battleTitleBar.setVisible(false);
         this.node.setRotationFromEuler(0, 0, 0)
         this.seekEnemy();
         this._curActFunc = this.doSeekEnemy; 
@@ -174,13 +196,12 @@ export class HeroBase extends Component {
 
     startEmbattle(embattlePos: Vec3, actTime: number): void {
         this._actTime = actTime;
-        this.playAnim(HeroBase.STATUS.RUN);
+        this.playAnim(BattlerHero.STATUS.RUN);
         this.embattle(embattlePos);
         this._curActFunc = this.doEmbattle;
         this.node.getComponent(BoxCollider).enabled = false;
         this.node.getComponent(RigidBody).enabled = false;
         this.node.getComponent(RigidBody).clearState();
-        this.node.getComponent(RigidBody)?.sleep();
     }
 
     embattle(embattlePos: Vec3): void {
@@ -199,7 +220,7 @@ export class HeroBase extends Component {
             // this.node.getComponent(BoxCollider).active = true;
             // this.node.getComponent(RigidBody).active = true;
             // this.node.getComponent(RigidBody).clearState();
-            // this.playAnim(HeroBase.STATUS.IDLE);
+            // this.playAnim(BattlerHero.STATUS.IDLE);
             this.node.setPosition(this._targetPos);
         } else {
             this._tmpPos.x += dt * this._dirVector.x
@@ -209,9 +230,11 @@ export class HeroBase extends Component {
     }
 
     startRunToBattle(z: number, actTime: number): void {
+        this._battleTitleBar.setVisible(true);
         this.node.getComponent(RigidBody).clearState();
-        this.node.setPosition(this._targetPos);
+        // this.node.setPosition(this._targetPos);
 
+        this.playAnim(BattlerHero.STATUS.RUN);
         this._actTime = actTime;
         this.runToBattle(z);
         this._curActFunc = this.doRunToBattle;
@@ -231,18 +254,18 @@ export class HeroBase extends Component {
             this._curActFunc = null; // TODO
             // this.node.getComponent(BoxCollider).active = true;
             // this.node.getComponent(RigidBody).active = true;
-            this.node.getComponent(RigidBody).clearState();
-            // this.playAnim(HeroBase.STATUS.IDLE);
+            this.node.getComponent(RigidBody)?.clearState();
+            // this.playAnim(BattlerHero.STATUS.IDLE);
             this.node.setPosition(this._targetPos);
 
-            this.playAnim(HeroBase.STATUS.ATTACK)
+            this.playAnim(BattlerHero.STATUS.ATTACK)
         }  else {
             this._tmpPos.z += dt * this._dirVector.z
             this.node.setPosition(this._tmpPos);
         }
     }
 
-    startBattle(targetList: any): void {
+    startBattle(targetList: Array<BattlerHero>): void {
         this._curActFunc = null;
         this._targetList = targetList
         this.seekAttackTarget();
@@ -250,29 +273,29 @@ export class HeroBase extends Component {
 
     seekAttackTarget(): void {
         // this._curActFunc = null;
-        this._targetNode = null;
+        this._target = null;
         this._dirVector.set(Vec3.ZERO);
         let dirVec = new Vec3();
         for (let i = 0; i < this._targetList.length; i++) {
-            if (!this._targetList[i].getComponent("HeroBase").isDie()) {
-                if(this._targetNode) {
-                    Vec3.subtract(dirVec, this._targetList[i].position, this.node.position);
+            if (!this._targetList[i].isDie()) {
+                if(this._target) {
+                    Vec3.subtract(dirVec, this._targetList[i].node.position, this.node.position);
                     if(dirVec.length() < this._dirVector.length()) {
-                        this._targetNode = this._targetList[i];
+                        this._target = this._targetList[i];
                         this._dirVector.set(dirVec);
                     }
                 } else {
-                    this._targetNode = this._targetList[i];
-                    Vec3.subtract(this._dirVector, this._targetNode.position, this.node.position);
+                    this._target = this._targetList[i];
+                    Vec3.subtract(this._dirVector, this._target.node.position, this.node.position);
                 }
             }
         }
 
-        if (this._targetNode) {
-            if (this._heroInfo.atkRange < this._dirVector.length()) {
+        if (this._target) {
+            if (this._heroInfo.range < this._dirVector.length()) {
                 // 先简单处理了
-                dirVec.x = this._dirVector.x * this._heroInfo.atkRange / this._dirVector.length()
-                dirVec.z = this._dirVector.z * this._heroInfo.atkRange / this._dirVector.length()
+                dirVec.x = this._dirVector.x * this._heroInfo.range / this._dirVector.length()
+                dirVec.z = this._dirVector.z * this._heroInfo.range / this._dirVector.length()
                 this._dirVector.subtract(dirVec);
                 this._targetPos.set(this.node.position);
                 this._targetPos.add(this._dirVector);
@@ -283,13 +306,13 @@ export class HeroBase extends Component {
             }
                 
         } else {
-            this.playAnim(HeroBase.STATUS.IDLE);
+            this.playAnim(BattlerHero.STATUS.IDLE);
         }
 
     }
 
     startRunTo(): void {
-        this.playAnim(HeroBase.STATUS.RUN);
+        this.playAnim(BattlerHero.STATUS.RUN);
         this._curActFunc = this.doRunTo;
         this.runTo();
     }
@@ -301,7 +324,7 @@ export class HeroBase extends Component {
     }
 
     doRunTo(dt: number): void {
-        if (this._targetNode.getComponent("HeroBase").isDie()) {
+        if (this._target.isDie()) {
             this.seekAttackTarget();
             return;
         }
@@ -322,16 +345,27 @@ export class HeroBase extends Component {
     }
 
     attack(): void {
+        if (!this._target) {
+            // TODO
+            console.error("call BattlerHero.attack fail, this._target is null");
+            return;
+        }
+
+        // 开始发动攻击时计算速度 TODO 有buffer刷新时候再计算
+
         this._curActFunc = this.doAttack;
         this._actTime = this._heroInfo.hitTime;
-        this.playAnim(HeroBase.STATUS.ATTACK);
-        this.node.lookAt(this._targetNode.position);
-        this._curNode.getComponent(SkeletalAnimation)?.on(SkeletalAnimation.EventType.LASTFRAME, function (a: any, b: any, c: any) {
-            if (this._targetNode) {
-                if (this._targetNode.getComponent("HeroBase").isDie()) {
+        this.playAnim(BattlerHero.STATUS.ATTACK);
+        this.node.lookAt(this._target.node.position);
+        this._curNode.getComponent(SkeletalAnimation)?.on(SkeletalAnimation.EventType.LASTFRAME, (a: any, b: any, c: any) => {
+            if (this._target) {
+                if (this._target.isDie()) {
                     this._curNode.getComponent(SkeletalAnimation)?.off(SkeletalAnimation.EventType.LASTFRAME)
                     this.seekAttackTarget();
                 } else {
+                    // 开始发动攻击时计算速度 TODO 有buffer刷新时候再计算
+
+
                     this._curActFunc = this.doAttack;
                     this._actTime = this._heroInfo.hitTime;
                 }
@@ -340,9 +374,10 @@ export class HeroBase extends Component {
             }
             
             // console.log(a, b, c)
-        }.bind(this))
+        })
     }
 
+    // TODO 改成使用事件帧
     doAttack(dt: number) {
         this._actTime -= dt;
         if (this._actTime <= 0) {
@@ -353,12 +388,10 @@ export class HeroBase extends Component {
     }
 
     hitTarget(): void {
-        if (this._targetNode && !this._targetNode.getComponent("HeroBase").isDie()) {
-            this._targetNode.getComponent("HeroBase").addHp(-this._heroInfo.atk);
+        if (this._target && !this._target.isDie()) {
+            this._target.addHp(-this._heroInfo.atk);
         } 
     }
-
-    
 
     isDie(): boolean {
         return this._hp === 0
@@ -377,19 +410,56 @@ export class HeroBase extends Component {
         this._battleTitleBar.flyWords(hp);
     }
 
-    die(): void {
-        this._curActFunc = null;
-        this._battleTitleBar.setVisible(false);
-        this.playAnim(HeroBase.STATUS.DIE);
+    addPow(pow: number) {
+        this._pow += pow;
+        if (this._pow > this._maxPow) {
+            this._pow = this._maxPow;
+        } else if (this._pow <= 0) {
+            this._pow = 0;
+        }
+        this._battleTitleBar.setPowPercent(this._pow / this._maxPow);
+
     }
 
-    initHero(camera: Camera, canvas: Node, heroInfo: any, _leaderNode?: any): void {
+    die(): void {
+        if (this._status == BattlerHero.STATUS.DIE) {
+            return;
+        }
+        this._curActFunc = null;
+        this._battleTitleBar.setVisible(false);
+        this.playAnim(BattlerHero.STATUS.DIE);
+        this._battleCtrl.onHeroDie(this);
+    }
+
+    addBuff() {
+
+    }
+
+    removeBuff() {
+
+    }
+
+
+    onTargetDie() {
+
+    }
+
+    initHero(battleCtrl: BattleCtrl, heroInfo: any, _leaderNode?: any): void {
+        this._battleCtrl = battleCtrl;
         this._heroInfo = heroInfo;
         this._leaderNode = _leaderNode;
 
-        this.initTitleBar(camera, canvas);
+        // this._curNode.getComponent(SkeletalAnimation)
+
+
+
+        this._attackStatus = this.attackNode.getComponent(SkeletalAnimation).getState("Take 001");
+        // this._attackStatus = this.skillNode.getComponent(SkeletalAnimation).getState("Take 001");
+        
+        this.initTitleBar();
 
         this.refreshData();
+        // this.refreshAttackSpeed();
     }
 
     refreshData(): void {
@@ -402,21 +472,21 @@ export class HeroBase extends Component {
         this._battleTitleBar.setPowPercent(this._pow / this._maxPow);
     }
 
+     
+
     revive(): void {
         this.refreshData();
-        this.playAnim(HeroBase.STATUS.IDLE);
+        this.playAnim(BattlerHero.STATUS.IDLE);
     }
 
-    initTitleBar(camera: Camera, canvas: Node): void {
-        this._battleTitleBar = this.node.getChildByName("titleBarNode")?.getComponent("BattleTitleBar");
+    isEnemy(): boolean {
+        return this._heroInfo.type != BattlerHero.HeroType.LEADER && this._heroInfo.type != BattlerHero.HeroType.HERO
+    }
 
-        let isGreen = true;
-        if (this._heroInfo.type != HeroBase.HeroType.LEADER && this._heroInfo.type != HeroBase.HeroType.HERO) {
-            isGreen = false;
-        }
+    initTitleBar(): void {
+        this._battleTitleBar = this.node.getChildByName("titleBarNode")?.getComponent("BattleTitleBar") as BattleTitleBar;
 
-
-        this._battleTitleBar.createTitleBar(camera, canvas, isGreen);
+        this._battleTitleBar.createTitleBar(this._battleCtrl.camera, this._battleCtrl.canvas, !this.isEnemy());
         
         this._battleTitleBar.setHpPercent(1);
         this._battleTitleBar.setPowPercent(0);
@@ -435,22 +505,22 @@ export class HeroBase extends Component {
         this._curNode.active = false;
         this._status = status;
         switch (status) {
-            case HeroBase.STATUS.NONE:
+            case BattlerHero.STATUS.NONE:
                 this._curNode = this.idleNode;
                 break;
-            case HeroBase.STATUS.IDLE:
+            case BattlerHero.STATUS.IDLE:
                 this._curNode = this.idleNode;
                 break; 
-            case HeroBase.STATUS.RUN:
+            case BattlerHero.STATUS.RUN:
                 this._curNode = this.runNode;
                 break;
-            case HeroBase.STATUS.ATTACK:
+            case BattlerHero.STATUS.ATTACK:
                 this._curNode = this.attackNode;
                 break;
-            case HeroBase.STATUS.VICTORY:
+            case BattlerHero.STATUS.VICTORY:
                 this._curNode = this.victoryNode;
                 break;
-            case HeroBase.STATUS.DIE:
+            case BattlerHero.STATUS.DIE:
                 this._curNode = this.dieNode;
                 break;
             default:
@@ -460,5 +530,21 @@ export class HeroBase extends Component {
 
         this._curNode.active = true;
         this._curNode.getComponent(SkeletalAnimation).play();
+
+        let a = this._curNode.getComponent(SkeletalAnimation) as SkeletalAnimation;
+        let b = a.clips[0]
+    
+        a.getState(b.name).speed = 1.5;
+        console.log(b, b?.name)
     }
+
+
+    addEvent(): void {
+
+    }
+
+    removeEvent(): void {
+
+    }
+
 }

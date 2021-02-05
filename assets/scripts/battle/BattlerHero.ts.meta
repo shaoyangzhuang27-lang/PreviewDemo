@@ -11,7 +11,7 @@
   "subMetas": {},
   "userData": {
     "importAsPlugin": false,
-    "moduleId": "project:///assets/scripts/battle/HeroBase.js",
+    "moduleId": "project:///assets/scripts/battle/BattlerHero.js",
     "importerSettings": 7
   }
 }
