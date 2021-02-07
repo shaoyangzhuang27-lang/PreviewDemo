@@ -2,27 +2,38 @@
 import { DataCore } from '../../core/control/DataCore';
 
 export class DataMgr extends DataCore{
-    private static _instance: DataMgr = new DataMgr();
-    public static getInstance() {
-        return this._instance;
-    }
-
-    public getTable(key:string){
-        //返回游戏列表数据:[行Array,从0开始记](列Map,通过key获取,data与表中标明数据类型一样)
-        return this.csvData.get(key);
-    }
-
-    public loadAllData(finishCallBack:any,csvNameTab:Array<string> = ["activity"]) {
-        // Your initialization goes here.
-        // this.initCsv('data/activity',this.activityData)// 这里是你要加载的 csv 文件的路径 （相对于项目 resources 目录的路径）
-        this.csvNameTab = csvNameTab;
-        this.loadCallBack = finishCallBack
-        for (var i = 0; i < this.csvNameTab.length; i++) {
-            this.initCsv('data/'+this.csvNameTab[i],this.csvNameTab[i])// 这里是你要加载的 csv 文件的路径 （相对于项目 resources 目录的路径）
-        }
-    }
-
+    // private static _instance: DataMgr = new DataMgr();
+    // public static getInstance() {
+    //     return this._instance;
+    // }
 }
 
 
 
+
+
+        // let _xxtea = xxtea.getInstance();    //获取实例
+        
+
+
+        // let fileUrl = this.getUrl("achievement");
+
+        // loader.load({ url: fileUrl, type: "binary", }, function (err, data) {
+        //     if (data instanceof ArrayBuffer){
+        //         data = new Uint8Array(data);
+        //     }
+        //     // console.log("test 2")
+        //     // console.log("err ===", err);
+        //     // console.log("data ===", data.length);
+        //     let decrypt_data = _xxtea.decrypt(data ,  "Kp/QG.V|!j7A=utb"); //解密
+        //     // let achievement = [];
+        //     // Msg.achievement
+        //     // let achievement = Config.achievement.decode(decrypt_data);
+        //     let achievement = Config["achievement"].decode(decrypt_data);
+        //     // err = proto.Unmarshal(decrypt_data, achievement)
+
+        //     console.log(decrypt_data);
+        //     console.log(achievement);
+        //     console.log(achievement.records[11]);
+        //     // resolve(new CCCsv(res.text))
+        // });

@@ -14,9 +14,11 @@ import { MsgGame } from "./msg/MsgGame";
 class NetTips implements INetworkTips {
     requestTips(isShow: boolean): void {}
     connectTips(isShow: boolean): void {
+        console.log("connectTips"+isShow)
         PopMgr.getInstance().setNetLoading(isShow,"连接中...");
     }
     reconnectTips(isShow: boolean): void {
+        console.log("reconnectTips"+isShow)
         PopMgr.getInstance().setNetLoading(isShow,"重连中...");
     }
     connectCloseTips():void{

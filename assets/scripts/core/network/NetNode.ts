@@ -51,7 +51,7 @@ export class NetNode {
     protected _keepAliveTimer: any = null;                                  // 心跳定时器
     protected _receiveMsgTimer: any = null;                                 // 接收数据定时器
     protected _reconnectTimer: any = null;                                  // 重连定时器
-    protected _heartTime: number = 10000;                                   // 心跳间隔
+    protected _heartTime: number = 30000;                                   // 心跳间隔
     protected _receiveTime: number = 6000000;                               // 多久没收到数据断开
     protected _reconnetTimeOut: number = 8000000;                           // 重连间隔
     protected _requests: RequestObject[] = Array<RequestObject>();          // 请求列表

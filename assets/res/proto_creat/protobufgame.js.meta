@@ -2,7 +2,7 @@
   "ver": "4.0.9",
   "importer": "javascript",
   "imported": true,
-  "uuid": "7e96ee45-5c41-47d3-a48f-71a27b641c16",
+  "uuid": "3f1fd130-1f43-4867-b3c6-fe914d5551c8",
   "files": [
     ".js",
     "editor.js",
@@ -11,7 +11,7 @@
   "subMetas": {},
   "userData": {
     "importAsPlugin": false,
-    "moduleId": "project:///assets/scripts/core/tool/ccCsvParser.js",
+    "moduleId": "project:///assets/res/proto_creat/protobufgame.js",
     "importerSettings": 7
   }
 }

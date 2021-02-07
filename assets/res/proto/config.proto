@@ -1,0 +1,1392 @@
+syntax = "proto3";
+package Config;
+option csharp_namespace = "Config";
+option go_package = "config"
+;
+message achievement
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		string name                  = 2 ;		// 名称
+		string desc                  = 3 ;		// 描述
+		int32  type                  = 4 ;		// 类型
+		int32  param                 = 5 ;		// 类型参数
+		int32  req_num               = 6 ;		// 需求数量
+		int32  next_id               = 7 ;		// 后续成就ID
+		repeated int32  award_type   = 8 ;		// 奖励物品类型
+		repeated int32  award_param1 = 9 ;		// 奖励物品参数
+		repeated int32  award_param2 = 10;		// 奖励物品参数
+		repeated int32  award_param3 = 11;		// 奖励物品参数
+		repeated int32  award_num    = 12;		// 奖励物品数量
+		int32  is_deleted            = 13;		// 1代表删除，0不删
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message activity
+{
+	message Record
+	{
+		int32  id                          = 1 ;		// ID
+		int32  activity_type               = 2 ;		// 活动类型
+		string image                       = 3 ;		// 背景图
+		string name                        = 4 ;		// 活动名称
+		string tittle                      = 5 ;		// 活动标题
+		string desc                        = 6 ;		// 文字说明
+		string daily_mail_title            = 7 ;		// 每日邮件标题
+		string daily_mail_content          = 8 ;		// 每日邮件内容
+		repeated int32  mail_award_type    = 9 ;		// 邮件奖励类型
+		repeated int32  mail_award_param1  = 10;		// 邮件奖励参数
+		repeated int32  mail_award_param2  = 11;		// 邮件奖励参数
+		repeated int32  mail_award_param3  = 12;		// 邮件奖励参数
+		repeated int32  mail_award_num     = 13;		// 邮件奖励数量
+		int32  repeat_times                = 14;		// 循环次数
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message activity_accumulation
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		int32  req_vrmb              = 2 ;		// 需求积累充值
+		repeated int32  goods_type   = 3 ;		// 奖励类型
+		repeated int32  goods_param1 = 4 ;		// 奖励参数
+		repeated int32  goods_param2 = 5 ;		// 奖励参数
+		repeated int32  goods_param3 = 6 ;		// 奖励参数
+		repeated int32  goods_num    = 7 ;		// 奖励数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message activity_quest
+{
+	message Record
+	{
+		int32  id                     = 1 ;		// ID
+		string desc                   = 2 ;		// 任务描述
+		int32  quest_type             = 3 ;		// 任务类型
+		int32  param1                 = 4 ;		// 任务类型参数
+		int32  param2                 = 5 ;		// 任务类型参数
+		int32  require_times          = 6 ;		// 需求次数
+		int32  repeat_times           = 7 ;		// 可重复完成次数
+		repeated int32  award_type    = 8 ;		// 奖励类型
+		repeated int32  award_param1  = 9 ;		// 奖励参数
+		repeated int32  award_param2  = 10;		// 奖励参数
+		repeated int32  award_param3  = 11;		// 奖励参数
+		repeated int32  award_num     = 12;		// 奖励数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message activity_rank_award
+{
+	message Record
+	{
+		int32  id                     = 1 ;		// ID
+		int32  activity_type          = 2 ;		// 活动类型
+		int32  req_score              = 3 ;		// 条件积分
+		int32  rank_min               = 4 ;		// 最低排名
+		int32  rank_max               = 5 ;		// 最高排名
+		repeated int32  award_type    = 6 ;		// 奖励类型
+		repeated int32  award_param1  = 7 ;		// 奖励参数
+		repeated int32  award_param2  = 8 ;		// 奖励参数
+		repeated int32  award_param3  = 9 ;		// 奖励参数
+		repeated int32  award_num     = 10;		// 奖励数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message activity_sell
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		int32  price                 = 2 ;		// 价格
+		repeated int32  goods_type   = 3 ;		// 奖励类型
+		repeated int32  goods_param1 = 4 ;		// 奖励参数
+		repeated int32  goods_param2 = 5 ;		// 奖励参数
+		repeated int32  goods_param3 = 6 ;		// 奖励参数
+		repeated int32  goods_num    = 7 ;		// 奖励数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message aura
+{
+	message Record
+	{
+		int32  id                     = 1 ;		// ID
+		int32  param                  = 2 ;		// 需求阵营
+		int32  num                    = 3 ;		// 需求数量
+		string icon                   = 4 ;		// 图标
+		string particle               = 5 ;		// 特效
+		repeated int32  property_type = 6 ;		// 属性
+		repeated float  property_num  = 7 ;		// 属性数值
+		float  fighting               = 8 ;		// 战力提升
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message aura_hunting
+{
+	message Record
+	{
+		int32  id                     = 1 ;		// ID
+		int32  type                   = 2 ;		// 条件类型：1星级，2职业
+		int32  param                  = 3 ;		// 条件参数
+		int32  num                    = 4 ;		// 需求数量
+		repeated int32  property_type = 5 ;		// 属性
+		repeated float  property_num  = 6 ;		// 属性数值
+		float  fighting               = 7 ;		// 战力提升
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message book_hero_property
+{
+	message Record
+	{
+		int32  id                = 1 ;		// ID
+		repeated int32  pro_type = 2 ;		// 属性类型列表
+		repeated int32  pro_num  = 3 ;		// 属性值列表
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message book_total_property
+{
+	message Record
+	{
+		int32  id                     = 1 ;		// ID
+		int32  req_point              = 2 ;		// 需求点数
+		repeated int32  hero_pro_type = 3 ;		// 英雄属性类型列表
+		repeated float  hero_pro_num  = 4 ;		// 英雄属性值列表
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message buff_new
+{
+	message Record
+	{
+		int32  id                      = 1 ;		// ID
+		string name                    = 2 ;		// 名称
+		int32  buff_or_debuff          = 3 ;		// 正面还是负面
+		int32  buff_status             = 4 ;		// 状态类型
+		int32  max_stack               = 5 ;		// 最大层数
+		int32  effect_type             = 6 ;		// 效果类型
+		int32  effect_param1           = 7 ;		// 效果参数
+		int32  effect_param2           = 8 ;		// 效果参数
+		float  effect_levelup          = 9 ;		// 效果等级成长(用于宠物)
+		string particle                = 10;		// 特效粒子
+		string icon                    = 11;		// 图标
+		float  duration                = 12;		// 持续时间
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message challenge_copy
+{
+	message Record
+	{
+		int32  id                       = 1 ;		// ID
+		int32  req_level                = 2 ;		// 需求等级
+		int32  map_id                   = 3 ;		// 地图ID
+		int32  reference_power          = 4 ;		// 参考战力
+		repeated int32  boss_id         = 5 ;		// BOSSID
+		repeated int32  boss_star       = 6 ;		// BOSS星级
+		repeated int32  boss_level      = 7 ;		// BOSS等级
+		int32  battle_level             = 8 ;		// 战斗等级
+		repeated int32  award_type      = 9 ;		// 奖励物品类型
+		repeated int32  award_param1    = 10;		// 奖励物品参数
+		repeated int32  award_param2    = 11;		// 奖励物品参数
+		repeated int32  award_param3    = 12;		// 奖励物品参数
+		repeated int32  award_num       = 13;		// 奖励物品数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message challenge_extra_award
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		int32  copy_id               = 2 ;		// 副本ID
+		repeated int32  award_type   = 3 ;		// 奖励物品类型
+		repeated int32  award_param1 = 4 ;		// 奖励物品参数
+		repeated int32  award_param2 = 5 ;		// 奖励物品参数
+		repeated int32  award_param3 = 6 ;		// 奖励物品参数
+		repeated int32  award_num    = 7 ;		// 奖励物品数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message copy
+{
+	message Record
+	{
+		int32  id                         = 1 ;		// ID
+		int32  enemy_kills                = 2 ;		// 怪物波次
+		int32  enemy_nums                 = 3 ;		// 怪物数量
+		repeated int32  enemy_ids         = 4 ;		// 怪物ID
+		repeated int32  enemy_stars       = 5 ;		// 怪物星级
+		repeated int32  enemy_levels      = 6 ;		// 怪物等级
+		repeated int32  boss_id           = 7 ;		// BOSSID
+		repeated int32  boss_star         = 8 ;		// BOSS星级
+		repeated int32  boss_level        = 9 ;		// BOSS等级
+		int32  battle_level               = 10;		// 战斗等级
+		int32  map_id                     = 11;		// 地图ID
+		int32  next_id                    = 12;		// 下一张地图ID
+		int32  reference_power            = 13;		// 参考战力
+		int32  reference_level            = 14;		// 参考等级
+		int32  skill_damage_idle          = 15;		// 技能对小怪的伤害百分比
+		int32  skill_damage_boss          = 16;		// 技能对BOSS伤害占主角攻击的百分比
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message copy_extra_award
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		int32  copy_id               = 2 ;		// 副本ID
+		repeated int32  award_type   = 3 ;		// 奖励物品类型
+		repeated int32  award_param1 = 4 ;		// 奖励物品参数
+		repeated int32  award_param2 = 5 ;		// 奖励物品参数
+		repeated int32  award_param3 = 6 ;		// 奖励物品参数
+		repeated int32  award_num    = 7 ;		// 奖励物品数量
+		int32  award_show            = 8 ;		// 显示在主UI的奖励idx
+		string award_desc            = 9 ;		// 显示在主UI的
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message copy_loot
+{
+	message Record
+	{
+		int32  id                          = 1 ;		// ID
+		int32  exp                         = 2 ;		// 掉落经验
+		int32  money                       = 3 ;		// 掉落金币
+		int32  upgrade_point               = 4 ;		// 掉落升级点
+		repeated int32  rand_loot_type     = 5 ;		// 随机掉落类型
+		repeated int32  rand_loot_param1   = 6 ;		// 随机掉落参数1
+		repeated int32  rand_loot_param2   = 7 ;		// 随机掉落参数2
+		repeated int32  rand_loot_param3   = 8 ;		// 随机掉落参数3
+		repeated int32  rand_loot_num      = 9 ;		// 随机掉落数量
+		repeated float  rand_loot_rate     = 10;		// 随机掉落几率
+		repeated int32  pass_award_type    = 11;		// 通关奖励类型
+		repeated int32  pass_award_param1  = 12;		// 通关奖励参数1
+		repeated int32  pass_award_param2  = 13;		// 通关奖励参数2
+		repeated int32  pass_award_param3  = 14;		// 通关奖励参数3
+		repeated int32  pass_award_num     = 15;		// 通关奖励数量
+		int32  pass_reputation             = 16;		// 通关奖励声望
+		float  idle_money                  = 17;		// 挂机金币
+		float  idle_exp                    = 18;		// 挂机经验
+		float  idle_upgrade_point          = 19;		// 挂机升级点
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message country
+{
+	message Record
+	{
+		string id            = 1 ;		// 英文缩写
+		string name          = 2 ;		// 中文
+		int32  area          = 3 ;		// 所属地区id
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message crystal
+{
+	message Record
+	{
+		int32  id                     = 1 ;		// ID
+		string name                   = 2 ;		// 名字
+		int32  quality                = 3 ;		// 品质
+		int32  star                   = 4 ;		// 星级
+		int32  cost                   = 5 ;		// 价值
+		int32  pro_num                = 6 ;		// 属性数量
+		int32  upgrade_money          = 7 ;		// 升级所需金币
+		int32  upgrade_dust           = 8 ;		// 升级所需材料
+		int32  lock_pro_vrmb          = 9 ;		// 锁定属性需求钻石
+		int32  convert_money          = 10;		// 转换所需金币
+		int32  convert_dust           = 11;		// 转换所需材料
+		string icon                   = 12;		// 图片名字
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message daily_recharge_award
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		int32  type                  = 2 ;		// 0新手，1活动
+		int32  day                   = 3 ;		// 第几天(0代表最终奖励)
+		int32  req_rmb               = 4 ;		// 需求充值数
+		repeated int32  award_type   = 5 ;		// 奖励类型
+		repeated int32  award_param1 = 6 ;		// 奖励参数
+		repeated int32  award_param2 = 7 ;		// 奖励参数
+		repeated int32  award_param3 = 8 ;		// 奖励参数
+		repeated int32  award_num    = 9 ;		// 奖励数量
+		int32  award_value           = 10;		// 奖励价值
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message equip
+{
+	message Record
+	{
+		int32  id                     = 1 ;		// ID
+		string name                   = 2 ;		// 名称
+		int32  location_type          = 3 ;		// 位置类型
+		int32  quality                = 4 ;		// 品质
+		int32  star                   = 5 ;		// 星级
+		repeated int32  property_type = 6 ;		// 属性类型
+		repeated int32  property_num  = 7 ;		// 属性值
+		int32  forward_id             = 8 ;		// 前置ID
+		int32  compose_money          = 9 ;		// 合成消耗金币
+		string image_name             = 10;		// 图标
+		int32  suit_id                = 11;		// 套装ID
+		int32  price                  = 12;		// 出售价格
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message equip_role
+{
+	message Record
+	{
+		int32  id                          = 1 ;		// ID
+		repeated int32  property_type      = 2 ;		// 属性类型
+		repeated float  property_num       = 3 ;		// 属性值
+		repeated int32  suit_property_type = 4 ;		// 套装属性类型
+		repeated float  suit_property_num  = 5 ;		// 套装属性值
+		int32  forge_stone                 = 6 ;		// 消耗锻造石
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message event_copy
+{
+	message Record
+	{
+		int32  id                       = 1 ;		// ID
+		int32  type                     = 2 ;		// 类型
+		int32  rank                     = 3 ;		// 等级
+		int32  req_level                = 4 ;		// 需求等级
+		int32  reference_power          = 5 ;		// 参考战力
+		int32  map_id                   = 6 ;		// 地图ID
+		repeated int32  boss_id         = 7 ;		// BOSSID
+		repeated int32  boss_star       = 8 ;		// BOSS星级
+		repeated int32  boss_level      = 9 ;		// BOSS等级
+		int32  battle_level             = 10;		// 战斗等级
+		repeated int32  award_type      = 11;		// 奖励物品类型
+		repeated int32  award_param1    = 12;		// 奖励物品参数
+		repeated int32  award_param2    = 13;		// 奖励物品参数
+		repeated int32  award_param3    = 14;		// 奖励物品参数
+		repeated int32  award_num       = 15;		// 奖励物品数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message frame
+{
+	message Record
+	{
+		int32  id                   = 1 ;		// ID
+		int32  quality              = 2 ;		// 品质
+		string image_bg             = 3 ;		// 底板图
+		string image_board          = 4 ;		// 外框图
+		string name                 = 5 ;		// 名称
+		string desc                 = 6 ;		// 描述
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message gift_code_award
+{
+	message Record
+	{
+		int32  id              = 1 ;		// id
+		repeated int32  type   = 2 ;		// 礼品类型
+		repeated int32  param1 = 3 ;		// 参数1
+		repeated int32  param2 = 4 ;		// 参数2
+		repeated int32  param3 = 5 ;		// 参数3
+		repeated int32  num    = 6 ;		// 数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message guide_text
+{
+	message Record
+	{
+		int32  id               = 1 ;		// ID
+		int32  side             = 2 ;		// 左右
+		string image            = 3 ;		// 形象
+		string name             = 4 ;		// 显示名称
+		string text             = 5 ;		// 显示文本
+		int32  next_id          = 6 ;		// 后续文本
+		int32  copy_id          = 7 ;		// 哪关出现
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message guildConfig
+{
+	message Record
+	{
+		int32  id                       = 1 ;		// 编号
+		int32  price                    = 2 ;		// 创建公会价格(钻石)
+		int32  open_lv                  = 3 ;		// 开放等级
+		int32  max_lv                   = 4 ;		// 公会最高级别
+		int32  zhaomu                   = 5 ;		// 公会招募间隔（秒）
+		int32  sign_times               = 6 ;		// 每日签到次数
+		int32  sign_role                = 7 ;		// 签到个人增加的公会币
+		int32  sign_guild               = 8 ;		// 签到使公会增加的经验
+		int32  mill_lv                  = 9 ;		// 公会磨坊解锁等级
+		int32  skill_price              = 10;		// 公会科技重置价格(钻石，第一次免费)
+		int32  shop_price               = 11;		// 公会商店充值价格(公会币)
+		int32  mill_order_time          = 12;		// 公会磨坊订单生产时间(秒)
+		int32  mill_add_one             = 13;		// 公会磨坊捐献一次的数量
+		int32  raid_times               = 14;		// 每日可免费打公会副本次数
+		repeated int32  raid_cost       = 15;		// 收费打副本消耗
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message guildExpData
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// 编号
+		repeated int32  cost         = 2 ;		// 升级经验
+		int32  member                = 3 ;		// 成员数量
+		int32  open_monster          = 4 ;		// 公会副本开启条件
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message guildOrderData
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// 编号
+		string icon                  = 2 ;		// 图标
+		int32  guild_lv              = 3 ;		// 对应公会等级
+		int32  order_type            = 4 ;		// 低0中1高2
+		int32  price                 = 5 ;		// 价格
+		repeated int32  goods_type   = 6 ;		// 奖励类型
+		repeated int32  goods_param1 = 7 ;		// 奖励参数
+		repeated int32  goods_param2 = 8 ;		// 奖励参数
+		repeated int32  goods_param3 = 9 ;		// 奖励参数
+		repeated int32  goods_num    = 10;		// 奖励数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message guild_boss
+{
+	message Record
+	{
+		int32  id                     = 1 ;		// 拨数
+		repeated int32  monster_id    = 2 ;		// 怪ID列表
+		repeated int32  monster_level = 3 ;		// 怪等级列表
+		int32  battle_level           = 4 ;		// 战斗等级
+		float  duration               = 5 ;		// 几秒后自动刷新下一拨
+		int32  map                    = 6 ;		// 刷怪点id
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message guild_monster
+{
+	message Record
+	{
+		int32  id                      = 1 ;		// ID
+		string name                    = 2 ;		// 名称
+		int32  star                    = 3 ;		// 星级
+		int32  classes                 = 4 ;		// 职业
+		int32  camp                    = 5 ;		// 阵营
+		string prefab                  = 6 ;		// 形象
+		float  scale                   = 7 ;		// 场景中的缩放
+		string image                   = 8 ;		// 头像
+		string prepare_attack          = 9 ;		// 普攻蓄力帧出现的粒子
+		string normal_attack           = 10;		// 普通攻击帧粒子名字
+		float  range                   = 11;		// 射程
+		float  speed                   = 12;		// 攻速
+		float  skill_speed             = 13;		// 技能速度
+		float  damage_reduce           = 14;		// 免伤值
+		float  atk                     = 15;		// 攻击力
+		int64  hp                      = 16;		// 血量
+		float  def                     = 17;		// 护甲
+		float  crit                    = 18;		// 暴击率
+		float  crit_damage             = 19;		// 暴击伤害
+		float  hit                     = 20;		// 命中率
+		float  dodge                   = 21;		// 闪避率
+		float  def_break               = 22;		// 破甲
+		int32  skill_id                = 23;		// 主动技能ID
+		repeated int32  talent_id      = 24;		// 天赋ID列表
+		int32  power_skill             = 25;		// 多少能量放技能
+		int32  show_level              = 26;		// 显示等级
+		int32  fighting                = 27;		// 显示战力
+		repeated int32  fight_type     = 28;		// 挑战奖励类型
+		repeated int32  fight_param1   = 29;		// 挑战奖励参数
+		repeated int32  fight_param2   = 30;		// 挑战奖励参数
+		repeated int32  fight_param3   = 31;		// 挑战奖励参数
+		repeated int32  fight_num      = 32;		// 挑战奖励数量
+		repeated int32  luck_type      = 33;		// 奖池奖励类型
+		repeated int32  luck_param1    = 34;		// 奖池奖励参数
+		repeated int32  luck_param2    = 35;		// 奖池奖励参数
+		repeated int32  luck_param3    = 36;		// 奖池奖励参数
+		repeated int32  luck_num       = 37;		// 奖池奖励数量
+		repeated int32  luck_count     = 38;		// 奖池奖励次数
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message guild_monster_rank_award
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		int32  rank_min              = 2 ;		// 最低排名
+		int32  rank_max              = 3 ;		// 最高排名
+		repeated int32  award_type   = 4 ;		// 奖励类型
+		repeated int32  award_param1 = 5 ;		// 奖励参数
+		repeated int32  award_param2 = 6 ;		// 奖励参数
+		repeated int32  award_param3 = 7 ;		// 奖励参数
+		repeated int32  award_num    = 8 ;		// 奖励数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message hero_animation
+{
+	message Record
+	{
+		string id                             = 1 ;		// ID
+		repeated int32  attack_total_frame    = 2 ;		// 普通攻击总帧数
+		repeated int32  attack_key_frame      = 3 ;		// 普通攻击关键帧
+		repeated int32  attack_particle_speed = 4 ;		// 普通攻击粒子速度(0为立即生效)
+		repeated int32  skill_total_frame     = 5 ;		// 技能总帧数
+		repeated int32  skill_key_frame       = 6 ;		// 技能关键帧
+		repeated int32  skill_particle_speed  = 7 ;		// 技能粒子速度(0为立即生效)
+		repeated string skill_particle        = 8 ;		// 技能粒子名称
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message hero_mission
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		string name                  = 2 ;		// 任务名称
+		int32  star                  = 3 ;		// 任务星级
+		int32  hero_num              = 4 ;		// 需求英雄数量
+		int32  hero_star             = 5 ;		// 需求英雄星级
+		repeated int32  hero_camp    = 6 ;		// 需求阵营
+		repeated int32  hero_classes = 7 ;		// 需求职业
+		int32  fighting              = 8 ;		// 需求战力
+		int32  award_type            = 9 ;		// 奖励物品类型
+		int32  award_param1          = 10;		// 奖励物品参数
+		int32  award_param2          = 11;		// 奖励物品参数
+		int32  award_param3          = 12;		// 奖励物品参数
+		int32  award_num             = 13;		// 奖励物品数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message hero_recommend
+{
+	message Record
+	{
+		int32  id                  = 1 ;		// ID
+		string title               = 2 ;		// 标题
+		int32  role_armor          = 3 ;		// 主角盔甲ID
+		repeated int32  core_hero  = 4 ;		// 核心英雄ID列表
+		repeated int32  other_hero = 5 ;		// 其它英雄ID列表
+		string desc                = 6 ;		// 描述
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message hero_text
+{
+	message Record
+	{
+		int32  id            = 1 ;		// ID
+		string text          = 2 ;		// 名称
+		int32  hero          = 3 ;		// 属于哪个英雄
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message heroes
+{
+	message Record
+	{
+		int32  id                          = 1 ;		// ID
+		string name                        = 2 ;		// 名称
+		string title                       = 3 ;		// 头衔
+		int32  star                        = 4 ;		// 星级
+		int32  classes                     = 5 ;		// 职业
+		int32  camp                        = 6 ;		// 阵营
+		string prefab                      = 7 ;		// 形象
+		string image                       = 8 ;		// 头像
+		string prepare_attack              = 9 ;		// 普攻蓄力帧出现的粒子
+		string normal_attack               = 10;		// 普通攻击帧粒子名字
+		float  range                       = 11;		// 射程
+		float  speed                       = 12;		// 攻速
+		float  skill_speed                 = 13;		// 技能速度
+		float  base_damage_reduce          = 14;		// 基础免伤值
+		float  atk_base                    = 15;		// 基础攻击力
+		float  atk_up                      = 16;		// 攻击力提升
+		float  hp_base                     = 17;		// 基础血量
+		float  hp_up                       = 18;		// 血量提升
+		float  def_base                    = 19;		// 基础护甲
+		float  def_up                      = 20;		// 护甲提升
+		float  crit                        = 21;		// 暴击率
+		float  crit_damage                 = 22;		// 暴击伤害
+		float  hit                         = 23;		// 命中率
+		float  dodge                       = 24;		// 闪避率
+		float  def_break                   = 25;		// 破甲
+		int32  skill_id                    = 26;		// 主动技能ID
+		repeated int32  talent_id          = 27;		// 天赋ID列表
+		repeated int32  talent_unlock_tier = 28;		// 天赋解锁品阶列表
+		int32  next_id                     = 29;		// 升星或觉醒后续ID
+		int32  weight                      = 30;		// 抽卡权值
+		int32  starup_type                 = 31;		// 升星材料类型
+		int32  starup_param                = 32;		// 升星材料参数ID或星
+		int32  starup_num                  = 33;		// 升星材料数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message hunting_boss
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// 层数
+		int32  hp                    = 2 ;		// 血量
+		int32  atk                   = 3 ;		// 攻击力
+		int32  battle_level          = 4 ;		// 战斗等级
+		repeated int32  equip_id     = 5 ;		// 掉落装备ID列表
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message hunting_rank_award
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		int32  rank_min              = 2 ;		// 最低排名
+		int32  rank_max              = 3 ;		// 最高排名
+		repeated int32  award_type   = 4 ;		// 奖励类型
+		repeated int32  award_param1 = 5 ;		// 奖励参数
+		repeated int32  award_param2 = 6 ;		// 奖励参数
+		repeated int32  award_param3 = 7 ;		// 奖励参数
+		repeated int32  award_num    = 8 ;		// 奖励数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message iap
+{
+	message Record
+	{
+		string id                        = 1 ;		// 产品ID
+		int32  product_type              = 2 ;		// 产品类型
+		int32  product_param             = 3 ;		// 产品类型参数
+		int32  product_param2            = 4 ;		// 产品类型参数2
+		int32  vrmb                      = 5 ;		// 钻石数量
+		repeated float  price            = 6 ;		// 货币数量
+		int32  days                      = 7 ;		// 持续天数
+		int32  vrmb_per_day              = 8 ;		// 每天获得钻石数量
+		repeated int32  award_type       = 9 ;		// 奖励类型
+		repeated int32  award_param1     = 10;		// 参数1
+		repeated int32  award_param2     = 11;		// 参数2
+		repeated int32  award_param3     = 12;		// 参数3
+		repeated int32  award_num        = 13;		// 数量
+		string name                      = 14;		// 名称
+		string desc                      = 15;		// 描述
+		int32  vip_exp                   = 16;		// vip经验
+		int32  activate_type             = 17;		// 触发类型
+		int32  activate_param            = 18;		// 触发参数
+		int32  activate_req_vip          = 19;		// 触发VIP需求
+		int32  duration                  = 20;		// 持续时间
+		string image_banner              = 21;		// 商城图
+		string image_bg                  = 22;		// 背景图
+		string forward_iap               = 23;		// 前置IAP
+		int32  discount                  = 24;		// 折扣
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message iap_package
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		int32  type                  = 2 ;		// 类型1关卡,2地牢
+		int32  condition             = 3 ;		// 条件
+		repeated int32  award_type   = 4 ;		// 奖励类型
+		repeated int32  award_param1 = 5 ;		// 参数1
+		repeated int32  award_param2 = 6 ;		// 参数2
+		repeated int32  award_param3 = 7 ;		// 参数3
+		repeated int32  award_num    = 8 ;		// 数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message item_usable
+{
+	message Record
+	{
+		int32  id                 = 1 ;		// id
+		string icon               = 2 ;		// 图标
+		int32  quality            = 3 ;		// 品质
+		string name               = 4 ;		// 名称
+		string desc               = 5 ;		// 描述
+		int32  item_type          = 6 ;		// 道具类型
+		repeated int32  obj_type  = 7 ;		// 物品类型
+		repeated int32  param1    = 8 ;		// 参数1
+		repeated int32  param2    = 9 ;		// 参数2
+		repeated int32  param3    = 10;		// 参数3
+		repeated int32  num       = 11;		// 数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message ladder_achievement
+{
+	message Record
+	{
+		int32  id                  = 1 ;		// ID
+		int32  req_rank            = 2 ;		// 需求排名
+		repeated int32  award_type = 3 ;		// 奖励类型
+		repeated int32  award_num  = 4 ;		// 奖励数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message language_data
+{
+	message Record
+	{
+		string id          = 1 ;		// ID
+		string en          = 2 ;		// english
+		string cn          = 3 ;		// chinese
+		string ja          = 4 ;		// japanese
+		string tw          = 5 ;		// taiwanese
+		string kr          = 6 ;		// korean
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message language_dync
+{
+	message Record
+	{
+		string id          = 1 ;		// ID
+		string en          = 2 ;		// english
+		string cn          = 3 ;		// chinese
+		string ja          = 4 ;		// japanese
+		string tw          = 5 ;		// taiwanese
+		string kr          = 6 ;		// korean
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message language_error
+{
+	message Record
+	{
+		string id          = 1 ;		// ID
+		string en          = 2 ;		// english
+		string cn          = 3 ;		// chinese
+		string ja          = 4 ;		// japanese
+		string tw          = 5 ;		// taiwanese
+		string kr          = 6 ;		// korean
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message language_ui
+{
+	message Record
+	{
+		string id          = 1 ;		// ID
+		string en          = 2 ;		// english
+		string cn          = 3 ;		// chinese
+		string ja          = 4 ;		// japanese
+		string tw          = 5 ;		// taiwanese
+		string kr          = 6 ;		// korean
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message login_award
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		int32  award_type            = 2 ;		// 奖励类型
+		int32  award_param1          = 3 ;		// 参数
+		int32  award_param2          = 4 ;		// 参数
+		int32  award_param3          = 5 ;		// 参数
+		int32  award_num             = 6 ;		// 数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message map
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		string scene_name            = 2 ;		// 名称
+		repeated int32  next_id      = 3 ;		// 能到达的点id
+		float  position_x            = 4 ;		// 点坐标x
+		float  position_y            = 5 ;		// 点坐标y
+		float  position_z            = 6 ;		// 点坐标z
+		repeated int32  boss_next_id = 7 ;		// 召唤BOSS能到达的点id
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message monsters
+{
+	message Record
+	{
+		int32  id                          = 1 ;		// ID
+		string name                        = 2 ;		// 名称
+		int32  star                        = 3 ;		// 星级
+		int32  classes                     = 4 ;		// 职业
+		int32  camp                        = 5 ;		// 阵营
+		string prefab                      = 6 ;		// 形象
+		string image                       = 7 ;		// 头像
+		string prepare_attack              = 8 ;		// 普攻蓄力帧出现的粒子
+		string normal_attack               = 9 ;		// 普通攻击帧粒子名字
+		float  range                       = 10;		// 射程
+		float  speed                       = 11;		// 攻速
+		float  skill_speed                 = 12;		// 技能速度
+		float  base_damage_reduce          = 13;		// 基础免伤值
+		float  atk_base                    = 14;		// 基础攻击力
+		float  atk_up                      = 15;		// 攻击力提升
+		float  hp_base                     = 16;		// 基础血量
+		float  hp_up                       = 17;		// 血量提升
+		float  def_base                    = 18;		// 基础护甲
+		float  def_up                      = 19;		// 护甲提升
+		float  crit                        = 20;		// 暴击率
+		float  crit_damage                 = 21;		// 暴击伤害
+		float  hit                         = 22;		// 命中率
+		float  dodge                       = 23;		// 闪避率
+		float  def_break                   = 24;		// 破甲
+		int32  skill_id                    = 25;		// 主动技能ID
+		repeated int32  talent_id          = 26;		// 天赋ID列表
+		float  scale                       = 27;		// 模型缩放
+		float  offset                      = 28;		// 主角和随从攻击怪时的攻击距离补正
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message mythical_copy
+{
+	message Record
+	{
+		int32  id                         = 1 ;		// ID
+		int32  map_id                     = 2 ;		// 地图ID
+		repeated int32  boss_id           = 3 ;		// BOSSID
+		repeated int32  boss_star         = 4 ;		// BOSS星级
+		repeated int32  boss_level        = 5 ;		// BOSS等级
+		int32  reference_power            = 6 ;		// 参考战力
+		repeated int32  award_type        = 7 ;		// 奖励物品类型
+		repeated int32  award_param1      = 8 ;		// 奖励物品参数
+		repeated int32  award_param2      = 9 ;		// 奖励物品参数
+		repeated int32  award_param3      = 10;		// 奖励物品参数
+		repeated int32  award_num         = 11;		// 奖励物品数量
+		repeated int32  forbidden_camp    = 12;		// 禁用阵营
+		repeated int32  forbidden_classes = 13;		// 禁用职业
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message mythical_extra_award
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		int32  copy_id               = 2 ;		// 大副本ID
+		int32  req_star              = 3 ;		// 需求星星数
+		repeated int32  award_type   = 4 ;		// 奖励物品类型
+		repeated int32  award_param1 = 5 ;		// 奖励物品参数
+		repeated int32  award_param2 = 6 ;		// 奖励物品参数
+		repeated int32  award_param3 = 7 ;		// 奖励物品参数
+		repeated int32  award_num    = 8 ;		// 奖励物品数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message pet
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		string name                  = 2 ;		// 宠物名称
+		string image                 = 3 ;		// 宠物图片
+		string prefab                = 4 ;		// 宠物形象
+		int32  star                  = 5 ;		// 宠物星级
+		int32  camp                  = 6 ;		// 宠物阵营
+		int32  skill_id              = 7 ;		// 宠物技能
+		repeated int32  talent_id    = 8 ;		// 光环被动
+		int32  unlock_exp            = 9 ;		// 解锁经验需求
+		int32  starup_exp            = 10;		// 升星经验需求
+		int32  starup_money          = 11;		// 升星金币需求
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message pet_skill
+{
+	message Record
+	{
+		int32  id                      = 1 ;		// ID
+		string name                    = 2 ;		// 名称
+		int32  skill_type              = 3 ;		// 类型主动/被动
+		int32  target_type             = 4 ;		// 技能目标
+		int32  target_number           = 5 ;		// 影响人数
+		int32  range                   = 6 ;		// 技能范围
+		repeated int32  effect_chance  = 7 ;		// 效果几率
+		repeated int32  effect_type    = 8 ;		// 效果类型
+		repeated int32  effect_param1  = 9 ;		// 效果参数
+		repeated int32  effect_param2  = 10;		// 效果参数
+		repeated float  effect_levelup = 11;		// 每级成长
+		string image                   = 12;		// UI图片名字
+		string desc                    = 13;		// 描述
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message portrait
+{
+	message Record
+	{
+		int32  id               = 1 ;		// ID
+		int32  quality          = 2 ;		// 品质
+		string image            = 3 ;		// 图片
+		string name             = 4 ;		// 名称
+		string desc             = 5 ;		// 描述
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message pvp_rank_award
+{
+	message Record
+	{
+		int32  id                               = 1 ;		// ID
+		int32  rank_min                         = 2 ;		// 最低排名
+		int32  rank_max                         = 3 ;		// 最高排名
+		repeated int32  daily_award_type        = 4 ;		// 每日奖励类型
+		repeated int32  daily_award_num         = 5 ;		// 每日奖励数量
+		repeated int32  season_award_type       = 6 ;		// 赛季奖励类型
+		repeated int32  season_award_num        = 7 ;		// 赛季奖励数量
+		repeated int32  ladder_daily_award_type = 8 ;		// 天梯每日奖励类型
+		repeated int32  ladder_daily_award_num  = 9 ;		// 天梯每日奖励数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message quest_award
+{
+	message Record
+	{
+		int32  id                     = 1 ;		// ID
+		int32  type                   = 2 ;		// 类型(1日常，2周常，3功勋，4试炼战令)
+		int32  require_score          = 3 ;		// 需求积分
+		repeated int32  award_type    = 4 ;		// 奖励类型
+		repeated int32  award_param1  = 5 ;		// 奖励参数
+		repeated int32  award_param2  = 6 ;		// 奖励参数
+		repeated int32  award_param3  = 7 ;		// 奖励参数
+		repeated int32  award_num     = 8 ;		// 奖励数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message quest_loop
+{
+	message Record
+	{
+		int32  id                     = 1 ;		// ID
+		int32  type                   = 2 ;		// 类型(1日常，2周常，3功勋)
+		int32  quest_type             = 3 ;		// 内容类型(对应ELoopQuestType)
+		string desc                   = 4 ;		// 任务描述
+		int32  require_times          = 5 ;		// 需求次数
+		int32  score                  = 6 ;		// 任务积分
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message rank_node
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		int32  requirement           = 2 ;		// 需求
+		string desc                  = 3 ;		// 描述
+		int32  award_type            = 4 ;		// 奖励类型
+		int32  award_param1          = 5 ;		// 参数1
+		int32  award_param2          = 6 ;		// 参数2
+		int32  award_param3          = 7 ;		// 参数3
+		int32  award_num             = 8 ;		// 数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message rookie_award
+{
+	message Record
+	{
+		int32  id                = 1 ;		// id
+		int32  type              = 2 ;		// 奖励类型
+		int32  param1            = 3 ;		// 参数1
+		int32  param2            = 4 ;		// 参数2
+		int32  param3            = 5 ;		// 参数3
+		int32  num               = 6 ;		// 数量
+		int32  duration          = 7 ;		// 时间(秒)
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message rookie_checkin
+{
+	message Record
+	{
+		int32  id              = 1 ;		// id
+		repeated int32  type   = 2 ;		// 奖励类型
+		repeated int32  param1 = 3 ;		// 参数1
+		repeated int32  param2 = 4 ;		// 参数2
+		repeated int32  param3 = 5 ;		// 参数3
+		repeated int32  num    = 6 ;		// 数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message rookie_quest
+{
+	message Record
+	{
+		int32  id                     = 1 ;		// ID
+		int32  day                    = 2 ;		// 第几天
+		string desc                   = 3 ;		// 任务描述
+		int32  quest_type             = 4 ;		// 任务类型
+		int32  param                  = 5 ;		// 类型参数
+		int32  require_times          = 6 ;		// 需求次数
+		int32  score                  = 7 ;		// 奖励积分
+		repeated int32  award_type    = 8 ;		// 奖励类型
+		repeated int32  award_param1  = 9 ;		// 奖励参数
+		repeated int32  award_param2  = 10;		// 奖励参数
+		repeated int32  award_param3  = 11;		// 奖励参数
+		repeated int32  award_num     = 12;		// 奖励数量
+		int32  next_id                = 13;		// 后续任务ID
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message shop_goods
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		int32  shop_type             = 2 ;		// 商店类型
+		int32  loc                   = 3 ;		// 商品位置
+		int32  goods_type            = 4 ;		// 商品类型
+		int32  goods_param1          = 5 ;		// 商品参数
+		int32  goods_param2          = 6 ;		// 商品参数
+		int32  goods_param3          = 7 ;		// 商品参数
+		int32  goods_num             = 8 ;		// 商品数量
+		int32  price_type            = 9 ;		// 价格类型
+		int32  price_num             = 10;		// 价格数量
+		int32  copy_min              = 11;		// 进度区间
+		int32  copy_max              = 12;		// 进度区间
+		int32  is_random             = 13;		// 是否随机
+		int32  buy_type              = 14;		// 购买类型0无限购买，1单次购买
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message skill
+{
+	message Record
+	{
+		int32  id                          = 1 ;		// ID
+		string name                        = 2 ;		// 名称
+		int32  level                       = 3 ;		// 等级
+		int32  target_type                 = 4 ;		// 目标类型
+		repeated int32  range              = 5 ;		// 半径或长宽
+		int32  target_number               = 6 ;		// 目标数量
+		repeated int32  effect_type        = 7 ;		// 效果类型
+		repeated int32  effect_param1      = 8 ;		// 效果参数
+		repeated int32  effect_param2      = 9 ;		// 效果参数
+		repeated int32  effect_cond_type   = 10;		// 生效条件类型
+		repeated int32  effect_cond_param  = 11;		// 生效条件参数
+		repeated int32  effect_chance      = 12;		// 生效几率
+		repeated int32  effect_target_type = 13;		// 效果目标类型
+		repeated int32  effect_target_num  = 14;		// 效果目标数量
+		repeated string effect_particle    = 15;		// 效果粒子特效
+		string image                       = 16;		// 图标
+		int32  unlock_star                 = 17;		// 解锁星级
+		string desc                        = 18;		// 描述
+		repeated int32  desc_param         = 19;		// 描述参数
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message suit
+{
+	message Record
+	{
+		int32  id                     = 1 ;		// ID
+		string name                   = 2 ;		// 名称
+		repeated int32  property_type = 3 ;		// 属性类型
+		repeated float  property_num  = 4 ;		// 属性值
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message talent
+{
+	message Record
+	{
+		int32  id                          = 1 ;		// ID
+		string name                        = 2 ;		// 天赋技能名称
+		int32  level                       = 3 ;		// 等级
+		string image                       = 4 ;		// 图标
+		int32  talent_type                 = 5 ;		// 天赋类型
+		int32  trigger_type                = 6 ;		// 触发条件
+		int32  trigger_param               = 7 ;		// 触发参数
+		int32  trigger_change              = 8 ;		// 触发几率
+		repeated int32  effect_type        = 9 ;		// 效果类型
+		repeated int32  effect_cond_type   = 10;		// 生效条件类型
+		repeated int32  effect_cond_param  = 11;		// 生效条件参数
+		repeated int32  effect_param1      = 12;		// 效果参数
+		repeated int32  effect_param2      = 13;		// 效果参数
+		repeated int32  effect_target_type = 14;		// 效果目标类型
+		repeated int32  effect_target_num  = 15;		// 效果目标数量
+		repeated string effect_particle    = 16;		// 效果粒子特效
+		int32  limit_times                 = 17;		// 限制次数
+		int32  fighting                    = 18;		// 战力加成
+		int32  unlock_star                 = 19;		// 解锁星级
+		string desc                        = 20;		// 描述
+		repeated int32  desc_param         = 21;		// 描述参数
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message technology
+{
+	message Record
+	{
+		int32  id                          = 1 ;		// ID
+		repeated int32  pro_type           = 2 ;		// 属性类型列表
+		repeated float  pro_num            = 3 ;		// 属性值列表
+		int32  levelup_money               = 4 ;		// 升级所需金币
+		int32  levelup_guild_coin          = 5 ;		// 升级所需公会币
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message title
+{
+	message Record
+	{
+		int32  id                = 1 ;		// ID
+		string name              = 2 ;		// 名称
+		string image             = 3 ;		// 图标
+		int32  quality           = 4 ;		// 品质
+		repeated int32  pro_type = 5 ;		// 属性类型列表
+		repeated float  pro_num  = 6 ;		// 属性数值列表
+		int32  duration          = 7 ;		// 时限(0为无时限)
+		string desc              = 8 ;		// 描述
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message trail
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		int32  type                  = 2 ;		// 关卡类型
+		int32  param                 = 3 ;		// 关卡类型参数
+		int32  difficult             = 4 ;		// 试炼难度百分比
+		repeated int32  award_type   = 5 ;		// 奖励物品类型
+		repeated int32  award_param1 = 6 ;		// 奖励物品参数
+		repeated int32  award_param2 = 7 ;		// 奖励物品参数
+		repeated int32  award_param3 = 8 ;		// 奖励物品参数
+		repeated int32  award_num    = 9 ;		// 奖励物品数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message trail_buff
+{
+	message Record
+	{
+		int32  id                     = 1 ;		// ID
+		string name                   = 2 ;		// 试炼BUFF名称
+		int32  quality                = 3 ;		// 品质
+		string image                  = 4 ;		// 图标
+		int32  type                   = 5 ;		// 类型
+		int32  type_param1            = 6 ;		// 类型参数1
+		int32  type_param2            = 7 ;		// 类型参数2
+		int32  target_type            = 8 ;		// 效果目标
+		int32  target_num             = 9 ;		// 目标数量
+		int32  effect_type            = 10;		// 效果类型
+		int32  effect_param1          = 11;		// 效果参数1
+		int32  effect_param2          = 12;		// 效果参数2
+		int32  limit                  = 13;		// 限制次数
+		string particle_name          = 14;		// 粒子名称
+		string desc                   = 15;		// 描述
+		int32  fighting               = 16;		// 战力参考
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message upgrade_exp
+{
+	message Record
+	{
+		int32  id                          = 1 ;		// 等级
+		int32  player_exp                  = 2 ;		// 升级所需经验
+		int32  hero_exp                    = 3 ;		// 随从升级所需经验
+		int32  hero_money                  = 4 ;		// 随从升级所需金币
+		int32  hero_decompose_exp          = 5 ;		// 分解返还经验
+		int32  pet_exp                     = 6 ;		// 宠物升级经验
+		int32  pet_money                   = 7 ;		// 宠物升级金币
+		int32  pet_skill_exp               = 8 ;		// 宠物光环升级经验
+		int32  pet_skill_money             = 9 ;		// 宠物光环升级金币
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message vip_award
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		int32  type                  = 2 ;		// 类型(1特权奖励，2折扣礼包)
+		repeated int32  award_type   = 3 ;		// 奖励类型
+		repeated int32  award_param1 = 4 ;		// 奖励参数
+		repeated int32  award_param2 = 5 ;		// 奖励参数
+		repeated int32  award_param3 = 6 ;		// 奖励参数
+		repeated int32  award_num    = 7 ;		// 奖励数量
+		int32  vrmb                  = 8 ;		// 折扣礼包价格
+		repeated int32  pack_type    = 9 ;		// 奖励类型
+		repeated int32  pack_param1  = 10;		// 奖励参数
+		repeated int32  pack_param2  = 11;		// 奖励参数
+		repeated int32  pack_param3  = 12;		// 奖励参数
+		repeated int32  pack_num     = 13;		// 奖励数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message wonder_summon
+{
+	message Record
+	{
+		int32  id                    = 1 ;		// ID
+		int32  quality               = 2 ;		// 品质(1普通，2稀有，3珍贵)
+		int32  probability           = 3 ;		// 概率(万分之一)
+		int32  award_type            = 4 ;		// 奖励类型(特殊定义大于等于10000为心愿英雄)
+		int32  award_param1          = 5 ;		// 参数
+		int32  award_param2          = 6 ;		// 参数
+		int32  award_param3          = 7 ;		// 参数
+		int32  award_num             = 8 ;		// 数量
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
