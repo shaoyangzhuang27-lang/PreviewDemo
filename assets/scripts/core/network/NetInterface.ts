@@ -21,6 +21,7 @@ export interface RequestObject {
 
 // 协议辅助接口
 export interface IProtocolHelper {
+    setProtocolMap(protocolMap:Map<number,string>):void;
     getHeadlen(): number;                   // 返回包头长度
     getHearbeat(): NetData;                 // 返回一个心跳包
     getPackageLen(msg: NetData): number;    // 返回整个包的长度
@@ -31,6 +32,10 @@ export interface IProtocolHelper {
 
 // 默认字符串协议对象
 export class DefStringProtocol implements IProtocolHelper {
+
+    setProtocolMap(protocolMap:Map<number,string>):void{
+
+    }
     getHeadlen(): number {
         return 0;
     }
@@ -55,6 +60,13 @@ export class DefStringProtocol implements IProtocolHelper {
 
 // 默认字符串协议对象
 export class SupperProtocol implements IProtocolHelper {
+    private protocolMap:Map<number,any>|null = null;
+    constructor(protocolMap:Map<number,any>|null = null) {
+        this.setProtocolMap(protocolMap);
+    }
+    setProtocolMap(protocolMap:Map<number,any>|null = null):void{
+        this.protocolMap = protocolMap
+    }
     getHeadlen(): number {
         return 2;
     }
@@ -78,12 +90,22 @@ export class SupperProtocol implements IProtocolHelper {
     }
     getPackage(msg:ArrayBuffer): NetData{
         const dv_all = new DataView(msg)
+        let id:number = dv_all.getInt16(0,true);
         const buffer_data = new ArrayBuffer(dv_all.byteLength - this.getHeadlen());
         const dv_data = new DataView(buffer_data)
         for (var i = 0; i < dv_data.byteLength; i++) {
             dv_data.setInt8(i,dv_all.getInt8(this.getHeadlen() + i));
         }
-        return new Uint8Array(dv_data.buffer);
+        let uData = new Uint8Array(dv_data.buffer);
+        if(this.protocolMap && this.protocolMap.get(id)){
+            let msgData = this.protocolMap.get(id).decode(uData);
+            
+            console.log("respone id:"+id);
+            console.log(msgData);
+            return msgData;
+        }else{
+            return uData;
+        }
     }
 }
 // Socket接口

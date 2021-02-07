@@ -35,7 +35,7 @@
     "_globals": {
       "__id__": 25
     },
-    "_id": "c68f3e23-8e1e-480d-ae3e-693338592282"
+    "_id": "c9a6cb4a-d805-4287-a7bc-d84d16c48173"
   },
   {
     "__type__": "cc.Node",
@@ -81,7 +81,7 @@
     "_id": "ae6KS5ZxFO9r99PmDrAYqM"
   },
   {
-    "__type__": "50eb2DXH4xEw7BUW5BW3YYL",
+    "__type__": "cd6d2cWyldAN5xqpG4FS9+P",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -89,11 +89,13 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "curScene": null,
+    "curScene": {
+      "__id__": 1
+    },
     "progress_bar": {
       "__id__": 4
     },
-    "_id": "6fFv10LYtPspYNWaRlU+Hg"
+    "_id": "f1tq+sCmBMtYn5d/3ohzN7"
   },
   {
     "__type__": "cc.Node",

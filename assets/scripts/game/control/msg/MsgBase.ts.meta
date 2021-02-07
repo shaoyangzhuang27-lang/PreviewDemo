@@ -2,7 +2,7 @@
   "ver": "4.0.9",
   "importer": "typescript",
   "imported": true,
-  "uuid": "cd6d2716-ca57-4037-9c6a-a46e054bdf8f",
+  "uuid": "2a7cafbf-c410-4b31-8b5d-6feaa43a059b",
   "files": [
     ".js",
     "editor.js",
@@ -11,7 +11,7 @@
   "subMetas": {},
   "userData": {
     "importAsPlugin": false,
-    "moduleId": "project:///assets/scripts/game/view/SceneFirst.js",
+    "moduleId": "project:///assets/scripts/game/control/msg/MsgBase.js",
     "importerSettings": 7
   }
 }

@@ -32,8 +32,8 @@ export class PopMgr extends PopCore  {
     }
 
     public setNetLoading(bo:boolean,content:string){
-        console.log(content+"hhhhhhh:::");
-        console.log(bo);
+        // console.log(content+"hhhhhhh:::");
+        // console.log(bo);
         if(this.netLoading){
             let script = this.netLoading.getComponent("NetLoading") as NetLoading;
             script.setContent(content);

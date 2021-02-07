@@ -23,12 +23,16 @@ export class SceneLogin extends BaseScene {
     }
     submitHandle(){
         console.log("login");
-        MsgMgr.getInstance().requestDeviceLoginNew();
+        MsgMgr.getInstance().getMsgLogin().requestDeviceLoginNew();
     }
     notifyPlayerLoginHandle(data:any){
-        MsgMgr.getInstance().requestGetHeroList();
-        MsgMgr.getInstance().requestGetPlayerData();
+        MsgMgr.getInstance().getMsgLogin().requestGetHeroList();
+        MsgMgr.getInstance().getMsgLogin().requestGetPlayerData();
         SceneMgr.getInstance().changeToBattle();
+    }
+    onDestroy(){
+        super.onDestroy();
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_player_login,this.notifyPlayerLoginHandle,this);
     }
 
 }

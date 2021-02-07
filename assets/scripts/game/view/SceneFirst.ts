@@ -1,9 +1,3 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import { _decorator, Component, Node,ProgressBarComponent } from 'cc';
 import { MsgMgr } from '../control/MsgMgr';
@@ -40,8 +34,10 @@ export class SceneFirst extends BaseScene {
         p.progress = pro;
     }
     initNet(){
-        MsgMgr.getInstance().initLoginNet();
-        MsgMgr.getInstance().requestVersionCheck();
+        // MsgMgr.getInstance().initLoginNet();
+        MsgMgr.getInstance().initLoginServer();
+        MsgMgr.getInstance().connectLoginServer();
+        MsgMgr.getInstance().getMsgLogin().requestVersionCheck();
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_version_check,this.notifyVersionCheckHandle,this);
     }
     notifyVersionCheckHandle(data:any){
@@ -49,7 +45,4 @@ export class SceneFirst extends BaseScene {
         SceneMgr.getInstance().changeToLogin();
     }
 
-    // update (deltaTime: number) {
-    //     // Your update function goes here.
-    // }
 }
