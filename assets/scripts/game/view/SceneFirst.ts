@@ -32,6 +32,7 @@ export class SceneFirst extends BaseScene {
             // console.log(loadTotal);
             // console.log(loadIndex);
         // });
+        console.log("--------------------------------game start--------------------------------------------")
         DataCore.getInstance().initData(["achievement","activity","activity_accumulation","activity_quest","activity_rank_award","activity_sell",
         "aura","aura_hunting","book_hero_property","book_total_property","buff_new","challenge_copy","challenge_extra_award","copy",
         "copy_extra_award","copy_loot","country","crystal","daily_recharge_award","equip","equip_role","event_copy","frame","gift_code_award","guide_text",
@@ -47,9 +48,9 @@ export class SceneFirst extends BaseScene {
         if(cur == total){
             this.isConfigComplete = true;
         }
-        console.log("loading files:")
-        console.log(cur)
-        console.log(total)
+        // console.log("loading files:")
+        // console.log(cur)
+        // console.log(total)
         this.checkComplete();
     }
     initNet(){
@@ -66,7 +67,6 @@ export class SceneFirst extends BaseScene {
     }
     notifyVersionCheckHandle(data:any){
         //进入登陆界面
-        console.log("notifyVersionCheckHandle")
         this.isVersionComplete = true;
         this.checkComplete();
     }

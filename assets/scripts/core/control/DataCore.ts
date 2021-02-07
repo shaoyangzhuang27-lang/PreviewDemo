@@ -1,6 +1,6 @@
 
 // import { loadCsv } from '../tool/ccCsvParser';
-import { Asset, resources ,loader } from "cc";
+import { Asset, resources ,loader, assetManager } from "cc";
 import{xxtea} from "../tool/xxtea";
 
 export class DataCore{
@@ -38,11 +38,10 @@ export class DataCore{
         },(err:any, data :ArrayBuffer) => {
             data = new Uint8Array(data);
             let decrypt_data = _xxtea.decrypt(data ,  this.getPsw()); //解密
-            console.log(tableName)
             let tabObj = Config[tableName].decode(decrypt_data);
 
-            console.log(tabObj);
-            console.log(tabObj.records[11]);
+            // console.log("table "+tableName+":");
+            // console.log(tabObj.records);
 
             this.csvData.set(tableName,tabObj.records);
             this.loadIndex++;
@@ -52,6 +51,7 @@ export class DataCore{
         });
     }
     protected getUrl(tableName:string){
+        // let u:string = assetManager.utils.getUuidFromURL("resources/data/"+tableName+".bytes");
         let u:string = cc.url.raw("resources/data/"+tableName+".bytes");
         return u;
     }

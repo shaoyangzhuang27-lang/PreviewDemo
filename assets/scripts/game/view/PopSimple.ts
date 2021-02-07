@@ -33,13 +33,11 @@ export class PopSimple extends PopBase {
         this.btn_submit?.on(Node.EventType.TOUCH_END, this.submitHandle, this);
     }
     submitHandle(){
-        console.log("submit")
         if(this.submitCallFun){
             this.submitCallFun();
         }
     }
     public setTitle(title:string){
-        console.log(title)
         if(this.lab_title)
             this.lab_title.string = title
     }

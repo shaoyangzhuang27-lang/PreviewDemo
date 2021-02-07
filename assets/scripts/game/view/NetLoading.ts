@@ -21,7 +21,6 @@ export class NetLoading extends Component {
         this.mask?.on(Node.EventType.TOUCH_END, this.maskHandle, this);
     }
     public setContent(content:string){
-        console.log(content)
         if(this.lab_content)
             this.lab_content.string = content
     }
