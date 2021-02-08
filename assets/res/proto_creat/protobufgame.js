@@ -2257,6 +2257,323 @@ $root.Config = (function() {
         return activity_sell;
     })();
 
+    Config.artifact = (function() {
+
+        /**
+         * Properties of an artifact.
+         * @memberof Config
+         * @interface Iartifact
+         * @property {Array.<Config.artifact.IRecord>|null} [records] artifact records
+         * @property {number|null} [version] artifact version
+         */
+
+        /**
+         * Constructs a new artifact.
+         * @memberof Config
+         * @classdesc Represents an artifact.
+         * @implements Iartifact
+         * @constructor
+         * @param {Config.Iartifact=} [p] Properties to set
+         */
+        function artifact(p) {
+            this.records = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        /**
+         * artifact records.
+         * @member {Array.<Config.artifact.IRecord>} records
+         * @memberof Config.artifact
+         * @instance
+         */
+        artifact.prototype.records = $util.emptyArray;
+
+        /**
+         * artifact version.
+         * @member {number} version
+         * @memberof Config.artifact
+         * @instance
+         */
+        artifact.prototype.version = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * Encodes the specified artifact message. Does not implicitly {@link Config.artifact.verify|verify} messages.
+         * @function encode
+         * @memberof Config.artifact
+         * @static
+         * @param {Config.Iartifact} m artifact message or plain object to encode
+         * @param {protobuf.Writer} [w] Writer to encode to
+         * @returns {protobuf.Writer} Writer
+         */
+        artifact.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.records != null && m.records.length) {
+                for (var i = 0; i < m.records.length; ++i)
+                    $root.Config.artifact.Record.encode(m.records[i], w.uint32(10).fork()).ldelim();
+            }
+            if (m.version != null && Object.hasOwnProperty.call(m, "version"))
+                w.uint32(16).int64(m.version);
+            return w;
+        };
+
+        /**
+         * Decodes an artifact message from the specified reader or buffer.
+         * @function decode
+         * @memberof Config.artifact
+         * @static
+         * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+         * @param {number} [l] Message length if known beforehand
+         * @returns {Config.artifact} artifact
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        artifact.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.Config.artifact();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1:
+                    if (!(m.records && m.records.length))
+                        m.records = [];
+                    m.records.push($root.Config.artifact.Record.decode(r, r.uint32()));
+                    break;
+                case 2:
+                    m.version = r.int64();
+                    break;
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        artifact.Record = (function() {
+
+            /**
+             * Properties of a Record.
+             * @memberof Config.artifact
+             * @interface IRecord
+             * @property {number|null} [id] Record id
+             * @property {string|null} [name] Record name
+             * @property {string|null} [image] Record image
+             * @property {number|null} [quality] Record quality
+             * @property {Array.<number>|null} [proType] Record proType
+             * @property {Array.<number>|null} [proNum] Record proNum
+             * @property {number|null} [talentId] Record talentId
+             * @property {number|null} [nextId] Record nextId
+             * @property {number|null} [weight] Record weight
+             */
+
+            /**
+             * Constructs a new Record.
+             * @memberof Config.artifact
+             * @classdesc Represents a Record.
+             * @implements IRecord
+             * @constructor
+             * @param {Config.artifact.IRecord=} [p] Properties to set
+             */
+            function Record(p) {
+                this.proType = [];
+                this.proNum = [];
+                if (p)
+                    for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                        if (p[ks[i]] != null)
+                            this[ks[i]] = p[ks[i]];
+            }
+
+            /**
+             * Record id.
+             * @member {number} id
+             * @memberof Config.artifact.Record
+             * @instance
+             */
+            Record.prototype.id = 0;
+
+            /**
+             * Record name.
+             * @member {string} name
+             * @memberof Config.artifact.Record
+             * @instance
+             */
+            Record.prototype.name = "";
+
+            /**
+             * Record image.
+             * @member {string} image
+             * @memberof Config.artifact.Record
+             * @instance
+             */
+            Record.prototype.image = "";
+
+            /**
+             * Record quality.
+             * @member {number} quality
+             * @memberof Config.artifact.Record
+             * @instance
+             */
+            Record.prototype.quality = 0;
+
+            /**
+             * Record proType.
+             * @member {Array.<number>} proType
+             * @memberof Config.artifact.Record
+             * @instance
+             */
+            Record.prototype.proType = $util.emptyArray;
+
+            /**
+             * Record proNum.
+             * @member {Array.<number>} proNum
+             * @memberof Config.artifact.Record
+             * @instance
+             */
+            Record.prototype.proNum = $util.emptyArray;
+
+            /**
+             * Record talentId.
+             * @member {number} talentId
+             * @memberof Config.artifact.Record
+             * @instance
+             */
+            Record.prototype.talentId = 0;
+
+            /**
+             * Record nextId.
+             * @member {number} nextId
+             * @memberof Config.artifact.Record
+             * @instance
+             */
+            Record.prototype.nextId = 0;
+
+            /**
+             * Record weight.
+             * @member {number} weight
+             * @memberof Config.artifact.Record
+             * @instance
+             */
+            Record.prototype.weight = 0;
+
+            /**
+             * Encodes the specified Record message. Does not implicitly {@link Config.artifact.Record.verify|verify} messages.
+             * @function encode
+             * @memberof Config.artifact.Record
+             * @static
+             * @param {Config.artifact.IRecord} m Record message or plain object to encode
+             * @param {protobuf.Writer} [w] Writer to encode to
+             * @returns {protobuf.Writer} Writer
+             */
+            Record.encode = function encode(m, w) {
+                if (!w)
+                    w = $Writer.create();
+                if (m.id != null && Object.hasOwnProperty.call(m, "id"))
+                    w.uint32(8).int32(m.id);
+                if (m.name != null && Object.hasOwnProperty.call(m, "name"))
+                    w.uint32(18).string(m.name);
+                if (m.image != null && Object.hasOwnProperty.call(m, "image"))
+                    w.uint32(26).string(m.image);
+                if (m.quality != null && Object.hasOwnProperty.call(m, "quality"))
+                    w.uint32(32).int32(m.quality);
+                if (m.proType != null && m.proType.length) {
+                    w.uint32(42).fork();
+                    for (var i = 0; i < m.proType.length; ++i)
+                        w.int32(m.proType[i]);
+                    w.ldelim();
+                }
+                if (m.proNum != null && m.proNum.length) {
+                    w.uint32(50).fork();
+                    for (var i = 0; i < m.proNum.length; ++i)
+                        w.float(m.proNum[i]);
+                    w.ldelim();
+                }
+                if (m.talentId != null && Object.hasOwnProperty.call(m, "talentId"))
+                    w.uint32(56).int32(m.talentId);
+                if (m.nextId != null && Object.hasOwnProperty.call(m, "nextId"))
+                    w.uint32(64).int32(m.nextId);
+                if (m.weight != null && Object.hasOwnProperty.call(m, "weight"))
+                    w.uint32(72).int32(m.weight);
+                return w;
+            };
+
+            /**
+             * Decodes a Record message from the specified reader or buffer.
+             * @function decode
+             * @memberof Config.artifact.Record
+             * @static
+             * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+             * @param {number} [l] Message length if known beforehand
+             * @returns {Config.artifact.Record} Record
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {protobuf.util.ProtocolError} If required fields are missing
+             */
+            Record.decode = function decode(r, l) {
+                if (!(r instanceof $Reader))
+                    r = $Reader.create(r);
+                var c = l === undefined ? r.len : r.pos + l, m = new $root.Config.artifact.Record();
+                while (r.pos < c) {
+                    var t = r.uint32();
+                    switch (t >>> 3) {
+                    case 1:
+                        m.id = r.int32();
+                        break;
+                    case 2:
+                        m.name = r.string();
+                        break;
+                    case 3:
+                        m.image = r.string();
+                        break;
+                    case 4:
+                        m.quality = r.int32();
+                        break;
+                    case 5:
+                        if (!(m.proType && m.proType.length))
+                            m.proType = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.proType.push(r.int32());
+                        } else
+                            m.proType.push(r.int32());
+                        break;
+                    case 6:
+                        if (!(m.proNum && m.proNum.length))
+                            m.proNum = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.proNum.push(r.float());
+                        } else
+                            m.proNum.push(r.float());
+                        break;
+                    case 7:
+                        m.talentId = r.int32();
+                        break;
+                    case 8:
+                        m.nextId = r.int32();
+                        break;
+                    case 9:
+                        m.weight = r.int32();
+                        break;
+                    default:
+                        r.skipType(t & 7);
+                        break;
+                    }
+                }
+                return m;
+            };
+
+            return Record;
+        })();
+
+        return artifact;
+    })();
+
     Config.aura = (function() {
 
         /**
@@ -3662,6 +3979,437 @@ $root.Config = (function() {
         })();
 
         return buff_new;
+    })();
+
+    Config.camp_copy = (function() {
+
+        /**
+         * Properties of a camp_copy.
+         * @memberof Config
+         * @interface Icamp_copy
+         * @property {Array.<Config.camp_copy.IRecord>|null} [records] camp_copy records
+         * @property {number|null} [version] camp_copy version
+         */
+
+        /**
+         * Constructs a new camp_copy.
+         * @memberof Config
+         * @classdesc Represents a camp_copy.
+         * @implements Icamp_copy
+         * @constructor
+         * @param {Config.Icamp_copy=} [p] Properties to set
+         */
+        function camp_copy(p) {
+            this.records = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        /**
+         * camp_copy records.
+         * @member {Array.<Config.camp_copy.IRecord>} records
+         * @memberof Config.camp_copy
+         * @instance
+         */
+        camp_copy.prototype.records = $util.emptyArray;
+
+        /**
+         * camp_copy version.
+         * @member {number} version
+         * @memberof Config.camp_copy
+         * @instance
+         */
+        camp_copy.prototype.version = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * Encodes the specified camp_copy message. Does not implicitly {@link Config.camp_copy.verify|verify} messages.
+         * @function encode
+         * @memberof Config.camp_copy
+         * @static
+         * @param {Config.Icamp_copy} m camp_copy message or plain object to encode
+         * @param {protobuf.Writer} [w] Writer to encode to
+         * @returns {protobuf.Writer} Writer
+         */
+        camp_copy.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.records != null && m.records.length) {
+                for (var i = 0; i < m.records.length; ++i)
+                    $root.Config.camp_copy.Record.encode(m.records[i], w.uint32(10).fork()).ldelim();
+            }
+            if (m.version != null && Object.hasOwnProperty.call(m, "version"))
+                w.uint32(16).int64(m.version);
+            return w;
+        };
+
+        /**
+         * Decodes a camp_copy message from the specified reader or buffer.
+         * @function decode
+         * @memberof Config.camp_copy
+         * @static
+         * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+         * @param {number} [l] Message length if known beforehand
+         * @returns {Config.camp_copy} camp_copy
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        camp_copy.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.Config.camp_copy();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1:
+                    if (!(m.records && m.records.length))
+                        m.records = [];
+                    m.records.push($root.Config.camp_copy.Record.decode(r, r.uint32()));
+                    break;
+                case 2:
+                    m.version = r.int64();
+                    break;
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        camp_copy.Record = (function() {
+
+            /**
+             * Properties of a Record.
+             * @memberof Config.camp_copy
+             * @interface IRecord
+             * @property {number|null} [id] Record id
+             * @property {number|null} [camp] Record camp
+             * @property {number|null} [mapId] Record mapId
+             * @property {Array.<number>|null} [bossId] Record bossId
+             * @property {Array.<number>|null} [bossStar] Record bossStar
+             * @property {Array.<number>|null} [bossLevel] Record bossLevel
+             * @property {number|null} [referencePower] Record referencePower
+             * @property {Array.<number>|null} [awardType] Record awardType
+             * @property {Array.<number>|null} [awardParam1] Record awardParam1
+             * @property {Array.<number>|null} [awardParam2] Record awardParam2
+             * @property {Array.<number>|null} [awardParam3] Record awardParam3
+             * @property {Array.<number>|null} [awardNum] Record awardNum
+             */
+
+            /**
+             * Constructs a new Record.
+             * @memberof Config.camp_copy
+             * @classdesc Represents a Record.
+             * @implements IRecord
+             * @constructor
+             * @param {Config.camp_copy.IRecord=} [p] Properties to set
+             */
+            function Record(p) {
+                this.bossId = [];
+                this.bossStar = [];
+                this.bossLevel = [];
+                this.awardType = [];
+                this.awardParam1 = [];
+                this.awardParam2 = [];
+                this.awardParam3 = [];
+                this.awardNum = [];
+                if (p)
+                    for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                        if (p[ks[i]] != null)
+                            this[ks[i]] = p[ks[i]];
+            }
+
+            /**
+             * Record id.
+             * @member {number} id
+             * @memberof Config.camp_copy.Record
+             * @instance
+             */
+            Record.prototype.id = 0;
+
+            /**
+             * Record camp.
+             * @member {number} camp
+             * @memberof Config.camp_copy.Record
+             * @instance
+             */
+            Record.prototype.camp = 0;
+
+            /**
+             * Record mapId.
+             * @member {number} mapId
+             * @memberof Config.camp_copy.Record
+             * @instance
+             */
+            Record.prototype.mapId = 0;
+
+            /**
+             * Record bossId.
+             * @member {Array.<number>} bossId
+             * @memberof Config.camp_copy.Record
+             * @instance
+             */
+            Record.prototype.bossId = $util.emptyArray;
+
+            /**
+             * Record bossStar.
+             * @member {Array.<number>} bossStar
+             * @memberof Config.camp_copy.Record
+             * @instance
+             */
+            Record.prototype.bossStar = $util.emptyArray;
+
+            /**
+             * Record bossLevel.
+             * @member {Array.<number>} bossLevel
+             * @memberof Config.camp_copy.Record
+             * @instance
+             */
+            Record.prototype.bossLevel = $util.emptyArray;
+
+            /**
+             * Record referencePower.
+             * @member {number} referencePower
+             * @memberof Config.camp_copy.Record
+             * @instance
+             */
+            Record.prototype.referencePower = 0;
+
+            /**
+             * Record awardType.
+             * @member {Array.<number>} awardType
+             * @memberof Config.camp_copy.Record
+             * @instance
+             */
+            Record.prototype.awardType = $util.emptyArray;
+
+            /**
+             * Record awardParam1.
+             * @member {Array.<number>} awardParam1
+             * @memberof Config.camp_copy.Record
+             * @instance
+             */
+            Record.prototype.awardParam1 = $util.emptyArray;
+
+            /**
+             * Record awardParam2.
+             * @member {Array.<number>} awardParam2
+             * @memberof Config.camp_copy.Record
+             * @instance
+             */
+            Record.prototype.awardParam2 = $util.emptyArray;
+
+            /**
+             * Record awardParam3.
+             * @member {Array.<number>} awardParam3
+             * @memberof Config.camp_copy.Record
+             * @instance
+             */
+            Record.prototype.awardParam3 = $util.emptyArray;
+
+            /**
+             * Record awardNum.
+             * @member {Array.<number>} awardNum
+             * @memberof Config.camp_copy.Record
+             * @instance
+             */
+            Record.prototype.awardNum = $util.emptyArray;
+
+            /**
+             * Encodes the specified Record message. Does not implicitly {@link Config.camp_copy.Record.verify|verify} messages.
+             * @function encode
+             * @memberof Config.camp_copy.Record
+             * @static
+             * @param {Config.camp_copy.IRecord} m Record message or plain object to encode
+             * @param {protobuf.Writer} [w] Writer to encode to
+             * @returns {protobuf.Writer} Writer
+             */
+            Record.encode = function encode(m, w) {
+                if (!w)
+                    w = $Writer.create();
+                if (m.id != null && Object.hasOwnProperty.call(m, "id"))
+                    w.uint32(8).int32(m.id);
+                if (m.camp != null && Object.hasOwnProperty.call(m, "camp"))
+                    w.uint32(16).int32(m.camp);
+                if (m.mapId != null && Object.hasOwnProperty.call(m, "mapId"))
+                    w.uint32(24).int32(m.mapId);
+                if (m.bossId != null && m.bossId.length) {
+                    w.uint32(34).fork();
+                    for (var i = 0; i < m.bossId.length; ++i)
+                        w.int32(m.bossId[i]);
+                    w.ldelim();
+                }
+                if (m.bossStar != null && m.bossStar.length) {
+                    w.uint32(42).fork();
+                    for (var i = 0; i < m.bossStar.length; ++i)
+                        w.int32(m.bossStar[i]);
+                    w.ldelim();
+                }
+                if (m.bossLevel != null && m.bossLevel.length) {
+                    w.uint32(50).fork();
+                    for (var i = 0; i < m.bossLevel.length; ++i)
+                        w.int32(m.bossLevel[i]);
+                    w.ldelim();
+                }
+                if (m.referencePower != null && Object.hasOwnProperty.call(m, "referencePower"))
+                    w.uint32(56).int32(m.referencePower);
+                if (m.awardType != null && m.awardType.length) {
+                    w.uint32(66).fork();
+                    for (var i = 0; i < m.awardType.length; ++i)
+                        w.int32(m.awardType[i]);
+                    w.ldelim();
+                }
+                if (m.awardParam1 != null && m.awardParam1.length) {
+                    w.uint32(74).fork();
+                    for (var i = 0; i < m.awardParam1.length; ++i)
+                        w.int32(m.awardParam1[i]);
+                    w.ldelim();
+                }
+                if (m.awardParam2 != null && m.awardParam2.length) {
+                    w.uint32(82).fork();
+                    for (var i = 0; i < m.awardParam2.length; ++i)
+                        w.int32(m.awardParam2[i]);
+                    w.ldelim();
+                }
+                if (m.awardParam3 != null && m.awardParam3.length) {
+                    w.uint32(90).fork();
+                    for (var i = 0; i < m.awardParam3.length; ++i)
+                        w.int32(m.awardParam3[i]);
+                    w.ldelim();
+                }
+                if (m.awardNum != null && m.awardNum.length) {
+                    w.uint32(98).fork();
+                    for (var i = 0; i < m.awardNum.length; ++i)
+                        w.int32(m.awardNum[i]);
+                    w.ldelim();
+                }
+                return w;
+            };
+
+            /**
+             * Decodes a Record message from the specified reader or buffer.
+             * @function decode
+             * @memberof Config.camp_copy.Record
+             * @static
+             * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+             * @param {number} [l] Message length if known beforehand
+             * @returns {Config.camp_copy.Record} Record
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {protobuf.util.ProtocolError} If required fields are missing
+             */
+            Record.decode = function decode(r, l) {
+                if (!(r instanceof $Reader))
+                    r = $Reader.create(r);
+                var c = l === undefined ? r.len : r.pos + l, m = new $root.Config.camp_copy.Record();
+                while (r.pos < c) {
+                    var t = r.uint32();
+                    switch (t >>> 3) {
+                    case 1:
+                        m.id = r.int32();
+                        break;
+                    case 2:
+                        m.camp = r.int32();
+                        break;
+                    case 3:
+                        m.mapId = r.int32();
+                        break;
+                    case 4:
+                        if (!(m.bossId && m.bossId.length))
+                            m.bossId = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.bossId.push(r.int32());
+                        } else
+                            m.bossId.push(r.int32());
+                        break;
+                    case 5:
+                        if (!(m.bossStar && m.bossStar.length))
+                            m.bossStar = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.bossStar.push(r.int32());
+                        } else
+                            m.bossStar.push(r.int32());
+                        break;
+                    case 6:
+                        if (!(m.bossLevel && m.bossLevel.length))
+                            m.bossLevel = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.bossLevel.push(r.int32());
+                        } else
+                            m.bossLevel.push(r.int32());
+                        break;
+                    case 7:
+                        m.referencePower = r.int32();
+                        break;
+                    case 8:
+                        if (!(m.awardType && m.awardType.length))
+                            m.awardType = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.awardType.push(r.int32());
+                        } else
+                            m.awardType.push(r.int32());
+                        break;
+                    case 9:
+                        if (!(m.awardParam1 && m.awardParam1.length))
+                            m.awardParam1 = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.awardParam1.push(r.int32());
+                        } else
+                            m.awardParam1.push(r.int32());
+                        break;
+                    case 10:
+                        if (!(m.awardParam2 && m.awardParam2.length))
+                            m.awardParam2 = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.awardParam2.push(r.int32());
+                        } else
+                            m.awardParam2.push(r.int32());
+                        break;
+                    case 11:
+                        if (!(m.awardParam3 && m.awardParam3.length))
+                            m.awardParam3 = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.awardParam3.push(r.int32());
+                        } else
+                            m.awardParam3.push(r.int32());
+                        break;
+                    case 12:
+                        if (!(m.awardNum && m.awardNum.length))
+                            m.awardNum = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.awardNum.push(r.int32());
+                        } else
+                            m.awardNum.push(r.int32());
+                        break;
+                    default:
+                        r.skipType(t & 7);
+                        break;
+                    }
+                }
+                return m;
+            };
+
+            return Record;
+        })();
+
+        return camp_copy;
     })();
 
     Config.challenge_copy = (function() {
@@ -10091,6 +10839,7 @@ $root.Config = (function() {
              * @property {Array.<number>|null} [luckParam3] Record luckParam3
              * @property {Array.<number>|null} [luckNum] Record luckNum
              * @property {Array.<number>|null} [luckCount] Record luckCount
+             * @property {number|null} [mapId] Record mapId
              */
 
             /**
@@ -10425,6 +11174,14 @@ $root.Config = (function() {
             Record.prototype.luckCount = $util.emptyArray;
 
             /**
+             * Record mapId.
+             * @member {number} mapId
+             * @memberof Config.guild_monster.Record
+             * @instance
+             */
+            Record.prototype.mapId = 0;
+
+            /**
              * Encodes the specified Record message. Does not implicitly {@link Config.guild_monster.Record.verify|verify} messages.
              * @function encode
              * @memberof Config.guild_monster.Record
@@ -10560,6 +11317,8 @@ $root.Config = (function() {
                         w.int32(m.luckCount[i]);
                     w.ldelim();
                 }
+                if (m.mapId != null && Object.hasOwnProperty.call(m, "mapId"))
+                    w.uint32(312).int32(m.mapId);
                 return w;
             };
 
@@ -10778,6 +11537,9 @@ $root.Config = (function() {
                                 m.luckCount.push(r.int32());
                         } else
                             m.luckCount.push(r.int32());
+                        break;
+                    case 39:
+                        m.mapId = r.int32();
                         break;
                     default:
                         r.skipType(t & 7);
@@ -14987,6 +15749,9 @@ $root.Config = (function() {
              * @property {number|null} [id] Record id
              * @property {number|null} [reqRank] Record reqRank
              * @property {Array.<number>|null} [awardType] Record awardType
+             * @property {Array.<number>|null} [awardParam1] Record awardParam1
+             * @property {Array.<number>|null} [awardParam2] Record awardParam2
+             * @property {Array.<number>|null} [awardParam3] Record awardParam3
              * @property {Array.<number>|null} [awardNum] Record awardNum
              */
 
@@ -15000,6 +15765,9 @@ $root.Config = (function() {
              */
             function Record(p) {
                 this.awardType = [];
+                this.awardParam1 = [];
+                this.awardParam2 = [];
+                this.awardParam3 = [];
                 this.awardNum = [];
                 if (p)
                     for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
@@ -15032,6 +15800,30 @@ $root.Config = (function() {
             Record.prototype.awardType = $util.emptyArray;
 
             /**
+             * Record awardParam1.
+             * @member {Array.<number>} awardParam1
+             * @memberof Config.ladder_achievement.Record
+             * @instance
+             */
+            Record.prototype.awardParam1 = $util.emptyArray;
+
+            /**
+             * Record awardParam2.
+             * @member {Array.<number>} awardParam2
+             * @memberof Config.ladder_achievement.Record
+             * @instance
+             */
+            Record.prototype.awardParam2 = $util.emptyArray;
+
+            /**
+             * Record awardParam3.
+             * @member {Array.<number>} awardParam3
+             * @memberof Config.ladder_achievement.Record
+             * @instance
+             */
+            Record.prototype.awardParam3 = $util.emptyArray;
+
+            /**
              * Record awardNum.
              * @member {Array.<number>} awardNum
              * @memberof Config.ladder_achievement.Record
@@ -15061,8 +15853,26 @@ $root.Config = (function() {
                         w.int32(m.awardType[i]);
                     w.ldelim();
                 }
-                if (m.awardNum != null && m.awardNum.length) {
+                if (m.awardParam1 != null && m.awardParam1.length) {
                     w.uint32(34).fork();
+                    for (var i = 0; i < m.awardParam1.length; ++i)
+                        w.int32(m.awardParam1[i]);
+                    w.ldelim();
+                }
+                if (m.awardParam2 != null && m.awardParam2.length) {
+                    w.uint32(42).fork();
+                    for (var i = 0; i < m.awardParam2.length; ++i)
+                        w.int32(m.awardParam2[i]);
+                    w.ldelim();
+                }
+                if (m.awardParam3 != null && m.awardParam3.length) {
+                    w.uint32(50).fork();
+                    for (var i = 0; i < m.awardParam3.length; ++i)
+                        w.int32(m.awardParam3[i]);
+                    w.ldelim();
+                }
+                if (m.awardNum != null && m.awardNum.length) {
+                    w.uint32(58).fork();
                     for (var i = 0; i < m.awardNum.length; ++i)
                         w.int32(m.awardNum[i]);
                     w.ldelim();
@@ -15105,6 +15915,36 @@ $root.Config = (function() {
                             m.awardType.push(r.int32());
                         break;
                     case 4:
+                        if (!(m.awardParam1 && m.awardParam1.length))
+                            m.awardParam1 = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.awardParam1.push(r.int32());
+                        } else
+                            m.awardParam1.push(r.int32());
+                        break;
+                    case 5:
+                        if (!(m.awardParam2 && m.awardParam2.length))
+                            m.awardParam2 = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.awardParam2.push(r.int32());
+                        } else
+                            m.awardParam2.push(r.int32());
+                        break;
+                    case 6:
+                        if (!(m.awardParam3 && m.awardParam3.length))
+                            m.awardParam3 = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.awardParam3.push(r.int32());
+                        } else
+                            m.awardParam3.push(r.int32());
+                        break;
+                    case 7:
                         if (!(m.awardNum && m.awardNum.length))
                             m.awardNum = [];
                         if ((t & 7) === 2) {
@@ -19137,10 +19977,19 @@ $root.Config = (function() {
              * @property {number|null} [rankMin] Record rankMin
              * @property {number|null} [rankMax] Record rankMax
              * @property {Array.<number>|null} [dailyAwardType] Record dailyAwardType
+             * @property {Array.<number>|null} [dailyAwardParam1] Record dailyAwardParam1
+             * @property {Array.<number>|null} [dailyAwardParam2] Record dailyAwardParam2
+             * @property {Array.<number>|null} [dailyAwardParam3] Record dailyAwardParam3
              * @property {Array.<number>|null} [dailyAwardNum] Record dailyAwardNum
              * @property {Array.<number>|null} [seasonAwardType] Record seasonAwardType
+             * @property {Array.<number>|null} [seasonAwardParam1] Record seasonAwardParam1
+             * @property {Array.<number>|null} [seasonAwardParam2] Record seasonAwardParam2
+             * @property {Array.<number>|null} [seasonAwardParam3] Record seasonAwardParam3
              * @property {Array.<number>|null} [seasonAwardNum] Record seasonAwardNum
              * @property {Array.<number>|null} [ladderDailyAwardType] Record ladderDailyAwardType
+             * @property {Array.<number>|null} [ladderDailyAwardParam1] Record ladderDailyAwardParam1
+             * @property {Array.<number>|null} [ladderDailyAwardParam2] Record ladderDailyAwardParam2
+             * @property {Array.<number>|null} [ladderDailyAwardParam3] Record ladderDailyAwardParam3
              * @property {Array.<number>|null} [ladderDailyAwardNum] Record ladderDailyAwardNum
              */
 
@@ -19154,10 +20003,19 @@ $root.Config = (function() {
              */
             function Record(p) {
                 this.dailyAwardType = [];
+                this.dailyAwardParam1 = [];
+                this.dailyAwardParam2 = [];
+                this.dailyAwardParam3 = [];
                 this.dailyAwardNum = [];
                 this.seasonAwardType = [];
+                this.seasonAwardParam1 = [];
+                this.seasonAwardParam2 = [];
+                this.seasonAwardParam3 = [];
                 this.seasonAwardNum = [];
                 this.ladderDailyAwardType = [];
+                this.ladderDailyAwardParam1 = [];
+                this.ladderDailyAwardParam2 = [];
+                this.ladderDailyAwardParam3 = [];
                 this.ladderDailyAwardNum = [];
                 if (p)
                     for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
@@ -19198,6 +20056,30 @@ $root.Config = (function() {
             Record.prototype.dailyAwardType = $util.emptyArray;
 
             /**
+             * Record dailyAwardParam1.
+             * @member {Array.<number>} dailyAwardParam1
+             * @memberof Config.pvp_rank_award.Record
+             * @instance
+             */
+            Record.prototype.dailyAwardParam1 = $util.emptyArray;
+
+            /**
+             * Record dailyAwardParam2.
+             * @member {Array.<number>} dailyAwardParam2
+             * @memberof Config.pvp_rank_award.Record
+             * @instance
+             */
+            Record.prototype.dailyAwardParam2 = $util.emptyArray;
+
+            /**
+             * Record dailyAwardParam3.
+             * @member {Array.<number>} dailyAwardParam3
+             * @memberof Config.pvp_rank_award.Record
+             * @instance
+             */
+            Record.prototype.dailyAwardParam3 = $util.emptyArray;
+
+            /**
              * Record dailyAwardNum.
              * @member {Array.<number>} dailyAwardNum
              * @memberof Config.pvp_rank_award.Record
@@ -19214,6 +20096,30 @@ $root.Config = (function() {
             Record.prototype.seasonAwardType = $util.emptyArray;
 
             /**
+             * Record seasonAwardParam1.
+             * @member {Array.<number>} seasonAwardParam1
+             * @memberof Config.pvp_rank_award.Record
+             * @instance
+             */
+            Record.prototype.seasonAwardParam1 = $util.emptyArray;
+
+            /**
+             * Record seasonAwardParam2.
+             * @member {Array.<number>} seasonAwardParam2
+             * @memberof Config.pvp_rank_award.Record
+             * @instance
+             */
+            Record.prototype.seasonAwardParam2 = $util.emptyArray;
+
+            /**
+             * Record seasonAwardParam3.
+             * @member {Array.<number>} seasonAwardParam3
+             * @memberof Config.pvp_rank_award.Record
+             * @instance
+             */
+            Record.prototype.seasonAwardParam3 = $util.emptyArray;
+
+            /**
              * Record seasonAwardNum.
              * @member {Array.<number>} seasonAwardNum
              * @memberof Config.pvp_rank_award.Record
@@ -19228,6 +20134,30 @@ $root.Config = (function() {
              * @instance
              */
             Record.prototype.ladderDailyAwardType = $util.emptyArray;
+
+            /**
+             * Record ladderDailyAwardParam1.
+             * @member {Array.<number>} ladderDailyAwardParam1
+             * @memberof Config.pvp_rank_award.Record
+             * @instance
+             */
+            Record.prototype.ladderDailyAwardParam1 = $util.emptyArray;
+
+            /**
+             * Record ladderDailyAwardParam2.
+             * @member {Array.<number>} ladderDailyAwardParam2
+             * @memberof Config.pvp_rank_award.Record
+             * @instance
+             */
+            Record.prototype.ladderDailyAwardParam2 = $util.emptyArray;
+
+            /**
+             * Record ladderDailyAwardParam3.
+             * @member {Array.<number>} ladderDailyAwardParam3
+             * @memberof Config.pvp_rank_award.Record
+             * @instance
+             */
+            Record.prototype.ladderDailyAwardParam3 = $util.emptyArray;
 
             /**
              * Record ladderDailyAwardNum.
@@ -19261,32 +20191,86 @@ $root.Config = (function() {
                         w.int32(m.dailyAwardType[i]);
                     w.ldelim();
                 }
-                if (m.dailyAwardNum != null && m.dailyAwardNum.length) {
+                if (m.dailyAwardParam1 != null && m.dailyAwardParam1.length) {
                     w.uint32(42).fork();
+                    for (var i = 0; i < m.dailyAwardParam1.length; ++i)
+                        w.int32(m.dailyAwardParam1[i]);
+                    w.ldelim();
+                }
+                if (m.dailyAwardParam2 != null && m.dailyAwardParam2.length) {
+                    w.uint32(50).fork();
+                    for (var i = 0; i < m.dailyAwardParam2.length; ++i)
+                        w.int32(m.dailyAwardParam2[i]);
+                    w.ldelim();
+                }
+                if (m.dailyAwardParam3 != null && m.dailyAwardParam3.length) {
+                    w.uint32(58).fork();
+                    for (var i = 0; i < m.dailyAwardParam3.length; ++i)
+                        w.int32(m.dailyAwardParam3[i]);
+                    w.ldelim();
+                }
+                if (m.dailyAwardNum != null && m.dailyAwardNum.length) {
+                    w.uint32(66).fork();
                     for (var i = 0; i < m.dailyAwardNum.length; ++i)
                         w.int32(m.dailyAwardNum[i]);
                     w.ldelim();
                 }
                 if (m.seasonAwardType != null && m.seasonAwardType.length) {
-                    w.uint32(50).fork();
+                    w.uint32(74).fork();
                     for (var i = 0; i < m.seasonAwardType.length; ++i)
                         w.int32(m.seasonAwardType[i]);
                     w.ldelim();
                 }
+                if (m.seasonAwardParam1 != null && m.seasonAwardParam1.length) {
+                    w.uint32(82).fork();
+                    for (var i = 0; i < m.seasonAwardParam1.length; ++i)
+                        w.int32(m.seasonAwardParam1[i]);
+                    w.ldelim();
+                }
+                if (m.seasonAwardParam2 != null && m.seasonAwardParam2.length) {
+                    w.uint32(90).fork();
+                    for (var i = 0; i < m.seasonAwardParam2.length; ++i)
+                        w.int32(m.seasonAwardParam2[i]);
+                    w.ldelim();
+                }
+                if (m.seasonAwardParam3 != null && m.seasonAwardParam3.length) {
+                    w.uint32(98).fork();
+                    for (var i = 0; i < m.seasonAwardParam3.length; ++i)
+                        w.int32(m.seasonAwardParam3[i]);
+                    w.ldelim();
+                }
                 if (m.seasonAwardNum != null && m.seasonAwardNum.length) {
-                    w.uint32(58).fork();
+                    w.uint32(106).fork();
                     for (var i = 0; i < m.seasonAwardNum.length; ++i)
                         w.int32(m.seasonAwardNum[i]);
                     w.ldelim();
                 }
                 if (m.ladderDailyAwardType != null && m.ladderDailyAwardType.length) {
-                    w.uint32(66).fork();
+                    w.uint32(114).fork();
                     for (var i = 0; i < m.ladderDailyAwardType.length; ++i)
                         w.int32(m.ladderDailyAwardType[i]);
                     w.ldelim();
                 }
+                if (m.ladderDailyAwardParam1 != null && m.ladderDailyAwardParam1.length) {
+                    w.uint32(122).fork();
+                    for (var i = 0; i < m.ladderDailyAwardParam1.length; ++i)
+                        w.int32(m.ladderDailyAwardParam1[i]);
+                    w.ldelim();
+                }
+                if (m.ladderDailyAwardParam2 != null && m.ladderDailyAwardParam2.length) {
+                    w.uint32(130).fork();
+                    for (var i = 0; i < m.ladderDailyAwardParam2.length; ++i)
+                        w.int32(m.ladderDailyAwardParam2[i]);
+                    w.ldelim();
+                }
+                if (m.ladderDailyAwardParam3 != null && m.ladderDailyAwardParam3.length) {
+                    w.uint32(138).fork();
+                    for (var i = 0; i < m.ladderDailyAwardParam3.length; ++i)
+                        w.int32(m.ladderDailyAwardParam3[i]);
+                    w.ldelim();
+                }
                 if (m.ladderDailyAwardNum != null && m.ladderDailyAwardNum.length) {
-                    w.uint32(74).fork();
+                    w.uint32(146).fork();
                     for (var i = 0; i < m.ladderDailyAwardNum.length; ++i)
                         w.int32(m.ladderDailyAwardNum[i]);
                     w.ldelim();
@@ -19332,6 +20316,36 @@ $root.Config = (function() {
                             m.dailyAwardType.push(r.int32());
                         break;
                     case 5:
+                        if (!(m.dailyAwardParam1 && m.dailyAwardParam1.length))
+                            m.dailyAwardParam1 = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.dailyAwardParam1.push(r.int32());
+                        } else
+                            m.dailyAwardParam1.push(r.int32());
+                        break;
+                    case 6:
+                        if (!(m.dailyAwardParam2 && m.dailyAwardParam2.length))
+                            m.dailyAwardParam2 = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.dailyAwardParam2.push(r.int32());
+                        } else
+                            m.dailyAwardParam2.push(r.int32());
+                        break;
+                    case 7:
+                        if (!(m.dailyAwardParam3 && m.dailyAwardParam3.length))
+                            m.dailyAwardParam3 = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.dailyAwardParam3.push(r.int32());
+                        } else
+                            m.dailyAwardParam3.push(r.int32());
+                        break;
+                    case 8:
                         if (!(m.dailyAwardNum && m.dailyAwardNum.length))
                             m.dailyAwardNum = [];
                         if ((t & 7) === 2) {
@@ -19341,7 +20355,7 @@ $root.Config = (function() {
                         } else
                             m.dailyAwardNum.push(r.int32());
                         break;
-                    case 6:
+                    case 9:
                         if (!(m.seasonAwardType && m.seasonAwardType.length))
                             m.seasonAwardType = [];
                         if ((t & 7) === 2) {
@@ -19351,7 +20365,37 @@ $root.Config = (function() {
                         } else
                             m.seasonAwardType.push(r.int32());
                         break;
-                    case 7:
+                    case 10:
+                        if (!(m.seasonAwardParam1 && m.seasonAwardParam1.length))
+                            m.seasonAwardParam1 = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.seasonAwardParam1.push(r.int32());
+                        } else
+                            m.seasonAwardParam1.push(r.int32());
+                        break;
+                    case 11:
+                        if (!(m.seasonAwardParam2 && m.seasonAwardParam2.length))
+                            m.seasonAwardParam2 = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.seasonAwardParam2.push(r.int32());
+                        } else
+                            m.seasonAwardParam2.push(r.int32());
+                        break;
+                    case 12:
+                        if (!(m.seasonAwardParam3 && m.seasonAwardParam3.length))
+                            m.seasonAwardParam3 = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.seasonAwardParam3.push(r.int32());
+                        } else
+                            m.seasonAwardParam3.push(r.int32());
+                        break;
+                    case 13:
                         if (!(m.seasonAwardNum && m.seasonAwardNum.length))
                             m.seasonAwardNum = [];
                         if ((t & 7) === 2) {
@@ -19361,7 +20405,7 @@ $root.Config = (function() {
                         } else
                             m.seasonAwardNum.push(r.int32());
                         break;
-                    case 8:
+                    case 14:
                         if (!(m.ladderDailyAwardType && m.ladderDailyAwardType.length))
                             m.ladderDailyAwardType = [];
                         if ((t & 7) === 2) {
@@ -19371,7 +20415,37 @@ $root.Config = (function() {
                         } else
                             m.ladderDailyAwardType.push(r.int32());
                         break;
-                    case 9:
+                    case 15:
+                        if (!(m.ladderDailyAwardParam1 && m.ladderDailyAwardParam1.length))
+                            m.ladderDailyAwardParam1 = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.ladderDailyAwardParam1.push(r.int32());
+                        } else
+                            m.ladderDailyAwardParam1.push(r.int32());
+                        break;
+                    case 16:
+                        if (!(m.ladderDailyAwardParam2 && m.ladderDailyAwardParam2.length))
+                            m.ladderDailyAwardParam2 = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.ladderDailyAwardParam2.push(r.int32());
+                        } else
+                            m.ladderDailyAwardParam2.push(r.int32());
+                        break;
+                    case 17:
+                        if (!(m.ladderDailyAwardParam3 && m.ladderDailyAwardParam3.length))
+                            m.ladderDailyAwardParam3 = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.ladderDailyAwardParam3.push(r.int32());
+                        } else
+                            m.ladderDailyAwardParam3.push(r.int32());
+                        break;
+                    case 18:
                         if (!(m.ladderDailyAwardNum && m.ladderDailyAwardNum.length))
                             m.ladderDailyAwardNum = [];
                         if ((t & 7) === 2) {
@@ -22168,6 +23242,351 @@ $root.Config = (function() {
         })();
 
         return skill;
+    })();
+
+    Config.skin = (function() {
+
+        /**
+         * Properties of a skin.
+         * @memberof Config
+         * @interface Iskin
+         * @property {Array.<Config.skin.IRecord>|null} [records] skin records
+         * @property {number|null} [version] skin version
+         */
+
+        /**
+         * Constructs a new skin.
+         * @memberof Config
+         * @classdesc Represents a skin.
+         * @implements Iskin
+         * @constructor
+         * @param {Config.Iskin=} [p] Properties to set
+         */
+        function skin(p) {
+            this.records = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        /**
+         * skin records.
+         * @member {Array.<Config.skin.IRecord>} records
+         * @memberof Config.skin
+         * @instance
+         */
+        skin.prototype.records = $util.emptyArray;
+
+        /**
+         * skin version.
+         * @member {number} version
+         * @memberof Config.skin
+         * @instance
+         */
+        skin.prototype.version = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * Encodes the specified skin message. Does not implicitly {@link Config.skin.verify|verify} messages.
+         * @function encode
+         * @memberof Config.skin
+         * @static
+         * @param {Config.Iskin} m skin message or plain object to encode
+         * @param {protobuf.Writer} [w] Writer to encode to
+         * @returns {protobuf.Writer} Writer
+         */
+        skin.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.records != null && m.records.length) {
+                for (var i = 0; i < m.records.length; ++i)
+                    $root.Config.skin.Record.encode(m.records[i], w.uint32(10).fork()).ldelim();
+            }
+            if (m.version != null && Object.hasOwnProperty.call(m, "version"))
+                w.uint32(16).int64(m.version);
+            return w;
+        };
+
+        /**
+         * Decodes a skin message from the specified reader or buffer.
+         * @function decode
+         * @memberof Config.skin
+         * @static
+         * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+         * @param {number} [l] Message length if known beforehand
+         * @returns {Config.skin} skin
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        skin.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.Config.skin();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1:
+                    if (!(m.records && m.records.length))
+                        m.records = [];
+                    m.records.push($root.Config.skin.Record.decode(r, r.uint32()));
+                    break;
+                case 2:
+                    m.version = r.int64();
+                    break;
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        skin.Record = (function() {
+
+            /**
+             * Properties of a Record.
+             * @memberof Config.skin
+             * @interface IRecord
+             * @property {number|null} [id] Record id
+             * @property {number|null} [heroId] Record heroId
+             * @property {string|null} [name] Record name
+             * @property {string|null} [image] Record image
+             * @property {number|null} [quality] Record quality
+             * @property {string|null} [prefab] Record prefab
+             * @property {Array.<number>|null} [proType] Record proType
+             * @property {Array.<number>|null} [proNum] Record proNum
+             * @property {number|null} [duration] Record duration
+             * @property {string|null} [desc] Record desc
+             * @property {string|null} [iapId] Record iapId
+             */
+
+            /**
+             * Constructs a new Record.
+             * @memberof Config.skin
+             * @classdesc Represents a Record.
+             * @implements IRecord
+             * @constructor
+             * @param {Config.skin.IRecord=} [p] Properties to set
+             */
+            function Record(p) {
+                this.proType = [];
+                this.proNum = [];
+                if (p)
+                    for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                        if (p[ks[i]] != null)
+                            this[ks[i]] = p[ks[i]];
+            }
+
+            /**
+             * Record id.
+             * @member {number} id
+             * @memberof Config.skin.Record
+             * @instance
+             */
+            Record.prototype.id = 0;
+
+            /**
+             * Record heroId.
+             * @member {number} heroId
+             * @memberof Config.skin.Record
+             * @instance
+             */
+            Record.prototype.heroId = 0;
+
+            /**
+             * Record name.
+             * @member {string} name
+             * @memberof Config.skin.Record
+             * @instance
+             */
+            Record.prototype.name = "";
+
+            /**
+             * Record image.
+             * @member {string} image
+             * @memberof Config.skin.Record
+             * @instance
+             */
+            Record.prototype.image = "";
+
+            /**
+             * Record quality.
+             * @member {number} quality
+             * @memberof Config.skin.Record
+             * @instance
+             */
+            Record.prototype.quality = 0;
+
+            /**
+             * Record prefab.
+             * @member {string} prefab
+             * @memberof Config.skin.Record
+             * @instance
+             */
+            Record.prototype.prefab = "";
+
+            /**
+             * Record proType.
+             * @member {Array.<number>} proType
+             * @memberof Config.skin.Record
+             * @instance
+             */
+            Record.prototype.proType = $util.emptyArray;
+
+            /**
+             * Record proNum.
+             * @member {Array.<number>} proNum
+             * @memberof Config.skin.Record
+             * @instance
+             */
+            Record.prototype.proNum = $util.emptyArray;
+
+            /**
+             * Record duration.
+             * @member {number} duration
+             * @memberof Config.skin.Record
+             * @instance
+             */
+            Record.prototype.duration = 0;
+
+            /**
+             * Record desc.
+             * @member {string} desc
+             * @memberof Config.skin.Record
+             * @instance
+             */
+            Record.prototype.desc = "";
+
+            /**
+             * Record iapId.
+             * @member {string} iapId
+             * @memberof Config.skin.Record
+             * @instance
+             */
+            Record.prototype.iapId = "";
+
+            /**
+             * Encodes the specified Record message. Does not implicitly {@link Config.skin.Record.verify|verify} messages.
+             * @function encode
+             * @memberof Config.skin.Record
+             * @static
+             * @param {Config.skin.IRecord} m Record message or plain object to encode
+             * @param {protobuf.Writer} [w] Writer to encode to
+             * @returns {protobuf.Writer} Writer
+             */
+            Record.encode = function encode(m, w) {
+                if (!w)
+                    w = $Writer.create();
+                if (m.id != null && Object.hasOwnProperty.call(m, "id"))
+                    w.uint32(8).int32(m.id);
+                if (m.heroId != null && Object.hasOwnProperty.call(m, "heroId"))
+                    w.uint32(16).int32(m.heroId);
+                if (m.name != null && Object.hasOwnProperty.call(m, "name"))
+                    w.uint32(26).string(m.name);
+                if (m.image != null && Object.hasOwnProperty.call(m, "image"))
+                    w.uint32(34).string(m.image);
+                if (m.quality != null && Object.hasOwnProperty.call(m, "quality"))
+                    w.uint32(40).int32(m.quality);
+                if (m.prefab != null && Object.hasOwnProperty.call(m, "prefab"))
+                    w.uint32(50).string(m.prefab);
+                if (m.proType != null && m.proType.length) {
+                    w.uint32(58).fork();
+                    for (var i = 0; i < m.proType.length; ++i)
+                        w.int32(m.proType[i]);
+                    w.ldelim();
+                }
+                if (m.proNum != null && m.proNum.length) {
+                    w.uint32(66).fork();
+                    for (var i = 0; i < m.proNum.length; ++i)
+                        w.float(m.proNum[i]);
+                    w.ldelim();
+                }
+                if (m.duration != null && Object.hasOwnProperty.call(m, "duration"))
+                    w.uint32(72).int32(m.duration);
+                if (m.desc != null && Object.hasOwnProperty.call(m, "desc"))
+                    w.uint32(82).string(m.desc);
+                if (m.iapId != null && Object.hasOwnProperty.call(m, "iapId"))
+                    w.uint32(90).string(m.iapId);
+                return w;
+            };
+
+            /**
+             * Decodes a Record message from the specified reader or buffer.
+             * @function decode
+             * @memberof Config.skin.Record
+             * @static
+             * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+             * @param {number} [l] Message length if known beforehand
+             * @returns {Config.skin.Record} Record
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {protobuf.util.ProtocolError} If required fields are missing
+             */
+            Record.decode = function decode(r, l) {
+                if (!(r instanceof $Reader))
+                    r = $Reader.create(r);
+                var c = l === undefined ? r.len : r.pos + l, m = new $root.Config.skin.Record();
+                while (r.pos < c) {
+                    var t = r.uint32();
+                    switch (t >>> 3) {
+                    case 1:
+                        m.id = r.int32();
+                        break;
+                    case 2:
+                        m.heroId = r.int32();
+                        break;
+                    case 3:
+                        m.name = r.string();
+                        break;
+                    case 4:
+                        m.image = r.string();
+                        break;
+                    case 5:
+                        m.quality = r.int32();
+                        break;
+                    case 6:
+                        m.prefab = r.string();
+                        break;
+                    case 7:
+                        if (!(m.proType && m.proType.length))
+                            m.proType = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.proType.push(r.int32());
+                        } else
+                            m.proType.push(r.int32());
+                        break;
+                    case 8:
+                        if (!(m.proNum && m.proNum.length))
+                            m.proNum = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.proNum.push(r.float());
+                        } else
+                            m.proNum.push(r.float());
+                        break;
+                    case 9:
+                        m.duration = r.int32();
+                        break;
+                    case 10:
+                        m.desc = r.string();
+                        break;
+                    case 11:
+                        m.iapId = r.string();
+                        break;
+                    default:
+                        r.skipType(t & 7);
+                        break;
+                    }
+                }
+                return m;
+            };
+
+            return Record;
+        })();
+
+        return skin;
     })();
 
     Config.suit = (function() {

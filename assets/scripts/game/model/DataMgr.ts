@@ -27,12 +27,9 @@ export class DataMgr extends DataCore{
         }
 
         this.initData(tabName,func);
-        // this.getTableByName(TableName.achievement);
     }
     public getTableByName(t:TableName){
         let name:string = TableName[t];
-        console.log("YYY:")
-        console.log(name)
         return this.getTable(name);
     }
     

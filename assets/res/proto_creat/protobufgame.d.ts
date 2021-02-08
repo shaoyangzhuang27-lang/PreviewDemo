@@ -856,6 +856,139 @@ export namespace Config {
         }
     }
 
+    /** Properties of an artifact. */
+    interface Iartifact {
+
+        /** artifact records */
+        records?: (Config.artifact.IRecord[]|null);
+
+        /** artifact version */
+        version?: (number|null);
+    }
+
+    /** Represents an artifact. */
+    class artifact implements Iartifact {
+
+        /**
+         * Constructs a new artifact.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Config.Iartifact);
+
+        /** artifact records. */
+        public records: Config.artifact.IRecord[];
+
+        /** artifact version. */
+        public version: number;
+
+        /**
+         * Encodes the specified artifact message. Does not implicitly {@link Config.artifact.verify|verify} messages.
+         * @param m artifact message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Config.Iartifact, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes an artifact message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns artifact
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Config.artifact;
+    }
+
+    namespace artifact {
+
+        /** Properties of a Record. */
+        interface IRecord {
+
+            /** Record id */
+            id?: (number|null);
+
+            /** Record name */
+            name?: (string|null);
+
+            /** Record image */
+            image?: (string|null);
+
+            /** Record quality */
+            quality?: (number|null);
+
+            /** Record proType */
+            proType?: (number[]|null);
+
+            /** Record proNum */
+            proNum?: (number[]|null);
+
+            /** Record talentId */
+            talentId?: (number|null);
+
+            /** Record nextId */
+            nextId?: (number|null);
+
+            /** Record weight */
+            weight?: (number|null);
+        }
+
+        /** Represents a Record. */
+        class Record implements IRecord {
+
+            /**
+             * Constructs a new Record.
+             * @param [p] Properties to set
+             */
+            constructor(p?: Config.artifact.IRecord);
+
+            /** Record id. */
+            public id: number;
+
+            /** Record name. */
+            public name: string;
+
+            /** Record image. */
+            public image: string;
+
+            /** Record quality. */
+            public quality: number;
+
+            /** Record proType. */
+            public proType: number[];
+
+            /** Record proNum. */
+            public proNum: number[];
+
+            /** Record talentId. */
+            public talentId: number;
+
+            /** Record nextId. */
+            public nextId: number;
+
+            /** Record weight. */
+            public weight: number;
+
+            /**
+             * Encodes the specified Record message. Does not implicitly {@link Config.artifact.Record.verify|verify} messages.
+             * @param m Record message or plain object to encode
+             * @param [w] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(m: Config.artifact.IRecord, w?: protobuf.Writer): protobuf.Writer;
+
+            /**
+             * Decodes a Record message from the specified reader or buffer.
+             * @param r Reader or buffer to decode from
+             * @param [l] Message length if known beforehand
+             * @returns Record
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Config.artifact.Record;
+        }
+    }
+
     /** Properties of an aura. */
     interface Iaura {
 
@@ -1452,6 +1585,157 @@ export namespace Config {
              * @throws {protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Config.buff_new.Record;
+        }
+    }
+
+    /** Properties of a camp_copy. */
+    interface Icamp_copy {
+
+        /** camp_copy records */
+        records?: (Config.camp_copy.IRecord[]|null);
+
+        /** camp_copy version */
+        version?: (number|null);
+    }
+
+    /** Represents a camp_copy. */
+    class camp_copy implements Icamp_copy {
+
+        /**
+         * Constructs a new camp_copy.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Config.Icamp_copy);
+
+        /** camp_copy records. */
+        public records: Config.camp_copy.IRecord[];
+
+        /** camp_copy version. */
+        public version: number;
+
+        /**
+         * Encodes the specified camp_copy message. Does not implicitly {@link Config.camp_copy.verify|verify} messages.
+         * @param m camp_copy message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Config.Icamp_copy, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a camp_copy message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns camp_copy
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Config.camp_copy;
+    }
+
+    namespace camp_copy {
+
+        /** Properties of a Record. */
+        interface IRecord {
+
+            /** Record id */
+            id?: (number|null);
+
+            /** Record camp */
+            camp?: (number|null);
+
+            /** Record mapId */
+            mapId?: (number|null);
+
+            /** Record bossId */
+            bossId?: (number[]|null);
+
+            /** Record bossStar */
+            bossStar?: (number[]|null);
+
+            /** Record bossLevel */
+            bossLevel?: (number[]|null);
+
+            /** Record referencePower */
+            referencePower?: (number|null);
+
+            /** Record awardType */
+            awardType?: (number[]|null);
+
+            /** Record awardParam1 */
+            awardParam1?: (number[]|null);
+
+            /** Record awardParam2 */
+            awardParam2?: (number[]|null);
+
+            /** Record awardParam3 */
+            awardParam3?: (number[]|null);
+
+            /** Record awardNum */
+            awardNum?: (number[]|null);
+        }
+
+        /** Represents a Record. */
+        class Record implements IRecord {
+
+            /**
+             * Constructs a new Record.
+             * @param [p] Properties to set
+             */
+            constructor(p?: Config.camp_copy.IRecord);
+
+            /** Record id. */
+            public id: number;
+
+            /** Record camp. */
+            public camp: number;
+
+            /** Record mapId. */
+            public mapId: number;
+
+            /** Record bossId. */
+            public bossId: number[];
+
+            /** Record bossStar. */
+            public bossStar: number[];
+
+            /** Record bossLevel. */
+            public bossLevel: number[];
+
+            /** Record referencePower. */
+            public referencePower: number;
+
+            /** Record awardType. */
+            public awardType: number[];
+
+            /** Record awardParam1. */
+            public awardParam1: number[];
+
+            /** Record awardParam2. */
+            public awardParam2: number[];
+
+            /** Record awardParam3. */
+            public awardParam3: number[];
+
+            /** Record awardNum. */
+            public awardNum: number[];
+
+            /**
+             * Encodes the specified Record message. Does not implicitly {@link Config.camp_copy.Record.verify|verify} messages.
+             * @param m Record message or plain object to encode
+             * @param [w] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(m: Config.camp_copy.IRecord, w?: protobuf.Writer): protobuf.Writer;
+
+            /**
+             * Decodes a Record message from the specified reader or buffer.
+             * @param r Reader or buffer to decode from
+             * @param [l] Message length if known beforehand
+             * @returns Record
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Config.camp_copy.Record;
         }
     }
 
@@ -4095,6 +4379,9 @@ export namespace Config {
 
             /** Record luckCount */
             luckCount?: (number[]|null);
+
+            /** Record mapId */
+            mapId?: (number|null);
         }
 
         /** Represents a Record. */
@@ -4219,6 +4506,9 @@ export namespace Config {
 
             /** Record luckCount. */
             public luckCount: number[];
+
+            /** Record mapId. */
+            public mapId: number;
 
             /**
              * Encodes the specified Record message. Does not implicitly {@link Config.guild_monster.Record.verify|verify} messages.
@@ -5929,6 +6219,15 @@ export namespace Config {
             /** Record awardType */
             awardType?: (number[]|null);
 
+            /** Record awardParam1 */
+            awardParam1?: (number[]|null);
+
+            /** Record awardParam2 */
+            awardParam2?: (number[]|null);
+
+            /** Record awardParam3 */
+            awardParam3?: (number[]|null);
+
             /** Record awardNum */
             awardNum?: (number[]|null);
         }
@@ -5950,6 +6249,15 @@ export namespace Config {
 
             /** Record awardType. */
             public awardType: number[];
+
+            /** Record awardParam1. */
+            public awardParam1: number[];
+
+            /** Record awardParam2. */
+            public awardParam2: number[];
+
+            /** Record awardParam3. */
+            public awardParam3: number[];
 
             /** Record awardNum. */
             public awardNum: number[];
@@ -7673,17 +7981,44 @@ export namespace Config {
             /** Record dailyAwardType */
             dailyAwardType?: (number[]|null);
 
+            /** Record dailyAwardParam1 */
+            dailyAwardParam1?: (number[]|null);
+
+            /** Record dailyAwardParam2 */
+            dailyAwardParam2?: (number[]|null);
+
+            /** Record dailyAwardParam3 */
+            dailyAwardParam3?: (number[]|null);
+
             /** Record dailyAwardNum */
             dailyAwardNum?: (number[]|null);
 
             /** Record seasonAwardType */
             seasonAwardType?: (number[]|null);
 
+            /** Record seasonAwardParam1 */
+            seasonAwardParam1?: (number[]|null);
+
+            /** Record seasonAwardParam2 */
+            seasonAwardParam2?: (number[]|null);
+
+            /** Record seasonAwardParam3 */
+            seasonAwardParam3?: (number[]|null);
+
             /** Record seasonAwardNum */
             seasonAwardNum?: (number[]|null);
 
             /** Record ladderDailyAwardType */
             ladderDailyAwardType?: (number[]|null);
+
+            /** Record ladderDailyAwardParam1 */
+            ladderDailyAwardParam1?: (number[]|null);
+
+            /** Record ladderDailyAwardParam2 */
+            ladderDailyAwardParam2?: (number[]|null);
+
+            /** Record ladderDailyAwardParam3 */
+            ladderDailyAwardParam3?: (number[]|null);
 
             /** Record ladderDailyAwardNum */
             ladderDailyAwardNum?: (number[]|null);
@@ -7710,17 +8045,44 @@ export namespace Config {
             /** Record dailyAwardType. */
             public dailyAwardType: number[];
 
+            /** Record dailyAwardParam1. */
+            public dailyAwardParam1: number[];
+
+            /** Record dailyAwardParam2. */
+            public dailyAwardParam2: number[];
+
+            /** Record dailyAwardParam3. */
+            public dailyAwardParam3: number[];
+
             /** Record dailyAwardNum. */
             public dailyAwardNum: number[];
 
             /** Record seasonAwardType. */
             public seasonAwardType: number[];
 
+            /** Record seasonAwardParam1. */
+            public seasonAwardParam1: number[];
+
+            /** Record seasonAwardParam2. */
+            public seasonAwardParam2: number[];
+
+            /** Record seasonAwardParam3. */
+            public seasonAwardParam3: number[];
+
             /** Record seasonAwardNum. */
             public seasonAwardNum: number[];
 
             /** Record ladderDailyAwardType. */
             public ladderDailyAwardType: number[];
+
+            /** Record ladderDailyAwardParam1. */
+            public ladderDailyAwardParam1: number[];
+
+            /** Record ladderDailyAwardParam2. */
+            public ladderDailyAwardParam2: number[];
+
+            /** Record ladderDailyAwardParam3. */
+            public ladderDailyAwardParam3: number[];
 
             /** Record ladderDailyAwardNum. */
             public ladderDailyAwardNum: number[];
@@ -8860,6 +9222,151 @@ export namespace Config {
              * @throws {protobuf.util.ProtocolError} If required fields are missing
              */
             public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Config.skill.Record;
+        }
+    }
+
+    /** Properties of a skin. */
+    interface Iskin {
+
+        /** skin records */
+        records?: (Config.skin.IRecord[]|null);
+
+        /** skin version */
+        version?: (number|null);
+    }
+
+    /** Represents a skin. */
+    class skin implements Iskin {
+
+        /**
+         * Constructs a new skin.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Config.Iskin);
+
+        /** skin records. */
+        public records: Config.skin.IRecord[];
+
+        /** skin version. */
+        public version: number;
+
+        /**
+         * Encodes the specified skin message. Does not implicitly {@link Config.skin.verify|verify} messages.
+         * @param m skin message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Config.Iskin, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a skin message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns skin
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Config.skin;
+    }
+
+    namespace skin {
+
+        /** Properties of a Record. */
+        interface IRecord {
+
+            /** Record id */
+            id?: (number|null);
+
+            /** Record heroId */
+            heroId?: (number|null);
+
+            /** Record name */
+            name?: (string|null);
+
+            /** Record image */
+            image?: (string|null);
+
+            /** Record quality */
+            quality?: (number|null);
+
+            /** Record prefab */
+            prefab?: (string|null);
+
+            /** Record proType */
+            proType?: (number[]|null);
+
+            /** Record proNum */
+            proNum?: (number[]|null);
+
+            /** Record duration */
+            duration?: (number|null);
+
+            /** Record desc */
+            desc?: (string|null);
+
+            /** Record iapId */
+            iapId?: (string|null);
+        }
+
+        /** Represents a Record. */
+        class Record implements IRecord {
+
+            /**
+             * Constructs a new Record.
+             * @param [p] Properties to set
+             */
+            constructor(p?: Config.skin.IRecord);
+
+            /** Record id. */
+            public id: number;
+
+            /** Record heroId. */
+            public heroId: number;
+
+            /** Record name. */
+            public name: string;
+
+            /** Record image. */
+            public image: string;
+
+            /** Record quality. */
+            public quality: number;
+
+            /** Record prefab. */
+            public prefab: string;
+
+            /** Record proType. */
+            public proType: number[];
+
+            /** Record proNum. */
+            public proNum: number[];
+
+            /** Record duration. */
+            public duration: number;
+
+            /** Record desc. */
+            public desc: string;
+
+            /** Record iapId. */
+            public iapId: string;
+
+            /**
+             * Encodes the specified Record message. Does not implicitly {@link Config.skin.Record.verify|verify} messages.
+             * @param m Record message or plain object to encode
+             * @param [w] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(m: Config.skin.IRecord, w?: protobuf.Writer): protobuf.Writer;
+
+            /**
+             * Decodes a Record message from the specified reader or buffer.
+             * @param r Reader or buffer to decode from
+             * @param [l] Message length if known beforehand
+             * @returns Record
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Config.skin.Record;
         }
     }
 

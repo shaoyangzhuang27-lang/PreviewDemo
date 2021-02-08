@@ -120,6 +120,24 @@ message activity_sell
 	int64 version           = 2;
 }
 
+message artifact
+{
+	message Record
+	{
+		int32  id                 = 1 ;		// ID
+		string name               = 2 ;		// 名称
+		string image              = 3 ;		// 图标
+		int32  quality            = 4 ;		// 品质
+		repeated int32  pro_type  = 5 ;		// 属性类型
+		repeated float  pro_num   = 6 ;		// 属性值
+		int32  talent_id          = 7 ;		// 天赋ID
+		int32  next_id            = 8 ;		// 升品质后的ID
+		int32  weight             = 9 ;		// 权值
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
 message aura
 {
 	message Record
@@ -194,6 +212,27 @@ message buff_new
 		string particle                = 10;		// 特效粒子
 		string icon                    = 11;		// 图标
 		float  duration                = 12;		// 持续时间
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message camp_copy
+{
+	message Record
+	{
+		int32  id                       = 1 ;		// ID
+		int32  camp                     = 2 ;		// 阵营
+		int32  map_id                   = 3 ;		// 地图ID
+		repeated int32  boss_id         = 4 ;		// BOSSID
+		repeated int32  boss_star       = 5 ;		// BOSS星级
+		repeated int32  boss_level      = 6 ;		// BOSS等级
+		int32  reference_power          = 7 ;		// 参考战力
+		repeated int32  award_type      = 8 ;		// 奖励物品类型
+		repeated int32  award_param1    = 9 ;		// 奖励物品参数
+		repeated int32  award_param2    = 10;		// 奖励物品参数
+		repeated int32  award_param3    = 11;		// 奖励物品参数
+		repeated int32  award_num       = 12;		// 奖励物品数量
 	}
 	repeated Record records = 1;
 	int64 version           = 2;
@@ -579,6 +618,7 @@ message guild_monster
 		repeated int32  luck_param3    = 36;		// 奖池奖励参数
 		repeated int32  luck_num       = 37;		// 奖池奖励数量
 		repeated int32  luck_count     = 38;		// 奖池奖励次数
+		int32  map_id                  = 39;		// 地图ID
 	}
 	repeated Record records = 1;
 	int64 version           = 2;
@@ -814,10 +854,13 @@ message ladder_achievement
 {
 	message Record
 	{
-		int32  id                  = 1 ;		// ID
-		int32  req_rank            = 2 ;		// 需求排名
-		repeated int32  award_type = 3 ;		// 奖励类型
-		repeated int32  award_num  = 4 ;		// 奖励数量
+		int32  id                    = 1 ;		// ID
+		int32  req_rank              = 2 ;		// 需求排名
+		repeated int32  award_type   = 3 ;		// 奖励类型
+		repeated int32  award_param1 = 4 ;		// 奖励参数
+		repeated int32  award_param2 = 5 ;		// 奖励参数
+		repeated int32  award_param3 = 6 ;		// 奖励参数
+		repeated int32  award_num    = 7 ;		// 奖励数量
 	}
 	repeated Record records = 1;
 	int64 version           = 2;
@@ -1050,15 +1093,24 @@ message pvp_rank_award
 {
 	message Record
 	{
-		int32  id                               = 1 ;		// ID
-		int32  rank_min                         = 2 ;		// 最低排名
-		int32  rank_max                         = 3 ;		// 最高排名
-		repeated int32  daily_award_type        = 4 ;		// 每日奖励类型
-		repeated int32  daily_award_num         = 5 ;		// 每日奖励数量
-		repeated int32  season_award_type       = 6 ;		// 赛季奖励类型
-		repeated int32  season_award_num        = 7 ;		// 赛季奖励数量
-		repeated int32  ladder_daily_award_type = 8 ;		// 天梯每日奖励类型
-		repeated int32  ladder_daily_award_num  = 9 ;		// 天梯每日奖励数量
+		int32  id                                 = 1 ;		// ID
+		int32  rank_min                           = 2 ;		// 最低排名
+		int32  rank_max                           = 3 ;		// 最高排名
+		repeated int32  daily_award_type          = 4 ;		// 每日奖励类型
+		repeated int32  daily_award_param1        = 5 ;		// 每日奖励参数
+		repeated int32  daily_award_param2        = 6 ;		// 每日奖励参数
+		repeated int32  daily_award_param3        = 7 ;		// 每日奖励参数
+		repeated int32  daily_award_num           = 8 ;		// 每日奖励数量
+		repeated int32  season_award_type         = 9 ;		// 赛季奖励类型
+		repeated int32  season_award_param1       = 10;		// 赛季奖励参数
+		repeated int32  season_award_param2       = 11;		// 赛季奖励参数
+		repeated int32  season_award_param3       = 12;		// 赛季奖励参数
+		repeated int32  season_award_num          = 13;		// 赛季奖励数量
+		repeated int32  ladder_daily_award_type   = 14;		// 天梯每日奖励类型
+		repeated int32  ladder_daily_award_param1 = 15;		// 天梯每日奖励参数
+		repeated int32  ladder_daily_award_param2 = 16;		// 天梯每日奖励参数
+		repeated int32  ladder_daily_award_param3 = 17;		// 天梯每日奖励参数
+		repeated int32  ladder_daily_award_num    = 18;		// 天梯每日奖励数量
 	}
 	repeated Record records = 1;
 	int64 version           = 2;
@@ -1212,6 +1264,26 @@ message skill
 		int32  unlock_star                 = 17;		// 解锁星级
 		string desc                        = 18;		// 描述
 		repeated int32  desc_param         = 19;		// 描述参数
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
+
+message skin
+{
+	message Record
+	{
+		int32  id                = 1 ;		// ID
+		int32  hero_id           = 2 ;		// 所属英雄ID
+		string name              = 3 ;		// 名称
+		string image             = 4 ;		// 图标
+		int32  quality           = 5 ;		// 品质
+		string prefab            = 6 ;		// 预设
+		repeated int32  pro_type = 7 ;		// 属性类型列表
+		repeated float  pro_num  = 8 ;		// 属性数值列表
+		int32  duration          = 9 ;		// 时限(0为无时限)
+		string desc              = 10;		// 描述
+		string iap_id            = 11;		// 礼包ID
 	}
 	repeated Record records = 1;
 	int64 version           = 2;

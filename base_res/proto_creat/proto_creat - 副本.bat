@@ -1,1 +1,0 @@
-java -jar D:\project\All_H5\src\frameworks\cocos2d-html5\tools\compiler\compiler.jar --js_output_file=D:\project\PreviewDemo\assets\scripts\core\network\proto.js D:\project\PreviewDemo\assets\res\proto_creat\protobufgame.js
