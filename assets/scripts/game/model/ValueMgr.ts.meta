@@ -2,7 +2,7 @@
   "ver": "4.0.9",
   "importer": "typescript",
   "imported": true,
-  "uuid": "305de0bb-993f-459b-864b-4787d80aa23e",
+  "uuid": "a93ebf44-537f-44bd-b077-d200df80f866",
   "files": [
     ".js",
     "editor.js",
@@ -11,7 +11,7 @@
   "subMetas": {},
   "userData": {
     "importAsPlugin": false,
-    "moduleId": "project:///assets/scripts/game/model/DataMgr.js",
+    "moduleId": "project:///assets/scripts/game/model/ValueMgr.js",
     "importerSettings": 7
   }
 }

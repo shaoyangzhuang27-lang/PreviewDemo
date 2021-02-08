@@ -3,11 +3,7 @@
 import { Asset, resources ,loader, assetManager } from "cc";
 import{xxtea} from "../tool/xxtea";
 
-export class DataCore{
-    // private static _instance: DataCore = new DataCore();
-    // public static getInstance() {
-    //     return this._instance;
-    // }
+export class ValueCore{
 
     protected csvNameTab:Array<string> | null = null;
     protected csvData:Map<string,any> = new Map();

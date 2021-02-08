@@ -2,7 +2,7 @@
   "ver": "4.0.9",
   "importer": "typescript",
   "imported": true,
-  "uuid": "a80007b4-c8a7-4955-9524-9bad4a14d582",
+  "uuid": "accbf626-c3b9-4b53-8e27-f2127ff99908",
   "files": [
     ".js",
     "editor.js",
@@ -11,7 +11,7 @@
   "subMetas": {},
   "userData": {
     "importAsPlugin": false,
-    "moduleId": "project:///assets/scripts/core/control/DataCore.js",
+    "moduleId": "project:///assets/scripts/core/control/ValueCore.js",
     "importerSettings": 7
   }
 }

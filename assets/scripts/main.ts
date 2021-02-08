@@ -1,5 +1,5 @@
 import { _decorator, Component, Node, director } from 'cc';
-import { DataMgr } from "./game/model/DataMgr";
+import { ValueMgr } from "./game/model/ValueMgr";
 
 import { PhysicsSystem, geometry, SystemEvent } from 'cc';
 // import { _decorator, Component, Node, Vec3, SkeletalAnimationComponent, macro,ColliderComponent,RigidBodyComponent,AudioSourceComponent,CameraComponent, PhysicsSystem, SystemEvent,systemEvent,ICollisionEvent, ITriggerEvent ,CCInteger, geometry }

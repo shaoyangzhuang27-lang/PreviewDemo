@@ -3,7 +3,7 @@ import { _decorator, Component, Node,ProgressBarComponent } from 'cc';
 import { MsgMgr } from '../control/MsgMgr';
 import { NotifyMgr } from '../control/NotifyMgr';
 import { SceneMgr } from '../control/SceneMgr';
-import { DataMgr, TableName } from '../model/DataMgr';
+import { ValueMgr, TableName } from '../model/ValueMgr';
 import { BaseScene } from './BaseScene';
 const { ccclass, property } = _decorator;
 
@@ -24,7 +24,7 @@ export class SceneFirst extends BaseScene {
 
     start () {
         this.initNet();
-        DataMgr.getInstance().loadData((cur:number,total:number)=>{this.setProgress(cur,total)});
+        ValueMgr.getInstance().loadData((cur:number,total:number)=>{this.setProgress(cur,total)});
     }
     setProgress(cur:number,total:number){
         let p = this.progress_bar?.getComponent(ProgressBarComponent) as ProgressBarComponent;
@@ -45,7 +45,7 @@ export class SceneFirst extends BaseScene {
     }
     checkComplete(){
         if(this.isConfigComplete && this.isVersionComplete){
-            let data = DataMgr.getInstance().getTableByName(TableName.achievement);
+            let data = ValueMgr.getInstance().getTableByName(TableName.achievement);
             console.log("data::::::::::::::")
             console.log(data)
             for (let index = 0; index < data.length; index++) {
