@@ -4,10 +4,10 @@ import { Asset, resources ,loader, assetManager } from "cc";
 import{xxtea} from "../tool/xxtea";
 
 export class DataCore{
-    private static _instance: DataCore = new DataCore();
-    public static getInstance() {
-        return this._instance;
-    }
+    // private static _instance: DataCore = new DataCore();
+    // public static getInstance() {
+    //     return this._instance;
+    // }
 
     protected csvNameTab:Array<string> | null = null;
     protected csvData:Map<string,any> = new Map();
@@ -16,9 +16,7 @@ export class DataCore{
     protected loadCallBack:Function |null = null;
 
 
-    // public curSceneName:string = null;
-
-    public initData(tabName:Array<string>,func:Function){
+    protected initData(tabName:Array<string>,func:Function){
         this.csvNameTab = tabName;
         this.loadCallBack = func;
         for (let index = 0; index < this.csvNameTab.length; index++) {
@@ -26,7 +24,7 @@ export class DataCore{
             this.loadBytes(element);
         }
     }
-    public getTable(tabName:string){
+    protected getTable(tabName:string){
         return this.csvData.get(tabName);
     }
     protected loadBytes(tableName:string){

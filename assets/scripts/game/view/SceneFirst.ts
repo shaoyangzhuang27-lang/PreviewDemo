@@ -1,10 +1,9 @@
 
 import { _decorator, Component, Node,ProgressBarComponent } from 'cc';
-import { DataCore } from '../../core/control/DataCore';
 import { MsgMgr } from '../control/MsgMgr';
 import { NotifyMgr } from '../control/NotifyMgr';
 import { SceneMgr } from '../control/SceneMgr';
-import { DataMgr } from '../model/DataMgr';
+import { DataMgr, TableName } from '../model/DataMgr';
 import { BaseScene } from './BaseScene';
 const { ccclass, property } = _decorator;
 
@@ -24,23 +23,8 @@ export class SceneFirst extends BaseScene {
     private isConfigComplete = false;
 
     start () {
-        // Your initialization goes here.
         this.initNet();
-        
-        // DataMgr.getInstance().loadAllData((loadTotal:number,loadIndex:number)=>{
-            // console.log("loadPro!!!")
-            // console.log(loadTotal);
-            // console.log(loadIndex);
-        // });
-        console.log("--------------------------------game start--------------------------------------------")
-        DataCore.getInstance().initData(["achievement","activity","activity_accumulation","activity_quest","activity_rank_award","activity_sell",
-        "aura","aura_hunting","book_hero_property","book_total_property","buff_new","challenge_copy","challenge_extra_award","copy",
-        "copy_extra_award","copy_loot","country","crystal","daily_recharge_award","equip","equip_role","event_copy","frame","gift_code_award","guide_text",
-        "guild_boss","guild_monster","guild_monster_rank_award","guildConfig","guildExpData","guildOrderData","hero_animation","hero_mission","hero_recommend",
-        "hero_text","heroes","hunting_boss","hunting_rank_award","iap","iap_package","item_usable","ladder_achievement","language_data","language_dync","language_error",
-        "language_ui","login_award","map","monsters","mythical_copy","mythical_extra_award","pet","pet_skill","portrait","pvp_rank_award","quest_award",
-        "quest_loop","rank_node","rookie_award","rookie_checkin","rookie_quest","shop_goods","skill","suit","talent","technology","title","trail","trail_buff",
-        "upgrade_exp","vip_award","wonder_summon"],(cur:number,total:number)=>{this.setProgress(cur,total)});//,"limit_task","skin","camp_copy","artifact"
+        DataMgr.getInstance().loadData((cur:number,total:number)=>{this.setProgress(cur,total)});
     }
     setProgress(cur:number,total:number){
         let p = this.progress_bar?.getComponent(ProgressBarComponent) as ProgressBarComponent;
@@ -50,11 +34,10 @@ export class SceneFirst extends BaseScene {
         }
         // console.log("loading files:")
         // console.log(cur)
-        // console.log(total)
+        // console.log(total) 
         this.checkComplete();
     }
     initNet(){
-        // MsgMgr.getInstance().initLoginNet();
         MsgMgr.getInstance().initLoginServer();
         MsgMgr.getInstance().connectLoginServer();
         MsgMgr.getInstance().getMsgLogin().requestVersionCheck();
@@ -62,6 +45,16 @@ export class SceneFirst extends BaseScene {
     }
     checkComplete(){
         if(this.isConfigComplete && this.isVersionComplete){
+            let data = DataMgr.getInstance().getTableByName(TableName.achievement);
+            console.log("data::::::::::::::")
+            console.log(data)
+            for (let index = 0; index < data.length; index++) {
+                const element = data[index];
+                console.log(element)
+                // console.log(element.awardNum)
+                // console.log(element.desc)
+            }
+
             SceneMgr.getInstance().changeToLogin();
         }
     }
@@ -70,5 +63,6 @@ export class SceneFirst extends BaseScene {
         this.isVersionComplete = true;
         this.checkComplete();
     }
+
 
 }

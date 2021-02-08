@@ -17,7 +17,7 @@ export class BaseScene extends Component {
         }
         PopMgr.getInstance().initPop(this.curScene)
         // NotifyMgr.getInstance().addNotifyHandler("test",this.notifyTest,this);
-        
+        console.log("---------------------------------------------------- "+this.name+" start ----------------------------------------------------");
     }
     initUI(){
         resources.load('prefabs_ui/main_ui', (err:any,res:any)=>{
@@ -34,6 +34,7 @@ export class BaseScene extends Component {
     }
     onDestroy(){
         // console.log("BaseScene onDestory")
+        console.log("---------------------------------------------------- "+this.name+" end ----------------------------------------------------");
         PopMgr.getInstance().clearPop();
         NotifyMgr.getInstance().removeNotifyHandler("test",this.notifyTest,this);
     }
