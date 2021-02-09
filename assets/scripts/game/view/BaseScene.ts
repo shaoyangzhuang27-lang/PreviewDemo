@@ -10,14 +10,14 @@ export class BaseScene extends Component {
     public curScene:Scene | null = null;
 
     onLoad(){
-        console.log("basescene onLoad")
+        // console.log("BaseScene onLoad")
         if(!this.curScene){
             console.log("场景未设置,请设置当前场景");
             this.curScene = director.getScene();
         }
         PopMgr.getInstance().initPop(this.curScene)
-        NotifyMgr.getInstance().addNotifyHandler("test",this.notifyTest,this);
-        
+        // NotifyMgr.getInstance().addNotifyHandler("test",this.notifyTest,this);
+        console.log("---------------------------------------------------- "+this.name+" start ----------------------------------------------------");
     }
     initUI(){
         resources.load('prefabs_ui/main_ui', (err:any,res:any)=>{
@@ -29,11 +29,12 @@ export class BaseScene extends Component {
     start () {
     }
     notifyTest(data:any){
-        console.log("basescene notifyTest!!");
-        console.log(data);
+        // console.log("BaseScene notifyTest!!");
+        // console.log(data);
     }
     onDestroy(){
-        console.log("basescene onDestory")
+        // console.log("BaseScene onDestory")
+        console.log("---------------------------------------------------- "+this.name+" end ----------------------------------------------------");
         PopMgr.getInstance().clearPop();
         NotifyMgr.getInstance().removeNotifyHandler("test",this.notifyTest,this);
     }

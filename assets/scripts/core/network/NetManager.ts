@@ -24,7 +24,7 @@ export class NetManager {
         return this._channels[channelId]
     }
 
-    // 移除Node
+    // 移除Node 
     public removeNetNode(channelId: number) {
         delete this._channels[channelId];
     }

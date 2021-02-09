@@ -8,12 +8,9 @@ export class PopMgr extends PopCore  {
     public static getInstance() {
         return this._instance;
     }
-
-    
-    private netLoading:Node | null = null;
     
     public clearPop(){
-        this.netLoading = null;
+
     }
     public popupSimpleWindow(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
@@ -32,21 +29,19 @@ export class PopMgr extends PopCore  {
     }
 
     public setNetLoading(bo:boolean,content:string){
-        console.log(content+"hhhhhhh:::");
-        console.log(bo);
-        if(this.netLoading){
-            let script = this.netLoading.getComponent("NetLoading") as NetLoading;
-            script.setContent(content);
-            this.netLoading.active = bo;
-            return;
-        }
         resources.load('prefabs_ui/net_loading', (err:Error | null,res:any)=>{
-            this.netLoading = instantiate( res );
-            if(this.netLoading){
-                this.parent?.addChild(this.netLoading)
-                let script = this.netLoading.getComponent("NetLoading") as NetLoading;
+            // this.netLoading = instantiate( res );
+
+            let net_loading = this.parent?.getChildByName("net_loading")
+            if(!net_loading){
+                net_loading = instantiate( res );
+                if(net_loading)
+                    this.parent?.addChild(net_loading);
+            }
+            if(net_loading){
+                let script = net_loading.getComponent("NetLoading") as NetLoading;
                 script.setContent(content);
-                this.netLoading.active = bo;
+                net_loading.active = bo;
             }
         })
     }

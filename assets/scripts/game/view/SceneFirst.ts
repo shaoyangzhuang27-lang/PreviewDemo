@@ -1,15 +1,9 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import { _decorator, Component, Node,ProgressBarComponent } from 'cc';
 import { MsgMgr } from '../control/MsgMgr';
 import { NotifyMgr } from '../control/NotifyMgr';
 import { SceneMgr } from '../control/SceneMgr';
-import { DataMgr } from '../model/DataMgr';
+import { ValueMgr, TableName } from '../model/ValueMgr';
 import { BaseScene } from './BaseScene';
 const { ccclass, property } = _decorator;
 
@@ -25,31 +19,50 @@ export class SceneFirst extends BaseScene {
     @property({type: Node})
     public progress_bar:Node | null = null;
 
+    private isVersionComplete = false;
+    private isConfigComplete = false;
+
     start () {
-        // Your initialization goes here.
         this.initNet();
-        
-        DataMgr.getInstance().loadAllData((loadTotal:number,loadIndex:number)=>{
-            // console.log("loadPro!!!")
-            // console.log(loadTotal);
-            // console.log(loadIndex);
-        });
+        ValueMgr.getInstance().loadData((cur:number,total:number)=>{this.setProgress(cur,total)});
     }
-    setProgress(pro:number){
+    setProgress(cur:number,total:number){
         let p = this.progress_bar?.getComponent(ProgressBarComponent) as ProgressBarComponent;
-        p.progress = pro;
+        p.progress = cur/total;
+        if(cur == total){
+            this.isConfigComplete = true;
+        }
+        // console.log("loading files:")
+        // console.log(cur)
+        // console.log(total) 
+        this.checkComplete();
     }
     initNet(){
-        MsgMgr.getInstance().initLoginNet();
-        MsgMgr.getInstance().requestVersionCheck();
+        MsgMgr.getInstance().initLoginServer();
+        MsgMgr.getInstance().connectLoginServer();
+        MsgMgr.getInstance().getMsgLogin().requestVersionCheck();
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_version_check,this.notifyVersionCheckHandle,this);
+    }
+    checkComplete(){
+        if(this.isConfigComplete && this.isVersionComplete){
+            let data = ValueMgr.getInstance().getTableByName(TableName.achievement);
+            console.log("data::::::::::::::")
+            console.log(data)
+            for (let index = 0; index < data.length; index++) {
+                const element = data[index];
+                console.log(element)
+                // console.log(element.awardNum)
+                // console.log(element.desc)
+            }
+
+            SceneMgr.getInstance().changeToLogin();
+        }
     }
     notifyVersionCheckHandle(data:any){
         //进入登陆界面
-        SceneMgr.getInstance().changeToLogin();
+        this.isVersionComplete = true;
+        this.checkComplete();
     }
 
-    // update (deltaTime: number) {
-    //     // Your update function goes here.
-    // }
+
 }

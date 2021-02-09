@@ -3,46 +3,47 @@
 import { WebSock } from "./WebSock";
 import { NetManager } from "./NetManager";
 import { NetNode } from "./NetNode";
-import { DefStringProtocol, NetData, INetworkTips,IProtocolHelper,SupperProtocol } from "./NetInterface";
+import { DefStringProtocol, NetData, INetworkTips,IProtocolHelper,SupperProtocol, NetCallFunc } from "./NetInterface";
 import { PopCore } from "../control/PopCore";
 
 // import {NotifyManager} from "./NotifyManager";
 // import {Msg} from "./proto";
 
-
-
 export class MsgCore{
-    // private static _instance: MsgCore = new MsgCore();
-    // public static getInstance() {
-    //     return this._instance;
-    // }
 
-    public initLoginNet(){
-        this.initLoginServer();
-        this.connectLoginServer();
-        this.initLoginResponeHandle();
+
+    public initLoginServer(){
     }
-    public connectLoginServer(){
+    
+    public connectLoginServer(channelId: number = 0){
         // NetManager.getInstance().connect({ url: "ws://192.168.15.132:17183" });//开启连接
         // NetManager.getInstance().connect({ url: "ws://echo.websocket.org" });//开启连接
         // NetManager.getInstance().connect({ url: "ws://121.40.165.18:8800" });//开启连接
         // NetManager.getInstance().close();//关闭连接
     }
-    protected initLoginServer(){
+
+    protected getMsgMap(arr:Array<Map<number,any> | null>){
+        let msgMap:Map<number,any> = new Map<number,any>();
+        for (let index = 0; index < arr.length; index++) {
+            const element = arr[index];
+            element?.forEach((value:any, key:number) => {
+                msgMap.set(key,value[0]);
+            });
+        }
+        return msgMap;
     }
-    protected initLoginResponeHandle(){
-    }
+
     
-    protected sendData(msgId:number,buffer_data:any){
-        console.log("request id:"+msgId);
-        console.log(buffer_data);
+    public sendData(msgId:number,buffer_data:any, channelId: number = 0){
+        // console.log("request id:"+msgId);
+        // console.log(buffer_data);
         let buffer_all = this.encodeMessage(msgId,buffer_data)
-        let isRight = NetManager.getInstance().send(buffer_all);//发送信息
+        let isRight = NetManager.getInstance().send(buffer_all,false, channelId);//发送信息
         if(!isRight){
-            this.connectLoginServer();
+            this.connectLoginServer(channelId);
         }
     }
-    private encodeMessage(id:number,buffer_data:any){
+    public encodeMessage(id:number,buffer_data:any){
         let offsetLen = 2
         const buffer_all = new ArrayBuffer(buffer_data.byteLength + offsetLen);
         const dv_all = new DataView(buffer_all)
