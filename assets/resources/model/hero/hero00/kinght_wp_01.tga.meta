@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "67e5347e-13ad-4f07-9a39-59491d194574",
+  "uuid": "cb61686e-414d-41e3-9e93-e0512e12c325",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "67e5347e-13ad-4f07-9a39-59491d194574@6c48a",
-      "displayName": "character_wp_33",
+      "uuid": "cb61686e-414d-41e3-9e93-e0512e12c325@6c48a",
+      "displayName": "kinght_wp_01",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "67e5347e-13ad-4f07-9a39-59491d194574"
+        "imageUuidOrDatabaseUri": "cb61686e-414d-41e3-9e93-e0512e12c325"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -35,6 +35,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "67e5347e-13ad-4f07-9a39-59491d194574@6c48a"
+    "redirect": "cb61686e-414d-41e3-9e93-e0512e12c325@6c48a"
   }
 }

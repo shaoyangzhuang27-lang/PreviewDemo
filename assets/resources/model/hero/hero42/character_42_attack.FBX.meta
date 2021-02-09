@@ -56,12 +56,12 @@
       ],
       "subMetas": {}
     },
-    "73b7f": {
+    "989ed": {
       "importer": "gltf-animation",
-      "uuid": "8c002030-fafb-4c75-ad84-8c458502dda6@73b7f",
+      "uuid": "8c002030-fafb-4c75-ad84-8c458502dda6@989ed",
       "displayName": "",
-      "id": "73b7f",
-      "name": "Take 001.animation",
+      "id": "989ed",
+      "name": "attack.animation",
       "userData": {
         "gltfIndex": 0,
         "wrapMode": 2,
@@ -213,7 +213,7 @@
         "fps": 30,
         "splits": [
           {
-            "name": "Take 001",
+            "name": "attack",
             "from": 0,
             "to": 1.125,
             "wrapMode": 2

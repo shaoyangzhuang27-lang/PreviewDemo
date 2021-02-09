@@ -22,6 +22,30 @@
       ],
       "subMetas": {}
     },
+    "78391": {
+      "importer": "gltf-animation",
+      "uuid": "8173302d-7c9e-480f-80bd-b72075157123@78391",
+      "displayName": "",
+      "id": "78391",
+      "name": "skill.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.9583333730697632
+        },
+        "events": []
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
     "d41e3": {
       "importer": "gltf-mesh",
       "uuid": "8173302d-7c9e-480f-80bd-b72075157123@d41e3",
@@ -49,30 +73,6 @@
         "gltfIndex": 1
       },
       "ver": "1.1.0",
-      "imported": true,
-      "files": [
-        ".bin",
-        ".json"
-      ],
-      "subMetas": {}
-    },
-    "73b7f": {
-      "importer": "gltf-animation",
-      "uuid": "8173302d-7c9e-480f-80bd-b72075157123@73b7f",
-      "displayName": "",
-      "id": "73b7f",
-      "name": "Take 001.animation",
-      "userData": {
-        "gltfIndex": 0,
-        "wrapMode": 2,
-        "sample": 30,
-        "span": {
-          "from": 0,
-          "to": 1.9583333730697632
-        },
-        "events": []
-      },
-      "ver": "1.0.14",
       "imported": true,
       "files": [
         ".bin",
@@ -213,7 +213,7 @@
         "fps": 30,
         "splits": [
           {
-            "name": "Take 001",
+            "name": "skill",
             "from": 0,
             "to": 1.9583333730697632,
             "wrapMode": 2

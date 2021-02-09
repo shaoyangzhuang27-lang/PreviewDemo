@@ -39,12 +39,12 @@
       ],
       "subMetas": {}
     },
-    "73b7f": {
+    "1f586": {
       "importer": "gltf-animation",
-      "uuid": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@73b7f",
+      "uuid": "492dc6ad-2cfc-4cf9-8b21-549bde75b63c@1f586",
       "displayName": "",
-      "id": "73b7f",
-      "name": "Take 001.animation",
+      "id": "1f586",
+      "name": "idle.animation",
       "userData": {
         "gltfIndex": 0,
         "wrapMode": 2,
@@ -53,8 +53,7 @@
           "from": 0,
           "to": 2.125
         },
-        "events": [],
-        "speed": 1
+        "events": []
       },
       "ver": "1.0.14",
       "imported": true,
@@ -199,7 +198,7 @@
         "fps": 30,
         "splits": [
           {
-            "name": "Take 001",
+            "name": "idle",
             "from": 0,
             "to": 2.125,
             "wrapMode": 2

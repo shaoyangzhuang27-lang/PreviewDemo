@@ -17,12 +17,12 @@ TODO
 export class BattlerHero extends Component {
 
     public static STATUS = {
-        NONE: 0,    // 无动作
-        IDLE: 1,    // 待机
-        RUN: 2,     // 奔跑
-        ATTACK: 3,  // 攻击
-        VICTORY: 4, // 胜利
-        DIE: 5,     // 死亡
+        IDLE: "idle",
+        RUN: "run",
+        ATTACK: "attack",
+        SKILL: "skill",
+        VICTORY: "victroy",
+        DIE: "die",
     }
 
     public static HeroType = {
@@ -31,25 +31,6 @@ export class BattlerHero extends Component {
         MONSTER: 3,
         BOSS: 4
     }
-
-    @property(Node)
-    private attackNode: Node = null
-
-    @property(Node)
-    private dieNode: Node = null
-
-    @property(Node)
-    private idleNode: Node = null
-
-    @property(Node)
-    private runNode: Node = null
-
-    @property(Node)
-    private victoryNode: Node = null
-
-    private _attackStatus: AnimationState = null
-
-
 
     private _battleTitleBar: BattleTitleBar = null
 
@@ -60,14 +41,14 @@ export class BattlerHero extends Component {
     private _targetList: Array<BattlerHero> = []
     private _target: BattlerHero | null = null
 
-    private _curNode: any = null
+    private _bodyNode: any = null
     private _heroInfo: any = null
 
 
     private _leaderNode: any = null
 
-    private _status: number = 0
-    private _actTime: any = null
+    private _status: string = ""
+    private _actTime: number = 0
     private _curActFunc: any = null
 
     private _maxHp: number = 0
@@ -75,8 +56,17 @@ export class BattlerHero extends Component {
     private _hp: number = 0
     private _pow: number = 0
 
-
-    private _tmpSpeed: number = 0
+    public atk: number = 0
+    public def: number = 0
+    public rng: number = 0
+    public spd: number = 0
+    public skillSpd: number = 0
+    public crt: number = 0
+    public crtDmg: number = 0
+    public hitRat: number = 0
+    public evd: number = 0
+    public defBreak: number = 0
+    
 
 
 
@@ -87,14 +77,8 @@ export class BattlerHero extends Component {
     }
     private _battleEvents = {}
     onLoad() {
-        
-        this.attackNode.active = false;
-        this.dieNode.active = false;
-        this.idleNode.active = false;
-        this.runNode.active = false;
-        this.victoryNode.active = false;
 
-        this._curNode = this.idleNode;
+        this._bodyNode = this.node.getChildByName("body");
         this.playAnim(BattlerHero.STATUS.IDLE);
 
         // this.startSeekEnemy()
@@ -124,8 +108,7 @@ export class BattlerHero extends Component {
 
         if (this._curActFunc) {
             this._curActFunc.call(this, dt);
-        }
-        
+        }  
     }
 
     startSeekEnemy(): void {
@@ -357,10 +340,10 @@ export class BattlerHero extends Component {
         this._actTime = this._heroInfo.hitTime;
         this.playAnim(BattlerHero.STATUS.ATTACK);
         this.node.lookAt(this._target.node.position);
-        this._curNode.getComponent(SkeletalAnimation)?.on(SkeletalAnimation.EventType.LASTFRAME, (a: any, b: any, c: any) => {
+        this._bodyNode.getComponent(SkeletalAnimation)?.on(SkeletalAnimation.EventType.LASTFRAME, (a: any, b: any, c: any) => {
             if (this._target) {
                 if (this._target.isDie()) {
-                    this._curNode.getComponent(SkeletalAnimation)?.off(SkeletalAnimation.EventType.LASTFRAME)
+                    this._bodyNode.getComponent(SkeletalAnimation)?.off(SkeletalAnimation.EventType.LASTFRAME)
                     this.seekAttackTarget();
                 } else {
                     // 开始发动攻击时计算速度 TODO 有buffer刷新时候再计算
@@ -370,7 +353,7 @@ export class BattlerHero extends Component {
                     this._actTime = this._heroInfo.hitTime;
                 }
             } else {
-                this._curNode.getComponent(SkeletalAnimation)?.off(SkeletalAnimation.EventType.LASTFRAME)
+                this._bodyNode.getComponent(SkeletalAnimation)?.off(SkeletalAnimation.EventType.LASTFRAME)
             }
             
             // console.log(a, b, c)
@@ -425,6 +408,11 @@ export class BattlerHero extends Component {
         if (this._status == BattlerHero.STATUS.DIE) {
             return;
         }
+
+        if (this._status == BattlerHero.STATUS.ATTACK) {
+            this._bodyNode.getComponent(SkeletalAnimation)?.off(SkeletalAnimation.EventType.LASTFRAME)
+        }
+
         this._curActFunc = null;
         this._battleTitleBar.setVisible(false);
         this.playAnim(BattlerHero.STATUS.DIE);
@@ -449,17 +437,34 @@ export class BattlerHero extends Component {
         this._heroInfo = heroInfo;
         this._leaderNode = _leaderNode;
 
-        // this._curNode.getComponent(SkeletalAnimation)
+        // this._bodyNode.getComponent(SkeletalAnimation)
 
+        this.initBattleData();
+        
 
-
-        this._attackStatus = this.attackNode.getComponent(SkeletalAnimation).getState("Take 001");
-        // this._attackStatus = this.skillNode.getComponent(SkeletalAnimation).getState("Take 001");
+        // let a: SkeletalAnimation = this._bodyNode.getComponent(SkeletalAnimation) as SkeletalAnimation
+        // a.hasEventListener
+        // let b: AnimationState = a.getState("attack");
+        // b.length
+        // console.log(b.length);
         
         this.initTitleBar();
 
         this.refreshData();
         // this.refreshAttackSpeed();
+    }
+
+    initBattleData(): void {
+        this.atk = this._heroInfo.atk;
+        this.def = 0;
+        this.rng = 0;
+        this.spd = 0;
+        this.skillSpd = 0;
+        this.crt = 0;
+        this.crtDmg = 0;
+        this.hitRat = 0;
+        this.evd = 0;
+        this.defBreak = 0;
     }
 
     refreshData(): void {
@@ -497,45 +502,19 @@ export class BattlerHero extends Component {
         this._battleTitleBar.setVisible(b);
     }
 
-    playAnim(status: number): void {
+    playAnim(status: string): void {
         if (this._status == status) {
             return;
         }
 
-        this._curNode.active = false;
         this._status = status;
-        switch (status) {
-            case BattlerHero.STATUS.NONE:
-                this._curNode = this.idleNode;
-                break;
-            case BattlerHero.STATUS.IDLE:
-                this._curNode = this.idleNode;
-                break; 
-            case BattlerHero.STATUS.RUN:
-                this._curNode = this.runNode;
-                break;
-            case BattlerHero.STATUS.ATTACK:
-                this._curNode = this.attackNode;
-                break;
-            case BattlerHero.STATUS.VICTORY:
-                this._curNode = this.victoryNode;
-                break;
-            case BattlerHero.STATUS.DIE:
-                this._curNode = this.dieNode;
-                break;
-            default:
-                this._curNode = this.idleNode;
-                break;
-        }
+        this._bodyNode.getComponent(SkeletalAnimation).play(status);
 
-        this._curNode.active = true;
-        this._curNode.getComponent(SkeletalAnimation).play();
-
-        let a = this._curNode.getComponent(SkeletalAnimation) as SkeletalAnimation;
-        let b = a.clips[0]
+        // let a = this._bodyNode.getComponent(SkeletalAnimation) as SkeletalAnimation;
+        // let b = a.clips[0]
     
-        a.getState(b.name).speed = 1.5;
-        console.log(b, b?.name)
+        // a.getState(b.name).speed = 1.5;
+        // console.log(b, b?.name)
     }
 
 
