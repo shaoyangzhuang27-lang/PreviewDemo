@@ -45,15 +45,12 @@ export class SceneFirst extends BaseScene {
     }
     checkComplete(){
         if(this.isConfigComplete && this.isVersionComplete){
-            let data = ValueMgr.getInstance().getTableByName(TableName.achievement);
-            console.log("data::::::::::::::")
-            console.log(data)
-            for (let index = 0; index < data.length; index++) {
-                const element = data[index];
-                console.log(element)
-                // console.log(element.awardNum)
-                // console.log(element.desc)
-            }
+            // let data = ValueMgr.getInstance().getTableByName(TableName.achievement);
+            // console.log("data::::::::::::::")
+            // console.log(data)
+            // for (let index = 0; index < data.length; index++) {
+            //     const element = data[index];
+            // }
 
             SceneMgr.getInstance().changeToLogin();
         }

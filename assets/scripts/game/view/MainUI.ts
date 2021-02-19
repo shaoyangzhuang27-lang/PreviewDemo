@@ -1,16 +1,10 @@
 import { _decorator, Component, Node,director,tween,Vec3 } from 'cc';
-// import { DataMgr } from "./game/model/DataMgr";
+import { DataMgr } from '../model/DataMgr';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('MainUI')
 export class MainUI extends Component {
-    /* class member could be defined like this */
-    // dummy = '';
-
-    /* use `property` decorator if your want the member to be serializable */
-    // @property
-    // serializableDummy = 0;
-
     @property({type: Node, displayName: "英雄"})
     public btn_hero:Node | null = null;
 
@@ -46,13 +40,22 @@ export class MainUI extends Component {
         this.locateMenu();
     }
     update(){
-        this.setPreMenuPos(this.sprite_select.position)
+        if(this.sprite_select)
+            this.setPreMenuPos(this.sprite_select.position)
     }
 
     onDestroy(){
     }
     start () {
-        // Your initialization goes here.
+        this.initView()
+    }
+    initView(){
+        let playerInfo = DataMgr.getInstance().getPlayerInfo()
+        playerInfo.name ="王";
+        console.log("wbdwbd+++++++++++++++++++++")
+        console.log(DataMgr.getInstance().getPlayerInfo())
+        console.log(DataMgr.getInstance().getPlayerInfo().name)
+        
     }
 
     buttonBtnClick(event:any){
@@ -74,9 +77,6 @@ export class MainUI extends Component {
                 if(this.getCurSceneName() == "scene_main"){
                     director.loadScene("battle");
                     this.setCurSceneName("battle");
-                    console.log("sdfasgsag;lksdjgls;kd")
-                    console.log(this.ico_battle)
-                    console.log(this.ico_battle.getComponent("cc.Sprite"));
                     this.setCityBattleBtnState("battle");
                     // this.ico_battle.getComponent("cc.Sprite").setTexture(cc.textureCache.addImage("ui/main/主城图标.png"));
                     // cc.resources.load("ui/main/主城图标.png", cc.SpriteFrame, null, function (err, spriteFrame) {
@@ -102,35 +102,41 @@ export class MainUI extends Component {
     }
 
     locateMenu(){
+        if(this.btn_battle && this.sprite_select){
 
-        let preMenuPos = this.getPreMenuPos();
-        let curMenuPos:Vec3 = this.btn_battle.position;
-
-        if(director.getScene()?.name == "scene_main" || director.getScene()?.name == ""){
-            curMenuPos = this.btn_battle.position;
+            let preMenuPos = this.getPreMenuPos();
+            let curMenuPos:Vec3 = this.btn_battle.position;
+    
+            if(director.getScene()?.name == "scene_main" || director.getScene()?.name == ""){
+                curMenuPos = this.btn_battle.position;
+            }
+    
+            if(preMenuPos){
+                this.sprite_select.position = preMenuPos
+                tween(this.sprite_select)
+                .to(0.2,{position:curMenuPos})
+                .start()
+            }else{
+                this.sprite_select.setPosition(curMenuPos);
+            }
+    
+            this.setCityBattleBtnState(this.getCurSceneName());
         }
-
-        if(preMenuPos){
-            this.sprite_select.position = preMenuPos
-            tween(this.sprite_select)
-            .to(0.2,{position:curMenuPos})
-            .start()
-        }else{
-            this.sprite_select.setPosition(curMenuPos);
-        }
-
-        this.setCityBattleBtnState(this.getCurSceneName());
     }
     setCityBattleBtnState(state:string){
         if(state == "scene_main"){
             // cc.resources.load("ui/main/主城图标1.png",(err, spriteFrame)=> {
             //     this.ico_battle.getComponent("cc.Sprite").spriteFrame = spriteFrame;
             // })
-            this.ico_battle.active = false
-            this.ico_city.active = true
+            if(this.ico_battle)
+                this.ico_battle.active = false
+            if(this.ico_city)
+                this.ico_city.active = true
         }else{
-            this.ico_battle.active = true
-            this.ico_city.active = false
+            if(this.ico_battle)
+                this.ico_battle.active = true
+            if(this.ico_city)
+                this.ico_city.active = false
         }
     }
 

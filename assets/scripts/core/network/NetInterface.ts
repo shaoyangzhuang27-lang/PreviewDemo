@@ -102,6 +102,7 @@ export class SupperProtocol implements IProtocolHelper {
             
             if(id != 34){
                 console.log("NetInterface respone id:"+id);
+                // console.log(this.protocolMap.get(id));
                 console.log(msgData);
             }
             return msgData;
