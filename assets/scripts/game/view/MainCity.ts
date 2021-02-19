@@ -31,6 +31,7 @@ export class MainCity extends Component {
         // print("city onTouchStart!!!!")
         // console.log(event)
         this.prePosX = event._point.x
+        console.log("ontouchstart!")
     }
     onTouchMove(event:any){
         // console.log(event)
@@ -38,9 +39,11 @@ export class MainCity extends Component {
 
         this.mainSceneMoveHandle(event)
         this.prePosX = event._point.x
+        console.log("ontouchmove!")
     }
     onTouchEnd(event:any){
         this.clickBuildHandle(event)
+        console.log("ontouchend!")
     }
 
     mainSceneMoveHandle(event:any){
@@ -63,7 +66,16 @@ export class MainCity extends Component {
         let dis = Vec2.distance(event._startPoint,event._point)
         // console.log(dis)
         //基于物理碰撞器的射线检测
+        console.log("22222")
+        console.log(this.mainCamera)
+        console.log(event._point.x)
+        console.log(event._point.y)
+        console.log(this._ray)
+        console.log(PhysicsSystem.instance.raycastClosest(this._ray))
+        console.log(dis)
         if (PhysicsSystem.instance.raycastClosest(this._ray) && dis<5) {
+            
+        console.log("11111")
             console.log(PhysicsSystem.instance.raycastClosestResult.collider.node.name);
             this.pop(PhysicsSystem.instance.raycastClosestResult.collider.node.name);
         }
