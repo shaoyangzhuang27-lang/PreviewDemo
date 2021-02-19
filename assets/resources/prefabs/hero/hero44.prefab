@@ -36,17 +36,14 @@
       },
       {
         "__id__": 142
-      },
-      {
-        "__id__": 144
       }
     ],
     "_prefab": {
-      "__id__": 146
+      "__id__": 144
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -7.967,
+      "x": 0,
       "y": 0,
       "z": 0
     },
@@ -3642,7 +3639,7 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": true,
+    "_enabled": false,
     "__prefab": {
       "__id__": 141
     },
@@ -3667,7 +3664,7 @@
     "fileId": "407gyEzfNP5rJrlqwfgVt4"
   },
   {
-    "__type__": "cc.BoxCollider",
+    "__type__": "cc.RigidBody",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -3677,44 +3674,13 @@
     "__prefab": {
       "__id__": 143
     },
-    "_material": null,
-    "_isTrigger": false,
-    "_center": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0.5,
-      "z": 0
-    },
-    "_size": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "83Oi/rSW5MxJzt1XwcJy1H"
-  },
-  {
-    "__type__": "cc.RigidBody",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": false,
-    "__prefab": {
-      "__id__": 145
-    },
     "_group": 1,
     "_type": 1,
     "_mass": 10,
     "_allowSleep": true,
     "_linearDamping": 0.2,
     "_angularDamping": 0.2,
-    "_useGravity": true,
+    "_useGravity": false,
     "_linearFactor": {
       "__type__": "cc.Vec3",
       "x": 0.1,
