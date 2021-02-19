@@ -61,7 +61,9 @@
       "__id__": 1
     },
     "_enabled": true,
-    "__prefab": null,
+    "__prefab": {
+      "__id__": 62
+    },
     "_materials": [
       {
         "__uuid__": "ad254bd6-a861-43c1-aab0-5dcf6e9872c0"
@@ -706,11 +708,10 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "682cdUPb5JqYyLtiCM1w2b",
-    "sync": false,
-    "_synced": {
-      "default": false,
-      "serializable": false
-    }
+    "fileId": "682cdUPb5JqYyLtiCM1w2b"
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "2e70+En8VKYYCXPeBmaKpI"
   }
 ]

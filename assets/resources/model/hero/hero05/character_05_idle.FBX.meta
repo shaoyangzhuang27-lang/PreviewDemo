@@ -1,5 +1,5 @@
 {
-  "ver": "2.0.2",
+  "ver": "2.0.10",
   "importer": "fbx",
   "imported": true,
   "uuid": "424f44b0-a1f2-4aab-b5f5-01d08367d3e5",
@@ -218,7 +218,7 @@
       "userData": {
         "gltfIndex": 0
       },
-      "ver": "1.0.11",
+      "ver": "1.0.12",
       "imported": true,
       "files": [
         ".json"
@@ -274,6 +274,9 @@
       "scenes": [
         "424f44b0-a1f2-4aab-b5f5-01d08367d3e5@db68b"
       ]
+    },
+    "fbx": {
+      "unitConversion": "hierarchy-level"
     }
   }
 }

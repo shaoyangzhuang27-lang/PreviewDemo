@@ -182,6 +182,9 @@
     },
     "_textureAnimationModule": {
       "__id__": 55
+    },
+    "__prefab": {
+      "__id__": 156
     }
   },
   {
@@ -2709,12 +2712,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "c2WJwQLRRGsotmKsAU0NeO",
-    "sync": false,
-    "_synced": {
-      "default": false,
-      "serializable": false
-    }
+    "fileId": "c2WJwQLRRGsotmKsAU0NeO"
   },
   {
     "__type__": "cc.ParticleSystem",
@@ -2796,6 +2794,9 @@
     },
     "_textureAnimationModule": {
       "__id__": 140
+    },
+    "__prefab": {
+      "__id__": 157
     }
   },
   {
@@ -5522,11 +5523,14 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "b5SskTH6FBqb8o611rizHw",
-    "sync": false,
-    "_synced": {
-      "default": false,
-      "serializable": false
-    }
+    "fileId": "b5SskTH6FBqb8o611rizHw"
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "d3PAGLImBMZaqPbFjK2My2"
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "2e2w2v2mhH3Zz/4w0XE91G"
   }
 ]

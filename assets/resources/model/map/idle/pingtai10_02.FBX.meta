@@ -1,5 +1,5 @@
 {
-  "ver": "2.0.2",
+  "ver": "2.0.10",
   "importer": "fbx",
   "imported": true,
   "uuid": "27ee1dc4-6bf3-447b-ad8f-7666c25b724b",
@@ -199,7 +199,7 @@
       "userData": {
         "gltfIndex": 0
       },
-      "ver": "1.0.11",
+      "ver": "1.0.12",
       "imported": true,
       "files": [
         ".json"
@@ -247,6 +247,9 @@
       ]
     },
     "dumpMaterials": false,
-    "materialDumpDir": "db://assets/resources/model/map/idle/groundMat"
+    "materialDumpDir": "db://assets/resources/model/map/idle/groundMat",
+    "fbx": {
+      "unitConversion": "hierarchy-level"
+    }
   }
 }

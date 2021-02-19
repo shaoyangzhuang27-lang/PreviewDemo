@@ -1,5 +1,5 @@
 {
-  "ver": "2.0.2",
+  "ver": "2.0.10",
   "importer": "fbx",
   "imported": true,
   "uuid": "33aa2a41-2b5c-4e8b-b49f-6d1aa1e265d6",
@@ -169,7 +169,7 @@
       "userData": {
         "gltfIndex": 0
       },
-      "ver": "1.0.11",
+      "ver": "1.0.12",
       "imported": true,
       "files": [
         ".json"
@@ -226,6 +226,9 @@
       ]
     },
     "dumpMaterials": true,
-    "materialDumpDir": "db://assets/resources/model/hero/hero46/mat"
+    "materialDumpDir": "db://assets/resources/model/hero/hero46/mat",
+    "fbx": {
+      "unitConversion": "hierarchy-level"
+    }
   }
 }

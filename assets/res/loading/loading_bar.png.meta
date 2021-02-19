@@ -55,9 +55,10 @@
         "borderRight": 11,
         "isUuid": true,
         "imageUuidOrDatabaseUri": "9cf3bede-86a7-47d1-bb3d-c123c347dcfa@6c48a",
-        "atlasUuid": ""
+        "atlasUuid": "",
+        "packable": true
       },
-      "ver": "1.0.8",
+      "ver": "1.0.9",
       "imported": true,
       "files": [
         ".json"
