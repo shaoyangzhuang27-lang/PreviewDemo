@@ -2,7 +2,7 @@
   "ver": "4.0.9",
   "importer": "typescript",
   "imported": true,
-  "uuid": "0d241918-0f7d-4e73-940d-ee5f1da7f96a",
+  "uuid": "21c1775b-ba5d-454d-bcec-ec3d8bdbb2b4",
   "files": [
     ".js",
     "editor.js",
@@ -11,7 +11,7 @@
   "subMetas": {},
   "userData": {
     "importAsPlugin": false,
-    "moduleId": "project:///assets/scripts/battle/BattlerHero.js",
+    "moduleId": "project:///assets/scripts/battle/test/BattleTest.js",
     "importerSettings": 7
   }
 }

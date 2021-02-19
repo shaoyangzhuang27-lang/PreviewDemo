@@ -2,7 +2,10 @@
 import { _decorator, Component, Node, Vec3, Canvas, Prefab, instantiate, director, resources } from 'cc';
 const { ccclass, property } = _decorator;
 
-import {BattlerHero} from "./BattlerHero";
+import {BattleHero} from "./BattleHero";
+
+import {BattleTest} from "./test/BattleTest";
+import {BattleResMgr} from "./BattleResMgr";
 
 let bLoadMain = false;
 
@@ -13,43 +16,12 @@ let oldMainLoop: any = null;
 @ccclass('BattleCtrl')
 export class BattleCtrl extends Component {
 
-    @property(Prefab)
-    private hero00Prefab: Prefab = null
-    @property(Prefab)
-    private hero29Prefab: Prefab = null
-    @property(Prefab)
-    private hero30Prefab: Prefab = null
-    @property(Prefab)
-    private hero25Prefab: Prefab = null
-    @property(Prefab)
-    private hero26Prefab: Prefab = null
-    @property(Prefab)
-    private hero33Prefab: Prefab = null
-
-
-
-    @property(Prefab)
-    private hero40Prefab: Prefab = null
-    @property(Prefab)
-    private hero41Prefab: Prefab = null
-    @property(Prefab)
-    private hero42Prefab: Prefab = null
-    @property(Prefab)
-    private hero44Prefab: Prefab = null
-    @property(Prefab)
-    private hero45Prefab: Prefab = null
-    @property(Prefab)
-    private hero46Prefab: Prefab = null
-
-
-    @property(Prefab)
-    private pingtai01Prefab: Prefab = null
+    private _groundPrefab: Prefab = null;
 
     public static EmbattleCfg = [[-3, 0], [0, 0], [3, 0] 
                                     ,[-3, 3], [0, 3], [3, 3]]
 
     private _enemyInfo: any = []
-    private _HeroCfg: any = {}
 
     private _actTime: number = 0
     private _curActFunc: any = null
@@ -57,8 +29,8 @@ export class BattleCtrl extends Component {
     private _battleGrounds: Array<Node> = []
     private _nextGroundIdx: number = 0
 
-    private _army: Array<BattlerHero> = []
-    private _enemy: Array<BattlerHero> = []
+    private _army: Array<BattleHero> = []
+    private _enemy: Array<BattleHero> = []
 
     private _leaderNode: Node = null
 
@@ -67,8 +39,6 @@ export class BattleCtrl extends Component {
     public camera: any = null
     public cameraNode: any = null
 
-
-    // private _goundPrefab: Prefab = null;
 
     onLoad() {
         // resources.load("prefabs/battle/pingtai01", Prefab, function name(e, res) {
@@ -90,6 +60,22 @@ export class BattleCtrl extends Component {
 
     start() {
 
+        if(BattleTest.isInit) {
+            this.doStart();
+        } else {
+            BattleTest.buildTestBattle()
+            BattleResMgr.getInstance().startLoad(BattleTest.getLoadResList(), (c, t)=>{
+                
+            }, ()=>{
+                this.doStart();
+            });
+        }
+        
+
+    }
+
+
+    doStart() {
         this.initMap();
         this.initHeros();
         
@@ -123,15 +109,17 @@ export class BattleCtrl extends Component {
     }
 
     lateUpdate(): void {
-        // if(!this.cameraNode) {
-        //     return;
-        // }
+        if(!this._leaderNode) {
+            return;
+        }
         this.cameraNode.setPosition(this._leaderNode.position.x, 0, this._leaderNode.position.z);
     }
 
     initMap(): void {
+        
+        this._groundPrefab = BattleResMgr.getInstance().getRes(BattleTest.getMapInfo().prefab);
         for(let i = 0; i < 3; i++) {
-            let ground = instantiate(this.pingtai01Prefab);
+            let ground = instantiate(this._groundPrefab);
             this.node.addChild(ground);
             ground.setPosition(new Vec3(0, 0 , -GroundLen*i))
             this._battleGrounds.push(ground);
@@ -148,169 +136,169 @@ export class BattleCtrl extends Component {
 
     initHeros(): void {
         // 初始化怪物
-        this._enemyInfo = [
-            {
-                id: 40,
-                type: BattlerHero.HeroType.MONSTER,
-                hp: 30,
-                atk: 2,
-                hitTime: 0.5,
-                range: 3,
-                speed: 1.3,
-                normal_attack: "0",
-            },
-            {
-                id: 44,
-                type: BattlerHero.HeroType.MONSTER,
-                hp: 50,
-                atk: 2,
-                hitTime: 0.5,
-                range: 3,
-                speed: 1.3,
-                normal_attack: "0",
-            },
-            {
-                id: 45,
-                type: BattlerHero.HeroType.MONSTER,
-                hp: 40,
-                atk: 2,
-                hitTime: 0.5,
-                range: 3,
-                speed: 1.3,
-                normal_attack: "0",
-            },
-            {
-                id: 41,
-                type: BattlerHero.HeroType.MONSTER,
-                hp: 20,
-                atk: 3,
-                hitTime: 0.5,
-                range: 7,
-                speed: 1.3,
-                normal_attack: "0",
-            },
-            {
-                id: 42,
-                type: BattlerHero.HeroType.MONSTER,
-                hp: 15,
-                atk: 3,
-                hitTime: 0.5,
-                range: 7,
-                speed: 1.3,
-                normal_attack: "0",
-            },
-            {
-                id: 46,
-                type: BattlerHero.HeroType.MONSTER,
-                hp: 50,
-                atk: 3,
-                hitTime: 0.5,
-                range: 7,
-                speed: 1.3,
-                normal_attack: "0",
-            },
-        ]
+        // this._enemyInfo = [
+        //     {
+        //         id: 40,
+        //         type: BattleHero.HeroType.MONSTER,
+        //         hp: 30,
+        //         atk: 2,
+        //         hitTime: 0.5,
+        //         range: 3,
+        //         speed: 1.3,
+        //         normal_attack: "0",
+        //     },
+        //     {
+        //         id: 44,
+        //         type: BattleHero.HeroType.MONSTER,
+        //         hp: 50,
+        //         atk: 2,
+        //         hitTime: 0.5,
+        //         range: 3,
+        //         speed: 1.3,
+        //         normal_attack: "0",
+        //     },
+        //     {
+        //         id: 45,
+        //         type: BattleHero.HeroType.MONSTER,
+        //         hp: 40,
+        //         atk: 2,
+        //         hitTime: 0.5,
+        //         range: 3,
+        //         speed: 1.3,
+        //         normal_attack: "0",
+        //     },
+        //     {
+        //         id: 41,
+        //         type: BattleHero.HeroType.MONSTER,
+        //         hp: 20,
+        //         atk: 3,
+        //         hitTime: 0.5,
+        //         range: 6,
+        //         speed: 1.3,
+        //         normal_attack: "0",
+        //     },
+        //     {
+        //         id: 42,
+        //         type: BattleHero.HeroType.MONSTER,
+        //         hp: 15,
+        //         atk: 3,
+        //         hitTime: 0.5,
+        //         range: 6,
+        //         speed: 1.3,
+        //         normal_attack: "0",
+        //     },
+        //     {
+        //         id: 46,
+        //         type: BattleHero.HeroType.MONSTER,
+        //         hp: 50,
+        //         atk: 3,
+        //         hitTime: 0.5,
+        //         range: 6,
+        //         speed: 1.3,
+        //         normal_attack: "0",
+        //     },
+        // ]
 
-        this._HeroCfg = {
-            0: this.hero00Prefab,
-            29: this.hero29Prefab,
-            30: this.hero30Prefab,
-            25: this.hero25Prefab,
-            26: this.hero26Prefab,
-            33: this.hero33Prefab,
+        // this._HeroCfg = {
+        //     0: this.hero00Prefab,
+        //     29: this.hero29Prefab,
+        //     30: this.hero30Prefab,
+        //     25: this.hero25Prefab,
+        //     26: this.hero26Prefab,
+        //     33: this.hero33Prefab,
 
-            40: this.hero40Prefab,
-            41: this.hero41Prefab,
-            42: this.hero42Prefab,
-            44: this.hero44Prefab,
-            45: this.hero45Prefab,
-            46: this.hero46Prefab,
-        }
+        //     40: this.hero40Prefab,
+        //     41: this.hero41Prefab,
+        //     42: this.hero42Prefab,
+        //     44: this.hero44Prefab,
+        //     45: this.hero45Prefab,
+        //     46: this.hero46Prefab,
+        // }
 
         // 第一个位置固定主角
-        let armyInfo = [
-            {
-                id: 0,
-                type: BattlerHero.HeroType.LEADER,
-                embattleedSite: 1,
-                hp: 100,
-                atk: 5,
-                hitTime: 0.6,
-                range: 3,
-                speed: 1.3,
-                normal_attack: "0",
-            },
-            {
-                id: 29,
-                type: BattlerHero.HeroType.LEADER,
-                embattleedSite: 0,
-                hp: 100,
-                atk: 4,
-                hitTime: 0.5,
-                range: 3,
-                speed: 1.3,
-                normal_attack: "0",
-            },
-            {
-                id: 30,
-                type: BattlerHero.HeroType.LEADER,
-                embattleedSite: 2,
-                hp: 100,
-                atk: 4,
-                hitTime: 0.5,
-                range: 3,
-                speed: 1.3,
-                normal_attack: "0",
-            },
-            {
-                id: 25,
-                type: BattlerHero.HeroType.LEADER,
-                embattleedSite: 3,
-                hp: 100,
-                atk: 6,
-                hitTime: 0.5,
-                range: 7,
-                speed: 1.3,
-                normal_attack: "0",
-            },
-            {
-                id: 26,
-                type: BattlerHero.HeroType.LEADER,
-                embattleedSite: 4,
-                hp: 100,
-                atk: 6,
-                hitTime: 0.5,
-                range: 7,
-                speed: 1.3,
-                normal_attack: "0",
-            },
-            {
-                id: 33,
-                type: BattlerHero.HeroType.LEADER,
-                embattleedSite: 5,
-                hp: 100,
-                atk: 6,
-                hitTime: 0.5,
-                range: 7,
-                speed: 1.3,
-                normal_attack: "0",
-            },
-        ]
-        
-        this._leaderNode = instantiate(this._HeroCfg[armyInfo[0].id]);
+        // let armyInfo = [
+        //     {
+        //         id: 0,
+        //         type: BattleHero.HeroType.LEADER,
+        //         embattleedSite: 1,
+        //         hp: 100,
+        //         atk: 5,
+        //         hitTime: 0.6,
+        //         range: 3,
+        //         speed: 1.3,
+        //         normal_attack: "0",
+        //     },
+        //     {
+        //         id: 29,
+        //         type: BattleHero.HeroType.LEADER,
+        //         embattleedSite: 0,
+        //         hp: 100,
+        //         atk: 4,
+        //         hitTime: 0.5,
+        //         range: 3,
+        //         speed: 1.3,
+        //         normal_attack: "0",
+        //     },
+        //     {
+        //         id: 30,
+        //         type: BattleHero.HeroType.LEADER,
+        //         embattleedSite: 2,
+        //         hp: 100,
+        //         atk: 4,
+        //         hitTime: 0.5,
+        //         range: 3,
+        //         speed: 1.3,
+        //         normal_attack: "0",
+        //     },
+        //     {
+        //         id: 25,
+        //         type: BattleHero.HeroType.LEADER,
+        //         embattleedSite: 3,
+        //         hp: 100,
+        //         atk: 6,
+        //         hitTime: 0.5,
+        //         range: 6,
+        //         speed: 1.3,
+        //         normal_attack: "0",
+        //     },
+        //     {
+        //         id: 26,
+        //         type: BattleHero.HeroType.LEADER,
+        //         embattleedSite: 4,
+        //         hp: 100,
+        //         atk: 6,
+        //         hitTime: 0.5,
+        //         range: 6,
+        //         speed: 1.3,
+        //         normal_attack: "0",
+        //     },
+        //     {
+        //         id: 33,
+        //         type: BattleHero.HeroType.LEADER,
+        //         embattleedSite: 5,
+        //         hp: 100,
+        //         atk: 6,
+        //         hitTime: 0.5,
+        //         range: 6,
+        //         speed: 1.3,
+        //         normal_attack: "0",
+        //     },
+        // ]
+        let armyInfo = BattleTest.getArmyInfo();
+        this._leaderNode = instantiate(BattleResMgr.getInstance().getRes(armyInfo[0].heroInfo.prefab));
         // this.camera.removeFromParent();
         // this._leaderNode.addChild(this.camera);
         this.node.addChild(this._leaderNode);
-        let hero: BattlerHero = this._leaderNode.getComponent("BattlerHero") as BattlerHero;
-        hero.initHero(this, armyInfo[0]);
+        let hero: BattleHero = this._leaderNode.getComponent("BattleHero") as BattleHero;
+        hero.initHero(this, armyInfo[0].heroInfo);
         this._army[armyInfo[0].embattleedSite] = hero
 
 
         for (let i = 1; i < armyInfo.length; i++) {
-            let heroNode = instantiate(this._HeroCfg[armyInfo[i].id]);
+            let heroNode = instantiate(BattleResMgr.getInstance().getRes(armyInfo[i].heroInfo.prefab));
             this.node.addChild(heroNode);
-            hero = heroNode.getComponent("BattlerHero"); 
-            hero.initHero(this, armyInfo[i], this._leaderNode);
+            hero = heroNode.getComponent("BattleHero"); 
+            hero.initHero(this, armyInfo[i].heroInfo, this._leaderNode);
             this._army[armyInfo[i].embattleedSite] = hero;
         }
 
@@ -322,13 +310,14 @@ export class BattleCtrl extends Component {
             // console.log(this._army[i].position)
         }
 
+        this._enemyInfo = BattleTest.getEnemyInfo();
         // 怪物提前生成，保证游戏顺畅
         for (let i = 0; i < 6; i++) {
-            let heroNode = instantiate(this._HeroCfg[this._enemyInfo[i].id]);
+            let heroNode = instantiate(BattleResMgr.getInstance().getRes(this._enemyInfo[i].heroInfo.prefab));
             this.node.addChild(heroNode);
             heroNode.setRotationFromEuler(0, 180, 0);
-            hero = heroNode.getComponent("BattlerHero"); 
-            hero.initHero(this, this._enemyInfo[i]);
+            hero = heroNode.getComponent("BattleHero"); 
+            hero.initHero(this, this._enemyInfo[i].heroInfo);
             this._enemy[i] = hero;
             heroNode.setPosition(0, 0, 0);
             hero.setVisible(false);
@@ -414,7 +403,7 @@ export class BattleCtrl extends Component {
     // doBattle(): void {
     // }
 
-    onHeroDie(hero: BattlerHero) {
+    onHeroDie(hero: BattleHero) {
         if (hero.isEnemy()) {
             let isAllDie = true;
             for(let i = 0; i < 6; i++) {
@@ -471,5 +460,15 @@ export class BattleCtrl extends Component {
         }
         
     }
+
+
+
+
+
+
+
+
+
+    
 
 }

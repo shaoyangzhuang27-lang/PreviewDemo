@@ -13,8 +13,8 @@ TODO
 2.  找完目标后，锁定的移动位置可能已被占用。
 */
 
-@ccclass('BattlerHero')
-export class BattlerHero extends Component {
+@ccclass('BattleHero')
+export class BattleHero extends Component {
 
     public static STATUS = {
         IDLE: "idle",
@@ -38,8 +38,8 @@ export class BattlerHero extends Component {
     private _targetPos: Vec3 = new Vec3()
     private _dirVector: Vec3 = new Vec3()
 
-    private _targetList: Array<BattlerHero> = []
-    private _target: BattlerHero | null = null
+    private _targetList: Array<BattleHero> = []
+    private _target: BattleHero | null = null
 
     private _bodyNode: any = null
     private _heroInfo: any = null
@@ -79,7 +79,7 @@ export class BattlerHero extends Component {
     onLoad() {
 
         this._bodyNode = this.node.getChildByName("body");
-        this.playAnim(BattlerHero.STATUS.IDLE);
+        this.playAnim(BattleHero.STATUS.IDLE);
 
         // this.startSeekEnemy()
     }
@@ -112,7 +112,7 @@ export class BattlerHero extends Component {
     }
 
     startSeekEnemy(): void {
-        this.playAnim(BattlerHero.STATUS.RUN);
+        this.playAnim(BattleHero.STATUS.RUN);
         // this.node.getComponent(RigidBody)?.wakeUp();
         this.node.getComponent(BoxCollider).enabled = true;
         this.node.getComponent(RigidBody).enabled = true;
@@ -179,7 +179,7 @@ export class BattlerHero extends Component {
 
     startEmbattle(embattlePos: Vec3, actTime: number): void {
         this._actTime = actTime;
-        this.playAnim(BattlerHero.STATUS.RUN);
+        this.playAnim(BattleHero.STATUS.RUN);
         this.embattle(embattlePos);
         this._curActFunc = this.doEmbattle;
         this.node.getComponent(BoxCollider).enabled = false;
@@ -203,7 +203,7 @@ export class BattlerHero extends Component {
             // this.node.getComponent(BoxCollider).active = true;
             // this.node.getComponent(RigidBody).active = true;
             // this.node.getComponent(RigidBody).clearState();
-            // this.playAnim(BattlerHero.STATUS.IDLE);
+            // this.playAnim(BattleHero.STATUS.IDLE);
             this.node.setPosition(this._targetPos);
         } else {
             this._tmpPos.x += dt * this._dirVector.x
@@ -217,7 +217,7 @@ export class BattlerHero extends Component {
         this.node.getComponent(RigidBody).clearState();
         // this.node.setPosition(this._targetPos);
 
-        this.playAnim(BattlerHero.STATUS.RUN);
+        this.playAnim(BattleHero.STATUS.RUN);
         this._actTime = actTime;
         this.runToBattle(z);
         this._curActFunc = this.doRunToBattle;
@@ -238,17 +238,17 @@ export class BattlerHero extends Component {
             // this.node.getComponent(BoxCollider).active = true;
             // this.node.getComponent(RigidBody).active = true;
             this.node.getComponent(RigidBody)?.clearState();
-            // this.playAnim(BattlerHero.STATUS.IDLE);
+            // this.playAnim(BattleHero.STATUS.IDLE);
             this.node.setPosition(this._targetPos);
 
-            this.playAnim(BattlerHero.STATUS.ATTACK)
+            this.playAnim(BattleHero.STATUS.ATTACK)
         }  else {
             this._tmpPos.z += dt * this._dirVector.z
             this.node.setPosition(this._tmpPos);
         }
     }
 
-    startBattle(targetList: Array<BattlerHero>): void {
+    startBattle(targetList: Array<BattleHero>): void {
         this._curActFunc = null;
         this._targetList = targetList
         this.seekAttackTarget();
@@ -289,13 +289,13 @@ export class BattlerHero extends Component {
             }
                 
         } else {
-            this.playAnim(BattlerHero.STATUS.IDLE);
+            this.playAnim(BattleHero.STATUS.IDLE);
         }
 
     }
 
     startRunTo(): void {
-        this.playAnim(BattlerHero.STATUS.RUN);
+        this.playAnim(BattleHero.STATUS.RUN);
         this._curActFunc = this.doRunTo;
         this.runTo();
     }
@@ -330,7 +330,7 @@ export class BattlerHero extends Component {
     attack(): void {
         if (!this._target) {
             // TODO
-            console.error("call BattlerHero.attack fail, this._target is null");
+            console.error("call BattleHero.attack fail, this._target is null");
             return;
         }
 
@@ -338,7 +338,7 @@ export class BattlerHero extends Component {
 
         this._curActFunc = this.doAttack;
         this._actTime = this._heroInfo.hitTime;
-        this.playAnim(BattlerHero.STATUS.ATTACK);
+        this.playAnim(BattleHero.STATUS.ATTACK);
         this.node.lookAt(this._target.node.position);
         this._bodyNode.getComponent(SkeletalAnimation)?.on(SkeletalAnimation.EventType.LASTFRAME, (a: any, b: any, c: any) => {
             if (this._target) {
@@ -405,17 +405,17 @@ export class BattlerHero extends Component {
     }
 
     die(): void {
-        if (this._status == BattlerHero.STATUS.DIE) {
+        if (this._status == BattleHero.STATUS.DIE) {
             return;
         }
 
-        if (this._status == BattlerHero.STATUS.ATTACK) {
+        if (this._status == BattleHero.STATUS.ATTACK) {
             this._bodyNode.getComponent(SkeletalAnimation)?.off(SkeletalAnimation.EventType.LASTFRAME)
         }
 
         this._curActFunc = null;
         this._battleTitleBar.setVisible(false);
-        this.playAnim(BattlerHero.STATUS.DIE);
+        this.playAnim(BattleHero.STATUS.DIE);
         this._battleCtrl.onHeroDie(this);
     }
 
@@ -481,11 +481,11 @@ export class BattlerHero extends Component {
 
     revive(): void {
         this.refreshData();
-        this.playAnim(BattlerHero.STATUS.IDLE);
+        this.playAnim(BattleHero.STATUS.IDLE);
     }
 
     isEnemy(): boolean {
-        return this._heroInfo.type != BattlerHero.HeroType.LEADER && this._heroInfo.type != BattlerHero.HeroType.HERO
+        return this._heroInfo.type != BattleHero.HeroType.LEADER && this._heroInfo.type != BattleHero.HeroType.HERO
     }
 
     initTitleBar(): void {
