@@ -36,7 +36,7 @@ export class ValueMgr extends ValueCore{
         return this.getTable(name);
     }
     public getItemByField(t:TableName,fieldName:string,key:number|string){
-        let tab = this.getTableByName(t);
+        let tab = this.getTableByName(t).records;
 
         let name:string = TableName[t];
         let mapName = name+"_"+fieldName;
@@ -56,5 +56,4 @@ export class ValueMgr extends ValueCore{
         }
     }
 }
-
 // ValueMgr.getInstance().getTableByName(TableName.language_data)["id"]
