@@ -10,7 +10,8 @@ export class DataMgr{
     private playerData:Msg.GetPlayerDataA | null  = null;//new Msg.GetPlayerDataA();
     private playerInfo:Msg.IPlayerInfo | null | undefined = null;
     private gameConfig:Msg.IGameConfig | null | undefined = null;
-    private heroList:Array<Msg.IHeroInfo> | null = null;//new Array<Msg.IHeroInfo>();
+    // private heroList:Array<Msg.IHeroInfo> | null = null;
+    private heroList:Map<number,Msg.IHeroInfo> = new Map<number,Msg.IHeroInfo>(); 
     private heroBookInfo:{ [k: string]: Msg.IHeroBookUnit } | null = null;
 
     
@@ -22,8 +23,13 @@ export class DataMgr{
         // console.log(this.playerLogin)
     }
     public setHeroList(data:Msg.GetHeroListA){
-        this.heroList = data.heroList;
+        // this.heroList = data.heroList;
         this.heroBookInfo = data.heroBookInfo;
+
+        for (let index = 0; index < data.heroList.length; index++) {
+            const element = data.heroList[index];
+            this.heroList.set(element.id as number,element);
+        }
     }
     public setPlayerData(data:Msg.GetPlayerDataA){
         this.playerData = data;
