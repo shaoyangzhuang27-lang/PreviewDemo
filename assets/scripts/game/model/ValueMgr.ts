@@ -35,7 +35,7 @@ export class ValueMgr extends ValueCore{
         let name:string = TableName[t];
         return this.getTable(name);
     }
-    public getItemByField(t:TableName,fieldName:string,key:number|string){
+    public getItemByField(t:TableName,key:number|string,fieldName:string = "id"){
         let tab = this.getTableByName(t).records;
 
         let name:string = TableName[t];
