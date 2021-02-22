@@ -15,6 +15,9 @@ export class ValueMgr extends ValueCore{
     public static getInstance() {
         return this._instance;
     }
+
+    private dataMap:Map<string,Map<number|string,{}>>  = new Map<string,Map<number|string,{}>>();
+
     public loadData(func:Function){
         let tabName:Array<string> = [];
         for (var key in TableName) 
@@ -32,4 +35,26 @@ export class ValueMgr extends ValueCore{
         let name:string = TableName[t];
         return this.getTable(name);
     }
+    public getItemByField(t:TableName,fieldName:string,key:number|string){
+        let tab = this.getTableByName(t);
+
+        let name:string = TableName[t];
+        let mapName = name+"_"+fieldName;
+        let tabMap = this.dataMap.get(mapName);
+        if(tabMap){
+            return tabMap.get(key);
+        }else{
+            tabMap = new Map<number|string,{}>();
+            this.dataMap.set(mapName,tabMap);
+
+            for (let index = 0; index < tab.length; index++) {
+                const element = tab[index];
+                tabMap.set(element[fieldName],element);
+            }
+            
+            return tabMap.get(key);
+        }
+    }
 }
+
+// ValueMgr.getInstance().getTableByName(TableName.language_data)["id"]
