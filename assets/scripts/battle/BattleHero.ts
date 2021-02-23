@@ -56,6 +56,7 @@ export class BattleHero extends Component {
     private _hp: number = 0
     private _pow: number = 0
 
+    public embattleedSite: number = 0
     public atk: number = 0
     public def: number = 0
     public rng: number = 0
@@ -255,7 +256,7 @@ export class BattleHero extends Component {
     }
 
     seekAttackTarget(): void {
-        // this._curActFunc = null;
+        this._curActFunc = null;
         this._target = null;
         this._dirVector.set(Vec3.ZERO);
         let dirVec = new Vec3();
@@ -336,8 +337,8 @@ export class BattleHero extends Component {
 
         // 开始发动攻击时计算速度 TODO 有buffer刷新时候再计算
 
-        this._curActFunc = this.doAttack;
-        this._actTime = this._heroInfo.hitTime;
+        // this._curActFunc = this.doAttack;
+        // this._actTime = this._heroInfo.hitTime;
         this.playAnim(BattleHero.STATUS.ATTACK);
         this.node.lookAt(this._target.node.position);
         this._bodyNode.getComponent(SkeletalAnimation)?.on(SkeletalAnimation.EventType.LASTFRAME, (a: any, b: any, c: any) => {
@@ -349,8 +350,8 @@ export class BattleHero extends Component {
                     // 开始发动攻击时计算速度 TODO 有buffer刷新时候再计算
 
 
-                    this._curActFunc = this.doAttack;
-                    this._actTime = this._heroInfo.hitTime;
+                    // this._curActFunc = this.doAttack;
+                    // this._actTime = this._heroInfo.hitTime;
                 }
             } else {
                 this._bodyNode.getComponent(SkeletalAnimation)?.off(SkeletalAnimation.EventType.LASTFRAME)
@@ -360,8 +361,12 @@ export class BattleHero extends Component {
         })
     }
 
+    onAttack() {
+        this.hitTarget();
+    }
+
     // TODO 改成使用事件帧
-    doAttack(dt: number) {
+    doAttack(dt: number): void {
         this._actTime -= dt;
         if (this._actTime <= 0) {
             this.hitTarget();
@@ -451,14 +456,15 @@ export class BattleHero extends Component {
         this.initTitleBar();
 
         this.refreshData();
-        // this.refreshAttackSpeed();
+        this.refreshAttackSpeed();
     }
 
     initBattleData(): void {
+        this.embattleedSite = this._heroInfo.embattleedSite;
         this.atk = this._heroInfo.atk;
         this.def = 0;
         this.rng = 0;
-        this.spd = 0;
+        this.spd = this._heroInfo.speed;
         this.skillSpd = 0;
         this.crt = 0;
         this.crtDmg = 0;
@@ -477,7 +483,11 @@ export class BattleHero extends Component {
         this._battleTitleBar.setPowPercent(this._pow / this._maxPow);
     }
 
-     
+    refreshAttackSpeed(): void {
+        let s: SkeletalAnimation = this._bodyNode.getComponent(SkeletalAnimation) as SkeletalAnimation
+        let a: AnimationState = s.getState("attack");
+        a.speed = a.length / this.spd
+    }
 
     revive(): void {
         this.refreshData();

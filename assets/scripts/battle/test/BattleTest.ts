@@ -71,7 +71,7 @@ export class BattleTest {
             atk: 5,
             hitTime: 0.6,
             range: 3,
-            speed: 1.3,
+            speed: 1,
         },
         29: {
             prefab: "hero29",
@@ -260,6 +260,7 @@ export class BattleTest {
         embattleedInfo.heroInfo.prefab = "prefabs/hero/" + embattleedInfo.heroInfo.prefab
         BattleTest.loadResList.push(embattleedInfo.heroInfo.prefab);
         embattleedInfo.heroInfo.type = embattleedInfo.type;
+        embattleedInfo.heroInfo.embattleedSite = embattleedInfo.embattleedSite;
     }
 
     public static buildArmyInfo() {

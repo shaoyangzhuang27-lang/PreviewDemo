@@ -70,7 +70,14 @@
           "from": 0,
           "to": 1.2083333730697632
         },
-        "events": []
+        "events": [
+          {
+            "frame": 0.43333333333333335,
+            "functionName": "onAttack",
+            "parameters": []
+          }
+        ],
+        "speed": 1
       },
       "ver": "1.0.14",
       "imported": true,

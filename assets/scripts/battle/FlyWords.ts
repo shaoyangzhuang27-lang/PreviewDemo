@@ -6,7 +6,7 @@ const { ccclass, property } = _decorator;
 export class FlyWords extends Component {
     
 
-    private _actTime = 0.6;
+    private _actTime = 0.4;
 
     private _tmpScale = 0;
 
@@ -15,7 +15,7 @@ export class FlyWords extends Component {
     }
 
     startFly(str: String, color: math.Color): void {
-        this._tmpScale = 0;
+        this._tmpScale = 0.3;
         this.node.getComponent(Label).string = str;
         this.node.getComponent(Label).color = color;
         this.node.setScale(this._tmpScale, this._tmpScale);

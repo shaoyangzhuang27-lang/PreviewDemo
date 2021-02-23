@@ -142,28 +142,29 @@ export class BattleCtrl extends Component {
         this.node.addChild(this._leaderNode);
         let hero: BattleHero = this._leaderNode.getComponent("BattleHero") as BattleHero;
         hero.initHero(this, armyInfo[0].heroInfo);
-        this._army[armyInfo[0].embattleedSite] = hero
-
+        // this._army[armyInfo[0].embattleedSite] = hero
+        this._army.push(hero)
 
         for (let i = 1; i < armyInfo.length; i++) {
             let heroNode = instantiate(BattleResMgr.getInstance().getRes(armyInfo[i].heroInfo.prefab));
             this.node.addChild(heroNode);
             hero = heroNode.getComponent("BattleHero"); 
             hero.initHero(this, armyInfo[i].heroInfo, this._leaderNode);
-            this._army[armyInfo[i].embattleedSite] = hero;
+            // this._army[armyInfo[i].embattleedSite] = hero;
+            this._army.push(hero)
         }
 
-        for (let i = 0; i < 6; i++) {
-            this._army[i].node.setPosition(new Vec3(BattleCtrl.EmbattleCfg[i][0]
+        for (let i = 0; i < this._army.length; i++) {
+            this._army[i].node.setPosition(new Vec3(BattleCtrl.EmbattleCfg[this._army[i].embattleedSite][0]
                 , 0 
-                , this._battleGrounds[this._nextGroundIdx - 1].position.z - 10 + BattleCtrl.EmbattleCfg[i][1]))
+                , this._battleGrounds[this._nextGroundIdx - 1].position.z - 10 + BattleCtrl.EmbattleCfg[this._army[i].embattleedSite][1]))
 
             // console.log(this._army[i].position)
         }
 
         this._enemyInfo = BattleTest.getEnemyInfo();
         // 怪物提前生成，保证游戏顺畅
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < this._enemyInfo.length; i++) {
             let heroNode = instantiate(BattleResMgr.getInstance().getRes(this._enemyInfo[i].heroInfo.prefab));
             this.node.addChild(heroNode);
             heroNode.setRotationFromEuler(0, 180, 0);
@@ -178,7 +179,7 @@ export class BattleCtrl extends Component {
     seekEnemy(): void {
         this._actTime = 10 + Math.random() * 2;
         this._curActFunc = this.doSeekEnemy;
-        for(let i = 0; i < 6; i++) {
+        for(let i = 0; i < this._army.length; i++) {
             this._army[i].startSeekEnemy();
         }
     }
@@ -199,11 +200,11 @@ export class BattleCtrl extends Component {
         this.refreshEnemy(enemyZ);
 
         enemyZ += 20;
-        for(let i = 0; i < 6; i++) {
+        for(let i = 0; i < this._army.length; i++) {
             this._army[i].startEmbattle(
-                new Vec3(BattleCtrl.EmbattleCfg[i][0]
+                new Vec3(BattleCtrl.EmbattleCfg[this._army[i].embattleedSite][0]
                 , 0 
-                , enemyZ + BattleCtrl.EmbattleCfg[i][1]), this._actTime - 0.03);
+                , enemyZ + BattleCtrl.EmbattleCfg[this._army[i].embattleedSite][1]), this._actTime - 0.03);
         }
     }
 
@@ -221,12 +222,12 @@ export class BattleCtrl extends Component {
         this._curActFunc = this.doRunToBattle;
 
         let enemyZ = (-20 + 3)/2;
-        for(let i = 0; i < 6; i++) {
+        for(let i = 0; i < this._army.length; i++) {
             this._army[i].startRunToBattle(enemyZ, this._actTime - 0.03);
         }
 
         enemyZ = -enemyZ;
-        for(let i = 0; i < 6; i++) {
+        for(let i = 0; i < this._enemy.length; i++) {
             this._enemy[i].startRunToBattle(enemyZ, this._actTime - 0.03);
         }
     }
@@ -242,12 +243,12 @@ export class BattleCtrl extends Component {
     battle(): void {
         // this._curActFunc = this.doBattle;
         this._curActFunc = null;
-        for(let i = 0; i < 6; i++) {
+        for(let i = 0; i < this._army.length; i++) {
             this._army[i].startBattle(this._enemy);
         }
 
-        for(let i = 0; i < 6; i++) {
-            this._enemy[i].startBattle(this._army);
+        for(let i = 0; i < this._enemy.length; i++) {
+            // this._enemy[i].startBattle(this._army);
         }
     }
 
@@ -257,7 +258,7 @@ export class BattleCtrl extends Component {
     onHeroDie(hero: BattleHero) {
         if (hero.isEnemy()) {
             let isAllDie = true;
-            for(let i = 0; i < 6; i++) {
+            for(let i = 0; i < this._enemy.length; i++) {
                 if (!this._enemy[i].isDie()) {
                     isAllDie = false;
                     break;
@@ -278,11 +279,11 @@ export class BattleCtrl extends Component {
     doWait(dt: number): void {
         this._actTime -= dt;
         if (this._actTime <= 0) {
-            for(let i = 0; i < 6; i++) {
+            for(let i = 0; i < this._enemy.length; i++) {
                 this._enemy[i].setVisible(false);
             }
 
-            for(let i = 0; i < 6; i++) {
+            for(let i = 0; i < this._army.length; i++) {
                 this._army[i].refreshData();
             }
             this.seekEnemy();
@@ -290,13 +291,13 @@ export class BattleCtrl extends Component {
     }
 
     refreshEnemy(enemyZ: number): void {
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < this._enemy.length; i++) {
             this._enemy[i].setVisible(true);
             this._enemy[i].node.setRotationFromEuler(0, 180);
             this._enemy[i].revive();
-            this._enemy[i].node.setPosition(new Vec3(BattleCtrl.EmbattleCfg[i][0]
+            this._enemy[i].node.setPosition(new Vec3(BattleCtrl.EmbattleCfg[this._enemy[i].embattleedSite][0]
                 , 0 
-                , enemyZ - BattleCtrl.EmbattleCfg[i][1]));
+                , enemyZ - BattleCtrl.EmbattleCfg[this._enemy[i].embattleedSite][1]));
         }
     }
 
