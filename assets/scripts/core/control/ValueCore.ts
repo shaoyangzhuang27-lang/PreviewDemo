@@ -37,7 +37,7 @@ export class ValueCore{
             // console.log("table "+tableName+":");
             // console.log(tabObj.records);
 
-            this.csvData.set(tableName,tabObj.records);
+            this.csvData.set(tableName,tabObj);
             this.loadIndex++;
             if(this.loadCallBack){
                 this.loadCallBack(this.loadIndex,this.csvNameTab?.length);

@@ -5,36 +5,58 @@ export class DataMgr{
         return this._instance;
     }
     
-    private playerData:Msg.GetPlayerDataA  = new Msg.GetPlayerDataA();
-    private playerLogin:Msg.PlayerLoginA =new Msg.PlayerLoginA();
-    private heroList:Msg.GetHeroListR =new Msg.GetHeroListR();
+    // private heroList:Msg.GetHeroListR =new Msg.GetHeroListR();
+    // private playerLogin:Msg.PlayerLoginA =new Msg.PlayerLoginA();
+    private playerData:Msg.GetPlayerDataA | null  = null;//new Msg.GetPlayerDataA();
+    private playerInfo:Msg.IPlayerInfo | null | undefined = null;
+    private gameConfig:Msg.IGameConfig | null | undefined = null;
+    // private heroList:Array<Msg.IHeroInfo> | null = null;
+    private heroList:Map<number,Msg.IHeroInfo> = new Map<number,Msg.IHeroInfo>(); 
+    private heroBookInfo:{ [k: string]: Msg.IHeroBookUnit } | null = null;
+
     
     public setPlayerLogin(data:Msg.PlayerLoginA){
-        this.playerLogin = data;
-        console.log("000000-----------------")
-        console.log(this.playerLogin)
+        this.playerInfo = data.playerInfo;
+        this.gameConfig = data.conf;
+        // this.playerLogin = data;
+        // console.log("000000-----------------")
+        // console.log(this.playerLogin)
     }
-    public getPlayerLogin(){
-        return this.playerLogin
-    }
-    public setHeroList(data:Msg.GetHeroListR){
-        this.heroList = data;
-    }
-    public getHeroList(){
-        return this.heroList as Msg.PlayerInfo;
+    public setHeroList(data:Msg.GetHeroListA){
+        // this.heroList = data.heroList;
+        this.heroBookInfo = data.heroBookInfo;
+
+        for (let index = 0; index < data.heroList.length; index++) {
+            const element = data.heroList[index];
+            this.heroList.set(element.id as number,element);
+        }
     }
     public setPlayerData(data:Msg.GetPlayerDataA){
         this.playerData = data;
     }
+
+    //英雄数据
+    public getHeroList(){
+        return this.heroList;
+    }
+    //英雄图鉴数据
+    public getHeroBookInfo(){
+        return this.heroBookInfo;
+    }
+
+    //玩家数据
     public getPlayerData(){
         return this.playerData
     }
 
-
+    //角色信息
     public getPlayerInfo(){
-        return this.playerLogin.playerInfo as Msg.PlayerInfo;
+        return this.playerInfo;
+        // return this.playerLogin.playerInfo as Msg.PlayerInfo;
     }
+    //游戏信息
     public getGameConfig(){
-        return this.playerLogin.conf as Msg.GameConfig;
+        return this.gameConfig;
+        // return this.playerLogin.conf as Msg.GameConfig;
     }
 }

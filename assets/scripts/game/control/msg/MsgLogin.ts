@@ -39,7 +39,7 @@ export class MsgLogin extends MsgBase{
     
     public requestDeviceLoginNew(){
         let data = new Msg.DeviceLoginNewR();
-        data.deviceId = "asdfasfas";
+        data.deviceId = "73f08c52ad36acf31baecfec8db006b8d1af428a";
         const buffer_data = Msg.DeviceLoginNewR.encode(data).finish();
         this.msgMgr?.sendData(Msg.MsgType.TheDeviceLoginNewR,buffer_data);
         }
@@ -74,7 +74,8 @@ export class MsgLogin extends MsgBase{
         this.msgMgr?.sendData(Msg.MsgType.TheGetHeroListR,buffer_data);
     }
     public responeGetHeroListA(msgId: number, msgData: Msg.GetHeroListA){
-        // console.log(msgData)
+        console.log("herodata------")
+        console.log(msgData)
     }
         
     public requestGetPlayerData(){
