@@ -66,16 +66,14 @@ export class MainCity extends Component {
         let dis = Vec2.distance(event._startPoint,event._point)
         // console.log(dis)
         //基于物理碰撞器的射线检测
-        console.log("22222")
-        console.log(this.mainCamera)
-        console.log(event._point.x)
-        console.log(event._point.y)
-        console.log(this._ray)
-        console.log(PhysicsSystem.instance.raycastClosest(this._ray))
-        console.log(dis)
+        // console.log(this.mainCamera)
+        // console.log(event._point.x)
+        // console.log(event._point.y)
+        // console.log(this._ray)
+        // console.log(PhysicsSystem.instance.raycastClosest(this._ray))
+        // console.log(dis)
         if (PhysicsSystem.instance.raycastClosest(this._ray) && dis<5) {
             
-        console.log("11111")
             console.log(PhysicsSystem.instance.raycastClosestResult.collider.node.name);
             this.pop(PhysicsSystem.instance.raycastClosestResult.collider.node.name);
         }
