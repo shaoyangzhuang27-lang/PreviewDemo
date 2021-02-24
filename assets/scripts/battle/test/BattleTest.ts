@@ -19,7 +19,7 @@ const type_map = {
     * 描述：返回obj对象的字符串类型
     * 参数：任意数据格式
 */
-function getType(obj)
+function getType(obj: any)
 {
     return type_map[Object.prototype.toString.call(obj)];
 }
@@ -27,10 +27,10 @@ function getType(obj)
 /*
     * 描述：数组和字典数据的深拷贝
 */
-function deepClone(data)
+function deepClone(data: any)
 {
-    var type = getType(data);
-    var obj;
+    let type = getType(data);
+    let obj: any;
     if(type === 'array')
     {
         obj = [];
@@ -46,15 +46,15 @@ function deepClone(data)
 
     if(type === 'array')
     {
-        for(var i = 0, len = data.length; i < len; i++)
+        for(let i = 0, len = data.length; i < len; i++)
         {
-            var tmpData = data===data[i] ? data : deepClone(data[i])
+            let tmpData = data===data[i] ? data : deepClone(data[i])
             obj.push(tmpData)
         }
     }
     else if(type === 'object')
     {
-        for(var key in data)
+        for(let key in data)
         {
             obj[key] = data===data[key] ? data : deepClone(data[key])
         }
@@ -66,7 +66,7 @@ function deepClone(data)
 export class BattleTest {
     public static heroTestInfo = {
         0: {
-            prefab: "hero00",
+            prefab: "leader00",
             hp: 100,
             atk: 5,
             hitTime: 0.6,
@@ -74,7 +74,7 @@ export class BattleTest {
             speed: 1,
         },
         29: {
-            prefab: "hero29",
+            prefab: "hero029",
             hp: 100,
             atk: 4,
             hitTime: 0.5,
@@ -82,7 +82,7 @@ export class BattleTest {
             speed: 1.3,
         },
         30: {
-            prefab: "hero30",
+            prefab: "hero030",
             hp: 100,
             atk: 4,
             hitTime: 0.5,
@@ -90,7 +90,7 @@ export class BattleTest {
             speed: 1.3,
         },
         25: {
-            prefab: "hero25",
+            prefab: "hero025",
             hp: 100,
             atk: 6,
             hitTime: 0.5,
@@ -98,7 +98,7 @@ export class BattleTest {
             speed: 1.3,
         },
         26: {
-            prefab: "hero26",
+            prefab: "hero026",
             hp: 100,
             atk: 6,
             hitTime: 0.5,
@@ -106,7 +106,7 @@ export class BattleTest {
             speed: 1.3,
         },
         33: {
-            prefab: "hero33",
+            prefab: "hero033",
             hp: 100,
             atk: 6,
             hitTime: 0.5,
@@ -118,7 +118,7 @@ export class BattleTest {
     
     public static monsterTestInfo = {
         40: {
-            prefab: "hero40",
+            prefab: "hero040",
             hp: 30,
             atk: 2,
             hitTime: 0.5,
@@ -126,7 +126,7 @@ export class BattleTest {
             speed: 1.3,
         },
         44: {
-            prefab: "hero44",
+            prefab: "hero044",
             hp: 50,
             atk: 2,
             hitTime: 0.5,
@@ -134,7 +134,7 @@ export class BattleTest {
             speed: 1.3,
         },
         45: {
-            prefab: "hero45",
+            prefab: "hero045",
             hp: 40,
             atk: 2,
             hitTime: 0.5,
@@ -142,7 +142,7 @@ export class BattleTest {
             speed: 1.3,
         },
         41: {
-            prefab: "hero41",
+            prefab: "hero041",
             hp: 20,
             atk: 3,
             hitTime: 0.5,
@@ -150,7 +150,7 @@ export class BattleTest {
             speed: 1.3,
         },
         42: {
-            prefab: "hero42",
+            prefab: "hero042",
             hp: 15,
             atk: 3,
             hitTime: 0.5,
@@ -158,7 +158,7 @@ export class BattleTest {
             speed: 1.3,
         },
         46: {
-            prefab: "hero46",
+            prefab: "hero046",
             hp: 50,
             atk: 3,
             hitTime: 0.5,
@@ -188,7 +188,6 @@ export class BattleTest {
             id: 25,
             type: BattleHero.HeroType.HERO,
             embattleedSite: 3,
-
         },
         {
             id: 26,
@@ -302,6 +301,10 @@ export class BattleTest {
         BattleTest.buildMapInfo();
         BattleTest.buildArmyInfo();
         BattleTest.buildEnemyInfo();
+
+
+        // TODO
+        BattleTest.loadResList.push("prefabs/battle/hero/battleHero");
 
         BattleTest.isInit = true;
     }

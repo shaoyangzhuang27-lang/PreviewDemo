@@ -1,8 +1,11 @@
 import { _decorator, Component, Node, SkeletalAnimation, AnimationState, Vec3, BoxCollider, RigidBody } from 'cc';
 const { ccclass, property } = _decorator;
 
-import {BattleCtrl} from "./BattleCtrl";
-import {BattleTitleBar} from "./BattleTitleBar";
+
+import { HeroBase } from "../core/base/HeroBase";
+
+import { BattleCtrl } from "./BattleCtrl";
+import { BattleTitleBar } from "./BattleTitleBar";
 
 
 const RunSpeed = 7;
@@ -16,15 +19,6 @@ TODO
 @ccclass('BattleHero')
 export class BattleHero extends Component {
 
-    public static STATUS = {
-        IDLE: "idle",
-        RUN: "run",
-        ATTACK: "attack",
-        SKILL: "skill",
-        VICTORY: "victroy",
-        DIE: "die",
-    }
-
     public static HeroType = {
         LEADER: 1,
         HERO: 2,
@@ -33,6 +27,15 @@ export class BattleHero extends Component {
     }
 
     private _battleTitleBar: BattleTitleBar = null
+    private _heroBase: HeroBase = null
+    private _battleCtrl: BattleCtrl = null
+
+
+    private _heroSkeletalAnimation: SkeletalAnimation = null
+    private _heroBoxCollider: BoxCollider = null
+    private _heroRigidBody: RigidBody = null
+
+
 
     private _tmpPos: Vec3 = new Vec3()
     private _targetPos: Vec3 = new Vec3()
@@ -41,13 +44,12 @@ export class BattleHero extends Component {
     private _targetList: Array<BattleHero> = []
     private _target: BattleHero | null = null
 
-    private _bodyNode: any = null
+    
     private _heroInfo: any = null
 
 
     private _leaderNode: any = null
 
-    private _status: string = ""
     private _actTime: number = 0
     private _curActFunc: any = null
 
@@ -70,18 +72,13 @@ export class BattleHero extends Component {
     
 
 
-
-    private _battleCtrl: BattleCtrl = null
-
-    public static Event = {
-        DIE: "DIE",
-    }
-    private _battleEvents = {}
-    onLoad() {
-
-        this._bodyNode = this.node.getChildByName("body");
-        this.playAnim(BattleHero.STATUS.IDLE);
-
+    // public static Event = {
+    //     DIE: "DIE",
+    // }
+    // private _battleEvents = {}
+    onLoad() { 
+        this._battleTitleBar = this.node.getChildByName("titleBarNode")?.getComponent("BattleTitleBar") as BattleTitleBar;
+        
         // this.startSeekEnemy()
     }
 
@@ -112,11 +109,109 @@ export class BattleHero extends Component {
         }  
     }
 
+    initHero(battleCtrl: BattleCtrl, heroInfo: any, heroBaseNode: Node, _leaderNode?: any): void {
+        this._battleCtrl = battleCtrl;
+        this._heroInfo = heroInfo;
+        this._leaderNode = _leaderNode;
+
+
+        this.initBattleData();
+        this.initHeroBase(heroBaseNode);
+        this.initTitleBar();
+
+        this.refreshData();
+        this.refreshAttackSpeed();
+    }
+
+    initHeroBase(heroBaseNode: Node): void {
+        heroBaseNode.name = "heroBase";
+        heroBaseNode.setPosition(0, 0, 0);
+        this.node.addChild(heroBaseNode);
+    
+        this._heroBase = heroBaseNode.getComponent("HeroBase") as HeroBase;
+        this._heroSkeletalAnimation = this._heroBase.getSkeletalAnimation();
+        let heroBoxCollider = heroBaseNode.getComponent(BoxCollider) as BoxCollider;
+        this.node.addComponent(BoxCollider);
+        this._heroBoxCollider = this.node.getComponent(BoxCollider) as BoxCollider;
+        this._heroBoxCollider.center = heroBoxCollider.center;
+        this._heroBoxCollider.size = heroBoxCollider.size;
+        heroBoxCollider.destroy();
+        this._heroBoxCollider.enabled = false;
+
+        let heroRigidBody = heroBaseNode.getComponent(RigidBody) as RigidBody;
+        this.node.addComponent(RigidBody);
+        this._heroRigidBody = this.node.getComponent(RigidBody) as RigidBody;
+        this._heroRigidBody.mass = heroRigidBody.mass;
+        this._heroRigidBody.linearDamping = heroRigidBody.linearDamping;
+        this._heroRigidBody.angularDamping = heroRigidBody.angularDamping;
+        this._heroRigidBody.useGravity = heroRigidBody.useGravity;
+        this._heroRigidBody.linearFactor = heroRigidBody.linearFactor;
+        this._heroRigidBody.angularFactor = heroRigidBody.angularFactor;
+        heroRigidBody.destroy();
+        this._heroRigidBody.enabled = false;
+
+        this._heroBase.setAttackEventCallBack(() => {
+            this.onAttack();
+        })
+    }
+
+    initBattleData(): void {
+        this.embattleedSite = this._heroInfo.embattleedSite;
+        this.atk = this._heroInfo.atk;
+        this.def = 0;
+        this.rng = 0;
+        this.spd = this._heroInfo.speed;
+        this.skillSpd = 0;
+        this.crt = 0;
+        this.crtDmg = 0;
+        this.hitRat = 0;
+        this.evd = 0;
+        this.defBreak = 0;
+    }
+
+    refreshData(): void {
+        this._maxHp = this._heroInfo.hp;
+        this._maxPow = 100;
+        this._hp = this._maxHp;
+        this._pow = 0;
+
+        this._battleTitleBar.setHpPercent(this._hp / this._maxHp);
+        this._battleTitleBar.setPowPercent(this._pow / this._maxPow);
+    }
+
+    refreshAttackSpeed(): void {
+        let a: AnimationState = this._heroSkeletalAnimation.getState("attack");
+        a.speed = a.length / this.spd
+    }
+
+    revive(): void {
+        this.refreshData();
+        this._heroBase.playIdle();
+    }
+
+    isEnemy(): boolean {
+        return this._heroInfo.type != BattleHero.HeroType.LEADER && this._heroInfo.type != BattleHero.HeroType.HERO
+    }
+
+    initTitleBar(): void {
+           
+        this._battleTitleBar.createTitleBar(this._battleCtrl.camera, this._battleCtrl.canvas, !this.isEnemy());
+        
+        this._battleTitleBar.setHpPercent(1);
+        this._battleTitleBar.setPowPercent(0);
+    }
+
+    setVisible(b: boolean): void {
+        this.node.active = b;
+        this._battleTitleBar.setVisible(b);
+    }
+
     startSeekEnemy(): void {
-        this.playAnim(BattleHero.STATUS.RUN);
-        // this.node.getComponent(RigidBody)?.wakeUp();
-        this.node.getComponent(BoxCollider).enabled = true;
-        this.node.getComponent(RigidBody).enabled = true;
+        this._heroBase.playRun();
+        this._heroBoxCollider.enabled = true;
+        this._heroRigidBody.enabled = true;
+        
+
         this._battleTitleBar.setVisible(false);
         this.node.setRotationFromEuler(0, 0, 0)
         this.seekEnemy();
@@ -124,7 +219,8 @@ export class BattleHero extends Component {
     }
 
     seekEnemy(): void {
-        this.node.getComponent(RigidBody)?.clearState();
+        this._heroRigidBody.clearState();
+
         this._actTime = 1 + Math.random()*2;
 
         if (this._leaderNode) {
@@ -180,12 +276,12 @@ export class BattleHero extends Component {
 
     startEmbattle(embattlePos: Vec3, actTime: number): void {
         this._actTime = actTime;
-        this.playAnim(BattleHero.STATUS.RUN);
+        this._heroBase.playRun();
         this.embattle(embattlePos);
         this._curActFunc = this.doEmbattle;
-        this.node.getComponent(BoxCollider).enabled = false;
-        this.node.getComponent(RigidBody).enabled = false;
-        this.node.getComponent(RigidBody).clearState();
+        this._heroBoxCollider.enabled = false;
+        this._heroRigidBody.enabled = false;
+        this._heroRigidBody.clearState();
     }
 
     embattle(embattlePos: Vec3): void {
@@ -201,10 +297,6 @@ export class BattleHero extends Component {
         this._actTime -= dt;
         if (this._actTime <= 0) {
             this._curActFunc = null; // TODO
-            // this.node.getComponent(BoxCollider).active = true;
-            // this.node.getComponent(RigidBody).active = true;
-            // this.node.getComponent(RigidBody).clearState();
-            // this.playAnim(BattleHero.STATUS.IDLE);
             this.node.setPosition(this._targetPos);
         } else {
             this._tmpPos.x += dt * this._dirVector.x
@@ -215,10 +307,9 @@ export class BattleHero extends Component {
 
     startRunToBattle(z: number, actTime: number): void {
         this._battleTitleBar.setVisible(true);
-        this.node.getComponent(RigidBody).clearState();
+        // this._heroRigidBody.clearState();
         // this.node.setPosition(this._targetPos);
-
-        this.playAnim(BattleHero.STATUS.RUN);
+        this._heroBase.playRun();
         this._actTime = actTime;
         this.runToBattle(z);
         this._curActFunc = this.doRunToBattle;
@@ -236,13 +327,11 @@ export class BattleHero extends Component {
         this._actTime -= dt;
         if (this._actTime <= 0) {
             this._curActFunc = null; // TODO
-            // this.node.getComponent(BoxCollider).active = true;
-            // this.node.getComponent(RigidBody).active = true;
-            this.node.getComponent(RigidBody)?.clearState();
-            // this.playAnim(BattleHero.STATUS.IDLE);
+
+            // this._heroRigidBody.clearState();
             this.node.setPosition(this._targetPos);
 
-            this.playAnim(BattleHero.STATUS.ATTACK)
+            this._heroBase.playAttack();
         }  else {
             this._tmpPos.z += dt * this._dirVector.z
             this.node.setPosition(this._tmpPos);
@@ -290,13 +379,13 @@ export class BattleHero extends Component {
             }
                 
         } else {
-            this.playAnim(BattleHero.STATUS.IDLE);
+            this._heroBase.playIdle();
         }
 
     }
 
     startRunTo(): void {
-        this.playAnim(BattleHero.STATUS.RUN);
+        this._heroBase.playRun();
         this._curActFunc = this.doRunTo;
         this.runTo();
     }
@@ -339,12 +428,12 @@ export class BattleHero extends Component {
 
         // this._curActFunc = this.doAttack;
         // this._actTime = this._heroInfo.hitTime;
-        this.playAnim(BattleHero.STATUS.ATTACK);
+        this._heroBase.playAttack();
         this.node.lookAt(this._target.node.position);
-        this._bodyNode.getComponent(SkeletalAnimation)?.on(SkeletalAnimation.EventType.LASTFRAME, (a: any, b: any, c: any) => {
+        this._heroSkeletalAnimation.on(SkeletalAnimation.EventType.LASTFRAME, (a: any, b: any, c: any) => {
             if (this._target) {
                 if (this._target.isDie()) {
-                    this._bodyNode.getComponent(SkeletalAnimation)?.off(SkeletalAnimation.EventType.LASTFRAME)
+                    this._heroSkeletalAnimation.off(SkeletalAnimation.EventType.LASTFRAME)
                     this.seekAttackTarget();
                 } else {
                     // 开始发动攻击时计算速度 TODO 有buffer刷新时候再计算
@@ -354,7 +443,7 @@ export class BattleHero extends Component {
                     // this._actTime = this._heroInfo.hitTime;
                 }
             } else {
-                this._bodyNode.getComponent(SkeletalAnimation)?.off(SkeletalAnimation.EventType.LASTFRAME)
+                this._heroSkeletalAnimation.off(SkeletalAnimation.EventType.LASTFRAME)
             }
             
             // console.log(a, b, c)
@@ -410,17 +499,17 @@ export class BattleHero extends Component {
     }
 
     die(): void {
-        if (this._status == BattleHero.STATUS.DIE) {
+        if (this._heroBase.isDie()) {
             return;
         }
 
-        if (this._status == BattleHero.STATUS.ATTACK) {
-            this._bodyNode.getComponent(SkeletalAnimation)?.off(SkeletalAnimation.EventType.LASTFRAME)
+        if (this._heroBase.isAttack()) {
+            this._heroSkeletalAnimation.off(SkeletalAnimation.EventType.LASTFRAME)
         }
 
         this._curActFunc = null;
         this._battleTitleBar.setVisible(false);
-        this.playAnim(BattleHero.STATUS.DIE);
+        this._heroBase.playDie();
         this._battleCtrl.onHeroDie(this);
     }
 
@@ -437,96 +526,7 @@ export class BattleHero extends Component {
 
     }
 
-    initHero(battleCtrl: BattleCtrl, heroInfo: any, _leaderNode?: any): void {
-        this._battleCtrl = battleCtrl;
-        this._heroInfo = heroInfo;
-        this._leaderNode = _leaderNode;
-
-        // this._bodyNode.getComponent(SkeletalAnimation)
-
-        this.initBattleData();
-        
-
-        // let a: SkeletalAnimation = this._bodyNode.getComponent(SkeletalAnimation) as SkeletalAnimation
-        // a.hasEventListener
-        // let b: AnimationState = a.getState("attack");
-        // b.length
-        // console.log(b.length);
-        
-        this.initTitleBar();
-
-        this.refreshData();
-        this.refreshAttackSpeed();
-    }
-
-    initBattleData(): void {
-        this.embattleedSite = this._heroInfo.embattleedSite;
-        this.atk = this._heroInfo.atk;
-        this.def = 0;
-        this.rng = 0;
-        this.spd = this._heroInfo.speed;
-        this.skillSpd = 0;
-        this.crt = 0;
-        this.crtDmg = 0;
-        this.hitRat = 0;
-        this.evd = 0;
-        this.defBreak = 0;
-    }
-
-    refreshData(): void {
-        this._maxHp = this._heroInfo.hp;
-        this._maxPow = 100;
-        this._hp = this._maxHp;
-        this._pow = 0;
-
-        this._battleTitleBar.setHpPercent(this._hp / this._maxHp);
-        this._battleTitleBar.setPowPercent(this._pow / this._maxPow);
-    }
-
-    refreshAttackSpeed(): void {
-        let s: SkeletalAnimation = this._bodyNode.getComponent(SkeletalAnimation) as SkeletalAnimation
-        let a: AnimationState = s.getState("attack");
-        a.speed = a.length / this.spd
-    }
-
-    revive(): void {
-        this.refreshData();
-        this.playAnim(BattleHero.STATUS.IDLE);
-    }
-
-    isEnemy(): boolean {
-        return this._heroInfo.type != BattleHero.HeroType.LEADER && this._heroInfo.type != BattleHero.HeroType.HERO
-    }
-
-    initTitleBar(): void {
-        this._battleTitleBar = this.node.getChildByName("titleBarNode")?.getComponent("BattleTitleBar") as BattleTitleBar;
-
-        this._battleTitleBar.createTitleBar(this._battleCtrl.camera, this._battleCtrl.canvas, !this.isEnemy());
-        
-        this._battleTitleBar.setHpPercent(1);
-        this._battleTitleBar.setPowPercent(0);
-    }
-
-    setVisible(b: boolean): void {
-        this.node.active = b;
-        this._battleTitleBar.setVisible(b);
-    }
-
-    playAnim(status: string): void {
-        if (this._status == status) {
-            return;
-        }
-
-        this._status = status;
-        this._bodyNode.getComponent(SkeletalAnimation).play(status);
-
-        // let a = this._bodyNode.getComponent(SkeletalAnimation) as SkeletalAnimation;
-        // let b = a.clips[0]
-    
-        // a.getState(b.name).speed = 1.5;
-        // console.log(b, b?.name)
-    }
-
+   
 
     addEvent(): void {
 
