@@ -66,7 +66,7 @@ function deepClone(data)
 export class BattleTest {
     public static heroTestInfo = {
         0: {
-            prefab: "hero00",
+            prefab: "leader00",
             hp: 100,
             atk: 5,
             hitTime: 0.6,
@@ -188,7 +188,6 @@ export class BattleTest {
             id: 25,
             type: BattleHero.HeroType.HERO,
             embattleedSite: 3,
-
         },
         {
             id: 26,
@@ -302,6 +301,10 @@ export class BattleTest {
         BattleTest.buildMapInfo();
         BattleTest.buildArmyInfo();
         BattleTest.buildEnemyInfo();
+
+
+        // TODO
+        BattleTest.loadResList.push("prefabs/battle/hero/battleHero");
 
         BattleTest.isInit = true;
     }

@@ -134,24 +134,27 @@ export class BattleCtrl extends Component {
         this._nextGroundIdx = 2;
     }
 
+    createHero(heroInfo: any, leaderNode?: Node): BattleHero {
+        let battleHeroNode = instantiate(BattleResMgr.getInstance().getRes("prefabs/battle/hero/battleHero"));
+        let battleHero: BattleHero = battleHeroNode.getComponent("BattleHero") as BattleHero;
+        this.node.addChild(battleHeroNode);
+    
+        battleHero.initHero(this, heroInfo, instantiate(BattleResMgr.getInstance().getRes(heroInfo.prefab)), leaderNode);    
+        return battleHero;
+    }
+
     initHeros(): void {
+        // TODO
         let armyInfo = BattleTest.getArmyInfo();
-        this._leaderNode = instantiate(BattleResMgr.getInstance().getRes(armyInfo[0].heroInfo.prefab));
-        // this.camera.removeFromParent();
-        // this._leaderNode.addChild(this.camera);
-        this.node.addChild(this._leaderNode);
-        let hero: BattleHero = this._leaderNode.getComponent("BattleHero") as BattleHero;
-        hero.initHero(this, armyInfo[0].heroInfo);
-        // this._army[armyInfo[0].embattleedSite] = hero
-        this._army.push(hero)
+        
+
+        // 创建主角
+        let hero: BattleHero = this.createHero(armyInfo[0].heroInfo);
+        this._leaderNode = hero.node;
+        this._army.push(hero);
 
         for (let i = 1; i < armyInfo.length; i++) {
-            let heroNode = instantiate(BattleResMgr.getInstance().getRes(armyInfo[i].heroInfo.prefab));
-            this.node.addChild(heroNode);
-            hero = heroNode.getComponent("BattleHero"); 
-            hero.initHero(this, armyInfo[i].heroInfo, this._leaderNode);
-            // this._army[armyInfo[i].embattleedSite] = hero;
-            this._army.push(hero)
+            this._army.push(this.createHero(armyInfo[i].heroInfo, this._leaderNode));
         }
 
         for (let i = 0; i < this._army.length; i++) {
@@ -159,19 +162,16 @@ export class BattleCtrl extends Component {
                 , 0 
                 , this._battleGrounds[this._nextGroundIdx - 1].position.z - 10 + BattleCtrl.EmbattleCfg[this._army[i].embattleedSite][1]))
 
-            // console.log(this._army[i].position)
+            console.log(this._army[i].node.position)
         }
 
         this._enemyInfo = BattleTest.getEnemyInfo();
         // 怪物提前生成，保证游戏顺畅
         for (let i = 0; i < this._enemyInfo.length; i++) {
-            let heroNode = instantiate(BattleResMgr.getInstance().getRes(this._enemyInfo[i].heroInfo.prefab));
-            this.node.addChild(heroNode);
-            heroNode.setRotationFromEuler(0, 180, 0);
-            hero = heroNode.getComponent("BattleHero"); 
-            hero.initHero(this, this._enemyInfo[i].heroInfo);
+            hero = this.createHero(this._enemyInfo[i].heroInfo);
+            // hero.node.setRotationFromEuler(0, 180, 0);
             this._enemy[i] = hero;
-            heroNode.setPosition(0, 0, 0);
+            // hero.node.setPosition(0, 0, -320);
             hero.setVisible(false);
         }
     }
@@ -248,7 +248,7 @@ export class BattleCtrl extends Component {
         }
 
         for(let i = 0; i < this._enemy.length; i++) {
-            // this._enemy[i].startBattle(this._army);
+            this._enemy[i].startBattle(this._army);
         }
     }
 

@@ -21,25 +21,22 @@
       },
       {
         "__id__": 103
-      },
-      {
-        "__id__": 107
       }
     ],
     "_active": true,
     "_components": [
       {
+        "__id__": 110
+      },
+      {
+        "__id__": 112
+      },
+      {
         "__id__": 114
-      },
-      {
-        "__id__": 116
-      },
-      {
-        "__id__": 118
       }
     ],
     "_prefab": {
-      "__id__": 120
+      "__id__": 116
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2691,7 +2688,7 @@
     }
   },
   {
-    "__type__": "5cc54xkwtdK1YRvsoy3h32n",
+    "__type__": "8eaa6andAhKi7RJ93E/PTor",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -2705,7 +2702,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "a3llxAS9FA4ovqMlsBQr1o"
+    "fileId": "d2LnXMKMxEu6PibEggJsLK"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2719,84 +2716,6 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "titleBarNode",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
-    },
-    "_children": [],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 104
-      }
-    ],
-    "_prefab": {
-      "__id__": 106
-    },
-    "_lpos": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 2,
-      "z": 0
-    },
-    "_lrot": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_lscale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_layer": 1073741824,
-    "_euler": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "d260fsIjiJAz4Q2L/wRyGl2",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 103
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 105
-    },
-    "TitleBarPrefab": {
-      "__uuid__": "756b7699-6314-47e4-8700-ec04397a644f"
-    },
-    "FlyWordPrefab": {
-      "__uuid__": "5d5ba925-bc7c-4c07-a600-acb122934cc0"
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "be2fgCo0NCkqgM5QYB7rg9"
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__id__": 0
-    },
-    "fileId": "bciqdHj0NMMKVxBWkwBVvr"
-  },
-  {
-    "__type__": "cc.Node",
     "_name": "sd",
     "_objFlags": 0,
     "_parent": {
@@ -2804,13 +2723,13 @@
     },
     "_children": [
       {
-        "__id__": 108
+        "__id__": 104
       }
     ],
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 113
+      "__id__": 109
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2845,17 +2764,17 @@
     "_name": "Cylinder001",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 107
+      "__id__": 103
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 109
+        "__id__": 105
       }
     ],
     "_prefab": {
-      "__id__": 112
+      "__id__": 108
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2890,11 +2809,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 108
+      "__id__": 104
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 110
+      "__id__": 106
     },
     "_materials": [
       {
@@ -2903,7 +2822,7 @@
     ],
     "_visFlags": 0,
     "lightmapSettings": {
-      "__id__": 111
+      "__id__": 107
     },
     "_mesh": {
       "__uuid__": "d524359b-0533-49d9-ba46-7c35af86572b@c6160"
@@ -2954,7 +2873,7 @@
     "fileId": "52DtltwelCgrZL20zxZkJf"
   },
   {
-    "__type__": "0d241kYD31Oc5QN7l8dp/lq",
+    "__type__": "3f546iXeG1FXrvFzG+NZhst",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -2962,13 +2881,13 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 115
+      "__id__": 111
     },
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "b1U4qAxkZNqoEnC3wjaVb9"
+    "fileId": "206GG3oKZPhJ4gRPjG7hJf"
   },
   {
     "__type__": "cc.BoxCollider",
@@ -2979,7 +2898,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 117
+      "__id__": 113
     },
     "_material": null,
     "_isTrigger": false,
@@ -3010,7 +2929,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 119
+      "__id__": 115
     },
     "_group": 1,
     "_type": 1,
