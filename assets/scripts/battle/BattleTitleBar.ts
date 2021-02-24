@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, instantiate, Prefab, Vec3, Camera, ProgressBar, Color } from 'cc';
 const { ccclass, property } = _decorator;
 
+import { FlyWords } from "./FlyWords";
 
 
 @ccclass('BattleTitleBar')
@@ -116,9 +117,8 @@ export class BattleTitleBar extends Component {
             str = "+" + str;
             color = Color.GREEN;
         }
-        wordsLabel.getComponent("FlyWords").startFly(str, color);
         this._titleBar.getChildByName("flyWordNode").addChild(wordsLabel);
-        
+        (wordsLabel.getComponent("FlyWords") as FlyWords).startFly(str, color);    
     }
 
 

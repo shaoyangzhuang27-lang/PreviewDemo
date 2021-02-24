@@ -162,7 +162,7 @@ export class BattleCtrl extends Component {
                 , 0 
                 , this._battleGrounds[this._nextGroundIdx - 1].position.z - 10 + BattleCtrl.EmbattleCfg[this._army[i].embattleedSite][1]))
 
-            console.log(this._army[i].node.position)
+            // console.log(this._army[i].node.position)
         }
 
         this._enemyInfo = BattleTest.getEnemyInfo();

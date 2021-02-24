@@ -1,9 +1,5 @@
+import { _decorator, Component } from 'cc';
 
-
-import { _decorator, Component, Node } from 'cc';
-
-
-import { BattleHero } from "./BattleHero";
 const { ccclass, property } = _decorator;
 
 @ccclass('HeroAnimationEvent')

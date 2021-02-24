@@ -1,6 +1,6 @@
 
 import { _decorator, Component, Vec2, Vec3, Quat, systemEvent, Touch, EventTouch, SystemEventType } from 'cc';
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 
 // let v2_1 = new Vec2();
 let v2_2 = new Vec2();

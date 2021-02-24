@@ -24,11 +24,10 @@ export class HeroBase extends Component {
 
     onLoad() {
 
-        this._bodyNode = this.node.getChildByName("body");
-        this._skeletalAnimation = this._bodyNode.getComponent(SkeletalAnimation);
-        this.node.getComponent(BoxCollider).enabled = false;
-        this.node.getComponent(RigidBody).enabled = false;
-        // this.node.getComponent(RigidBody).clearState();
+        this._bodyNode = this.node.getChildByName("body") as Node;
+        this._skeletalAnimation = this._bodyNode.getComponent(SkeletalAnimation) as SkeletalAnimation;
+        (this.node.getComponent(BoxCollider) as BoxCollider).enabled = false;
+        (this.node.getComponent(RigidBody) as RigidBody).enabled = false;
 
         this.playIdle();
         this.stopAnim();
