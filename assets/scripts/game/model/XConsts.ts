@@ -1,3 +1,4 @@
+import { Color } from 'cc';
 export class XConsts{
     public static  KLanguegeTypeUI:string = "UI";
     public static  KLanguegeTypeError:string = "ERR";
@@ -42,35 +43,35 @@ export class XConsts{
     public static  KAtlasGuildIcon:string = "Atlas_GuildIcon";   
 
     //上帝技能
-    public static KGodSkills:number[] = [200,201,202,203,204,205];
+    public static KGodSkills:number[] = new Array<number> (200,201,202,203,204,205);
     //上帝天赋
-    public static KGodTalents:number[] = [200,201,202,203,204,205];
+    public static KGodTalents:number[] = new Array<number> (200,201,202,203,204,205);
     public static KGodSkillNormal:number = 101;
-    public static GodSkillParticle:string[] = ["上帝技能粒子/闪电球", "上帝技能粒子/冰球", "上帝技能粒子/火球", "上帝技能粒子/毒球", "上帝技能粒子/光球", "上帝技能粒子/暗球"];
-    public static GodSkillUltimateParticle:string[] = ["上帝技能粒子/闪电大招", "上帝技能粒子/水大招", "上帝技能粒子/火大招", "上帝技能粒子/毒大招", "上帝技能粒子/光大招", "上帝技能粒子/暗大招"];
-    public static GodSkillIcon:string[] = ["技能按钮_闪电", "技能按钮_水球", "技能按钮_火球", "技能按钮_毒球", "技能按钮_光球", "技能按钮_暗球" ];
-    public static GodSkillSlider:string[] = ["技能按钮_闪电充满", "技能按钮_水球充满", "技能按钮_火球充满", "技能按钮_毒球充满", "技能按钮_光球充满", "技能按钮_暗球充满"] ;
-    public static GodSkillFull:string[] = ["技能按钮_闪电充满发光", "技能按钮_水球充满发光", "技能按钮_火球充满发光", "技能按钮_毒球充满发光", "技能按钮_光球充满发光", "技能按钮_暗球充满发光"] ;
+    public static GodSkillParticle:string[] = new Array<string> ("上帝技能粒子/闪电球", "上帝技能粒子/冰球", "上帝技能粒子/火球", "上帝技能粒子/毒球", "上帝技能粒子/光球", "上帝技能粒子/暗球");
+    public static GodSkillUltimateParticle:string[] = new Array<string> ("上帝技能粒子/闪电大招", "上帝技能粒子/水大招", "上帝技能粒子/火大招", "上帝技能粒子/毒大招", "上帝技能粒子/光大招", "上帝技能粒子/暗大招");
+    public static GodSkillIcon:string[] = new Array<string> ("技能按钮_闪电", "技能按钮_水球", "技能按钮_火球", "技能按钮_毒球", "技能按钮_光球", "技能按钮_暗球" );
+    public static GodSkillSlider:string[] = new Array<string> ("技能按钮_闪电充满", "技能按钮_水球充满", "技能按钮_火球充满", "技能按钮_毒球充满", "技能按钮_光球充满", "技能按钮_暗球充满");
+    public static GodSkillFull:string[] = new Array<string> ("技能按钮_闪电充满发光", "技能按钮_水球充满发光", "技能按钮_火球充满发光", "技能按钮_毒球充满发光", "技能按钮_光球充满发光", "技能按钮_暗球充满发光");
 
     //常用颜色定义
-    // public static KColorGreen:Color =  Color(61 / 255, 229 / 255, 144 / 255);
-    // public static KColorRed:Color = Color(221 / 255, 27 / 255, 27 / 255);
-    // public static KColorGray:Color = Color(160 / 255, 160 / 255, 160 / 255);
-    // //public static Color KColorGray = new Color(200 / 255, 222 / 255, 255 / 255);
-    // public static KColorBlack:Color = Color(71 / 255, 71 / 255, 73 / 255);
-    // public static KColorGolden:Color = Color(234 / 255, 185 / 255, 44 / 255);
-    // public static KColorOrange:Color = Color(234 / 255, 90 / 255, 12 / 255);
-    // public static KColorCollegeLevel:Color = Color(139 / 255,186/255,252/255);
+    public static KColorGreen:Color =  new Color(61 / 255, 229 / 255, 144 / 255);
+    public static KColorRed:Color = new Color(221 / 255, 27 / 255, 27 / 255);
+    public static KColorGray:Color = new Color(160 / 255, 160 / 255, 160 / 255);
+    //public static Color KColorGray = new Color(200 / 255, 222 / 255, 255 / 255);
+    public static KColorBlack:Color = new Color(71 / 255, 71 / 255, 73 / 255);
+    public static KColorGolden:Color = new Color(234 / 255, 185 / 255, 44 / 255);
+    public static KColorOrange:Color = new Color(234 / 255, 90 / 255, 12 / 255);
+    public static KColorCollegeLevel:Color = new Color(139 / 255,186/255,252/255);
 
-    public static KCampSkillAndTalentsName:string[] = ["UI_None","UI_CampSkillWater","UI_CampSkillFire","UI_CampSkillWood","UI_CampSkillLight","UI_CampSkillDark"];
-    public static KCampSkillAndTalentsImgName:string[] = ["无", "光环_水球技能", "光环_火球技能", "光环_毒球技能", "光环_光球技能", "光环_暗球技能"];
-    public static KClassesName:string[] = [ "UI_None", "UI_Classes1", "UI_Classes2", "UI_Classes3", "UI_Classes4", "UI_Classes5", "UI_Classes6" ];
-    public static KCampName:string[] = [ "UI_None", "UI_CampType1", "UI_CampType2", "UI_CampType3", "UI_CampType4", "UI_CampType5", "UI_CampType6" ];
-    public static KQualityName:string[] =[ "NULL", "UI_Quality1", "UI_Quality2", "UI_Quality3", "UI_Quality4", "UI_Quality5", "UI_Quality6" ];
-    public static KEquipLocation:string[] = [ "None", "UI_Equip_Weapon", "UI_Equip_Head", "UI_Equip_Chest", "UI_Equip_Trinket" ];
-    public static KPropertyName:string[] = [ "None", "UI_Property_HP", "UI_Property_ATK", "UI_Property_DEF", "UI_Property_Speed", "UI_Property_Crit", "UI_Property_CritDamage",
-        "UI_Property_Hit", "UI_Property_Dodge", "UI_Property_DEFBreak", "UI_Property_DamageReduce", "UI_Property_SkillEffect", "UI_Property_CampDamage"];
-    public static KArmorPropertyIconName:string[] = [ "主角武器", "主角盾牌", "主角头盔", "主角铠甲", "主角护手", "主角战靴"];
+    public static KCampSkillAndTalentsName:string[] = new Array<string> ("UI_None","UI_CampSkillWater","UI_CampSkillFire","UI_CampSkillWood","UI_CampSkillLight","UI_CampSkillDark");
+    public static KCampSkillAndTalentsImgName:string[] = new Array<string> ("无", "光环_水球技能", "光环_火球技能", "光环_毒球技能", "光环_光球技能", "光环_暗球技能");
+    public static KClassesName:string[] = new Array<string> ( "UI_None", "UI_Classes1", "UI_Classes2", "UI_Classes3", "UI_Classes4", "UI_Classes5", "UI_Classes6" );
+    public static KCampName:string[] = new Array<string> ( "UI_None", "UI_CampType1", "UI_CampType2", "UI_CampType3", "UI_CampType4", "UI_CampType5", "UI_CampType6" );
+    public static KQualityName:string[] = new Array<string> ( "NULL", "UI_Quality1", "UI_Quality2", "UI_Quality3", "UI_Quality4", "UI_Quality5", "UI_Quality6" );
+    public static KEquipLocation:string[] = new Array<string> ( "None", "UI_Equip_Weapon", "UI_Equip_Head", "UI_Equip_Chest", "UI_Equip_Trinket" );
+    public static KPropertyName:string[] = new Array<string> ( "None", "UI_Property_HP", "UI_Property_ATK", "UI_Property_DEF", "UI_Property_Speed", "UI_Property_Crit", "UI_Property_CritDamage",
+        "UI_Property_Hit", "UI_Property_Dodge", "UI_Property_DEFBreak", "UI_Property_DamageReduce", "UI_Property_SkillEffect", "UI_Property_CampDamage");
+    public static KArmorPropertyIconName:string[] = new Array<string> ( "主角武器", "主角盾牌", "主角头盔", "主角铠甲", "主角护手", "主角战靴");
     public static GetArmorPropertyIconName(quality:number, index:number) {
         let i:number = quality / 4 + 1;
         if (i > 4)
@@ -79,27 +80,28 @@ export class XConsts{
     }
 
     
-    // public static Color[] KQualityColor = new Color[7] {
-    //     Color.white, 
-    //     new Color(187.0f / 255.0f, 187.0f / 255.0f, 187.0f / 255.0f),
-    //     new Color(120.0f / 255.0f, 247.0f / 255.0f, 103.0f / 255.0f), 
-    //     new Color(103.0f / 255.0f, 195.0f / 255.0f, 247.0f / 255.0f),
-    //     new Color(247.0f / 255.0f, 103.0f / 255.0f, 234.0f / 255.0f),
-    //     new Color(254.0f / 255.0f, 216.0f / 255.0f, 87.0f / 255.0f),
-    //     new Color(249.0f / 255.0f, 206.0f / 255.0f, 120.0f / 255.0f)};
-    public static KHeroDetailTierSpriteName:string[] = [ "英雄详情_标题背景品质灰", "英雄详情_标题背景品质绿","英雄详情_标题背景品质蓝", "英雄详情_标题背景品质紫", "英雄详情_标题背景品质橙", "英雄详情_标题背景品质红" ];
-    public static KHeroDetailCampSpriteName:string[] = [ "英雄详情_背景", "英雄详情_背景图4", "英雄详情_背景图5", "英雄详情_背景图1", "英雄详情_背景图2", "英雄详情_背景图3" ];
-    public static KCampSpriteName:string[] = [ "无", "水属性", "火属性", "木属性", "光属性", "暗属性" ];
-    public static KCampFrameSpriteName:string[] = [ "无", "光环_水框", "光环_火框", "光环_木框", "光环_光框", "光环_暗框" ];
-    public static KCampLVSpriteName:string[] = [ "光环_骑士", "光环_水", "光环_火", "光环_木", "光环_光", "光环_暗" ];
-    public static KCampBGSpriteName:string[] = [ "无", "光环_水", "光环_火", "光环_木", "光环_光", "光环_暗" ];
-    public static KClassesSpriteName:string[] = [ "无", "无", "战士图标", "刺客图标", "法师图标", "游侠图标", "牧师图标" ];
-    public static KClassesCombatSpriteName:string[] = [ "无", "无", "战斗_职业战士", "战斗_职业刺客", "战斗_职业法师", "战斗_职业游侠", "战斗_职业牧师" ];
-    public static KHeroQualityBgSpriteName:string[] = [ "小卡框_品质灰", "小卡框_品质绿", "小卡框_品质蓝", "小卡框_品质紫", "小卡框_品质橙", "小卡框_品质红", "小卡框_品质金"];
-    public static KItemHeroBookBGSpriteName:string[] = [ "无", "图鉴_新背景4", "图鉴_新背景5", "图鉴_新背景1", "图鉴_新背景2", "图鉴_新背景3"];
-    public static KHeroUpBgSpriteName:string[] = [ "战斗_头像灰上框", "战斗_头像绿上框", "战斗_头像蓝上框", "战斗_头像紫上框", "战斗_头像橙上框", "战斗_头像红上框", "战斗_头像金上框" ];
-    public static KHeroDownBgSpriteName:string[] = [ "战斗_头像灰下框", "战斗_头像绿下框", "战斗_头像蓝下框", "战斗_头像紫下框", "战斗_头像橙下框", "战斗_头像红下框", "战斗_头像金下框" ];
-    public static KMythicalgSpriteName:string[] = [ "秘闻副本_冰冷矿坑", "秘闻副本_灼热之地", "秘闻副本_幽暗森林", "秘闻副本_永恒圣地", "秘闻副本_灵魂熔炉", "秘闻副本_潮汐王座", "秘闻副本_燃烧峡谷", "秘闻副本_沉没沼泽", "秘闻副本_金色平原", "秘闻副本_暗影迷宫", "秘闻副本_岩石深渊", "秘闻副本_北风冻原", "秘闻副本_瘟疫之地", "秘闻副本_风暴旋涡", "秘闻副本_堕落神殿", "秘闻副本_时光回廊" ];
+    public static  KQualityColor:Color[] = new Array<Color> (
+        Color.WHITE, 
+        new Color(187.0 / 255.0, 187.0 / 255.0, 187.0 / 255.0),
+        new Color(120.0 / 255.0, 247.0 / 255.0, 103.0 / 255.0), 
+        new Color(103.0 / 255.0, 195.0 / 255.0, 247.0 / 255.0),
+        new Color(247.0 / 255.0, 103.0 / 255.0, 234.0 / 255.0),
+        new Color(254.0 / 255.0, 216.0 / 255.0, 87.0 / 255.0),
+        new Color(249.0 / 255.0, 206.0 / 255.0, 120.0 / 255.0));
+
+    public static KHeroDetailTierSpriteName:string[] = new Array<string> ( "英雄详情_标题背景品质灰", "英雄详情_标题背景品质绿","英雄详情_标题背景品质蓝", "英雄详情_标题背景品质紫", "英雄详情_标题背景品质橙", "英雄详情_标题背景品质红" );
+    public static KHeroDetailCampSpriteName:string[] = new Array<string> ( "英雄详情_背景", "英雄详情_背景图4", "英雄详情_背景图5", "英雄详情_背景图1", "英雄详情_背景图2", "英雄详情_背景图3" );
+    public static KCampSpriteName:string[] = new Array<string> ( "无", "水属性", "火属性", "木属性", "光属性", "暗属性" );
+    public static KCampFrameSpriteName:string[] = new Array<string> ( "无", "光环_水框", "光环_火框", "光环_木框", "光环_光框", "光环_暗框" );
+    public static KCampLVSpriteName:string[] = new Array<string> ( "光环_骑士", "光环_水", "光环_火", "光环_木", "光环_光", "光环_暗" );
+    public static KCampBGSpriteName:string[] = new Array<string> ( "无", "光环_水", "光环_火", "光环_木", "光环_光", "光环_暗" );
+    public static KClassesSpriteName:string[] = new Array<string> ( "无", "无", "战士图标", "刺客图标", "法师图标", "游侠图标", "牧师图标" );
+    public static KClassesCombatSpriteName:string[] = new Array<string> ( "无", "无", "战斗_职业战士", "战斗_职业刺客", "战斗_职业法师", "战斗_职业游侠", "战斗_职业牧师" );
+    public static KHeroQualityBgSpriteName:string[] = new Array<string> ( "小卡框_品质灰", "小卡框_品质绿", "小卡框_品质蓝", "小卡框_品质紫", "小卡框_品质橙", "小卡框_品质红", "小卡框_品质金");
+    public static KItemHeroBookBGSpriteName:string[] = new Array<string> ( "无", "图鉴_新背景4", "图鉴_新背景5", "图鉴_新背景1", "图鉴_新背景2", "图鉴_新背景3");
+    public static KHeroUpBgSpriteName:string[] = new Array<string> ( "战斗_头像灰上框", "战斗_头像绿上框", "战斗_头像蓝上框", "战斗_头像紫上框", "战斗_头像橙上框", "战斗_头像红上框", "战斗_头像金上框" );
+    public static KHeroDownBgSpriteName:string[] = new Array<string> ( "战斗_头像灰下框", "战斗_头像绿下框", "战斗_头像蓝下框", "战斗_头像紫下框", "战斗_头像橙下框", "战斗_头像红下框", "战斗_头像金下框" );
+    public static KMythicalgSpriteName:string[] = new Array<string> ( "秘闻副本_冰冷矿坑", "秘闻副本_灼热之地", "秘闻副本_幽暗森林", "秘闻副本_永恒圣地", "秘闻副本_灵魂熔炉", "秘闻副本_潮汐王座", "秘闻副本_燃烧峡谷", "秘闻副本_沉没沼泽", "秘闻副本_金色平原", "秘闻副本_暗影迷宫", "秘闻副本_岩石深渊", "秘闻副本_北风冻原", "秘闻副本_瘟疫之地", "秘闻副本_风暴旋涡", "秘闻副本_堕落神殿", "秘闻副本_时光回廊" );
     public static GetHeroBgByStar(star:number)    
     {
         let idx:number = 0;
@@ -129,15 +131,15 @@ export class XConsts{
             idx = 6;
         return XConsts.KHeroQualityBgSpriteName[idx];
     }
-    public static KHeroQualityBgSpriteNameForHeroBook:string[] = [ "无","图鉴_品质灰", "图鉴_品质绿", "图鉴_品质蓝", "图鉴_品质紫", "图鉴_品质红","图鉴_品质金"];
-    public static KQualityBgSpriteName:string[] = [ "无", "装备底板_灰", "装备底板_绿", "装备底板_蓝", "装备底板_紫", "装备底板_橙", "装备底板_金" ];
-    public static KequipBgSpriteName:string[] = [ "无", "装备底板_灰", "装备底板_绿", "装备底板_蓝", "装备底板_紫", "装备底板_橙", "装备底板_金" ];
-    public static KVCampBgSpriteName:string[] = [ "人物底板_灰", "人物底板_水", "人物底板_火", "人物底板_木", "人物底板_光", "人物底板_暗" ];
-    public static KVCampCombatBgSpriteName:string[] =[ "战斗_骑士阵营背景后", "战斗_水阵营背景后", "战斗_火阵营背景后", "战斗_木阵营背景后", "战斗_光阵营背景后", "战斗_暗阵营背景后" ];
-    public static KVCampCombatFrontBgSpriteName:string[] = [ "战斗_骑士阵营背景前", "战斗_水阵营背景前", "战斗_火阵营背景前", "战斗_木阵营背景前", "战斗_光阵营背景前", "战斗_暗阵营背景前" ];
-    public static KVSPCampBgSpriteName:string[] = [ "人物碎片底板_万能", "人物底板_水", "人物底板_火", "人物底板_木", "人物底板_光", "人物底板_暗" ];
-    public static KVSPAdvanceCampBgSpriteName:string[] = [ "人物碎片底板_万能", "多彩头像背景-蓝", "多彩头像背景-红", "多彩头像背景-绿", "多彩头像背景-黄", "多彩头像背景-紫" ];
-    public static KVSPCampBgFragSpriteName:string[] = [ "小卡框_碎片品质灰", "小卡框_碎片品质绿", "小卡框_碎片品质蓝", "小卡框_碎片品质紫", "小卡框_碎片品质橙", "小卡框_碎片品质红", "小卡框_碎片品质金"];
+    public static KHeroQualityBgSpriteNameForHeroBook:string[] = new Array<string> ( "无","图鉴_品质灰", "图鉴_品质绿", "图鉴_品质蓝", "图鉴_品质紫", "图鉴_品质红","图鉴_品质金");
+    public static KQualityBgSpriteName:string[] = new Array<string> ( "无", "装备底板_灰", "装备底板_绿", "装备底板_蓝", "装备底板_紫", "装备底板_橙", "装备底板_金" );
+    public static KequipBgSpriteName:string[] = new Array<string> ( "无", "装备底板_灰", "装备底板_绿", "装备底板_蓝", "装备底板_紫", "装备底板_橙", "装备底板_金" );
+    public static KVCampBgSpriteName:string[] = new Array<string> ( "人物底板_灰", "人物底板_水", "人物底板_火", "人物底板_木", "人物底板_光", "人物底板_暗" );
+    public static KVCampCombatBgSpriteName:string[] = new Array<string> ( "战斗_骑士阵营背景后", "战斗_水阵营背景后", "战斗_火阵营背景后", "战斗_木阵营背景后", "战斗_光阵营背景后", "战斗_暗阵营背景后" );
+    public static KVCampCombatFrontBgSpriteName:string[] = new Array<string> ( "战斗_骑士阵营背景前", "战斗_水阵营背景前", "战斗_火阵营背景前", "战斗_木阵营背景前", "战斗_光阵营背景前", "战斗_暗阵营背景前" );
+    public static KVSPCampBgSpriteName:string[] = new Array<string> ( "人物碎片底板_万能", "人物底板_水", "人物底板_火", "人物底板_木", "人物底板_光", "人物底板_暗" );
+    public static KVSPAdvanceCampBgSpriteName:string[] = new Array<string> ( "人物碎片底板_万能", "多彩头像背景-蓝", "多彩头像背景-红", "多彩头像背景-绿", "多彩头像背景-黄", "多彩头像背景-紫" );
+    public static KVSPCampBgFragSpriteName:string[] = new Array<string> ( "小卡框_碎片品质灰", "小卡框_碎片品质绿", "小卡框_碎片品质蓝", "小卡框_碎片品质紫", "小卡框_碎片品质橙", "小卡框_碎片品质红", "小卡框_碎片品质金");
 
     public static GetQualityBgFragByStar(star:number) {
         let idx:number = 0;
@@ -153,36 +155,36 @@ export class XConsts{
             idx = 6;
         return XConsts.KVSPCampBgFragSpriteName[idx];
     }
-    public static KObjectIconSpriteName:string[] = ["无", "金币", "经验", "升级点", "钻石", "英雄", "碎片", "装备", "技能", "魔法尘", "试炼点",
+    public static KObjectIconSpriteName:string[] = new Array<string> ("无", "金币", "经验", "升级点", "钻石", "英雄", "碎片", "装备", "技能", "魔法尘", "试炼点",
                                                                             "血瓶", "进阶点", "普通召唤卷轴","高级召唤卷轴", "普通任务卷轴", "高级任务卷轴", "灵魂石", "奇迹宝石", "奇迹碎片", "心",
                                                                             "竞技门票", "技能突破材料", "普通筹码", "高级筹码", "声望图标", "幸运硬币", "飞龙", "公会币", "公会经验", "宠物经验",
-                                                                            "宠物技能材料", "功勋图标", "无", "奇迹卷轴", "锻造石", "符文水晶", "试炼功勋"];
-    public static KCrystalQualityString:string[] = [ "无", "I", "II", "III", "IV", "V", "VI" ];
-    public static KCampSummonBgName:string[] = [ "无", "阵营抽卡_水背板", "阵营抽卡_火背板", "阵营抽卡_木背板", "阵营抽卡_光暗背板", "阵营抽卡_光暗背板" ];
-    public static KLanguageShowString:string[] = [ "无", "English", "简体中文", "繁體中文", "日本語", "한국어"];
-    public static KPetBgSpriteName:string[] = [ "无", "宠物系统_龙背景水", "宠物系统_龙背景火", "宠物系统_龙背景木", "宠物系统_龙背景光", "宠物系统_龙背景暗"];
-    public static KHeroCampIcon:string[] = [ "无", "水", "火", "木", "光", "暗" ];
-    public static KHeroCampRestrainIcon:string[] = [ "无", "阵营克制_水", "阵营克制_火", "阵营克制_木", "阵营克制_光", "阵营克制_暗" ];
-    public static KHeroClasses:string[] = [ "无", "无", "UI_Warrior", "UI_Assassin", "UI_Mage", "UI_Rogue", "UI_Pastor" ];
-    // public static Color[] KCampColor = new Color[6] {
-    //     Color.white,
-    //     new Color(103.0f / 255.0f, 195.0f / 255.0f, 247.0f / 255.0f),
-    //     new Color(244.0f / 255.0f, 62.0f / 255.0f, 5.0f / 255.0f),
-    //     new Color(120.0f / 255.0f, 247.0f / 255.0f, 103.0f / 255.0f),
-    //     new Color(249.0f / 255.0f, 206.0f / 255.0f, 120.0f / 255.0f),
-    //     new Color(247.0f / 255.0f, 103.0f / 255.0f, 234.0f / 255.0f)];
+                                                                            "宠物技能材料", "功勋图标", "无", "奇迹卷轴", "锻造石", "符文水晶", "试炼功勋");
+    public static KCrystalQualityString:string[] = new Array<string> ( "无", "I", "II", "III", "IV", "V", "VI" );
+    public static KCampSummonBgName:string[] = new Array<string> ( "无", "阵营抽卡_水背板", "阵营抽卡_火背板", "阵营抽卡_木背板", "阵营抽卡_光暗背板", "阵营抽卡_光暗背板" );
+    public static KLanguageShowString:string[] = new Array<string> ( "无", "English", "简体中文", "繁體中文", "日本語", "한국어");
+    public static KPetBgSpriteName:string[] = new Array<string> ( "无", "宠物系统_龙背景水", "宠物系统_龙背景火", "宠物系统_龙背景木", "宠物系统_龙背景光", "宠物系统_龙背景暗");
+    public static KHeroCampIcon:string[] = new Array<string> ( "无", "水", "火", "木", "光", "暗" );
+    public static KHeroCampRestrainIcon:string[] = new Array<string> ( "无", "阵营克制_水", "阵营克制_火", "阵营克制_木", "阵营克制_光", "阵营克制_暗" );
+    public static KHeroClasses:string[] = new Array<string> ( "无", "无", "UI_Warrior", "UI_Assassin", "UI_Mage", "UI_Rogue", "UI_Pastor" );
+    public static KCampColor:Color[] = new Array<Color>(
+        Color.WHITE,
+        new Color(103.0 / 255.0, 195.0 / 255.0, 247.0 / 255.0),
+        new Color(244.0 / 255.0, 62.0 / 255.0, 5.0 / 255.0),
+        new Color(120.0 / 255.0, 247.0 / 255.0, 103.0 / 255.0),
+        new Color(249.0 / 255.0, 206.0 / 255.0, 120.0 / 255.0),
+        new Color(247.0 / 255.0, 103.0 / 255.0, 234.0 / 255.0));
 
-    // public static Color[] KMapBgColor = new Color[4] {
-    //     new Color(119.0f / 255.0f, 231.0f / 255.0f, 242.0f / 255.0f),
-    //     new Color(112.0f / 255.0f, 154.0f / 255.0f, 248.0f / 255.0f),
-    //     new Color(117.0f / 255.0f, 48.0f / 255.0f, 246.0f / 255.0f),
-    //     new Color(236.0f / 255.0f, 44.0f / 255.0f, 49.0f / 255.0f)];
+    public static KMapBgColor:Color[] = new  Array<Color>(
+        new Color(119.0 / 255.0, 231.0 / 255.0, 242.0 / 255.0),
+        new Color(112.0 / 255.0, 154.0 / 255.0, 248.0 / 255.0),
+        new Color(117.0 / 255.0, 48.0 / 255.0, 246.0 / 255.0),
+        new Color(236.0 / 255.0, 44.0 / 255.0, 49.0 / 255.0));
 
-    // public static Color[] KBuffQualityColor = new Color[4] {
-    //     Color.white,
-    //     new Color(0f / 255.0f, 229.0f / 255.0f, 255.0f / 255.0f),
-    //     new Color(247.0f / 255.0f, 155.0f / 255.0f, 250.0f / 255.0f),
-    //     new Color(254.0f / 255.0f, 131.0f / 255.0f,0f)};
+    public static KBuffQualityColor:Color[] = new Array<Color>(
+        Color.WHITE,
+        new Color(0 / 255.0, 229.0 / 255.0, 255.0 / 255.0),
+        new Color(247.0 / 255.0, 155.0 / 255.0, 250.0 / 255.0),
+        new Color(254.0 / 255.0, 131.0 / 255.0,0));
 
     //#region 技能通配符
     public static GetKeyStrSkill(key:string, idx:number = 0) {
