@@ -1,0 +1,74 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "bac98c90-ef10-4d01-8daa-b2d2daec5451",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "bac98c90-ef10-4d01-8daa-b2d2daec5451@6c48a",
+      "displayName": "底部弹框_英雄列表标签页选中背景",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "bac98c90-ef10-4d01-8daa-b2d2daec5451"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "bac98c90-ef10-4d01-8daa-b2d2daec5451@f9941",
+      "displayName": "底部弹框_英雄列表标签页选中背景",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 234,
+        "height": 122,
+        "rawWidth": 234,
+        "rawHeight": 122,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 35,
+        "borderRight": 37,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "bac98c90-ef10-4d01-8daa-b2d2daec5451@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "bac98c90-ef10-4d01-8daa-b2d2daec5451@f9941"
+  }
+}

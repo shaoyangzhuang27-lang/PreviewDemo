@@ -1,5 +1,8 @@
-import { _decorator, Component, Node,director,tween,Vec3 } from 'cc';
+import { _decorator, Component, Node,director,tween,Vec3, instantiate, resources } from 'cc';
 import { DataMgr } from '../model/DataMgr';
+import { BagMain } from './team/BagMain';
+import { KnightMain } from './team/KnightMain';
+import { TeamMain } from './team/TeamMain';
 
 const { ccclass, property } = _decorator;
 
@@ -51,10 +54,10 @@ export class MainUI extends Component {
     }
     initView(){
         let playerInfo = DataMgr.getInstance().getPlayerInfo()
-        playerInfo.name ="王";
-        console.log("wbdwbd+++++++++++++++++++++")
-        console.log(DataMgr.getInstance().getPlayerInfo())
-        console.log(DataMgr.getInstance().getPlayerInfo().name)
+        // playerInfo.name ="王";
+        // console.log("wbdwbd+++++++++++++++++++++")
+        // console.log(DataMgr.getInstance().getPlayerInfo())
+        // console.log(DataMgr.getInstance().getPlayerInfo().name)
         
     }
 
@@ -66,11 +69,46 @@ export class MainUI extends Component {
 
         switch (event.target) {
             case this.btn_hero:
-                console.log("btn_hero")
-                director.loadScene("loading")
+                // console.log("btn_hero")
+                // director.loadScene("loading")
+                
+                this.closeTeam();
+                this.closeBag();
+
+                resources.load('prefabs_ui/main/knight', (err:any,res:any)=>{
+                    
+                    let nodeTeam = this.node.getChildByName("node_knight")
+                    if(nodeTeam){
+                        return;
+                    }
+
+                    let p = instantiate( res );
+                    p.name = "node_knight"
+                    this.node.addChild(p);
+                    p.setSiblingIndex(0);
+                } );
+
+
                 break;
             case this.btn_team:
                 console.log("btn_team")
+                
+                this.closeKnight();
+                this.closeBag();
+
+                resources.load('prefabs_ui/main/team', (err:any,res:any)=>{
+                    
+                    let nodeTeam = this.node.getChildByName("node_team")
+                    if(nodeTeam){
+                        return;
+                    }
+
+                    let p = instantiate( res );
+                    p.name = "node_team"
+                    this.node.addChild(p);
+                    p.setSiblingIndex(0);
+                } );
+
                 break;
             case this.btn_battle:
                 console.log("btn_battle")
@@ -91,6 +129,23 @@ export class MainUI extends Component {
                 break;
             case this.btn_bag:
                 console.log("btn_bag")
+                
+                
+                this.closeKnight();
+                this.closeTeam();
+
+                resources.load('prefabs_ui/main/bag', (err:any,res:any)=>{
+                    
+                    let nodeTeam = this.node.getChildByName("node_bag")
+                    if(nodeTeam){
+                        return;
+                    }
+
+                    let p = instantiate( res );
+                    p.name = "node_bag"
+                    this.node.addChild(p);
+                    p.setSiblingIndex(0);
+                } );
                 break;
             case this.btn_guild:
                 console.log("btn_guild")  
@@ -98,6 +153,30 @@ export class MainUI extends Component {
             default:
                 // code...
                 break;
+        }
+    }
+    closeTeam(){
+        let nodeTeam = this.node.getChildByName("node_team")
+        if(nodeTeam){
+            // nodeTeam.name = ""
+            let script =  nodeTeam.getComponent("TeamMain") as TeamMain;
+            script.hide();
+        }
+    }
+    closeKnight(){
+        let nodeKnight = this.node.getChildByName("node_knight")
+        if(nodeKnight){
+            // nodeKnight.name = ""
+            let script =  nodeKnight.getComponent("KnightMain") as KnightMain;
+            script.hide();
+        }
+    }
+    closeBag(){
+        let nodeBag = this.node.getChildByName("node_bag")
+        if(nodeBag){
+            // nodeTeam.name = ""
+            let script =  nodeBag.getComponent("BagMain") as BagMain;
+            script.hide();
         }
     }
 
