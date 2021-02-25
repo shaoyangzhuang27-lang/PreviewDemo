@@ -1,3 +1,4 @@
+import { GameModel } from "./GameModel";
 
 export class DataMgr{
     private static _instance: DataMgr = new DataMgr();
@@ -11,13 +12,14 @@ export class DataMgr{
     private playerInfo:Msg.IPlayerInfo | null | undefined = null;
     private gameConfig:Msg.IGameConfig | null | undefined = null;
     // private heroList:Array<Msg.IHeroInfo> | null = null;
-    private heroList:Map<number,Msg.IHeroInfo> = new Map<number,Msg.IHeroInfo>(); 
+    private heroList:Map<number,Msg.HeroInfo> = new Map<number,Msg.HeroInfo>(); 
     private heroBookInfo:{ [k: string]: Msg.IHeroBookUnit } | null = null;
 
     
     public setPlayerLogin(data:Msg.PlayerLoginA){
         this.playerInfo = data.playerInfo;
         this.gameConfig = data.conf;
+        
         // this.playerLogin = data;
         // console.log("000000-----------------")
         // console.log(this.playerLogin)
@@ -27,7 +29,7 @@ export class DataMgr{
         this.heroBookInfo = data.heroBookInfo;
 
         for (let index = 0; index < data.heroList.length; index++) {
-            const element = data.heroList[index];
+            let element = data.heroList[index] as Msg.HeroInfo;
             this.heroList.set(element.id as number,element);
         }
     }

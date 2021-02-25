@@ -1,11 +1,9 @@
 //数据基类
 
-import { TCampType, ValueMgr } from "./ValueMgr";
+import {  ValueMgr } from "./ValueMgr";
 
-export class BaseData
+export class BaseHeroData
 {
-    private _recordSkill : any = null;    //记录的技能
-    private _isOwner : any = null;
 
     public GetMaxHP(isAura:boolean = true) { return 0; }            //最大血量
     public GetATK(isAura:boolean = true) { return 0; }              //攻击
@@ -22,7 +20,7 @@ export class BaseData
     public GetHealEffect(isAura:boolean = true) { return 0; }       //治疗效果
     public GetSkillSpeed(isAura:boolean = true) { return 0; }       //技能攻速
 
-    public GetProperty(isAura:boolean = true) { return 0; }       //阵营伤害
+    public GetProperty(proType:Msg.THeroPropertyType,isAura:boolean = true) { return 0; }       //阵营伤害
     public GetRange(isAura:boolean = true) { return 0; }       //范围
     public GetPrepareAttackParticleName() { return "0"; }       //蓄力攻击粒子名称
     public GetNormalAttackParticleName() { return "0"; }       //普通攻击粒子名称
@@ -31,15 +29,15 @@ export class BaseData
     public Level() { return 0; }       //等级
     public StaticID() { return 0; }       //静态ID
     public DyncID() { return 0; }       //
-    public Camp() { return TCampType.EcampTypeNull; }       //阵营
+    public Camp() { return Msg.TCampType.ECampType_NULL; }       //阵营
     public Star() { return 0; }       //星级
-    public set recordSkill(_skill :any) { this._recordSkill = _skill; }
-    public get recordSkill() { return this._recordSkill; }
+    // public set recordSkill(_skill :any) { this._recordSkill = _skill; }
+    // public get recordSkill() { return this._recordSkill; }
     public IsOrangeQuality() { return false; }
     public ArmorID() { return 0; }
     public GetFighting() { return 0; }
     public ImageIcon() { return "0"; }
     public MaxPower() { return 0; }
-    public set Owner(isOwn : boolean) {this._isOwner = isOwn; }
-    public get Owner() { return this._isOwner; }
+    public set Owner(isOwn : boolean) { }
+    public get Owner() { return true; }
 }
