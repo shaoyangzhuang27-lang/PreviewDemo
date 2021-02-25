@@ -1,12 +1,12 @@
-//单个英雄头像
+//英雄碎片
 import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources } from 'cc';
 const { ccclass, property } = _decorator;
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { XConsts } from "../../model/XConsts";
 import { HeroItem } from "../../model/HeroItem";
 
-@ccclass('HeroIcon')
-export class HeroIcon extends Component {
+@ccclass('HeroDebris')
+export class HeroDebris extends Component {
     // [1]
     // dummy = '';
 
@@ -26,8 +26,14 @@ export class HeroIcon extends Component {
     @property({type :  Node})
     public img_camp:Node = null as unknown as Node;
 
+    @property({type :  Node})
+    public img_debris:Node = null as unknown as Node;
+
     @property({type :  Label})
-    public lab_level:Label = null as unknown as Label;
+    public lab_num:Label = null as unknown as Label;
+
+    @property({type :  Node})
+    public proBar_num:Label = null as unknown as Label;
 
     @property({type :  Node})
     public starlist:Node[] = [];
@@ -39,7 +45,10 @@ export class HeroIcon extends Component {
 
     start () {
         // [3]
-        this.btn_frame.on(Node.EventType.TOUCH_END, this.openHeroInfoView, this);        
+        //英雄合成界面
+        this.btn_frame.on(Node.EventType.TOUCH_END, this.openMergeHeroView, this);        
+        this.img_camp.active = false;
+
     }
 
     //传入英雄id  初始化对象
@@ -50,30 +59,32 @@ export class HeroIcon extends Component {
         this.init();
     }
 
+    //初始化碎片信息，碎片阵营、背景、头像、数量、品质
+    //表名不详
     init()
     {
-        let _campName:string = XConsts.KCampSpriteName[this._heroLT.camp];
-        let _frameName:string = XConsts.GetQualityBgByStar(this._heroLT.star);
-        let _level : string = this._heroInfo.level;
-        let _iconName:string = this._heroLT.image;
-        let _starNum:number = this._heroLT.star;
+        // let _campName:string = XConsts.KCampSpriteName[this._heroLT.camp];
+        // let _frameName:string = XConsts.GetQualityBgByStar(this._heroLT.star);
+        // // let _level : string = this._heroInfo.level;
+        // let _iconName:string = this._heroLT.image;
+        // let _starNum:number = this._heroLT.star;
 
-        let campIconPath:string = "resources/ui/icon/" + _campName + ".png"
-        this._resourceLoad(campIconPath,this.img_camp);
+        // let campIconPath:string = "resources/ui/icon/" + _campName + ".png"
+        // this._resourceLoad(campIconPath,this.img_camp);
         
-        let framePath:string = "resources/ui/icon/" + _frameName + ".png"
-        this._resourceLoad(framePath,this.btn_frame);
+        // let framePath:string = "resources/ui/icon/" + _frameName + ".png"
+        // this._resourceLoad(framePath,this.btn_frame);
 
-        let heroIconPath:string = "resources/ui/hero/" + _iconName + ".png"
-        this._resourceLoad(heroIconPath,this.img_icon);
+        // let heroIconPath:string = "resources/ui/hero/" + _iconName + ".png"
+        // this._resourceLoad(heroIconPath,this.img_icon);
         
-        this.lab_level.string = _level.toString();
+        this.lab_num.string = "10/50";
 
-        this._setStar(_starNum);
+        // this._setStar(_starNum);
     }
 
-    //开启英雄面板
-    openHeroInfoView()
+    //开启英雄合成面板
+    openMergeHeroView()
     {
         
     }
