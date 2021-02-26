@@ -1,0 +1,252 @@
+{
+  "ver": "2.0.10",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "e09f3275-3198-40e5-aaba-47b64f0e2870",
+  "files": [],
+  "subMetas": {
+    "47e89": {
+      "importer": "gltf-mesh",
+      "uuid": "e09f3275-3198-40e5-aaba-47b64f0e2870@47e89",
+      "displayName": "",
+      "id": "47e89",
+      "name": "Box016.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "83e22": {
+      "importer": "gltf-mesh",
+      "uuid": "e09f3275-3198-40e5-aaba-47b64f0e2870@83e22",
+      "displayName": "",
+      "id": "83e22",
+      "name": "Cylinder004.mesh",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "dec11": {
+      "importer": "gltf-mesh",
+      "uuid": "e09f3275-3198-40e5-aaba-47b64f0e2870@dec11",
+      "displayName": "",
+      "id": "dec11",
+      "name": "Cylinder003.mesh",
+      "userData": {
+        "gltfIndex": 2
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "cf5ee": {
+      "importer": "gltf-animation",
+      "uuid": "e09f3275-3198-40e5-aaba-47b64f0e2870@cf5ee",
+      "displayName": "",
+      "id": "cf5ee",
+      "name": "run.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.625
+        },
+        "events": []
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "438fe": {
+      "importer": "gltf-skeleton",
+      "uuid": "e09f3275-3198-40e5-aaba-47b64f0e2870@438fe",
+      "displayName": "",
+      "id": "438fe",
+      "name": "UnnamedSkeleton.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 69
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "16ba9": {
+      "importer": "gltf-embeded-image",
+      "uuid": "e09f3275-3198-40e5-aaba-47b64f0e2870@16ba9",
+      "displayName": "",
+      "id": "16ba9",
+      "name": "Map #62.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "dd293": {
+      "importer": "gltf-embeded-image",
+      "uuid": "e09f3275-3198-40e5-aaba-47b64f0e2870@dd293",
+      "displayName": "",
+      "id": "dd293",
+      "name": "Map #63.image",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ce720": {
+      "importer": "texture",
+      "uuid": "e09f3275-3198-40e5-aaba-47b64f0e2870@ce720",
+      "displayName": "",
+      "id": "ce720",
+      "name": "Map #62.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "e09f3275-3198-40e5-aaba-47b64f0e2870@16ba9"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "9df47": {
+      "importer": "texture",
+      "uuid": "e09f3275-3198-40e5-aaba-47b64f0e2870@9df47",
+      "displayName": "",
+      "id": "9df47",
+      "name": "Map #63.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "e09f3275-3198-40e5-aaba-47b64f0e2870@dd293"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "8f2b5": {
+      "importer": "gltf-scene",
+      "uuid": "e09f3275-3198-40e5-aaba-47b64f0e2870@8f2b5",
+      "displayName": "",
+      "id": "8f2b5",
+      "name": "character_42_run.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #62",
+        "uri": "e09f3275-3198-40e5-aaba-47b64f0e2870@16ba9"
+      },
+      {
+        "name": "Map #63",
+        "uri": "e09f3275-3198-40e5-aaba-47b64f0e2870@dd293"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 0.625,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "run",
+            "from": 0,
+            "to": 0.625,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "e09f3275-3198-40e5-aaba-47b64f0e2870@8f2b5",
+    "assetFinder": {
+      "meshes": [
+        "e09f3275-3198-40e5-aaba-47b64f0e2870@47e89",
+        "e09f3275-3198-40e5-aaba-47b64f0e2870@83e22",
+        "e09f3275-3198-40e5-aaba-47b64f0e2870@dec11"
+      ],
+      "skeletons": [
+        "e09f3275-3198-40e5-aaba-47b64f0e2870@438fe"
+      ],
+      "textures": [
+        "e09f3275-3198-40e5-aaba-47b64f0e2870@ce720",
+        "e09f3275-3198-40e5-aaba-47b64f0e2870@9df47"
+      ],
+      "materials": [
+        "5df0fd06-76c2-4585-af42-fb4876eb7f70",
+        "e1ad6351-9e38-414d-a530-ff6d5fe8b42b"
+      ],
+      "scenes": [
+        "e09f3275-3198-40e5-aaba-47b64f0e2870@8f2b5"
+      ]
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/resources/model/hero/hero042/mat",
+    "fbx": {
+      "unitConversion": "hierarchy-level"
+    }
+  }
+}

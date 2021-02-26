@@ -1,0 +1,234 @@
+{
+  "ver": "2.0.10",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "abb0c09d-2593-4252-857a-4b7c1d1c3eaa",
+  "files": [],
+  "subMetas": {
+    "40f4c": {
+      "importer": "gltf-mesh",
+      "uuid": "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@40f4c",
+      "displayName": "",
+      "id": "40f4c",
+      "name": "Object034.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d3400": {
+      "importer": "gltf-mesh",
+      "uuid": "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@d3400",
+      "displayName": "",
+      "id": "d3400",
+      "name": "Box011.mesh",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1f586": {
+      "importer": "gltf-animation",
+      "uuid": "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@1f586",
+      "displayName": "",
+      "id": "1f586",
+      "name": "idle.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.9583333134651184
+        },
+        "events": []
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "438fe": {
+      "importer": "gltf-skeleton",
+      "uuid": "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@438fe",
+      "displayName": "",
+      "id": "438fe",
+      "name": "UnnamedSkeleton.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 34
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "104a2": {
+      "importer": "gltf-embeded-image",
+      "uuid": "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@104a2",
+      "displayName": "",
+      "id": "104a2",
+      "name": "Map #52.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e6308": {
+      "importer": "gltf-embeded-image",
+      "uuid": "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@e6308",
+      "displayName": "",
+      "id": "e6308",
+      "name": "Map #53.image",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "3e201": {
+      "importer": "texture",
+      "uuid": "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@3e201",
+      "displayName": "",
+      "id": "3e201",
+      "name": "Map #52.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@104a2"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "8ed8f": {
+      "importer": "texture",
+      "uuid": "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@8ed8f",
+      "displayName": "",
+      "id": "8ed8f",
+      "name": "Map #53.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@e6308"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "78cc9": {
+      "importer": "gltf-scene",
+      "uuid": "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@78cc9",
+      "displayName": "",
+      "id": "78cc9",
+      "name": "character_28_idle.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #52",
+        "uri": "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@104a2"
+      },
+      {
+        "name": "Map #53",
+        "uri": "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@e6308"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 0.9583333134651184,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "idle",
+            "from": 0,
+            "to": 0.9583333134651184,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@78cc9",
+    "assetFinder": {
+      "meshes": [
+        "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@40f4c",
+        "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@d3400"
+      ],
+      "skeletons": [
+        "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@438fe"
+      ],
+      "textures": [
+        "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@3e201",
+        "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@8ed8f"
+      ],
+      "materials": [
+        "466a20bc-da45-42db-b8c8-93f9ea3198c7",
+        "c96997b8-5963-4b83-8835-29b619b8e271"
+      ],
+      "scenes": [
+        "abb0c09d-2593-4252-857a-4b7c1d1c3eaa@78cc9"
+      ]
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/resources/model/hero/hero028/mat",
+    "fbx": {
+      "unitConversion": "hierarchy-level"
+    }
+  }
+}

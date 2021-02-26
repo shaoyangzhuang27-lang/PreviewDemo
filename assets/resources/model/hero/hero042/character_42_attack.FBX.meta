@@ -1,0 +1,259 @@
+{
+  "ver": "2.0.10",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "8c002030-fafb-4c75-ad84-8c458502dda6",
+  "files": [],
+  "subMetas": {
+    "47e89": {
+      "importer": "gltf-mesh",
+      "uuid": "8c002030-fafb-4c75-ad84-8c458502dda6@47e89",
+      "displayName": "",
+      "id": "47e89",
+      "name": "Box016.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "83e22": {
+      "importer": "gltf-mesh",
+      "uuid": "8c002030-fafb-4c75-ad84-8c458502dda6@83e22",
+      "displayName": "",
+      "id": "83e22",
+      "name": "Cylinder004.mesh",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "dec11": {
+      "importer": "gltf-mesh",
+      "uuid": "8c002030-fafb-4c75-ad84-8c458502dda6@dec11",
+      "displayName": "",
+      "id": "dec11",
+      "name": "Cylinder003.mesh",
+      "userData": {
+        "gltfIndex": 2
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "989ed": {
+      "importer": "gltf-animation",
+      "uuid": "8c002030-fafb-4c75-ad84-8c458502dda6@989ed",
+      "displayName": "",
+      "id": "989ed",
+      "name": "attack.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.125
+        },
+        "events": [
+          {
+            "frame": 0.23333333333333334,
+            "functionName": "onAttack",
+            "parameters": []
+          }
+        ],
+        "speed": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "438fe": {
+      "importer": "gltf-skeleton",
+      "uuid": "8c002030-fafb-4c75-ad84-8c458502dda6@438fe",
+      "displayName": "",
+      "id": "438fe",
+      "name": "UnnamedSkeleton.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 69
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "16ba9": {
+      "importer": "gltf-embeded-image",
+      "uuid": "8c002030-fafb-4c75-ad84-8c458502dda6@16ba9",
+      "displayName": "",
+      "id": "16ba9",
+      "name": "Map #62.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "dd293": {
+      "importer": "gltf-embeded-image",
+      "uuid": "8c002030-fafb-4c75-ad84-8c458502dda6@dd293",
+      "displayName": "",
+      "id": "dd293",
+      "name": "Map #63.image",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ce720": {
+      "importer": "texture",
+      "uuid": "8c002030-fafb-4c75-ad84-8c458502dda6@ce720",
+      "displayName": "",
+      "id": "ce720",
+      "name": "Map #62.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "8c002030-fafb-4c75-ad84-8c458502dda6@16ba9"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "9df47": {
+      "importer": "texture",
+      "uuid": "8c002030-fafb-4c75-ad84-8c458502dda6@9df47",
+      "displayName": "",
+      "id": "9df47",
+      "name": "Map #63.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "8c002030-fafb-4c75-ad84-8c458502dda6@dd293"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "edde3": {
+      "importer": "gltf-scene",
+      "uuid": "8c002030-fafb-4c75-ad84-8c458502dda6@edde3",
+      "displayName": "",
+      "id": "edde3",
+      "name": "character_42_attack.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #62",
+        "uri": "8c002030-fafb-4c75-ad84-8c458502dda6@16ba9"
+      },
+      {
+        "name": "Map #63",
+        "uri": "8c002030-fafb-4c75-ad84-8c458502dda6@dd293"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 1.125,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "attack",
+            "from": 0,
+            "to": 1.125,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "8c002030-fafb-4c75-ad84-8c458502dda6@edde3",
+    "assetFinder": {
+      "meshes": [
+        "8c002030-fafb-4c75-ad84-8c458502dda6@47e89",
+        "8c002030-fafb-4c75-ad84-8c458502dda6@83e22",
+        "8c002030-fafb-4c75-ad84-8c458502dda6@dec11"
+      ],
+      "skeletons": [
+        "8c002030-fafb-4c75-ad84-8c458502dda6@438fe"
+      ],
+      "textures": [
+        "8c002030-fafb-4c75-ad84-8c458502dda6@ce720",
+        "8c002030-fafb-4c75-ad84-8c458502dda6@9df47"
+      ],
+      "materials": [
+        "5df0fd06-76c2-4585-af42-fb4876eb7f70",
+        "e1ad6351-9e38-414d-a530-ff6d5fe8b42b"
+      ],
+      "scenes": [
+        "8c002030-fafb-4c75-ad84-8c458502dda6@edde3"
+      ]
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/resources/model/hero/hero042/mat",
+    "fbx": {
+      "unitConversion": "hierarchy-level"
+    }
+  }
+}
