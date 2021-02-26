@@ -1,5 +1,5 @@
 
-import { _decorator, Component, SkeletalAnimation, Node, BoxCollider, RigidBody } from 'cc';
+import { _decorator, Component, SkeletalAnimation, Node, BoxCollider, RigidBody, Enum } from 'cc';
 const { ccclass, property } = _decorator;
 
 import { HeroAnimationEvent } from "./HeroAnimationEvent";
@@ -13,14 +13,35 @@ const AnimStatus = {
     DIE: "die",
 } 
 
+
+export enum HeroPot {
+    Base, // 原点
+    MainWeapon, // 主武器
+    Chest, // 胸骨
+    SubWeapon, // 副武器
+    Center, // 中心点
+}
+Enum(HeroPot);
+
 @ccclass('HeroBase')
 export class HeroBase extends Component {
 
     // public static STATUS = AnimStatus
 
+    @property({type: Node, displayName: "英雄原点"})
+    public heroBasePot: Node = null as unknown as Node
+    @property({type: Node, displayName: "英雄主武器"})
+    public heroMainWeaponPot: Node = null as unknown as Node
+    @property({type: Node, displayName: "英雄胸骨"})
+    public heroChestPot: Node = null as unknown as Node
+    @property({type: Node, displayName: "英雄副武器"})
+    public heroSubWeaponPot: Node = null as unknown as Node
+    @property({type: Node, displayName: "英雄中心点"})
+    public heroCenterPot: Node = null as unknown as Node
+
     private _status: string = ""
-    private _bodyNode: Node = null
-    private _skeletalAnimation: SkeletalAnimation = null
+    private _bodyNode: Node = null as unknown as Node
+    private _skeletalAnimation: SkeletalAnimation = null as unknown as SkeletalAnimation
 
     onLoad() {
 
@@ -29,20 +50,41 @@ export class HeroBase extends Component {
         (this.node.getComponent(BoxCollider) as BoxCollider).enabled = false;
         (this.node.getComponent(RigidBody) as RigidBody).enabled = false;
 
+        // if (!this.heroBasePot) {
+        //     this.heroBasePot = this.node;
+        //     console.warn("英雄未配置原点");
+        // }
+
+        // if (!this.heroMainWeaponPot) {
+        //     this.heroMainWeaponPot = this.node;
+        //     console.warn("英雄未配置主武器");
+        // }
+
+        // if (!this.heroChestPot) {
+        //     this.heroChestPot = this.node;
+        //     console.warn("英雄未配置胸骨");
+        // }
+
+        // if (!this.heroSubWeaponPot) {
+        //     this.heroSubWeaponPot = this.node;
+        //     console.warn("英雄未配置副武器");
+        // }
+
+        // if (!this.heroCenterPot) {
+        //     this.heroCenterPot = this.node;
+        //     console.warn("英雄未配置中心点");
+        // }
+
         this.playIdle();
-        this.stopAnim();
+        // this.stopAnim();
     }
-
-    start () {
-        // [3]
-    }
-
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
 
     setAttackEventCallBack(attackEventCallBack: Function) {
         (this._bodyNode.getComponent("HeroAnimationEvent") as HeroAnimationEvent).setAttackEventCallBack(attackEventCallBack);
+    }
+
+    setSkillEventCallBack(skillEventCallBack: Function) {
+        (this._bodyNode.getComponent("HeroAnimationEvent") as HeroAnimationEvent).setSkillEventCallBack(skillEventCallBack);
     }
 
     isStatus(status: string) {
@@ -96,5 +138,26 @@ export class HeroBase extends Component {
 
     stopAnim(): void {
         this._skeletalAnimation.stop();
+    }
+
+    playEffect(effectNode: Node, playPot: HeroPot): void {
+        this.getPlayPot(playPot).addChild(effectNode);
+    }
+
+    getPlayPot(playPot: HeroPot): Node {
+        switch (playPot) {
+            case HeroPot.Base:
+                return this.heroBasePot
+            case HeroPot.MainWeapon:
+                return this.heroMainWeaponPot
+            case HeroPot.Chest:
+                return this.heroChestPot
+            case HeroPot.SubWeapon:
+                return this.heroSubWeaponPot
+            case HeroPot.Center:
+                return this.heroCenterPot   
+            default:
+                return this.node;
+        }
     }
 }

@@ -66,7 +66,7 @@ function deepClone(data: any)
 export class BattleTest {
     public static heroTestInfo = {
         0: {
-            prefab: "leader00",
+            prefab: "leader_00",
             hp: 100,
             atk: 5,
             hitTime: 0.6,
@@ -74,7 +74,7 @@ export class BattleTest {
             speed: 1,
         },
         29: {
-            prefab: "hero029",
+            prefab: "hero_029",
             hp: 100,
             atk: 4,
             hitTime: 0.5,
@@ -82,7 +82,7 @@ export class BattleTest {
             speed: 1.3,
         },
         30: {
-            prefab: "hero030",
+            prefab: "hero_030",
             hp: 100,
             atk: 4,
             hitTime: 0.5,
@@ -90,7 +90,7 @@ export class BattleTest {
             speed: 1.3,
         },
         25: {
-            prefab: "hero025",
+            prefab: "hero_025",
             hp: 100,
             atk: 6,
             hitTime: 0.5,
@@ -98,7 +98,7 @@ export class BattleTest {
             speed: 1.3,
         },
         26: {
-            prefab: "hero026",
+            prefab: "hero_026",
             hp: 100,
             atk: 6,
             hitTime: 0.5,
@@ -106,7 +106,7 @@ export class BattleTest {
             speed: 1.3,
         },
         33: {
-            prefab: "hero033",
+            prefab: "hero_033",
             hp: 100,
             atk: 6,
             hitTime: 0.5,
@@ -118,7 +118,7 @@ export class BattleTest {
     
     public static monsterTestInfo = {
         40: {
-            prefab: "hero040",
+            prefab: "hero_040",
             hp: 30,
             atk: 2,
             hitTime: 0.5,
@@ -126,7 +126,7 @@ export class BattleTest {
             speed: 1.3,
         },
         44: {
-            prefab: "hero044",
+            prefab: "hero_044",
             hp: 50,
             atk: 2,
             hitTime: 0.5,
@@ -134,7 +134,7 @@ export class BattleTest {
             speed: 1.3,
         },
         45: {
-            prefab: "hero045",
+            prefab: "hero_045",
             hp: 40,
             atk: 2,
             hitTime: 0.5,
@@ -142,7 +142,7 @@ export class BattleTest {
             speed: 1.3,
         },
         41: {
-            prefab: "hero041",
+            prefab: "hero_041",
             hp: 20,
             atk: 3,
             hitTime: 0.5,
@@ -150,7 +150,7 @@ export class BattleTest {
             speed: 1.3,
         },
         42: {
-            prefab: "hero042",
+            prefab: "hero_042",
             hp: 15,
             atk: 3,
             hitTime: 0.5,
@@ -158,7 +158,7 @@ export class BattleTest {
             speed: 1.3,
         },
         46: {
-            prefab: "hero046",
+            prefab: "hero_046",
             hp: 50,
             atk: 3,
             hitTime: 0.5,
@@ -246,7 +246,7 @@ export class BattleTest {
 
     public static buildMapInfo() {
         // TODO
-        BattleTest.mapInfo.prefab = "prefabs/battle/pingtai01";
+        BattleTest.mapInfo.prefab = "prefabs/battle/map/battle_idle_ground_001";
         BattleTest.loadResList.push(BattleTest.mapInfo.prefab);
     }
 
@@ -304,7 +304,7 @@ export class BattleTest {
 
 
         // TODO
-        BattleTest.loadResList.push("prefabs/battle/hero/battleHero");
+        BattleTest.loadResList.push("prefabs/battle/hero/battle_hero");
 
         BattleTest.isInit = true;
     }

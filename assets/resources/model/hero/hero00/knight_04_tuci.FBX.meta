@@ -70,7 +70,14 @@
           "from": 0,
           "to": 1.4583333730697632
         },
-        "events": []
+        "events": [
+          {
+            "frame": 0.6666666666666666,
+            "functionName": "onSkill",
+            "parameters": []
+          }
+        ],
+        "speed": 1
       },
       "ver": "1.0.14",
       "imported": true,
@@ -291,6 +298,70 @@
       ],
       "subMetas": {}
     },
+    "489e0": {
+      "importer": "gltf-material",
+      "uuid": "182f764d-434f-4ec4-b828-46716289e28d@489e0",
+      "displayName": "",
+      "id": "489e0",
+      "name": "Material #39.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "4bfd9": {
+      "importer": "gltf-material",
+      "uuid": "182f764d-434f-4ec4-b828-46716289e28d@4bfd9",
+      "displayName": "",
+      "id": "4bfd9",
+      "name": "Material #40.material",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "6ba23": {
+      "importer": "gltf-material",
+      "uuid": "182f764d-434f-4ec4-b828-46716289e28d@6ba23",
+      "displayName": "",
+      "id": "6ba23",
+      "name": "Material #41.material",
+      "userData": {
+        "gltfIndex": 2
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "adc5c": {
+      "importer": "gltf-material",
+      "uuid": "182f764d-434f-4ec4-b828-46716289e28d@adc5c",
+      "displayName": "",
+      "id": "adc5c",
+      "name": "Material #38.material",
+      "userData": {
+        "gltfIndex": 3
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
     "3fcac": {
       "importer": "gltf-scene",
       "uuid": "182f764d-434f-4ec4-b828-46716289e28d@3fcac",
@@ -362,16 +433,16 @@
         "182f764d-434f-4ec4-b828-46716289e28d@4a849"
       ],
       "materials": [
-        "e1305658-d5ed-4892-bc29-7da649fd1cf4",
-        "43482ca6-1db4-4a40-be55-981962d7da11",
-        "0bec73b4-5364-4405-b44c-d04c1bfa1773",
-        "521f7bd3-be9a-4226-a6b8-95d9b7d6bf42"
+        "182f764d-434f-4ec4-b828-46716289e28d@489e0",
+        "182f764d-434f-4ec4-b828-46716289e28d@4bfd9",
+        "182f764d-434f-4ec4-b828-46716289e28d@6ba23",
+        "182f764d-434f-4ec4-b828-46716289e28d@adc5c"
       ],
       "scenes": [
         "182f764d-434f-4ec4-b828-46716289e28d@3fcac"
       ]
     },
-    "dumpMaterials": true,
+    "dumpMaterials": false,
     "materialDumpDir": "db://assets/resources/model/hero/hero00/mat"
   }
 }

@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, instantiate, Prefab, Vec3, Camera, ProgressBar, Color } from 'cc';
+import { _decorator, Component, Node, instantiate, Prefab, Vec3, Camera, ProgressBar, Color, TERRAIN_HEIGHT_BASE } from 'cc';
 const { ccclass, property } = _decorator;
 
 import { FlyWords } from "./FlyWords";
@@ -6,25 +6,21 @@ import { FlyWords } from "./FlyWords";
 
 @ccclass('BattleTitleBar')
 export class BattleTitleBar extends Component {
-    /* use `property` decorator if your want the member to be serializable */
-    // @property
-    // serializableDummy = 0;
+    @property(Prefab)
+    private BattleUiTitlePrefab: Prefab = null as unknown as Prefab;
 
+    @property(Prefab)
+    private FlyWordsPrefab: Prefab = null as unknown as Prefab;
 
-    private _hpBar: ProgressBar = null;
-    private _powBar: ProgressBar = null;
+    private _hpBarComponent: ProgressBar = null as unknown as ProgressBar;
+    private _powBarComponent: ProgressBar = null as unknown as ProgressBar;
 
-    private _titleBar: any = null;
+    private _battleUiTitleNode: Node | null = null;
+    private _fly_words_node: Node | null = null;
+
     private _targetPos = new Vec3();
 
     private _camera: any = null;
-    private _canvas: any = null;
-
-    @property(Prefab)
-    private TitleBarPrefab: Prefab = null;
-
-    @property(Prefab)
-    private FlyWordPrefab: Prefab = null;
 
     // start () {
     //     // Your initialization goes here.
@@ -32,7 +28,7 @@ export class BattleTitleBar extends Component {
 
     //slow-update. fps = 10 TODO 需要优化
     // update(dt: number) {
-    //     if (!this._titleBar && !this._titleBar.active) {
+    //     if (!this._battleUiTitleNode && !this._battleUiTitleNode.active) {
     //         return;
     //     }
 
@@ -43,13 +39,13 @@ export class BattleTitleBar extends Component {
 
     //     this.node.getWorldPosition(this._targetPos);
     //     //this._targetPos.y += this._offsetY;
-    //     this._camera.convertToUINode(this._targetPos, this._titleBar.parent, this._targetPos);
-    //     this._titleBar.setPosition(this._targetPos);
+    //     this._camera.convertToUINode(this._targetPos, this._battleUiTitleNode.parent, this._targetPos);
+    //     this._battleUiTitleNode.setPosition(this._targetPos);
 
     // }
 
     lateUpdate(): void {
-        if (!this._titleBar || !this._titleBar.active) {
+        if (!this._battleUiTitleNode || !this._battleUiTitleNode.active) {
             return;
         }
 
@@ -60,56 +56,58 @@ export class BattleTitleBar extends Component {
 
         this.node.getWorldPosition(this._targetPos);
         //this._targetPos.y += this._offsetY;
-        this._camera.convertToUINode(this._targetPos, this._titleBar.parent, this._targetPos);
-        this._titleBar.setPosition(this._targetPos);
+        this._camera.convertToUINode(this._targetPos, this._battleUiTitleNode.parent, this._targetPos);
+        this._battleUiTitleNode.setPosition(this._targetPos);
     }
 
     createTitleBar(camera: Camera, canvas: Node, isGreen: boolean): void {
         this._camera = camera.getComponent(Camera);
-        this._canvas = canvas;
-        this._titleBar = instantiate(this.TitleBarPrefab);
+        // this._canvas = canvas;
+        this._battleUiTitleNode = instantiate(this.BattleUiTitlePrefab);
 
-        let hpBarList = this._titleBar.getChildByName("hp").getComponents(ProgressBar);
+        let hpBarList = this._battleUiTitleNode.getChildByName("hp")?.getComponents(ProgressBar) as [ProgressBar];
         for (let hpBar of hpBarList) {
             let spNode: any = hpBar.barSprite?.node
-            if(spNode.name == "greenBar" && isGreen) {
-                this._hpBar = hpBar;
-            } else if (spNode.name == "redBar" && !isGreen) {
-                this._hpBar = hpBar;
+            if(spNode.name == "green_bar" && isGreen) {
+                this._hpBarComponent = hpBar;
+            } else if (spNode.name == "red_bar" && !isGreen) {
+                this._hpBarComponent = hpBar;
             } else {
                 hpBar.destroy();
                 spNode.destroy();
             }
         }
 
-        this._powBar = this._titleBar.getChildByName("pow").getComponent(ProgressBar);
-        canvas.addChild(this._titleBar);
+        this._powBarComponent = this._battleUiTitleNode.getChildByName("pow")?.getComponent(ProgressBar) as ProgressBar;
+        this._fly_words_node = this._battleUiTitleNode.getChildByName("fly_words_node");
+        canvas.addChild(this._battleUiTitleNode);
     }
 
     removeTitleBar(): void {
-        if (this._titleBar) {
-            this._titleBar.destroy();
-            this._titleBar = null;
+        if (this._battleUiTitleNode) {
+            this._battleUiTitleNode.destroy();
+            this._battleUiTitleNode = null;
+            this._fly_words_node = null;
         }
     }
 
     setHpPercent(percent: number): void {
-        if (this._hpBar) {
-            this._hpBar.progress = percent;
+        if (this._hpBarComponent) {
+            this._hpBarComponent.progress = percent;
         }
     }
 
     setPowPercent(percent: number): void {
-        if (this._powBar) {
-            this._powBar.progress = percent;
+        if (this._powBarComponent) {
+            this._powBarComponent.progress = percent;
         }
     }
 
     flyWords(v: number): void {
-        if(!this.FlyWordPrefab) {
+        if(!this.FlyWordsPrefab) {
             return;
         }
-        let wordsLabel = instantiate(this.FlyWordPrefab);
+        let wordsLabel = instantiate(this.FlyWordsPrefab);
 
         let color = Color.RED;
         let str = v.toString();
@@ -117,18 +115,18 @@ export class BattleTitleBar extends Component {
             str = "+" + str;
             color = Color.GREEN;
         }
-        this._titleBar.getChildByName("flyWordNode").addChild(wordsLabel);
+        this._fly_words_node?.addChild(wordsLabel);
         (wordsLabel.getComponent("FlyWords") as FlyWords).startFly(str, color);    
     }
 
 
-    setVisible(b: boolean): void {
-        if (this._titleBar) {
-            this._titleBar.active = b;
-            if (b) {
+    setVisible(bVisible: boolean): void {
+        if (this._battleUiTitleNode) {
+            this._battleUiTitleNode.active = bVisible;
+            if (bVisible) {
                 this.lateUpdate();
             } else {
-                this._titleBar.getChildByName("flyWordNode").removeAllChildren();
+                this._fly_words_node?.removeAllChildren();
             }
         }
     }

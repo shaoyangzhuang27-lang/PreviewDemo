@@ -135,7 +135,7 @@ export class BattleCtrl extends Component {
     }
 
     createHero(heroInfo: any, leaderNode?: Node): BattleHero {
-        let battleHeroNode = instantiate(BattleResMgr.getInstance().getRes("prefabs/battle/hero/battleHero"));
+        let battleHeroNode = instantiate(BattleResMgr.getInstance().getRes("prefabs/battle/hero/battle_hero"));
         let battleHero: BattleHero = battleHeroNode.getComponent("BattleHero") as BattleHero;
         this.node.addChild(battleHeroNode);
     
