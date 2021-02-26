@@ -1,0 +1,74 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "f9a5b6a1-4678-48bd-94ad-55294501bc62",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "f9a5b6a1-4678-48bd-94ad-55294501bc62@6c48a",
+      "displayName": "法师2_55_1_image",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "f9a5b6a1-4678-48bd-94ad-55294501bc62"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "f9a5b6a1-4678-48bd-94ad-55294501bc62@f9941",
+      "displayName": "法师2_55_1_image",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": -32.5,
+        "offsetY": -63.5,
+        "trimX": 14,
+        "trimY": 127,
+        "width": 500,
+        "height": 381,
+        "rawWidth": 593,
+        "rawHeight": 508,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "f9a5b6a1-4678-48bd-94ad-55294501bc62@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "f9a5b6a1-4678-48bd-94ad-55294501bc62@f9941"
+  }
+}

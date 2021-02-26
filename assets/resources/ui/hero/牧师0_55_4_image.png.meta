@@ -1,0 +1,74 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "13089e7d-32f4-4599-8ce4-cbf6de9a889f",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "13089e7d-32f4-4599-8ce4-cbf6de9a889f@6c48a",
+      "displayName": "牧师0_55_4_image",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "13089e7d-32f4-4599-8ce4-cbf6de9a889f"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "13089e7d-32f4-4599-8ce4-cbf6de9a889f@f9941",
+      "displayName": "牧师0_55_4_image",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 63.5,
+        "offsetY": 3.5,
+        "trimX": 171,
+        "trimY": 11,
+        "width": 378,
+        "height": 479,
+        "rawWidth": 593,
+        "rawHeight": 508,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "13089e7d-32f4-4599-8ce4-cbf6de9a889f@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "13089e7d-32f4-4599-8ce4-cbf6de9a889f@f9941"
+  }
+}

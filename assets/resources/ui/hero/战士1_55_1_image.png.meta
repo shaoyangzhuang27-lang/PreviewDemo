@@ -1,0 +1,74 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "09ed5000-3915-4af5-8d30-35c975ee3b98",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "09ed5000-3915-4af5-8d30-35c975ee3b98@6c48a",
+      "displayName": "战士1_55_1_image",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "09ed5000-3915-4af5-8d30-35c975ee3b98"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "09ed5000-3915-4af5-8d30-35c975ee3b98@f9941",
+      "displayName": "战士1_55_1_image",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": -48,
+        "offsetY": -23,
+        "trimX": 49,
+        "trimY": 81,
+        "width": 399,
+        "height": 392,
+        "rawWidth": 593,
+        "rawHeight": 508,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "09ed5000-3915-4af5-8d30-35c975ee3b98@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "09ed5000-3915-4af5-8d30-35c975ee3b98@f9941"
+  }
+}

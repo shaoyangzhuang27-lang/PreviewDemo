@@ -2,6 +2,7 @@ import { MsgCore} from "../../../core/network/MsgCore";
 import { NetCallFunc } from "../../../core/network/NetInterface";
 import { NetManager } from "../../../core/network/NetManager";
 import { DataMgr } from "../../model/DataMgr";
+import { GameModel } from "../../model/GameModel";
 import { NotifyMgr } from "../NotifyMgr";
 import { MsgBase } from "./MsgBase";
 
@@ -66,6 +67,8 @@ export class MsgLogin extends MsgBase{
     public responePlayerLoginA(msgId: number, msgData: Msg.PlayerLoginA){
         DataMgr.getInstance().setPlayerLogin(msgData);
         NotifyMgr.getInstance().notify(NotifyMgr.event_net_player_login,msgData);
+        
+        GameModel.getInstance().initPlayerData(msgData);
     }
     //角色登陆------------------------------------
     //获取游戏数据-----------------------
@@ -76,6 +79,8 @@ export class MsgLogin extends MsgBase{
     public responeGetHeroListA(msgId: number, msgData: Msg.GetHeroListA){
         console.log("herodata------")
         console.log(msgData)
+        DataMgr.getInstance().setHeroList(msgData);
+        GameModel.getInstance().initHeroList(DataMgr.getInstance().getHeroList());
     }
         
     public requestGetPlayerData(){

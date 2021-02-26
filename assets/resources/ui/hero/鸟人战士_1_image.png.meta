@@ -1,0 +1,74 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "987a046a-fd0f-4141-89de-21809ba3f0c4",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "987a046a-fd0f-4141-89de-21809ba3f0c4@6c48a",
+      "displayName": "鸟人战士_1_image",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "987a046a-fd0f-4141-89de-21809ba3f0c4"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "987a046a-fd0f-4141-89de-21809ba3f0c4@f9941",
+      "displayName": "鸟人战士_1_image",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 21,
+        "offsetY": -28,
+        "trimX": 183,
+        "trimY": 117,
+        "width": 269,
+        "height": 330,
+        "rawWidth": 593,
+        "rawHeight": 508,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "987a046a-fd0f-4141-89de-21809ba3f0c4@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "987a046a-fd0f-4141-89de-21809ba3f0c4@f9941"
+  }
+}

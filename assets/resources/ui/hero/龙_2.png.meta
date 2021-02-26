@@ -1,0 +1,74 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "ffc4e77a-b55e-46f8-96aa-6a07b7c4c30b",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "ffc4e77a-b55e-46f8-96aa-6a07b7c4c30b@6c48a",
+      "displayName": "龙_2",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "ffc4e77a-b55e-46f8-96aa-6a07b7c4c30b"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "ffc4e77a-b55e-46f8-96aa-6a07b7c4c30b@f9941",
+      "displayName": "龙_2",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": -18.5,
+        "trimX": 0,
+        "trimY": 37,
+        "width": 160,
+        "height": 172,
+        "rawWidth": 160,
+        "rawHeight": 209,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "ffc4e77a-b55e-46f8-96aa-6a07b7c4c30b@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "ffc4e77a-b55e-46f8-96aa-6a07b7c4c30b@f9941"
+  }
+}
