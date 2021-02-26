@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "017d3822-b121-4068-8e6d-766d9a7e1794",
+  "uuid": "c59080a5-51a0-4b94-ace7-3b1f0e2c69b5",
   "files": [
     ".png",
     ".json"
@@ -11,7 +11,7 @@
     "6c48a": {
       "ver": "1.0.20",
       "importer": "texture",
-      "uuid": "017d3822-b121-4068-8e6d-766d9a7e1794@6c48a",
+      "uuid": "c59080a5-51a0-4b94-ace7-3b1f0e2c69b5@6c48a",
       "imported": true,
       "files": [
         ".json"
@@ -26,16 +26,16 @@
         "premultiplyAlpha": false,
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "017d3822-b121-4068-8e6d-766d9a7e1794"
+        "imageUuidOrDatabaseUri": "c59080a5-51a0-4b94-ace7-3b1f0e2c69b5"
       },
-      "displayName": "Partex_01",
+      "displayName": "fire0002_body",
       "id": "6c48a",
       "name": "texture"
     }
   },
   "userData": {
     "type": "texture",
-    "redirect": "017d3822-b121-4068-8e6d-766d9a7e1794@6c48a",
+    "redirect": "c59080a5-51a0-4b94-ace7-3b1f0e2c69b5@6c48a",
     "hasAlpha": true
   }
 }

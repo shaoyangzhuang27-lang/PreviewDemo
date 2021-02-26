@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "55968bf6-5a13-4954-a59e-fd5b2e5ef0d3",
+  "uuid": "9135c514-ab65-4177-a284-9e565722b107",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "55968bf6-5a13-4954-a59e-fd5b2e5ef0d3@6c48a",
-      "displayName": "skill001_effect_ani",
+      "uuid": "9135c514-ab65-4177-a284-9e565722b107@6c48a",
+      "displayName": "sd",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "55968bf6-5a13-4954-a59e-fd5b2e5ef0d3"
+        "imageUuidOrDatabaseUri": "9135c514-ab65-4177-a284-9e565722b107"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -35,6 +35,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "55968bf6-5a13-4954-a59e-fd5b2e5ef0d3@6c48a"
+    "redirect": "9135c514-ab65-4177-a284-9e565722b107@6c48a"
   }
 }

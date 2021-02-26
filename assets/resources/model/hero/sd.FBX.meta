@@ -57,7 +57,7 @@
       ]
     },
     "dumpMaterials": true,
-    "materialDumpDir": "db://assets/resources/model/hero/Materials_sd",
+    "materialDumpDir": "db://assets/resources/model/hero/mat_sd",
     "fbx": {
       "unitConversion": "hierarchy-level"
     }

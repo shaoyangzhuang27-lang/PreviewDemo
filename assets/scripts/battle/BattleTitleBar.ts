@@ -18,7 +18,7 @@ export class BattleTitleBar extends Component {
     private _targetPos = new Vec3();
 
     private _camera: any = null;
-    private _canvas: any = null;
+    // private _canvas: any = null;
 
     @property(Prefab)
     private TitleBarPrefab: Prefab = null;
@@ -66,7 +66,7 @@ export class BattleTitleBar extends Component {
 
     createTitleBar(camera: Camera, canvas: Node, isGreen: boolean): void {
         this._camera = camera.getComponent(Camera);
-        this._canvas = canvas;
+        // this._canvas = canvas;
         this._titleBar = instantiate(this.TitleBarPrefab);
 
         let hpBarList = this._titleBar.getChildByName("hp").getComponents(ProgressBar);
