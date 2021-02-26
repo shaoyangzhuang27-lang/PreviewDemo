@@ -77,7 +77,7 @@ export class BattleHero extends Component {
     // }
     // private _battleEvents = {}
     onLoad() { 
-        this._battleTitleBar = this.node.getChildByName("titleBarNode")?.getComponent("BattleTitleBar") as BattleTitleBar;
+        this._battleTitleBar = this.node.getChildByName("battle_ui_title_pot")?.getComponent("BattleTitleBar") as BattleTitleBar;
         
         // this.startSeekEnemy()
     }
