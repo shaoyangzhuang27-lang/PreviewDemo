@@ -26,9 +26,6 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 81
-      },
-      {
         "__id__": 83
       },
       {
@@ -36,10 +33,13 @@
       },
       {
         "__id__": 87
+      },
+      {
+        "__id__": 89
       }
     ],
     "_prefab": {
-      "__id__": 89
+      "__id__": 91
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -334,10 +334,13 @@
       },
       {
         "__id__": 78
+      },
+      {
+        "__id__": 80
       }
     ],
     "_prefab": {
-      "__id__": 80
+      "__id__": 82
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -623,8 +626,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 180.5,
-      "y": 100.93799999999999,
+      "x": 186.605,
+      "y": 109.35900000000001,
       "z": 0
     },
     "_lrot": {
@@ -735,8 +738,8 @@
     "_alignFlags": 33,
     "_target": null,
     "_left": 0,
-    "_right": 12,
-    "_top": 16.561999999999998,
+    "_right": 5.89500000000001,
+    "_top": 8.140999999999991,
     "_bottom": 0,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
@@ -1844,6 +1847,26 @@
     "fileId": "76Wz3lOuFDuqpODaEWXARP"
   },
   {
+    "__type__": "cc.Animation",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 12
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 81
+    },
+    "playOnLoad": false,
+    "_clips": [],
+    "_defaultClip": null,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "4fmFyMqEJLPKdAugKVWe08"
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -1862,7 +1885,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 82
+      "__id__": 84
     },
     "_priority": 0,
     "_contentSize": {
@@ -1890,7 +1913,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 84
+      "__id__": 86
     },
     "_cameraComponent": null,
     "_alignCanvasWithScreen": true,
@@ -1909,7 +1932,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 86
+      "__id__": 88
     },
     "_alignFlags": 45,
     "_target": null,
@@ -1944,7 +1967,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 88
+      "__id__": 90
     },
     "btn_close": {
       "__id__": 23

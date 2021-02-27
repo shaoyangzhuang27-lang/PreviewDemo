@@ -8,10 +8,8 @@ import { XConsts } from "./XConsts";
 import { XShare } from "./XShare";
 
 export class HeroData extends BaseHeroData {
-    // private _staticID : number = 0;
-    // private _objectID : number = 100;
     private _recordSkill : Config.skill.Record = new Config.skill.Record();    //记录的技能
-    private _isOwner : any = null;
+    // private _isOwner : any = null;
     private _heroInfo : Msg.HeroInfo = new Msg.HeroInfo();
     private _record :Config.heroes.Record = new Config.heroes.Record();
 
@@ -25,12 +23,6 @@ export class HeroData extends BaseHeroData {
     private _gameModel:GameModel = null as unknown as GameModel;//待修改
     
     
-    // constructor(heroInfo : Msg.HeroInfo)
-    // {
-    //     super();
-    //     this.initDataByHero(heroInfo);
-        
-    // }
     public initDataByKnight(pi:Msg.PlayerInfo,gameModel:GameModel){
         this._heroInfo.id = 0;
         this._heroInfo.level = pi.level;
@@ -133,6 +125,13 @@ export class HeroData extends BaseHeroData {
             return 1;// Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);
         } else
             return this._heroInfo.tier;
+    }
+    public get equipOnList(){
+        
+        if (!this.IsRoleHero()) {
+            return null;// Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);
+        } else
+            return this._equipOnList;
     }
     public get record(){
         return this._record

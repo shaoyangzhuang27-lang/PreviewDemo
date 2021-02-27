@@ -38,6 +38,6 @@ export class BaseHeroData
     public GetFighting() { return 0; }
     public ImageIcon() { return "0"; }
     public MaxPower() { return 0; }
-    public set Owner(isOwn : boolean) { }
-    public get Owner() { return true; }
+    // public set Owner(isOwn : boolean) { }
+    // public get Owner() { return true; }
 }

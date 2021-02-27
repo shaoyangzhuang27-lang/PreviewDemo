@@ -36,7 +36,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 254
+      "__id__": 253
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -1068,7 +1068,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 329.949,
-      "y": 285.104,
+      "y": 286.166,
       "z": 0
     },
     "_lrot": {
@@ -1080,8 +1080,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.5,
-      "y": 0.5,
+      "x": 1,
+      "y": 1,
       "z": 1
     },
     "_layer": 33554432,
@@ -1155,8 +1155,8 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 48,
-      "height": 45
+      "width": 24,
+      "height": 23
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1196,7 +1196,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -1237,8 +1237,8 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 120,
-      "height": 122
+      "width": 60,
+      "height": 61
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1522,7 +1522,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -1652,7 +1652,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -1785,7 +1785,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -5691,9 +5691,6 @@
       "__id__": 1
     },
     "_enabled": true,
-    "__prefab": {
-      "__id__": 253
-    },
     "selectGroup": {
       "__id__": 40
     },
@@ -5710,10 +5707,6 @@
       "__id__": 43
     },
     "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "cc9skejA1HQqzN7ehmWbo1"
   },
   {
     "__type__": "cc.PrefabInfo",
