@@ -80,9 +80,10 @@ export class MsgLogin extends MsgBase{
         console.log("herodata------")
         console.log(msgData)
         DataMgr.getInstance().setHeroList(msgData);
-        GameModel.getInstance().initHeroList(DataMgr.getInstance().getHeroList());
+        // GameModel.getInstance().initHeroList(DataMgr.getInstance().getHeroList());
+        GameModel.getInstance().initHeroList(msgData);
     }
-        
+
     public requestGetPlayerData(){
         const buffer_data = Msg.GetPlayerDataR.encode({}).finish();
         this.msgMgr?.sendData(Msg.MsgType.TheGetPlayerDataR,buffer_data);
@@ -91,6 +92,7 @@ export class MsgLogin extends MsgBase{
         DataMgr.getInstance().setPlayerData(msgData);
         // this.requestSyncChat();
         // MsgMgr.getInstance().requestGetCacheChatList();
+        GameModel.getInstance().initPlayerBag(msgData);
     }
     //获取游戏数据-----------------------
 }

@@ -158,7 +158,7 @@ export class HeroData extends BaseHeroData {
         if (this._suitPropertyList == null)
             this._suitPropertyList = new Map<Msg.THeroPropertyType, number>();
         this._suitPropertyList.clear();
-        let armorLevel = this._gameModel.GetArmorLevel();
+        let armorLevel = this._gameModel.getArmorLevel();
         let activeQuality = armorLevel / XConsts.KRoleHeroEquipNum;
         //已全部激活的品质
         for (let i = 1; i <= activeQuality; i++) {
@@ -309,7 +309,7 @@ export class HeroData extends BaseHeroData {
     private getAuraProperty(propertyType:Msg.THeroPropertyType) {
         let ret = 0;
         if (this._gameModel != null) {
-            ret += this._gameModel.GetAuraProperty(propertyType);
+            ret += this._gameModel.getAuraProperty(propertyType);
         }
         return ret;
     }
@@ -771,20 +771,20 @@ export class HeroData extends BaseHeroData {
 
     private getHeroBookPropertyByHero(proType:Msg.THeroPropertyType) {
         if (this._gameModel != null) {
-            return this._gameModel.GetHeroBookPropertyByHero(proType);
+            return this._gameModel.getHeroBookPropertyByHero(proType);
         }
         return 0;
     }
     private getHeroBookPropertyByBook( proType:Msg.THeroPropertyType) {
         if (this._gameModel != null) {
-            return this._gameModel.GetHeroBookPropertyByBook(proType);
+            return this._gameModel.getHeroBookPropertyByBook(proType);
         }
         return 0;
     }
 
     private getTitleProperty( proType:Msg.THeroPropertyType) {
         if (this._gameModel != null) {
-            return this._gameModel.GetTitleProperty(proType);
+            return this._gameModel.getTitleProperty(proType);
         }
         return 0;
     }
@@ -792,7 +792,7 @@ export class HeroData extends BaseHeroData {
     private getTechnologyProperty( proType:Msg.THeroPropertyType) {
         if (this._gameModel != null) {
             let classes =  this._record.classes as Msg.TClassesType;
-            return this._gameModel.GetTechnologyProperty(classes, proType);
+            return this._gameModel.getTechnologyProperty(classes, proType);
         }
         return 0;
     }
