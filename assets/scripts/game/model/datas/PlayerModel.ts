@@ -1,16 +1,13 @@
 import { GameModel } from "../GameModel";
+import { BaseModel } from "./BaseModel";
 import { HeroData } from "./HeroData";
 
-export class PlayerModel{
+export class PlayerModel extends BaseModel{
     
     private _playerInfo:Msg.PlayerInfo = null as unknown as Msg.PlayerInfo;
     private _gameConf:Msg.GameConfig = null as unknown as Msg.GameConfig;
     private _roleHero:HeroData = null as unknown as HeroData;
-    private _gameModel:GameModel = null as unknown as GameModel;
     
-    constructor(gameModel:GameModel){
-        this._gameModel = gameModel;
-    }
     public initPlayerData(msg:Msg.PlayerLoginA) {
         this._playerInfo = msg.playerInfo as Msg.PlayerInfo;
         this._gameConf = msg.conf as Msg.GameConfig;

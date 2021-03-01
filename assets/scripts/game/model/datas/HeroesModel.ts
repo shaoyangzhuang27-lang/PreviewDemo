@@ -2,17 +2,14 @@ import { GameModel } from "../GameModel";
 import { HeroData } from "./HeroData";
 import { TableName, ValueMgr } from "../ValueMgr";
 import { XMsgExt } from "../const/XMsgExt";
+import { BaseModel } from "./BaseModel";
 
-export class HeroesModel{
+export class HeroesModel extends BaseModel{
 
     
     private _heroList:Map<number,HeroData> = new Map<number,HeroData>();
     private _heroBookMap:Map<number, Msg.HeroBookUnit> = new Map<number, Msg.HeroBookUnit>();//图鉴
-    private _gameModel:GameModel = null as unknown as GameModel;
 
-    constructor(gameModel:GameModel){
-        this._gameModel = gameModel;
-    }
     public getHeroList(){
         return this._heroList;
     }

@@ -83,7 +83,4 @@ export class MsgMgr extends MsgCore{
     public connectLoginServer(channelId: number = 0){
         NetManager.getInstance().connect({ url: "ws://192.168.15.132:17183" },channelId);//开启连接
     }
-
-
-
 }

@@ -1,15 +1,12 @@
 import { GameModel } from "../GameModel";
 import { HeroData } from "./HeroData";
 import { XConsts } from "../const/XConsts";
+import { BaseModel } from "./BaseModel";
 
-export class FormationModel{
+export class FormationModel extends BaseModel{
     
     private _formationList:Map<number,Map<number,number>> = new Map<number,Map<number,number>>();//阵型数据 索引,英雄动态id和站位
-    private _gameModel:GameModel = null as unknown as GameModel;
     
-    constructor(gameModel:GameModel){
-        this._gameModel = gameModel;
-    }
     
     protected _currentFormationIndex = 0; //当前战斗使用的阵型索引
     public initFormationList(msg:Msg.GetPlayerDataA) {

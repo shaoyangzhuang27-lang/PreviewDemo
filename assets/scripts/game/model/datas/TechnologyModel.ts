@@ -1,13 +1,8 @@
 import { GameModel } from "../GameModel";
 import { TableName, ValueMgr } from "../ValueMgr";
+import { BaseModel } from "./BaseModel";
 
-export class TechnologyModel{
-    private _gameModel:GameModel = null as unknown as GameModel;
-
-    constructor(gameModel:GameModel){
-        this._gameModel = gameModel;
-    }
-
+export class TechnologyModel extends BaseModel{
     
     //技术提供的属性
     private _technologyProperty:Map<Msg.TClassesType, Map<Msg.THeroPropertyType, number>> = new Map<Msg.TClassesType, Map<Msg.THeroPropertyType, number>>();

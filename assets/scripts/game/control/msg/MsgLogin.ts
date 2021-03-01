@@ -27,7 +27,7 @@ export class MsgLogin extends MsgBase{
         data.build = 1;
         data.channel = "1";
         const buffer_data = Msg.VersionCheckR.encode(data).finish();
-        this.msgMgr?.sendData(Msg.MsgType.TheVersionCheckR,buffer_data);
+        this.msgMgr.sendData(Msg.MsgType.TheVersionCheckR,buffer_data);
     }
 
     public responeVersionCheckA(msgId: number, msgData: Msg.VersionCheckA){
@@ -42,7 +42,7 @@ export class MsgLogin extends MsgBase{
         let data = new Msg.DeviceLoginNewR();
         data.deviceId = "73f08c52ad36acf31baecfec8db006b8d1af428a";
         const buffer_data = Msg.DeviceLoginNewR.encode(data).finish();
-        this.msgMgr?.sendData(Msg.MsgType.TheDeviceLoginNewR,buffer_data);
+        this.msgMgr.sendData(Msg.MsgType.TheDeviceLoginNewR,buffer_data);
         }
     public responeDeviceLoginNewA(msgId: number, msgData: Msg.DeviceLoginNewA){
         this.requestPlayerLogin(msgData.loginPlayerID);
@@ -62,7 +62,7 @@ export class MsgLogin extends MsgBase{
         // data.loginIp = "";
         // data.language = 1;
         const buffer_data = Msg.PlayerLoginR.encode(data).finish();
-        this.msgMgr?.sendData(Msg.MsgType.ThePlayerLoginR,buffer_data);
+        this.msgMgr.sendData(Msg.MsgType.ThePlayerLoginR,buffer_data);
     }
     public responePlayerLoginA(msgId: number, msgData: Msg.PlayerLoginA){
         DataMgr.getInstance().setPlayerLogin(msgData);
@@ -74,7 +74,7 @@ export class MsgLogin extends MsgBase{
     //获取游戏数据-----------------------
     public requestGetHeroList(){
         const buffer_data = Msg.GetHeroListR.encode({}).finish();
-        this.msgMgr?.sendData(Msg.MsgType.TheGetHeroListR,buffer_data);
+        this.msgMgr.sendData(Msg.MsgType.TheGetHeroListR,buffer_data);
     }
     public responeGetHeroListA(msgId: number, msgData: Msg.GetHeroListA){
         console.log("herodata------")
@@ -86,7 +86,7 @@ export class MsgLogin extends MsgBase{
 
     public requestGetPlayerData(){
         const buffer_data = Msg.GetPlayerDataR.encode({}).finish();
-        this.msgMgr?.sendData(Msg.MsgType.TheGetPlayerDataR,buffer_data);
+        this.msgMgr.sendData(Msg.MsgType.TheGetPlayerDataR,buffer_data);
     }
     public responeGetPlayerDataA(msgId: number, msgData: Msg.GetPlayerDataA){
         DataMgr.getInstance().setPlayerData(msgData);
