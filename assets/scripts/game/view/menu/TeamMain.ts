@@ -1,5 +1,6 @@
 
 import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, Vec3, tween } from 'cc';
+import { GameModel } from '../../model/GameModel';
 const { ccclass, property } = _decorator;
 
 @ccclass('TeamMain')
@@ -35,26 +36,29 @@ export class TeamMain extends Component {
         this.selectGroup?.checkEvents.push(containerEventHandler);
         this.btnClose?.on(Node.EventType.TOUCH_END, this.closeHandle, this);
         this.show();
+        this.test();
+    }
+    test(){
+        let heroList = GameModel.getInstance().getHeroList();
+        console.log("heroList=====:");
+        console.log(heroList);
+        console.log(GameModel.getInstance().getCurrentFormation());
+        // heroList.forEach((value,key)=>{
+        //     console.log(value.GetATK());
+        // })
     }
     
     tabClick(event: Event, customEventData: string){
-        //这里 event 是一个 Touch Event 对象，你可以通过 event.target 取到事件的发送节点
-        // 这里的 customEventData 参数就等于之前设置的 'foobar'
-        console.log(event)
-        console.log(customEventData)
-        let tog:Toggle = (event as Toggle);
+        let tog:Toggle = (event as any);
         console.log(tog.node.name)
+        
+        if(!(this.teamNode && this.heroNode) )return;
         if(tog.node.name == "Toggle1"){
-            if(this.teamNode)
-                this.teamNode.active = true;
-            if(this.heroNode)
-                this.heroNode.active = false;
+            this.teamNode.active = true;
+            this.heroNode.active = false;
         }else{
-            if(this.teamNode)
-                this.teamNode.active = false;
-            if(this.heroNode)
-                this.heroNode.active = true;
-
+            this.teamNode.active = false;
+            this.heroNode.active = true;
         }
     }
     show(){
@@ -67,7 +71,6 @@ export class TeamMain extends Component {
         }).start()
     }
     hide(){
-        
         tween(this.pNode)
         .to(0.1,{position:new Vec3(this.pNode?.getPosition().x,-900,0)})
         .call(() => {

@@ -4,7 +4,7 @@ import { _decorator, Component, Node, Vec2, Vec3,systemEvent,Camera } from 'cc';
 // import { DataMgr } from "../game/model/DataMgr";
 
 import { PhysicsSystem, geometry, SystemEvent } from 'cc';
-import { PopMgr } from '../control/PopMgr';
+import { PopMgr } from '../../control/PopMgr';
 // import { _decorator, Component, Node, Vec3, SkeletalAnimationComponent, macro,ColliderComponent,RigidBodyComponent,AudioSourceComponent,CameraComponent, PhysicsSystem, SystemEvent,systemEvent,ICollisionEvent, ITriggerEvent ,CCInteger, geometry }
 
 const { ccclass, property } = _decorator;

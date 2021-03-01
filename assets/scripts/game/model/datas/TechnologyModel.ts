@@ -21,7 +21,7 @@ export class TechnologyModel{
     private _technologyMap:Map<Msg.TClassesType, number> = new Map<Msg.TClassesType, number>();
     private _technologyTotalLevel:number = 0;
     private _technologyRoleLevel:number = 0;
-    public RefreshTechnologyProperty(classes:Msg.TClassesType) {
+    public refreshTechnologyProperty(classes:Msg.TClassesType) {
         this._technologyTotalLevel = 0;
         this._technologyMap.forEach((value,key)=>{
             if (key != Msg.TClassesType.EClassesType_Role)
@@ -56,7 +56,7 @@ export class TechnologyModel{
             this._technologyProperty = new Map<Msg.TClassesType, Map<Msg.THeroPropertyType, number>> ();
         this._technologyProperty.clear();
         for (let classes:Msg.TClassesType = Msg.TClassesType.EClassesType_Role; classes <= Msg.TClassesType.EClassesType_Priest; classes++)
-            this.RefreshTechnologyProperty (classes);
+            this.refreshTechnologyProperty (classes);
     }
     
     //根据职业和科技等级，计算加成的总属性，并存在proMap中

@@ -1,8 +1,8 @@
 import { _decorator, Component, Node,director,tween,Vec3, instantiate, resources } from 'cc';
-import { DataMgr } from '../model/DataMgr';
-import { BagMain } from './team/BagMain';
-import { KnightMain } from './team/KnightMain';
-import { TeamMain } from './team/TeamMain';
+import { DataMgr } from '../../model/DataMgr';
+import { BagMain } from '../menu/BagMain';
+import { KnightMain } from '../menu/KnightMain';
+import { TeamMain } from '../menu/TeamMain';
 
 const { ccclass, property } = _decorator;
 

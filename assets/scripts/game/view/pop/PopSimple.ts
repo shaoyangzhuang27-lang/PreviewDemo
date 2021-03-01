@@ -6,7 +6,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import { _decorator, Component, Node,LabelComponent } from 'cc';
-import { PopBase } from '../../core/control/PopBase';
+import { PopBase } from '../../../core/control/PopBase';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopSimple')

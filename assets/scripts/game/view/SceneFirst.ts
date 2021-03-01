@@ -45,14 +45,20 @@ export class SceneFirst extends BaseScene {
     }
     checkComplete(){
         if(this.isConfigComplete && this.isVersionComplete){
-            // let data = ValueMgr.getInstance().getTableByName(TableName.achievement);
-            // console.log("data::::::::::::::")
-            // console.log(data)
-            // for (let index = 0; index < data.length; index++) {
-            //     const element = data[index];
-            // }
+            //let tab = ValueMgr.getInstance().getTableByName(TableName.achievement) as Config.achievement;
+            //console.log("data::::::::::::::")
+            //console.log(tab)
+            //console.log((tab.records[1].awardNum as number[])[0]);
+            //console.log(tab.records[1].id );
+            
+            //let item = ValueMgr.getInstance().getItemByField(TableName.heroes,100) as Config.heroes.Record;
+            //console.log("item::::::::::::::")
+            //console.log(item);
+            //console.log(item.name);
+            
 
             SceneMgr.getInstance().changeToLogin();
+
         }
     }
     notifyVersionCheckHandle(data:any){
