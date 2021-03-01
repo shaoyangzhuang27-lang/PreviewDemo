@@ -335,7 +335,11 @@ export class HeroData extends BaseHeroData {
     {
 
         let maxHp : number = 0;
-        let baseHeroHP : number = this._record.hpBase + this._record.hpUp * this._heroInfo.level;
+        if (this._heroInfo != null && this._record != null) {
+            maxHp += this._record.hpBase + this._record.hpUp * this.level;
+        }
+
+
         maxHp *= 1.0 + this.getPropertyUpByTier();
         maxHp += this.getEquipProperty(Msg.THeroPropertyType.EHeroPropertyType_HP) + this.getHeroBookPropertyByHero(Msg.THeroPropertyType.EHeroPropertyType_HP);
         maxHp += isAura ? this.getPetAuraProperty(Msg.THeroPropertyType.EHeroPropertyType_HP) : 0;
