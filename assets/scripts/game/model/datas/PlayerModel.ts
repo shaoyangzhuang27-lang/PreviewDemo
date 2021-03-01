@@ -3,8 +3,8 @@ import { HeroData } from "./HeroData";
 
 export class PlayerModel{
     
-    private _playerInfo:Msg.PlayerInfo = new Msg.PlayerInfo();
-    private _gameConf:Msg.GameConfig = new Msg.GameConfig();
+    private _playerInfo:Msg.PlayerInfo = null as unknown as Msg.PlayerInfo;
+    private _gameConf:Msg.GameConfig = null as unknown as Msg.GameConfig;
     private _roleHero:HeroData = null as unknown as HeroData;
     private _gameModel:GameModel = null as unknown as GameModel;
     
