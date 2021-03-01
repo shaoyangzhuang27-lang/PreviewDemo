@@ -1,11 +1,9 @@
 import { FormationModel } from "./datas/FormationModel";
+import { HeroData } from "./datas/HeroData";
 import { HeroesModel } from "./datas/HeroesModel";
 import { PlayerModel } from "./datas/PlayerModel";
 import { TechnologyModel } from "./datas/TechnologyModel";
-import { HeroData } from "./HeroData";
 import { TableName, ValueMgr } from "./ValueMgr";
-import { XConsts } from "./XConsts";
-import { XMsgExt } from "./XMsgExt";
 
 export class GameModel{
     private static _instance: GameModel = new GameModel();
@@ -41,16 +39,16 @@ export class GameModel{
     }
     
     public initPlayerBag(msg:Msg.GetPlayerDataA) {
-        this._formationModel.initFormationList(msg)
+        this._formationModel.initFormationList(msg);
     }
     
-
+    //将弃用-----------------
     //当前阵容
     public getCurrentFormation():Map<number, HeroData> {
-        return this._formationModel.getCurrentFormation()
+        return this._formationModel.getCurrentFormation();
     }
     public getFormationByIndex(index:number):Map<number, HeroData>{
-        return this._formationModel.getFormationByIndex(index)
+        return this._formationModel.getFormationByIndex(index);
     }
     
 
@@ -63,16 +61,17 @@ export class GameModel{
     public getRoleHero(){
         return this._playerModel.getRoleHero();
     }
+    //将弃用-----------------
     
 
     //---------------------herodata 里需要使用到的方法--------------------------------------------
 
     public getHeroBookPropertyByHero(proType:Msg.THeroPropertyType) {
-        return this._heroesModel.retHeroBookPropertyByHero(proType)
+        return this._heroesModel.retHeroBookPropertyByHero(proType);
     }
     
     public getHeroBookPropertyByBook(proType:Msg.THeroPropertyType) {
-        return this._heroesModel.retHeroBookPropertyByBook(proType)
+        return this._heroesModel.retHeroBookPropertyByBook(proType);
     }
 
     //头衔提供的属性

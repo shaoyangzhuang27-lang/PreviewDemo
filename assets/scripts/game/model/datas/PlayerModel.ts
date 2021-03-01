@@ -1,5 +1,5 @@
 import { GameModel } from "../GameModel";
-import { HeroData } from "../HeroData";
+import { HeroData } from "./HeroData";
 
 export class PlayerModel{
     
@@ -15,7 +15,7 @@ export class PlayerModel{
         this._playerInfo = msg.playerInfo as Msg.PlayerInfo;
         this._gameConf = msg.conf as Msg.GameConfig;
         this._roleHero = new HeroData();
-        this._roleHero.initDataByKnight(this._playerInfo,this._gameModel);
+        this._roleHero.initDataByKnight(this._playerInfo, this._gameModel);
         //默认自动施放技能开启
         this._playerInfo.isAutoSkill = true;
     }

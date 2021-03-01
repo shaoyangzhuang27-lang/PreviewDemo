@@ -2,10 +2,10 @@
 
 // import { Item } from '../../core/control/Item';
 import { BaseHeroData } from "./BaseHeroData";
-import { GameModel } from "./GameModel";
-import { TableName, ValueMgr } from "./ValueMgr";
-import { XConsts } from "./XConsts";
-import { XShare } from "./XShare";
+import { GameModel } from "../GameModel";
+import { TableName, ValueMgr } from "../ValueMgr";
+import { XConsts } from "../const/XConsts";
+import { XShare } from "../const/XShare";
 
 export class HeroData extends BaseHeroData {
     private _recordSkill : Config.skill.Record = new Config.skill.Record();    //记录的技能

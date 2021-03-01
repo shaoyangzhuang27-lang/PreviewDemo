@@ -1,6 +1,6 @@
 import { GameModel } from "../GameModel";
-import { HeroData } from "../HeroData";
-import { XConsts } from "../XConsts";
+import { HeroData } from "./HeroData";
+import { XConsts } from "../const/XConsts";
 
 export class FormationModel{
     
@@ -25,18 +25,18 @@ export class FormationModel{
             this._formationList.set(Number(key), fi);
         }
         
-        this._currentFormationIndex = this._gameModel.getPlayerModel().getPlayerInfo().idleFormation
+        this._currentFormationIndex = this._gameModel.getPlayerModel().getPlayerInfo().idleFormation;
         //本地创建一个用于试炼的阵容
         this._formationList.set(XConsts.KTrailFormationIndex, new Map<number, number>());
     }
     public getCurFormationIndex(){
-        return this._currentFormationIndex
+        return this._currentFormationIndex;
     }
 
     
     //当前阵容
     public getCurrentFormation():Map<number, HeroData> {
-        return this.getFormationByIndex(this.getCurFormationIndex())
+        return this.getFormationByIndex(this.getCurFormationIndex());
     }
 
     //根据阵容索引获取阵容
@@ -50,11 +50,11 @@ export class FormationModel{
         let formation = new Map<number,HeroData>();
         curFormationData?.forEach((value,key)=>{
             if(key == 0){
-                formation.set(value,this._gameModel.getPlayerModel().getRoleHero())
+                formation.set(value, this._gameModel.getPlayerModel().getRoleHero());
             }else if(this._gameModel.getHeroesModel().getHeroList().has(key)){
-                formation.set(value,this._gameModel.getHeroesModel().getHeroList().get(key) as HeroData)
+                formation.set(value, this._gameModel.getHeroesModel().getHeroList().get(key) as HeroData);
             }
         })
-        return formation
+        return formation;
     }
 }

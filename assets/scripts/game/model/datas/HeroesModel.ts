@@ -1,7 +1,7 @@
 import { GameModel } from "../GameModel";
-import { HeroData } from "../HeroData";
+import { HeroData } from "./HeroData";
 import { TableName, ValueMgr } from "../ValueMgr";
-import { XMsgExt } from "../XMsgExt";
+import { XMsgExt } from "../const/XMsgExt";
 
 export class HeroesModel{
 
@@ -26,7 +26,7 @@ export class HeroesModel{
 
             if(ValueMgr.getInstance().getItemByField(TableName.heroes,heroInfo.staticID as number)){
                 let hero = new HeroData();
-                hero.initDataByHero(heroInfo as Msg.HeroInfo,this._gameModel);
+                hero.initDataByHero(heroInfo as Msg.HeroInfo, this._gameModel);
                 this._heroList.set(heroInfo.id as number,hero);
             }
         })
@@ -54,13 +54,13 @@ export class HeroesModel{
         //图鉴中每个英雄提供的属性
         this._heroBookMap.forEach((value,key)=> {
             this._heroBookPoint += value.level;
-            var record = ValueMgr.getInstance().getItemByField(TableName.book_hero_property,XMsgExt.GetHeroPropertyStaticID(value)) as Config.book_hero_property.Record;
+            var record = ValueMgr.getInstance().getItemByField(TableName.book_hero_property, XMsgExt.GetHeroPropertyStaticID(value)) as Config.book_hero_property.Record;
             if (record){
                 for (let i = 0; i < record.proType.length; i++) {
                     let propertyType = record.proType[i] as Msg.THeroPropertyType;
                     let proNum = record.proNum[i];
                     if (this._heroBookPropertyByHero.has(propertyType))
-                        this._heroBookPropertyByHero.set(propertyType,this._heroBookPropertyByHero.get(propertyType) as number + proNum);
+                        this._heroBookPropertyByHero.set(propertyType, this._heroBookPropertyByHero.get(propertyType) as number + proNum);
                     else
                         this._heroBookPropertyByHero.set(propertyType, proNum);
                 }
@@ -76,7 +76,7 @@ export class HeroesModel{
         })
         
 
-        var recordTotal = ValueMgr.getInstance().getItemByField(TableName.book_total_property,this._heroBookLevel) as Config.book_total_property.Record;
+        var recordTotal = ValueMgr.getInstance().getItemByField(TableName.book_total_property, this._heroBookLevel) as Config.book_total_property.Record;
         if (recordTotal) {
             for (let i = 0; i < recordTotal.heroProType.length; i++) {
                 let propertyType = recordTotal.heroProType[i] as Msg.THeroPropertyType;
