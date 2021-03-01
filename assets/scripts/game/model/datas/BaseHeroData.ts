@@ -1,6 +1,6 @@
 //数据基类
 
-import {  ValueMgr } from "./ValueMgr";
+import {  ValueMgr } from "../ValueMgr";
 
 export class BaseHeroData
 {

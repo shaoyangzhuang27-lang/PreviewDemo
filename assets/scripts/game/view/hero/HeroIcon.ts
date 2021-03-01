@@ -2,8 +2,7 @@
 import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources } from 'cc';
 const { ccclass, property } = _decorator;
 import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { XConsts } from "../../model/XConsts";
-import { HeroItem } from "../../model/HeroItem";
+import { XConsts } from "../../model/const/XConsts";
 
 @ccclass('HeroIcon')
 export class HeroIcon extends Component {

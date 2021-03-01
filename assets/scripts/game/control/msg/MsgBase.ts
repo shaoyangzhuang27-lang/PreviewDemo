@@ -5,7 +5,7 @@ import { NotifyMgr } from "../NotifyMgr";
 
 export class MsgBase{
 
-    protected msgMgr:MsgCore | null = null;
+    protected msgMgr:MsgCore = null as unknown as MsgCore;
     protected  responeMap:Map<number,[any,NetCallFunc,any]> | null = null;
 
 

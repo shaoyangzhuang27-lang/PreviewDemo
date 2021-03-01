@@ -10,6 +10,7 @@ import { SceneMgr } from "./SceneMgr";
 import { MsgCore } from "../../core/network/MsgCore";
 import { MsgLogin } from "./msg/MsgLogin";
 import { MsgGame } from "./msg/MsgGame";
+import { MsgBase } from "./msg/MsgBase";
 
 class NetTips implements INetworkTips {
     requestTips(isShow: boolean): void {}
@@ -38,34 +39,48 @@ export class MsgMgr extends MsgCore{
     public static getInstance() {
         return this._instance;
     }
+    private _msgs:Array<MsgBase> = new Array<MsgBase>();
 
-    private msgLogin:MsgLogin = new MsgLogin(this);
+    //消息定义-------------------------------------------------
+    private _msgLogin:MsgLogin = new MsgLogin(this);
     public getMsgLogin(){
-        return this.msgLogin;
+        return this._msgLogin;
     }
 
-    private msgGame:MsgGame = new MsgGame(this);
+    private _msgGame:MsgGame = new MsgGame(this);
     public getMsgGame(){
-        return this.msgGame;
+        return this._msgGame;
     }
+    //消息定义-------------------------------------------------
+    
+    //消息注册-------------------------------------------------
+    private _initMsg(){
+        this._msgs.push(this._msgLogin)
+        this._msgs.push(this._msgGame)
+    }
+    //消息注册-------------------------------------------------
 
     public initLoginServer(){
-        this.msgLogin.initData();
-        this.msgGame.initData();
-        let msgMap = this.getMsgMap([this.msgGame.getResponeMap(),this.msgLogin.getResponeMap()]);
+        this._initMsg()
+
+        let responeMap =Array<Map<number,any> | null>();
+        this._msgs.forEach((val,idx)=>{
+            val.initData();
+            responeMap.push(val.getResponeMap());
+        })
+        let msgMap = this.getMsgMap(responeMap);
+        
 
         let node = new NetNode();
         node.init(new WebSock(), new SupperProtocol(msgMap), new NetTips());
         NetManager.getInstance().setNetNode(node);
-
-        this.msgLogin.initHandle();
-        this.msgGame.initHandle();
+        
+        this._msgs.forEach((val,idx)=>{
+            val.initHandle();
+        })
     }
     
     public connectLoginServer(channelId: number = 0){
         NetManager.getInstance().connect({ url: "ws://192.168.15.132:17183" },channelId);//开启连接
     }
-
-
-
 }

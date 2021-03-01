@@ -2,10 +2,10 @@
 
 // import { Item } from '../../core/control/Item';
 import { BaseHeroData } from "./BaseHeroData";
-import { GameModel } from "./GameModel";
-import { TableName, ValueMgr } from "./ValueMgr";
-import { XConsts } from "./XConsts";
-import { XShare } from "./XShare";
+import { GameModel } from "../GameModel";
+import { TableName, ValueMgr } from "../ValueMgr";
+import { XConsts } from "../const/XConsts";
+import { XShare } from "../const/XShare";
 
 export class HeroData extends BaseHeroData {
     private _recordSkill : Config.skill.Record = new Config.skill.Record();    //记录的技能
@@ -335,7 +335,11 @@ export class HeroData extends BaseHeroData {
     {
 
         let maxHp : number = 0;
-        let baseHeroHP : number = this._record.hpBase + this._record.hpUp * this._heroInfo.level;
+        if (this._heroInfo != null && this._record != null) {
+            maxHp += this._record.hpBase + this._record.hpUp * this.level;
+        }
+
+
         maxHp *= 1.0 + this.getPropertyUpByTier();
         maxHp += this.getEquipProperty(Msg.THeroPropertyType.EHeroPropertyType_HP) + this.getHeroBookPropertyByHero(Msg.THeroPropertyType.EHeroPropertyType_HP);
         maxHp += isAura ? this.getPetAuraProperty(Msg.THeroPropertyType.EHeroPropertyType_HP) : 0;

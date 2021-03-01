@@ -41,11 +41,7 @@ export class BagMain extends Component {
     }
     
     tabClick(event: Event, customEventData: string){
-        //这里 event 是一个 Touch Event 对象，你可以通过 event.target 取到事件的发送节点
-        // 这里的 customEventData 参数就等于之前设置的 'foobar'
-        // console.log(event)
-        // console.log(customEventData)
-        let tog:Toggle = (event as Toggle);
+        let tog:Toggle = (event as any);
         if(!(this.fragNode && this.equipNode && this.propsNode) )return;
 
         if(tog.node.name == "Toggle1"){
