@@ -46,4 +46,20 @@ export class PopMgr extends PopCore  {
         })
     }
 
+    //弹出阵容更换界面
+    //type
+    public popBattleTeamView(type:number,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop_battleteam', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopBattleTeam");
+            script.setSubmitCallBack(submitCallBack)
+            script.setCloseCallBack(closeCallBack);
+            script.setIsMaskClose(isMaskClose);
+            script.setInitTeamView(type)
+        } );
+    }
+
 }

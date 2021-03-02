@@ -26,7 +26,7 @@ export class GameModel{
     public getPlayerModel(){
         return this._playerModel;
     }
-    public geFormationModel(){
+    public getFormationModel(){
         return this._formationModel;
     }
     

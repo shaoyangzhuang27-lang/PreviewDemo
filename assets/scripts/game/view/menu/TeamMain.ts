@@ -1,5 +1,7 @@
 
 import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, Vec3, tween } from 'cc';
+import { MsgMgr } from '../../control/MsgMgr';
+import { PopMgr } from '../../control/PopMgr';
 import { GameModel } from '../../model/GameModel';
 const { ccclass, property } = _decorator;
 
@@ -26,6 +28,9 @@ export class TeamMain extends Component {
     @property({type: Node })
     public btnClose:Node | null = null;
 
+    @property({type: Node })
+    public btnBook:Node | null = null;
+
     start () {
         // [3]
         const containerEventHandler = new EventHandler();
@@ -35,6 +40,7 @@ export class TeamMain extends Component {
         containerEventHandler.customEventData = '';
         this.selectGroup?.checkEvents.push(containerEventHandler);
         this.btnClose?.on(Node.EventType.TOUCH_END, this.closeHandle, this);
+        this.btnBook?.on(Node.EventType.TOUCH_END, this.openChangeFormationView, this);
         this.show();
         this.test();
     }
@@ -78,6 +84,14 @@ export class TeamMain extends Component {
         }).start()
     }
     closeHandle(){
+        this.hide();
+    }
+
+    openChangeFormationView()
+    {
+        PopMgr.getInstance().popBattleTeamView(1,()=>{
+            // MsgMgr.getInstance().getMsgFormation().requestChangeBattleTeam();
+        });
         this.hide();
     }
 

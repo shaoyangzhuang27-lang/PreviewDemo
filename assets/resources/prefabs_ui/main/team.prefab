@@ -5691,6 +5691,7 @@
       "__id__": 1
     },
     "_enabled": true,
+    "__prefab": null,
     "selectGroup": {
       "__id__": 40
     },
@@ -5705,6 +5706,9 @@
     },
     "btnClose": {
       "__id__": 43
+    },
+    "btnBook": {
+      "__id__": 70
     },
     "_id": ""
   },
