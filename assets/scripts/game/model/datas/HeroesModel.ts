@@ -35,6 +35,17 @@ export class HeroesModel extends BaseModel{
         this.refreshHeroBookProperty(); //收到消息后刷新
     }
 
+    //根据阵营获取当前英雄
+    public getHeroListByCampType(_campType:number)
+    {
+        let _campHeroList:Map<number,HeroData> = new Map<number,HeroData>();
+        this._heroList.forEach((heroInfo)=>{
+            if(ValueMgr.getInstance().getItemByField(TableName.heroes, heroInfo.getStaticID() as number) && heroInfo.getCamp() == _campType){
+                _campHeroList.set(heroInfo.getDyncID() as number, heroInfo);
+            }
+        });
+        return _campHeroList;
+    }
     
     
     private _heroBookLevel = 0;
@@ -102,6 +113,18 @@ export class HeroesModel extends BaseModel{
         if (this._heroBookPropertyByBook.has(proType))
             return this._heroBookPropertyByBook.get(proType) as number;
         return 0;
+    }    
+
+    //根据阵营获取当前图鉴英雄列表
+    public getBooKHeroListByCampType(_campType:number)
+    {
+        let _campHeroList:Map<number, Msg.HeroBookUnit> = new Map<number, Msg.HeroBookUnit>();//图鉴
+        this._heroBookMap.forEach((heroInfo)=>{
+            var _hero = ValueMgr.getInstance().getItemByField(TableName.heroes, heroInfo.heroBookId as number) as Config.heroes.Record;
+            if(_hero && _hero.camp == _campType){
+                _campHeroList.set(heroInfo.heroBookId as number, heroInfo);
+            }
+        });
+        return _campHeroList;
     }
-    
 }
