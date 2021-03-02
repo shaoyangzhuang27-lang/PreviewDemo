@@ -13,16 +13,16 @@ export class PopSimple extends PopBase {
 
     @property({type: Node})
     public btn_submit:Node | null = null;
-    
-    private submitCallFun:Function | null = null;
+
+    private _submitCallFun:Function | null = null;
 
     start () {
         super.start();
-        this.btn_submit?.on(Node.EventType.TOUCH_END, this.onSubmit, this);
+        this.btn_submit?.on(Node.EventType.TOUCH_END, this._onSubmit, this);
     }
-    onSubmit(){
-        if(this.submitCallFun){
-            this.submitCallFun();
+    private _onSubmit(){
+        if(this._submitCallFun){
+            this._submitCallFun();
         }
     }
     public setTitle(title:string){
@@ -35,7 +35,7 @@ export class PopSimple extends PopBase {
             this.lab_content.string = content
     }
     public setSubmitCallBack(func:Function){
-        this.submitCallFun = func;
+        this._submitCallFun = func;
     }
 
     public setCloseCallBack(func:Function | null){
