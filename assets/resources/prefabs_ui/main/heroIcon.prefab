@@ -33,7 +33,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 78
+      "__id__": 79
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -1715,7 +1715,9 @@
       "__id__": 1
     },
     "_enabled": true,
-    "__prefab": null,
+    "__prefab": {
+      "__id__": 78
+    },
     "img_bg": {
       "__id__": 3
     },
@@ -1749,6 +1751,10 @@
       }
     ],
     "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "ccURScSuRF7pqq7YnaaHWU"
   },
   {
     "__type__": "cc.PrefabInfo",

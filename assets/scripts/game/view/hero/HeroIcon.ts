@@ -3,6 +3,7 @@ import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resourc
 const { ccclass, property } = _decorator;
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { XConsts } from "../../model/const/XConsts";
+import { HeroData } from '../../model/datas/HeroData';
 
 @ccclass('HeroIcon')
 export class HeroIcon extends Component {
@@ -32,8 +33,8 @@ export class HeroIcon extends Component {
     public starlist:Node[] = [];
     
 
-    private _heroInfo : any | null = null;
-    private _heroLT : any | null = null;
+    private _heroInfo : HeroData | null = null as unknown as HeroData;
+    private _heroLT : any | null = null as unknown as HeroData;
 
 
     start () {
@@ -42,20 +43,20 @@ export class HeroIcon extends Component {
     }
 
     //传入英雄id  初始化对象
-    setHeroID(_heroData : Msg.HeroInfo)
+    setHeroID(_heroData : HeroData)
     {
         this._heroInfo = _heroData;
-        this._heroLT = ValueMgr.getInstance().getItemByField(TableName.heroes,this._heroInfo.id) as Config.heroes.Record;
-        this.init();
+        this._heroLT = ValueMgr.getInstance().getItemByField(TableName.heroes,this._heroInfo.getStaticID()) as Config.heroes.Record;
+        // this.init();
     }
 
     init()
     {
-        let _campName:string = XConsts.KCampSpriteName[this._heroLT.camp];
-        let _frameName:string = XConsts.GetQualityBgByStar(this._heroLT.star);
-        let _level : string = this._heroInfo.level;
-        let _iconName:string = this._heroLT.image;
-        let _starNum:number = this._heroLT.star;
+        let _campName:string = XConsts.KCampSpriteName[this._heroInfo?.getCamp() as number];
+        let _frameName:string = XConsts.GetQualityBgByStar(this._heroInfo?.getStar() as number);
+        let _level : number = Number(this._heroInfo?.getLevel());
+        let _iconName:string = this._heroInfo?.getImageIcon() as string;
+        let _starNum:number = this._heroInfo?.getStar() as number;
 
         let campIconPath:string = "resources/ui/icon/" + _campName + ".png"
         this._resourceLoad(campIconPath,this.img_camp);

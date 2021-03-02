@@ -107,28 +107,28 @@ export class HeroData extends BaseHeroData {
         return talentID;
     }
     public isTalentActive(loc:number, hdList:Array<HeroData>|null = null) {
-        if (this.IsRoleHero()) {
+        if (this.isRoleHero()) {
             return this.level >= this._record.talentUnlockTier[loc];
         } else{
             return this.tier >= this._record.talentUnlockTier[loc];
         }
     }
     public get level(){
-        if (!this.IsRoleHero()) {
+        if (!this.isRoleHero()) {
             return 1//Mathf.Min(XLuaFunc.instance.KHeroMaxLevelForTier[_record.Star], PlayerData.instance.HeroCollegeLevel);
         } else
             return this._heroInfo.level;
     }
     public get tier(){
         
-        if (!this.IsRoleHero()) {
+        if (!this.isRoleHero()) {
             return 1;// Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);
         } else
             return this._heroInfo.tier;
     }
     public get equipOnList(){
         
-        if (!this.IsRoleHero()) {
+        if (!this.isRoleHero()) {
             return null;// Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);
         } else
             return this._equipOnList;
@@ -136,12 +136,12 @@ export class HeroData extends BaseHeroData {
     public get record(){
         return this._record
     }
-    public IsRoleHero() {
+    public isRoleHero() {
         return this._heroInfo.id == 0;
     }
 
     public refreshEquipProperty() {
-        if (this.IsRoleHero())
+        if (this.isRoleHero())
             this.refreshRoleHeroEquipProperty();
         else
             this.refreshHeroEquipProperty();
@@ -331,7 +331,7 @@ export class HeroData extends BaseHeroData {
         //////////////////////////////////
     */
     //英雄HP = 基础HP + HP加值 * 等级 + 装备加成 + 图鉴加成 + 光环加成 + 套装加成 + 工会buff加成 + 称号加成
-    public GetMaxHP(isAura : boolean = true)
+    public getMaxHP(isAura : boolean = true)
     {
 
         let maxHp : number = 0;
@@ -358,7 +358,7 @@ export class HeroData extends BaseHeroData {
     }
     
     //英雄攻击 = 基础攻击 + 攻击加值 * 等级 + 装备加成 + 图鉴加成 + 光环加成 + 套装加成 + 工会buff加成 + 称号加成
-    public GetATK(isAura : boolean = true)
+    public getATK(isAura : boolean = true)
     {
         
         let atk:number = 0;
@@ -382,7 +382,7 @@ export class HeroData extends BaseHeroData {
     }
 
     //英雄防御 = 基础防御 + 防御加值 * 等级 + 装备加成 + 图鉴加成 + 光环加成 + 套装加成 + 工会buff加成 + 称号加成
-    public GetDEF(isAura : boolean = true)
+    public getDEF(isAura : boolean = true)
     {
         let def = 0;
         if (this._heroInfo != null && this._record != null) {
@@ -405,7 +405,7 @@ export class HeroData extends BaseHeroData {
     }
 
     //英雄攻速 = 基础攻速 + 装备加成 + 图鉴加成 + 光环加成 + 套装加成 + 工会buff加成 + 称号加成
-    public GetSpeed(isAura : boolean = true)
+    public getSpeed(isAura : boolean = true)
     {
         let num = 0;
         if (this._heroInfo != null && this._record != null) {
@@ -426,7 +426,7 @@ export class HeroData extends BaseHeroData {
 
 
     //英雄命中率 = 基础命中率 + 装备加成 + 图鉴加成 + 光环加成 + 套装加成 + 工会buff加成 + 称号加成
-    public GetHit(isAura : boolean = true)
+    public getHit(isAura : boolean = true)
     {
         let num = 0;
         if (this._heroInfo != null && this._record != null) {
@@ -445,7 +445,7 @@ export class HeroData extends BaseHeroData {
     }
 
     //英雄暴击率 = 基础暴击率 + 装备加成 + 图鉴加成 + 光环加成 + 套装加成 + 工会buff加成 + 称号加成
-    public GetCrit(isAura : boolean = true)
+    public getCrit(isAura : boolean = true)
     {
         let num = 0;
         if (this._heroInfo != null && this._record != null) {
@@ -464,7 +464,7 @@ export class HeroData extends BaseHeroData {
     }
 
     //英雄暴击伤害 = 基础暴击伤害 + 装备加成 + 图鉴加成 + 光环加成 + 套装加成 + 工会buff加成 + 称号加成
-    public GetCritDamage(isAura : boolean = true)
+    public getCritDamage(isAura : boolean = true)
     {
         let num = 0;
         if (this._heroInfo != null && this._record != null) {
@@ -483,7 +483,7 @@ export class HeroData extends BaseHeroData {
     }
     
     //英雄破甲率 = 基础破甲率 + 装备加成 + 图鉴加成 + 光环加成 + 套装加成 + 工会buff加成 + 称号加成
-    public GetDEFBreak(isAura : boolean = true)
+    public getDEFBreak(isAura : boolean = true)
     {
         let num = 0;
         if (this._heroInfo != null && this._record != null) {
@@ -502,7 +502,7 @@ export class HeroData extends BaseHeroData {
     }
 
     //英雄闪避率 = 基础闪避率 + 装备加成 + 图鉴加成 + 光环加成 + 套装加成 + 工会buff加成 + 称号加成
-    public GetDodge(isAura : boolean = true)
+    public getDodge(isAura : boolean = true)
     {
         let num = 0;
         if (this._heroInfo != null && this._record != null) {
@@ -521,7 +521,7 @@ export class HeroData extends BaseHeroData {
     }
 
     
-    public GetReduceDamage(isAura : boolean = true){
+    public getReduceDamage(isAura : boolean = true){
         let num = 0;
         num += this.getCrystalProperty(Msg.THeroPropertyType.EHeroPropertyType_DamageReduce);
         num += isAura ? this.getAuraProperty(Msg.THeroPropertyType.EHeroPropertyType_DamageReduce) : 0;
@@ -534,7 +534,7 @@ export class HeroData extends BaseHeroData {
         num += this.getTechnologyProperty(Msg.THeroPropertyType.EHeroPropertyType_DamageReduce);
         return num;
     }
-    public GetSkillEffect(isAura : boolean = true){
+    public getSkillEffect(isAura : boolean = true){
         let num = 0;
         num += this.getCrystalProperty(Msg.THeroPropertyType.EHeroPropertyType_SkillEffect);
         num += isAura ? this.getAuraProperty(Msg.THeroPropertyType.EHeroPropertyType_SkillEffect) : 0;
@@ -547,7 +547,7 @@ export class HeroData extends BaseHeroData {
         num += this.getTechnologyProperty(Msg.THeroPropertyType.EHeroPropertyType_SkillEffect);
         return num;
     }
-    public GetCampDamage(isAura : boolean = true){
+    public getCampDamage(isAura : boolean = true){
         let num = XShare.getInstance().KCampDamageBonus/100.0;
         num += this.getTalentSkillBuff(Msg.THeroPropertyType.EHeroPropertyType_CampDamage);
         num += this.getEquipProperty(Msg.THeroPropertyType.EHeroPropertyType_CampDamage);
@@ -558,7 +558,7 @@ export class HeroData extends BaseHeroData {
         num += this.getTechnologyProperty(Msg.THeroPropertyType.EHeroPropertyType_CampDamage);
         return num;
     }
-    public GetHealEffect(isAura : boolean = true){
+    public getHealEffect(isAura : boolean = true){
         let num = 0;
         num += this.getCrystalProperty(Msg.THeroPropertyType.EHeroPropertyType_HealEffect);
         num += isAura ? this.getAuraProperty(Msg.THeroPropertyType.EHeroPropertyType_HealEffect) : 0;
@@ -572,7 +572,7 @@ export class HeroData extends BaseHeroData {
         return num;
     }
     //英雄技能攻速
-    public GetSkillSpeed(isAura : boolean = true)
+    public getSkillSpeed(isAura : boolean = true)
     {
         let num = 0;
         if (this._heroInfo != null && this._record != null) {
@@ -582,40 +582,40 @@ export class HeroData extends BaseHeroData {
         return num;
     }
     
-    public GetProperty(proType:Msg.THeroPropertyType, isAura : boolean = true) {
+    public getProperty(proType:Msg.THeroPropertyType, isAura : boolean = true) {
         switch (proType) {
             case Msg.THeroPropertyType.EHeroPropertyType_HP:
-                return this.GetMaxHP(isAura);
+                return this.getMaxHP(isAura);
             case Msg.THeroPropertyType.EHeroPropertyType_ATK:
-                return this.GetATK(isAura);
+                return this.getATK(isAura);
             case Msg.THeroPropertyType.EHeroPropertyType_DEF:
-                return this.GetDEF(isAura);
+                return this.getDEF(isAura);
             case Msg.THeroPropertyType.EHeroPropertyType_Crit:
-                return this.GetCrit(isAura);
+                return this.getCrit(isAura);
             case Msg.THeroPropertyType.EHeroPropertyType_CritDamage:
-                return this.GetCritDamage(isAura);
+                return this.getCritDamage(isAura);
             case Msg.THeroPropertyType.EHeroPropertyType_Hit:
-                return this.GetHit(isAura);
+                return this.getHit(isAura);
             case Msg.THeroPropertyType.EHeroPropertyType_Dodge:
-                return this.GetDodge(isAura);
+                return this.getDodge(isAura);
             case Msg.THeroPropertyType.EHeroPropertyType_DEFBreak:
-                return this.GetDEFBreak(isAura);
+                return this.getDEFBreak(isAura);
             case Msg.THeroPropertyType.EHeroPropertyType_Speed:
-                return this.GetSpeed(isAura);
+                return this.getSpeed(isAura);
             case Msg.THeroPropertyType.EHeroPropertyType_DamageReduce:
-                return this.GetReduceDamage(isAura);
+                return this.getReduceDamage(isAura);
             case Msg.THeroPropertyType.EHeroPropertyType_SkillEffect:
-                return this.GetSkillEffect(isAura);
+                return this.getSkillEffect(isAura);
             case Msg.THeroPropertyType.EHeroPropertyType_CampDamage:
-                return this.GetCampDamage(isAura);
+                return this.getCampDamage(isAura);
             case Msg.THeroPropertyType.EHeroPropertyType_HealEffect:
-                return this.GetHealEffect(isAura);
+                return this.getHealEffect(isAura);
         }
         return 0;
     }
 
     //普攻范围
-    public GetRange(isAura : boolean = true)
+    public getRange(isAura : boolean = true)
     {
         if (this._heroInfo != null && this._record != null) {
             return this._record.range;
@@ -623,21 +623,21 @@ export class HeroData extends BaseHeroData {
         return 0;
     }
     
-    public  GetPrepareAttackParticleName() {
+    public  getPrepareAttackParticleName() {
         if (this._heroInfo != null && this._record != null) {
             return this._record.prepareAttack;
         }
         return "0";
     }
 
-    public GetNormalAttackParticleName() {
+    public getNormalAttackParticleName() {
         if (this._heroInfo != null && this._record != null) {
             return this._record.normalAttack;
         }
         return "0";
     }
 
-    public GetActiveTalent() {// List<talent.Types.Record>
+    public getActiveTalent() {// List<talent.Types.Record>
         let active_talents = new Array<Config.talent.Record>();
         for (let i = 0; i < this._record.talentId.length; i++) {
             if (this.isTalentActive(i)) {
@@ -651,46 +651,46 @@ export class HeroData extends BaseHeroData {
     }
 
     //等级
-    public Level() {
+    public getLevel() {
         return this._heroInfo.level; 
     }
     //静态ID
-    public StaticID() {
+    public getStaticID() {
         return this._heroInfo.staticID; 
     }
 
-    public DyncID() { 
+    public getDyncID() { 
         return this._heroInfo.id; 
     }
     //阵营
-    public Camp() { 
+    public getCamp() { 
         return this._record.camp;
     }
     //星级   
-    public Star() { 
+    public getStar() { 
         return this._record.star;
     }
 
-    public IsOrangeQuality() { 
+    public isOrangeQuality() { 
         return this._heroInfo.staticID/1000000 >= 5; 
     }
     
-    public ArmorID() {
-        if (this.IsRoleHero())
+    public getArmorID() {
+        if (this.isRoleHero())
             return this._record.id / 100;
         return 0;
     }
 
     
-    public GetFighting() {
+    public getFighting() {
         //主角和英雄现在战力计算方式相同
         //战力公式不再计算免伤，将防御属性按英雄的攻血比转化为攻击
         //战力 = 血量 / (1-免伤) / (1 - 闪避) * (攻击 + 防御 * 攻防比)/2 /攻速 * (1 + 暴击率 * 暴击伤害) * 命中 * (1 + 破甲 + (技能伤害+治疗效果) / 2)
         let fighting = 0;
-        fighting += this.GetMaxHP(false) / XShare.getInstance().KRoleFightingParam / (1.0 - this.GetDodge(false)) / (1.0 - this.GetReduceDamage(false)) *
-            (this.GetATK(false) + this.GetDEF(false) * this.getRatioAtkDef()) / 2.0 / this.GetSpeed(false) * (1.0 + (this.GetCrit(false) + XShare.getInstance().KBaseCrit / 100.0) * 
-            (XShare.getInstance().KBaseCritDmage / 100.0 - 1.0 + this.GetCritDamage(false))) * (this.GetHit(false) + XShare.getInstance().KBaseHit / 100.0) * 
-            (1.0 + this.GetDEFBreak(false) + (this.GetSkillEffect(false) + this.GetHealEffect(false)) / 2);
+        fighting += this.getMaxHP(false) / XShare.getInstance().KRoleFightingParam / (1.0 - this.getDodge(false)) / (1.0 - this.getReduceDamage(false)) *
+            (this.getATK(false) + this.getDEF(false) * this.getRatioAtkDef()) / 2.0 / this.getSpeed(false) * (1.0 + (this.getCrit(false) + XShare.getInstance().KBaseCrit / 100.0) * 
+            (XShare.getInstance().KBaseCritDmage / 100.0 - 1.0 + this.getCritDamage(false))) * (this.getHit(false) + XShare.getInstance().KBaseHit / 100.0) * 
+            (1.0 + this.getDEFBreak(false) + (this.getSkillEffect(false) + this.getHealEffect(false)) / 2);
 
         let talentFighting = 0;
         for (let i = 0; i < this._record.talentId.length; i++) {
@@ -714,7 +714,7 @@ export class HeroData extends BaseHeroData {
         return 1;
     }
     
-    public imageIcon() { 
+    public getImageIcon() { 
         return this._record.image;
     }
 
