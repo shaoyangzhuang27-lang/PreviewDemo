@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Vec2, Vec3,systemEvent,Camera } from 'cc';
+import { _decorator, Component, Node, Vec2, Vec3,systemEvent,Camera, view } from 'cc';
 // import { PopMgr } from "./game/control/PopMgr";
 // import { DataMgr } from "../game/model/DataMgr";
 
@@ -62,6 +62,9 @@ export class MainCity extends Component {
     }
 
     clickBuildHandle(event:any){
+        
+        // PopMgr.getInstance().tipSimpleWindow(new Vec3(event._point.x, event._point.y,0))
+        
         this.mainCamera?.screenPointToRay(event._point.x, event._point.y, this._ray);
         let dis = Vec2.distance(event._startPoint,event._point)
         // console.log(dis)

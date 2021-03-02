@@ -11,7 +11,7 @@ export class GameModel{
         return this._instance;
     }
     
-
+    //数据类定义---------------------
     private _heroesModel:HeroesModel = new HeroesModel(this);
     private _technologyModel:TechnologyModel = new TechnologyModel(this);
     private _playerModel:PlayerModel =  new PlayerModel(this);
@@ -29,6 +29,7 @@ export class GameModel{
     public geFormationModel(){
         return this._formationModel;
     }
+    //数据类定义---------------------
     
     public initHeroList(msg:Msg.GetHeroListA) {
         this._heroesModel.initHeroList(msg);

@@ -30,9 +30,9 @@ export class PopSimple extends PopBase {
 
     start () {
         super.start();
-        this.btn_submit?.on(Node.EventType.TOUCH_END, this.submitHandle, this);
+        this.btn_submit?.on(Node.EventType.TOUCH_END, this.onSubmit, this);
     }
-    submitHandle(){
+    onSubmit(){
         if(this.submitCallFun){
             this.submitCallFun();
         }

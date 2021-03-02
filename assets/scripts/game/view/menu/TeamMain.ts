@@ -34,7 +34,7 @@ export class TeamMain extends Component {
         containerEventHandler.handler = 'tabClick';
         containerEventHandler.customEventData = '';
         this.selectGroup?.checkEvents.push(containerEventHandler);
-        this.btnClose?.on(Node.EventType.TOUCH_END, this.closeHandle, this);
+        this.btnClose?.on(Node.EventType.TOUCH_END, this.onClose, this);
         this.show();
         this.test();
     }
@@ -77,7 +77,7 @@ export class TeamMain extends Component {
             this.node.removeFromParent();
         }).start()
     }
-    closeHandle(){
+    onClose(){
         this.hide();
     }
 

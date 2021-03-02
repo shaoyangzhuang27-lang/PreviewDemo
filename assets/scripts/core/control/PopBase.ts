@@ -14,10 +14,10 @@ export class PopBase extends Component {
     public btn_cancel:Node | null = null;
 
     @property({type: Node})
-    public window:Node | null = null;
+    public window:Node = null as unknown as Node;
 
     @property({type: Node})
-    public mask:Node | null = null;
+    public mask:Node = null as unknown as Node;
 
     private isShow:boolean = false;
     private isLive:boolean = false;
@@ -28,27 +28,25 @@ export class PopBase extends Component {
     //弹窗初始化-----
     start () {
         // Your initialization goes here.
-        this.btn_close?.on(Node.EventType.TOUCH_END, this.closeHandle, this);
-        this.btn_submit?.on(Node.EventType.TOUCH_END, this.submitHandle, this);
-        this.btn_cancel?.on(Node.EventType.TOUCH_END, this.closeHandle, this);
-        this.mask?.on(Node.EventType.TOUCH_END, this.maskHandle, this);
+        this.btn_close?.on(Node.EventType.TOUCH_END, this.onClose, this);
+        this.btn_submit?.on(Node.EventType.TOUCH_END, this.onSubmit, this);
+        this.btn_cancel?.on(Node.EventType.TOUCH_END, this.onClose, this);
+        this.mask.on(Node.EventType.TOUCH_END, this.onMaskClick, this);
 
         this.show();
-        if(this.mask)
-            this.mask.active = true
-        if(this.window)
-            this.window.scale = new Vec3(0,0,1)
+        this.mask.active = true
+        this.window.scale = new Vec3(0,0,1)
     }
-    maskHandle(){
+    onMaskClick(){
         if(this.isMaskClose && this.closeFunc){
             this.closeFunc();
         }
     }
-    closeHandle(){
+    onClose(){
         if(this.closeFunc)
             this.closeFunc();
     }
-    submitHandle(){
+    onSubmit(){
         console.log("submit")
     }
     //---------------------
