@@ -1,7 +1,8 @@
-import {  Node,resources,instantiate,LabelComponent,Vec3,tween,Scene } from 'cc';
-import { PopSimple } from "../view/PopSimple";
+import {  Node,resources,instantiate,LabelComponent,Vec3,tween,Scene, Script } from 'cc';
+import { PopSimple } from "../view/pop/PopSimple";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
+import { TipDemo } from '../view/TipDemo';
 import { PopHeroPub } from "../view/PopHeroPub";
 export class PopMgr extends PopCore  {
 
@@ -12,21 +13,6 @@ export class PopMgr extends PopCore  {
     
     public clearPop(){
 
-    }
-    public popupSimpleWindow(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
-
-        resources.load('prefabs_ui/pop_simple', (err:any,res:any)=>{
-            let p = instantiate( res );
-            this.pushWindow(p)
-
-            let script = p.getComponent("PopSimple") as PopSimple;
-            script.setTitle(title)
-            script.setContent(content)
-            script.setSubmitCallBack(submitCallBack)
-            script.setCloseCallBack(closeCallBack);
-            script.setIsMaskClose(isMaskClose);
-
-        } );
     }
 
     public setNetLoading(bo:boolean,content:string){
@@ -46,6 +32,66 @@ export class PopMgr extends PopCore  {
             }
         })
     }
+
+    //弹窗放这里------------------------------------------------------------
+    public popupSimpleWindow(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+
+        resources.load('prefabs_ui/pop_simple', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopSimple") as PopSimple;
+            script.setTitle(title)
+            script.setContent(content)
+            script.setSubmitCallBack(submitCallBack)
+            script.setCloseCallBack(closeCallBack);
+            script.setIsMaskClose(isMaskClose);
+
+        } );
+    }
+
+    //弹出阵容更换界面
+    //type
+    public popBattleTeamView(type:number,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop_battleteam', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopBattleTeam");
+            script.setSubmitCallBack(submitCallBack)
+            script.setCloseCallBack(closeCallBack);
+            script.setIsMaskClose(isMaskClose);
+            script.setInitTeamView(type)
+        } );
+            }
+
+
+
+
+
+
+
+    //弹窗放这里------------------------------------------------------------
+
+
+    //弹出提示窗放这里-------------------------------------------------
+    public tipSimpleWindow(pos:Vec3){
+        
+        resources.load('prefabs_ui/tip_demo', (err:any,res:any)=>{
+            let p = instantiate( res ) as Node;
+            this.parent?.addChild(p);
+            let script = p.getComponent("TipDemo") as TipDemo;
+            script.setWinPos(pos);
+        });
+            }
+
+
+
+
+
+
+    //弹出提示窗放这里-------------------------------------------------
 
     public popHeroPubWindow(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 

@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "3d758a1a-e925-40a4-a260-74346afe5be9",
+  "uuid": "b49ad86a-86b4-44f9-9cce-d6ecf55a61f5",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "3d758a1a-e925-40a4-a260-74346afe5be9@6c48a",
-      "displayName": "通用内镶x30y38",
+      "uuid": "b49ad86a-86b4-44f9-9cce-d6ecf55a61f5@6c48a",
+      "displayName": "光环_木1",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "3d758a1a-e925-40a4-a260-74346afe5be9"
+        "imageUuidOrDatabaseUri": "b49ad86a-86b4-44f9-9cce-d6ecf55a61f5"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "3d758a1a-e925-40a4-a260-74346afe5be9@f9941",
-      "displayName": "通用内镶x30y38",
+      "uuid": "b49ad86a-86b4-44f9-9cce-d6ecf55a61f5@f9941",
+      "displayName": "光环_木1",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 100,
-        "height": 73,
-        "rawWidth": 100,
-        "rawHeight": 73,
-        "borderTop": 30,
-        "borderBottom": 30,
-        "borderLeft": 30,
-        "borderRight": 30,
+        "width": 39,
+        "height": 34,
+        "rawWidth": 39,
+        "rawHeight": 34,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "3d758a1a-e925-40a4-a260-74346afe5be9@6c48a",
+        "imageUuidOrDatabaseUri": "b49ad86a-86b4-44f9-9cce-d6ecf55a61f5@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "3d758a1a-e925-40a4-a260-74346afe5be9@f9941"
+    "redirect": "b49ad86a-86b4-44f9-9cce-d6ecf55a61f5@f9941"
   }
 }
