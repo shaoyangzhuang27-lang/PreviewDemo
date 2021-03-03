@@ -7,22 +7,24 @@ import { NotifyMgr } from "../control/NotifyMgr";
 export class BaseScene extends Component {
 
     @property({type: Node})
-    public curScene:Scene | null = null;
+    public curScene:Scene = null as unknown as Scene;
+
+    @property({type: Node})
+    public curCanvas:Node = null as unknown as Node;
 
     onLoad(){
-        // console.log("BaseScene onLoad")
         if(!this.curScene){
             console.log("场景未设置,请设置当前场景");
-            this.curScene = director.getScene();
+            this.curScene = director.getScene() as Scene;
         }
-        PopMgr.getInstance().initPop(this.curScene)
+        PopMgr.getInstance().initPop(this.curCanvas)
         // NotifyMgr.getInstance().addNotifyHandler("test",this.notifyTest,this);
         console.log("---------------------------------------------------- "+this.name+" start ----------------------------------------------------");
     }
-    initUI(){
+    protected initUI(){
         resources.load('prefabs_ui/main_ui', (err:any,res:any)=>{
             let p = instantiate( res );
-            this.curScene?.addChild(p);
+            this.curCanvas.addChild(p);
         } );
     }
 
@@ -36,7 +38,7 @@ export class BaseScene extends Component {
         // console.log("BaseScene onDestory")
         console.log("---------------------------------------------------- "+this.name+" end ----------------------------------------------------");
         PopMgr.getInstance().clearPop();
-        NotifyMgr.getInstance().removeNotifyHandler("test",this.notifyTest,this);
+        // NotifyMgr.getInstance().removeNotifyHandler("test",this.notifyTest,this);
     }
     
 }
