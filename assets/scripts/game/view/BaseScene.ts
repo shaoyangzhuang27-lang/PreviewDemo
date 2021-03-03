@@ -2,6 +2,7 @@ import { _decorator, Component, Node,director,instantiate,resources,Scene } from
 const { ccclass, property } = _decorator;
 import { PopMgr } from "../control/PopMgr";
 import { NotifyMgr } from "../control/NotifyMgr";
+import { XConsts } from '../model/const/XConsts';
 
 @ccclass('BaseScene')
 export class BaseScene extends Component {
@@ -23,8 +24,9 @@ export class BaseScene extends Component {
     }
     protected initUI(){
         resources.load('prefabs_ui/main_ui', (err:any,res:any)=>{
-            let p = instantiate( res );
+            let p = instantiate( res ) as Node;
             this.curCanvas.addChild(p);
+            p.setSiblingIndex(XConsts.OrderMainUI)
         } );
     }
 

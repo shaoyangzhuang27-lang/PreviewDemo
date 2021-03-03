@@ -26,6 +26,14 @@ export class XConsts{
     public static  KIAPNameStarterTenSummon:string = "IAPNameStarterTenSummon";
     public static  KDailyRechargeDayCount:number = 5;
 
+    public static  OrderMainUI = 0;
+    public static  OrderPopHide = 1;
+    public static  OrderPopShow = 2;
+    public static  OrderTip = 2;
+    public static  OrderLoading = 3;
+    public static  OrderToash = 4;
+
+
     //图集名称
     public static  KAtlasCount:number = 12;
     public static  KAtlasCommon:string = "Atlas_Common_1";

@@ -3,6 +3,7 @@ import { PopSimple } from "../view/pop/PopSimple";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
 import { TipDemo } from '../view/TipDemo';
+import { XConsts } from '../model/const/XConsts';
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -28,6 +29,7 @@ export class PopMgr extends PopCore  {
                 let script = net_loading.getComponent("NetLoading") as NetLoading;
                 script.setContent(content);
                 net_loading.active = bo;
+                net_loading.setSiblingIndex(XConsts.OrderLoading);
             }
         })
     }
@@ -35,7 +37,7 @@ export class PopMgr extends PopCore  {
     //弹窗放这里------------------------------------------------------------
     public popupSimpleWindow(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-        resources.load('prefabs_ui/pop_simple', (err:any,res:any)=>{
+        resources.load('prefabs_ui/pop/pop_simple', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
@@ -48,7 +50,7 @@ export class PopMgr extends PopCore  {
 
         } );
     }
-    
+
     //弹出阵容更换界面
     //type
     public popBattleTeamView(type:number,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
@@ -77,9 +79,11 @@ export class PopMgr extends PopCore  {
     //弹出提示窗放这里-------------------------------------------------
     public tipSimpleWindow(pos:Vec3){
         
-        resources.load('prefabs_ui/tip_demo', (err:any,res:any)=>{
+        resources.load('prefabs_ui/pop/tip_demo', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
             this.parent?.addChild(p);
+            p.setSiblingIndex(XConsts.OrderTip);
+
             let script = p.getComponent("TipDemo") as TipDemo;
             script.setWinPos(pos);
         });
