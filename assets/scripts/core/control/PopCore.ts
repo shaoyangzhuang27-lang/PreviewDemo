@@ -10,10 +10,10 @@ export class PopCore {
     protected popArray:Array<Node> = [];
     protected popDataArray:Array<[Node,string,[] ]> = [];
     // protected pop 
-    protected parent:Scene | null = null;
+    protected parent:Node | null = null;
 
 
-    public initPop(parent:Scene | null){
+    public initPop(parent:Node | null){
         this.parent = parent;
     }
     public clearPop(){
@@ -41,10 +41,11 @@ export class PopCore {
         curPopScript?.createMe(()=>{this.deleteWindow()});
         this.parent?.addChild(curPop);
         curPopScript?.show();
+        curPop.setSiblingIndex(1);
 
         // curPop.zIndex = -1
         if(prePopScript){
-            // prePop.zIndex = -1
+            prePop.setSiblingIndex(0);
             prePopScript.hide()
         }
     }
@@ -66,10 +67,12 @@ export class PopCore {
 
         curPopScript?.deleteMe();
         curPopScript?.hide();
+        curPop.setSiblingIndex(0);
 
         // curPop.zIndex = -1
         if(prePopScript){
             // prePop.zIndex = -1
+            prePop.setSiblingIndex(1);
             prePopScript.show()
         }
     }

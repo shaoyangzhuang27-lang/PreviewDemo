@@ -7,6 +7,7 @@ import { BaseScene } from './BaseScene';
 export class SceneBattle extends BaseScene {
 
     start () {
+        super.start();
         this.initUI();
     }
 

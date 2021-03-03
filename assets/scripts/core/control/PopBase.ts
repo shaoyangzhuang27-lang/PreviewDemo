@@ -23,8 +23,8 @@ export class PopBase extends Component {
     private _isLive:boolean = false;
     private _isMaskClose:boolean = true;
 
-    private _showTime:number = 1;
-    private _hideTime:number = 1;
+    private _showTime:number = 0.15;
+    private _hideTime:number = 0.15;
 
     protected _closeFunc:Function | null = null;
 

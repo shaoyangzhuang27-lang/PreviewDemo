@@ -50,7 +50,7 @@ export class MainUI extends Component {
     onDestroy(){
     }
     start () {
-        this.initView()
+        this.initView();
     }
     initView(){
         let playerInfo = DataMgr.getInstance().getPlayerInfo()
