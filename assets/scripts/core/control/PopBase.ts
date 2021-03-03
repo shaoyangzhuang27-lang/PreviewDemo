@@ -25,6 +25,7 @@ export class PopBase extends Component {
 
     private _showTime:number = 0.15;
     private _hideTime:number = 0.15;
+    private _isNeedHide:boolean = true;
 
     protected _closeFunc:Function | null = null;
 
@@ -77,6 +78,7 @@ export class PopBase extends Component {
         // node?.addChild(this.node);
         this._closeFunc = closeFunc;
         this._isLive = true;
+        this.window.scale = new Vec3(0,0,1)
     }
     public deleteMe(){
         this._isLive = false;
@@ -88,15 +90,17 @@ export class PopBase extends Component {
         this._isMaskClose = bo;
     }
 
-
+    public setIsNeedHide(bo:boolean){
+        this._isNeedHide = bo;
+    }
 
     public show(){
         if(this._isShow){
             return;
         }
+        this.mask.active = true
+        this._isShow = true
 
-        if(this.window)
-            this.window.scale = new Vec3(0,0,1)
         tween(this.window)
         .to(this._showTime,{scale:new Vec3(1,1,1)},{easing: 'backOut'})
         .call(() => { 
@@ -110,15 +114,16 @@ export class PopBase extends Component {
         .to(this._showTime,{opacity:255},{easing: 'backOut'})
         .start()
 
-        if(this.mask)
-            this.mask.active = true
-
-        this._isShow = true
     }
     public hide(){
         if(!this._isShow){
             return;
         }
+        this.mask.active = false
+        this._isShow = false
+
+        if(!this._isNeedHide && this._isLive)return;
+
         tween(this.window)
         .to(this._hideTime,{scale:new Vec3(0,0,1)},{easing: 'backIn'}) 
         .call(() => {
@@ -131,10 +136,6 @@ export class PopBase extends Component {
         .to(this._hideTime,{opacity:0})
         .start()
 
-        if(this.mask)
-            this.mask.active = false
-
-        this._isShow = false
     }
 
     private _showEnd(){

@@ -47,6 +47,7 @@ export class PopMgr extends PopCore  {
             script.setSubmitCallBack(submitCallBack)
             script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
+            // script.setIsNeedHide(false);
 
         } );
     }
