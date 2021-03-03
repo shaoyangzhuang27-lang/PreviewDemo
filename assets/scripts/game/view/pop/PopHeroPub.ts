@@ -1,21 +1,82 @@
 
-import { _decorator, Component, Node,LabelComponent,resources,instantiate,Vec3 } from 'cc';
+import { _decorator, Component, Node,LabelComponent,resources,instantiate,Vec3, CCInteger} from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 const { ccclass, property } = _decorator;
 
+ var SUMMON_FRIEND_COUNT_MAX = 30;
 @ccclass('PopHeroPub')
 export class PopHeroPub extends PopBase {
     @property({type: LabelComponent})
     public lab_title:LabelComponent | null = null;
 
+    @property({type: Node})
+    public btn_introduce:Node | null = null;
+
+    @property({type: Node})
+    public btn_recommendteam:Node | null = null;
+
+
+    @property({type: Node})
+    public img_prop:Node | null = null;
+
+
     @property({type: LabelComponent})
-    public lab_content:LabelComponent | null = null;
+    public lab_prop_num:LabelComponent | null = null;
+
+    @property({type: Node})
+    public node_diamond = null as unknown as Node;
+
+    @property({type: Node})
+    public node_friend = null as unknown as Node;
+
+    @property({type: Node})
+    public btn_hero_summon:Node | null = null;
+
+    @property({type: Node})
+    public btn_friend_summon:Node | null = null;
+
+    @property({type: Node})
+    public img_summon_ad:Node | null = null;
+
+    @property({type: Node})
+    public btn_summon_one:Node | null = null;
+
+    @property({type: Node})
+    public btn_summon_ten:Node | null = null;
+    // @property({type: LabelComponent})
+    // public lab_content:LabelComponent | null = null;
+
+
 
     private submitCallFun:Function | null = null;
 
+    // //召唤类型  默认英雄召唤
+    // private _curSummonType: Msg.TSummonType = Msg.TSummonType.ESummonType_Heroic;
+    // //消费道具类型 默认道具类型Null
+    // private _curSummonConsumType :  Msg.TSummonConsumeType = Msg.TSummonConsumeType.ESummonConsumeType_NULL;
+    //召唤类型  默认英雄召唤
+    private _curSummonType: number = 0;
+    //消费道具类型 默认道具类型Null
+    private _curSummonConsumType :  number = 0;
+    //卷轴数量
+    private _nScorllNum : number  = 0;
+    //友情心数量
+    private _nFriendHeartNum : number = 0;
+    //英雄召唤进度
+    private _nSummonFriendCount : number = 0;
+     //弹窗初始化-----
+     onLoad(){
+        super.onLoad();
+        
+        // this._curSummonType = Msg.TSummonType.ESummonType_Heroic;
+        // this._curSummonType = Msg.TSummonType.ESummonType_Friend;
+        this.setSummonType(Msg.TSummonType.ESummonType_Friend);
+        // this._curSummonConsumType= Msg.TSummonConsumeType.ESummonConsumeType_NULL;
+    }
+    
+    
     start () {
         super.start();
-        this.btn_submit?.on(Node.EventType.TOUCH_END, this.submitHandle, this);
         this.showPubHeroIconPrefab()
     }
 
@@ -28,26 +89,27 @@ export class PopHeroPub extends PopBase {
         if(this.lab_title)
             this.lab_title.string = title
     }
-    public setContent(content:string){
-        console.log(content)
-        if(this.lab_content)
-            this.lab_content.string = content
-    }
+    // public setContent(content:string){
+    //     console.log(content)
+    //     if(this.lab_content)
+    //         this.lab_content.string = content
+    // }
     public setSubmitCallBack(func:Function){
         this.submitCallFun = func;
     }
 
     public setCloseCallBack(func:Function | null){
         if(func)
-            this.closeFunc = func;
+            this._closeFunc = func;
     }
 
     // update (deltaTime: number) {
-    //     // Your update function goes here.
+    // //     // Your update function goes here.
     // }
 
     public showPubHeroIconPrefab()
     {
+        
         resources.load('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
             let p = instantiate( res );
             var nodWindow = this.node.getChildByName("window");
@@ -59,15 +121,24 @@ export class PopHeroPub extends PopBase {
                 p.setScale(0.4,0.4)
                 nodeFiveStar.addChild(p)
             }
-            // let script = p.getComponent("node_diamond");
-            // script.setTitle(title)
-            // script.setContent(content)
-            // script.setSubmitCallBack(submitCallBack)
-            // script.setCloseCallBack(closeCallBack);
-            // script.setIsMaskClose(isMaskClose);
-
         } );
     }
+
+    public setSummonType(value : Msg.TSummonType) {
+        switch(value)
+        {
+            case Msg.TSummonType.ESummonType_Heroic:
+                this.node_diamond.active = true;
+                this.node_friend.active = false;
+                break;
+            case Msg.TSummonType.ESummonType_Friend:
+                this.node_friend.active = true;
+                this.node_diamond.active = false;
+                break;
+        }
+        this._curSummonType = value;
+    }
+
 }
 
 /**
