@@ -25,7 +25,7 @@ export class PopCore {
     //2 系统等待loading
     //3 系统弹窗
     //是否换场景换场景释放
-    protected pushWindow(w:Node,parent:Node|null = null){
+    public pushWindow(w:Node,parent:Node|null = null){
         if(parent){
             this.parent = parent
         }

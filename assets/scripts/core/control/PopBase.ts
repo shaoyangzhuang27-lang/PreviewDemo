@@ -1,22 +1,23 @@
 import { _decorator, Component, Node,Vec3,tween,Scene, EventTouch, UITransform, math, view, UIOpacity } from 'cc';
+import { PopMgr } from '../../game/control/PopMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopBase')
 export class PopBase extends Component {
 
-    @property({type: Node})
+    @property({type: Node, displayName: "关闭按钮[选填项]"})
     public btn_close:Node | null = null;
 
     // @property({type: Node})
     // public btn_submit:Node | null = null;
 
-    @property({type: Node})
+    @property({type: Node, displayName: "取消按钮[选填项]"})
     public btn_cancel:Node | null = null;
 
-    @property({type: Node})
+    @property({type: Node, displayName: "弹出窗口[必填项]"})
     public window:Node = null as unknown as Node;
 
-    @property({type: Node})
+    @property({type: Node, displayName: "遮罩层[必填项]"})
     public mask:Node = null as unknown as Node;
 
     private _isShow:boolean = false;
@@ -71,6 +72,13 @@ export class PopBase extends Component {
 
         let isInWin = (Math.abs(pos.x-nodeSize.width/2 - winPos.x) < winSize.width / 2) && (Math.abs(pos.y-nodeSize.height/2 - winPos.y) < winSize.height / 2);
         return isInWin;
+    }
+
+    private hasPop = false;
+    public popSelf(){
+        if(this.hasPop)return;
+        this.hasPop = true;
+        PopMgr.getInstance().pushWindow(this.node);
     }
 
 

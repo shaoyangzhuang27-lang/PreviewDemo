@@ -39,14 +39,15 @@ export class PopMgr extends PopCore  {
 
         resources.load('prefabs_ui/pop/pop_simple', (err:any,res:any)=>{
             let p = instantiate( res );
-            this.pushWindow(p)
+            this.pushWindow(p);
 
             let script = p.getComponent("PopSimple") as PopSimple;
-            script.setTitle(title)
-            script.setContent(content)
-            script.setSubmitCallBack(submitCallBack)
+            script.setTitle(title);
+            script.setContent(content);
+            script.setSubmitCallBack(submitCallBack);
             script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
+            // script.popSelf();
             // script.setIsNeedHide(false);
 
         } );

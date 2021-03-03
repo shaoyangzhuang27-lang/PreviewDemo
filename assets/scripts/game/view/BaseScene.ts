@@ -7,10 +7,10 @@ import { XConsts } from '../model/const/XConsts';
 @ccclass('BaseScene')
 export class BaseScene extends Component {
 
-    @property({type: Node})
+    @property({type: Node, displayName: "当前场景[必填项]"})
     public curScene:Scene = null as unknown as Scene;
 
-    @property({type: Node})
+    @property({type: Node, displayName: "当前画布[必填项]"})
     public curCanvas:Node = null as unknown as Node;
 
     onLoad(){
@@ -22,6 +22,16 @@ export class BaseScene extends Component {
         // NotifyMgr.getInstance().addNotifyHandler("test",this.notifyTest,this);
         console.log("---------------------------------------------------- "+this.name+" start ----------------------------------------------------");
     }
+    start () {
+
+    }
+    onDestroy(){
+        // console.log("BaseScene onDestory")
+        console.log("---------------------------------------------------- "+this.name+" end ----------------------------------------------------");
+        PopMgr.getInstance().clearPop();
+        // NotifyMgr.getInstance().removeNotifyHandler("test",this.notifyTest,this);
+    }
+
     protected initUI(){
         resources.load('prefabs_ui/main_ui', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
@@ -30,17 +40,9 @@ export class BaseScene extends Component {
         } );
     }
 
-    start () {
-    }
     notifyTest(data:any){
         // console.log("BaseScene notifyTest!!");
         // console.log(data);
-    }
-    onDestroy(){
-        // console.log("BaseScene onDestory")
-        console.log("---------------------------------------------------- "+this.name+" end ----------------------------------------------------");
-        PopMgr.getInstance().clearPop();
-        // NotifyMgr.getInstance().removeNotifyHandler("test",this.notifyTest,this);
     }
     
 }
