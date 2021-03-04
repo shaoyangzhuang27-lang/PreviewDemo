@@ -32,7 +32,7 @@ export class HeroSelectIcon extends Component {
 
     initHeroIcon()
     {
-        resources.load('prefabs_ui/main/heroIcon', (err:any,res:any)=>{                  
+        resources.load('prefabs_ui/main/heroicon', (err:any,res:any)=>{                  
             let _heroIcon = instantiate(res) as Node;
             _heroIcon.scale = new Vec3(0.6,0.6,1);
             this.btnFrame.addChild(_heroIcon);
