@@ -11,6 +11,7 @@ import { MsgCore } from "../../core/network/MsgCore";
 import { MsgLogin } from "./msg/MsgLogin";
 import { MsgGame } from "./msg/MsgGame";
 import { MsgFormation } from "./msg/MsgFormation";
+import { MsgHeroPub } from "./msg/MsgHeroPub";
 import { MsgBase } from "./msg/MsgBase";
 
 
@@ -60,12 +61,19 @@ export class MsgMgr extends MsgCore{
         this._msgs.push(this._msgLogin)
         this._msgs.push(this._msgGame)
         this._msgs.push(this._msgFormation);
+        this._msgs.push(this._msgFormation);
     }
     //消息注册-------------------------------------------------
 
     private _msgFormation : MsgFormation = new MsgFormation(this);
     public getMsgFormation(){
         return this._msgFormation;
+    }
+
+    //HeroPub消息注册
+    private _msgHeroPub : MsgHeroPub = new MsgHeroPub(this);
+    public getMsgHeroPub(){
+        return this._msgHeroPub;
     }
 
     public initLoginServer(){

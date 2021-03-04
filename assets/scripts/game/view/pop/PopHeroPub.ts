@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger,Sprite, SpriteFrame, Button} from 'cc';
+import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger,Sprite, SpriteFrame, Button, ButtonComponent} from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 const { ccclass, property } = _decorator;
 
@@ -57,7 +57,7 @@ export class PopHeroPub extends PopBase {
     //消费道具类型 默认道具类型Null
     private _curSummonConsumType :  number = 0;
     //卷轴数量
-    private _nScorllNum : number  = 0;
+    private _nScorllNum : number  = 1;
     //友情心数量
     private _nFriendHeartNum : number = 0;
     //英雄召唤进度
@@ -72,13 +72,15 @@ export class PopHeroPub extends PopBase {
         this.btn_friend_summon.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_summon_one.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_summon_ten.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
+        this.showBtnSummonState();
+
     }
     
     private _onButtonClick(event:any){
         switch (event.target.getComponent(Button)) {
             case this.btn_hero_summon:
                 console.log("hero_summon");
-                if(this.curSummonType != Msg.TSummonType.ESummonType_Heroic)
+                if(this._curSummonType != Msg.TSummonType.ESummonType_Heroic)
                 {
                     this.curSummonType = Msg.TSummonType.ESummonType_Heroic;
                 }
@@ -86,7 +88,7 @@ export class PopHeroPub extends PopBase {
                 break;
             case this.btn_friend_summon:
                 console.log("friend_summon");
-                if(this.curSummonType != Msg.TSummonType.ESummonType_Friend)
+                if(this._curSummonType != Msg.TSummonType.ESummonType_Friend)
                 {
                     this.curSummonType = Msg.TSummonType.ESummonType_Friend;
                 }
@@ -108,6 +110,7 @@ export class PopHeroPub extends PopBase {
     start () {
         super.start();
         this.showPubHeroIconPrefab()
+
     }
 
     submitHandle(){
@@ -178,13 +181,106 @@ export class PopHeroPub extends PopBase {
                 break;
         }
         this._curSummonType = value;
+        this.showBtnSummonState();
     }
+
+    
 
     public resetResourcesSpriFame(path:string,objSprite : Sprite)
     {
         resources.load(path, SpriteFrame ,(err: any, spriteFrame: SpriteFrame) => {
             objSprite.spriteFrame = spriteFrame;
         });
+    }
+
+
+    public showBtnSummonState()
+    {
+        var lab_one = this.btn_summon_one.node.getChildByName("lab_summon_num")?.getComponent(Label);
+        var img_one = this.btn_summon_one.node.getChildByName("img_summon_icon")?.getComponent(Sprite);
+        var img_one_remind = this.btn_summon_one.node.getChildByName("img_summon_remind")?.getComponent(Sprite);
+        var imgdi_ten = this.btn_summon_ten.node.getComponent(Sprite);
+        var lab_ten = this.btn_summon_ten.node.getChildByName("lab_summon_num")?.getComponent(Label);
+        var img_ten = this.btn_summon_ten.node.getChildByName("img_summon_icon")?.getComponent(Sprite);
+        var img_ten_remind = this.btn_summon_ten.node.getChildByName("img_summon_remind")?.getComponent(Sprite);
+        if(img_one_remind && img_ten_remind)
+        {
+            img_one_remind.node.active = true; 
+            img_ten_remind.node.active = true; 
+        }
+        if(this._curSummonType == Msg.TSummonType.ESummonType_Heroic)
+        {
+            if(this._nScorllNum == 0)
+            {
+                if(img_one_remind && img_ten_remind)
+                {
+                   
+                    img_one_remind.node.active = false; 
+                    img_ten_remind.node.active = false; 
+                }
+                if(lab_one && img_one)
+                {
+                    this.resetResourcesSpriFame("hero_pub/pub_diamond/spriteFrame",img_one);
+                    lab_one.string = "x" + String(300);
+                }
+                if(lab_ten && img_ten)
+                {
+                    this.resetResourcesSpriFame("hero_pub/pub_diamond/spriteFrame",img_ten);
+                    lab_ten.string = "x" + String(2700);
+                }
+               
+            }
+            else
+            {
+                if(img_one_remind && img_ten_remind)
+                {
+                    if(this._nScorllNum >= 10)
+                    {
+                        img_one_remind.node.active = true; 
+                        img_ten_remind.node.active = true; 
+                    }
+                    else
+                    {
+                        img_one_remind.node.active = true; 
+                        img_ten_remind.node.active = false; 
+                    }
+                    
+                }
+                if(lab_one && img_one)
+                {
+                    this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",img_one);
+                    lab_one.string = String(1);
+                }
+                if(lab_ten && img_ten)
+                {
+                    this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",img_ten);
+                    lab_ten.string = String(10);
+                }
+            }
+        }
+        else if(this._curSummonType == Msg.TSummonType.ESummonType_Friend)
+        {
+            if(img_one_remind && img_ten_remind)
+            {
+                img_one_remind.node.active = false; 
+                img_ten_remind.node.active = false; 
+            } 
+            if(imgdi_ten)
+            {
+                this.resetResourcesSpriFame("ui/initial/底部弹框_常用蓝色按钮/spriteFrame",imgdi_ten);
+            }
+            if(lab_one && img_one)
+            {
+                this.resetResourcesSpriFame("hero_pub/pub_prop_heart/spriteFrame",img_one);
+                lab_one.string = String(10);
+            }
+            if(lab_ten && img_ten)
+            {
+                this.resetResourcesSpriFame("hero_pub/pub_prop_heart/spriteFrame",img_ten);
+                lab_ten.string = String(100);
+            }
+        }
+        
     }
 }
 

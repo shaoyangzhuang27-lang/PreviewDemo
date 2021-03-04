@@ -5180,8 +5180,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.5,
-      "y": 0.5,
+      "x": 0.25,
+      "y": 0.25,
       "z": 1
     },
     "_layer": 33554432,
@@ -5207,8 +5207,8 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50,
-      "height": 43
+      "width": 127,
+      "height": 109
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -5244,7 +5244,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "dd5a35b5-688a-47a5-a3bf-09c6684bb07d@f9941"
+      "__uuid__": "ebb65472-f2dd-4701-8139-17bdc38bd470@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -5342,7 +5342,7 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_id": ""
@@ -5941,8 +5941,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.5,
-      "y": 0.5,
+      "x": 0.25,
+      "y": 0.25,
       "z": 1
     },
     "_layer": 33554432,
@@ -5968,8 +5968,8 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50,
-      "height": 43
+      "width": 127,
+      "height": 109
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -6005,7 +6005,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "dd5a35b5-688a-47a5-a3bf-09c6684bb07d@f9941"
+      "__uuid__": "ebb65472-f2dd-4701-8139-17bdc38bd470@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -6103,7 +6103,7 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_id": ""
@@ -6347,7 +6347,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "57206ee2-8a9f-4fd8-9158-52f5e2b987b5@f9941"
+      "__uuid__": "8b141fc8-25ba-4b55-86f0-4298e19e24cc@f9941"
     },
     "_type": 1,
     "_fillType": 0,
@@ -6411,7 +6411,7 @@
       "a": 255
     },
     "_normalSprite": {
-      "__uuid__": "57206ee2-8a9f-4fd8-9158-52f5e2b987b5@f9941"
+      "__uuid__": "8b141fc8-25ba-4b55-86f0-4298e19e24cc@f9941"
     },
     "_hoverSprite": null,
     "_pressedSprite": null,
