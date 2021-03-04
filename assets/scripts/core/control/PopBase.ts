@@ -33,6 +33,7 @@ export class PopBase extends Component {
     //弹窗初始化-----
     onLoad(){
         this.window.addComponent(UIOpacity);
+        this.mask.addComponent(UIOpacity);
     }
     start () {
         // Your initialization goes here.
@@ -42,12 +43,12 @@ export class PopBase extends Component {
         this.mask.on(Node.EventType.TOUCH_END, this._onMaskClick, this);
 
         this.show();
-        this.mask.active = true
+        // this.mask.active = true
         this.window.scale = new Vec3(0,0,1)
     }
     private _onMaskClick(event:EventTouch){
         let isInWin = this._isInWin(event)
-        if(this._isMaskClose && this._closeFunc&&!isInWin){
+        if(this._isMaskClose && this._isShow && this._closeFunc&&!isInWin){
             this._closeFunc();
         }
     }
@@ -72,6 +73,14 @@ export class PopBase extends Component {
 
         let isInWin = (Math.abs(pos.x-nodeSize.width/2 - winPos.x) < winSize.width / 2) && (Math.abs(pos.y-nodeSize.height/2 - winPos.y) < winSize.height / 2);
         return isInWin;
+    }
+    private _setMaskVisible(bo:boolean){
+        let op = this.mask.getComponent(UIOpacity) as UIOpacity;
+        if(bo){
+            op.opacity = 255;
+        }else{
+            op.opacity = 0;
+        }
     }
 
     private hasPop = false;
@@ -106,7 +115,8 @@ export class PopBase extends Component {
         if(this._isShow){
             return;
         }
-        this.mask.active = true
+        // this.mask.active = true
+        this._setMaskVisible(true);
         this._isShow = true
 
         tween(this.window)
@@ -127,7 +137,8 @@ export class PopBase extends Component {
         if(!this._isShow){
             return;
         }
-        this.mask.active = false
+        // this.mask.active = false
+        this._setMaskVisible(false);
         this._isShow = false
 
         if(!this._isNeedHide && this._isLive)return;

@@ -18,7 +18,7 @@ export class BaseScene extends Component {
             console.log("场景未设置,请设置当前场景");
             this.curScene = director.getScene() as Scene;
         }
-        PopMgr.getInstance().initPop(this.curCanvas)
+        PopMgr.getInstance().initPop(this.curCanvas);
         // NotifyMgr.getInstance().addNotifyHandler("test",this.notifyTest,this);
         console.log("---------------------------------------------------- "+this.name+" start ----------------------------------------------------");
     }
