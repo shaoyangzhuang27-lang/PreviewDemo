@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger,Sprite, SpriteFrame,ButtonComponent,EventHandler} from 'cc';
+import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger,Sprite, SpriteFrame, Button} from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 const { ccclass, property } = _decorator;
 
@@ -19,7 +19,6 @@ export class PopHeroPub extends PopBase {
     @property({type: Sprite})
     public img_prop = null as unknown as Sprite;
 
-
     @property({type: Label})
     public lab_prop_num:Label | null = null;
 
@@ -29,20 +28,21 @@ export class PopHeroPub extends PopBase {
     @property({type: Node})
     public node_friend = null as unknown as Node;
 
-    @property({type: ButtonComponent})
-    public btn_hero_summon = null as unknown as ButtonComponent;
+    @property({type: Button})
+    public btn_hero_summon = null as unknown as Button;
 
-    @property({type: ButtonComponent})
-    public btn_friend_summon = null as unknown as ButtonComponent;
+    @property({type: Button})
+    public btn_friend_summon = null as unknown as Button;
 
-    @property({type: Node})
-    public img_summon_ad:Node | null = null;
+    @property({type: Sprite})
+    public img_summon_ad = null as unknown as Sprite;
 
-    @property({type: Node})
-    public btn_summon_one:Node | null = null;
 
-    @property({type: Node})
-    public btn_summon_ten:Node | null = null;
+    @property({type: Button})
+    public btn_summon_one = null as unknown as Button;
+
+    @property({type: Button})
+    public btn_summon_ten = null as unknown as Button;
     // @property({type: LabelComponent})
     // public lab_content:LabelComponent | null = null;
 
@@ -67,18 +67,38 @@ export class PopHeroPub extends PopBase {
         super.onLoad();
         this.curSummonType = Msg.TSummonType.ESummonType_Heroic;
 
-
-        const clickEventHandler = new EventHandler();
-        clickEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
-        clickEventHandler.component = 'PopHeroPub';// 这个是代码文件名
-        clickEventHandler.handler = 'showHeroSummon';
-        clickEventHandler.customEventData = 'hero_summon';
-
-        // const button = this.node.getComponent(Button);
-        this.btn_hero_summon.clickEvents.push(clickEventHandler);
-        // this.btn_hero_summon.on(Node.EventType.TOUCH_END, this._onClose, this);
+        //获取空间的父节点Node进行注册点击事件
+        this.btn_hero_summon.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
+        this.btn_friend_summon.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
+        this.btn_summon_one.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
+        this.btn_summon_ten.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
     }
     
+    private _onButtonClick(event:any){
+        switch (event.target.getComponent(Button)) {
+            case this.btn_hero_summon:
+                console.log("hero_summon");
+                if(this.curSummonType != Msg.TSummonType.ESummonType_Heroic)
+                {
+                    this.curSummonType = Msg.TSummonType.ESummonType_Heroic;
+                }
+                
+                break;
+            case this.btn_friend_summon:
+                console.log("friend_summon");
+                if(this.curSummonType != Msg.TSummonType.ESummonType_Friend)
+                {
+                    this.curSummonType = Msg.TSummonType.ESummonType_Friend;
+                }
+                break;  
+            case this.btn_summon_one:
+                console.log("summon_one");
+                break; 
+            case this.btn_summon_ten:
+                console.log("summon_ten");
+                break;           
+        }
+    }
     showHeroSummon(event: Event, customEventData: string){
         // 这里 event 是一个 Touch Event 对象，你可以通过 event.target 取到事件的发送节点
         const node = event.target as unknown as Node;
@@ -119,7 +139,6 @@ export class PopHeroPub extends PopBase {
 
     public showPubHeroIconPrefab()
     {
-        
         resources.load('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
             let p = instantiate( res );
             var nodWindow = this.node.getChildByName("window");
@@ -144,18 +163,29 @@ export class PopHeroPub extends PopBase {
                 this.node_friend.active = false;
                 this.btn_hero_summon.interactable = false;
                 this.btn_friend_summon.interactable = true;
+                this.resetResourcesSpriFame("hero_pub/pub_call_ad_diamond/spriteFrame",this.img_summon_ad);
+                this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",this.img_prop);
+        
                 break;
             case Msg.TSummonType.ESummonType_Friend:
                 this.node_diamond.active = false;
                 this.node_friend.active = true;
                 this.btn_hero_summon.interactable = true;
                 this.btn_friend_summon.interactable = false;
+                this.resetResourcesSpriFame("hero_pub/pub_call_ad_friend/spriteFrame",this.img_summon_ad);
+                this.resetResourcesSpriFame("hero_pub/pub_prop_heart/spriteFrame",this.img_prop);
+
                 break;
         }
         this._curSummonType = value;
     }
 
-
+    public resetResourcesSpriFame(path:string,objSprite : Sprite)
+    {
+        resources.load(path, SpriteFrame ,(err: any, spriteFrame: SpriteFrame) => {
+            objSprite.spriteFrame = spriteFrame;
+        });
+    }
 }
 
 /**
