@@ -1,0 +1,74 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "338811c1-0db7-4c59-9a00-d924fff277c2",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "338811c1-0db7-4c59-9a00-d924fff277c2@6c48a",
+      "displayName": "英雄详情_数值背景",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "338811c1-0db7-4c59-9a00-d924fff277c2"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "338811c1-0db7-4c59-9a00-d924fff277c2@f9941",
+      "displayName": "英雄详情_数值背景",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 83,
+        "height": 69,
+        "rawWidth": 83,
+        "rawHeight": 69,
+        "borderTop": 11,
+        "borderBottom": 9,
+        "borderLeft": 10,
+        "borderRight": 5,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "338811c1-0db7-4c59-9a00-d924fff277c2@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "338811c1-0db7-4c59-9a00-d924fff277c2@f9941"
+  }
+}
