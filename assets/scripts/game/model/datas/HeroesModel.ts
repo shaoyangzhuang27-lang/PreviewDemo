@@ -46,8 +46,20 @@ export class HeroesModel extends BaseModel{
         });
         return _campHeroList;
     }
+
+    //根据id获取英雄信息
+    public getHeroInfoByDyncID(dyncID:number) : HeroData | null
+    {
+        if(this._heroList && this._heroList.has(dyncID))
+        {
+            return this._heroList.get(dyncID) as HeroData;
+        }
+        return null;
+    }
     
-    
+    /////////////////////////////////////////////////////
+    //////////////////////图鉴相关///////////////////////
+    /////////////////////////////////////////////////////
     private _heroBookLevel = 0;
     private _heroBookPoint = 0;
     private refreshHeroBookProperty() { //刷新英雄图鉴提供的属性

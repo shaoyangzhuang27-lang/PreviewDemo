@@ -54,4 +54,29 @@ export class FormationModel extends BaseModel{
         })
         return formation;
     }
+
+    //当前阵容修改
+    public setCurFormationChange(msg:Msg.ChangeFormationA) {
+        let curIndex = msg.newFormation?.index as number;
+        let curFormationData = this._formationList.get(curIndex);
+        // let _changeFormation:Map<number,number> = new Map<number,number>();
+        let _newFormation = msg.newFormation as Msg.FormationInfo;
+        for(let item in _newFormation.formation)
+        {
+            let newValue = _newFormation.formation[item];
+            curFormationData?.forEach((value,key)=>{
+                if(key == Number(item))
+                {
+                    value = newValue;
+                }
+                else{
+                    curFormationData?.set(Number(item), newValue);
+                }
+            })
+        }
+
+        //抛出通知  阵容发生变化
+
+        
+    }
 }

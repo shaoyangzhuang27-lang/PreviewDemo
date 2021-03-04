@@ -2,6 +2,7 @@
 import { MsgCore} from "../../../core/network/MsgCore";
 import { NetCallFunc } from "../../../core/network/NetInterface";
 import { NetManager } from "../../../core/network/NetManager";
+import { GameModel } from "../../model/GameModel";
 import { NotifyMgr } from "../NotifyMgr";
 import { MsgBase } from "./MsgBase";
 
@@ -20,7 +21,16 @@ export class MsgFormation extends MsgBase{
         this.msgMgr?.sendData(Msg.MsgType.TheChangeFormationR,buffer_data);
     }
     public responeChangeBattleTeam(msgId: number, msgData: any){
-
+        console.log("更换阵容数据返回",msgId);
+        let newMsgData = msgData as Msg.ChangeFormationA
+        if(newMsgData.err == 0)
+        {
+            GameModel.getInstance().getFormationModel().setCurFormationChange(newMsgData)
+        }
+        else{
+            console.log("打印输出错误码",newMsgData.err,newMsgData.errStr)
+        }
+        
     }
     //更换阵容
 }
