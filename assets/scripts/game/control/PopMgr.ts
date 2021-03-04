@@ -62,8 +62,8 @@ export class PopMgr extends PopCore  {
             this.pushWindow(p)
 
             let script = p.getComponent("PopBattleTeam");
-            script.setSubmitCallBack(submitCallBack)
-            script.setCloseCallBack(closeCallBack);
+            // script.setSubmitCallBack(submitCallBack)
+            // script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
             script.setInitTeamView(type)
         } );

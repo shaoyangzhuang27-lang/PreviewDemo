@@ -48,7 +48,7 @@ export class PopBattleTeam extends PopBase {
     @property({type :  Node})
     public scroll_content:Node = null as unknown as Node;
 
-    private submitCallFun:Function | null = null;       //保存阵容回调
+    // private submitCallFun:Function | null = null;       //保存阵容回调
     private _teamType :number = 0;  //获取阵型
     private _curPageNum :number = 1;    //当前阵容界面
     private _formationList:Map<number, HeroData> = new Map<number, HeroData>();   //当前上阵英雄阵容
@@ -289,6 +289,13 @@ export class PopBattleTeam extends PopBase {
         _saveFormation.index = this._curPageNum;
 
         MsgMgr.getInstance().getMsgFormation().requestChangeBattleTeam(_saveFormation,this._curPageNum,this._curPageNum,0);
+
+        //关闭窗口，删除自身
+        if(this._closeFunc)
+        {
+            this._closeFunc();
+        }
+        
     }
 
     scrollCallBack()
@@ -416,15 +423,15 @@ export class PopBattleTeam extends PopBase {
         if(this.lab_title)
             this.lab_title.string = title
     }
-    //保存阵容回调
-    public setSubmitCallBack(func:Function){
-        this.submitCallFun = func;
-    }
-    //关闭回调
-    public setCloseCallBack(func:Function | null){
-        if(func)
-            this._closeFunc = func;
-    }
+    // //保存阵容回调
+    // public setSubmitCallBack(func:Function){
+    //     this.submitCallFun = func;
+    // }
+    // //关闭回调
+    // public setCloseCallBack(func:Function | null){
+    //     if(func)
+    //         this._closeFunc = func;
+    // }
 
     // update (deltaTime: number) {
     //     // [4]
