@@ -1,13 +1,13 @@
 
-import { _decorator, Component, Node,LabelComponent,resources,instantiate,Vec3, CCInteger} from 'cc';
+import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger,Sprite, SpriteFrame,ButtonComponent,EventHandler} from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 const { ccclass, property } = _decorator;
 
  var SUMMON_FRIEND_COUNT_MAX = 30;
 @ccclass('PopHeroPub')
 export class PopHeroPub extends PopBase {
-    @property({type: LabelComponent})
-    public lab_title:LabelComponent | null = null;
+    @property({type: Label})
+    public lab_title:Label | null = null;
 
     @property({type: Node})
     public btn_introduce:Node | null = null;
@@ -16,12 +16,12 @@ export class PopHeroPub extends PopBase {
     public btn_recommendteam:Node | null = null;
 
 
-    @property({type: Node})
-    public img_prop:Node | null = null;
+    @property({type: Sprite})
+    public img_prop = null as unknown as Sprite;
 
 
-    @property({type: LabelComponent})
-    public lab_prop_num:LabelComponent | null = null;
+    @property({type: Label})
+    public lab_prop_num:Label | null = null;
 
     @property({type: Node})
     public node_diamond = null as unknown as Node;
@@ -29,11 +29,11 @@ export class PopHeroPub extends PopBase {
     @property({type: Node})
     public node_friend = null as unknown as Node;
 
-    @property({type: Node})
-    public btn_hero_summon:Node | null = null;
+    @property({type: ButtonComponent})
+    public btn_hero_summon = null as unknown as ButtonComponent;
 
-    @property({type: Node})
-    public btn_friend_summon:Node | null = null;
+    @property({type: ButtonComponent})
+    public btn_friend_summon = null as unknown as ButtonComponent;
 
     @property({type: Node})
     public img_summon_ad:Node | null = null;
@@ -45,8 +45,6 @@ export class PopHeroPub extends PopBase {
     public btn_summon_ten:Node | null = null;
     // @property({type: LabelComponent})
     // public lab_content:LabelComponent | null = null;
-
-
 
     private submitCallFun:Function | null = null;
 
@@ -67,14 +65,26 @@ export class PopHeroPub extends PopBase {
      //弹窗初始化-----
      onLoad(){
         super.onLoad();
-        
-        // this._curSummonType = Msg.TSummonType.ESummonType_Heroic;
-        // this._curSummonType = Msg.TSummonType.ESummonType_Friend;
-        this.setSummonType(Msg.TSummonType.ESummonType_Friend);
-        // this._curSummonConsumType= Msg.TSummonConsumeType.ESummonConsumeType_NULL;
+        this.curSummonType = Msg.TSummonType.ESummonType_Heroic;
+
+
+        const clickEventHandler = new EventHandler();
+        clickEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
+        clickEventHandler.component = 'PopHeroPub';// 这个是代码文件名
+        clickEventHandler.handler = 'showHeroSummon';
+        clickEventHandler.customEventData = 'hero_summon';
+
+        // const button = this.node.getComponent(Button);
+        this.btn_hero_summon.clickEvents.push(clickEventHandler);
+        // this.btn_hero_summon.on(Node.EventType.TOUCH_END, this._onClose, this);
     }
     
-    
+    showHeroSummon(event: Event, customEventData: string){
+        // 这里 event 是一个 Touch Event 对象，你可以通过 event.target 取到事件的发送节点
+        const node = event.target as unknown as Node;
+        // const button = node.getComponent(Button);
+        console.log(customEventData); // foobar
+    }
     start () {
         super.start();
         this.showPubHeroIconPrefab()
@@ -124,20 +134,27 @@ export class PopHeroPub extends PopBase {
         } );
     }
 
-    public setSummonType(value : Msg.TSummonType) {
+
+    set curSummonType(value : Msg.TSummonType)
+    {
         switch(value)
         {
             case Msg.TSummonType.ESummonType_Heroic:
                 this.node_diamond.active = true;
                 this.node_friend.active = false;
+                this.btn_hero_summon.interactable = false;
+                this.btn_friend_summon.interactable = true;
                 break;
             case Msg.TSummonType.ESummonType_Friend:
-                this.node_friend.active = true;
                 this.node_diamond.active = false;
+                this.node_friend.active = true;
+                this.btn_hero_summon.interactable = true;
+                this.btn_friend_summon.interactable = false;
                 break;
         }
         this._curSummonType = value;
     }
+
 
 }
 
