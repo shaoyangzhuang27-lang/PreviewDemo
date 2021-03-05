@@ -2,6 +2,7 @@
 import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger,Sprite, SpriteFrame, Button, ButtonComponent} from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
+import { PopMgr } from '../../control/PopMgr';
 const { ccclass, property } = _decorator;
 
  var SUMMON_FRIEND_COUNT_MAX = 30;
@@ -85,7 +86,7 @@ export class PopHeroPub extends PopBase {
     }
     private _onRecommendTeamClick(event : any)
     {
-        
+
     }
 
 
@@ -130,9 +131,24 @@ export class PopHeroPub extends PopBase {
                 break;  
             case this.btn_summon_one:
                 console.log("summon_one");
+                if(this._curSummonType == Msg.TSummonType.ESummonType_Friend)
+                {
+                    if(this._nFriendHeartNum < 10)
+                    {
+                        this.showPromptWindow("错误","爱心不足");
+                    }
+
+                }
                 break; 
             case this.btn_summon_ten:
                 console.log("summon_ten");
+                if(this._curSummonType == Msg.TSummonType.ESummonType_Friend)
+                {
+                    if(this._nFriendHeartNum < 100)
+                    {
+                        this.showPromptWindow("错误","爱心不足");
+                    }
+                }
                 break;           
         }
     }
@@ -215,6 +231,11 @@ export class PopHeroPub extends PopBase {
             objSprite.spriteFrame = spriteFrame;
         });
     }
+
+    public showPromptWindow(title : string, content : string)
+    {
+        PopMgr.getInstance().popHeroPubPromptWindow(title,content,()=>{console.log("召唤道具不足提示！")});
+    } 
 
 
     //更新召唤显示按钮状态
