@@ -12,9 +12,32 @@ const { ccclass, property } = _decorator;
 //弹窗初始化-----
 @ccclass('HeroPromotion')
 export class HeroPromotion extends PopBase {
-    
-    @property({type: Node, displayName: "升级"})
-    public btn_up:Node | null = null;
+    @property({type: Node, displayName: "锁定"})
+    public btn_lock:Node | null = null;
+
+    @property({type: Node, displayName: "分享"})
+    public btn_share:Node | null = null;
+
+    @property({type: Node, displayName: "英雄故事"})
+    public btn_story:Node | null = null;
+
+    @property({type: Node, displayName: "英雄各属性数值"})
+    public btn_fight_params:Node | null = null;
+
+    @property({type: Node, displayName: "左箭头"})
+    public btn_arrow_left:Node | null = null;
+
+    @property({type: Node, displayName: "右箭头"})
+    public btn_arrow_right:Node | null = null;
+
+    @property({type: Node, displayName: "升阶"})
+    public btn_up_tier:Node | null = null;
+
+    @property({type: Node, displayName: "升级Tab"})
+    public btn_tab_up_lv:Node | null = null;
+
+    @property({type: Node, displayName: "装备Tab"})
+    public btn_tab_equip:Node | null = null;
 
     private _curHeroId: number = 0; //当前英雄ID
     private _curHeroData: HeroData= null as unknown as HeroData; //当前英雄数据
@@ -26,7 +49,7 @@ export class HeroPromotion extends PopBase {
     onLoad(){
         super.onLoad();
         this._allHeroList = GameModel.getInstance().getHeroesModel().getHeroList();
-        this.btn_up?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_up_lv?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
         
     }
 
@@ -37,8 +60,8 @@ export class HeroPromotion extends PopBase {
         console.log(event)        
 
         switch (event.target) {
-            case this.btn_up:
-                console.log("HeroPromotion btn_up")
+            case this.btn_up_lv:
+                console.log("HeroPromotion btn_up_lv")
                 break;
             default:
                 // code...
@@ -72,7 +95,13 @@ export class HeroPromotion extends PopBase {
     {
         this._curHeroId = heroId;
         this._curHeroData  = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(this._curHeroId) as HeroData;        
-        // this._isHeroUpView = this._curHeroData.calcTalentSkillProperty
+        
+        //todo 星级下的每个品阶有对应的等级最大限制，当等级提升到最大限制后，通过升阶操作扩展更高的等级上限。
+        this._isLvUpView = true;
+        // 英雄等级 this._curHeroData.getLevel();
+        // 英雄星级 this._curHeroData.getStar();
+        // 英雄品阶 this._curHeroData.tier;
+
         this.initCurHeroView();
     }
 
@@ -81,7 +110,8 @@ export class HeroPromotion extends PopBase {
     {
        if(this._isHeroUpView)
        {            
-            this._isHeroUpView ? this.showHeroLvUpView(): this.showHeroUpgradeView();       }
+            this._isLvUpView ? this.showHeroLvUpView(): this.showHeroUpgradeView();      
+       }
        else
        {
             this.showEquipView();
@@ -91,7 +121,7 @@ export class HeroPromotion extends PopBase {
     // 展示英雄升级界面
     showHeroLvUpView()
     {
-
+        
     }
 
     // 展示英雄升阶界面
