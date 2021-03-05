@@ -2,6 +2,7 @@ import { GameModel } from "../GameModel";
 import { HeroData } from "./HeroData";
 import { XConsts } from "../const/XConsts";
 import { BaseModel } from "./BaseModel";
+import { NotifyMgr } from '../../control/NotifyMgr';
 
 export class FormationModel extends BaseModel{
     
@@ -53,5 +54,23 @@ export class FormationModel extends BaseModel{
             }
         })
         return formation;
+    }
+
+    //当前阵容修改
+    public setCurFormationChange(msg:Msg.ChangeFormationA) {
+        let curIndex = msg.newFormation?.index as number;
+        let curFormationData = this._formationList.get(curIndex);
+        // let _changeFormation:Map<number,number> = new Map<number,number>();
+        let _newFormation = msg.newFormation as Msg.FormationInfo;
+        curFormationData?.clear();
+        for(let item in _newFormation.formation)
+        {
+            let newValue = _newFormation.formation[item];
+            curFormationData?.set(Number(item), newValue);
+        }
+
+        //抛出通知  阵容发生变化
+        NotifyMgr.getInstance().notify(NotifyMgr.event_net_formation_change);
+        
     }
 }

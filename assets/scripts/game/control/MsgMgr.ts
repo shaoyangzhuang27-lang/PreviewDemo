@@ -10,7 +10,9 @@ import { SceneMgr } from "./SceneMgr";
 import { MsgCore } from "../../core/network/MsgCore";
 import { MsgLogin } from "./msg/MsgLogin";
 import { MsgGame } from "./msg/MsgGame";
+import { MsgFormation } from "./msg/MsgFormation";
 import { MsgBase } from "./msg/MsgBase";
+
 
 class NetTips implements INetworkTips {
     requestTips(isShow: boolean): void {}
@@ -57,8 +59,14 @@ export class MsgMgr extends MsgCore{
     private _initMsg(){
         this._msgs.push(this._msgLogin)
         this._msgs.push(this._msgGame)
+        this._msgs.push(this._msgFormation);
     }
     //消息注册-------------------------------------------------
+
+    private _msgFormation : MsgFormation = new MsgFormation(this);
+    public getMsgFormation(){
+        return this._msgFormation;
+    }
 
     public initLoginServer(){
         this._initMsg()
@@ -69,7 +77,6 @@ export class MsgMgr extends MsgCore{
             responeMap.push(val.getResponeMap());
         })
         let msgMap = this.getMsgMap(responeMap);
-        
 
         let node = new NetNode();
         node.init(new WebSock(), new SupperProtocol(msgMap), new NetTips());
@@ -78,6 +85,7 @@ export class MsgMgr extends MsgCore{
         this._msgs.forEach((val,idx)=>{
             val.initHandle();
         })
+
     }
     
     public connectLoginServer(channelId: number = 0){

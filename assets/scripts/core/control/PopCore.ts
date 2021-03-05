@@ -1,4 +1,5 @@
 import {  Node,resources,instantiate,LabelComponent,Vec3,tween,Scene } from 'cc';
+import { XConsts } from '../../game/model/const/XConsts';
 import { PopBase } from "./PopBase";
 export class PopCore {
 
@@ -10,10 +11,10 @@ export class PopCore {
     protected popArray:Array<Node> = [];
     protected popDataArray:Array<[Node,string,[] ]> = [];
     // protected pop 
-    protected parent:Scene | null = null;
+    protected parent:Node | null = null;
 
 
-    public initPop(parent:Scene | null){
+    public initPop(parent:Node | null){
         this.parent = parent;
     }
     public clearPop(){
@@ -24,7 +25,7 @@ export class PopCore {
     //2 系统等待loading
     //3 系统弹窗
     //是否换场景换场景释放
-    protected pushWindow(w:Node,parent:Scene|null = null){
+    public pushWindow(w:Node,parent:Node|null = null){
         if(parent){
             this.parent = parent
         }
@@ -41,10 +42,11 @@ export class PopCore {
         curPopScript?.createMe(()=>{this.deleteWindow()});
         this.parent?.addChild(curPop);
         curPopScript?.show();
+        curPop.setSiblingIndex(XConsts.OrderPopShow);
 
         // curPop.zIndex = -1
         if(prePopScript){
-            // prePop.zIndex = -1
+            prePop.setSiblingIndex(XConsts.OrderPopHide);
             prePopScript.hide()
         }
     }
@@ -66,10 +68,12 @@ export class PopCore {
 
         curPopScript?.deleteMe();
         curPopScript?.hide();
+        curPop.setSiblingIndex(XConsts.OrderPopHide);
 
         // curPop.zIndex = -1
         if(prePopScript){
             // prePop.zIndex = -1
+            prePop.setSiblingIndex(XConsts.OrderPopShow);
             prePopScript.show()
         }
     }
@@ -80,14 +84,15 @@ export class PopCore {
 
     public popupPrompt(content:string){
 
-        resources.load('prefabs_ui/pop_prompt', (err:Error | null,res:any)=>{
-            let p = instantiate( res );
+        resources.load('prefabs_ui/pop/pop_prompt', (err:Error | null,res:any)=>{
+            let p = instantiate( res ) as Node;
             this.parent?.addChild(p)
-            let lab = p.getChildByName('content');
-            let labcom = lab.getComponent(LabelComponent);
+            p.setSiblingIndex(XConsts.OrderToash);
+            let lab = p.getChildByName('content') as Node;
+            let labcom = lab.getComponent(LabelComponent) as LabelComponent;
             labcom.string = content;
             let curpos = lab.position
-            labcom.node.opacity = 10
+            // labcom.node.opacity = 10
             tween(lab)
             .to(0.1,{position:new Vec3(curpos.x,curpos.y+100,curpos.z)})
             .delay(2)

@@ -2,12 +2,12 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-  "uuid": "9b00ac15-4aaa-4fcb-97f1-258d7ac3adf9",
+  "uuid": "e8d61ede-66df-47b9-8cc9-3551ec539a9a",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "heroDebris"
+    "syncNodeName": "pop_battleteam"
   }
 }

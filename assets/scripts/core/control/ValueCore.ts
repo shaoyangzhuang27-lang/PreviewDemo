@@ -8,7 +8,7 @@ export class ValueCore{
     protected csvNameTab:Array<string> | null = null;
     protected csvData:Map<string,any> = new Map();
 
-    private loadIndex:number = 0;
+    private _loadIndex:number = 0;
     protected loadCallBack:Function |null = null;
 
 
@@ -38,9 +38,9 @@ export class ValueCore{
             // console.log(tabObj.records);
 
             this.csvData.set(tableName,tabObj);
-            this.loadIndex++;
+            this._loadIndex++;
             if(this.loadCallBack){
-                this.loadCallBack(this.loadIndex,this.csvNameTab?.length);
+                this.loadCallBack(this._loadIndex,this.csvNameTab?.length);
             }
         });
     }
