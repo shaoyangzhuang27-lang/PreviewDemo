@@ -8,6 +8,7 @@ import { HeroIcon } from '../hero/HeroIcon';
 import { HeroSelectIcon } from '../hero/HeroSelectIcon';
 import { PopMgr } from '../../control/PopMgr';
 import { MsgMgr } from '../../control/MsgMgr';
+import { XConsts } from "../../model/const/XConsts";
 
 @ccclass('PopBattleTeam')
 export class PopBattleTeam extends PopBase {
@@ -45,8 +46,8 @@ export class PopBattleTeam extends PopBase {
     @property({type :  ScrollView})
     public scroll_HeroView:ScrollView = null as unknown as ScrollView;
 
-    @property({type :  Node})
-    public scroll_content:Node = null as unknown as Node;
+    // @property({type :  Node})
+    // public scroll_content:Node = null as unknown as Node;
 
     // private submitCallFun:Function | null = null;       //保存阵容回调
     private _teamType :number = 0;  //获取阵型
@@ -276,8 +277,10 @@ export class PopBattleTeam extends PopBase {
         console.log(tog.node.name)
         var _length = tog.node.name.length;
         var _index = tog.node.name.charAt(_length-1);
-        console.log("tab 阵营切换",_index,_length);
+        console.log("tab 阵营切换",_index,_length,XConsts.KHeroCampIcon[Number(_index)]);
 
+        this._curCampType = Number(_index);
+        this.initBottomHero();
     }
 
     submitHandle(){
