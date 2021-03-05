@@ -56,6 +56,18 @@ export class FormationModel extends BaseModel{
         return formation;
     }
 
+    //获取当前阵容战力
+    public getCurrentFormationPower():number
+    {
+        let allHeroPower:number = 0;
+        let _curFormationList:Map<number, HeroData> = this.getCurrentFormation();
+        for (let value of _curFormationList.values()) { 
+            let _power = value.getMaxPower();
+            allHeroPower += _power;
+        }
+        return allHeroPower;
+    }
+
     //当前阵容修改
     public setCurFormationChange(msg:Msg.ChangeFormationA) {
         let curIndex = msg.newFormation?.index as number;
