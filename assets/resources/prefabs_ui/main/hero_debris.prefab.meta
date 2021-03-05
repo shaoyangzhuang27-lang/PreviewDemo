@@ -2,12 +2,12 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-  "uuid": "56902048-2937-4b0f-9aa1-4dea873937c8",
+  "uuid": "9b00ac15-4aaa-4fcb-97f1-258d7ac3adf9",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "heroicon"
+    "syncNodeName": "hero_debris"
   }
 }
