@@ -2,6 +2,7 @@
 import { _decorator, Component, SkeletalAnimation, Node, BoxCollider, RigidBody, Enum } from 'cc';
 const { ccclass, property } = _decorator;
 
+import { BattleEffect } from "../../battle/BattleEffect";
 import { HeroAnimationEvent } from "./HeroAnimationEvent";
 
 const AnimStatus = {
@@ -9,10 +10,9 @@ const AnimStatus = {
     RUN: "run",
     ATTACK: "attack",
     SKILL: "skill",
-    VICTORY: "victroy",
+    VICTORY: "victory",
     DIE: "die",
 } 
-
 
 export enum HeroPot {
     Base, // 原点
@@ -79,6 +79,12 @@ export class HeroBase extends Component {
         // this.stopAnim();
     }
 
+    onDestroy() {
+        if (this._skeletalAnimation) {
+            this._skeletalAnimation.off(SkeletalAnimation.EventType.LASTFRAME);
+        }
+    }
+
     setAttackEventCallBack(attackEventCallBack: Function) {
         (this._bodyNode.getComponent("HeroAnimationEvent") as HeroAnimationEvent).setAttackEventCallBack(attackEventCallBack);
     }
@@ -91,11 +97,15 @@ export class HeroBase extends Component {
         return this._status == status;
     }
 
-    isDie() {
+    isInDie() {
         return this._status == AnimStatus.DIE;
     }
 
-    isAttack() {
+    isInSkill() {
+        return this._status == AnimStatus.SKILL;
+    }
+
+    isInAttack() {
         return this._status == AnimStatus.ATTACK;
     }
 
@@ -140,8 +150,8 @@ export class HeroBase extends Component {
         this._skeletalAnimation.stop();
     }
 
-    playEffect(effectNode: Node, playPot: HeroPot): void {
-        this.getPlayPot(playPot).addChild(effectNode);
+    playEffect(effectNode: Node): void {
+        this.getPlayPot((effectNode.getComponent("BattleEffect") as BattleEffect).playPot).addChild(effectNode);
     }
 
     getPlayPot(playPot: HeroPot): Node {

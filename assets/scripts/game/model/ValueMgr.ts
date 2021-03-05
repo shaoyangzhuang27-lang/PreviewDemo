@@ -16,7 +16,17 @@ export class ValueMgr extends ValueCore{
         return this._instance;
     }
 
+    private _bInit: boolean = false;
+
     private dataMap:Map<string,Map<number|string,{}>>  = new Map<string,Map<number|string,{}>>();
+
+    public setInit(b: boolean) {
+        this._bInit = b;
+    }
+
+    public isInit(): boolean {
+        return this._bInit;
+    }
 
     public loadData(func:Function){
         let tabName:Array<string> = [];

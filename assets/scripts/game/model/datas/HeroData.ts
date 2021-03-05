@@ -666,6 +666,10 @@ export class HeroData extends BaseHeroData {
     public getCamp() { 
         return this._record.camp;
     }
+    // 职业
+    public getClasses() { 
+        return this._record.classes;
+    }
     //星级   
     public getStar() { 
         return this._record.star;
@@ -802,4 +806,16 @@ export class HeroData extends BaseHeroData {
     }
     
     
+
+
+
+
+
+
+
+    //////////////////////////////  分割线  //////////////////////////////
+    // 模型预制体路径
+    public getPrefabPath(): string {
+        return this._record.prefab;
+    }
 }
