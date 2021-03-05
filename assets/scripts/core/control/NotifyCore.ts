@@ -33,7 +33,7 @@ export class NotifyCore {
         return true;
     }
 
-    public notify(key:string,data:any){
+    public notify(key:string,data:any=null){
 
         let listeners = this._listener[key];
         if (null != listeners) {

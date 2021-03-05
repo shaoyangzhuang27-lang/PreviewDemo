@@ -1,8 +1,11 @@
 
-import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, Vec3, tween } from 'cc';
+import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, Vec3, tween, Label, Widget, resources, instantiate } from 'cc';
 import { MsgMgr } from '../../control/MsgMgr';
 import { PopMgr } from '../../control/PopMgr';
+import { NotifyMgr } from '../../control/NotifyMgr';
+import { HeroData } from '../../model/datas/HeroData';
 import { GameModel } from '../../model/GameModel';
+import { HeroIcon } from '../hero/HeroIcon';
 const { ccclass, property } = _decorator;
 
 @ccclass('TeamMain')
@@ -17,19 +20,34 @@ export class TeamMain extends Component {
     public selectGroup:ToggleContainer | null = null;
     
     @property({type: Node })
-    public teamNode:Node | null = null;
+    public teamNode:Node | null = null as unknown as Node;
     
     @property({type: Node })
-    public heroNode:Node | null = null;
+    public heroNode:Node | null = null as unknown as Node;
     
     @property({type: Node })
-    public pNode:Node | null = null;
+    public pNode:Node | null = null as unknown as Node;
     
     @property({type: Node })
-    public btnClose:Node | null = null;
+    public btnClose:Node = null as unknown as Node;
 
     @property({type: Node })
-    public btnBook:Node | null = null;
+    public btnBook:Node = null as unknown as Node;
+
+    @property({type: Node })
+    public btnChange:Node = null as unknown as Node;
+
+    @property({type: Node })
+    public btnPet:Node = null as unknown as Node;
+
+    @property({type: Node })
+    public btnAura:Node = null as unknown as Node;
+    
+    @property({type: Label })
+    public labPower:Label = null as unknown as Label;
+
+    @property({type :  Node})
+    public heroPosList:Node[] = [];
 
     start () {
         // [3]
@@ -39,11 +57,51 @@ export class TeamMain extends Component {
         containerEventHandler.handler = 'tabClick';
         containerEventHandler.customEventData = '';
         this.selectGroup?.checkEvents.push(containerEventHandler);
-        this.btnClose?.on(Node.EventType.TOUCH_END, this.closeHandle, this);
-        this.btnBook?.on(Node.EventType.TOUCH_END, this.openChangeFormationView, this);
+        this.btnClose.on(Node.EventType.TOUCH_END, this.closeHandle, this);
+        this.btnChange.on(Node.EventType.TOUCH_END, this._openChangeFormationView, this);
+        this.btnBook.on(Node.EventType.TOUCH_END, this._openBookLibraryView, this);
+        this.btnAura.on(Node.EventType.TOUCH_END, this._openAuraInfoView, this);
+        this.btnPet.on(Node.EventType.TOUCH_END, this._openPetInfoView, this);
+
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_formation_change,this._notifyFormationChangeHandle,this);
+
         this.show();
-        this.test();
+        this._initHero();
     }
+
+    private _initHero()
+    {
+        let _curFormationList:Map<number,HeroData> = GameModel.getInstance().getFormationModel().getCurrentFormation();
+        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{        
+            for (let index = 0; index < this.heroPosList.length; index++) {
+                this.heroPosList[index].removeAllChildren();                
+            }
+
+            let index = 0;
+            for (let value of _curFormationList.values()) {          
+                let _heroIcon = instantiate(res) as Node;
+                _heroIcon.scale = new Vec3(0.5,0.5,1);
+                _heroIcon.addComponent(Widget);
+                let subWidget = _heroIcon.getComponent(Widget) as Widget;
+                subWidget.updateAlignment();
+
+                this.heroPosList[index].addChild(_heroIcon);
+                _heroIcon.position = this.heroPosList[index].position;
+                _heroIcon.name = "formationIcon_" + value.getStaticID().toString();
+
+                let script = _heroIcon.getComponent("HeroIcon") as HeroIcon; 
+                script.setHeroID(value as HeroData);
+                script.setBtnCallBack((_data:any)=>{
+                    this._openHeroUpGradeView(_data);
+                });                
+                
+                index++;
+            }
+            // this.heroPosList[index].addChild();
+            
+        });
+    }
+
     test(){
         let heroList = GameModel.getInstance().getHeroList();
         console.log("heroList=====:");
@@ -87,15 +145,51 @@ export class TeamMain extends Component {
         this.hide();
     }
 
-    openChangeFormationView()
+    private _notifyFormationChangeHandle(data:any=null)
+    {
+        this._initHero();
+    }
+
+    //更换阵容
+    private _openChangeFormationView()
     {
         PopMgr.getInstance().popBattleTeamView(1,()=>{
             // MsgMgr.getInstance().getMsgFormation().requestChangeBattleTeam();
         });
-        this.hide();
+        // this.hide();
     }
+
+    //图鉴
+    private _openBookLibraryView()
+    {
+
+    }
+
+    //宠物
+    private _openPetInfoView()
+    {
+
+    }
+
+    //光环
+    private _openAuraInfoView()
+    {
+
+    }
+
+    //英雄升级界面
+    private _openHeroUpGradeView(_heroData:HeroData)
+    {
+
+    }
+    
 
     // update (deltaTime: number) {
     //     // [4]
     // }
+
+    onDestroy()
+    {
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_formation_change,this._notifyFormationChangeHandle,this);
+    }
 }

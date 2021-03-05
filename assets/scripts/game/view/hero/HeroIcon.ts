@@ -1,5 +1,5 @@
 //单个英雄头像
-import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources } from 'cc';
+import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources, math, UITransform } from 'cc';
 const { ccclass, property } = _decorator;
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { XConsts } from "../../model/const/XConsts";
@@ -36,35 +36,49 @@ export class HeroIcon extends Component {
     private _heroInfo : HeroData | null = null as unknown as HeroData;
     private _heroLT : any | null = null as unknown as HeroData;
 
+    private _callBack:Function|null = null as unknown as Function;  //回调方法
+
 
     start () {
         // [3]
-        this.btn_frame.on(Node.EventType.TOUCH_END, this.openHeroInfoView, this);        
+        // this.btn_frame.on(Node.EventType.TOUCH_END, this.openHeroInfoView, this);        
     }
-
-    //传入英雄id  初始化对象
-    setHeroID(_heroData : HeroData)
-    {
-        this._heroInfo = _heroData;
-        this._heroLT = ValueMgr.getInstance().getItemByField(TableName.heroes,this._heroInfo.getStaticID()) as Config.heroes.Record;
-        // this.init();
-    }
-
+    
     init()
     {
-        let _campName:string = XConsts.KCampSpriteName[this._heroInfo?.getCamp() as number];
+        if(!this._heroInfo)
+        {
+            return;
+        }
+
+        let _campName:string = XConsts.KHeroCampIcon[this._heroInfo?.getCamp() as number];
         let _frameName:string = XConsts.GetQualityBgByStar(this._heroInfo?.getStar() as number);
         let _level : number = Number(this._heroInfo?.getLevel());
         let _iconName:string = this._heroInfo?.getImageIcon() as string;
         let _starNum:number = this._heroInfo?.getStar() as number;
 
-        let campIconPath:string = "resources/ui/icon/" + _campName + ".png"
-        this._resourceLoad(campIconPath,this.img_camp);
+        if(!this._heroInfo.isRoleHero())
+        {
+            this.img_camp.active = true;
+            let campIconPath:string = "ui/team/" + _campName + "/spriteFrame"
+            resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
+            {
+                if(!err)
+                {
+                    let sprite = this.img_camp.getComponent(Sprite) as Sprite;
+                    sprite.spriteFrame = spriteFrame;
+                }
+            });            
+        }
+        else
+        {
+            this.img_camp.active = false;
+        }
         
-        let framePath:string = "resources/ui/icon/" + _frameName + ".png"
+        let framePath:string = "ui/icon/" + _frameName + "/spriteFrame"
         this._resourceLoad(framePath,this.btn_frame);
 
-        let heroIconPath:string = "resources/ui/hero/" + _iconName + ".png"
+        let heroIconPath:string = "ui/hero/" + _iconName + "/spriteFrame"
         this._resourceLoad(heroIconPath,this.img_icon);
         
         this.lab_level.string = _level.toString();
@@ -73,18 +87,25 @@ export class HeroIcon extends Component {
     }
 
     //开启英雄面板
-    openHeroInfoView()
-    {
-        
-    }
+    // openHeroInfoView()
+    // {
+    //     if(this._callBack)
+    //     {
+    //         this._callBack(this._heroInfo);
+    //     }
+    // }
 
     //资源替换
     _resourceLoad (path:string,obj:any)
     {
-        resources.load(path,SpriteFrame,(err:any,spriteFrame:SpriteFrame) =>
+        resources.load(path, (err,spriteFrame:SpriteFrame) =>
         {
-            let sprite = obj.getComponent(Sprite) as Sprite;
-            sprite.spriteFrame = spriteFrame;
+            console.log("errerrerrerrerrerrerr",err)
+            if(!err)
+            {
+                let sprite = obj.getComponent(Sprite) as Sprite;
+                sprite.spriteFrame = spriteFrame;
+            }
         });
     }
 
@@ -115,9 +136,35 @@ export class HeroIcon extends Component {
             
         }
     }
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
+
+
+    ////////////////////////////////
+    //传入英雄id  初始化对象
+    public setHeroID(_heroData : HeroData)
+    {
+        this._heroInfo = _heroData;
+        this._heroLT = ValueMgr.getInstance().getItemByField(TableName.heroes,this._heroInfo.getStaticID()) as Config.heroes.Record;
+        
+        // this._callBack = _callBack;
+        this.init();
+    }
+
+    public setNodeAnchor(point: math.Vec2 | number, y?: number)
+    {
+        let _node = this.node.getComponent(UITransform) as UITransform;
+        _node.setAnchorPoint(point);
+    }
+
+    public setBtnCallBack(_callBack:Function|null = null)
+    {
+        if(_callBack)
+        {
+            this.btn_frame.addComponent(Button);
+            this.btn_frame.on(Node.EventType.TOUCH_END, ()=>{            
+                _callBack(this._heroInfo)                
+            }, this);
+        }
+    }
 }
 
 /**

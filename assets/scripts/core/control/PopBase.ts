@@ -1,22 +1,23 @@
 import { _decorator, Component, Node,Vec3,tween,Scene, EventTouch, UITransform, math, view, UIOpacity } from 'cc';
+import { PopMgr } from '../../game/control/PopMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopBase')
 export class PopBase extends Component {
 
-    @property({type: Node})
+    @property({type: Node, displayName: "关闭按钮[选填项]"})
     public btn_close:Node | null = null;
 
     // @property({type: Node})
     // public btn_submit:Node | null = null;
 
-    @property({type: Node})
+    @property({type: Node, displayName: "取消按钮[选填项]"})
     public btn_cancel:Node | null = null;
 
-    @property({type: Node})
+    @property({type: Node, displayName: "弹出窗口[必填项]"})
     public window:Node = null as unknown as Node;
 
-    @property({type: Node})
+    @property({type: Node, displayName: "遮罩层[必填项]"})
     public mask:Node = null as unknown as Node;
 
     private _isShow:boolean = false;
@@ -25,12 +26,14 @@ export class PopBase extends Component {
 
     private _showTime:number = 0.15;
     private _hideTime:number = 0.15;
+    private _isNeedHide:boolean = true;
 
     protected _closeFunc:Function | null = null;
 
     //弹窗初始化-----
     onLoad(){
         this.window.addComponent(UIOpacity);
+        this.mask.addComponent(UIOpacity);
     }
     start () {
         // Your initialization goes here.
@@ -40,12 +43,12 @@ export class PopBase extends Component {
         this.mask.on(Node.EventType.TOUCH_END, this._onMaskClick, this);
 
         this.show();
-        this.mask.active = true
+        // this.mask.active = true
         this.window.scale = new Vec3(0,0,1)
     }
     private _onMaskClick(event:EventTouch){
         let isInWin = this._isInWin(event)
-        if(this._isMaskClose && this._closeFunc&&!isInWin){
+        if(this._isMaskClose && this._isShow && this._closeFunc&&!isInWin){
             this._closeFunc();
         }
     }
@@ -71,12 +74,28 @@ export class PopBase extends Component {
         let isInWin = (Math.abs(pos.x-nodeSize.width/2 - winPos.x) < winSize.width / 2) && (Math.abs(pos.y-nodeSize.height/2 - winPos.y) < winSize.height / 2);
         return isInWin;
     }
+    private _setMaskVisible(bo:boolean){
+        let op = this.mask.getComponent(UIOpacity) as UIOpacity;
+        if(bo){
+            op.opacity = 255;
+        }else{
+            op.opacity = 0;
+        }
+    }
+
+    private hasPop = false;
+    public popSelf(){
+        if(this.hasPop)return;
+        this.hasPop = true;
+        PopMgr.getInstance().pushWindow(this.node);
+    }
 
 
     public createMe(closeFunc:Function){
         // node?.addChild(this.node);
         this._closeFunc = closeFunc;
         this._isLive = true;
+        this.window.scale = new Vec3(0,0,1)
     }
     public deleteMe(){
         this._isLive = false;
@@ -88,15 +107,18 @@ export class PopBase extends Component {
         this._isMaskClose = bo;
     }
 
-
+    public setIsNeedHide(bo:boolean){
+        this._isNeedHide = bo;
+    }
 
     public show(){
         if(this._isShow){
             return;
         }
+        // this.mask.active = true
+        this._setMaskVisible(true);
+        this._isShow = true
 
-        if(this.window)
-            this.window.scale = new Vec3(0,0,1)
         tween(this.window)
         .to(this._showTime,{scale:new Vec3(1,1,1)},{easing: 'backOut'})
         .call(() => { 
@@ -110,15 +132,17 @@ export class PopBase extends Component {
         .to(this._showTime,{opacity:255},{easing: 'backOut'})
         .start()
 
-        if(this.mask)
-            this.mask.active = true
-
-        this._isShow = true
     }
     public hide(){
         if(!this._isShow){
             return;
         }
+        // this.mask.active = false
+        this._setMaskVisible(false);
+        this._isShow = false
+
+        if(!this._isNeedHide && this._isLive)return;
+
         tween(this.window)
         .to(this._hideTime,{scale:new Vec3(0,0,1)},{easing: 'backIn'}) 
         .call(() => {
@@ -131,10 +155,6 @@ export class PopBase extends Component {
         .to(this._hideTime,{opacity:0})
         .start()
 
-        if(this.mask)
-            this.mask.active = false
-
-        this._isShow = false
     }
 
     private _showEnd(){
