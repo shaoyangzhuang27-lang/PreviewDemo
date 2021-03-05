@@ -75,7 +75,19 @@ export class PopHeroPub extends PopBase {
         this.btn_friend_summon.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_summon_one.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_summon_ten.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
+        this.btn_introduce?.on(Node.EventType.TOUCH_END, this._onIntroduceClick, this)
+        this.btn_recommendteam?.on(Node.EventType.TOUCH_END, this._onRecommendTeamClick, this)
     }
+
+    private _onIntroduceClick(event : any)
+    {
+
+    }
+    private _onRecommendTeamClick(event : any)
+    {
+        
+    }
+
 
     //更新显示卷轴或爱心个数
     public updateImgPropNum()

@@ -6705,7 +6705,9 @@
     "lab_title": {
       "__id__": 45
     },
-    "btn_introduce": null,
+    "btn_introduce": {
+      "__id__": 34
+    },
     "btn_recommendteam": {
       "__id__": 78
     },
