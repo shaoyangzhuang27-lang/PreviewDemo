@@ -118,7 +118,7 @@ export class PopMgr extends PopCore  {
     
     public popCommonOneWindow(title:string,content:string,mode : number ,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-        resources.load('prefabs_ui/pop_common_one', (err:any,res:any)=>{
+        resources.load('prefabs_ui/pop/pop_common_one', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
             let script = p.getComponent("PopCommonOne") as PopCommonOne;
