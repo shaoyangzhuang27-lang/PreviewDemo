@@ -1,11 +1,11 @@
 import {  Node,resources,instantiate,LabelComponent,Vec3,tween,Scene, Script } from 'cc';
 import { PopSimple } from "../view/pop/PopSimple";
+import { PopCommonOne } from "../view/pop/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
 import { TipDemo } from '../view/TipDemo';
 import { XConsts } from '../model/const/XConsts';
 import { PopHeroPub } from "../view/pop/PopHeroPub";
-import { PopHeroPubPrompt } from "../view/pop/PopHeroPubPrompt";
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -115,15 +115,17 @@ export class PopMgr extends PopCore  {
 
         } );
     }
+    
+    public popCommonOneWindow(title:string,content:string,mode : number ,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-    public popHeroPubPromptWindow(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
-
-        resources.load('prefabs_ui/pub/pop_hero_pub_prompt', (err:any,res:any)=>{
+        resources.load('prefabs_ui/pop_common_one', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
-            let script = p.getComponent("PopHeroPubPrompt") as PopHeroPubPrompt;
+            let script = p.getComponent("PopCommonOne") as PopCommonOne;
             script.setTitle(title);
             script.setContent(content);
+            script.setShowMode(mode);
+            script.setSubmitCallBack(submitCallBack)
             script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
             // script.popSelf();

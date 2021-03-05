@@ -250,4 +250,14 @@ export class XConsts{
     public static KSoundMusic_Idle:string = "主城挂机音乐";
     public static KSoundMusic_Fight:string = "战斗音乐";
     public static KSoundMusic_City:string = "主城音乐";
+
+    //英雄酒馆
+    public static PUB_SUMMON_COUNT_MAX:number = 30 ;
+    public static PUB_SUMMON_DIAMOND_ONE_COSUME:number = 30 ;
+    public static PUB_SUMMON_DIAMOND_TEN_COSUME:number = 3000 ;
+    public static PUB_SUMMON_SCROLL_ONE_COSUME:number = 1 ;
+    public static PUB_SUMMON_SCROLL_TEN_COSUME:number = 10 ;
+    public static PUB_SUMMON_FRIEND_ONE_COSUME:number = 10 ;
+    public static PUB_SUMMON_FRIEND_TEN_COSUME:number = 100 ;
+
 } 

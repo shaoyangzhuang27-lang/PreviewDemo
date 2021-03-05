@@ -3,9 +3,9 @@ import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
 import { PopMgr } from '../../control/PopMgr';
+import { XConsts } from '../../model/const/XConsts';
 const { ccclass, property } = _decorator;
 
- var SUMMON_FRIEND_COUNT_MAX = 30;
 @ccclass('PopHeroPub')
 export class PopHeroPub extends PopBase {
     @property({type: Label})
@@ -133,9 +133,9 @@ export class PopHeroPub extends PopBase {
                 console.log("summon_one");
                 if(this._curSummonType == Msg.TSummonType.ESummonType_Friend)
                 {
-                    if(this._nFriendHeartNum < 10)
+                    if(this._nFriendHeartNum < XConsts.PUB_SUMMON_FRIEND_ONE_COSUME)
                     {
-                        this.showPromptWindow("错误","爱心不足");
+                        this.showPromptWindow("错误","爱心不足",1);
                     }
 
                 }
@@ -144,9 +144,9 @@ export class PopHeroPub extends PopBase {
                 console.log("summon_ten");
                 if(this._curSummonType == Msg.TSummonType.ESummonType_Friend)
                 {
-                    if(this._nFriendHeartNum < 100)
+                    if(this._nFriendHeartNum < XConsts.PUB_SUMMON_FRIEND_TEN_COSUME)
                     {
-                        this.showPromptWindow("错误","爱心不足");
+                        this.showPromptWindow("错误","爱心不足",1);
                     }
                 }
                 break;           
@@ -232,9 +232,9 @@ export class PopHeroPub extends PopBase {
         });
     }
 
-    public showPromptWindow(title : string, content : string)
+    public showPromptWindow(title : string, content : string, mode: number)
     {
-        PopMgr.getInstance().popHeroPubPromptWindow(title,content,()=>{console.log("召唤道具不足提示！")});
+        PopMgr.getInstance().popCommonOneWindow(title,content,mode,()=>{console.log("召唤道具不足提示！")});
     } 
 
 
