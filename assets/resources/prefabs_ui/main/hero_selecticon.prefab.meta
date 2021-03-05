@@ -2,12 +2,12 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-  "uuid": "9b00ac15-4aaa-4fcb-97f1-258d7ac3adf9",
+  "uuid": "e963b2df-39f7-4627-ba2e-191fa8b6a3da",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "herodebris"
+    "syncNodeName": "hero_selecticon"
   }
 }

@@ -116,7 +116,7 @@ export class PopBattleTeam extends PopBase {
     {
         this._formationList = GameModel.getInstance().getFormationModel().getFormationByIndex(this._curPageNum);
        
-        resources.load('prefabs_ui/main/heroicon', (err:any,res:any)=>{
+        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
             if(this._selectBattleList == null)
             {
                 this._selectBattleList = new Map<number, number>();
@@ -175,7 +175,7 @@ export class PopBattleTeam extends PopBase {
             this.scroll_HeroView.content.removeAllChildren()
         }
 
-        resources.load('prefabs_ui/main/heroselecticon', (err:any,res:any)=>{
+        resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
             if(this._svHeroList == null)
             {
                 this._svHeroList = new Map<number, Node>();
@@ -371,7 +371,7 @@ export class PopBattleTeam extends PopBase {
         }
         if(_clickType == 0)
         {
-            resources.load('prefabs_ui/main/heroicon', (err:any,res:any)=>{
+            resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
                 // index = index + 1;     
                 let _heroIcon = instantiate(res) as Node;
                 _heroIcon.scale = new Vec3(0.5,0.5,1);

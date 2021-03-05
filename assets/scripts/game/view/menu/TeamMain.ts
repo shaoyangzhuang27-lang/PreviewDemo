@@ -72,7 +72,7 @@ export class TeamMain extends Component {
     private _initHero()
     {
         let _curFormationList:Map<number,HeroData> = GameModel.getInstance().getFormationModel().getCurrentFormation();
-        resources.load('prefabs_ui/main/heroicon', (err:any,res:any)=>{        
+        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{        
             for (let index = 0; index < this.heroPosList.length; index++) {
                 this.heroPosList[index].removeAllChildren();                
             }
