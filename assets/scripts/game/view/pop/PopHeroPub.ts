@@ -1,6 +1,7 @@
 
 import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger,Sprite, SpriteFrame, Button, ButtonComponent} from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
+import { GameModel } from '../../model/GameModel';
 const { ccclass, property } = _decorator;
 
  var SUMMON_FRIEND_COUNT_MAX = 30;
@@ -20,7 +21,7 @@ export class PopHeroPub extends PopBase {
     public img_prop = null as unknown as Sprite;
 
     @property({type: Label})
-    public lab_prop_num:Label | null = null;
+    public lab_prop_num = null as unknown as Label;
 
     @property({type: Node})
     public node_diamond = null as unknown as Node;
@@ -57,32 +58,52 @@ export class PopHeroPub extends PopBase {
     //消费道具类型 默认道具类型Null
     private _curSummonConsumType :  number = 0;
     //卷轴数量
-    private _nScorllNum : number  = 1;
+    private _nScorllNum : number  = 0;
     //友情心数量
     private _nFriendHeartNum : number = 0;
     //英雄召唤进度
     private _nSummonFriendCount : number = 0;
-     //弹窗初始化-----
-     onLoad(){
-        super.onLoad();
-        this.curSummonType = Msg.TSummonType.ESummonType_Heroic;
 
-        //获取空间的父节点Node进行注册点击事件
+
+    start () {
+        super.start();
+        this.curSummonType = Msg.TSummonType.ESummonType_Heroic;
+        this.updateImgPropNum();
+        this.updateBtnSummonState();
+        this.showPubHeroIconPrefab()
         this.btn_hero_summon.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_friend_summon.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_summon_one.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_summon_ten.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
-        this.showBtnSummonState();
-
     }
-    
+
+    //更新显示卷轴或爱心个数
+    public updateImgPropNum()
+    {
+         //获取酒馆需要信息
+        this._nScorllNum = GameModel.getInstance().getHeroPubModel().getHeroSummonScrollNum();
+        this._nFriendHeartNum = GameModel.getInstance().getHeroPubModel().getFriendSummonScrollNum();
+        if(this._curSummonType == Msg.TSummonType.ESummonType_Heroic)
+        {
+            this.lab_prop_num.string = String(this._nScorllNum);
+        }
+        else if(this._curSummonType == Msg.TSummonType.ESummonType_Friend)
+        {
+            this.lab_prop_num.string = String(this._nFriendHeartNum);
+        }
+       
+    }
+
     private _onButtonClick(event:any){
         switch (event.target.getComponent(Button)) {
             case this.btn_hero_summon:
                 console.log("hero_summon");
                 if(this._curSummonType != Msg.TSummonType.ESummonType_Heroic)
                 {
+
                     this.curSummonType = Msg.TSummonType.ESummonType_Heroic;
+                    this.updateImgPropNum();
+                    this.updateBtnSummonState();
                 }
                 
                 break;
@@ -91,6 +112,8 @@ export class PopHeroPub extends PopBase {
                 if(this._curSummonType != Msg.TSummonType.ESummonType_Friend)
                 {
                     this.curSummonType = Msg.TSummonType.ESummonType_Friend;
+                    this.updateImgPropNum();
+                    this.updateBtnSummonState();
                 }
                 break;  
             case this.btn_summon_one:
@@ -100,17 +123,6 @@ export class PopHeroPub extends PopBase {
                 console.log("summon_ten");
                 break;           
         }
-    }
-    showHeroSummon(event: Event, customEventData: string){
-        // 这里 event 是一个 Touch Event 对象，你可以通过 event.target 取到事件的发送节点
-        const node = event.target as unknown as Node;
-        // const button = node.getComponent(Button);
-        console.log(customEventData); // foobar
-    }
-    start () {
-        super.start();
-        this.showPubHeroIconPrefab()
-
     }
 
     submitHandle(){
@@ -181,7 +193,6 @@ export class PopHeroPub extends PopBase {
                 break;
         }
         this._curSummonType = value;
-        this.showBtnSummonState();
     }
 
     
@@ -194,7 +205,8 @@ export class PopHeroPub extends PopBase {
     }
 
 
-    public showBtnSummonState()
+    //更新召唤显示按钮状态
+    public updateBtnSummonState()
     {
         var lab_one = this.btn_summon_one.node.getChildByName("lab_summon_num")?.getComponent(Label);
         var img_one = this.btn_summon_one.node.getChildByName("img_summon_icon")?.getComponent(Sprite);

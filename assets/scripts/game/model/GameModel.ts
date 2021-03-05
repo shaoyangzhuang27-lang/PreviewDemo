@@ -3,6 +3,7 @@ import { HeroData } from "./datas/HeroData";
 import { HeroesModel } from "./datas/HeroesModel";
 import { PlayerModel } from "./datas/PlayerModel";
 import { TechnologyModel } from "./datas/TechnologyModel";
+import { HeroPubModel } from "./datas/HeroPubModel";
 import { TableName, ValueMgr } from "./ValueMgr";
 
 export class GameModel{
@@ -16,6 +17,7 @@ export class GameModel{
     private _technologyModel:TechnologyModel = new TechnologyModel(this);
     private _playerModel:PlayerModel =  new PlayerModel(this);
     private _formationModel:FormationModel = new FormationModel(this);
+    private _heroPubModel:HeroPubModel = new HeroPubModel(this);
 
     public getHeroesModel(){
         return this._heroesModel;
@@ -28,6 +30,9 @@ export class GameModel{
     }
     public getFormationModel(){
         return this._formationModel;
+    }
+    public getHeroPubModel(){
+        return this._heroPubModel;
     }
     //数据类定义---------------------
     
