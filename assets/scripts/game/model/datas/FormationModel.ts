@@ -57,15 +57,15 @@ export class FormationModel extends BaseModel{
     }
 
     //获取当前阵容战力
-    public getCurrentFormationPower():number
+    public getCurrentFormationFightPower():number
     {
-        let allHeroPower:number = 0;
+        let allHeroFightPower:number = 0;
         let _curFormationList:Map<number, HeroData> = this.getCurrentFormation();
         for (let value of _curFormationList.values()) { 
-            let _power = value.getMaxPower();
-            allHeroPower += _power;
+            let _power = value.getFighting();
+            allHeroFightPower += _power;
         }
-        return allHeroPower;
+        return allHeroFightPower;
     }
 
     //当前阵容修改
