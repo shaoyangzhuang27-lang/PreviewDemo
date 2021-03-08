@@ -26,11 +26,12 @@ export class BaseHeroData
     public getNormalAttackParticleName() { return "0"; }       //普通攻击粒子名称
     public getActiveTalent() { let talentList : any = []; return talentList; }       //已激活的天赋id
 
-    public getLevel() { return 0; }       //等级
-    public getStaticID() { return 0; }       //静态ID
-    public getDyncID() { return 0; }       //
+    public getLevel() { return 0; }      //等级
+    public getStaticID() { return 0; }   //静态ID
+    public getDyncID() { return 0; }     //
     public getCamp() { return Msg.TCampType.ECampType_NULL; }       //阵营
-    public getStar() { return 0; }       //星级
+    public getClasses() { return Msg.TClassesType.EClassesType_NULL; }   // 职业
+    public getStar() { return 0; }      //星级
     // public set recordSkill(_skill :any) { this._recordSkill = _skill; }
     // public get recordSkill() { return this._recordSkill; }
     public isOrangeQuality() { return false; }
@@ -47,5 +48,9 @@ export class BaseHeroData
 
 
     //////////////////////////////  分割线  //////////////////////////////
-    public getPrefabPath() { return "" }    // 模型预制体
+    // 模型预制体路径
+    public getPrefabPath(): string { return ""; }
+    // 获得主动技能ID
+    public getSkillID(): number { return 0; }
+    
 }

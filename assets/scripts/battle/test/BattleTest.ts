@@ -1,9 +1,190 @@
 import {resources, instantiate} from 'cc';
 
-import {BattleHero} from "../BattleHero"
+import { EHeroType } from "../BattleHero";
+import { HeroData } from "../../game/model/datas/HeroData";
+
+import { TestHeroData } from "./TestHeroData";
 
 
-const type_map = {
+let SkillPrefabPath: {[key: number]: string} = {
+    1001 : "skill_0001"
+}
+
+let HeroTestInfo: {[key: number]: any} = {
+    0: {
+        prefab: "leader_00",
+        skillID: 1001,
+        hp: 100,
+        atk: 5,
+        range: 3,
+        speed: 1,
+    },
+    29: {
+        prefab: "hero_029",
+        hp: 100,
+        atk: 4,
+        range: 3,
+        speed: 1.3,
+    },
+    30: {
+        prefab: "hero_030",
+        hp: 100,
+        atk: 4,
+        range: 3,
+        speed: 1.3,
+    },
+    25: {
+        prefab: "hero_025",
+        hp: 100,
+        atk: 6,
+        range: 6,
+        speed: 1.3,
+    },
+    26: {
+        prefab: "hero_026",
+        hp: 100,
+        atk: 6,
+        range: 6,
+        speed: 1.3,
+    },
+    33: {
+        prefab: "hero_033",
+        hp: 100,
+        atk: 6,
+        range: 6,
+        speed: 1.3,
+    },
+}
+
+
+let MonsterTestInfo: {[key: number]: any}= {
+    40: {
+        prefab: "hero_040",
+        hp: 300,
+        atk: 2,
+        range: 3,
+        speed: 1.3,
+    },
+    44: {
+        prefab: "hero_044",
+        hp: 500,
+        atk: 2,
+        range: 3,
+        speed: 1.3,
+    },
+    45: {
+        prefab: "hero_045",
+        hp: 400,
+        atk: 2,
+        range: 3,
+        speed: 1.3,
+    },
+    41: {
+        prefab: "hero_041",
+        hp: 200,
+        atk: 3,
+        range: 6,
+        speed: 1.3,
+    },
+    42: {
+        prefab: "hero_042",
+        hp: 150,
+        atk: 3,
+        range: 6,
+        speed: 1.3,
+    },
+    46: {
+        prefab: "hero_046",
+        hp: 500,
+        atk: 3,
+        range: 6,
+        speed: 1.3,
+    },
+}
+
+
+let ArmyTestInfo =  [
+    {
+        id: 0,
+        type: EHeroType.LEADER,
+        embattleedSite: 1,
+    },
+    {
+        id: 29,
+        type: EHeroType.HERO,
+        embattleedSite: 0,
+    },
+    {
+        id: 30,
+        type: EHeroType.HERO,
+        embattleedSite: 2,
+    },
+    {
+        id: 25,
+        type: EHeroType.HERO,
+        embattleedSite: 3,
+    },
+    {
+        id: 26,
+        type: EHeroType.HERO,
+        embattleedSite: 4,
+    },
+    {
+        id: 33,
+        type: EHeroType.HERO,
+        embattleedSite: 5,
+    },
+]
+
+let EnemyTestInfo = [
+    {
+        id: 40,
+        type: EHeroType.MONSTER,
+        embattleedSite: 0,
+    },
+    {
+        id: 44,
+        type: EHeroType.MONSTER,
+        embattleedSite: 1,
+    },
+    {
+        id: 45,
+        type: EHeroType.MONSTER,
+        embattleedSite: 2,
+    },
+    {
+        id: 41,
+        type: EHeroType.MONSTER,
+        embattleedSite: 3,
+
+    },
+    {
+        id: 42,
+        type: EHeroType.MONSTER,
+        embattleedSite: 4,
+
+    },
+    {
+        id: 46,
+        type: EHeroType.MONSTER,
+        embattleedSite: 5,
+    },
+]
+
+for (let k in SkillPrefabPath) {
+    SkillPrefabPath[k] = "prefabs/battle/skill/" + SkillPrefabPath[k];
+}
+
+for (let k in HeroTestInfo) {
+    HeroTestInfo[k].prefab = "prefabs/hero/" + HeroTestInfo[k].prefab;
+}
+
+for (let k in MonsterTestInfo) {
+    MonsterTestInfo[k].prefab = "prefabs/hero/" + MonsterTestInfo[k].prefab;
+}
+
+
+const type_map: {[key: string]: string} = {
     '[object Boolean]'  : 'boolean',
     '[object Number]'   : 'number',
     '[object String]'   : 'string',
@@ -19,44 +200,32 @@ const type_map = {
     * 描述：返回obj对象的字符串类型
     * 参数：任意数据格式
 */
-function getType(obj: any)
-{
+function getType(obj: any) {
     return type_map[Object.prototype.toString.call(obj)];
 }
 
 /*
     * 描述：数组和字典数据的深拷贝
 */
-function deepClone(data: any)
-{
+function deepClone(data: any) {
     let type = getType(data);
     let obj: any;
-    if(type === 'array')
-    {
+    if (type === 'array') {
         obj = [];
-    }
-    else if(type === 'object')
-    {
+    } else if (type === 'object') {
         obj = {};
-    }
-    else
-    {
+    } else {
         return data;
     }
 
-    if(type === 'array')
-    {
-        for(let i = 0, len = data.length; i < len; i++)
-        {
-            let tmpData = data===data[i] ? data : deepClone(data[i])
+    if (type === 'array') {
+        for (let i = 0, len = data.length; i < len; i++) {
+            let tmpData = data === data[i] ? data : deepClone(data[i])
             obj.push(tmpData)
         }
-    }
-    else if(type === 'object')
-    {
-        for(let key in data)
-        {
-            obj[key] = data===data[key] ? data : deepClone(data[key])
+    } else if (type === 'object') {
+        for (let key in data) {
+            obj[key] = data === data[key] ? data : deepClone(data[key])
         }
     }
     return obj;
@@ -64,185 +233,14 @@ function deepClone(data: any)
 
 
 export class BattleTest {
-    public static heroTestInfo = {
-        0: {
-            prefab: "leader_00",
-            hp: 100,
-            atk: 5,
-            hitTime: 0.6,
-            range: 3,
-            speed: 1,
-        },
-        29: {
-            prefab: "hero_029",
-            hp: 100,
-            atk: 4,
-            hitTime: 0.5,
-            range: 3,
-            speed: 1.3,
-        },
-        30: {
-            prefab: "hero_030",
-            hp: 100,
-            atk: 4,
-            hitTime: 0.5,
-            range: 3,
-            speed: 1.3,
-        },
-        25: {
-            prefab: "hero_025",
-            hp: 100,
-            atk: 6,
-            hitTime: 0.5,
-            range: 6,
-            speed: 1.3,
-        },
-        26: {
-            prefab: "hero_026",
-            hp: 100,
-            atk: 6,
-            hitTime: 0.5,
-            range: 6,
-            speed: 1.3,
-        },
-        33: {
-            prefab: "hero_033",
-            hp: 100,
-            atk: 6,
-            hitTime: 0.5,
-            range: 6,
-            speed: 1.3,
-        },
-    }
-
-    
-    public static monsterTestInfo = {
-        40: {
-            prefab: "hero_040",
-            hp: 30,
-            atk: 2,
-            hitTime: 0.5,
-            range: 3,
-            speed: 1.3,
-        },
-        44: {
-            prefab: "hero_044",
-            hp: 50,
-            atk: 2,
-            hitTime: 0.5,
-            range: 3,
-            speed: 1.3,
-        },
-        45: {
-            prefab: "hero_045",
-            hp: 40,
-            atk: 2,
-            hitTime: 0.5,
-            range: 3,
-            speed: 1.3,
-        },
-        41: {
-            prefab: "hero_041",
-            hp: 20,
-            atk: 3,
-            hitTime: 0.5,
-            range: 6,
-            speed: 1.3,
-        },
-        42: {
-            prefab: "hero_042",
-            hp: 15,
-            atk: 3,
-            hitTime: 0.5,
-            range: 6,
-            speed: 1.3,
-        },
-        46: {
-            prefab: "hero_046",
-            hp: 50,
-            atk: 3,
-            hitTime: 0.5,
-            range: 6,
-            speed: 1.3,
-        },
-    }
-
-
-    public static armyTestInfo =  [
-        {
-            id: 0,
-            type: BattleHero.HeroType.LEADER,
-            embattleedSite: 1,
-        },
-        {
-            id: 29,
-            type: BattleHero.HeroType.HERO,
-            embattleedSite: 0,
-        },
-        {
-            id: 30,
-            type: BattleHero.HeroType.HERO,
-            embattleedSite: 2,
-        },
-        {
-            id: 25,
-            type: BattleHero.HeroType.HERO,
-            embattleedSite: 3,
-        },
-        {
-            id: 26,
-            type: BattleHero.HeroType.HERO,
-            embattleedSite: 4,
-        },
-        {
-            id: 33,
-            type: BattleHero.HeroType.HERO,
-            embattleedSite: 5,
-        },
-    ]
-
-    public static enemyTestInfo = [
-        {
-            id: 40,
-            type: BattleHero.HeroType.MONSTER,
-            embattleedSite: 0,
-        },
-        {
-            id: 44,
-            type: BattleHero.HeroType.MONSTER,
-            embattleedSite: 1,
-        },
-        {
-            id: 45,
-            type: BattleHero.HeroType.MONSTER,
-            embattleedSite: 2,
-        },
-        {
-            id: 41,
-            type: BattleHero.HeroType.MONSTER,
-            embattleedSite: 3,
-
-        },
-        {
-            id: 42,
-            type: BattleHero.HeroType.MONSTER,
-            embattleedSite: 4,
-
-        },
-        {
-            id: 46,
-            type: BattleHero.HeroType.MONSTER,
-            embattleedSite: 5,
-        },
-    ]
 
     public static isInit: boolean = false
 
     public static loadResList: any = []
 
     public static mapInfo: any = {}
-    public static armyInfo: any = []
-    public static enemyInfo: any = []
+    public static armyFormation: Map<number, HeroData> = new Map<number, TestHeroData>();
+    public static enemyFormation: Map<number, HeroData> = new Map<number, TestHeroData>();
 
     public static buildMapInfo() {
         // TODO
@@ -251,33 +249,38 @@ export class BattleTest {
     }
 
     public static createHeroInfo(embattleedInfo: any) {
-        if (embattleedInfo.type == BattleHero.HeroType.LEADER || embattleedInfo.type == BattleHero.HeroType.HERO) {
-            embattleedInfo.heroInfo = deepClone(BattleTest.heroTestInfo[embattleedInfo.id]);
+        if (embattleedInfo.type == EHeroType.LEADER || embattleedInfo.type == EHeroType.HERO) {
+            embattleedInfo.heroInfo = deepClone(HeroTestInfo[embattleedInfo.id]);
+            embattleedInfo.heroInfo.isRoleHero = embattleedInfo.type == EHeroType.LEADER;
         } else {
-            embattleedInfo.heroInfo = deepClone(BattleTest.monsterTestInfo[embattleedInfo.id]);
+            embattleedInfo.heroInfo = deepClone(MonsterTestInfo[embattleedInfo.id]);
         }
-        embattleedInfo.heroInfo.prefab = "prefabs/hero/" + embattleedInfo.heroInfo.prefab
         BattleTest.loadResList.push(embattleedInfo.heroInfo.prefab);
         embattleedInfo.heroInfo.type = embattleedInfo.type;
         embattleedInfo.heroInfo.embattleedSite = embattleedInfo.embattleedSite;
     }
 
-    public static buildArmyInfo() {
-        let armyInfo = deepClone(BattleTest.armyTestInfo);
+    public static createTestHeroData(testCfg: any): TestHeroData{
+        let heroData = new TestHeroData();
+        heroData.setTestCfg(testCfg);
+        return heroData;
+    }
+
+    public static buildArmy() {
+        let armyInfo = deepClone(ArmyTestInfo);
+
         for (let i in armyInfo) {
             BattleTest.createHeroInfo(armyInfo[i]);
+            BattleTest.armyFormation.set(armyInfo[i].embattleedSite, BattleTest.createTestHeroData(armyInfo[i].heroInfo));
         }
-
-        BattleTest.armyInfo = armyInfo;
     }
 
     public static buildEnemyInfo() {
-        let enemyInfo = deepClone(BattleTest.enemyTestInfo);
+        let enemyInfo = deepClone(EnemyTestInfo);
         for (let i in enemyInfo) {
             BattleTest.createHeroInfo(enemyInfo[i]);
+            BattleTest.enemyFormation.set(enemyInfo[i].embattleedSite, BattleTest.createTestHeroData(enemyInfo[i].heroInfo));
         }
-
-        BattleTest.enemyInfo = enemyInfo;
     }
 
     public static getLoadResList() {
@@ -288,23 +291,28 @@ export class BattleTest {
         return BattleTest.mapInfo;
     }
 
-    public static getArmyInfo() {
-        return BattleTest.armyInfo;
+    public static getArmyFormation(): Map<number, HeroData> {
+        return BattleTest.armyFormation;
     }
 
-    public static getEnemyInfo() {
-        return BattleTest.enemyInfo;
+    public static getEnemyFormation() {
+        return BattleTest.enemyFormation;
+    }
+
+    public static getSkillPrefabPath(skillID: number) {
+        return SkillPrefabPath[skillID];
     }
 
     public static buildTestBattle() {
         BattleTest.loadResList = [];
         BattleTest.buildMapInfo();
-        BattleTest.buildArmyInfo();
+        BattleTest.buildArmy();
         BattleTest.buildEnemyInfo();
 
 
         // TODO
         BattleTest.loadResList.push("prefabs/battle/hero/battle_hero");
+        BattleTest.loadResList.push("prefabs/battle/skill/skill_0001");
 
         BattleTest.isInit = true;
     }

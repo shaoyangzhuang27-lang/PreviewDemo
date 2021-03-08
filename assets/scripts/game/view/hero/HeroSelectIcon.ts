@@ -22,7 +22,7 @@ export class HeroSelectIcon extends Component {
         // this.choiceBg.active = true;
     }
 
-    btnChoiceCallBack()
+    private btnChoiceCallBack()
     {
         if(this._choiceCallBack)
         {
@@ -30,7 +30,7 @@ export class HeroSelectIcon extends Component {
         }
     }
 
-    initHeroIcon()
+    private initHeroIcon()
     {
         resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{                  
             let _heroIcon = instantiate(res) as Node;

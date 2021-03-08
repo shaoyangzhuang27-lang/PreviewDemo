@@ -1,11 +1,16 @@
 
-import { _decorator, Component, Node, Vec3, Canvas, Prefab, instantiate, director, resources } from 'cc';
+import { _decorator, Component, Node, Vec3, Canvas, Prefab, instantiate, director } from 'cc';
 const { ccclass, property } = _decorator;
 
-import {BattleHero} from "./BattleHero";
 
-import {BattleTest} from "./test/BattleTest";
-import {BattleResMgr} from "./BattleResMgr";
+
+import { BattleTest } from "./test/BattleTest";
+
+import { EHeroType, BattleHero } from "./BattleHero";
+import { BattleMgr } from "./BattleMgr";
+import { BattleResMgr } from "./BattleResMgr";
+
+import { ValueMgr } from "../game/model/ValueMgr";
 
 let bLoadMain = false;
 
@@ -16,12 +21,10 @@ let oldMainLoop: any = null;
 @ccclass('BattleCtrl')
 export class BattleCtrl extends Component {
 
-    private _groundPrefab: Prefab = null;
+    private _groundPrefab: Prefab = null as unknown as Prefab;
 
     public static EmbattleCfg = [[-3, 0], [0, 0], [3, 0] 
                                     ,[-3, 3], [0, 3], [3, 3]]
-
-    private _enemyInfo: any = []
 
     private _actTime: number = 0
     private _curActFunc: any = null
@@ -32,7 +35,10 @@ export class BattleCtrl extends Component {
     private _army: Array<BattleHero> = []
     private _enemy: Array<BattleHero> = []
 
-    private _leaderNode: Node = null
+    private _aliveArmy: Array<BattleHero> = []
+    private _aliveEnemy: Array<BattleHero> = []
+
+    private _leaderNode: Node = null as unknown as Node;
 
 
     public canvas: any = null
@@ -67,7 +73,18 @@ export class BattleCtrl extends Component {
             BattleResMgr.getInstance().startLoad(BattleTest.getLoadResList(), (c, t)=>{
                 
             }, ()=>{
-                this.doStart();
+                
+                if (ValueMgr.getInstance().isInit()) {
+                    this.doStart();
+                } else {
+                    
+                    ValueMgr.getInstance().loadData((cur:number, total:number)=>{
+                        if(cur == total){
+                            ValueMgr.getInstance().setInit(true);
+                            this.doStart();
+                        }
+                    });
+                } 
             });
         }
         
@@ -134,46 +151,47 @@ export class BattleCtrl extends Component {
         this._nextGroundIdx = 2;
     }
 
-    createHero(heroInfo: any, leaderNode?: Node): BattleHero {
+    createHero(heroData: any, heroType: EHeroType): BattleHero {
         let battleHeroNode = instantiate(BattleResMgr.getInstance().getRes("prefabs/battle/hero/battle_hero"));
         let battleHero: BattleHero = battleHeroNode.getComponent("BattleHero") as BattleHero;
         this.node.addChild(battleHeroNode);
     
-        battleHero.initHero(this, heroInfo, instantiate(BattleResMgr.getInstance().getRes(heroInfo.prefab)), leaderNode);    
+        battleHero.initHero(this, heroData, heroType);    
         return battleHero;
     }
 
     initHeros(): void {
         // TODO
-        let armyInfo = BattleTest.getArmyInfo();
+        let armyInfo = BattleMgr.getInstance().getIdleArmyInfo();
         
-
-        // 创建主角
-        let hero: BattleHero = this.createHero(armyInfo[0].heroInfo);
-        this._leaderNode = hero.node;
-        this._army.push(hero);
-
-        for (let i = 1; i < armyInfo.length; i++) {
-            this._army.push(this.createHero(armyInfo[i].heroInfo, this._leaderNode));
-        }
+        armyInfo.forEach((v, k) => {
+            let battleHero = this.createHero(v, v.isRoleHero() ? EHeroType.LEADER : EHeroType.HERO);
+            if (v.isRoleHero()) {
+                this._leaderNode = battleHero.node;
+            }
+            battleHero.setEmbattleedSite(k);
+            this._army.push(battleHero);
+        })
 
         for (let i = 0; i < this._army.length; i++) {
+            if (this._army[i].isHero()) {
+                this._army[i].setLeaderNode(this._leaderNode);
+            }
             this._army[i].node.setPosition(new Vec3(BattleCtrl.EmbattleCfg[this._army[i].embattleedSite][0]
                 , 0 
                 , this._battleGrounds[this._nextGroundIdx - 1].position.z - 10 + BattleCtrl.EmbattleCfg[this._army[i].embattleedSite][1]))
 
             // console.log(this._army[i].node.position)
         }
-
-        this._enemyInfo = BattleTest.getEnemyInfo();
+    
+        let enemyInfo = BattleMgr.getInstance().getIdleEnemyInfo();
         // 怪物提前生成，保证游戏顺畅
-        for (let i = 0; i < this._enemyInfo.length; i++) {
-            hero = this.createHero(this._enemyInfo[i].heroInfo);
-            // hero.node.setRotationFromEuler(0, 180, 0);
-            this._enemy[i] = hero;
-            // hero.node.setPosition(0, 0, -320);
-            hero.setVisible(false);
-        }
+        enemyInfo.forEach((v, k) => {
+            let battleHero = this.createHero(v, EHeroType.MONSTER);
+            battleHero.setEmbattleedSite(k);
+            this._enemy.push(battleHero);
+            battleHero.setVisible(false);
+        })
     }
 
     seekEnemy(): void {
@@ -196,15 +214,29 @@ export class BattleCtrl extends Component {
         this._actTime = 4;
         this._curActFunc = this.doEmbattle;
         let enemyZ = this._leaderNode.position.z - 50;
-        // 重置敌人
-        this.refreshEnemy(enemyZ);
 
+
+        // 重置敌人
+        for (let i = 0; i < this._enemy.length; i++) {
+            this._enemy[i].setVisible(true);
+            this._enemy[i].node.setRotationFromEuler(0, 180);
+            this._enemy[i].revive();
+            this._enemy[i].node.setPosition(new Vec3(BattleCtrl.EmbattleCfg[this._enemy[i].embattleedSite][0]
+                , 0 
+                , enemyZ - BattleCtrl.EmbattleCfg[this._enemy[i].embattleedSite][1]));
+
+            this._aliveEnemy[i] = this._enemy[i];
+        }
+
+        // 我方布阵
         enemyZ += 20;
         for(let i = 0; i < this._army.length; i++) {
             this._army[i].startEmbattle(
                 new Vec3(BattleCtrl.EmbattleCfg[this._army[i].embattleedSite][0]
                 , 0 
                 , enemyZ + BattleCtrl.EmbattleCfg[this._army[i].embattleedSite][1]), this._actTime - 0.03);
+
+            this._aliveArmy[i] = this._army[i];
         }
     }
 
@@ -244,28 +276,38 @@ export class BattleCtrl extends Component {
         // this._curActFunc = this.doBattle;
         this._curActFunc = null;
         for(let i = 0; i < this._army.length; i++) {
-            this._army[i].startBattle(this._enemy);
+            this._army[i].startBattle(this._aliveEnemy, this._aliveArmy);
         }
 
         for(let i = 0; i < this._enemy.length; i++) {
-            this._enemy[i].startBattle(this._army);
+            this._enemy[i].startBattle(this._aliveArmy, this._aliveEnemy);
         }
     }
 
     // doBattle(): void {
     // }
-
     onHeroDie(hero: BattleHero) {
         if (hero.isEnemy()) {
-            let isAllDie = true;
-            for(let i = 0; i < this._enemy.length; i++) {
-                if (!this._enemy[i].isDie()) {
-                    isAllDie = false;
+            for(let i = 0; i < this._aliveEnemy.length; i++) {
+                if (hero == this._aliveEnemy[i]) {
+                    this._aliveEnemy.splice(i, 1);
                     break;
                 }
             }
 
-            if (isAllDie) {
+            if (this._enemy.length == 0) {
+                this.wait();
+            }
+        } else {
+            for(let i = 0; i < this._aliveArmy.length; i++) {
+                if (hero == this._aliveArmy[i]) {
+                    this._aliveArmy.splice(i, 1);
+                    break;
+                }
+            }
+
+            if (this._aliveArmy.length == 0) 
+            {
                 this.wait();
             }
         }
@@ -279,12 +321,16 @@ export class BattleCtrl extends Component {
     doWait(dt: number): void {
         this._actTime -= dt;
         if (this._actTime <= 0) {
-            for(let i = 0; i < this._enemy.length; i++) {
+            for (let i = 0; i < this._enemy.length; i++) {
                 this._enemy[i].setVisible(false);
             }
 
-            for(let i = 0; i < this._army.length; i++) {
-                this._army[i].refreshData();
+            for (let i = 0; i < this._army.length; i++) {
+                if (this._army[i].isDie()) {
+                    this._army[i].revive();
+                } else {
+                    this._army[i].refreshData();
+                }
             }
             this.seekEnemy();
         }

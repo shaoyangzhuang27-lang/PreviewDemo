@@ -6,6 +6,7 @@ import { NotifyMgr } from '../../control/NotifyMgr';
 import { HeroData } from '../../model/datas/HeroData';
 import { GameModel } from '../../model/GameModel';
 import { HeroIcon } from '../hero/HeroIcon';
+import { XFuns } from '../../model/const/XFuns';
 const { ccclass, property } = _decorator;
 
 @ccclass('TeamMain')
@@ -98,7 +99,8 @@ export class TeamMain extends Component {
                 index++;
             }
             // this.heroPosList[index].addChild();
-            
+            let allFight = GameModel.getInstance().getFormationModel().getCurrentFormationFightPower();
+            this.labPower.string = XFuns.FormatNumber(allFight);
         });
     }
 

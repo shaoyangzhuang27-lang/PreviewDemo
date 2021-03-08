@@ -31,6 +31,7 @@ export class SceneFirst extends BaseScene {
         p.progress = cur/total;
         if(cur == total){
             this.isConfigComplete = true;
+            ValueMgr.getInstance().setInit(true);
         }
         // console.log("loading files:")
         // console.log(cur)

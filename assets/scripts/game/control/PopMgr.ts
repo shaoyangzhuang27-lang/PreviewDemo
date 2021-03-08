@@ -57,7 +57,7 @@ export class PopMgr extends PopCore  {
     //type
     public popBattleTeamView(type:number,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
-        resources.load('prefabs_ui/pop_battleteam', (err:any,res:any)=>{
+        resources.load('prefabs_ui/pop/pop_battleteam', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
