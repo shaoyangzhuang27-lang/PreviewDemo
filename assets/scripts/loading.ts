@@ -3,6 +3,8 @@ import { _decorator, Component, Node, Vec3, director, ProgressBar } from 'cc';
 import { BattleTest } from "./battle/test/BattleTest";
 import { BattleResMgr } from "./battle/BattleResMgr";
 
+import { ValueMgr } from './game/model/ValueMgr';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('Loading')
@@ -44,7 +46,17 @@ export class Loading extends Component {
                             this.loadingBar.progress = this._tmpProgress;
                         }
                     }, ()=>{
-                        director.loadScene("battle");
+                        if (ValueMgr.getInstance().isInit()) {
+                            director.loadScene("battle");
+                        } else {
+                            
+                            ValueMgr.getInstance().loadData((cur:number, total:number)=>{
+                                if(cur == total){
+                                    ValueMgr.getInstance().setInit(true);
+                                    director.loadScene("battle");
+                                }
+                            });
+                        }          
                     });
             });
         });
