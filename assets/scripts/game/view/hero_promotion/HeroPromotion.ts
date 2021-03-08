@@ -30,8 +30,17 @@ export class HeroPromotion extends PopBase {
     @property({type: Node, displayName: "右箭头"})
     public btn_arrow_right:Node | null = null;
 
+    @property({type: Node, displayName: "升级"})
+    public btn_up_lv:Node | null = null;
+
     @property({type: Node, displayName: "升阶"})
     public btn_up_tier:Node | null = null;
+
+    @property({type: Node, displayName: "阵营"})
+    public btn_camp:Node | null = null;
+
+    @property({type: Node, displayName: "职业"})
+    public btn_career:Node | null = null;
 
     @property({type: Node, displayName: "升级Tab"})
     public btn_tab_up_lv:Node | null = null;
@@ -39,8 +48,15 @@ export class HeroPromotion extends PopBase {
     @property({type: Node, displayName: "装备Tab"})
     public btn_tab_equip:Node | null = null;
 
+    @property({type: Node, displayName: "全部卸下"})
+    public btn_all_unload:Node | null = null;
+
+    @property({type: Node, displayName: "一键装备"})
+    public btn_all_load:Node | null = null;
+
     private _curHeroId: number = 0; //当前英雄ID
     private _curHeroData: HeroData= null as unknown as HeroData; //当前英雄数据
+    private _curHeroEquipData: EquipData= null as unknown as Data; //当前英雄数据
     private _allHeroList:Map<number, HeroData> = new Map<number, HeroData>(); //拥有的所有英雄
 
     private _isHeroUpView: boolean = true; //true标记当前是英雄升级/阶界面，false标记当前是英雄装备界面
@@ -49,8 +65,19 @@ export class HeroPromotion extends PopBase {
     onLoad(){
         super.onLoad();
         this._allHeroList = GameModel.getInstance().getHeroesModel().getHeroList();
-        this.btn_up_lv?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
-        
+
+        this.btn_lock?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_share?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_story?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_fight_params?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_arrow_left?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_arrow_right?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_camp?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_career?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_tab_up_lv?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_tab_equip?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_all_unload?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_all_load?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);        
     }
 
     onDestroy(){
