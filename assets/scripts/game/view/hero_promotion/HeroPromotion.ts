@@ -140,6 +140,7 @@ export class HeroPromotion extends PopBase {
     // 显示当前英雄数据
     initCurHeroView()
     {
+        this.showCurHeroModel();
        if(this._isHeroUpView)
        {            
             this._isLvUpView ? this.showHeroLvUpView(): this.showHeroUpgradeView();      
@@ -170,7 +171,7 @@ export class HeroPromotion extends PopBase {
     // 展示当前英雄形象
     showCurHeroModel()
     {
-        //this.cur_hero_model.updateByHeroPerfabPath();
+        // this.cur_hero_model.updateByHeroPerfabPath();
     }
 }
 
