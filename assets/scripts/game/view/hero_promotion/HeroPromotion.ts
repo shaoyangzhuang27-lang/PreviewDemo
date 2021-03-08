@@ -7,6 +7,7 @@ import { GameModel } from '../../model/GameModel';
 import { HeroData } from '../../model/datas/HeroData';
 import { PopMgr } from '../../control/PopMgr';
 import { MsgMgr } from '../../control/MsgMgr';
+import { HeroModel } from '../hero/HeroModel';
 const { ccclass, property } = _decorator;
  
 //弹窗初始化-----
@@ -54,9 +55,13 @@ export class HeroPromotion extends PopBase {
     @property({type: Node, displayName: "一键装备"})
     public btn_all_load:Node | null = null;
 
+    @property({ type: HeroModel, displayName: "当前英雄形象" })
+    public cur_hero_model: HeroModel | null = null;
+    
+
     private _curHeroId: number = 0; //当前英雄ID
     private _curHeroData: HeroData= null as unknown as HeroData; //当前英雄数据
-    private _curHeroEquipData: EquipData= null as unknown as Data; //当前英雄数据
+    // private _curHeroEquipData: EquipData= null as unknown as Data; //当前英雄装备数据
     private _allHeroList:Map<number, HeroData> = new Map<number, HeroData>(); //拥有的所有英雄
 
     private _isHeroUpView: boolean = true; //true标记当前是英雄升级/阶界面，false标记当前是英雄装备界面
@@ -161,6 +166,11 @@ export class HeroPromotion extends PopBase {
     showEquipView()
     {
 
+    }
+    // 展示当前英雄形象
+    showCurHeroModel()
+    {
+        //this.cur_hero_model.updateByHeroPerfabPath();
     }
 }
 
