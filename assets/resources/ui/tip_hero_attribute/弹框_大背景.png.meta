@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "ecc29995-3b44-4eca-8cb6-690ca2b530e1",
+  "uuid": "37e0174a-d6b6-43e6-a123-3e4e32803e47",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "ecc29995-3b44-4eca-8cb6-690ca2b530e1@6c48a",
+      "uuid": "37e0174a-d6b6-43e6-a123-3e4e32803e47@6c48a",
       "displayName": "弹框_大背景",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "ecc29995-3b44-4eca-8cb6-690ca2b530e1"
+        "imageUuidOrDatabaseUri": "37e0174a-d6b6-43e6-a123-3e4e32803e47"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "ecc29995-3b44-4eca-8cb6-690ca2b530e1@f9941",
+      "uuid": "37e0174a-d6b6-43e6-a123-3e4e32803e47@f9941",
       "displayName": "弹框_大背景",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 26,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "ecc29995-3b44-4eca-8cb6-690ca2b530e1@6c48a",
+        "imageUuidOrDatabaseUri": "37e0174a-d6b6-43e6-a123-3e4e32803e47@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "ecc29995-3b44-4eca-8cb6-690ca2b530e1@f9941"
+    "redirect": "37e0174a-d6b6-43e6-a123-3e4e32803e47@f9941"
   }
 }
