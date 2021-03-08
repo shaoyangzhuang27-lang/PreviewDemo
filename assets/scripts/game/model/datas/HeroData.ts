@@ -818,4 +818,14 @@ export class HeroData extends BaseHeroData {
     public getPrefabPath(): string {
         return this._record.prefab;
     }
+
+    //返回英雄头衔
+    public getTitleName():string{
+        let _title = "";
+        if(this._record != null)
+        {
+            return this._record.title;
+        }
+        return _title
+    }
 }

@@ -8,6 +8,8 @@ import { HeroIcon } from '../hero/HeroIcon';
 import { HeroSelectIcon } from '../hero/HeroSelectIcon';
 import { PopMgr } from '../../control/PopMgr';
 import { MsgMgr } from '../../control/MsgMgr';
+import { XConsts } from "../../model/const/XConsts";
+import { XFuns } from '../../model/const/XFuns';
 
 @ccclass('PopBattleTeam')
 export class PopBattleTeam extends PopBase {
@@ -16,10 +18,10 @@ export class PopBattleTeam extends PopBase {
     public btn_submit:Node | null = null;
 
     @property({type: Label})
-    public lab_title:Label | null = null;
+    public lab_title:Label = null as unknown as Label;
 
     @property({type: Label})
-    public lab_power:Label | null = null;
+    public lab_power:Label = null as unknown as Label;
 
     @property({type :  Node})
     public btn_left:Node = null as unknown as Node;
@@ -45,8 +47,8 @@ export class PopBattleTeam extends PopBase {
     @property({type :  ScrollView})
     public scroll_HeroView:ScrollView = null as unknown as ScrollView;
 
-    @property({type :  Node})
-    public scroll_content:Node = null as unknown as Node;
+    // @property({type :  Node})
+    // public scroll_content:Node = null as unknown as Node;
 
     // private submitCallFun:Function | null = null;       //保存阵容回调
     private _teamType :number = 0;  //获取阵型
@@ -112,7 +114,7 @@ export class PopBattleTeam extends PopBase {
         this.initBottomHero()
     }
 
-    initTopHero()
+    private initTopHero()
     {
         this._formationList = GameModel.getInstance().getFormationModel().getFormationByIndex(this._curPageNum);
        
@@ -154,13 +156,14 @@ export class PopBattleTeam extends PopBase {
                 this._selectBattleHeroList.set(value.getDyncID(), index);
                 index++;
             }
-            this.initBottomHero();
-            // this.heroPosList[index].addChild();
-            
+            let allFight = GameModel.getInstance().getFormationModel().getCurrentFormationFightPower();
+            this.lab_power.string = XFuns.FormatNumber(allFight);
+
+            this.initBottomHero();            
         });
     }
 
-    initBottomHero()
+    private initBottomHero()
     {
         if(this._curCampType == 0)
         {
@@ -227,7 +230,7 @@ export class PopBattleTeam extends PopBase {
         });
     }
 
-    tabClick(event: Event, customEventData: string){
+    private tabClick(event: Event, customEventData: string){
         let tog:Toggle = (event as any);
         console.log(tog.node.name)
         var _length = tog.node.name.length;
@@ -249,7 +252,7 @@ export class PopBattleTeam extends PopBase {
         this.initTopHero();
     }
 
-    btnLeftCallBack()
+    private btnLeftCallBack()
     {
         this._curPageNum--;
         if(this._curPageNum < 0)
@@ -260,7 +263,7 @@ export class PopBattleTeam extends PopBase {
         this.initTopHero();
     }
 
-    btnRightCallBack()
+    private btnRightCallBack()
     {
         this._curPageNum++;
         if(this._curPageNum > this.selectToggleList.length)
@@ -271,16 +274,18 @@ export class PopBattleTeam extends PopBase {
         this.initTopHero();
     }
 
-    tabCampClick(event: Event, customEventData: string){
+    private tabCampClick(event: Event, customEventData: string){
         let tog:Toggle = (event as any);
         console.log(tog.node.name)
         var _length = tog.node.name.length;
         var _index = tog.node.name.charAt(_length-1);
-        console.log("tab 阵营切换",_index,_length);
+        console.log("tab 阵营切换",_index,_length,XConsts.KHeroCampIcon[Number(_index)]);
 
+        this._curCampType = Number(_index);
+        this.initBottomHero();
     }
 
-    submitHandle(){
+    private submitHandle(){
         sys.localStorage.setItem("heroFormation_" + this._teamType, this._curPageNum);
         let _saveFormation:Msg.FormationInfo = new Msg.FormationInfo();
         for (const item of this._selectBattleHeroList.keys()) {
@@ -298,13 +303,13 @@ export class PopBattleTeam extends PopBase {
         
     }
 
-    scrollCallBack()
+    private scrollCallBack()
     {
 
     }
     
     //上阵区域点选英雄回调
-    _topHeroClickCallBack(_heroInfo:HeroData, isBottomClick:boolean = false) {
+    private _topHeroClickCallBack(_heroInfo:HeroData, isBottomClick:boolean = false) {
         let _heroID = _heroInfo.getStaticID() as number;
         let _dyncId = _heroInfo.getDyncID();
         let childName = "formationIcon_" + _heroID.toString();
@@ -347,7 +352,7 @@ export class PopBattleTeam extends PopBase {
     }
 
     //滚动区域英雄点击回调
-    _bottomHeroSelectCallBack(_heroInfo:HeroData,_clickType:number = 0)
+    private _bottomHeroSelectCallBack(_heroInfo:HeroData,_clickType:number = 0)
     {
         let _heroStaticID = _heroInfo.getStaticID() as number;
         let _heroDyncID = _heroInfo.getDyncID();

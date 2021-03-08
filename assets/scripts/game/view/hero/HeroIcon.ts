@@ -44,7 +44,7 @@ export class HeroIcon extends Component {
         // this.btn_frame.on(Node.EventType.TOUCH_END, this.openHeroInfoView, this);        
     }
     
-    init()
+    private init()
     {
         if(!this._heroInfo)
         {
@@ -96,7 +96,7 @@ export class HeroIcon extends Component {
     // }
 
     //资源替换
-    _resourceLoad (path:string,obj:any)
+    private _resourceLoad (path:string,obj:any)
     {
         resources.load(path, (err,spriteFrame:SpriteFrame) =>
         {
@@ -109,7 +109,7 @@ export class HeroIcon extends Component {
         });
     }
 
-    _setStar(star:number)
+    private _setStar(star:number)
     {
         if(star > 5 && star <= 10)
         {
