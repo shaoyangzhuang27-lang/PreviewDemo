@@ -5,6 +5,7 @@ import { NetLoading } from '../view/NetLoading';
 import { TipDemo } from '../view/TipDemo';
 import { TipHeroAttribute } from '../view/TipHeroAttribute';
 import { XConsts } from '../model/const/XConsts';
+import { TipSkill } from '../view/TipSkill';
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -105,7 +106,7 @@ export class PopMgr extends PopCore  {
         });
     }
     //英雄属性值弹窗tip
-    public tipHeroAttributewindow(pos:Vec3, heroId:number = 0){
+    public tipHeroAttributeWindow(pos:Vec3, heroId:number = 0){
         
         resources.load('prefabs_ui/pop/tip_hero_attribute', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
@@ -118,7 +119,19 @@ export class PopMgr extends PopCore  {
         });
     }
 
+    //英雄技能弹窗tip
+    public tipSkillWindow(pos:Vec3, skillId:number, skillLv:number, heroId:number){
+    
+        resources.load('prefabs_ui/pop/tip_skill', (err:any,res:any)=>{
+            let p = instantiate( res ) as Node;
+            this.parent?.addChild(p);
+            p.setSiblingIndex(XConsts.OrderTip);
 
+            let script = p.getComponent("TipSkill") as TipSkill;
+            script.setWinPos(pos);
+            script.setSkillData(skillId, skillLv, heroId);
+        });
+    }
 
 
     //弹出提示窗放这里-------------------------------------------------

@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "8827c8bf-74f8-4e91-bd69-75b2aa3d9bf1",
+  "uuid": "958e1f4f-2e13-44d4-abde-cdf41e1a23ed",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "8827c8bf-74f8-4e91-bd69-75b2aa3d9bf1@6c48a",
-      "displayName": "底部弹框_常用绿色按钮",
+      "uuid": "958e1f4f-2e13-44d4-abde-cdf41e1a23ed@6c48a",
+      "displayName": "弹框_大背景",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "8827c8bf-74f8-4e91-bd69-75b2aa3d9bf1"
+        "imageUuidOrDatabaseUri": "958e1f4f-2e13-44d4-abde-cdf41e1a23ed"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "8827c8bf-74f8-4e91-bd69-75b2aa3d9bf1@f9941",
-      "displayName": "底部弹框_常用绿色按钮",
+      "uuid": "958e1f4f-2e13-44d4-abde-cdf41e1a23ed@f9941",
+      "displayName": "弹框_大背景",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -45,18 +45,18 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 134,
-        "height": 67,
-        "rawWidth": 134,
-        "rawHeight": 67,
-        "borderTop": 20,
-        "borderBottom": 23,
-        "borderLeft": 34,
-        "borderRight": 32,
+        "width": 48,
+        "height": 48,
+        "rawWidth": 48,
+        "rawHeight": 48,
+        "borderTop": 23,
+        "borderBottom": 25,
+        "borderLeft": 22,
+        "borderRight": 26,
+        "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "8827c8bf-74f8-4e91-bd69-75b2aa3d9bf1@6c48a",
-        "atlasUuid": "",
-        "packable": true
+        "imageUuidOrDatabaseUri": "958e1f4f-2e13-44d4-abde-cdf41e1a23ed@6c48a",
+        "atlasUuid": ""
       },
       "ver": "1.0.9",
       "imported": true,
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "8827c8bf-74f8-4e91-bd69-75b2aa3d9bf1@f9941"
+    "redirect": "958e1f4f-2e13-44d4-abde-cdf41e1a23ed@f9941"
   }
 }
