@@ -204,7 +204,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -258.573,
+      "x": -253.006,
       "y": -45,
       "z": 0
     },
@@ -334,7 +334,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -258.573,
+      "x": -253.006,
       "y": -72,
       "z": 0
     },
@@ -464,7 +464,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -258.573,
+      "x": -253.006,
       "y": -101,
       "z": 0
     },
@@ -1383,7 +1383,7 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 610,
+      "width": 600,
       "height": 260
     },
     "_anchorPoint": {
@@ -1558,7 +1558,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "level",
+    "_name": "lab_team_name",
     "_objFlags": 512,
     "_parent": {
       "__id__": 63
@@ -2115,7 +2115,7 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 610,
+      "width": 600,
       "height": 150
     },
     "_anchorPoint": {
@@ -2232,7 +2232,7 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 630,
+      "width": 600,
       "height": 410
     },
     "_anchorPoint": {
@@ -2270,7 +2270,7 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 630,
+      "width": 600,
       "height": 410
     },
     "_anchorPoint": {
