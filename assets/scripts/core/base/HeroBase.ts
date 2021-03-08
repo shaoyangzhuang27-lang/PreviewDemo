@@ -6,6 +6,7 @@ import { BattleEffect } from "../../battle/BattleEffect";
 import { HeroAnimationEvent } from "./HeroAnimationEvent";
 
 const AnimStatus = {
+    STOP: "stop",
     IDLE: "idle",
     RUN: "run",
     ATTACK: "attack",
@@ -75,7 +76,7 @@ export class HeroBase extends Component {
         //     console.warn("英雄未配置中心点");
         // }
 
-        this.playIdle();
+        // this.playIdle();
         // this.stopAnim();
     }
 
@@ -137,18 +138,25 @@ export class HeroBase extends Component {
         this.playAnim(AnimStatus.DIE);
     }
 
+    stopAnim(): void {
+        this.playAnim(AnimStatus.STOP);
+    }
+
     playAnim(status: string): void {
         if (this._status == status) {
             return;
         }
-
         this._status = status;
+
+        if (this._status == AnimStatus.STOP) {
+            this._skeletalAnimation.stop();
+            return;
+        }
+
         this._skeletalAnimation.play(status);
     }
 
-    stopAnim(): void {
-        this._skeletalAnimation.stop();
-    }
+    
 
     playEffect(effectNode: Node): void {
         this.getPlayPot((effectNode.getComponent("BattleEffect") as BattleEffect).playPot).addChild(effectNode);
