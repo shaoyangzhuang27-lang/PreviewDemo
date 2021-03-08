@@ -3,6 +3,7 @@ import { PopSimple } from "../view/pop/PopSimple";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
 import { TipDemo } from '../view/TipDemo';
+import { TipHeroAttribute } from '../view/TipHeroAttribute';
 import { XConsts } from '../model/const/XConsts';
 export class PopMgr extends PopCore  {
 
@@ -103,8 +104,19 @@ export class PopMgr extends PopCore  {
             script.setWinPos(pos);
         });
     }
+    //英雄属性值弹窗tip
+    public tipHeroAttributewindow(pos:Vec3, heroId:number = 0){
+        
+        resources.load('prefabs_ui/pop/tip_hero_attribute', (err:any,res:any)=>{
+            let p = instantiate( res ) as Node;
+            this.parent?.addChild(p);
+            p.setSiblingIndex(XConsts.OrderTip);
 
-
+            let script = p.getComponent("TipHeroAttribute") as TipHeroAttribute;
+            script.setWinPos(pos);
+            script.setHeroId(heroId);
+        });
+    }
 
 
 
