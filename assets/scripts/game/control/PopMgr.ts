@@ -6,6 +6,7 @@ import { NetLoading } from '../view/NetLoading';
 import { TipDemo } from '../view/TipDemo';
 import { XConsts } from '../model/const/XConsts';
 import { PopHeroPub } from "../view/pop/PopHeroPub";
+import { PopRecLineUp } from "../view/pub/PopRecLineUp";
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -133,4 +134,21 @@ export class PopMgr extends PopCore  {
 
         } );
     }
+
+     //弹出酒馆推荐阵容
+    //type
+    public popRecLineUpWindow(title:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_reclineup', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopRecLineUp");
+            script.setTitle(title);
+            // script.setSubmitCallBack(submitCallBack)
+            // script.setCloseCallBack(closeCallBack);
+            script.setIsMaskClose(isMaskClose);
+            // script.setInitTeamView(type)
+        } );
+            }
 }

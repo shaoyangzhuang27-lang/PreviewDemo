@@ -15,7 +15,7 @@ export class PopHeroPub extends PopBase {
     public btn_introduce:Node | null = null;
 
     @property({type: Node})
-    public btn_recommendteam:Node | null = null;
+    public btn_recteam:Node | null = null;
 
 
     @property({type: Sprite})
@@ -71,22 +71,22 @@ export class PopHeroPub extends PopBase {
         this.curSummonType = Msg.TSummonType.ESummonType_Heroic;
         this.updateImgPropNum();
         this.updateBtnSummonState();
-        this.showPubHeroIconPrefab()
+        this.showPubHeroIconPrefab();
         this.btn_hero_summon.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_friend_summon.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_summon_one.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_summon_ten.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
-        this.btn_introduce?.on(Node.EventType.TOUCH_END, this._onIntroduceClick, this)
-        this.btn_recommendteam?.on(Node.EventType.TOUCH_END, this._onRecommendTeamClick, this)
+        this.btn_introduce?.on(Node.EventType.TOUCH_END, this._onIntroduceClick, this);
+        this.btn_recteam?.on(Node.EventType.TOUCH_END, this._onRecommendTeamClick, this);
     }
 
     private _onIntroduceClick(event : any)
     {
-
+        PopMgr.getInstance().popRecLineUpWindow("推荐阵容",()=>{console.log("")});
     }
     private _onRecommendTeamClick(event : any)
     {
-
+        PopMgr.getInstance().popRecLineUpWindow("推荐阵容",()=>{console.log("")});
     }
 
 
