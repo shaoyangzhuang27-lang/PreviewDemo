@@ -260,4 +260,10 @@ export class XConsts{
     public static PUB_SUMMON_FRIEND_ONE_COSUME:number = 10 ;
     public static PUB_SUMMON_FRIEND_TEN_COSUME:number = 100 ;
 
+    public static PUB_RECOMMEND_LINEUP_UI_PACKUP : string = "UI_PackUp";
+    public static PUB_RECOMMEND_LINEUP_UI_VIEWDETAIL : string = "UI_Detail";
+    public static PUB_RECOMMEND_LINEUP_UI_COREHERO : string = "UI_CoreHero";
+    public static PUB_RECOMMEND_LINEUP_UI_KNIGHTARMOR : string = "UI_KnightArmor";
+    public static PUB_RECOMMEND_LINEUP_UI_CAMPANALYSE : string = "UI_CampAnalyse";
+
 } 

@@ -3,11 +3,15 @@ import { HeroData } from "./HeroData";
 import { XConsts } from "../const/XConsts";
 import { BaseModel } from "./BaseModel";
 import { TableName, ValueMgr } from "../ValueMgr";
+import { instantiate } from "cc";
 
 export class HeroPubModel extends BaseModel{
     
 
     private _nLineUpCounts : number = 0;
+
+
+    private _stuLineUpInfos : XStruct.lineup_item_info.Record[] = [];
     // private _formationList:Map<number,Map<number,number>> = new Map<number,Map<number,number>>();//阵型数据 索引,英雄动态id和站位
     
     
@@ -76,7 +80,7 @@ export class HeroPubModel extends BaseModel{
         return this._gameModel.getPlayerModel().getPlayerInfo().vrmb || 0;
     }
     
-    public getRecLineUpInfos() :Map<number, XStruct.lineup_item_info.Record>
+    public initRecLineUpInfos()
     {
         // interface lineup_item_info {
         //     title?: (string|null); 
@@ -85,6 +89,10 @@ export class HeroPubModel extends BaseModel{
         //     heorIdList?:(number[]|null);
         //     analysisDetail?:(string|null);
         // }
+        if(this._stuLineUpInfos.length > 0)
+        {
+            return 
+        }
 
         var info : XStruct.lineup_item_info.Record = {
             title : "",
@@ -95,42 +103,37 @@ export class HeroPubModel extends BaseModel{
         };
         var hero_rec_tab = ValueMgr.getInstance().getTableByName(TableName.hero_recommend).records
         this.nLineUpCounts = hero_rec_tab.length;
-        console.log("hero_commend",hero_rec_tab);
-        // for (let index = 0; index < hero_rec_tab.length; index++) {
-        //     console.log("hero_rec_tab", index,hero_rec_tab[index]); 
-        // }
-        // var heroInfo = ValueMgr.getInstance().getItemByField(TableName.heroes,tab[0].coreHero[0]) as Config.heroes.Record;
-        // console.log("heroinfo",heroInfo);
-        //阵容分析
-        var lineUpAnalysisTable = ValueMgr.getInstance().getItemByField(TableName.language_data,hero_rec_tab[0].desc) as Config.language_data.Record;
-        console.log("lineUpAnalysisTable",lineUpAnalysisTable);
-        info.analysisDetail = lineUpAnalysisTable.cn;
-        //阵容标题
-        var lineUpTitleTable = ValueMgr.getInstance().getItemByField(TableName.language_data,hero_rec_tab[0].title) as Config.language_data.Record;
-        console.log("lineUpTitleTable",lineUpTitleTable);
-        info.title = lineUpTitleTable.cn;
-        info.coreHeroName = ""
-        //核心英雄
-        for(var i=0; i < hero_rec_tab[0].coreHero.length; i++)
-        {
-            var heroInfoTable = ValueMgr.getInstance().getItemByField(TableName.heroes,hero_rec_tab[0].coreHero[i]) as Config.heroes.Record;
-            var heroNameTable = ValueMgr.getInstance().getItemByField(TableName.language_data,heroInfoTable.name) as Config.language_data.Record;
-            console.log("heroNameTable",heroNameTable);
-            info.coreHeroName =  info.coreHeroName + heroNameTable.cn + " ";
-        }
-        for(var i =0; i < hero_rec_tab[0].otherHero.length;i++)
-        {
-            var heroInfoTable = ValueMgr.getInstance().getItemByField(TableName.heroes,hero_rec_tab[0].otherHero[i]) as Config.heroes.Record;
-            var heroNameTable = ValueMgr.getInstance().getItemByField(TableName.language_data,heroInfoTable.name) as Config.language_data.Record;
-            // info.coreHeroName = info.coreHeroName + heroNameTable.cn + " ";
-        }
-        info.heorIdList = hero_rec_tab[0].coreHero.concat(hero_rec_tab[0].otherHero);
-        info.roleArmor = hero_rec_tab[0].roleArmor;
+        console.log("hero_commend",hero_rec_tab.length);
+        for (let index = 0; index < hero_rec_tab.length; index++) {
+            // console.log("hero_rec_tab", index,hero_rec_tab[index]); 
+             //阵容分析
+            var lineUpAnalysisTable = ValueMgr.getInstance().getItemByField(TableName.language_data,hero_rec_tab[index].desc) as Config.language_data.Record;
+            // console.log("lineUpAnalysisTable",lineUpAnalysisTable);
+            info.analysisDetail = lineUpAnalysisTable.cn;
+            //阵容标题
+            var lineUpTitleTable = ValueMgr.getInstance().getItemByField(TableName.language_data,hero_rec_tab[index].title) as Config.language_data.Record;
+            // console.log("lineUpTitleTable",lineUpTitleTable);
+            info.title = lineUpTitleTable.cn;
+            info.coreHeroName = ""
+            //核心英雄
+            for(var i=0; i < hero_rec_tab[index].coreHero.length; i++)
+            {
+                var heroInfoTable = ValueMgr.getInstance().getItemByField(TableName.heroes,hero_rec_tab[index].coreHero[i]) as Config.heroes.Record;
+                var heroNameTable = ValueMgr.getInstance().getItemByField(TableName.language_data,heroInfoTable.name) as Config.language_data.Record;
+                // console.log("heroNameTable",heroNameTable);
+                info.coreHeroName =  info.coreHeroName + heroNameTable.cn + " ";
+            }
+            // for(var i =0; i < hero_rec_tab[index].otherHero.length;i++)
+            // {
+            //     var heroInfoTable = ValueMgr.getInstance().getItemByField(TableName.heroes,hero_rec_tab[index].otherHero[i]) as Config.heroes.Record;
+            //     var heroNameTable = ValueMgr.getInstance().getItemByField(TableName.language_data,heroInfoTable.name) as Config.language_data.Record;
+            //     // info.coreHeroName = info.coreHeroName + heroNameTable.cn + " ";
+            // }
+            info.heorIdList = hero_rec_tab[index].coreHero.concat(hero_rec_tab[index].otherHero);
+            info.roleArmor = hero_rec_tab[index].roleArmor;
 
-        console.log("nCounts",this.nLineUpCounts);
-        console.log("info",info);
-       
-        return  info;
+            this._stuLineUpInfos.push(instantiate(info));
+        } 
     } 
 
     set nLineUpCounts(nCounts : number)

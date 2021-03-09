@@ -36,7 +36,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 301
+      "__id__": 300
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -6685,9 +6685,6 @@
       "__id__": 1
     },
     "_enabled": true,
-    "__prefab": {
-      "__id__": 300
-    },
     "btn_close": {
       "__id__": 23
     },
@@ -6734,11 +6731,7 @@
     "btn_summon_ten": {
       "__id__": 280
     },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "dazdu/3i1KMps+Q6I/z62Z"
+    "_id": "62SrjtBTRIdpFv0Ia8UMVU"
   },
   {
     "__type__": "cc.PrefabInfo",

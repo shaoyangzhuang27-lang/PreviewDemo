@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label, ToggleContainer, EventHandler, Toggle, sys, resources, instantiate, Vec3, ScrollView, v3, math, Widget } from 'cc';
+import { _decorator, Component, Node, Label, ToggleContainer, EventHandler, Toggle, sys, resources, instantiate, Vec3, ScrollView, v3, math, Widget, UITransform } from 'cc';
 const { ccclass, property } = _decorator;
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
@@ -10,6 +10,7 @@ import { MsgMgr } from '../../control/MsgMgr';
 import { XConsts } from "../../model/const/XConsts";
 import { XFuns } from '../../model/const/XFuns';
 
+
 @ccclass('PopRecLineUp')
 export class PopRecLineUp extends PopBase {
 
@@ -19,9 +20,8 @@ export class PopRecLineUp extends PopBase {
     @property({type: Label})
     public lab_title:Label = null as unknown as Label;
 
-    // @property({type: Label})
-    // public lab_power:Label = null as unknown as Label;
-
+    @property({type :  ScrollView})
+    public scroll_lineup_view:ScrollView = null as unknown as ScrollView;
     // @property({type :  Node})
     // public btn_left:Node = null as unknown as Node;
 
@@ -67,6 +67,8 @@ export class PopRecLineUp extends PopBase {
 
     onLoad () {
         super.onLoad();
+        GameModel.getInstance().getHeroPubModel().initRecLineUpInfos();
+        this.initLineUpView();
         // // [3]
         // this._formationList = GameModel.getInstance().getFormationModel().getCurrentFormation();   //当前上阵英雄阵容
         // this._allHeroList = GameModel.getInstance().getHeroList();
@@ -102,6 +104,27 @@ export class PopRecLineUp extends PopBase {
         // this.btn_right.on(Node.EventType.TOUCH_END, this.btnRightCallBack, this);
     }
 
+    public initLineUpView()
+    {
+        if(this.scroll_lineup_view.content)
+        {
+            this.scroll_lineup_view.content.removeAllChildren()
+        }
+        resources.load('prefabs_ui/main/pub_reclineup_item', (err:any,res:any)=>{
+
+            for (var i = 0 ; i < GameModel.getInstance().getHeroPubModel().nLineUpCounts ; i++) {
+                let reclineup_item = instantiate( res );
+                // console.log("size",reclineup_item.getComponent(UITransform).contentSize);
+                this.scroll_lineup_view.content?.addChild(reclineup_item);
+            }
+            // console.log("dddddddddddd",this.scroll_lineup_view.content);
+        });
+    }
+
+    public initLineUpItem(nCounts : number)
+    {
+
+    } 
     // start()
     // {
     //     super.start()
