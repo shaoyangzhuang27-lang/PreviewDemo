@@ -1,0 +1,74 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "b88202dc-420f-4d45-8a02-9706bd57c4b6",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "b88202dc-420f-4d45-8a02-9706bd57c4b6@6c48a",
+      "displayName": "半透阴影x16y16",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "b88202dc-420f-4d45-8a02-9706bd57c4b6"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "b88202dc-420f-4d45-8a02-9706bd57c4b6@f9941",
+      "displayName": "半透阴影x16y16",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 27,
+        "height": 25,
+        "rawWidth": 27,
+        "rawHeight": 25,
+        "borderTop": 13,
+        "borderBottom": 12,
+        "borderLeft": 14,
+        "borderRight": 13,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "b88202dc-420f-4d45-8a02-9706bd57c4b6@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "b88202dc-420f-4d45-8a02-9706bd57c4b6@f9941"
+  }
+}
