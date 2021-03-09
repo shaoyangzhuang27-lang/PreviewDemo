@@ -30,11 +30,45 @@
         ".json"
       ],
       "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "c5e82358-ad6d-4c1e-ba9d-b6e36fc4a081@f9941",
+      "displayName": "chest15",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": -1.5,
+        "offsetY": 0.5,
+        "trimX": 0,
+        "trimY": 5,
+        "width": 197,
+        "height": 189,
+        "rawWidth": 200,
+        "rawHeight": 200,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "c5e82358-ad6d-4c1e-ba9d-b6e36fc4a081@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
     }
   },
   "userData": {
     "hasAlpha": true,
-    "type": "texture",
-    "redirect": "c5e82358-ad6d-4c1e-ba9d-b6e36fc4a081@6c48a"
+    "type": "sprite-frame",
+    "redirect": "c5e82358-ad6d-4c1e-ba9d-b6e36fc4a081@f9941"
   }
 }

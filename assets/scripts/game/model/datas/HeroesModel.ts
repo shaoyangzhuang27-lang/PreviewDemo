@@ -139,4 +139,23 @@ export class HeroesModel extends BaseModel{
         });
         return _campHeroList;
     }
+
+    //根据静态id获取图鉴英雄
+    public getBookHeroDataByStaticID(staticId:number):Msg.HeroBookUnit
+    {
+        let tempBookId = HeroData.GetHeroBookID(staticId);
+        let tempBookHero:Msg.HeroBookUnit = new Msg.HeroBookUnit();
+        if(this._heroBookMap.has(tempBookId))
+        {
+            tempBookHero = this._heroBookMap.get(tempBookId) as Msg.HeroBookUnit;
+        }
+        // this._heroBookMap.forEach((heroInfo)=>{
+        //     var _hero = ValueMgr.getInstance().getItemByField(TableName.heroes, heroInfo.heroBookId as number) as Config.heroes.Record;
+        //     if(heroInfo && heroInfo.heroBookId == tempBookId){
+        //         tempBookHero = heroInfo;      
+        //         return;          
+        //     }
+        // });
+        return tempBookHero;
+    }
 }

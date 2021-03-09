@@ -30,11 +30,45 @@
         ".json"
       ],
       "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "77811b04-6400-4516-a8ca-dfd39603391c@f9941",
+      "displayName": "主角铠甲3",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 2,
+        "offsetY": -4,
+        "trimX": 12,
+        "trimY": 14,
+        "width": 180,
+        "height": 180,
+        "rawWidth": 200,
+        "rawHeight": 200,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "77811b04-6400-4516-a8ca-dfd39603391c@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
     }
   },
   "userData": {
     "hasAlpha": true,
-    "type": "texture",
-    "redirect": "77811b04-6400-4516-a8ca-dfd39603391c@6c48a"
+    "type": "sprite-frame",
+    "redirect": "77811b04-6400-4516-a8ca-dfd39603391c@f9941"
   }
 }

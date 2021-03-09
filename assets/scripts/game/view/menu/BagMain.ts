@@ -1,5 +1,7 @@
 
-import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, Vec3, tween } from 'cc';
+import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, Vec3, tween, ScrollView, Game, resources, instantiate } from 'cc';
+import { GameModel } from '../../model/GameModel';
+import { ItemEquipCell } from './ItemEquipCell';
 const { ccclass, property } = _decorator;
 
 @ccclass('BagMain')
@@ -27,6 +29,12 @@ export class BagMain extends Component {
     
     @property({type: Node })
     public btnClose:Node | null = null;
+
+    @property({type :  ScrollView})
+    public scroll_EquipView:ScrollView = null as unknown as ScrollView;
+
+    @property({type :  ScrollView})
+    public scroll_ItemView:ScrollView = null as unknown as ScrollView;
 
     start () {
         // [3]
@@ -62,6 +70,7 @@ export class BagMain extends Component {
         tween(this.pNode)
         .to(0.1,{position:new Vec3(this.pNode?.getPosition().x,-340,0)})
         .call(() => {
+            this._initScrollview()
         }).start()
     }
     hide(){
@@ -74,6 +83,39 @@ export class BagMain extends Component {
     }
     closeHandle(){
         this.hide();
+    }
+
+    private _initScrollview()
+    {
+        this._initEquipScrollview()
+    }
+
+    private _initEquipScrollview()
+    {
+        let allEquipList = GameModel.getInstance().getBagModel().getBagEquipList();
+        resources.load('prefabs_ui/main/itemEquipCell', (err:any,res:any)=>{
+            for (let key of allEquipList.keys()) {
+                let value = allEquipList.get(key);  //数量
+                // let equipData = ValueMgr.getInstance().getItemByField(TableName.equip,Number(key)) as Config.equip.Record;
+                let equipCell = instantiate(res) as Node;
+                this.scroll_EquipView.content?.addChild(equipCell);
+
+                let script = equipCell.getComponent("ItemEquipCell") as ItemEquipCell;
+                script.setItemType(Number(key),Number(value),2,(id:number,num:number)=>{
+                    this._itemEqipCallBack(id,num)
+                })
+            }
+        })   
+    }
+
+    private _itemEqipCallBack(itemID:number,itemType:number)
+    {
+
+    }
+
+    onDestroy()
+    {
+
     }
 
     // update (deltaTime: number) {

@@ -30,11 +30,45 @@
         ".json"
       ],
       "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "58155932-91e6-4b34-ba88-fd6eecace331@f9941",
+      "displayName": "主角战靴4",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": -6,
+        "offsetY": -2.5,
+        "trimX": 25,
+        "trimY": 24,
+        "width": 138,
+        "height": 157,
+        "rawWidth": 200,
+        "rawHeight": 200,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "58155932-91e6-4b34-ba88-fd6eecace331@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
     }
   },
   "userData": {
     "hasAlpha": true,
-    "type": "texture",
-    "redirect": "58155932-91e6-4b34-ba88-fd6eecace331@6c48a"
+    "type": "sprite-frame",
+    "redirect": "58155932-91e6-4b34-ba88-fd6eecace331@f9941"
   }
 }

@@ -93,6 +93,7 @@ export class MsgLogin extends MsgBase{
         // this.requestSyncChat();
         // MsgMgr.getInstance().requestGetCacheChatList();
         GameModel.getInstance().initPlayerBag(msgData);
+        GameModel.getInstance().initPlayerItem(msgData);
     }
     //获取游戏数据-----------------------
 }

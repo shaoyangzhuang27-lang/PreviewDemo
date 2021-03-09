@@ -62,6 +62,9 @@ export class PopHeroBookView extends PopBase {
         // this.btnRules.on(Node.EventType.TOUCH_END, this.openRuleView, this);
 
         this._bookHeroList = GameModel.getInstance().getHeroesModel().getBookMap();
+        // for (let iterator of this._bookHeroList.keys()) {
+        //     console.log("sdaczxcascascq",iterator)
+        // }
         this._refreshData()
     }
 
@@ -74,10 +77,10 @@ export class PopHeroBookView extends PopBase {
 
         let heroStaticId2List:number[] = new Array<number>();
         let heroStaticId3List:number[] = new Array<number>();
-        let heroDataes = ValueMgr.getInstance().getTableByName(TableName.heroes) ;
+        let heroDataes = ValueMgr.getInstance().getTableByName(TableName.heroes).records ;
         for (let herodata of heroDataes) {
             let record = herodata as Config.heroes.Record;
-            console.log("英雄id及下一个id",record.id,record.nextId);
+            // console.log("英雄id及下一个id",record.id,record.nextId);
             if(record.classes == 1 || record.nextId != 0) { continue; }
             if(record.camp == this._curCampType)
             {
@@ -139,7 +142,7 @@ export class PopHeroBookView extends PopBase {
     }
 
     //阵营切换
-    private _tabCampClick()
+    private _tabCampClick(event: Event, customEventData: string)
     {
         let tog:Toggle = (event as any);
         console.log(tog.node.name)
@@ -148,6 +151,7 @@ export class PopHeroBookView extends PopBase {
         console.log("tab 阵营切换",_index,_length,XConsts.KHeroCampIcon[Number(_index)]);
 
         this._curCampType = Number(_index);
+        this._refreshData()
     }
 
     //打开规则界面

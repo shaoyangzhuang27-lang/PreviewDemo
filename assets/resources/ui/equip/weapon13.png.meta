@@ -30,11 +30,45 @@
         ".json"
       ],
       "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "9cfe0b26-d666-4d8e-a397-a7b4de02f303@f9941",
+      "displayName": "weapon13",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": -4,
+        "offsetY": 3,
+        "trimX": 12,
+        "trimY": 2,
+        "width": 168,
+        "height": 190,
+        "rawWidth": 200,
+        "rawHeight": 200,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "9cfe0b26-d666-4d8e-a397-a7b4de02f303@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
     }
   },
   "userData": {
     "hasAlpha": true,
-    "type": "texture",
-    "redirect": "9cfe0b26-d666-4d8e-a397-a7b4de02f303@6c48a"
+    "type": "sprite-frame",
+    "redirect": "9cfe0b26-d666-4d8e-a397-a7b4de02f303@f9941"
   }
 }

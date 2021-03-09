@@ -30,11 +30,45 @@
         ".json"
       ],
       "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "977e7502-3978-443c-876d-f5cc75bbdf1f@f9941",
+      "displayName": "trinket1",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": -1.5,
+        "offsetY": -1,
+        "trimX": 6,
+        "trimY": 9,
+        "width": 185,
+        "height": 184,
+        "rawWidth": 200,
+        "rawHeight": 200,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "977e7502-3978-443c-876d-f5cc75bbdf1f@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
     }
   },
   "userData": {
     "hasAlpha": true,
-    "type": "texture",
-    "redirect": "977e7502-3978-443c-876d-f5cc75bbdf1f@6c48a"
+    "type": "sprite-frame",
+    "redirect": "977e7502-3978-443c-876d-f5cc75bbdf1f@f9941"
   }
 }

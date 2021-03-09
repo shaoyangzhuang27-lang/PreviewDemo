@@ -3,6 +3,7 @@ import { HeroData } from "./datas/HeroData";
 import { HeroesModel } from "./datas/HeroesModel";
 import { PlayerModel } from "./datas/PlayerModel";
 import { TechnologyModel } from "./datas/TechnologyModel";
+import { BagItemModel } from "./datas/BagItemModel";
 import { TableName, ValueMgr } from "./ValueMgr";
 
 export class GameModel{
@@ -16,6 +17,7 @@ export class GameModel{
     private _technologyModel:TechnologyModel = new TechnologyModel(this);
     private _playerModel:PlayerModel =  new PlayerModel(this);
     private _formationModel:FormationModel = new FormationModel(this);
+    private _bagItemModel:BagItemModel = new BagItemModel(this);
 
     public getHeroesModel(){
         return this._heroesModel;
@@ -29,6 +31,9 @@ export class GameModel{
     public getFormationModel(){
         return this._formationModel;
     }
+    public getBagModel(){
+        return this._bagItemModel;
+    }
     //数据类定义---------------------
     
     public initHeroList(msg:Msg.GetHeroListA) {
@@ -41,6 +46,10 @@ export class GameModel{
     
     public initPlayerBag(msg:Msg.GetPlayerDataA) {
         this._formationModel.initFormationList(msg);
+    }
+
+    public initPlayerItem(msg:Msg.GetPlayerDataA) {
+        this._bagItemModel.initBagItemList(msg);
     }
     
     //将弃用-----------------
