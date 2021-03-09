@@ -1,8 +1,11 @@
 import { _decorator, Component, Node,director,tween,Vec3, instantiate, resources } from 'cc';
+import { MsgMgr } from '../../control/MsgMgr';
+import { NotifyMgr } from '../../control/NotifyMgr';
 import { DataMgr } from '../../model/DataMgr';
 import { BagMain } from '../menu/BagMain';
 import { KnightMain } from '../menu/KnightMain';
 import { TeamMain } from '../menu/TeamMain';
+import { PopOffLineBonus} from '../pop/PopOffLineBonus';
 
 const { ccclass, property } = _decorator;
 
@@ -32,14 +35,22 @@ export class MainUI extends Component {
     @property({type: Node, displayName: "主城图标"})
     public ico_city:Node | null = null;
 
+    @property({type: Node, displayName: "挂机奖励"})
+    public btn_offline:Node | null = null;
+
 
 
     onLoad(){
+        // 点击事件
         this.btn_hero?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
         this.btn_team?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
         this.btn_battle?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
         this.btn_bag?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
         this.btn_guild?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_offline?.on(Node.EventType.TOUCH_END, this.buttonBtnOffLineClick, this)
+
+        // 监听事件
+        NotifyMgr.getInstance().addNotifyHandler("event_net_offline", this.openOfflineBonus, this);
         this.locateMenu();
     }
     update(){
@@ -48,6 +59,7 @@ export class MainUI extends Component {
     }
 
     onDestroy(){
+        NotifyMgr.getInstance().removeNotifyHandler("event_net_offline", this.openOfflineBonus, this);
     }
     start () {
         this.initView();
@@ -59,6 +71,21 @@ export class MainUI extends Component {
         // console.log(DataMgr.getInstance().getPlayerInfo())
         // console.log(DataMgr.getInstance().getPlayerInfo().name)
         
+    }
+
+    openOfflineBonus(){
+        resources.load('prefabs_ui/offline/pop_offline', (err: any, res: any) => {
+            let p = instantiate(res);
+            let script = p.getComponent("PopOffLineBonus") as PopOffLineBonus
+            script.popSelf()
+            script.setSubmitCallBack(function () { })
+            script.setIsMaskClose(true);
+        });
+    }
+    // 点击宝箱
+    buttonBtnOffLineClick(event:any){
+        // 请求数据
+        MsgMgr.getInstance().getMsgOffline().requestGainOfflineAwardR();
     }
 
     buttonBtnClick(event:any){

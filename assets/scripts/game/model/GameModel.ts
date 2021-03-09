@@ -4,6 +4,8 @@ import { HeroesModel } from "./datas/HeroesModel";
 import { PlayerModel } from "./datas/PlayerModel";
 import { TechnologyModel } from "./datas/TechnologyModel";
 import { TableName, ValueMgr } from "./ValueMgr";
+import { OfflineModel } from "./datas/OfflineModel"
+
 
 export class GameModel{
     private static _instance: GameModel = new GameModel();
@@ -16,6 +18,7 @@ export class GameModel{
     private _technologyModel:TechnologyModel = new TechnologyModel(this);
     private _playerModel:PlayerModel =  new PlayerModel(this);
     private _formationModel:FormationModel = new FormationModel(this);
+    private _offlineModel:OfflineModel = new OfflineModel();
 
     public getHeroesModel(){
         return this._heroesModel;
@@ -28,6 +31,10 @@ export class GameModel{
     }
     public getFormationModel(){
         return this._formationModel;
+    }
+    // 挂机数据
+    public getOfflineModel(){
+        return this._offlineModel;
     }
     //数据类定义---------------------
     
