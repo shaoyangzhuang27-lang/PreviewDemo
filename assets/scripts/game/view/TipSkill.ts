@@ -65,9 +65,10 @@ export class TipSkill extends TipBase {
         }
         else
         {
-            this.lab_txt_0.string = "";
-            this.lab_txt_1.string = "";
-            this.lab_txt_2.string = "";
+            //
+            // this.lab_txt_0.string = "";
+            // this.lab_txt_1.string = "";
+            // this.lab_txt_2.string = "";
         }
     }
 
