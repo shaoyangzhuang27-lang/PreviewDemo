@@ -54,7 +54,6 @@ export class PopBattleTeam extends PopBase {
     private _teamType :number = 0;  //获取阵型
     private _curPageNum :number = 1;    //当前阵容界面
     private _formationList:Map<number, HeroData> = new Map<number, HeroData>();   //当前上阵英雄阵容
-    private _topSelectHeroList:Map<number, number> = new Map<number, number>();
     private _lastTog:Toggle = null as unknown as Toggle;
 
 
@@ -98,72 +97,76 @@ export class PopBattleTeam extends PopBase {
 
 
 
-        this.btn_submit?.on(Node.EventType.TOUCH_END, this.submitHandle, this);
-        this.btn_left.on(Node.EventType.TOUCH_END, this.btnLeftCallBack, this);
-        this.btn_right.on(Node.EventType.TOUCH_END, this.btnRightCallBack, this);
+        this.btn_submit?.on(Node.EventType.TOUCH_END, this._submitHandle, this);
+        this.btn_left.on(Node.EventType.TOUCH_END, this._btnLeftCallBack, this);
+        this.btn_right.on(Node.EventType.TOUCH_END, this._btnRightCallBack, this);
     }
 
     start()
     {
-        super.start()
-        if(this._selectBattleList == null)
-        {
-            this._selectBattleList = new Map<number, number>();
-        }
-        this._selectBattleList.clear();
-        this.initBottomHero()
+        super.start();
+        this._initTopHeros();
+        this._initBottomHeros();
     }
 
-    private initTopHero()
+    private _initTopHero(heroIcon:any,value:HeroData){
+        
+        let childName = "formationIcon_" + value.getStaticID().toString();;
+        heroIcon.scale = new Vec3(0.5,0.5,1);
+        heroIcon.addComponent(Widget);
+        let subWidget = heroIcon.getComponent(Widget) as Widget;
+        subWidget.updateAlignment();
+        heroIcon.name = childName;
+
+        let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+        script.setHeroID(value as HeroData);
+        script.setBtnCallBack((_data:any)=>{
+            this._topHeroClickCallBack(_data);
+        });  
+    }
+    private _getTopHero(heroID:number){
+        
+        let childName = "formationIcon_" + heroID;
+        
+        for (let index = 0; index < this.heroPosList.length; index++) {
+            let child = this.heroPosList[index].getChildByName(childName);
+            if(child)return child
+        }
+    }
+
+    private _initTopHeros()
     {
         this._formationList = GameModel.getInstance().getFormationModel().getFormationByIndex(this._curPageNum);
+
+        this._selectBattleList.clear()
+        this._selectBattleHeroList.clear()
+        this._formationList.forEach((value,key)=>{
+            let bookheroid = HeroData.GetHeroBookID(value.getStaticID());
+            this._selectBattleList.set( bookheroid, value.getDyncID());
+            this._selectBattleHeroList.set(value.getDyncID(), key);
+        });
        
         resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
-            if(this._selectBattleList == null)
-            {
-                this._selectBattleList = new Map<number, number>();
-            }
-            this._selectBattleList.clear()
-            if(this._selectBattleHeroList == null)
-            {
-                this._selectBattleHeroList = new Map<number, number>();
-            }
-            this._selectBattleHeroList.clear()
 
             for (let index = 0; index < this.heroPosList.length; index++) {
                 this.heroPosList[index].removeAllChildren();                
             }
 
-            let index = 0;
-            for (let value of this._formationList.values()) {          
-                let _heroIcon = instantiate(res) as Node;
-                _heroIcon.scale = new Vec3(0.5,0.5,1);
-                _heroIcon.addComponent(Widget);
-                let subWidget = _heroIcon.getComponent(Widget) as Widget;
-                subWidget.updateAlignment();
-
-                this.heroPosList[index].addChild(_heroIcon);
-                _heroIcon.position = this.heroPosList[index].position;
-                _heroIcon.name = "formationIcon_" + value.getStaticID().toString();
-
-                let script = _heroIcon.getComponent("HeroIcon") as HeroIcon; 
-                script.setHeroID(value as HeroData);
-                script.setBtnCallBack((_data:any)=>{
-                    this._topHeroClickCallBack(_data);
-                });                
+            this._formationList.forEach((value,key)=>{
+                let heroIcon = instantiate(res) as Node;
+                this._initTopHero(heroIcon, value);
+                this.heroPosList[key].addChild(heroIcon);
                 
-                this._selectBattleList.set(value.getStaticID() as number, value.getDyncID());
-                this._selectBattleHeroList.set(value.getDyncID(), index);
-                index++;
-            }
+            });
+
+
             let allFight = GameModel.getInstance().getFormationModel().getCurrentFormationFightPower();
             this.lab_power.string = XFuns.FormatNumber(allFight);
 
-            this.initBottomHero();            
         });
     }
 
-    private initBottomHero()
+    private _initBottomHeros()
     {
         if(this._curCampType == 0)
         {
@@ -179,113 +182,87 @@ export class PopBattleTeam extends PopBase {
         }
 
         resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
-            if(this._svHeroList == null)
-            {
-                this._svHeroList = new Map<number, Node>();
-            }
             this._svHeroList.clear()
 
             for (let value of this._allHeroList.values()) {
-                let _heroIcon = instantiate(res) as Node;
-                this.scroll_HeroView.content?.addChild(_heroIcon);
-                _heroIcon.name = "scrollviewHero_" + value.getStaticID().toString()
+                let heroIcon = instantiate(res) as Node;
+                this.scroll_HeroView.content?.addChild(heroIcon);
 
-                let script = _heroIcon.getComponent("HeroSelectIcon") as HeroSelectIcon; 
+                let script = heroIcon.getComponent("HeroSelectIcon") as HeroSelectIcon; 
                 
-                let _clickType =  0;                
-                if(this._selectBattleList.has(value.getStaticID()))
-                {
-                    let _dyncId = this._selectBattleList.get(value.getStaticID()) as number;
-                    let _topHeroInfo:HeroData = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(_dyncId) as HeroData;
-                    if(_topHeroInfo.getDyncID() == value.getDyncID())
-                    {
-                        _clickType = 1;
-                    }
-                    else{
-                        _clickType = 2;
-                    }
-                }
+                let itemType =  this._getItemType(value);
+                console.log("itemType----")
+                console.log(itemType)
+                script.setChoiceIconImage(itemType);
 
-                script.setChoiceIconImage(_clickType);
-                script.setSelectData(value as HeroData,(data:any,_num:number)=>{
-                    this._bottomHeroSelectCallBack(data,_num);
-                    if((_num == 1 || _num == 0) && this._selectBattleList && this._selectBattleList.size < 6 )
+                script.setSelectData(value as HeroData,(data:any,itemType:number)=>{
+                    this._bottomHeroSelectCallBack(data,itemType);
+
+                    if((itemType == 1 || itemType == 0) && this._selectBattleList && this._selectBattleList.size < 6 )
                     {
-                        if(_num == 1) {_num = 0;}
-                        else {
-                            if(this._selectBattleList && this._selectBattleList.size < 6)
-                            {
-                                _num = 1;
-                            }
-                            else{ return }
+                        if(itemType == 1) {
+                            itemType = 0;
+                        }else if(this._selectBattleList && this._selectBattleList.size < 6){
+                            itemType = 1;
                         }
-                        script.setChoiceIconImage(_num);
+                        else{
+                            return 
+                        }
+                        script.setChoiceIconImage(itemType);
                     }
                     
                 });
 
 
-                this._svHeroList.set(value.getDyncID(), _heroIcon);
+                this._svHeroList.set(value.getDyncID(), heroIcon);
             }
         });
     }
+    private _getItemType(heroData:HeroData){
+        let itemType =  0;
+        // //0未选中
+        // if(!this._selectBattleList.has(heroData.getStaticID())){
+        //     itemType = 0;
+        // }
+        // //1选中
+        // if(this._selectBattleList.has(heroData.getStaticID())){
+        //     itemType = 1;
+        // }
+        // //2锁定
 
-    private tabClick(event: Event, customEventData: string){
-        let tog:Toggle = (event as any);
-        console.log(tog.node.name)
-        var _length = tog.node.name.length;
-        var _index = tog.node.name.charAt(_length-1);
-        console.log("tab 页面切换",_index,_length);
-        if(!this.selectToggleList[Number(_index)])
+        //this._selectBattleList:上面的英雄组
+        //heroData:下面的英雄
+
+        //没有一样的英雄    bookid没有
+        //有一样的英雄选中  bookid有 动态id有
+        //有一样的英雄未选中    bookid有 动态id没有
+
+        let dyncId = this._selectBattleList.get(HeroData.GetHeroBookID(heroData.getStaticID()));
+        console.log("=-=-=-=-=-=-=-=-=-=-=-=-=-0000000000000000000000")
+        console.log(this._selectBattleList)
+        console.log(heroData.getStaticID())
+        console.log(HeroData.GetHeroBookID(heroData.getStaticID()))
+        console.log(heroData.getStaticID() / 1000000 * 1000000)
+        console.log(heroData.getStaticID() % 10000)
+        if(dyncId)//有一样的英雄
         {
-            return
+            let heroInfo:HeroData = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(dyncId) as HeroData;
+            console.log(heroInfo.getDyncID())
+            console.log(heroData.getDyncID())
+            if(heroInfo.getDyncID() == heroData.getDyncID())
+            {
+                itemType = 1;
+            }
+            else{
+                itemType = 2;
+            }
+        }else{//没有一样的英雄
+            itemType = 0;
         }
-        if(this._lastTog && this._lastTog != tog)
-        {
-            this._lastTog.enabled = true;
-            this._lastTog.isChecked = false;
-        }
-        tog.enabled = false;
-        console.log("上次与本次的索引",this._curPageNum,Number(_index));
-        this._curPageNum = Number(_index);
-        this._lastTog = tog;
-        this.initTopHero();
+        return itemType;
     }
 
-    private btnLeftCallBack()
-    {
-        this._curPageNum--;
-        if(this._curPageNum < 0)
-        {
-            this._curPageNum = this.selectToggleList.length;
-        }
-        (this.selectToggleList[this._curPageNum] as unknown as Toggle).isChecked = true;
-        this.initTopHero();
-    }
-
-    private btnRightCallBack()
-    {
-        this._curPageNum++;
-        if(this._curPageNum > this.selectToggleList.length)
-        {
-            this._curPageNum = 0;
-        }
-        (this.selectToggleList[this._curPageNum] as unknown as Toggle).isChecked = true;
-        this.initTopHero();
-    }
-
-    private tabCampClick(event: Event, customEventData: string){
-        let tog:Toggle = (event as any);
-        console.log(tog.node.name)
-        var _length = tog.node.name.length;
-        var _index = tog.node.name.charAt(_length-1);
-        console.log("tab 阵营切换",_index,_length,XConsts.KHeroCampIcon[Number(_index)]);
-
-        this._curCampType = Number(_index);
-        this.initBottomHero();
-    }
-
-    private submitHandle(){
+    private _submitHandle(){
         sys.localStorage.setItem("heroFormation_" + this._teamType, this._curPageNum);
         let _saveFormation:Msg.FormationInfo = new Msg.FormationInfo();
         for (const item of this._selectBattleHeroList.keys()) {
@@ -312,24 +289,19 @@ export class PopBattleTeam extends PopBase {
     private _topHeroClickCallBack(_heroInfo:HeroData, isBottomClick:boolean = false) {
         let _heroID = _heroInfo.getStaticID() as number;
         let _dyncId = _heroInfo.getDyncID();
-        let childName = "formationIcon_" + _heroID.toString();
         console.log("点击顶部英雄头像，则下阵英雄",_heroID);
-        if(this._selectBattleList && this._selectBattleList.has(_heroID))
+        if(this._selectBattleList && this._selectBattleList.has(HeroData.GetHeroBookID(_heroID)))
         {
             if(_heroID == 0 || _heroInfo.isRoleHero())
             {
                 PopMgr.getInstance().popupPrompt("主角不能下阵");
             }
             else{
-                this._selectBattleList.delete(_heroID);
+                this._selectBattleList.delete(HeroData.GetHeroBookID(_heroID));
                 this._selectBattleHeroList.delete(_dyncId);
-                for (let index = 0; index < this.heroPosList.length; index++) {
-                    let child = this.heroPosList[index].getChildByName(childName);
-                    if(child)
-                    {
-                        child.removeFromParent();
-                    }                    
-                }
+                
+                let node = this._getTopHero(_heroID)
+                if(node)node.removeFromParent();
             }            
         }
         if(!isBottomClick && this._svHeroList.has(_dyncId))
@@ -352,82 +324,126 @@ export class PopBattleTeam extends PopBase {
     }
 
     //滚动区域英雄点击回调
-    private _bottomHeroSelectCallBack(_heroInfo:HeroData,_clickType:number = 0)
+    private _bottomHeroSelectCallBack(heroInfo:HeroData,itemType:number = 0)
     {
-        let _heroStaticID = _heroInfo.getStaticID() as number;
-        let _heroDyncID = _heroInfo.getDyncID();
-        console.log("点击滚动区域影响按时大多数",_clickType,_heroStaticID,_heroDyncID);
+        let heroStaticID = heroInfo.getStaticID() as number;
+        let heroDyncID = heroInfo.getDyncID();
+        console.log("点击滚动区域影响按时大多数",itemType,heroStaticID,heroDyncID);
 
-        let posIndex:number = 0;
-        if(this._selectBattleList.size >= 6 && _clickType == 0)
+        if(this._selectBattleList.size >= 6 && itemType == 0)
         {
             PopMgr.getInstance().popupPrompt("已达到最大上阵数量");
             return;
         }
 
-        for (let index = 0; index < this.heroPosList.length; index++) {
-            const element = this.heroPosList[index];
-            if(element.children.length == 0)
-            {
-                posIndex = index;
-                break;
-            }
-            
-        }
-        if(_clickType == 0)
+        let foremostHeroHomeIndex:number = this._getForemostHeroHomeIndex();
+        let foremostHeroHome = this.heroPosList[foremostHeroHomeIndex];
+
+        if(itemType == 0)
         {
             resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
-                // index = index + 1;     
-                let _heroIcon = instantiate(res) as Node;
-                _heroIcon.scale = new Vec3(0.5,0.5,1);
-                _heroIcon.addComponent(Widget);
-                let subWidget = _heroIcon.getComponent(Widget) as Widget;
-                subWidget.updateAlignment();    
-                this.heroPosList[posIndex].addChild(_heroIcon);
-
-                _heroIcon.position = this.heroPosList[posIndex].position;
-                _heroIcon.name = "formationIcon_" + _heroStaticID.toString();
-
-                let script = _heroIcon.getComponent("HeroIcon") as HeroIcon; 
-                script.setHeroID(_heroInfo as HeroData);
-                script.setBtnCallBack((_data:any)=>{
-                    this._topHeroClickCallBack(_data);
-                });
-                
-                this._selectBattleList.set(_heroStaticID, _heroDyncID);
-                this._selectBattleHeroList.set(_heroDyncID, posIndex);
+                let heroIcon = instantiate(res) as Node;       
+                this._initTopHero(heroIcon, heroInfo);
+                foremostHeroHome.addChild(heroIcon);  
             });
+
+            this._selectBattleList.set(HeroData.GetHeroBookID(heroStaticID), heroDyncID);
+            this._selectBattleHeroList.set(heroDyncID, foremostHeroHomeIndex);
         }
-        else if(_clickType == 1)
+        else if(itemType == 1)
         {
-            this._topHeroClickCallBack(_heroInfo,true);
+            this._topHeroClickCallBack(heroInfo,true);
         }
-        else if(_clickType == 2)
+        else if(itemType == 2)
         {
             PopMgr.getInstance().popupPrompt("出站英雄中已包含相同的英雄");
         }
     }
+    private _getForemostHeroHomeIndex(){
+        
+        let foremostHeroHomeIndex:number = 0;
+        for (let index = 0; index < this.heroPosList.length; index++) {
+            const element = this.heroPosList[index];
+            if(element.children.length == 0)
+            {
+                foremostHeroHomeIndex = index;
+                break;
+            }
+        }
+        return foremostHeroHomeIndex
+    }
 
     //////////////////////////////////////////////////////
 
-    public setInitTeamView(type:number = 1)
-    {
-        this._teamType = type;
-        this._curPageNum = sys.localStorage.getItem("heroFormation_" + this._teamType) | 1;
-        if(this._topSelectHeroList == null)
-        {
-            this._topSelectHeroList = new Map<number, number>();
-        }
-        this._topSelectHeroList.clear();
-        // this._lastTog = this.selectToggleList[Number(this._curPageNum)] as Toggle;
-        this.initTopHero();
-    }
 
     //设置标题
     public setTitle(title:string){
         if(this.lab_title)
             this.lab_title.string = title
     }
+
+    private tabCampClick(event: Event, customEventData: string){
+        let tog:Toggle = (event as any);
+        console.log(tog.node.name)
+        var _length = tog.node.name.length;
+        var _index = tog.node.name.charAt(_length-1);
+        console.log("tab 阵营切换",_index,_length,XConsts.KHeroCampIcon[Number(_index)]);
+
+        this._curCampType = Number(_index);
+        this._initBottomHeros();
+    }
+
+    
+    //上阵英雄切换标签------------------------------------------------
+    private _btnLeftCallBack()
+    {
+        this._curPageNum--;
+        if(this._curPageNum < 0)
+        {
+            this._curPageNum = this.selectToggleList.length;
+        }
+        (this.selectToggleList[this._curPageNum] as unknown as Toggle).isChecked = true;
+        this._initTopHeros();
+        this._initBottomHeros();
+    }
+
+    private _btnRightCallBack()
+    {
+        this._curPageNum++;
+        if(this._curPageNum > this.selectToggleList.length)
+        {
+            this._curPageNum = 0;
+        }
+        (this.selectToggleList[this._curPageNum] as unknown as Toggle).isChecked = true;
+        this._initTopHeros();
+        this._initBottomHeros();
+    }
+
+    private tabClick(event: Event, customEventData: string){
+        let tog:Toggle = (event as any);
+        console.log(tog.node.name)
+        var _length = tog.node.name.length;
+        var _index = tog.node.name.charAt(_length-1);
+        console.log("tab 页面切换",_index,_length);
+        if(!this.selectToggleList[Number(_index)])
+        {
+            return
+        }
+        if(this._lastTog && this._lastTog != tog)
+        {
+            this._lastTog.enabled = true;
+            this._lastTog.isChecked = false;
+        }
+        tog.enabled = false;
+        console.log("上次与本次的索引",this._curPageNum,Number(_index));
+        this._curPageNum = Number(_index);
+        this._lastTog = tog;
+        this._initTopHeros();
+        this._initBottomHeros();
+    }
+
+
+    //上阵英雄切换标签------------------------------------------------
     // //保存阵容回调
     // public setSubmitCallBack(func:Function){
     //     this.submitCallFun = func;
@@ -442,14 +458,3 @@ export class PopBattleTeam extends PopBase {
     //     // [4]
     // }
 }
-
-/**
- * [1] Class member could be defined like this.
- * [2] Use `property` decorator if your want the member to be serializable.
- * [3] Your initialization goes here.
- * [4] Your update function goes here.
- *
- * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
- * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
- * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
- */

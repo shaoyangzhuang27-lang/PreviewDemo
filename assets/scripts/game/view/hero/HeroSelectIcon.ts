@@ -57,34 +57,27 @@ export class HeroSelectIcon extends Component {
     {
         return this._heroInfo;
     }
-
+    /**
+     * @param _type 0:未选中 1:选中 2:锁定
+     */
     public setChoiceIconImage(_type:number=0)
     {
         this._clickType = _type;
-        if(_type == 0 ) { 
-            this.choiceBg.active = false;
-            return 
-        }
 
-        this.choiceBg.active = true;
-        if(_type == 2)
-        {
+        if(_type == 0){
+            this.choiceBg.active = false;
+        }else if(_type == 1){
+            this.choiceBg.active = true;
+        }else if(_type == 2){
             resources.load("ui/team/弹框_升星_英雄锁定状态/spriteFrame",(err,_spriteFrame:SpriteFrame)=>{
+                console.log("OPOPOPOPOP============")
+                console.log(err)
                 if(!err)
                 {
                     let sprite = this.choiceBg.getComponent(Sprite) as Sprite;
                     sprite.spriteFrame = _spriteFrame;
                 }
             })
-        }
-        else{
-            // resources.load("ui/team/阵型调整_出战英雄选中/spriteFrame",(err,_spriteFrame:SpriteFrame)=>{
-            //     if(!err)
-            //     {
-            //         let sprite = this.choiceBg.getComponent(Sprite) as Sprite;
-            //         sprite.spriteFrame = _spriteFrame;
-            //     }
-            // })
         }
     }
 
