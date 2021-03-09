@@ -35,6 +35,7 @@ export class ItemEquipCell extends Component {
         this.btn_frame.on(Node.EventType.TOUCH_END, this._openItemEquipInfoView, this);
     }
 
+    //传入道具id,数量，当前数据类型 道具:1、装备:2 
     public setItemType(id:number,count:number,type:number,callback:Function | null)
     {
         this._itemID = id;
