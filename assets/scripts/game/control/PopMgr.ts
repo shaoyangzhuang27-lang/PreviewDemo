@@ -120,7 +120,7 @@ export class PopMgr extends PopCore  {
     }
 
     //英雄技能弹窗tip
-    public tipSkillWindow(pos:Vec3, skillId:number, skillLv:number, heroId:number){
+    public tipSkillWindow(pos:Vec3, skillId:number, skillLv:number){
     
         resources.load('prefabs_ui/pop/tip_skill', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
@@ -129,7 +129,7 @@ export class PopMgr extends PopCore  {
 
             let script = p.getComponent("TipSkill") as TipSkill;
             script.setWinPos(pos);
-            script.setSkillData(skillId, skillLv, heroId);
+            script.setSkillData(skillId, skillLv);
         });
     }
 

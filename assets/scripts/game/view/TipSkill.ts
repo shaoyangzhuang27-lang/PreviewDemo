@@ -1,7 +1,4 @@
-import { _decorator, Component, Node, Sprite, math, Label, Vec3 } from 'cc';
-import { DataMgr } from '../model/DataMgr';
-import { HeroData } from '../model/datas/HeroData';
-import { GameModel } from '../model/GameModel';
+import { _decorator, Node, Label, Vec3 } from 'cc';
 import { TipBase } from './TipBase';
 const { ccclass, property } = _decorator;
 
@@ -9,7 +6,7 @@ const { ccclass, property } = _decorator;
 export class TipSkill extends TipBase {
     // [1]
     // dummy = '';
-    _heroId:number =0 ; //英雄id
+
     _skillId:number =0 ; //技能id
     _skillLv:number =0 ; //当前技能等级
     
@@ -32,38 +29,57 @@ export class TipSkill extends TipBase {
     public lab_txt_2:Label = null as unknown as Label;
 
     //底部三角形箭头标
-    @property({type: Sprite})
-    public bg_triangle:Sprite = null as unknown as Sprite;
+    @property({type: Node})
+    public bg_triangle:Node = null as unknown as Node;
     
     start () {
         super.start();
     }
 
-    setSkillData(skillId:number, skillLv:number, heroId:number)
+    public setWinPos(pos:Vec3,align:number = 0,isViewPos:boolean = true){
+        super.setWinPos(pos, align, isViewPos);
+        // console.log("child-重写父类的方法，添加新的东西！");
+        this.setTrianglePos(pos.x);
+      }
+
+    setSkillData(skillId:number, skillLv:number)
     {
-        //骑士
-        if(heroId==0)
+        //todo 
+        if(skillLv ==1)
         {            
-            let playerInfo = DataMgr.getInstance().getPlayerInfo();            
-            //todo
+            this.lab_txt_0.string = "xxxxxxxx";
+            this.lab_txt_1.string = "";
+            this.lab_txt_2.string = "";            
+        }
+        else if(skillLv ==2)
+        {            
+            this.lab_txt_0.string = "xxxxxxxx";
+            this.lab_txt_1.string = "xxxxxxxx";
+            this.lab_txt_2.string = "";            
+        }
+        else if(skillLv ==3)
+        {            
+            this.lab_txt_0.string = "xxxxxxxx";
+            this.lab_txt_1.string = "xxxxxxxx";
+            this.lab_txt_2.string = "xxxxxxxx";                           
         }
         else
         {
-            let herodata = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(heroid) as HeroData;     
-        }        
+            this.lab_txt_0.string = "";
+            this.lab_txt_1.string = "";
+            this.lab_txt_2.string = "";
+        }
     }
 
-    setTxts()
-    {
-        this.lab_txt_0.string = "";
-        this.lab_txt_1.string = "";
-        this.lab_txt_2.string = "";
-    }
-
-    //设置三角形标x轴位置
+     //设置三角形标x轴位置
     setTrianglePos(x:number)
     {
-        let pos:Vec3= new Vec3(0,0,0);
-        // this.bg_triangle.point(pos);
+        let pos:Vec3 = this.bg_triangle.getPosition();
+        if(x < 0){
+            pos.x = -160;   //箭头位于左边
+        }else{
+            pos.x = 160;    //箭头位于右边
+        }       
+        this.bg_triangle.setPosition(pos) ;
     }
 }

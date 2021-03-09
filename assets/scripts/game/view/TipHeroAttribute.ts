@@ -72,45 +72,58 @@ export class TipHeroAttribute extends TipBase {
 
     setHeroId(heroid:number= 0)
     {
-        let list: number[]=[];
+        let listNames: string[]=["血量", "攻击", "防御", "速度", "暴击", "暴击伤害", "命中", "闪避", "破甲"];
+        let listValues: number[]=[];
         //骑士
         if(heroid==0)
         {            
             let playerInfo = DataMgr.getInstance().getPlayerInfo();            
             //todo
-            // list[0] = herodata.getMaxHP();
-            // list[1] = herodata.getATK();
-            // list[2] = herodata.getDEF();
-            // list[3] = herodata.getSpeed();
-            // list[4] = herodata.getCrit();
-            // list[5] = herodata.getCritDamage();
-            // list[6] = herodata.getHit();
-            // list[7] = herodata.getDodge();
-            // list[8] = herodata.getDEFBreak();
+            // listValues[0] = herodata.getMaxHP();
+            // listValues[1] = herodata.getATK();
+            // listValues[2] = herodata.getDEF();
+            // listValues[3] = herodata.getSpeed();
+            // listValues[4] = herodata.getCrit();
+            // listValues[5] = herodata.getCritDamage();
+            // listValues[6] = herodata.getHit();
+            // listValues[7] = herodata.getDodge();
+            // listValues[8] = herodata.getDEFBreak();
         }
         else
         {
             let herodata = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(heroid) as HeroData;        
-            list[0] = herodata.getMaxHP();
-            list[1] = herodata.getATK();
-            list[2] = herodata.getDEF();
-            list[3] = herodata.getSpeed();
-            list[4] = herodata.getCrit();
-            list[5] = herodata.getCritDamage();
-            list[6] = herodata.getHit();
-            list[7] = herodata.getDodge();
-            list[8] = herodata.getDEFBreak();
+            listValues[0] = herodata.getMaxHP();
+            listValues[1] = herodata.getATK();
+            listValues[2] = herodata.getDEF();
+            listValues[3] = herodata.getSpeed();
+            listValues[4] = herodata.getCrit();
+            listValues[5] = herodata.getCritDamage();
+            listValues[6] = herodata.getHit();
+            listValues[7] = herodata.getDodge();
+            listValues[8] = herodata.getDEFBreak();
         }
         
-        this.setValues(list);
+        this.setContents(listNames, listValues);
     }
 
-    setValues(values: number[])
+
+    setContents(names:string[], values: number[])
     {
-        if(values.length <9 )
+        if(values.length <9 || names.length<9)
         {
             return ;
         }
+
+        this.lab_HP.string         = names[0];
+        this.lab_Attack.string     = names[1];
+        this.lab_Def.string        = names[2];
+        this.lab_Speed.string      = names[3];
+        this.lab_Crit.string       = names[4];
+        this.lab_CritDamage.string = names[5];
+        this.lab_Hit.string        = names[6];
+        this.lab_Dodge.string      = names[7];
+        this.lab_DEFBreak.string   = names[8];
+
         this.lab_HP_value.string         = values[0].toString();
         this.lab_Attack_value.string     = values[1].toString();
         this.lab_Def_value.string        = values[2].toString();

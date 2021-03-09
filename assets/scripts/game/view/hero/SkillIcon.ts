@@ -3,8 +3,6 @@
 import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources, math, UITransform, Material } from 'cc';
 const { ccclass, property } = _decorator;
 import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { XConsts } from "../../model/const/XConsts";
-import { HeroData } from '../../model/datas/HeroData';
 
 @ccclass('SkillIcon')
 export class SkillIcon extends Component {
@@ -29,11 +27,7 @@ export class SkillIcon extends Component {
 
     private _isGrayStatus: boolean = false;
     private _skillId: number = 0;
-    private _skillLv: number = 0;
-    private _skillData : any | null = null ;//as unknown as SkillData;
-    private _heroInfo : HeroData | null = null as unknown as HeroData;
-    private _heroLT : any | null = null as unknown as HeroData;
-
+    private _skillLv: number = 0;  
     private _callBack:Function|null = null as unknown as Function;  //回调方法
 
 
@@ -44,13 +38,12 @@ export class SkillIcon extends Component {
     
     private init()
     {
-        if(!this._skillData)
+        if(this._skillId <=0 )
         {
             return;
         }
 
-        let _level : number = Number(this._skillData?.getLevel());
-        let _iconName:string = this._skillData?.getImageIcon() as string;
+        let _iconName:string = "";//this._skillData?.getImageIcon() as string;
 
         let heroIconPath:string = "ui/skill/" + _iconName + "/spriteFrame";
         if(_iconName == "无")
@@ -59,7 +52,7 @@ export class SkillIcon extends Component {
         }        
         this._resourceLoad(heroIconPath,this.img_icon);
         
-        this._setLv(_level);
+        this._setLv(this._skillLv);
     }
 
     //资源替换
@@ -100,10 +93,12 @@ export class SkillIcon extends Component {
     {
         this._isGrayStatus= false;
         //todo
-        Material
+        //Material
         //内建材质
-        //let material:Material = Material.getHash //.getBuiltinMaterial('2d-gray-sprite')
+        //let material:Material = Material.getBuiltinMaterial('2d-gray-sprite')
        // this.head.setMaterial(0, material);
+       let sprite = this.img_icon.getComponent(Sprite) as Sprite;
+    //    sprite.setMaterial(Material.get);
     }
 
     private _doUnGrayNode()
@@ -112,13 +107,12 @@ export class SkillIcon extends Component {
         //todo
     }
     ////////////////////////////////
-    //传入英雄id 技能id  初始化对象
-    public setHeroIDAndSkillId(_heroData : HeroData, _skillId: number)
+    //传入技能id  技能lv  初始化对象
+    public setSkillData(_skillId : number, _skillLv: number)
     {
         this._skillId = _skillId;
-        this._heroInfo = _heroData;
-        this._heroLT = ValueMgr.getInstance().getItemByField(TableName.heroes,this._heroInfo.getStaticID()) as Config.heroes.Record;
-        
+        this._skillLv = _skillLv;
+
         // this._callBack = _callBack;
         this.init();
     }
