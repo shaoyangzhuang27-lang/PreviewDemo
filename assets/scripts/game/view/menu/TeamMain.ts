@@ -164,6 +164,10 @@ export class TeamMain extends Component {
     //图鉴
     private _openBookLibraryView()
     {
+        // test_xt
+        PopMgr.getInstance().popHeroPromotionView(1,()=>{
+            MsgMgr.getInstance().getMsgFormation().requestHeroLvUp(1,1,1,1);
+        });
 
     }
 

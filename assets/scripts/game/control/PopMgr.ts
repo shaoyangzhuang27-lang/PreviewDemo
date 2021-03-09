@@ -3,7 +3,9 @@ import { PopSimple } from "../view/pop/PopSimple";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
 import { TipDemo } from '../view/TipDemo';
+import { TipHeroAttribute } from '../view/TipHeroAttribute';
 import { XConsts } from '../model/const/XConsts';
+import { TipSkill } from '../view/TipSkill';
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -70,6 +72,19 @@ export class PopMgr extends PopCore  {
         } );
     }
 
+    
+    //弹出英雄升级,升阶,装备界面
+    public popHeroPromotionView(heroId:number,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_heropromotion', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("HeroPromotion");
+            script.setIsMaskClose(isMaskClose);
+            script.setCurrentHeroId(heroId);
+        } );
+    }
 
 
 
@@ -91,10 +106,38 @@ export class PopMgr extends PopCore  {
             script.setWinPos(pos);
         });
     }
+    //英雄属性值弹窗tip
+    public tipHeroAttributeWindow(pos:Vec3, heroId:number = 0){
+        
+        resources.load('prefabs_ui/pop/tip_hero_attribute', (err:any,res:any)=>{
+            let p = instantiate( res ) as Node;
+            this.parent?.addChild(p);
+            p.setSiblingIndex(XConsts.OrderTip);
 
+            let script = p.getComponent("TipHeroAttribute") as TipHeroAttribute;
+            script.setWinPos(pos);
+            script.setHeroId(heroId);
+        });
+    }
 
+    //英雄技能弹窗tip
+    public tipSkillWindow(pos:Vec3, skillId:number){
+    
+        resources.load('prefabs_ui/pop/tip_skill', (err:any,res:any)=>{
+            let p = instantiate( res ) as Node;
+            this.parent?.addChild(p);
+            p.setSiblingIndex(XConsts.OrderTip);
 
-
+            let script = p.getComponent("TipSkill") as TipSkill;
+            script.setWinPos(pos);
+            // todo debug
+            if(skillId ==0)
+            {
+                skillId= 535002;//破甲弹2级
+            }
+            script.setSkillData(skillId);
+        });
+    }
 
 
     //弹出提示窗放这里-------------------------------------------------
