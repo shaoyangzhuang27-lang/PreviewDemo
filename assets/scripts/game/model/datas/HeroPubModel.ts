@@ -130,13 +130,6 @@ export class HeroPubModel extends BaseModel{
     
     public initRecLineUpInfos()
     {
-        // interface lineup_item_info {
-        //     title?: (string|null); 
-        //     roleArmor?: (number|null);
-        //     coreHeroName?: (string|null);
-        //     heorIdList?:(number[]|null);
-        //     analysisDetail?:(string|null);
-        // }
         if(this._stuLineUpInfos.length > 0)
         {
             return 
@@ -144,7 +137,6 @@ export class HeroPubModel extends BaseModel{
 
         var info : XStruct.lineup_item_info.Record = {
             title : "",
-            roleArmor : 0,
             coreHeroName : "",
             heorIdList : [],
             analysisDetail : "",
@@ -178,7 +170,6 @@ export class HeroPubModel extends BaseModel{
             //     // info.coreHeroName = info.coreHeroName + heroNameTable.cn + " ";
             // }
             info.heorIdList = hero_rec_tab[index].coreHero.concat(hero_rec_tab[index].otherHero);
-            info.roleArmor = hero_rec_tab[index].roleArmor;
 
             this._stuLineUpInfos.push(instantiate(info));
         } 
@@ -203,7 +194,6 @@ export class HeroPubModel extends BaseModel{
         {
             return  {
                 title : "",
-                roleArmor : 0,
                 coreHeroName : "",
                 heorIdList : [],
                 analysisDetail : "",
