@@ -1,3 +1,4 @@
+//技能框点击弹出的Tip
 import { _decorator, Node, Label, Vec3, Sprite, Color, UITransform, math, resources, SpriteFrame } from 'cc';
 import { TableName, ValueMgr } from '../model/ValueMgr';
 import { TipBase } from './TipBase';
@@ -8,60 +9,70 @@ export class TipSkill extends TipBase {
     // [1]
     // dummy = '';
 
-    _skillId:number =0 ; //技能id
-    _skillLv:number =0 ; //当前技能等级
+    private _skillId:number =0 ; //技能id
+    private _skillLv:number =0 ; //当前技能等级
     private _recordSkill : Config.skill.Record = null as unknown as Config.skill.Record;    //记录的技能
 
     //技能图标
-    @property({type: Sprite})
+    @property({type: Sprite, displayName: "技能图标"})
     public skill_icon:Sprite = null as unknown as Sprite;
     //技能名字
-    @property({type: Label})
+    @property({type: Label, displayName: "技能名字"})
     public lab_name:Label = null as unknown as Label;
     //技能类型
-    @property({type: Label})
+    @property({type: Label, displayName: "技能类型"})
     public lab_type:Label = null as unknown as Label;
     
     //技能等级描述
-    @property({type: Label})
+    @property({type: Label, displayName: "等级1描述"})
     public lab_txt_0:Label = null as unknown as Label;
     //技能等级描述
-    @property({type: Label})
+    @property({type: Label, displayName: "等级2描述"})
     public lab_txt_1:Label = null as unknown as Label;
     //技能等级描述
-    @property({type: Label})
+    @property({type: Label, displayName: "等级3描述"})
     public lab_txt_2:Label = null as unknown as Label;
 
     //底部三角形箭头标
-    @property({type: Sprite})
-    public bg_triangle:Sprite = null as unknown as Sprite;
+    @property({type: Sprite, displayName: "底部三角形"})
+    public bg_triangle:Sprite | null = null as unknown as Sprite;
+    
     
     start () {
         super.start();
     }
 
     public setWinPos(pos:Vec3,align:number = 0,isViewPos:boolean = true){
+        // let posOld =new Vec3(pos);
         super.setWinPos(pos, align, isViewPos);
-
-        console.log("设置三角形标x轴位置");
+        let newPos= this.window.getPosition();
+        if(newPos.x < 0)
+        {
+            newPos.x += 50;
+        }
+        else if(newPos.x >0)
+        {
+            newPos.x -= 50;
+        }
+        // newPos.x= posOld.x;
+        this.window.setPosition(newPos);
         this.setTrianglePos(pos.x);
     }
 
       //设置三角形标x轴位置
      setTrianglePos(x:number)
      {
-        let pos:Vec3 = this.bg_triangle?.node.getPosition();
-        // todo  
-        let nodeSize = this.node.getComponent(UITransform)?.contentSize as math.Size;
-        let winSize = this.window.getComponent(UITransform)?.contentSize as math.Size;
-        if(x > nodeSize.width/2 - winSize.width/2){
-            pos.x = -160;   //箭头位于左边
-        }else if(pos.x < -(nodeSize.width/2 - winSize.width/2)){
-            pos.x = 160;    //箭头位于右边
-        }
-
-        this.bg_triangle?.node.setPosition(pos) ;
-     }
+         if(this.bg_triangle)
+         {
+            let pos= this.bg_triangle.node.getPosition();
+            if(x > 0){
+                pos.x = 160;   //箭头位于右边
+            }else if(x <=0){
+                pos.x = -160;  //箭头位于左边
+            }
+            this.bg_triangle.node.setPosition(pos);
+         }
+    }
 
     setSkillData(skillId:number)
     {        
@@ -69,8 +80,7 @@ export class TipSkill extends TipBase {
         this._skillLv= this._recordSkill.level;
 
         // 技能名称
-        let name= this._recordSkill.name;       
-        
+        let name= this._recordSkill.name;  
         let record_language_data = ValueMgr.getInstance().getItemByField(TableName.language_data,name) as Config.language_data.Record;
         this.lab_name.string = record_language_data.cn;
         // 技能类型 todo
@@ -160,7 +170,7 @@ export class TipSkill extends TipBase {
         // 获取技能描述
         let record_language_data = ValueMgr.getInstance().getItemByField(TableName.language_data,desc_id) as Config.language_data.Record;
         let strTmp= "Lv"+ lv.toString() + ":"+ record_language_data.cn;
-        let values =  [0,0,0]; //todo
+        let values =  [10,9,8]; //todo
         lab_txt.string = this.formatSkillDesc(strTmp, values);
     }
 
@@ -172,7 +182,11 @@ export class TipSkill extends TipBase {
         //<ex1>--效果1 
         //<bt1>,<bt2>,<bt3>--持续多少秒
         //<ec1>--效果1
-
-        return desc;
+        //{0}--提升/降低效果1
+        let newDesc= desc;
+        for (let index = 0; index < values.length; index++) {
+            newDesc = desc.replace(`<ep1>`, values[index].toString() );
+          }
+        return newDesc;
     }
 }
