@@ -87,7 +87,8 @@ export class BagMain extends Component {
 
     private _initScrollview()
     {
-        this._initEquipScrollview()
+        this._initEquipScrollview();
+        this._initItemScrollview();
     }
 
     private _initEquipScrollview()
@@ -102,6 +103,24 @@ export class BagMain extends Component {
 
                 let script = equipCell.getComponent("ItemEquipCell") as ItemEquipCell;
                 script.setItemType(Number(key),Number(value),2,(id:number,num:number)=>{
+                    this._itemEqipCallBack(id,num)
+                })
+            }
+        })   
+    }
+
+    private _initItemScrollview()
+    {
+        let allItemList = GameModel.getInstance().getBagModel().getBagItemList();
+        resources.load('prefabs_ui/main/itemEquipCell', (err:any,res:any)=>{
+            for (let key of allItemList.keys()) {
+                let value = allItemList.get(key);  //数量
+                // let equipData = ValueMgr.getInstance().getItemByField(TableName.equip,Number(key)) as Config.equip.Record;
+                let equipCell = instantiate(res) as Node;
+                this.scroll_ItemView.content?.addChild(equipCell);
+
+                let script = equipCell.getComponent("ItemEquipCell") as ItemEquipCell;
+                script.setItemType(Number(key),Number(value),1,(id:number,num:number)=>{
                     this._itemEqipCallBack(id,num)
                 })
             }
