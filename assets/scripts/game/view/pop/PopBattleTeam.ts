@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Label, ToggleContainer, EventHandler, Toggle, sys, resources, instantiate, Vec3, ScrollView, v3, math, Widget } from 'cc';
+import { _decorator, Component, Node, Label, ToggleContainer, EventHandler, Toggle, sys, resources, instantiate, Vec3, ScrollView, v3, math, Widget, SystemEventType } from 'cc';
 const { ccclass, property } = _decorator;
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
@@ -35,6 +35,9 @@ export class PopBattleTeam extends PopBase {
     // @property({type :  Node})
     // public selectToggleList:Node[] = [];
 
+    @property({type:Node})
+    public btn_restraint:Node = null as unknown as Node;
+
     @property({type: ToggleContainer })
     public campGroup:ToggleContainer = null as unknown as ToggleContainer;
 
@@ -47,21 +50,18 @@ export class PopBattleTeam extends PopBase {
     @property({type :  ScrollView})
     public scroll_HeroView:ScrollView = null as unknown as ScrollView;
 
-    // @property({type :  Node})
-    // public scroll_content:Node = null as unknown as Node;
-
-    // private submitCallFun:Function | null = null;       //保存阵容回调
-    private _teamType :number = 0;  //获取阵型
-    private _curPageNum :number = 1;    //当前阵容界面
-    private _formationList:Map<number, HeroData> = new Map<number, HeroData>();   //当前上阵英雄阵容
-
-
-    private _allHeroList:Map<number, HeroData> = new Map<number, HeroData>();        //拥有的所有英雄
-    private _curCampType:number = 0;        //当前选择的英雄阵营
-
+    //当前阵容页面
+    private _curPageNum:number = 1;
+    //拥有的所有英雄
+    private _allHeroList:Map<number, HeroData> = new Map<number, HeroData>();
+    //拥有的所有英雄列表显示对象
+    private _bottomHeroItemList:Map<number, Node> = new Map<number, Node>();
+    //当前上阵英雄阵容
+    private _formationList:Map<number, HeroData> = new Map<number, HeroData>();
+    //上阵英雄列表 bookid,动态id(未保存)
     private _selectBattleList:Map<number, number> = new Map<number, number>();
-    private _bottomHeroItemList:Map<number, Node> = new Map<number, Node>();        //滚动区域创建的英雄列表
-    private _selectBattleHeroList:Map<number, number> = new Map<number, number>();      //第一个number是英雄静态id,第二个是站位
+    //上阵英雄列表 英雄静态id,站位(未保存)
+    private _selectBattleHeroList:Map<number, number> = new Map<number, number>();
 
 
     onLoad () {
@@ -78,23 +78,41 @@ export class PopBattleTeam extends PopBase {
 
         this.topHeroPages?.checkEvents.push(containerEventHandler);
 
-        const containerCampEventHandler = new EventHandler();
-        containerCampEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
-        containerCampEventHandler.component = 'PopBattleTeam';// 这个是代码文件名
-        containerCampEventHandler.handler = '_onCampClick';
-        containerCampEventHandler.customEventData = '';
-        this.campGroup?.checkEvents.push(containerCampEventHandler);
+        // const containerCampEventHandler = new EventHandler();
+        // containerCampEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
+        // containerCampEventHandler.component = 'PopBattleTeam';// 这个是代码文件名
+        // containerCampEventHandler.handler = '_onCampClick';
+        // containerCampEventHandler.customEventData = '';
+        // this.campGroup?.checkEvents.push(containerCampEventHandler);
+        
+        const campEventHandler = new EventHandler();
+        campEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
+        campEventHandler.component = 'PopBattleTeam';// 这个是代码文件名
+        campEventHandler.handler = '_onCampClick';
+        campEventHandler.customEventData = '';
+        this.campGroup.checkEvents.push(campEventHandler);
+        this.campGroup.toggleItems.forEach((tog)=>{
+            tog?.checkEvents.push(campEventHandler);
+        });
 
 
         this.btn_submit?.on(Node.EventType.TOUCH_END, this._onSubmit, this);
         this.btn_left.on(Node.EventType.TOUCH_END, this._onLeftPage, this);
         this.btn_right.on(Node.EventType.TOUCH_END, this._onRightPage, this);
+        this.btn_restraint.on(Node.EventType.TOUCH_END, this._onRestraint, this);
+    }
+    private _onRestraint() {
+        // this._bottomHeroItemList.forEach((value,key)=>{
+        //     let ran = Math.floor(Math.random()*100);
+        //     value.setSiblingIndex(ran);
+        // });
     }
 
     start()
     {
         super.start();
         this._curPageNum = GameModel.getInstance().getFormationModel().getCurFormationIndex();
+        this._allHeroList = GameModel.getInstance().getHeroList();
         
         this._initTopHeros();
         this._initBottomHeros();
@@ -136,13 +154,6 @@ export class PopBattleTeam extends PopBase {
 
     private _initBottomHeros()
     {
-        if(this._curCampType == 0)
-        {
-            this._allHeroList = GameModel.getInstance().getHeroList();
-        }
-        else{
-            this._allHeroList = GameModel.getInstance().getHeroesModel().getHeroListByCampType(this._curCampType);
-        }
 
         if(this.scroll_HeroView.content)
         {
@@ -376,7 +387,8 @@ export class PopBattleTeam extends PopBase {
     private _onCampClick(event: Event, customEventData: string){
         let tog:Toggle = (event as any);
         var index = tog.node.name.charAt(tog.node.name.length-1);
-        this._curCampType = Number(index);
+        // tog.isChecked
+        // this._curCampType = Number(index);
         
         this._frushButtonHero();
     }
