@@ -113,8 +113,9 @@ export class PopMgr extends PopCore  {
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipHeroAttribute") as TipHeroAttribute;
-            script.setWinPos(pos);
+            script.setWinPos(pos,1);
             script.setHeroId(heroId);
+            script.setIsWinClose(true);
         });
     }
 
@@ -133,6 +134,7 @@ export class PopMgr extends PopCore  {
                 skillId= 535002;//破甲弹2级
             }
             script.setSkillData(skillId);
+            script.setIsWinClose(true);
         });
     }
 

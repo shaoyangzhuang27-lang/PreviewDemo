@@ -114,7 +114,7 @@ export class HeroPromotion extends PopBase {
         // [3]
         super.start()
         this.initView();
-        this.cur_SkillItem?.setSkillData(0);
+        // this.cur_SkillItem?.setSkillData(0);
     }
 
     initView(){

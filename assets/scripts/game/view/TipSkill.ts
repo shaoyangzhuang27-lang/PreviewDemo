@@ -43,9 +43,19 @@ export class TipSkill extends TipBase {
     }
 
     public setWinPos(pos:Vec3,align:number = 0,isViewPos:boolean = true){
+        // let posOld =new Vec3(pos);
         super.setWinPos(pos, align, isViewPos);
-
-        // console.log("设置三角形标x轴位置");
+        let newPos= this.window.getPosition();
+        if(newPos.x < 0)
+        {
+            newPos.x += 50;
+        }
+        else if(newPos.x >0)
+        {
+            newPos.x -= 50;
+        }
+        // newPos.x= posOld.x;
+        this.window.setPosition(newPos);
         this.setTrianglePos(pos.x);
     }
 

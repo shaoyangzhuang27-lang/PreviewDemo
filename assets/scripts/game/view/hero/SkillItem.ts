@@ -22,8 +22,8 @@ export class SkillItem extends Component {
     @property({type :  Label, displayName: "技能等级"})
     public lab_level:Label = null as unknown as Label;
     
-    @property({type :  Node, displayName: "技能等级节点"})
-    public node_lv:Node = null as unknown as Node;
+    @property({type :  Node, displayName: "技能等级背景"})
+    public sp_lv:Node = null as unknown as Node;
 
     private _isGrayStatus: boolean = false; // 技能图标灰化标识
     private _skillId:number =0 ; //技能id
@@ -33,15 +33,11 @@ export class SkillItem extends Component {
 
     start () {
         // [3]
-    }
-    
-    onLoad() {
-        systemEvent.on(SystemEvent.EventType.TOUCH_END, this.onTouchEnd, this);
-    }
-
-    onTouchEnd(event:any){
-        console.log("skillitem ontouchend!")
-        
+        if(this._skillId ==0) //todo debug
+        {
+            this._skillId= 535002;//破甲弹2级
+        }
+        this.setDefaultBtnCallBack();
     }
 
     private init()
@@ -75,14 +71,14 @@ export class SkillItem extends Component {
     {
         if(lv<=0)
         {
-            this.node_lv.active= false;
+            this.sp_lv.active= false;
             this.lab_level.string = "";
             //灰化处理
             this._doGrayNode();
         }
         else 
         {
-            this.node_lv.active= true; 
+            this.sp_lv.active= true; 
             this.lab_level.string =  (lv==1) ? "": lv.toString();
             //还原灰化处理
             this._doUnGrayNode();
@@ -120,27 +116,34 @@ export class SkillItem extends Component {
 
         // this._callBack = _callBack;
         this.init();
-        this.setBtnCallBack();
+        this.setDefaultBtnCallBack();
     }
 
-    public setBtnCallBack(_callBack:Function|null = null)
+    public setDefaultBtnCallBack()
     {
-        if(_callBack)
-        {
-            this.btn_bg.addComponent(Button);
-            this.btn_bg.node.on(Node.EventType.TOUCH_END, ()=>{            
-                _callBack(this._skillId)                
-            }, this, false);
-        }
-        else
-        {
-            // todo 默认点击显示技能Tip
-            let skillId= this._skillId;
-            this.btn_bg.addComponent(Button);
-            this.btn_bg.node.on(Node.EventType.TOUCH_END, (event:any/*EventTouch*/)=>{            
-                PopMgr.getInstance().tipSkillWindow(new Vec3(event._point.x, event._point.y,0), skillId)       
-            }, this, false);
-        }
+        // todo 默认点击显示技能Tip
+        // let tipPos0 = this.btn_bg.node.getPosition();        
+        // console.log("tipPos0=====>");
+        // console.log(tipPos0);
+        // let tipPos = this.btn_bg.node.getWorldPosition(); 
+        // console.log("tipPos=====>");
+        // console.log(tipPos);
+        
+        this.btn_bg.addComponent(Button);        
+        this.btn_bg.node.on(Node.EventType.TOUCH_END, (event:EventTouch)=>{               
+            let pos = new Vec3(event.getLocation().x, event.getLocation().y,0);  
+            if(event.target == this.btn_bg.node)
+            {   
+                console.log("event.target == this.btn_bg");             
+                pos= this.btn_bg.node.getWorldPosition();
+                console.log(pos);
+                //let _node = this.node.getComponent(UITransform) as UITransform;
+                // let k = this.btn_bg.node.getComponent(UITransform) as UITransform;
+                // pos.y += k.contentSize.height/2;
+            }
+            
+            PopMgr.getInstance().tipSkillWindow(pos, this._skillId);
+        }, this);
     }
 }
 
