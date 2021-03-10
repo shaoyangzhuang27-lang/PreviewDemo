@@ -3,7 +3,7 @@ import { HeroData } from "./HeroData";
 import { XConsts } from "../const/XConsts";
 import { BaseModel } from "./BaseModel";
 import { TableName, ValueMgr } from "../ValueMgr";
-import { instantiate } from "cc";
+import { instantiate, Prefab } from "cc";
 
 export class HeroPubModel extends BaseModel{
     
@@ -11,10 +11,58 @@ export class HeroPubModel extends BaseModel{
     private _nLineUpCounts : number = 0;
 
 
+    //推荐阵容信息
     private _stuLineUpInfos : XStruct.lineup_item_info.Record[] = [];
     // private _formationList:Map<number,Map<number,number>> = new Map<number,Map<number,number>>();//阵型数据 索引,英雄动态id和站位
     
+
+
+    private _strPubUILabContents : Map<number|string,string> = new Map();
+
+
+    public initPubUILabContents()
+    {
+        if(this._strPubUILabContents.size !=0)
+        {
+            return ;
+        }
+        var heroSummon = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_HEROSUMMON) as Config.language_ui.Record;
+        this._strPubUILabContents.set("lab_title",heroSummon.cn);
+        var campRecommend = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_CAMPRECOMMEND) as Config.language_ui.Record;
+        this._strPubUILabContents.set("lab_recteam",campRecommend.cn);
+        var summonHeroLotto = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONHEROLOTTO) as Config.language_ui.Record;
+        this._strPubUILabContents.set("lab_detail",summonHeroLotto.cn);
+        var newSummonJewelConsume = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONJEWELCONSUMEO) as Config.language_ui.Record;
+        this._strPubUILabContents.set("lab_detail_dimaond",newSummonJewelConsume.cn);
+        var newSummonResidue = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONRESIDUE) as Config.language_ui.Record;
+        this._strPubUILabContents.set("lab_bar_info",newSummonResidue.cn);
+        var newSummonFriendContent = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONFRIENDCONTENT) as Config.language_ui.Record;
+        this._strPubUILabContents.set("lab_friend_info",newSummonFriendContent.cn);
+        var friendSummon = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_FRIENDSUMMON) as Config.language_ui.Record;
+        this._strPubUILabContents.set("lab_summon_ad_friend",friendSummon.cn);
+        var heroicSummon = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_HEROICSUMMON) as Config.language_ui.Record;
+        this._strPubUILabContents.set("lab_summon_ad_hero",heroicSummon.cn);
+    }
     
+    public getPubUILabContentByUIName(name : string)
+    {
+        if(this._strPubUILabContents.size == 0)
+        {
+            return "";
+        }
+        else
+        {
+            var content = this._strPubUILabContents.get(name);
+            if(content)
+            {
+                return content;
+            }
+            else
+            {
+                return "";
+            }
+        }
+    }
     // protected _currentFormationIndex = 0; //当前战斗使用的阵型索引
     // public initFormationList(msg:Msg.GetPlayerDataA) {
     //     this._formationList.clear();

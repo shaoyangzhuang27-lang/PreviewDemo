@@ -64,15 +64,17 @@ export class PubRecLineUpItem extends Component {
     }
     private _onViewDetailClick(event : any)
     {
-        this.btn_view_detail.active = false;
-        this.btn_retract.active = true;
+        // this.btn_view_detail.active = false;
+        // this.btn_retract.active = true;
+        this.setAllDesLabelAndBtnState(true);
         console.log("查看详情");
         //PopMgr.getInstance().popRecLineUpWindow("推荐阵容",()=>{console.log("")});
     }
     private _onRetractClick(event : any)
     {
-        this.btn_view_detail.active = true;
-        this.btn_retract.active = false;
+        // this.btn_view_detail.active = true;
+        // this.btn_retract.active = false;
+        this.setAllDesLabelAndBtnState(false);
         console.log("收起");
         //PopMgr.getInstance().popRecLineUpWindow("推荐阵容",()=>{console.log("")});
     }
@@ -112,8 +114,10 @@ export class PubRecLineUpItem extends Component {
         this.lab_lineup_analysis.string = analysis;
     } 
 
-    public setAllLabelState(state : boolean)
+    public setAllDesLabelAndBtnState(state : boolean)
     {
+        this.btn_view_detail.active = !state;
+        this.btn_retract.active = state;
         this.lab_team_name.node.active = state;
         this.lab_core_hero.node.active = state;
         this.lab_knight_armor.node.active = state;
@@ -121,6 +125,7 @@ export class PubRecLineUpItem extends Component {
         this.lab_core_hero_title.node.active = state;
         this.lab_knight_armor_title.node.active = state;
         this.lab_lineup_analysis_title.node.active = state;
+        
     } 
 
     public initUI()
@@ -147,6 +152,7 @@ export class PubRecLineUpItem extends Component {
         {
             this.initHeroIconPrefab(i);
         }
+        this.setAllDesLabelAndBtnState(false);
     }
     // update (deltaTime: number) {
     //     // [4]

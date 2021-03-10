@@ -1,15 +1,23 @@
-
-import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger,Sprite, SpriteFrame, Button, ButtonComponent} from 'cc';
+import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger,Sprite, SpriteFrame, Button, ButtonComponent,ProgressBar} from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
 import { PopMgr } from '../../control/PopMgr';
 import { XConsts } from '../../model/const/XConsts';
+// import { TableName, ValueMgr } from "../../model/ValueMgr";
 const { ccclass, property } = _decorator;
 
 @ccclass('PopHeroPub')
 export class PopHeroPub extends PopBase {
     @property({type: Label})
     public lab_title:Label | null = null;
+
+    @property({type: Label})
+    public lab_recteam:Label | null = null;
+
+    @property({type: Label})
+    public lab_friend_info:Label | null = null;
+
+    
 
     @property({type: Node})
     public btn_introduce:Node | null = null;
@@ -39,21 +47,20 @@ export class PopHeroPub extends PopBase {
     @property({type: Sprite})
     public img_summon_ad = null as unknown as Sprite;
 
+    @property({type: Label})
+    public lab_summon_ad:Label | null = null;
+
+    @property({type: Label})
+    public lab_bar_info:Label | null = null;
 
     @property({type: Button})
     public btn_summon_one = null as unknown as Button;
 
     @property({type: Button})
     public btn_summon_ten = null as unknown as Button;
-    // @property({type: LabelComponent})
-    // public lab_content:LabelComponent | null = null;
-
+    
     private submitCallFun:Function | null = null;
 
-    // //召唤类型  默认英雄召唤
-    // private _curSummonType: Msg.TSummonType = Msg.TSummonType.ESummonType_Heroic;
-    // //消费道具类型 默认道具类型Null
-    // private _curSummonConsumType :  Msg.TSummonConsumeType = Msg.TSummonConsumeType.ESummonConsumeType_NULL;
     //召唤类型  默认英雄召唤
     private _curSummonType: number = 0;
     //消费道具类型 默认道具类型Null
@@ -63,23 +70,59 @@ export class PopHeroPub extends PopBase {
     //友情心数量
     private _nFriendHeartNum : number = 0;
     //英雄召唤进度
-    private _nSummonFriendCount : number = 0;
+    private _nHeroSummonProgress : number = 0;
 
 
     start () {
         super.start();
+        GameModel.getInstance().getHeroPubModel().initPubUILabContents();
         this.curSummonType = Msg.TSummonType.ESummonType_Heroic;
+        // var heroSummon = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_HEROSUMMON) as Config.language_ui.Record
+        this.initUILabel()
         this.updateImgPropNum();
         this.updateBtnSummonState();
         this.showPubHeroIconPrefab();
+        this.updateProgressProcess();
         this.btn_hero_summon.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_friend_summon.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_summon_one.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_summon_ten.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_introduce?.on(Node.EventType.TOUCH_END, this._onIntroduceClick, this);
         this.btn_recteam?.on(Node.EventType.TOUCH_END, this._onRecommendTeamClick, this);
+
+        // var str0 = "再召唤{0}次必得五星传奇英雄";
+        // var newStr = str0.replace("{0}","10");
+        // console.log("pppppppppppppppp",newStr);
     }
 
+
+    public initUILabel()
+    {
+        if(this.lab_title)
+        {
+            this.lab_title.string = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_title");
+        }
+        if(this.lab_recteam)
+        {
+            this.lab_recteam.string = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_recteam");
+        }
+       
+        if(this.lab_bar_info)
+        {
+            var strInfo = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_bar_info");
+            var newStr = strInfo.replace("{0}",String(XConsts.PUB_SUMMON_COUNT_MAX - this._nHeroSummonProgress));
+            this.lab_bar_info.string = newStr
+        }
+        if(this.lab_friend_info)
+        {
+            this.lab_friend_info.string = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_friend_info");
+        }
+
+        if(this.lab_summon_ad)
+        {
+            this.lab_summon_ad.string = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_summon_ad_hero");
+        }
+    }
     private _onIntroduceClick(event : any)
     {
         PopMgr.getInstance().popRecLineUpWindow("推荐阵容",()=>{console.log("")});
@@ -188,6 +231,19 @@ export class PopHeroPub extends PopBase {
             var nodeDiamond = nodWindow?.getChildByName("node_diamond");
             var imgFiveStarBg = nodeDiamond?.getChildByName("img_fivestar_bg");
             var nodeFiveStar = imgFiveStarBg?.getChildByName("node_fivestar");
+            var lab_detail =  nodeDiamond?.getChildByName("lab_detail")?.getComponent(Label);
+            // var summonHeroLotto = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONHEROLOTTO) as Config.language_ui.Record;
+            if(lab_detail)
+            {
+                lab_detail.string = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_detail");
+            }
+            var lab_detail_dimaond =  nodeDiamond?.getChildByName("lab_detail_dimaond")?.getComponent(Label);
+           // var summonJewelConsume = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONJEWELCONSUMEO) as Config.language_ui.Record;
+            if(lab_detail_dimaond)
+            {
+                lab_detail_dimaond.string = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_detail_dimaond");
+            }
+
             if(nodeFiveStar)
             {
                 p.setScale(0.4,0.4)
@@ -207,6 +263,10 @@ export class PopHeroPub extends PopBase {
                 this.btn_hero_summon.interactable = false;
                 this.btn_friend_summon.interactable = true;
                 this.resetResourcesSpriFame("hero_pub/pub_call_ad_diamond/spriteFrame",this.img_summon_ad);
+                if(this.lab_summon_ad)
+                {
+                    this.lab_summon_ad.string = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_summon_ad_hero");
+                }
                 this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",this.img_prop);
         
                 break;
@@ -216,6 +276,10 @@ export class PopHeroPub extends PopBase {
                 this.btn_hero_summon.interactable = true;
                 this.btn_friend_summon.interactable = false;
                 this.resetResourcesSpriFame("hero_pub/pub_call_ad_friend/spriteFrame",this.img_summon_ad);
+                if(this.lab_summon_ad)
+                {
+                    this.lab_summon_ad.string = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_summon_ad_friend");
+                }
                 this.resetResourcesSpriFame("hero_pub/pub_prop_heart/spriteFrame",this.img_prop);
 
                 break;
@@ -266,12 +330,12 @@ export class PopHeroPub extends PopBase {
                 if(lab_one && img_one)
                 {
                     this.resetResourcesSpriFame("hero_pub/pub_diamond/spriteFrame",img_one);
-                    lab_one.string = "x" + String(300);
+                    lab_one.string = "x" + String(XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME);
                 }
                 if(lab_ten && img_ten)
                 {
                     this.resetResourcesSpriFame("hero_pub/pub_diamond/spriteFrame",img_ten);
-                    lab_ten.string = "x" + String(2700);
+                    lab_ten.string = "x" + String(XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME * 0.9);
                 }
                
             }
@@ -294,12 +358,12 @@ export class PopHeroPub extends PopBase {
                 if(lab_one && img_one)
                 {
                     this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",img_one);
-                    lab_one.string = String(1);
+                    lab_one.string = String(XConsts.PUB_SUMMON_SCROLL_ONE_COSUME);
                 }
                 if(lab_ten && img_ten)
                 {
                     this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",img_ten);
-                    lab_ten.string = String(10);
+                    lab_ten.string = String(XConsts.PUB_SUMMON_SCROLL_TEN_COSUME);
                 }
             }
         }
@@ -317,15 +381,35 @@ export class PopHeroPub extends PopBase {
             if(lab_one && img_one)
             {
                 this.resetResourcesSpriFame("hero_pub/pub_prop_heart/spriteFrame",img_one);
-                lab_one.string = String(10);
+                lab_one.string = String(XConsts.PUB_SUMMON_FRIEND_ONE_COSUME);
             }
             if(lab_ten && img_ten)
             {
                 this.resetResourcesSpriFame("hero_pub/pub_prop_heart/spriteFrame",img_ten);
-                lab_ten.string = String(100);
+                lab_ten.string = String(XConsts.PUB_SUMMON_FRIEND_TEN_COSUME);
             }
         }
         
+    }
+
+
+    public updateProgressProcess()
+    {
+        var nodWindow = this.node.getChildByName("window");
+        var nodeDiamond = nodWindow?.getChildByName("node_diamond");
+        var barProgress = nodeDiamond?.getChildByName("bar_progress");
+        var barCompoent = barProgress?.getComponent(ProgressBar);
+        var labBarProgress = nodeDiamond?.getChildByName("lab_bar_progress");
+        var labCompoent = labBarProgress?.getComponent(Label);
+        if(barCompoent)
+        {
+            barCompoent.progress = this._nHeroSummonProgress /XConsts.PUB_SUMMON_COUNT_MAX ;
+        }
+        if(labCompoent)
+        {
+            var str = "{0}/30";
+            labCompoent.string = str.replace("{0}",String(this._nHeroSummonProgress));
+        }
     }
 }
 

@@ -260,6 +260,16 @@ export class XConsts{
     public static PUB_SUMMON_FRIEND_ONE_COSUME:number = 10 ;
     public static PUB_SUMMON_FRIEND_TEN_COSUME:number = 100 ;
 
+    public static PUB_UI_HEROSUMMON : string = "UI_HeroSummon";  //英雄酒馆
+    public static PUB_UI_CAMPRECOMMEND : string = "UI_CampRecommend";  //推荐阵容
+    public static PUB_UI_NEWSUMMONHEROLOTTO: string = "UI_NewSummonHeroLotto";  //10连英雄召唤
+    public static PUB_UI_NEWSUMMONJEWELCONSUMEO: string = "UI_NewSummonJewelConsume";  //钻石消耗直降
+    public static PUB_UI_NEWSUMMONRESIDUE: string = "UI_NewSummonResidue";  //再召唤{0}次必得五星传奇英雄
+    public static PUB_UI_NEWSUMMONFRIENDCONTENT: string = "UI_NewSummonFriendContent";  //添加好友，每日互送爱心，即可免费召唤英雄。
+    public static PUB_UI_FRIENDSUMMON : string = "UI_FriendSummon";
+    public static PUB_UI_HEROICSUMMON : string = "UI_HeroicSummon";
+
+
     public static PUB_RECOMMEND_LINEUP_UI_PACKUP : string = "UI_PackUp";
     public static PUB_RECOMMEND_LINEUP_UI_VIEWDETAIL : string = "UI_Detail";
     public static PUB_RECOMMEND_LINEUP_UI_COREHERO : string = "UI_CoreHero";
