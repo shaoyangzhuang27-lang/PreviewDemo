@@ -8,29 +8,6 @@
     ".json"
   ],
   "subMetas": {
-    "6c48a": {
-      "importer": "texture",
-      "uuid": "37e38984-968e-4e35-8a46-2aade404d351@6c48a",
-      "displayName": "crystal9",
-      "id": "6c48a",
-      "name": "texture",
-      "userData": {
-        "wrapModeS": "repeat",
-        "wrapModeT": "repeat",
-        "minfilter": "linear",
-        "magfilter": "linear",
-        "mipfilter": "none",
-        "anisotropy": 1,
-        "isUuid": true,
-        "imageUuidOrDatabaseUri": "37e38984-968e-4e35-8a46-2aade404d351"
-      },
-      "ver": "1.0.20",
-      "imported": true,
-      "files": [
-        ".json"
-      ],
-      "subMetas": {}
-    },
     "f9941": {
       "importer": "sprite-frame",
       "uuid": "37e38984-968e-4e35-8a46-2aade404d351@f9941",
@@ -59,6 +36,29 @@
         "atlasUuid": ""
       },
       "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "37e38984-968e-4e35-8a46-2aade404d351@6c48a",
+      "displayName": "crystal9",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "37e38984-968e-4e35-8a46-2aade404d351"
+      },
+      "ver": "1.0.20",
       "imported": true,
       "files": [
         ".json"

@@ -10,13 +10,16 @@ export class HeroSelectIcon extends Component {
     public btnFrame:Node = null as unknown as Node;
 
     @property({type :  Node})
-    public choiceBg:Node = null as unknown as Node;
+    public icoChoose:Node = null as unknown as Node;
+    
+    @property({type :  Node})
+    public icoLock:Node = null as unknown as Node;
 
 
     private _choiceCallBack:Function | null = null as unknown as Function;
     private _heroInfo:HeroData | null = null as unknown as HeroData;
 
-    private _clickType:number = 0;
+    private _itemType:number = 0;
     start () {
         this.btnFrame.on(Node.EventType.TOUCH_END, this.btnChoiceCallBack, this);
         // this.choiceBg.active = true;
@@ -26,7 +29,10 @@ export class HeroSelectIcon extends Component {
     {
         if(this._choiceCallBack)
         {
-            this._choiceCallBack(this._heroInfo, this._clickType);
+            this._choiceCallBack(this._heroInfo, this._itemType);//let isSelect = 
+            // if(isSelect != null){
+            //     this.setSelect(isSelect)
+            // }
         }
     }
 
@@ -58,32 +64,42 @@ export class HeroSelectIcon extends Component {
         return this._heroInfo;
     }
     /**
-     * @param _type 0:未选中 1:选中 2:锁定
+     * @param type 0:未选中 1:选中 2:锁定
      */
-    public setChoiceIconImage(_type:number=0)
+    public setItemType(type:number=0)
     {
-        this._clickType = _type;
+        this._itemType = type;
 
-        if(_type == 0){
-            this.choiceBg.active = false;
-        }else if(_type == 1){
-            this.choiceBg.active = true;
-        }else if(_type == 2){
-            resources.load("ui/team/弹框_升星_英雄锁定状态/spriteFrame",(err,_spriteFrame:SpriteFrame)=>{
-                console.log("OPOPOPOPOP============")
-                console.log(err)
-                if(!err)
-                {
-                    let sprite = this.choiceBg.getComponent(Sprite) as Sprite;
-                    sprite.spriteFrame = _spriteFrame;
-                }
-            })
+        this.icoChoose.active = false;
+        this.icoLock.active = false;
+
+        if(type == 0){
+        }else if(type == 1){
+            this.icoChoose.active = true;
+        }else if(type == 2){
+            this.icoLock.active = true;
+        }
+    }
+    public selectSelf(){
+        let type = 0;
+        if(this._itemType == 1){
+            type = 0;
+        }else if(this._itemType == 0){
+            type = 1;
+        }
+        this.setItemType(type);
+    }
+    public setSelect(isSelect:boolean){
+        if(isSelect){
+            this.setItemType(1)
+        }else{
+            this.setItemType(0)
         }
     }
 
-    public getClickType():number
+    public getItemType():number
     {
-        return this._clickType;
+        return this._itemType;
     }
 
     public getCurHeroInfo():HeroData|null
@@ -91,14 +107,3 @@ export class HeroSelectIcon extends Component {
         return this._heroInfo;
     }
 }
-
-/**
- * [1] Class member could be defined like this.
- * [2] Use `property` decorator if your want the member to be serializable.
- * [3] Your initialization goes here.
- * [4] Your update function goes here.
- *
- * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
- * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
- * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
- */

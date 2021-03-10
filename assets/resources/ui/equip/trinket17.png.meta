@@ -8,29 +8,6 @@
     ".json"
   ],
   "subMetas": {
-    "6c48a": {
-      "importer": "texture",
-      "uuid": "f7357c33-91d7-4c69-8182-3d9f92d68e52@6c48a",
-      "displayName": "trinket17",
-      "id": "6c48a",
-      "name": "texture",
-      "userData": {
-        "wrapModeS": "repeat",
-        "wrapModeT": "repeat",
-        "minfilter": "linear",
-        "magfilter": "linear",
-        "mipfilter": "none",
-        "anisotropy": 1,
-        "isUuid": true,
-        "imageUuidOrDatabaseUri": "f7357c33-91d7-4c69-8182-3d9f92d68e52"
-      },
-      "ver": "1.0.20",
-      "imported": true,
-      "files": [
-        ".json"
-      ],
-      "subMetas": {}
-    },
     "f9941": {
       "importer": "sprite-frame",
       "uuid": "f7357c33-91d7-4c69-8182-3d9f92d68e52@f9941",
@@ -59,6 +36,29 @@
         "atlasUuid": ""
       },
       "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "f7357c33-91d7-4c69-8182-3d9f92d68e52@6c48a",
+      "displayName": "trinket17",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "f7357c33-91d7-4c69-8182-3d9f92d68e52"
+      },
+      "ver": "1.0.20",
       "imported": true,
       "files": [
         ".json"

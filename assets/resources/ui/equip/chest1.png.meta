@@ -8,29 +8,6 @@
     ".json"
   ],
   "subMetas": {
-    "6c48a": {
-      "importer": "texture",
-      "uuid": "90674c9d-e0c0-4084-a17b-c326fc90e2dc@6c48a",
-      "displayName": "chest1",
-      "id": "6c48a",
-      "name": "texture",
-      "userData": {
-        "wrapModeS": "repeat",
-        "wrapModeT": "repeat",
-        "minfilter": "linear",
-        "magfilter": "linear",
-        "mipfilter": "none",
-        "anisotropy": 1,
-        "isUuid": true,
-        "imageUuidOrDatabaseUri": "90674c9d-e0c0-4084-a17b-c326fc90e2dc"
-      },
-      "ver": "1.0.20",
-      "imported": true,
-      "files": [
-        ".json"
-      ],
-      "subMetas": {}
-    },
     "f9941": {
       "importer": "sprite-frame",
       "uuid": "90674c9d-e0c0-4084-a17b-c326fc90e2dc@f9941",
@@ -59,6 +36,29 @@
         "atlasUuid": ""
       },
       "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "90674c9d-e0c0-4084-a17b-c326fc90e2dc@6c48a",
+      "displayName": "chest1",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "90674c9d-e0c0-4084-a17b-c326fc90e2dc"
+      },
+      "ver": "1.0.20",
       "imported": true,
       "files": [
         ".json"
