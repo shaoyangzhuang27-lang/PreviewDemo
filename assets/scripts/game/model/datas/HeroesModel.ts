@@ -3,6 +3,7 @@ import { HeroData } from "./HeroData";
 import { TableName, ValueMgr } from "../ValueMgr";
 import { XMsgExt } from "../const/XMsgExt";
 import { BaseModel } from "./BaseModel";
+import {XConsts} from "../const/XConsts";
 
 export class HeroesModel extends BaseModel{
 
@@ -138,5 +139,24 @@ export class HeroesModel extends BaseModel{
             }
         });
         return _campHeroList;
+    }
+
+    //酒馆推荐阵容英雄信息
+    public getHeroIconInfoByHeroId(id : number) : XStruct.hero_icon_info.Record{
+
+        let info :  XStruct.hero_icon_info.Record = {
+            camp : "",
+            star : 0,
+            level : 1,
+            frame : "",
+            img : "",
+
+        }
+        var _hero = ValueMgr.getInstance().getItemByField(TableName.heroes, id) as Config.heroes.Record;
+        info.camp = XConsts.KHeroCampIcon[_hero.camp];
+        info.star = _hero.star;
+        info.frame = XConsts.GetQualityBgByStar(_hero.star);
+        info.img = _hero.image;
+        return info
     }
 }

@@ -1,6 +1,7 @@
-import { _decorator, Component, Node,resources,instantiate,Vec3,Button,Label, UITransform, size, Size } from 'cc';
+import { _decorator, Component, Node,resources,instantiate,Vec3,Button,Label, UITransform, size, Size, Script } from 'cc';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { HeroIcon } from '../hero/HeroIcon';
 const { ccclass, property } = _decorator;
 
 @ccclass('PubRecLineUpItem')
@@ -40,7 +41,9 @@ export class PubRecLineUpItem extends Component {
     @property({type: Label })
     public lab_lineup_analysis = null as unknown as Label;
 
-
+    //推荐英雄ID
+    private _HeroIdArray : number[] = [];
+ 
     start () {
         this.node_hero_0?.on(Node.EventType.TOUCH_END, this._onNodeClick, this);
         this.node_hero_1?.on(Node.EventType.TOUCH_END, this._onNodeClick, this);
@@ -76,10 +79,14 @@ export class PubRecLineUpItem extends Component {
         //PopMgr.getInstance().popRecLineUpWindow("推荐阵容",()=>{console.log("")});
     }
     
-    public initHeroIconPrefab(index : number)
+    public initHeroIconPrefab(index : number,id : number)
     {
         resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
             let _heroIcon = instantiate(res) ;
+            let script = _heroIcon.getComponent(HeroIcon); 
+            // script.setHeroID(this._heroInfo as HeroData);
+            script.initRecLineUpHeroIconInfo(id);   
+                   
             // _heroIcon.scale = new Vec3(0.5,0.5,1);
             switch(index)
             {
@@ -132,9 +139,9 @@ export class PubRecLineUpItem extends Component {
         {
             lab_retract.string = packUpInfo.cn;
         }
-        for(var i=0; i < 5; i++)
+        for(var i=0; i < this._HeroIdArray.length; i++)
         {
-            this.initHeroIconPrefab(i);
+            this.initHeroIconPrefab(i,this._HeroIdArray[i]);
         }
         this.setAllDesLabelAndBtnState(false);
         this.setShowViewDetailState(false);
@@ -167,6 +174,7 @@ export class PubRecLineUpItem extends Component {
         this.lab_team_name.string = data.title;
         this.lab_core_hero.string  = data.coreHeroName;
         this.lab_lineup_analysis.string = data.analysisDetail ;
+        this._HeroIdArray = data.heorIdList;
     }
 }
 

@@ -4,6 +4,7 @@ const { ccclass, property } = _decorator;
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { XConsts } from "../../model/const/XConsts";
 import { HeroData } from '../../model/datas/HeroData';
+import {GameModel} from "../../model/GameModel";
 
 @ccclass('HeroIcon')
 export class HeroIcon extends Component {
@@ -164,6 +165,32 @@ export class HeroIcon extends Component {
                 _callBack(this._heroInfo)                
             }, this);
         }
+    }
+
+    //酒馆推荐阵容英雄icon
+    public initRecLineUpHeroIconInfo(id : number)
+    {
+        let info = GameModel.getInstance().getHeroesModel().getHeroIconInfoByHeroId(id);
+        this.img_camp.active = true;
+        let campIconPath:string = "ui/team/" + info.camp + "/spriteFrame"
+        resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
+        {
+            if(!err)
+            {
+                let sprite = this.img_camp.getComponent(Sprite) as Sprite;
+                sprite.spriteFrame = spriteFrame;
+            }
+        });
+
+        let framePath:string = "ui/icon/" + info.frame + "/spriteFrame"
+        this._resourceLoad(framePath,this.btn_frame);
+
+        let heroIconPath:string = "ui/hero/" + info.img + "/spriteFrame"
+        this._resourceLoad(heroIconPath,this.img_icon);
+
+        this.lab_level.node.active = false;
+
+        this._setStar(info.star);
     }
 }
 

@@ -24,18 +24,20 @@ export namespace XStruct {
        namespace hero_icon_info {
            /** Properties of a Record. */
            interface IRecord {
-               title?: (string|null);
-               coreHeroName?: (string|null);
-               heorIdList?:(number[]|null);
-               analysisDetail?:(string|null);
+               camp?: (string|null);
+               star?: (number|null);
+               level?:(number|null);
+               frame?:(string|null);
+               img?:(string|null);
            }
            /** Represents a Record. */
            class Record implements IRecord {
                constructor(p?: XStruct.hero_icon_info.IRecord);
-               title : string;
-               coreHeroName : string;
-               heorIdList : number[];
-               analysisDetail :string;
+               camp : string;
+               star : number;
+               level : number;
+               frame :string;
+               img : string;
            }
        }
    }
