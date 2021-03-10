@@ -31,14 +31,12 @@ export class PubRecLineUpItem extends Component {
 
     @property({type: Label })
     public lab_core_hero_title = null as unknown as Label;
-    @property({type: Label })
-    public lab_knight_armor_title = null as unknown as Label;
+
     @property({type: Label })
     public lab_lineup_analysis_title = null as unknown as Label;
     @property({type: Label })
     public lab_core_hero = null as unknown as Label;
-    @property({type: Label })
-    public lab_knight_armor = null as unknown as Label;
+
     @property({type: Label })
     public lab_lineup_analysis = null as unknown as Label;
 
@@ -110,10 +108,8 @@ export class PubRecLineUpItem extends Component {
         this.btn_retract.active = state;
         // this.lab_team_name.node.active = state;
         this.lab_core_hero.node.active = state;
-        this.lab_knight_armor.node.active = state;
         this.lab_lineup_analysis.node.active = state;
         this.lab_core_hero_title.node.active = state;
-        this.lab_knight_armor_title.node.active = state;
         this.lab_lineup_analysis_title.node.active = state;
         
     } 
@@ -123,10 +119,8 @@ export class PubRecLineUpItem extends Component {
         var packUpInfo = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_RECOMMEND_LINEUP_UI_PACKUP) as Config.language_ui.Record;
         var detailInfo = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_RECOMMEND_LINEUP_UI_VIEWDETAIL) as Config.language_ui.Record;
         var coreHeroInfo = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_RECOMMEND_LINEUP_UI_COREHERO) as Config.language_ui.Record;
-        var knightArmorInfo = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_RECOMMEND_LINEUP_UI_KNIGHTARMOR) as Config.language_ui.Record;
         var campAnalyseInfo = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_RECOMMEND_LINEUP_UI_CAMPANALYSE) as Config.language_ui.Record;
         this.lab_core_hero_title.string = coreHeroInfo.cn;
-        this.lab_knight_armor_title.string = knightArmorInfo.cn;
         this.lab_lineup_analysis_title.string = campAnalyseInfo.cn;
         var lab_detail = this.btn_view_detail.getChildByName("lab_veiw_detail")?.getComponent(Label);
         if(lab_detail)
@@ -154,14 +148,14 @@ export class PubRecLineUpItem extends Component {
         
         if(nodeTransForm)
         {
-            nodeTransForm.contentSize = bShow? new Size(600,410) : new Size(600,190);
+            nodeTransForm.contentSize = bShow? new Size(600,360) : new Size(600,190);
         }
         if(node)
         {
             let bgDescTransForm = node?.getChildByName("bg_dec")?.getComponent(UITransform);;
             if(bgDescTransForm)
             {
-                bgDescTransForm.contentSize = bShow? new Size(600,260) : new Size(600,40) ;
+                bgDescTransForm.contentSize = bShow? new Size(600,210) : new Size(600,40) ;
             }
         }
         
@@ -172,7 +166,6 @@ export class PubRecLineUpItem extends Component {
         // let data = instantiate(info);
         this.lab_team_name.string = data.title;
         this.lab_core_hero.string  = data.coreHeroName;
-        this.lab_knight_armor.string = String(data.roleArmor) ;
         this.lab_lineup_analysis.string = data.analysisDetail ;
     }
 }

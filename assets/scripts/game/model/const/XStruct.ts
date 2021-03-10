@@ -7,7 +7,6 @@ export namespace XStruct {
            /** Properties of a Record. */
            interface IRecord {
                 title?: (string|null); 
-                roleArmor?: (number|null);
                 coreHeroName?: (string|null);
                 heorIdList?:(number[]|null);
                 analysisDetail?:(string|null);
@@ -16,7 +15,6 @@ export namespace XStruct {
            class Record implements IRecord {
                constructor(p?: XStruct.lineup_item_info.IRecord);
                 title : string; 
-                roleArmor : number;
                 coreHeroName : string;
                 heorIdList : number[];
                 analysisDetail :string;

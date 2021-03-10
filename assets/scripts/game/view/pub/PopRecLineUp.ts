@@ -115,12 +115,9 @@ export class PopRecLineUp extends PopBase {
             for (var i = 0 ; i < GameModel.getInstance().getHeroPubModel().nLineUpCounts; i++) {
                 let reclineup_item = instantiate( res );
                 let script = reclineup_item.getComponent(PubRecLineUpItem);
-                // console.log("size",reclineup_item.getComponent(UITransform).contentSize);
                 script.setViewDetaiLabelContent(GameModel.getInstance().getHeroPubModel().getRecLineUpItemInfoByIndex(i));
-                // script.setShowViewDetailState(false);
                 this.scroll_lineup_view.content?.addChild(reclineup_item);
             }
-            // console.log("dddddddddddd",this.scroll_lineup_view.content);
         });
     }
 
