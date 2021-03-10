@@ -11,8 +11,8 @@ export class PopBase extends Component {
     // @property({type: Node})
     // public btn_submit:Node | null = null;
 
-    @property({type: Button, displayName: "取消按钮[选填项]"})
-    public btn_cancel = null as unknown as Button;
+    @property({type: Node, displayName: "取消按钮[选填项]"})
+    public btn_cancel = null as unknown as Node;
 
     @property({type: Node, displayName: "弹出窗口[必填项]"})
     public window:Node = null as unknown as Node;
@@ -39,7 +39,7 @@ export class PopBase extends Component {
         // Your initialization goes here.
         this.btn_close?.on(Node.EventType.TOUCH_END, this._onClose, this);
         // this.btn_submit?.on(Node.EventType.TOUCH_END, this.onSubmit, this);
-        this.btn_cancel?.node.on(Node.EventType.TOUCH_END, this._onClose, this);
+        this.btn_cancel?.on(Node.EventType.TOUCH_END, this._onClose, this);
         this.mask.on(Node.EventType.TOUCH_END, this._onMaskClick, this);
 
         this.show();

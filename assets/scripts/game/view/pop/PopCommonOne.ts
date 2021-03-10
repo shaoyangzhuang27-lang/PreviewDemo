@@ -94,7 +94,7 @@ export class PopCommonOne extends PopBase {
         }
         if(content)
         {
-            var lab = this.btn_cancel.node.getChildByName("lab")?.getComponent(Label);
+            var lab = this.btn_cancel.getChildByName("lab")?.getComponent(Label);
             if(lab)
             {
                 lab.string = content;
@@ -130,7 +130,7 @@ export class PopCommonOne extends PopBase {
         if(mode == 1)
         {
             this.btn_submit.node.active = false;
-            this.btn_cancel.node.active = false;
+            this.btn_cancel.active = false;
         }
         else
         {
