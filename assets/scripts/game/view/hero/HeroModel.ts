@@ -8,6 +8,7 @@ import { HeroBase } from "../../../core/base/HeroBase";
 import { BattleTest } from "../../../battle/test/BattleTest";
 
 import { ResMgr } from "../../control/ResMgr";
+import { HeroData } from '../../model/datas/HeroData';
 
 @ccclass('HeroModel')
 export class HeroModel extends Component {
@@ -16,6 +17,7 @@ export class HeroModel extends Component {
     private _resMap: Map<string, string> = new Map();
     private _onClickFunc: Function | null = null;
     private _bOnce: boolean = false;
+    private _heroBookMap:Map<number, Msg.HeroBookUnit> = new Map<number, Msg.HeroBookUnit>();
 
     onLoad() {
         this.node.on(SystemEventType.TOUCH_END, () => {
@@ -117,5 +119,30 @@ export class HeroModel extends Component {
         this.node.setRotationFromEuler(v);
     }
 
+    public getHeroBookMap():Map<number, Msg.HeroBookUnit>
+    {
+        return this._heroBookMap;
+    }
     
+    public addHeroBook(heroStaticID:number)
+    {
+        let bookid = HeroData.GetHeroBookID(heroStaticID);
+        let star = HeroData.GetHeroStar(heroStaticID);
+        if(!this._heroBookMap.has(bookid))
+        {
+            let hbu = new Msg.HeroBookUnit();
+            hbu.heroBookId = bookid;
+            hbu.isGetAward = false;
+            hbu.curTopStar = star;
+            hbu.level = 0;
+            this._heroBookMap.set(bookid,hbu);
+        }
+        else{
+            let hbu = this._heroBookMap.get(bookid) as Msg.HeroBookUnit;
+            if(hbu.curTopStar < star)
+            {
+                hbu.curTopStar = star;
+            }
+        }
+    }
 }

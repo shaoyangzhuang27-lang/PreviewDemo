@@ -1,5 +1,7 @@
 
-import { _decorator, Component, Node, Label } from 'cc';
+import { _decorator, Component, Node, Label, resources, SpriteFrame, Sprite } from 'cc';
+import { XConsts } from '../../model/const/XConsts';
+import { TableName, ValueMgr } from '../../model/ValueMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('ItemEquipCell')
@@ -9,9 +11,6 @@ export class ItemEquipCell extends Component {
 
     @property({type :  Node})
     public img_icon:Node = null as unknown as Node;
-
-    @property({type :  Node})
-    public btn_frame:Node = null as unknown as Node;
 
     @property({type :  Node})
     public starlist:Node[] = [];
@@ -26,23 +25,117 @@ export class ItemEquipCell extends Component {
     public img_infoBg:Node = null as unknown as Node;
 
     private _itemType : number = 1;     //区分道具:1、装备:2 
+    private _itemID:number = -1;
+    private _itemCount:number = 0;
+    private _clickCallback :Function | null = null;
     start () {
-        this.btn_frame.on(Node.EventType.TOUCH_END, this._openItemEquipInfoView, this);
+        this.img_bg.on(Node.EventType.TOUCH_END, this._openItemEquipInfoView, this);
     }
 
-    public setItemType(type:number)
+    //传入道具id,数量，当前数据类型 道具:1、装备:2 
+    public setItemType(id:number,count:number,type:number,callback:Function | null)
     {
+        this._itemID = id;
+        this._itemCount = count;
+        this._itemType = type;
+        this._clickCallback = callback;
         this._initIcon();
     }
 
     private _initIcon()
     {
+        //数量
+        this.lab_count.string = this._itemCount.toString();
+        let iconPath:string = "";
+        let qualityPath:string = "";
+        this.img_infoBg.active = false;
+        if(this._itemType == 2)     //装备
+        {            
+            this._setUIIConVisible(true);
+            let equipData:Config.equip.Record = ValueMgr.getInstance().getItemByField(TableName.equip,this._itemID) as Config.equip.Record;
+            let iconName:string = equipData.imageName;
+            let starCount:number = equipData.star;
+            let qualityName:string = XConsts.KQualityBgSpriteName[equipData.quality];
 
+            iconPath = "ui/equip/" + iconName + "/spriteFrame"
+            qualityPath = "ui/icon/" + qualityName + "/spriteFrame"
+
+            let name = ValueMgr.getInstance().getItemByField(TableName.language_data,equipData.name) as Config.language_data.Record;
+            console.log("装备的id,名称，品质",this._itemID,name.cn,qualityPath)
+
+            for (let index = 0; index < this.starlist.length; index++) {
+                if(index >= starCount)
+                {
+                    this.starlist[index].active = false;
+                }
+            }
+        }
+        else{       //道具
+            this._setUIIConVisible(false);
+            let itemData:Config.item_usable.Record = ValueMgr.getInstance().getItemByField(TableName.item_usable,this._itemID) as Config.item_usable.Record;
+            let iconName:string = itemData.icon;            
+            let qualityName:string = XConsts.KQualityBgSpriteName[itemData.quality];
+            let itemUseType:number = itemData.itemType;
+
+            qualityPath = "ui/icon/" + qualityName + "/spriteFrame"
+            if(itemUseType == Msg.TUsableItemType.EUsableItemType_ObjectOffline)
+            {
+                this.img_infoBg.active = true;
+            }
+        }
+
+        
+        resources.load(iconPath, (err,spriteFrame:SpriteFrame) =>
+        {
+            console.log("装备道具errerrerrerrerr",err,iconPath)
+            if(!err)
+            {
+                let sprite = this.img_icon.getComponent(Sprite) as Sprite;
+                sprite.spriteFrame = spriteFrame;
+            }
+        });
+
+        
+        resources.load(qualityPath, (err,spriteFrame:SpriteFrame) =>
+        {
+            console.log("装备品质errerrerrerrerr",err,qualityPath)
+            if(!err)
+            {
+                let sprite = this.img_bg.getComponent(Sprite) as Sprite;
+                sprite.spriteFrame = spriteFrame;
+            }
+        });
     }
 
     private _openItemEquipInfoView()
     {
+        if(this._clickCallback)
+        {
+            this._clickCallback(this._itemID,this._itemType)
+        }
+    }
 
+    private _setUIIConVisible(show:boolean)
+    {
+        // this.img_infoBg.active = show;
+        for (let index = 0; index < this.starlist.length; index++) {
+            let star = this.starlist[index] as Node;
+            star.active = show;                
+        }
+    }
+
+    //资源替换
+    private _resourceLoad (path:string,obj:any)
+    {
+        resources.load(path, (err,spriteFrame:SpriteFrame) =>
+        {
+            console.log("装备道具errerrerrerrerr",err,path)
+            if(!err)
+            {
+                let sprite = obj.getComponent(Sprite) as Sprite;
+                sprite.spriteFrame = spriteFrame;
+            }
+        });
     }
 }
 

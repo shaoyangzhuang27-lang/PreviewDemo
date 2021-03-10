@@ -65,8 +65,6 @@ export class PopMgr extends PopCore  {
             this.pushWindow(p)
 
             let script = p.getComponent("PopBattleTeam");
-            // script.setSubmitCallBack(submitCallBack)
-            // script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
             // script.setInitTeamView(type)
         } );
@@ -141,4 +139,15 @@ export class PopMgr extends PopCore  {
 
     //弹出提示窗放这里-------------------------------------------------
 
+    //弹出图鉴界面
+    public popBoolLibraryView()
+    {
+        resources.load('prefabs_ui/pop/pop_bookview', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopHeroBookView");
+            script.setIsMaskClose(false);
+        } );
+    }
 }

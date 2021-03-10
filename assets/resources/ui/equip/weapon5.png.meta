@@ -30,11 +30,45 @@
         ".json"
       ],
       "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "960bfbb4-c249-440d-be16-d3144eb00d23@f9941",
+      "displayName": "weapon5",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 10,
+        "offsetY": -7.5,
+        "trimX": 21,
+        "trimY": 15,
+        "width": 178,
+        "height": 185,
+        "rawWidth": 200,
+        "rawHeight": 200,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "960bfbb4-c249-440d-be16-d3144eb00d23@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
     }
   },
   "userData": {
     "hasAlpha": true,
-    "type": "texture",
-    "redirect": "960bfbb4-c249-440d-be16-d3144eb00d23@6c48a"
+    "type": "sprite-frame",
+    "redirect": "960bfbb4-c249-440d-be16-d3144eb00d23@f9941"
   }
 }
