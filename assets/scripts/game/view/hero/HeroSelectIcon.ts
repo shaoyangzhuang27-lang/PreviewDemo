@@ -39,27 +39,27 @@ export class HeroSelectIcon extends Component {
     private initHeroIcon()
     {
         resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{                  
-            let _heroIcon = instantiate(res) as Node;
-            _heroIcon.scale = new Vec3(0.6,0.6,1);
-            this.btnFrame.addChild(_heroIcon);
-            _heroIcon.position = this.btnFrame.position;
-            _heroIcon.name = "formationIcon"
+            let heroIcon = instantiate(res) as Node;
+            heroIcon.scale = new Vec3(0.6,0.6,1);
+            this.btnFrame.addChild(heroIcon);
+            heroIcon.position = this.btnFrame.position;
+            heroIcon.name = "formationIcon"
 
-            let script = _heroIcon.getComponent("HeroIcon") as HeroIcon; 
+            let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
             script.setHeroID(this._heroInfo as HeroData);
             script.setBtnCallBack(null);            
         });
     }
 
     //////////////////////////////
-    public setSelectData(_heroData : HeroData, callback:Function)
+    public setSelectData(heroData : HeroData, callback:Function)
     {
-        this._heroInfo = _heroData;
+        this._heroInfo = heroData;
         this._choiceCallBack = callback;
         this.initHeroIcon();
     }
 
-    public getHeroInfo()
+    public getHeroData()
     {
         return this._heroInfo;
     }

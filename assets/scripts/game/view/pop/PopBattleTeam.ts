@@ -30,13 +30,13 @@ export class PopBattleTeam extends PopBase {
     public btn_right:Node = null as unknown as Node;
 
     @property({type: ToggleContainer })
-    public topHeroPages:ToggleContainer | null = null as unknown as ToggleContainer;
+    public topHeroPages:ToggleContainer = null as unknown as ToggleContainer;
 
     // @property({type :  Node})
     // public selectToggleList:Node[] = [];
 
     @property({type: ToggleContainer })
-    public campGroup:ToggleContainer | null = null as unknown as ToggleContainer;
+    public campGroup:ToggleContainer = null as unknown as ToggleContainer;
 
     @property({type :  Node})
     public campToggleList:Node[] = [];
@@ -85,20 +85,10 @@ export class PopBattleTeam extends PopBase {
         containerCampEventHandler.customEventData = '';
         this.campGroup?.checkEvents.push(containerCampEventHandler);
 
-        // const scrollViewEventHandler = new EventHandler();
-        // containerEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
-        // containerEventHandler.component = 'PopBattleTeam';// 这个是代码文件名
-        // containerEventHandler.handler = 'scrollCallBack';
-        // containerEventHandler.customEventData = '';
-        // this.scroll_HeroView.scrollEvents.push(scrollViewEventHandler);
-
-        // this.scroll_HeroView.node.on("scroll-ended",this.scrollCallBack.bind(this),this);//监听scrollview事件
-
-
 
         this.btn_submit?.on(Node.EventType.TOUCH_END, this._onSubmit, this);
-        this.btn_left.on(Node.EventType.TOUCH_END, this._btnLeftCallBack, this);
-        this.btn_right.on(Node.EventType.TOUCH_END, this._btnRightCallBack, this);
+        this.btn_left.on(Node.EventType.TOUCH_END, this._onLeftPage, this);
+        this.btn_right.on(Node.EventType.TOUCH_END, this._onRightPage, this);
     }
 
     start()
@@ -133,7 +123,6 @@ export class PopBattleTeam extends PopBase {
             this._formationList.forEach((value,key)=>{
                 let heroIcon = instantiate(res) as Node;
                 this._initTopHero(heroIcon, value);
-                // if(key == 0) key = 1
                 this._getHeroHomeByIndex(key).addChild(heroIcon);
                 
             });
@@ -202,13 +191,13 @@ export class PopBattleTeam extends PopBase {
     private _frushButtonHero(){
         this._bottomHeroItemList.forEach((heroNode,dyncid)=>{
             let heroSelectScript = heroNode.getComponent("HeroSelectIcon") as HeroSelectIcon;
-            let heroData = heroSelectScript.getHeroInfo() as HeroData;
+            let heroData = heroSelectScript.getHeroData() as HeroData;
             let itemType =  this._getItemType(heroData);
             heroSelectScript.setItemType(itemType);
             
-            if(this._getCampSelect() == Msg.TCampType.ECampType_NULL){
+            if(this._getCampType() == Msg.TCampType.ECampType_NULL){
                 heroNode.active = true;
-            }else if(this._getCampSelect() == heroData.getCamp()){
+            }else if(this._getCampType() == heroData.getCamp()){
                 heroNode.active = true;
             }else{
                 heroNode.active = false;
@@ -231,6 +220,7 @@ export class PopBattleTeam extends PopBase {
             this._heroSelect(_data,false);
         });  
     }
+    //根据英雄动态id获取英雄静态id
     private _getTopHeroByStaticID(heroID:number){
         
         let childName = "formationIcon_" + heroID;
@@ -240,7 +230,7 @@ export class PopBattleTeam extends PopBase {
             if(child)return child
         }
     }
-    //
+    //获取英雄状态
     private _getItemType(heroData:HeroData){
         let itemType =  0;
 
@@ -261,6 +251,7 @@ export class PopBattleTeam extends PopBase {
         }
         return itemType;
     }
+    //根据herodata获取拥有英雄代码
     private _getBottomHeroItemScript(heroData:HeroData){
         for (let value of this._bottomHeroItemList.values()) {
             let script = value.getComponent("HeroSelectIcon") as HeroSelectIcon; 
@@ -271,6 +262,7 @@ export class PopBattleTeam extends PopBase {
             }
         }
     }
+    //获取最前一个空的上阵英雄容器index
     private _getForemostHeroHomeIndex(){
         
         let foremostHeroHomeIndex:number = 0;
@@ -284,28 +276,37 @@ export class PopBattleTeam extends PopBase {
         }
         return foremostHeroHomeIndex
     }
+    //根据index 1~6 获取上阵英雄容器
     private _getHeroHomeByIndex(index:number){
         return this.heroPosList[index - 1];
     }
+    //获取当前阵营类型
+    private _getCampType(){
+        let togs = this.campGroup?.activeToggles();
+        if(!togs)return;
+        if(togs?.length == 0){
+            return Msg.TCampType.ECampType_NULL
+        }else{
+            let tog = togs[0] as Toggle;
+            console.log(tog.name)
+            console.log(tog.node.name)
+            let index:number = Number(tog.node.name.charAt(tog.node.name.length-1));
+            return index;
+        }
+
+    }
 
     private _onSubmit(){
-        // sys.localStorage.setItem("heroFormation_" + this._teamType, this._curPageNum);
         let saveFormation:Msg.FormationInfo = new Msg.FormationInfo();
         for (const item of this._selectBattleHeroList.keys()) {
-            // if(item == 0)continue;
             saveFormation.formation[item] = this._selectBattleHeroList.get(item) as number;
         }
-        // saveFormation.formation[0] = 2;
         saveFormation.index = this._curPageNum;
 
         MsgMgr.getInstance().getMsgFormation().requestChangeBattleTeam(saveFormation,this._curPageNum,this._curPageNum,0);
 
         //关闭窗口，删除自身
-        if(this._closeFunc)
-        {
-            this._closeFunc();
-        }
-        
+        this.delSelf();
     }
 
     //点选英雄
@@ -331,7 +332,6 @@ export class PopBattleTeam extends PopBase {
             PopMgr.getInstance().popupPrompt("主角不能下阵");
             return;
         }
-
             
         if(isSelect)
         {
@@ -367,13 +367,11 @@ export class PopBattleTeam extends PopBase {
 
 
     //////////////////////////////////////////////////////
-
-
     //设置标题
-    public setTitle(title:string){
-        if(this.lab_title)
-            this.lab_title.string = title
-    }
+    // public setTitle(title:string){
+    //     if(this.lab_title)
+    //         this.lab_title.string = title
+    // }
 
     private _onCampClick(event: Event, customEventData: string){
         let tog:Toggle = (event as any);
@@ -381,32 +379,17 @@ export class PopBattleTeam extends PopBase {
         this._curCampType = Number(index);
         
         this._frushButtonHero();
-        
-    }
-    private _getCampSelect(){
-        let togs = this.campGroup?.activeToggles();
-        if(!togs)return;
-        if(togs?.length == 0){
-            return Msg.TCampType.ECampType_NULL
-        }else{
-            let tog = togs[0] as Toggle;
-            console.log(tog.name)
-            console.log(tog.node.name)
-            let index:number = Number(tog.node.name.charAt(tog.node.name.length-1));
-            return index;
-        }
-
     }
 
     
     //上阵英雄切换标签------------------------------------------------
-    private _btnLeftCallBack()
+    private _onLeftPage()
     {  
         if(this._curPageNum == 1)return;
         this._initTopTab(this._curPageNum - 1);
     }
 
-    private _btnRightCallBack()
+    private _onRightPage()
     {
         
         if(this._curPageNum == this.topHeroPages?.toggleItems.length)return;
@@ -431,23 +414,5 @@ export class PopBattleTeam extends PopBase {
         this._frushButtonHero();
     }
 
-    private scrollCallBack()
-    {
 
-    }
-
-    //上阵英雄切换标签------------------------------------------------
-    // //保存阵容回调
-    // public setSubmitCallBack(func:Function){
-    //     this.submitCallFun = func;
-    // }
-    // //关闭回调
-    // public setCloseCallBack(func:Function | null){
-    //     if(func)
-    //         this._closeFunc = func;
-    // }
-
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
 }
