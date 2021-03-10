@@ -8,6 +8,7 @@ import { HeroData } from '../../model/datas/HeroData';
 import { PopMgr } from '../../control/PopMgr';
 import { MsgMgr } from '../../control/MsgMgr';
 import { HeroModel } from '../hero/HeroModel';
+import { SkillItem } from '../hero/SkillItem';
 const { ccclass, property } = _decorator;
  
 //弹窗初始化-----
@@ -58,6 +59,8 @@ export class HeroPromotion extends PopBase {
     @property({ type: HeroModel, displayName: "当前英雄形象" })
     public cur_hero_model: HeroModel | null = null;
     
+    @property({ type: SkillItem, displayName: "当前英雄技能1" })
+    public cur_SkillItem: SkillItem | null = null;
 
     private _curHeroId: number = 0; //当前英雄ID
     private _curHeroData: HeroData= null as unknown as HeroData; //当前英雄数据
@@ -111,6 +114,7 @@ export class HeroPromotion extends PopBase {
         // [3]
         super.start()
         this.initView();
+        this.cur_SkillItem?.setSkillData(0);
     }
 
     initView(){

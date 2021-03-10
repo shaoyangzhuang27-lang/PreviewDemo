@@ -1,6 +1,6 @@
-//单个技能框UI
-
-import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources, math, UITransform, Material } from 'cc';
+//单个技能框UI单元
+import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources, math, UITransform, Material, Vec3, EventTouch, systemEvent, SystemEvent } from 'cc';
+import { PopMgr } from '../../control/PopMgr';
 const { ccclass, property } = _decorator;
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 
@@ -13,44 +13,46 @@ export class SkillItem extends Component {
     // @property
     // serializableDummy = 0;
     
-    @property({type :  Node})
-    public btn_bg:Node = null as unknown as Node;
+    @property({type :  Sprite, displayName: "技能背景框"})
+    public btn_bg:Sprite = null as unknown as Sprite;
 
-    @property({type :  Node})
+    @property({type :  Node, displayName: "技能图标"})
     public img_icon:Node = null as unknown as Node;
 
-    @property({type :  Label})
+    @property({type :  Label, displayName: "技能等级"})
     public lab_level:Label = null as unknown as Label;
     
-    @property({type :  Node})
+    @property({type :  Node, displayName: "技能等级节点"})
     public node_lv:Node = null as unknown as Node;
 
-    private _isGrayStatus: boolean = false;
-    private _skillId: number = 0;
-    private _skillLv: number = 0;  
-    private _callBack:Function|null = null as unknown as Function;  //回调方法
+    private _isGrayStatus: boolean = false; // 技能图标灰化标识
+    private _skillId:number =0 ; //技能id
+    private _skillLv:number =0 ; //当前技能等级
+    private _recordSkill : Config.skill.Record = null as unknown as Config.skill.Record;    //记录的技能
 
 
     start () {
         // [3]
-        // this.btn_frame.on(Node.EventType.TOUCH_END, this.openHeroInfoView, this);        
     }
     
+    onLoad() {
+        systemEvent.on(SystemEvent.EventType.TOUCH_END, this.onTouchEnd, this);
+    }
+
+    onTouchEnd(event:any){
+        console.log("skillitem ontouchend!")
+        
+    }
+
     private init()
     {
-        if(this._skillId <=0 )
+        // 技能图标
+        let iconPath:string = "ui/skill_icon/" + this._recordSkill.image + "/spriteFrame"        
+        if(this._recordSkill.image == "无")
         {
-            return;
-        }
-
-        let _iconName:string = "";//this._skillData?.getImageIcon() as string;
-
-        let heroIconPath:string = "ui/skill/" + _iconName + "/spriteFrame";
-        if(_iconName == "无")
-        {
-            heroIconPath = "ui/skill_icon/英雄详情_无";
+            iconPath = "ui/skill_icon/英雄详情_无";
         }        
-        this._resourceLoad(heroIconPath,this.img_icon);
+        this._resourceLoad(iconPath, this.img_icon);
         
         this._setLv(this._skillLv);
     }
@@ -60,7 +62,7 @@ export class SkillItem extends Component {
     {
         resources.load(path, (err,spriteFrame:SpriteFrame) =>
         {
-            console.log("skill icon---------",err)
+            console.log("skillItem icon---------",err)
             if(!err)
             {
                 let sprite = obj.getComponent(Sprite) as Sprite;
@@ -74,58 +76,70 @@ export class SkillItem extends Component {
         if(lv<=0)
         {
             this.node_lv.active= false;
+            this.lab_level.string = "";
             //灰化处理
             this._doGrayNode();
         }
-        else if(lv<=0)
+        else 
         {
-            this.node_lv.active= false;
+            this.node_lv.active= true; 
+            this.lab_level.string =  (lv==1) ? "": lv.toString();
+            //还原灰化处理
+            this._doUnGrayNode();
         }
-        else if(lv>1)
-        {            
-            this.node_lv.active= true;
-        }
-        this._skillLv= lv;
-        this.lab_level.string = lv.toString();
     }
 
+    //todo
     private _doGrayNode()
     {
         this._isGrayStatus= false;
-        //todo
         //Material
         //内建材质
         //let material:Material = Material.getBuiltinMaterial('2d-gray-sprite')
        // this.head.setMaterial(0, material);
-       let sprite = this.img_icon.getComponent(Sprite) as Sprite;
-    //    sprite.setMaterial(Material.get);
+       //let sprite = this.img_icon.getComponent(Sprite) as Sprite;
+        //   sprite.setMaterial(Material.get);
     }
-
+    //todo
     private _doUnGrayNode()
     {
         this._isGrayStatus= true;
         //todo
     }
     ////////////////////////////////
-    //传入技能id  技能lv  初始化对象
-    public setSkillData(_skillId : number, _skillLv: number)
+    //传入技能id  初始化对象
+    public setSkillData(_skillId : number)
     {
+        if(_skillId==0)
+        {
+            _skillId=512011;// todo debug 圣盾护体
+        }
+        this._recordSkill = ValueMgr.getInstance().getItemByField(TableName.skill, _skillId) as Config.skill.Record;
+        this._skillLv = this._recordSkill.level;
         this._skillId = _skillId;
-        this._skillLv = _skillLv;
 
         // this._callBack = _callBack;
         this.init();
+        this.setBtnCallBack();
     }
-
 
     public setBtnCallBack(_callBack:Function|null = null)
     {
         if(_callBack)
         {
             this.btn_bg.addComponent(Button);
-            this.btn_bg.on(Node.EventType.TOUCH_END, ()=>{            
-                _callBack(this._skillId, this._skillLv)                
-            }, this);
+            this.btn_bg.node.on(Node.EventType.TOUCH_END, ()=>{            
+                _callBack(this._skillId)                
+            }, this, false);
+        }
+        else
+        {
+            // todo 默认点击显示技能Tip
+            let skillId= this._skillId;
+            this.btn_bg.addComponent(Button);
+            this.btn_bg.node.on(Node.EventType.TOUCH_END, (event:any/*EventTouch*/)=>{            
+                PopMgr.getInstance().tipSkillWindow(new Vec3(event._point.x, event._point.y,0), skillId)       
+            }, this, false);
         }
     }
 }
