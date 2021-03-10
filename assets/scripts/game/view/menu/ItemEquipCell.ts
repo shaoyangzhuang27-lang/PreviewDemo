@@ -15,8 +15,8 @@ export class ItemEquipCell extends Component {
     @property({type :  Node})
     public starlist:Node[] = [];
 
-    @property({type :  Label})
-    public lab_count:Label = null as unknown as Label;
+    @property({type :  Node})
+    public lab_count:Node = null as unknown as Node;
 
     @property({type :  Label})
     public lab_info:Label = null as unknown as Label;
@@ -45,7 +45,12 @@ export class ItemEquipCell extends Component {
     private _initIcon()
     {
         //数量
-        this.lab_count.string = this._itemCount.toString();
+        let labCount:Label = this.lab_count.getComponent(Label) as Label;
+        labCount.string = this._itemCount.toString();
+        if(this._itemCount == 0)        //不需要显示数量时  数量设置为0
+        {
+            this.lab_count.active = false;
+        }
         let iconPath:string = "";
         let qualityPath:string = "";
         this.img_infoBg.active = false;

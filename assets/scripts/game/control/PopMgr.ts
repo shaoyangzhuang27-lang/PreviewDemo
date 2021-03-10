@@ -84,7 +84,21 @@ export class PopMgr extends PopCore  {
         } );
     }
 
+    //弹出说明界面
+    public popExplain(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_explain', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
 
+            let script = p.getComponent("PopSimple") as PopSimple;
+            script.setTitle(title);
+            script.setContent(content);
+            script.setSubmitCallBack(submitCallBack);
+            script.setCloseCallBack(closeCallBack);
+            script.setIsMaskClose(isMaskClose);
+        } );
+    }
 
 
 
