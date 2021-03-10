@@ -9,6 +9,7 @@ import { PopMgr } from '../../control/PopMgr';
 import { MsgMgr } from '../../control/MsgMgr';
 import { XConsts } from "../../model/const/XConsts";
 import { XFuns } from '../../model/const/XFuns';
+import { PubRecLineUpItem } from './PubRecLineUpItem';
 
 
 @ccclass('PopRecLineUp')
@@ -111,10 +112,12 @@ export class PopRecLineUp extends PopBase {
             this.scroll_lineup_view.content.removeAllChildren()
         }
         resources.load('prefabs_ui/main/pub_reclineup_item', (err:any,res:any)=>{
-
-            for (var i = 0 ; i < GameModel.getInstance().getHeroPubModel().nLineUpCounts ; i++) {
+            for (var i = 0 ; i < GameModel.getInstance().getHeroPubModel().nLineUpCounts; i++) {
                 let reclineup_item = instantiate( res );
+                let script = reclineup_item.getComponent(PubRecLineUpItem);
                 // console.log("size",reclineup_item.getComponent(UITransform).contentSize);
+                script.setViewDetaiLabelContent(GameModel.getInstance().getHeroPubModel().getRecLineUpItemInfoByIndex(i));
+                // script.setShowViewDetailState(false);
                 this.scroll_lineup_view.content?.addChild(reclineup_item);
             }
             // console.log("dddddddddddd",this.scroll_lineup_view.content);

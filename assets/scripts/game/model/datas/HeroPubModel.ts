@@ -193,5 +193,23 @@ export class HeroPubModel extends BaseModel{
         return this._nLineUpCounts;
     }
 
+    public getRecLineUpItemInfoByIndex(index : number) : XStruct.lineup_item_info.Record
+    {
+        if(this._stuLineUpInfos[index])
+        {
+            return  this._stuLineUpInfos[index];
+        }
+        else
+        {
+            return  {
+                title : "",
+                roleArmor : 0,
+                coreHeroName : "",
+                heorIdList : [],
+                analysisDetail : "",
+            };
+        }
+        
+    }
     
 }

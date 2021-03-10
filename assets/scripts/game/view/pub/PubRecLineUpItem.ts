@@ -1,4 +1,4 @@
-import { _decorator, Component, Node,resources,instantiate,Vec3,Button,Label } from 'cc';
+import { _decorator, Component, Node,resources,instantiate,Vec3,Button,Label, UITransform, size, Size } from 'cc';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 const { ccclass, property } = _decorator;
@@ -64,16 +64,15 @@ export class PubRecLineUpItem extends Component {
     }
     private _onViewDetailClick(event : any)
     {
-        // this.btn_view_detail.active = false;
-        // this.btn_retract.active = true;
+       this.setShowViewDetailState(true);
+        this.setAllDesLabelAndBtnState(false);
         this.setAllDesLabelAndBtnState(true);
         console.log("查看详情");
         //PopMgr.getInstance().popRecLineUpWindow("推荐阵容",()=>{console.log("")});
     }
     private _onRetractClick(event : any)
     {
-        // this.btn_view_detail.active = true;
-        // this.btn_retract.active = false;
+        this.setShowViewDetailState(false);
         this.setAllDesLabelAndBtnState(false);
         console.log("收起");
         //PopMgr.getInstance().popRecLineUpWindow("推荐阵容",()=>{console.log("")});
@@ -105,20 +104,11 @@ export class PubRecLineUpItem extends Component {
            
         });
     }
-
-    public setDescText(name : string,coreHero : string, armor : number,analysis : string)
-    {
-        this.lab_team_name.string = name;
-        this.lab_core_hero.string = coreHero;
-        this.lab_knight_armor.string = String(armor);
-        this.lab_lineup_analysis.string = analysis;
-    } 
-
     public setAllDesLabelAndBtnState(state : boolean)
     {
         this.btn_view_detail.active = !state;
         this.btn_retract.active = state;
-        this.lab_team_name.node.active = state;
+        // this.lab_team_name.node.active = state;
         this.lab_core_hero.node.active = state;
         this.lab_knight_armor.node.active = state;
         this.lab_lineup_analysis.node.active = state;
@@ -153,10 +143,38 @@ export class PubRecLineUpItem extends Component {
             this.initHeroIconPrefab(i);
         }
         this.setAllDesLabelAndBtnState(false);
+        this.setShowViewDetailState(false);
     }
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
+
+    public setShowViewDetailState(bShow:boolean)
+    {
+        var nodeTransForm = this.node.getComponent(UITransform); //.contentSize = 
+        let node = this.node?.getChildByName("node");
+        //.getComponent(UITransform);
+        
+        if(nodeTransForm)
+        {
+            nodeTransForm.contentSize = bShow? new Size(600,410) : new Size(600,190);
+        }
+        if(node)
+        {
+            let bgDescTransForm = node?.getChildByName("bg_dec")?.getComponent(UITransform);;
+            if(bgDescTransForm)
+            {
+                bgDescTransForm.contentSize = bShow? new Size(600,260) : new Size(600,40) ;
+            }
+        }
+        
+    }
+
+    public setViewDetaiLabelContent(data : XStruct.lineup_item_info.Record)
+    {
+        // let data = instantiate(info);
+        this.lab_team_name.string = data.title;
+        this.lab_core_hero.string  = data.coreHeroName;
+        this.lab_knight_armor.string = String(data.roleArmor) ;
+        this.lab_lineup_analysis.string = data.analysisDetail ;
+    }
 }
 
 
