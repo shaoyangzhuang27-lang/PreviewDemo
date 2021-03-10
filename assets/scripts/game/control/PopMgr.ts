@@ -108,7 +108,7 @@ export class PopMgr extends PopCore  {
             this.pushWindow(p)
 
             let script = p.getComponent("PopHeroPub") as PopHeroPub;
-            script.setTitle(title)
+            // script.setTitle(title)
             // script.setContent(content)
             script.setSubmitCallBack(submitCallBack)
             script.setCloseCallBack(closeCallBack);

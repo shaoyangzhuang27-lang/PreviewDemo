@@ -201,10 +201,10 @@ export class PopHeroPub extends PopBase {
             this.submitCallFun();
         }
     }
-    public setTitle(title:string){
-        if(this.lab_title)
-            this.lab_title.string = title
-    }
+    // public setTitle(title:string){
+    //     if(this.lab_title)
+    //         this.lab_title.string = title
+    // }
     // public setContent(content:string){
     //     console.log(content)
     //     if(this.lab_content)
