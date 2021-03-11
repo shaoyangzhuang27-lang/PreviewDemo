@@ -14,7 +14,7 @@ export class PopSummonSettle extends PopBase {
     // public lab_content:LabelComponent | null = null;
 
     @property({type: Node})
-    public btn_add:Node | null = null;
+    public btn_summon:Node | null = null;
 
     // private _submitCallFun:Function | null = null;
 
@@ -23,11 +23,11 @@ export class PopSummonSettle extends PopBase {
 
     start () {
         super.start();
-        this.btn_add?.on(Node.EventType.TOUCH_END, this._onAddClick, this);
+        this.btn_summon?.on(Node.EventType.TOUCH_END, this._onSummonClick, this);
         this.initUI();
     }
 
-    public _onAddClick(event : any)
+    public _onSummonClick(event : any)
     {
         resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
                 let reclineup_item = instantiate( res );

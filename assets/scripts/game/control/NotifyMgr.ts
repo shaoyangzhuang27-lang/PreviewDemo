@@ -12,4 +12,7 @@ export class NotifyMgr extends NotifyCore {
     // public static event_net_version_check:string = "event_net_version_check";
     // public static event_net_version_check:string = "event_net_version_check";
     // public static event_net_version_check:string = "event_net_version_check";
+
+
+    public static event_net_pub_summon_hero : string = "event_net_pub_summon_hero";     //酒馆召唤
 }

@@ -3,6 +3,7 @@ import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
 import { PopMgr } from '../../control/PopMgr';
 import { XConsts } from '../../model/const/XConsts';
+import { NotifyMgr } from '../../control/NotifyMgr';
 // import { TableName, ValueMgr } from "../../model/ValueMgr";
 const { ccclass, property } = _decorator;
 
@@ -93,6 +94,8 @@ export class PopHeroPub extends PopBase {
         // var str0 = "再召唤{0}次必得五星传奇英雄";
         // var newStr = str0.replace("{0}","10");
         // console.log("pppppppppppppppp",newStr);
+
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
     }
 
 
@@ -181,6 +184,7 @@ export class PopHeroPub extends PopBase {
                         this.showPromptWindow("错误","爱心不足",1);
                     }
                     else{
+                        // MsgMgr.getInstance().getMsgLogin().requestDeviceLoginNew();
                         //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
                         this.showSummonSettleWindow("SummonWindow");
                     }
@@ -464,6 +468,17 @@ export class PopHeroPub extends PopBase {
     {
         PopMgr.getInstance().popSummonSettleWindow(title,()=>{console.log("SummonSettleWindow!!")});
     } 
+
+
+    public notifyPubSummonHeroHandle (data:any){
+        console.log("Notify PubHeroSummon",data);
+        // MsgMgr.getInstance().getMsgLogin().requestGetHeroList();
+        // MsgMgr.getInstance().getMsgLogin().requestGetPlayerData();
+        // SceneMgr.getInstance().changeToBattle();
+    }
+    onDestroy(){
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+    }
 }
 
 /**
