@@ -89,7 +89,7 @@ export class TestHeroData extends HeroData{
 
     // 模型预制体路径
     public getPrefabPath(): string {
-        return this.getTestCfgValue("prefab");
+        return this.getTestCfgValueString("prefab");
     }
 
     // 获得主动技能ID
@@ -106,6 +106,13 @@ export class TestHeroData extends HeroData{
             return this._testCfg[key];
         }
         return 0;
+    }
+
+    public getTestCfgValueString(key: string) {
+        if (this._testCfg.hasOwnProperty(key)) {
+            return this._testCfg[key];
+        }
+        return "0";
     }
 }
 

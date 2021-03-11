@@ -24,26 +24,27 @@ export class BattleCtrl extends Component {
     private _groundPrefab: Prefab = null as unknown as Prefab;
 
     public static EmbattleCfg = [[-3, 0], [0, 0], [3, 0] 
-                                    ,[-3, 3], [0, 3], [3, 3]]
+                                    ,[-3, 3], [0, 3], [3, 3]];
 
-    private _actTime: number = 0
-    private _curActFunc: any = null
+    private _actTime: number = 0;
+    private _curActFunc: any = null;
 
-    private _battleGrounds: Array<Node> = []
-    private _nextGroundIdx: number = 0
+    private _battleGrounds: Array<Node> = [];
+    private _nextGroundIdx: number = 0;
 
-    private _army: Array<BattleHero> = []
-    private _enemy: Array<BattleHero> = []
+    private _army: Array<BattleHero> = [];
+    private _enemy: Array<BattleHero> = [];
 
-    private _aliveArmy: Array<BattleHero> = []
-    private _aliveEnemy: Array<BattleHero> = []
+    private _aliveArmy: Array<BattleHero> = [];
+    private _aliveEnemy: Array<BattleHero> = [];
 
     private _leaderNode: Node = null as unknown as Node;
 
 
-    public canvas: any = null
-    public camera: any = null
-    public cameraNode: any = null
+    public canvas: any = null;
+    public camera: any = null;
+    public cameraNode: any = null;
+
 
 
     onLoad() {
@@ -295,7 +296,7 @@ export class BattleCtrl extends Component {
                 }
             }
 
-            if (this._enemy.length == 0) {
+            if (this._aliveEnemy.length == 0) {
                 this.wait();
             }
         } else {
