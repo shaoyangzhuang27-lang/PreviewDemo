@@ -42,9 +42,9 @@ export class TipHeroAttribute extends TipBase {
     setHeroId(heroid:number= 0)
     {
         //todo  debug value
-        let listNames: string[]= ["血量", "攻击", "防御", "速度", "暴击"];//, "暴击伤害", "命中", "闪避", "破甲", "破甲2", "破甲3"];
-        let listValues: number[]=[123,123,123, 2,  0.01];//, 0.02, 0.03, 0.04, 0.05, 0.08, 0.2];
-        let listTypes: number[]= [0, 0, 0, 1, 2];//, 2, 2, 2, 2, 0, 1];
+        let listNames: string[]= ["血量", "攻击", "防御"];//, "速度", "暴击", "暴击伤害", "命中", "闪避", "破甲", "破甲2", "破甲3"];
+        let listValues: number[]=[123,123,123];//, 2,  0.01, 0.02, 0.03, 0.04, 0.05, 0.08, 0.2];
+        let listTypes: number[]= [0, 0, 0];//, 1, 2, 2, 2, 2, 2, 0, 1];
         // //骑士
         // if(heroid==0)
         // {            
@@ -102,7 +102,7 @@ export class TipHeroAttribute extends TipBase {
                 items= target.layout.node.getComponentsInChildren(TipHeroAttributeItem) as [TipHeroAttributeItem];
                 
                 let nodeSize = items[0].node.getComponent(UITransform)?.contentSize as math.Size;
-                hight =nodeSize.height * nSub;
+                hight = (nodeSize.height+ target.layout.spacingY) * nSub;
                 pos.y +=  hight/2;
                 target.layout.node.setPosition(pos);
 
@@ -128,8 +128,8 @@ export class TipHeroAttribute extends TipBase {
             }
 
             let nodeSize = items[0].node.getComponent(UITransform)?.contentSize as math.Size;
-            let hight =nodeSize.height * nSub1;
-            pos.y -=  hight/2;
+            let hight = (nodeSize.height+this.layout.spacingY) * nSub1;
+            pos.y -=  hight/2 ;
             this.layout.node.setPosition(pos);
         }
       
