@@ -12,6 +12,7 @@ export class MsgFormation extends MsgBase{
         this.responeMap = new Map<number,[any,NetCallFunc,any]>([
             [Msg.MsgType.TheChangeFormationA,[Msg.ChangeFormationA,this.responeChangeBattleTeam,this]],
             [Msg.MsgType.TheHeroTierUpA,[Msg.HeroTierUpA,this.responeHeroLvUp,this]],
+            [Msg.MsgType.TheSyncHeroLocked,[Msg.SyncHeroLocked,this.responeHeroLocked,this]],
         ]);
     }
 
@@ -44,12 +45,28 @@ export class MsgFormation extends MsgBase{
     }
     public responeHeroLvUp(msgId: number, msgData: any){
         console.log("英雄升级数据返回",msgId);
-        let newMsgData = msgData as Msg.HeroTierUpR
+        let newMsgData = msgData as Msg.HeroTierUpR;
         if(newMsgData)
         {
-            GameModel.getInstance().getFormationModel().setCurFormationChange(newMsgData)      
+            //GameModel.getInstance().getFormationModel().setCurFormationChange(newMsgData)      
         }
         
+    }
+
+
+    public requestHeroLocked(heroID:number, isLocked:boolean){
+        console.log("英雄锁定-----请求");
+        const buffer_data = Msg.SyncHeroLocked.encode({heroID: heroID, isLocked: isLocked}).finish();
+        this.msgMgr?.sendData(Msg.MsgType.TheSyncHeroLocked, buffer_data);
+    }
+
+    public responeHeroLocked(msgId: number, msgData: any){
+        console.log("英雄锁定-----响应",msgId);
+        let newMsgData = msgData as Msg.SyncHeroLocked;
+        if(newMsgData)
+        {
+            //GameModel.getInstance().getHeroesModel
+        }
     }
     //英雄升级,升阶,装备(一键装备,全部卸下)--------------------start
 }
