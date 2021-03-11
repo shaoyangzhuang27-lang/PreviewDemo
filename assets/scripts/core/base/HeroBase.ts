@@ -51,30 +51,30 @@ export class HeroBase extends Component {
         (this.node.getComponent(BoxCollider) as BoxCollider).enabled = false;
         (this.node.getComponent(RigidBody) as RigidBody).enabled = false;
 
-        // if (!this.heroBasePot) {
-        //     this.heroBasePot = this.node;
-        //     console.warn("英雄未配置原点");
-        // }
+        if (!this.heroBasePot) {
+            this.heroBasePot = this.node;
+            console.warn(this.node.name + "英雄未配置原点");
+        }
 
-        // if (!this.heroMainWeaponPot) {
-        //     this.heroMainWeaponPot = this.node;
-        //     console.warn("英雄未配置主武器");
-        // }
+        if (!this.heroMainWeaponPot) {
+            this.heroMainWeaponPot = this.node;
+            console.warn(this.node.name + "英雄未配置主武器");
+        }
 
-        // if (!this.heroChestPot) {
-        //     this.heroChestPot = this.node;
-        //     console.warn("英雄未配置胸骨");
-        // }
+        if (!this.heroChestPot) {
+            this.heroChestPot = this.node;
+            console.warn(this.node.name + "英雄未配置胸骨");
+        }
 
-        // if (!this.heroSubWeaponPot) {
-        //     this.heroSubWeaponPot = this.node;
-        //     console.warn("英雄未配置副武器");
-        // }
+        if (!this.heroSubWeaponPot) {
+            this.heroSubWeaponPot = this.node;
+            console.warn(this.node.name + "英雄未配置副武器");
+        }
 
-        // if (!this.heroCenterPot) {
-        //     this.heroCenterPot = this.node;
-        //     console.warn("英雄未配置中心点");
-        // }
+        if (!this.heroCenterPot) {
+            this.heroCenterPot = this.node;
+            console.warn(this.node.name + "英雄未配置中心点");
+        }
 
         // this.playIdle();
         // this.stopAnim();

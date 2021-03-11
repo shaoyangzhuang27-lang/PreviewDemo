@@ -12,19 +12,14 @@ export class BattleMgr {
         return this._instance;
     }
 
-    public preloadRes() {
-
-    }
-
-    public buildBattleIdleData() {
+    public buildPreloadRes() {
+        this.loadResList = [];
         let armyFormation: Map<number, HeroData> = BattleTest.getArmyFormation();
-
-        armyFormation.forEach(function(v, k) {
-            let o: any = {}
-            o.embattleedSite = k;
-            o.heroData = v;
+        armyFormation.forEach((v: HeroData, k: Number) => {
+            if(v.getPrefabPath() != "0") {
+                this.loadResList.push(v.getPrefabPath());
+            }
         }) 
-
     }
 
     public getIdleArmyInfo() {

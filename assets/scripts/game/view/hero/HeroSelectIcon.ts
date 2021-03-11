@@ -15,6 +15,9 @@ export class HeroSelectIcon extends Component {
     @property({type :  Node})
     public icoLock:Node = null as unknown as Node;
 
+    @property({type :  Node})
+    public icoStarUp:Node = null as unknown as Node;
+
 
     private _choiceCallBack:Function | null = null as unknown as Function;
     private _heroInfo:HeroData | null = null as unknown as HeroData;
@@ -64,7 +67,7 @@ export class HeroSelectIcon extends Component {
         return this._heroInfo;
     }
     /**
-     * @param type 0:未选中 1:选中 2:锁定
+     * @param type 0:未选中 1:选中 2:锁定 3:升星选中
      */
     public setItemType(type:number=0)
     {
@@ -72,12 +75,15 @@ export class HeroSelectIcon extends Component {
 
         this.icoChoose.active = false;
         this.icoLock.active = false;
+        this.icoStarUp.active = false;
 
         if(type == 0){
         }else if(type == 1){
             this.icoChoose.active = true;
         }else if(type == 2){
             this.icoLock.active = true;
+        }else if(type == 3){
+            this.icoStarUp.active = true;
         }
     }
     public selectSelf(){

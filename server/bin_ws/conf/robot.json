@@ -1,0 +1,6 @@
+{
+	"LogLevel": "debug",
+	"LogPath": "./log_robot/",
+	"MaxConnNum": 20000,
+	"TCPBattleAddr": ""
+}

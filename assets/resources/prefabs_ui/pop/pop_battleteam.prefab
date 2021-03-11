@@ -4329,7 +4329,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_camp",
+    "_name": "btn_restraint",
     "_objFlags": 0,
     "_parent": {
       "__id__": 12
@@ -12273,6 +12273,9 @@
     },
     "topHeroPages": {
       "__id__": 496
+    },
+    "btn_restraint": {
+      "__id__": 190
     },
     "campGroup": {
       "__id__": 187

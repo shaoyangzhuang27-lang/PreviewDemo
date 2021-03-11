@@ -1,0 +1,15 @@
+mysql日期默认值格式（'0000-00-00'）错误解决
+在执行下面 SQL 语句时发现报错
+`date` date NOT NULL DEFAULT '0000-00-00' COMMENT '注册日期'
+报的错误是时间的默认值有错误，查阅后发现 MySQL 5.7 版本开始有了一个 STRICT MODE（严格模式），此模式中对默认值做了一些限制。
+解决方法就是修改 sql_mode
+-- 查看当前
+select @@sql_mode;
+
+-- 去掉 NO_ZERO_IN_DATE 和 NO_ZERO_DATE
+set @@sql_mode=(select replace(@@sql_mode,'NO_ZERO_IN_DATE,NO_ZERO_DATE','')); 
+
+-- 查看全局
+select @@global.sql_mode;
+
+set @@global.sql_mode=(select replace(@@global.sql_mode,'NO_ZERO_IN_DATE,NO_ZERO_DATE',''));
