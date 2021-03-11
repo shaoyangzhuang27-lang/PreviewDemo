@@ -19,10 +19,4 @@ export class XFuns{
         else
             return num.toString();
     }
-
-    public getStaticIDFromBookId(bookid:number)
-    {
-        let numString = bookid.toString();
-        let starNum = Number(numString.slice(1,2)); 
-    }
 }
