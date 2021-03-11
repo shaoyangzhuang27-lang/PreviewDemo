@@ -4,7 +4,9 @@ import { PopCommonOne } from "../view/pop/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
 import { TipDemo } from '../view/TipDemo';
+import { TipHeroAttribute } from '../view/TipHeroAttribute';
 import { XConsts } from '../model/const/XConsts';
+import { TipSkill } from '../view/TipSkill';
 import { PopHeroPub } from "../view/pop/PopHeroPub";
 import { PopRecLineUp } from "../view/pub/PopRecLineUp";
 import { PopSummonSettle } from "../view/pop/PopSummonSettle";
@@ -51,6 +53,7 @@ export class PopMgr extends PopCore  {
             script.setSubmitCallBack(submitCallBack);
             script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
+            
             // script.popSelf();
             // script.setIsNeedHide(false);
 
@@ -66,15 +69,40 @@ export class PopMgr extends PopCore  {
             this.pushWindow(p)
 
             let script = p.getComponent("PopBattleTeam");
-            // script.setSubmitCallBack(submitCallBack)
-            // script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
-            script.setInitTeamView(type)
+            // script.setInitTeamView(type)
         } );
             }
 
 
+    //弹出英雄升级,升阶,装备界面
+    public popHeroPromotionView(heroId:number,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_heropromotion', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
 
+            let script = p.getComponent("HeroPromotion");
+            script.setIsMaskClose(isMaskClose);
+            script.setCurrentHeroId(heroId);
+        } );
+    }
+
+    //弹出说明界面
+    public popExplain(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_explain', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            let script = p.getComponent("PopSimple") as PopSimple;
+            script.setTitle(title);
+            script.setContent(content);
+            script.setSubmitCallBack(submitCallBack);
+            script.setCloseCallBack(closeCallBack);
+            script.setIsMaskClose(isMaskClose);
+        } );
+    }
 
 
 
@@ -94,14 +122,54 @@ export class PopMgr extends PopCore  {
             script.setWinPos(pos);
         });
             }
+    //英雄属性值弹窗tip
+    public tipHeroAttributeWindow(pos:Vec3, heroId:number = 0){
 
+        resources.load('prefabs_ui/pop/tip_hero_attribute', (err:any,res:any)=>{
+            let p = instantiate( res ) as Node;
+            this.parent?.addChild(p);
+            p.setSiblingIndex(XConsts.OrderTip);
 
+            let script = p.getComponent("TipHeroAttribute") as TipHeroAttribute;
+            script.setWinPos(pos,1);
+            script.setHeroId(heroId);
+            script.setIsWinClose(true);
+        });
+    }
 
+    //英雄技能弹窗tip
+    public tipSkillWindow(pos:Vec3, skillId:number){
 
+        resources.load('prefabs_ui/pop/tip_skill', (err:any,res:any)=>{
+            let p = instantiate( res ) as Node;
+            this.parent?.addChild(p);
+            p.setSiblingIndex(XConsts.OrderTip);
+
+            let script = p.getComponent("TipSkill") as TipSkill;
+            script.setWinPos(pos, 1);
+            if(skillId ==0)
+            {
+                skillId= 535002;//破甲弹2级
+            }
+            script.setSkillData(skillId);
+            script.setIsWinClose(true);
+        });
+    }
 
 
     //弹出提示窗放这里-------------------------------------------------
 
+    //弹出图鉴界面
+    public popBoolLibraryView()
+    {
+        resources.load('prefabs_ui/pop/pop_bookview', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopHeroBookView");
+            script.setIsMaskClose(false);
+        } );
+    }
     public popHeroPubWindow(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop_hero_pub', (err:any,res:any)=>{

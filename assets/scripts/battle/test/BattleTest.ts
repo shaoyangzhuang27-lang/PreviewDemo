@@ -6,6 +6,11 @@ import { HeroData } from "../../game/model/datas/HeroData";
 import { TestHeroData } from "./TestHeroData";
 
 
+let HeroModelPrefabPath: {[key: string]: string} = {
+    "主角_1": "leader_00"
+}
+
+
 let SkillPrefabPath: {[key: number]: string} = {
     1001 : "skill_0001"
 }
@@ -171,6 +176,10 @@ let EnemyTestInfo = [
     },
 ]
 
+for (let k in HeroModelPrefabPath) {
+    HeroModelPrefabPath[k] = "prefabs/hero/" + HeroModelPrefabPath[k];
+}
+
 for (let k in SkillPrefabPath) {
     SkillPrefabPath[k] = "prefabs/battle/skill/" + SkillPrefabPath[k];
 }
@@ -301,6 +310,15 @@ export class BattleTest {
 
     public static getSkillPrefabPath(skillID: number) {
         return SkillPrefabPath[skillID];
+    }
+
+    public static getHeroModelPrefabPath(path: string): string {
+        let s = HeroModelPrefabPath[path];
+        if (s) {
+            return s;
+        }
+        
+        return HeroModelPrefabPath["主角_1"];
     }
 
     public static buildTestBattle() {

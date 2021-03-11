@@ -6506,7 +6506,9 @@
         "__uuid__": "53aaa315-117c-4e25-8b83-06df2c0d8055@f39c0"
       }
     ],
-    "_defaultClip": null,
+    "_defaultClip": {
+      "__uuid__": "f1a2a321-548e-442a-9783-2dcb8e72b9f3@1f586"
+    },
     "_useBakedAnimation": true,
     "_sockets": [
       {

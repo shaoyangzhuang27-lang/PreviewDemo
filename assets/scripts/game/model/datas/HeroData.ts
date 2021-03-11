@@ -771,10 +771,10 @@ export class HeroData extends BaseHeroData {
 
 
     public static GetHeroBookID(staticID:number) {
-        return staticID / 1000000 * 1000000 + staticID % 10000;
+        return Math.floor(staticID / 1000000) * 1000000 + staticID % 10000;
     }
     public static GetHeroStar(staticID:number) {
-        return (staticID / 10000) % 100;
+        return Math.floor(staticID / 10000) % 100;
     }
 
     private getHeroBookPropertyByHero(proType:Msg.THeroPropertyType) {

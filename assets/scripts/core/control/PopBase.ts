@@ -35,6 +35,9 @@ export class PopBase extends Component {
         this.window.addComponent(UIOpacity);
         this.mask.addComponent(UIOpacity);
     }
+    onDestroy(){
+        
+    }
     start () {
         // Your initialization goes here.
         this.btn_close?.on(Node.EventType.TOUCH_END, this._onClose, this);
@@ -83,11 +86,17 @@ export class PopBase extends Component {
         }
     }
 
-    private hasPop = false;
+    private _hasPop = false;
     public popSelf(){
-        if(this.hasPop)return;
-        this.hasPop = true;
+        if(this._hasPop)return;
+        this._hasPop = true;
         PopMgr.getInstance().pushWindow(this.node);
+    }
+    private _hasDel = false
+    public delSelf(){
+        if(this._hasDel)return;
+        this._hasDel = true;
+        PopMgr.getInstance().deleteWindow();
     }
 
 

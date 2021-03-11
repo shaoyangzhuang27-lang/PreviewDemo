@@ -11,6 +11,7 @@ export class MsgFormation extends MsgBase{
     public initData(){
         this.responeMap = new Map<number,[any,NetCallFunc,any]>([
             [Msg.MsgType.TheChangeFormationA,[Msg.ChangeFormationA,this.responeChangeBattleTeam,this]],
+            [Msg.MsgType.TheHeroTierUpA,[Msg.HeroTierUpA,this.responeHeroLvUp,this]],
         ]);
     }
 
@@ -33,4 +34,22 @@ export class MsgFormation extends MsgBase{
         
     }
     //更换阵容
+
+    //英雄升级,升阶,装备(一键装备,全部卸下)--------------------start
+    public requestHeroLvUp(heroID:number, consumeAdvanceExp:number,consumeMoney:number,newTier:number)
+    {
+        console.log("英雄升级请求");
+        const buffer_data = Msg.HeroTierUpR.encode({heroID:heroID}).finish();
+        this.msgMgr?.sendData(Msg.MsgType.TheHeroTierUpR,buffer_data);
+    }
+    public responeHeroLvUp(msgId: number, msgData: any){
+        console.log("英雄升级数据返回",msgId);
+        let newMsgData = msgData as Msg.HeroTierUpR
+        if(newMsgData)
+        {
+            GameModel.getInstance().getFormationModel().setCurFormationChange(newMsgData)      
+        }
+        
+    }
+    //英雄升级,升阶,装备(一键装备,全部卸下)--------------------start
 }
