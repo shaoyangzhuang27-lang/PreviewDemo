@@ -143,7 +143,7 @@ export class PopMgr extends PopCore  {
         resources.load('prefabs_ui/pop/pop_reclineup', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
-            let script = p.getComponent(PopRecLineUp);
+            let script = p.getComponent("PopRecLineUp");
             script.setTitle(title);
             script.setIsMaskClose(isMaskClose);
 
@@ -155,7 +155,7 @@ export class PopMgr extends PopCore  {
         resources.load('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
-            let script = p.getComponent(PopSummonSettle);
+            let script = p.getComponent("PopSummonSettle");
             // script.setTitle(title);
             script.setIsMaskClose(isMaskClose);
 

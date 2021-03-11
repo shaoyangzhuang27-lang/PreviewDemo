@@ -36,7 +36,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 101
+      "__id__": 100
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2146,9 +2146,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "__prefab": {
-      "__id__": 100
-    },
+    "__prefab": null,
     "btn_close": {
       "__id__": 29
     },
@@ -2166,10 +2164,6 @@
       "__id__": 63
     },
     "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "afqrz3gZ1Jz4pK2i/3LRa1"
   },
   {
     "__type__": "cc.PrefabInfo",
