@@ -1,7 +1,8 @@
-import { _decorator, Component, Node,Label } from 'cc';
+import { _decorator, Component, Node,Label,ScrollView,resources,instantiate, Vec3, Size,Widget,UITransform } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { HeroIcon } from '../hero/HeroIcon';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopSummonSettle')
@@ -12,43 +13,49 @@ export class PopSummonSettle extends PopBase {
     // @property({type: LabelComponent})
     // public lab_content:LabelComponent | null = null;
 
-    // @property({type: Node})
-    // public btn_submit:Node | null = null;
+    @property({type: Node})
+    public btn_add:Node | null = null;
 
     // private _submitCallFun:Function | null = null;
 
+    @property({type :  ScrollView})
+    public scroll_heroicon_view:ScrollView = null as unknown as ScrollView;
+
     start () {
         super.start();
-        // this.btn_submit?.on(Node.EventType.TOUCH_END, this._onSubmit, this);
+        this.btn_add?.on(Node.EventType.TOUCH_END, this._onAddClick, this);
+        this.initUI();
     }
 
-    public iniUI()
+    public _onAddClick(event : any)
     {
-        var settleTitle = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.SUMMON_SETTLE_TITLE) as Config.language_ui.Record;
-        this.lab_title.string = settleTitle.cn;
+        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+                let reclineup_item = instantiate( res );
+                let script = reclineup_item.getComponent(HeroIcon);
+                reclineup_item.scale = new Vec3(0.75,0.75,1);
+                let subWidget = reclineup_item.getComponent(UITransform) as UITransform;
+                subWidget.contentSize = new Size(113,113);
+                this.scroll_heroicon_view.content?.addChild(reclineup_item);
+        });
     }
-    // private _onSubmit(){
-    //     if(this._submitCallFun){
-    //         this._submitCallFun();
-    //     }
-    // }
-    // public setTitle(title:string){
-    //     if(this.lab_title)
-    //         this.lab_title.string = title
-    // }
-    // public setContent(content:string){
-    //     console.log(content)
-    //     if(this.lab_content)
-    //         this.lab_content.string = content
-    // }
-    // public setSubmitCallBack(func:Function){
-    //     this._submitCallFun = func;
-    // }
 
-    // public setCloseCallBack(func:Function | null){
-    //     if(func)
-    //         this._closeFunc = func;
-    // }
+    public initUI()
+    {
+        var settleTitle = ValueMgr.getInstance().getItemByField(TableName.language_data,XConsts.SUMMON_SETTLE_TITLE) as Config.language_data.Record;
+        this.lab_title.string = settleTitle.cn;
 
-   
+        if(this.scroll_heroicon_view.content)
+        {
+            this.scroll_heroicon_view.content.removeAllChildren()
+        }
+        // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+        //     for (var i = 0 ; i < 2; i++) {
+        //         let reclineup_item = instantiate( res );
+        //         let script = reclineup_item.getComponent(HeroIcon);
+        //         reclineup_item.scale = new Vec3(0.5,0.5,1);
+        //         // script.initRecLineUpHeroIconInfo(id); 
+        //         this.scroll_heroicon_view.content?.addChild(reclineup_item);
+        //     }
+        // });
+    }
 }
