@@ -7,6 +7,7 @@ import { TipDemo } from '../view/TipDemo';
 import { XConsts } from '../model/const/XConsts';
 import { PopHeroPub } from "../view/pop/PopHeroPub";
 import { PopRecLineUp } from "../view/pub/PopRecLineUp";
+import { PopSummonSettle } from "../view/pop/PopSummonSettle";
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -142,13 +143,22 @@ export class PopMgr extends PopCore  {
         resources.load('prefabs_ui/pop/pop_reclineup', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
-
-            let script = p.getComponent("PopRecLineUp");
+            let script = p.getComponent(PopRecLineUp);
             script.setTitle(title);
-            // script.setSubmitCallBack(submitCallBack)
-            // script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
-            // script.setInitTeamView(type)
+
         } );
-            }
+    }
+
+    public popSummonSettleWindow(title:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+            let script = p.getComponent(PopSummonSettle);
+            // script.setTitle(title);
+            script.setIsMaskClose(isMaskClose);
+
+        } );
+    }
 }

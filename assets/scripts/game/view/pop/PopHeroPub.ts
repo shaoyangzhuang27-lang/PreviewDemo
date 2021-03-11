@@ -180,7 +180,30 @@ export class PopHeroPub extends PopBase {
                     {
                         this.showPromptWindow("错误","爱心不足",1);
                     }
-
+                    else{
+                        //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
+                        this.showSummonSettleWindow("SummonWindow");
+                    }
+                }
+                else
+                {
+                    if(this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_ONE_COSUME)
+                    {
+                        //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
+                        this.showSummonSettleWindow("SummonWindow");
+                    }
+                    else 
+                    {
+                        if(GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts() >= XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME)
+                        {
+                            //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
+                            this.showSummonSettleWindow("SummonWindow");
+                        }
+                        else
+                        {
+                            this.showPromptWindow("错误","钻石不足",1);
+                        }
+                    }
                 }
                 break; 
             case this.btn_summon_ten:
@@ -190,6 +213,31 @@ export class PopHeroPub extends PopBase {
                     if(this._nFriendHeartNum < XConsts.PUB_SUMMON_FRIEND_TEN_COSUME)
                     {
                         this.showPromptWindow("错误","爱心不足",1);
+                    }
+                    else
+                    {
+                        //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
+                        this.showSummonSettleWindow("SummonWindow");
+                    }
+                }
+                else
+                {
+                    if(this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_TEN_COSUME)
+                    {
+                        //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
+                        this.showSummonSettleWindow("SummonWindow");
+                    }
+                    else 
+                    {
+                        if(GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts() >= XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME)
+                        {
+                            //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
+                            this.showSummonSettleWindow("SummonWindow");
+                        }
+                        else
+                        {
+                            this.showPromptWindow("错误","钻石不足",1);
+                        }
                     }
                 }
                 break;           
@@ -411,6 +459,11 @@ export class PopHeroPub extends PopBase {
             labCompoent.string = str.replace("{0}",String(this._nHeroSummonProgress));
         }
     }
+
+    public showSummonSettleWindow(title : string)
+    {
+        PopMgr.getInstance().popSummonSettleWindow(title,()=>{console.log("SummonSettleWindow!!")});
+    } 
 }
 
 /**
