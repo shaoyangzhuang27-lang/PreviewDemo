@@ -3735,7 +3735,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_up",
+    "_name": "btn_up_lv",
     "_objFlags": 0,
     "_parent": {
       "__id__": 155
@@ -4722,7 +4722,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_upgrade",
+    "_name": "btn_up_tier",
     "_objFlags": 0,
     "_parent": {
       "__id__": 155
@@ -17516,7 +17516,7 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 700,
+      "width": 680,
       "height": 800
     },
     "_anchorPoint": {
@@ -18532,7 +18532,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_brief",
+    "_name": "btn_story",
     "_objFlags": 0,
     "_parent": {
       "__id__": 12
@@ -19266,6 +19266,21 @@
     "skillItem3": null,
     "tabGroup": {
       "__id__": 336
+    },
+    "node_up": {
+      "__id__": 155
+    },
+    "node_equip": {
+      "__id__": 339
+    },
+    "node_grade_gem": {
+      "__id__": 509
+    },
+    "node_upgrade": {
+      "__id__": 653
+    },
+    "node_fight_param": {
+      "__id__": 561
     },
     "_id": ""
   },

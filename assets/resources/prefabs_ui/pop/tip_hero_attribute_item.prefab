@@ -161,7 +161,7 @@
       "b": 10,
       "a": 255
     },
-    "_string": "暴击伤害",
+    "_string": "",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 24,
@@ -291,7 +291,7 @@
       "b": 10,
       "a": 255
     },
-    "_string": "123987%秒",
+    "_string": "",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 24,
