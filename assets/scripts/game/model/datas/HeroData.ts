@@ -679,11 +679,11 @@ export class HeroData extends BaseHeroData {
     public getLevel() {
         return this._heroInfo.level; 
     }
-    //静态ID
+    //静态ID对应英雄表内id
     public getStaticID() {
         return this._heroInfo.staticID; 
     }
-
+    //动态唯一id
     public getDyncID() { 
         return this._heroInfo.id; 
     }

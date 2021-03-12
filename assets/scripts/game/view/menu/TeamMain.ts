@@ -165,10 +165,7 @@ export class TeamMain extends Component {
     //图鉴
     private _openBookLibraryView()
     {
-        // test_xt
-        PopMgr.getInstance().popHeroPromotionView(1,()=>{
-            MsgMgr.getInstance().getMsgFormation().requestHeroLvUp(1,1,1,1);
-        });
+ 
 
     }
 
@@ -187,7 +184,7 @@ export class TeamMain extends Component {
     //英雄升级界面
     private _openHeroUpGradeView(_heroData:HeroData)
     {
-
+        PopMgr.getInstance().popHeroPromotionView(_heroData.getDyncID() );
     }
     
 

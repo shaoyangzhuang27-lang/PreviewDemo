@@ -71,12 +71,12 @@ export class PopMgr extends PopCore  {
     }
 
     
-    //弹出英雄升级,升阶,装备界面
-    public popHeroPromotionView(heroId:number,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    //弹出英雄升级,升阶,装备界面 
+    public popHeroPromotionView(heroId:number=0,submitCallBack:Function = ()=>{},closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_heropromotion', (err:any,res:any)=>{
             let p = instantiate( res );
-            this.pushWindow(p)
+            this.pushWindow(p);
 
             let script = p.getComponent("HeroPromotion");
             script.setIsMaskClose(isMaskClose);
