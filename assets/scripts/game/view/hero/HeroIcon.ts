@@ -46,8 +46,7 @@ export class HeroIcon extends Component {
             return;
         }
 
-        let campName:string = XConsts.KHeroCampIcon[this._heroInfo?.getCamp() as number];
-        let frameName:string = XConsts.GetQualityBgByStar(this._heroInfo?.getStar() as number);
+        let campName:string = XConsts.KHeroCampIcon[this._heroInfo?.getCamp() as number];        
         let level : number = Number(this._heroInfo?.getLevel());
         let iconName:string = this._heroInfo?.getImageIcon() as string;
         let starNum:number = this._heroInfo?.getStar() as number;
@@ -69,9 +68,8 @@ export class HeroIcon extends Component {
         {
             this.img_camp.active = false;
         }
-        
-        let framePath:string = "ui/icon/" + frameName + "/spriteFrame"
-        this._resourceLoad(framePath,this.btn_frame);
+
+        this.changeFrameSprite()
 
         let heroIconPath:string = "ui/hero/" + iconName + "/spriteFrame"
         this._resourceLoad(heroIconPath,this.img_icon);
@@ -132,6 +130,7 @@ export class HeroIcon extends Component {
         }
     }
 
+    //增加一颗星  升星塔使用
     public addOneStar()
     {
         if(this._heroInfo)
@@ -139,6 +138,15 @@ export class HeroIcon extends Component {
             let addStar = this._heroInfo.getStar()+1
             this._setStar(addStar);
         }
+    }
+
+    //根据星级更换外框
+    public changeFrameSprite(star:number|null = null)
+    {
+        let heroStar = star || this._heroInfo?.getStar()
+        let frameName:string = XConsts.GetQualityBgByStar(Number(heroStar));
+        let framePath:string = "ui/icon/" + frameName + "/spriteFrame"
+        this._resourceLoad(framePath,this.btn_frame);
     }
 
 
