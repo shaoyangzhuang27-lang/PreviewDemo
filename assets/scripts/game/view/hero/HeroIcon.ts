@@ -48,7 +48,7 @@ export class HeroIcon extends Component {
             return;
         }
 
-        let campName:string = XConsts.KHeroCampIcon[this._heroInfo?.getCamp() as number];        
+        let campName:string = XConsts.KHeroCampIcon[this._heroInfo?.getCamp() as number];
         let level : number = Number(this._heroInfo?.getLevel());
         let iconName:string = this._heroInfo?.getImageIcon() as string;
         let starNum:number = this._heroInfo?.getStar() as number;
@@ -159,6 +159,16 @@ export class HeroIcon extends Component {
     public setLvIconVisib(isShow:boolean = false)
     {
         this.lab_level.node.active = isShow
+    }
+
+    //蒙版英雄
+    public setMaskHeroData(campType:number,star:number)
+    {
+        this.lab_level.node.active = false;
+        let campName:string = XConsts.KHeroCampIcon[campType];
+        let campIconPath:string = "ui/team/" + campName + "/spriteFrame"
+        this._resourceLoad(campIconPath,this.img_camp)
+        this._setStar(star)
     }
 }
 

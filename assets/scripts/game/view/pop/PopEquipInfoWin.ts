@@ -8,8 +8,8 @@ import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
 import { GameModel } from '../../model/GameModel';
 
-@ccclass('PopEquipSellWin')
-export class PopEquipSellWin extends PopBase {
+@ccclass('PopEquipInfoWin')
+export class PopEquipInfoWin extends PopBase {
     @property({type :  Node})
     public btnSell:Node = null as unknown as Node;
 
@@ -98,7 +98,7 @@ export class PopEquipSellWin extends PopBase {
         //装备物品名称
         this.lab_name.string = nameData.cn;
 
-        resources.load('prefabs_ui/main/itemEquipCell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/main/itemequipcell', (err:any,res:any)=>{
             let itemEquipCell = instantiate(res) as Node;
             this.iconNode.addChild(itemEquipCell);
             let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
