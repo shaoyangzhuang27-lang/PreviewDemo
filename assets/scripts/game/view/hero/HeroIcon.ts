@@ -34,11 +34,6 @@ export class HeroIcon extends Component {
     
 
     private _heroInfo : HeroData | null = null as unknown as HeroData;
-    private _heroLT : any | null = null as unknown as HeroData;
-
-    private _callBack:Function|null = null as unknown as Function;  //回调方法
-
-
     start () {
         // [3]
         // this.btn_frame.on(Node.EventType.TOUCH_END, this.openHeroInfoView, this);        
@@ -51,16 +46,16 @@ export class HeroIcon extends Component {
             return;
         }
 
-        let _campName:string = XConsts.KHeroCampIcon[this._heroInfo?.getCamp() as number];
-        let _frameName:string = XConsts.GetQualityBgByStar(this._heroInfo?.getStar() as number);
-        let _level : number = Number(this._heroInfo?.getLevel());
-        let _iconName:string = this._heroInfo?.getImageIcon() as string;
-        let _starNum:number = this._heroInfo?.getStar() as number;
+        let campName:string = XConsts.KHeroCampIcon[this._heroInfo?.getCamp() as number];
+        let frameName:string = XConsts.GetQualityBgByStar(this._heroInfo?.getStar() as number);
+        let level : number = Number(this._heroInfo?.getLevel());
+        let iconName:string = this._heroInfo?.getImageIcon() as string;
+        let starNum:number = this._heroInfo?.getStar() as number;
 
         if(!this._heroInfo.isRoleHero())
         {
             this.img_camp.active = true;
-            let campIconPath:string = "ui/team/" + _campName + "/spriteFrame"
+            let campIconPath:string = "ui/team/" + campName + "/spriteFrame"
             resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
             {
                 if(!err)
@@ -75,15 +70,15 @@ export class HeroIcon extends Component {
             this.img_camp.active = false;
         }
         
-        let framePath:string = "ui/icon/" + _frameName + "/spriteFrame"
+        let framePath:string = "ui/icon/" + frameName + "/spriteFrame"
         this._resourceLoad(framePath,this.btn_frame);
 
-        let heroIconPath:string = "ui/hero/" + _iconName + "/spriteFrame"
+        let heroIconPath:string = "ui/hero/" + iconName + "/spriteFrame"
         this._resourceLoad(heroIconPath,this.img_icon);
         
-        this.lab_level.string = _level.toString();
+        this.lab_level.string = level.toString();
 
-        this._setStar(_starNum);
+        this._setStar(starNum);
     }
 
     //开启英雄面板
@@ -137,6 +132,15 @@ export class HeroIcon extends Component {
         }
     }
 
+    public addOneStar()
+    {
+        if(this._heroInfo)
+        {
+            let addStar = this._heroInfo.getStar()+1
+            this._setStar(addStar);
+        }
+    }
+
 
     ////////////////////////////////
     //传入英雄id  初始化对象
@@ -144,24 +148,23 @@ export class HeroIcon extends Component {
     {
         this._heroInfo = _heroData;
         this._heroLT = ValueMgr.getInstance().getItemByField(TableName.heroes,this._heroInfo.getStaticID()) as Config.heroes.Record;
-        
-        // this._callBack = _callBack;
+    
         this.init();
     }
 
     public setNodeAnchor(point: math.Vec2 | number, y?: number)
     {
-        let _node = this.node.getComponent(UITransform) as UITransform;
-        _node.setAnchorPoint(point);
+        let node = this.node.getComponent(UITransform) as UITransform;
+        node.setAnchorPoint(point);
     }
 
-    public setBtnCallBack(_callBack:Function|null = null)
+    public setBtnCallBack(callBack:Function|null = null)
     {
-        if(_callBack)
+        if(callBack)
         {
             this.btn_frame.addComponent(Button);
             this.btn_frame.on(Node.EventType.TOUCH_END, ()=>{            
-                _callBack(this._heroInfo)                
+                callBack(this._heroInfo)                
             }, this);
         }
     }
