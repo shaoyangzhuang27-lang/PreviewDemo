@@ -1,4 +1,4 @@
-import { _decorator, Component, Node,Label,ScrollView,resources,instantiate, Vec3, Size,Sprite,UITransform, Button } from 'cc';
+import { _decorator, Component, Node,Label,ScrollView,resources,instantiate, Vec3, Size,Sprite,UITransform, Button,SpriteFrame } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
@@ -68,5 +68,22 @@ export class PopSummonSettle extends PopBase {
         var lab = this.btn_summon.node.getChildByName("lab")?.getComponent(Label);
         var lab_summon_num = this.btn_summon.node.getChildByName("lab_summon_num")?.getComponent(Label);
         var img_summon_icon = this.btn_summon.node.getChildByName("img_summon_icon")?.getComponent(Sprite);
+
+        if(summmonType == Msg.TSummonType.ESummonType_Friend)
+        {    
+            img_summon_icon && this.resetResourcesSpriFame("hero_pub/pub_prop_heart/spriteFrame",img_summon_icon);
+        }
+        else if(summmonType == Msg.TSummonType.ESummonType_Basic && consumeType == Msg.TSummonConsumeType.ESummonConsumeType_Scroll)
+        {
+            img_summon_icon && this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",img_summon_icon);
+        }
+
+    }
+
+    public resetResourcesSpriFame(path:string,objSprite : Sprite)
+    {
+        resources.load(path, SpriteFrame ,(err: any, spriteFrame: SpriteFrame) => {
+            objSprite.spriteFrame = spriteFrame;
+        });
     }
 }
