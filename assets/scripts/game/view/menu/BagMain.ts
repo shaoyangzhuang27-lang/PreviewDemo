@@ -96,7 +96,7 @@ export class BagMain extends Component {
     private _initEquipScrollview()
     {
         let allEquipList = GameModel.getInstance().getBagModel().getBagEquipList();
-        resources.load('prefabs_ui/main/itemEquipCell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/main/itemequipcell', (err:any,res:any)=>{
             for (let key of allEquipList.keys()) {
                 let value = allEquipList.get(key);  //数量   
                 let equipCell = instantiate(res) as Node;
@@ -110,7 +110,7 @@ export class BagMain extends Component {
     {
         let allGoodsList = GameModel.getInstance().getBagModel().getAllGoods();
         let bagModel = GameModel.getInstance().getBagModel();
-        resources.load('prefabs_ui/main/itemEquipCell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/main/itemequipcell', (err:any,res:any)=>{
             for (let index = 0; index < allGoodsList.length; index++) {
                 let itemGoods = allGoodsList[index];
 
