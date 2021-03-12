@@ -37,6 +37,9 @@ export class BagMain extends Component {
 
     @property({type :  ScrollView})
     public scroll_ItemView:ScrollView = null as unknown as ScrollView;
+    
+    @property({type: Node })
+    public bgMask:Node = null as unknown as Node;
 
     start () {
         // [3]
@@ -47,6 +50,7 @@ export class BagMain extends Component {
         containerEventHandler.customEventData = '';
         this.selectGroup?.checkEvents.push(containerEventHandler);
         this.btnClose?.on(Node.EventType.TOUCH_END, this.closeHandle, this);
+        this.bgMask.on(Node.EventType.TOUCH_END, this.closeHandle, this);
         this.show();
     }
     

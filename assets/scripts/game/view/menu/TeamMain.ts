@@ -49,6 +49,9 @@ export class TeamMain extends Component {
 
     @property({type :  Node})
     public heroPosList:Node[] = [];
+    
+    @property({type: Node })
+    public bgMask:Node = null as unknown as Node;
 
     start () {
         // [3]
@@ -63,6 +66,7 @@ export class TeamMain extends Component {
         this.btnBook.on(Node.EventType.TOUCH_END, this._openBookLibraryView, this);
         this.btnAura.on(Node.EventType.TOUCH_END, this._openAuraInfoView, this);
         this.btnPet.on(Node.EventType.TOUCH_END, this._openPetInfoView, this);
+        this.bgMask.on(Node.EventType.TOUCH_END, this.closeHandle, this);
 
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_formation_change,this._notifyFormationChangeHandle,this);
 
