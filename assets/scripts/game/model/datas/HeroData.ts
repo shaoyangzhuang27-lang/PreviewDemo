@@ -119,13 +119,38 @@ export class HeroData extends BaseHeroData {
         } else
             return this._heroInfo.level;
     }
-    public get tier(){
-        
+    public set level(_lv: number){
+        if(this.isRoleHero() )
+        {                
+            this._heroInfo.level = _lv;
+        }
+        else
+        {
+            //KHeroMaxLevelForTier
+        }    
+    }
+
+    public get tier(){        
         if (!this.isRoleHero()) {
             return 1;// Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);
         } else
             return this._heroInfo.tier;
     }
+    public set tier(_tier:number){        
+        if (!this.isRoleHero()) {
+            // Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);
+        } else{
+            this._heroInfo.tier= _tier;
+        }
+    }
+
+    public get isLocked(){        
+        return this._heroInfo.isLocked;
+    }
+    public set isLocked(_isLocked:boolean){     
+        this._heroInfo.isLocked= _isLocked;
+    }
+
     public get equipOnList(){
         
         if (!this.isRoleHero()) {
@@ -674,6 +699,7 @@ export class HeroData extends BaseHeroData {
     public getStar() { 
         return this._record.star;
     }
+
 
     public isOrangeQuality() { 
         return this._heroInfo.staticID/1000000 >= 5; 

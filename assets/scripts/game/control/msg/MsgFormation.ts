@@ -65,7 +65,7 @@ export class MsgFormation extends MsgBase{
         let newMsgData = msgData as Msg.SyncHeroLocked;
         if(newMsgData)
         {
-            //GameModel.getInstance().getHeroesModel
+            GameModel.getInstance().getHeroesModel().setHeroLocked(newMsgData);
         }
     }
     //英雄升级,升阶,装备(一键装备,全部卸下)--------------------start

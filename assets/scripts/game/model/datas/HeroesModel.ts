@@ -3,6 +3,7 @@ import { HeroData } from "./HeroData";
 import { TableName, ValueMgr } from "../ValueMgr";
 import { XMsgExt } from "../const/XMsgExt";
 import { BaseModel } from "./BaseModel";
+import { NotifyMgr } from "../../control/NotifyMgr";
 
 export class HeroesModel extends BaseModel{
 
@@ -157,5 +158,18 @@ export class HeroesModel extends BaseModel{
         //     }
         // });
         return tempBookHero;
+    }
+
+
+    // 设置英雄锁定状态
+    public setHeroLocked(msg: Msg.SyncHeroLocked) {
+        //根据id获取英雄信息
+        let heroData = this.getHeroInfoByDyncID(msg.heroID); //HeroData
+        if(heroData)
+        {   
+            heroData.isLocked= msg.isLocked;
+            //抛出通知 英雄锁定状态 变化
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_locked, msg);
+        }        
     }
 }

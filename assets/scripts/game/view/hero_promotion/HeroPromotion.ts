@@ -9,6 +9,7 @@ import { PopMgr } from '../../control/PopMgr';
 import { MsgMgr } from '../../control/MsgMgr';
 import { HeroModel } from '../hero/HeroModel';
 import { SkillItem } from '../hero/SkillItem';
+import { NotifyMgr } from '../../control/NotifyMgr';
 const { ccclass, property } = _decorator;
  
 //弹窗初始化-----
@@ -93,7 +94,7 @@ export class HeroPromotion extends PopBase {
     private _allHeroList:Map<number, HeroData> = new Map<number, HeroData>(); //拥有的所有英雄
 
     private _isHeroUpView: boolean = true; //true标记当前是英雄升级/阶界面，false标记当前是英雄装备界面
-    private _isLvUpView: boolean = true; //true标记当前是英雄升级界面，false标记当前是英雄升阶界面
+    private _isLvUpView: boolean = false; //true标记当前是英雄升级界面，false标记当前是英雄升阶界面
 
     onLoad(){
         super.onLoad();
@@ -126,41 +127,36 @@ export class HeroPromotion extends PopBase {
         if (tog.node.name =="btn_tab_up") //升级tab
         {
             console.log(" btn_tab_up clicked!");
-            this.node_equip.active= false;
-            this.node_upgrade.active= !this._isLvUpView;
+            this.node_equip.active= false; //装备界面
+
+            this.node_up.active = true;//升级升阶大界面            
+            this.node_fight_param.active= this._isLvUpView; //升级底部属性界面
+            this.btn_up_lv.active= this._isLvUpView;        //升级按钮
+            this.node_upgrade.active= !this._isLvUpView;    //升阶底部属性界面
+            this.btn_up_tier.active= !this._isLvUpView;     //升阶按钮
             
-            this.btn_up_tier.active= !this._isLvUpView;
-            this.btn_up_lv.active= this._isLvUpView;
-            this.node_fight_param.active= this._isLvUpView;
-            this.node_up.active = true;
         }
         else if (tog.node.name =="btn_tab_equip")//装备tab
         {
             console.log(" btn_tab_equip clicked!");
             
-            this.node_fight_param.active= this._isLvUpView;
-            this.node_upgrade.active= !this._isLvUpView;
+            this.node_equip.active= true; //装备界面
 
-            this.btn_up_tier.active= false;
-            this.btn_up_lv.active= false;
-            this.node_up.active = false;
-
-            this.node_equip.active= true;
-            this.btn_up_tier.active= true;
-
+            this.node_up.active = false;//升级升阶大界面            
+            this.node_fight_param.active= this._isLvUpView; //升级底部属性界面
+            this.btn_up_lv.active= false;        //升级按钮
+            this.node_upgrade.active= !this._isLvUpView;    //升阶底部属性界面
+            this.btn_up_tier.active= false;     //升阶按钮
         }
     }
 
-    onDestroy(){
-    }
-    
     buttonBtnClick(event:any){
         console.log(" HeroPromotion buttonBtnClick: "+ event.target?._name)        
 
         switch (event.target) {
-            case this.btn_lock:
-                this.btn_lock.active= false;
+            case this.btn_lock:                
                 this.btn_unlock.active= true;
+                this.btn_lock.active= false;
                 MsgMgr.getInstance().getMsgFormation().requestHeroLocked(this._curHeroId , true);
                 break;
             case this.btn_unlock:
@@ -219,6 +215,26 @@ export class HeroPromotion extends PopBase {
         // this.cur_SkillItem?.setSkillData(0);
         //this.cur_hero_model?.node.setSiblingIndex(100);
         // UIMeshRenderer
+        
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_locked,this._notifyHeroLockedHandle,this);
+    }  
+    
+    onDestroy()
+    {
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_locked,this._notifyHeroLockedHandle,this);
+    }
+
+    private _notifyHeroLockedHandle(data:any=null)
+    {
+        if(data){
+            let msg = data as Msg.SyncHeroLocked;
+            if(msg.heroID == this._curHeroId)
+            {                
+                this._curHeroData.isLocked= msg.isLocked;
+                this.btn_lock.active=  !msg.isLocked;
+                this.btn_unlock.active= msg.isLocked;
+            }
+        }
     }
 
     initView(){
