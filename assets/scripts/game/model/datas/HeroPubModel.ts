@@ -119,7 +119,7 @@ export class HeroPubModel extends BaseModel{
     //友情英雄召唤卷轴
     public getFriendSummonScrollNum()
     {
-       return this._gameModel.getPlayerModel().getPlayerInfo().basicSummonScroll || 0;
+       return this._gameModel.getPlayerModel().getPlayerInfo().friendGift || 0;
     }
 
     //玩家身上钻石数量
