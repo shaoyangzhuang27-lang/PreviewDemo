@@ -319,12 +319,12 @@ export class PopHeroPub extends PopBase {
                 this.node_friend.active = false;
                 this.btn_hero_summon.interactable = false;
                 this.btn_friend_summon.interactable = true;
-                this.resetResourcesSpriFame("hero_pub/pub_call_ad_diamond/spriteFrame",this.img_summon_ad);
+                this.resetResourcesSpriFame("ui/hero_pub/pub_call_ad_diamond/spriteFrame",this.img_summon_ad);
                 if(this.lab_summon_ad)
                 {
                     this.lab_summon_ad.string = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_summon_ad_hero");
                 }
-                this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",this.img_prop);
+                this.resetResourcesSpriFame("ui/hero_pub/pub_prop_scroll/spriteFrame",this.img_prop);
         
                 break;
             case Msg.TSummonType.ESummonType_Friend:
@@ -332,12 +332,12 @@ export class PopHeroPub extends PopBase {
                 this.node_friend.active = true;
                 this.btn_hero_summon.interactable = true;
                 this.btn_friend_summon.interactable = false;
-                this.resetResourcesSpriFame("hero_pub/pub_call_ad_friend/spriteFrame",this.img_summon_ad);
+                this.resetResourcesSpriFame("ui/hero_pub/pub_call_ad_friend/spriteFrame",this.img_summon_ad);
                 if(this.lab_summon_ad)
                 {
                     this.lab_summon_ad.string = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_summon_ad_friend");
                 }
-                this.resetResourcesSpriFame("hero_pub/pub_prop_heart/spriteFrame",this.img_prop);
+                this.resetResourcesSpriFame("ui/hero_pub/pub_prop_heart/spriteFrame",this.img_prop);
 
                 break;
         }
@@ -386,12 +386,12 @@ export class PopHeroPub extends PopBase {
                 }
                 if(lab_one && img_one)
                 {
-                    this.resetResourcesSpriFame("hero_pub/pub_diamond/spriteFrame",img_one);
+                    this.resetResourcesSpriFame("ui/hero_pub/pub_diamond/spriteFrame",img_one);
                     lab_one.string = "x" + String(XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME);
                 }
                 if(lab_ten && img_ten)
                 {
-                    this.resetResourcesSpriFame("hero_pub/pub_diamond/spriteFrame",img_ten);
+                    this.resetResourcesSpriFame("ui/hero_pub/pub_diamond/spriteFrame",img_ten);
                     lab_ten.string = "x" + String(XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME * 0.9);
                 }
                
@@ -414,12 +414,12 @@ export class PopHeroPub extends PopBase {
                 }
                 if(lab_one && img_one)
                 {
-                    this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",img_one);
+                    this.resetResourcesSpriFame("ui/hero_pub/pub_prop_scroll/spriteFrame",img_one);
                     lab_one.string = String(XConsts.PUB_SUMMON_SCROLL_ONE_COSUME);
                 }
                 if(lab_ten && img_ten)
                 {
-                    this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",img_ten);
+                    this.resetResourcesSpriFame("ui/hero_pub/pub_prop_scroll/spriteFrame",img_ten);
                     lab_ten.string = String(XConsts.PUB_SUMMON_SCROLL_TEN_COSUME);
                 }
             }
@@ -437,12 +437,12 @@ export class PopHeroPub extends PopBase {
             }
             if(lab_one && img_one)
             {
-                this.resetResourcesSpriFame("hero_pub/pub_prop_heart/spriteFrame",img_one);
+                this.resetResourcesSpriFame("ui/hero_pub/pub_prop_heart/spriteFrame",img_one);
                 lab_one.string = String(XConsts.PUB_SUMMON_FRIEND_ONE_COSUME);
             }
             if(lab_ten && img_ten)
             {
-                this.resetResourcesSpriFame("hero_pub/pub_prop_heart/spriteFrame",img_ten);
+                this.resetResourcesSpriFame("ui/hero_pub/pub_prop_heart/spriteFrame",img_ten);
                 lab_ten.string = String(XConsts.PUB_SUMMON_FRIEND_TEN_COSUME);
             }
         }
