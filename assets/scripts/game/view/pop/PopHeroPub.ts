@@ -4,6 +4,7 @@ import { GameModel } from '../../model/GameModel';
 import { PopMgr } from '../../control/PopMgr';
 import { XConsts } from '../../model/const/XConsts';
 import { NotifyMgr } from '../../control/NotifyMgr';
+import { MsgMgr } from '../../control/MsgMgr';
 // import { TableName, ValueMgr } from "../../model/ValueMgr";
 const { ccclass, property } = _decorator;
 
@@ -95,6 +96,7 @@ export class PopHeroPub extends PopBase {
         // var newStr = str0.replace("{0}","10");
         // console.log("pppppppppppppppp",newStr);
 
+        let diamond =  GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts();
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
     }
 
@@ -186,7 +188,8 @@ export class PopHeroPub extends PopBase {
                     else{
                         // MsgMgr.getInstance().getMsgLogin().requestDeviceLoginNew();
                         //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                        this.showSummonSettleWindow("SummonWindow");
+                        // this.showSummonSettleWindow("SummonWindow");
+                        this.onSubmit(Msg.TSummonType.ESummonType_Friend,Msg.TSummonConsumeType.ESummonConsumeType_FriendGift,true);
                     }
                 }
                 else
@@ -194,14 +197,16 @@ export class PopHeroPub extends PopBase {
                     if(this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_ONE_COSUME)
                     {
                         //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                        this.showSummonSettleWindow("SummonWindow");
+                        // this.showSummonSettleWindow("SummonWindow");
+                        this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll,true);
                     }
                     else 
                     {
                         if(GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts() >= XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME)
                         {
                             //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                            this.showSummonSettleWindow("SummonWindow");
+                            // this.showSummonSettleWindow("SummonWindow");
+                            this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,true);
                         }
                         else
                         {
@@ -395,7 +400,7 @@ export class PopHeroPub extends PopBase {
             {
                 if(img_one_remind && img_ten_remind)
                 {
-                    if(this._nScorllNum >= 10)
+                    if(this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_TEN_COSUME)
                     {
                         img_one_remind.node.active = true; 
                         img_ten_remind.node.active = true; 
@@ -478,6 +483,16 @@ export class PopHeroPub extends PopBase {
     }
     onDestroy(){
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+    }
+
+    public onSubmit(nSummonType : Msg.TSummonType,nConsumeType : Msg.TSummonConsumeType, bIsOneOrTen : boolean)
+    {
+        let summonHeroR : Msg.SummonHeroR = {
+             summonType : nSummonType,
+            consumeType : nConsumeType,
+            isOneOrTen : bIsOneOrTen
+        }
+        MsgMgr.getInstance().getMsgHeroPub().requestSummonHeroR(summonHeroR);
     }
 }
 
