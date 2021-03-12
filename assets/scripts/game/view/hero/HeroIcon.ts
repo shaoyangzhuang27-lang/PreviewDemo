@@ -154,6 +154,12 @@ export class HeroIcon extends Component {
             }, this);
         }
     }
+
+    //隐藏等级
+    public setLvIconVisib(isShow:boolean = false)
+    {
+        this.lab_level.node.active = isShow
+    }
 }
 
 /**
