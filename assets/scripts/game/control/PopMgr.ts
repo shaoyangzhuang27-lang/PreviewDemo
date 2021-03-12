@@ -6,6 +6,10 @@ import { TipDemo } from '../view/TipDemo';
 import { TipHeroAttribute } from '../view/TipHeroAttribute';
 import { XConsts } from '../model/const/XConsts';
 import { TipSkill } from '../view/TipSkill';
+import { PopHeroBookView } from "../view/pop/PopHeroBookView";
+import { PopItemUseWin } from "../view/pop/PopItemUseWin";
+import { PopEquipSellWin } from "../view/pop/PopEquipSellWin";
+import { PopItemReward } from '../view/pop/popItemReward';
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -69,7 +73,6 @@ export class PopMgr extends PopCore  {
             // script.setInitTeamView(type)
         } );
     }
-
     
     //弹出英雄升级,升阶,装备界面
     public popHeroPromotionView(heroId:number,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
@@ -99,10 +102,6 @@ export class PopMgr extends PopCore  {
             script.setIsMaskClose(isMaskClose);
         } );
     }
-
-
-
-
     //弹窗放这里------------------------------------------------------------
 
 
@@ -156,14 +155,50 @@ export class PopMgr extends PopCore  {
     //弹出提示窗放这里-------------------------------------------------
 
     //弹出图鉴界面
-    public popBoolLibraryView()
+    public popBookLibraryView()
     {
         resources.load('prefabs_ui/pop/pop_bookview', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
-            let script = p.getComponent("PopHeroBookView");
+            let script = p.getComponent("PopHeroBookView") as PopHeroBookView;
             script.setIsMaskClose(false);
+        } );
+    }
+
+    //弹出道具使用出售
+    public popItemUseSellView(id:number,objType:number, isVisit:boolean|null = null)
+    {
+        resources.load('prefabs_ui/pop/pop_itemuse', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopItemUseWin") as PopItemUseWin;
+            script.setUseItemType(id,objType,isVisit);
+        } );
+    }
+
+    //弹出装备信息
+    public popEquipInfoView(id:number,isVisit:boolean|null = null)
+    {
+        resources.load('prefabs_ui/pop/pop_equipsell', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopEquipSellWin") as PopEquipSellWin;
+            script.setEquipItemType(id,isVisit);
+        } );
+    }
+
+    //弹出获得物品弹出（使用道具）
+    public popItemRewardView(id:number,num:number)
+    {
+        resources.load('prefabs_ui/pop/pop_itemreward', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopItemReward") as PopItemReward;
+            script.setItemInfo(id,num);
         } );
     }
 }

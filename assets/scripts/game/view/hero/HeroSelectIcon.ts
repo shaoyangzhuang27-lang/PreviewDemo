@@ -46,7 +46,7 @@ export class HeroSelectIcon extends Component {
             heroIcon.name = "formationIcon"
 
             let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
-            script.setHeroID(this._heroInfo as HeroData);
+            script.setHeroData(this._heroInfo as HeroData);
             script.setBtnCallBack(null);            
         });
     }

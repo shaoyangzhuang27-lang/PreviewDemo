@@ -34,7 +34,9 @@ export class HeroIcon extends Component {
     
 
     private _heroInfo : HeroData | null = null as unknown as HeroData;
+    private _starNameList:string[] = new Array<string>();
     start () {
+        this._starNameList = ["初级星星","中级星星","高级星星"]
         // [3]
         // this.btn_frame.on(Node.EventType.TOUCH_END, this.openHeroInfoView, this);        
     }
@@ -69,8 +71,6 @@ export class HeroIcon extends Component {
             this.img_camp.active = false;
         }
 
-        this.changeFrameSprite()
-
         let heroIconPath:string = "ui/hero/" + iconName + "/spriteFrame"
         this._resourceLoad(heroIconPath,this.img_icon);
         
@@ -104,30 +104,25 @@ export class HeroIcon extends Component {
 
     private _setStar(star:number)
     {
-        if(star > 5 && star <= 10)
-        {
-            star -= 5;
-            //初始化星星，使用中级星星  "resources/ui/icon/星星中级.png"
-        }
-        else if(star > 10)
-        {
-            star -= 10;
-            //初始化星星，使用中级星星  "resources/ui/icon/星星高级.png"
-        }
-        else{
-            //初始化星星，使用中级星星  "resources/ui/icon/星星初级.png"
-        }
+        let grade:number = Math.floor(star/5);
+        let yu:number = (star - 1) % 5 + 1;
+
+        let starName = this._starNameList[grade];
+        let starPath = "ui/icon/" + starName + "/spriteFrame"
 
         for (let index = 0; index < this.starlist.length; index++) {
-            if(index >= star)
+            if(index >= yu && yu != 0)
             {
                 this.starlist[index].active = false;
             }
             else{
                 this.starlist[index].active = true;
             }
-            
         }
+
+        let frameName:string = XConsts.GetQualityBgByStar(Number(star));
+        let framePath:string = "ui/icon/" + frameName + "/spriteFrame"
+        this._resourceLoad(framePath,this.btn_frame);
     }
 
     //增加一颗星  升星塔使用
@@ -140,30 +135,13 @@ export class HeroIcon extends Component {
         }
     }
 
-    //根据星级更换外框
-    public changeFrameSprite(star:number|null = null)
-    {
-        let heroStar = star || this._heroInfo?.getStar()
-        let frameName:string = XConsts.GetQualityBgByStar(Number(heroStar));
-        let framePath:string = "ui/icon/" + frameName + "/spriteFrame"
-        this._resourceLoad(framePath,this.btn_frame);
-    }
-
-
     ////////////////////////////////
     //传入英雄id  初始化对象
-    public setHeroID(_heroData : HeroData)
+    public setHeroData(heroData : HeroData)
     {
-        this._heroInfo = _heroData;
-        this._heroLT = ValueMgr.getInstance().getItemByField(TableName.heroes,this._heroInfo.getStaticID()) as Config.heroes.Record;
+        this._heroInfo = heroData;
     
         this.init();
-    }
-
-    public setNodeAnchor(point: math.Vec2 | number, y?: number)
-    {
-        let node = this.node.getComponent(UITransform) as UITransform;
-        node.setAnchorPoint(point);
     }
 
     public setBtnCallBack(callBack:Function|null = null)
@@ -175,6 +153,12 @@ export class HeroIcon extends Component {
                 callBack(this._heroInfo)                
             }, this);
         }
+    }
+
+    //隐藏等级
+    public setLvIconVisib(isShow:boolean = false)
+    {
+        this.lab_level.node.active = isShow
     }
 }
 
