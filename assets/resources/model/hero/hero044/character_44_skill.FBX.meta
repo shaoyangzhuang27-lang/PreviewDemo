@@ -35,7 +35,14 @@
           "from": 0,
           "to": 1.9583333730697632
         },
-        "events": []
+        "events": [
+          {
+            "frame": 1.2,
+            "functionName": "onSkill",
+            "parameters": []
+          }
+        ],
+        "speed": 1
       },
       "ver": "1.0.14",
       "imported": true,

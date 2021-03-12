@@ -1,0 +1,188 @@
+{
+  "ver": "2.0.10",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "9971b126-34f8-4353-906f-a9dc2f96b4f6",
+  "files": [],
+  "subMetas": {
+    "78391": {
+      "importer": "gltf-animation",
+      "uuid": "9971b126-34f8-4353-906f-a9dc2f96b4f6@78391",
+      "displayName": "",
+      "id": "78391",
+      "name": "skill.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.2916666269302368
+        },
+        "events": [
+          {
+            "frame": 0.6,
+            "functionName": "onSkill",
+            "parameters": []
+          }
+        ],
+        "speed": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c6160": {
+      "importer": "gltf-mesh",
+      "uuid": "9971b126-34f8-4353-906f-a9dc2f96b4f6@c6160",
+      "displayName": "",
+      "id": "c6160",
+      "name": "Cylinder001.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "438fe": {
+      "importer": "gltf-skeleton",
+      "uuid": "9971b126-34f8-4353-906f-a9dc2f96b4f6@438fe",
+      "displayName": "",
+      "id": "438fe",
+      "name": "UnnamedSkeleton.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 39
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "873ed": {
+      "importer": "gltf-embeded-image",
+      "uuid": "9971b126-34f8-4353-906f-a9dc2f96b4f6@873ed",
+      "displayName": "",
+      "id": "873ed",
+      "name": "Map #6.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "53e01": {
+      "importer": "texture",
+      "uuid": "9971b126-34f8-4353-906f-a9dc2f96b4f6@53e01",
+      "displayName": "",
+      "id": "53e01",
+      "name": "Map #6.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "9971b126-34f8-4353-906f-a9dc2f96b4f6@873ed"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "49b23": {
+      "importer": "gltf-material",
+      "uuid": "9971b126-34f8-4353-906f-a9dc2f96b4f6@49b23",
+      "displayName": "",
+      "id": "49b23",
+      "name": "Material #49.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "196ff": {
+      "importer": "gltf-scene",
+      "uuid": "9971b126-34f8-4353-906f-a9dc2f96b4f6@196ff",
+      "displayName": "",
+      "id": "196ff",
+      "name": "monster_14_skill.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #6",
+        "uri": "9971b126-34f8-4353-906f-a9dc2f96b4f6@873ed"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 1.2916666269302368,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "skill",
+            "from": 0,
+            "to": 1.2916666269302368,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "9971b126-34f8-4353-906f-a9dc2f96b4f6@196ff",
+    "assetFinder": {
+      "meshes": [
+        "9971b126-34f8-4353-906f-a9dc2f96b4f6@c6160"
+      ],
+      "skeletons": [
+        "9971b126-34f8-4353-906f-a9dc2f96b4f6@438fe"
+      ],
+      "textures": [
+        "9971b126-34f8-4353-906f-a9dc2f96b4f6@53e01"
+      ],
+      "materials": [
+        "9971b126-34f8-4353-906f-a9dc2f96b4f6@49b23"
+      ],
+      "scenes": [
+        "9971b126-34f8-4353-906f-a9dc2f96b4f6@196ff"
+      ]
+    }
+  }
+}

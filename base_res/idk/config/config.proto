@@ -1,0 +1,25 @@
+syntax = "proto3";
+package Config;
+option csharp_namespace = "Config";
+option go_package = "config"
+;
+message equip
+{
+	message Record
+	{
+		int32  id                     = 1 ;		// ID
+		string name                   = 2 ;		// 名称
+		int32  location_type          = 3 ;		// 位置类型
+		int32  quality                = 4 ;		// 品质
+		int32  star                   = 5 ;		// 星级
+		repeated int32  property_type = 6 ;		// 属性类型
+		repeated int32  property_num  = 7 ;		// 属性值
+		int32  forward_id             = 8 ;		// 前置ID
+		int32  compose_money          = 9 ;		// 合成消耗金币
+		string image_name             = 10;		// 图标
+		int32  suit_id                = 11;		// 套装ID
+		int32  price                  = 12;		// 出售价格
+	}
+	repeated Record records = 1;
+	int64 version           = 2;
+}
