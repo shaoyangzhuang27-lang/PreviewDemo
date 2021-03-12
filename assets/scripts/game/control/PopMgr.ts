@@ -8,7 +8,7 @@ import { XConsts } from '../model/const/XConsts';
 import { TipSkill } from '../view/TipSkill';
 import { PopHeroBookView } from "../view/pop/PopHeroBookView";
 import { PopItemUseWin } from "../view/pop/PopItemUseWin";
-import { PopEquipSellWin } from "../view/pop/PopEquipSellWin";
+import { PopEquipInfoWin } from "../view/pop/PopEquipSellWin";
 import { PopItemReward } from '../view/pop/popItemReward';
 export class PopMgr extends PopCore  {
 
@@ -181,11 +181,11 @@ export class PopMgr extends PopCore  {
     //弹出装备信息
     public popEquipInfoView(id:number,isVisit:boolean|null = null)
     {
-        resources.load('prefabs_ui/pop/pop_equipsell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/pop/pop_equipinfo', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
-            let script = p.getComponent("PopEquipSellWin") as PopEquipSellWin;
+            let script = p.getComponent("PopEquipInfoWin") as PopEquipInfoWin;
             script.setEquipItemType(id,isVisit);
         } );
     }
