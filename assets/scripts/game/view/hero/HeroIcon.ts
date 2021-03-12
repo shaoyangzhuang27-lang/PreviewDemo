@@ -121,7 +121,7 @@ export class HeroIcon extends Component {
         }
 
         for (let index = 0; index < this.starlist.length; index++) {
-            if(index > star)
+            if(index >= star)
             {
                 this.starlist[index].active = false;
             }
