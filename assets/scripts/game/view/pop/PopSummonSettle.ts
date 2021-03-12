@@ -1,4 +1,4 @@
-import { _decorator, Component, Node,Label,ScrollView,resources,instantiate, Vec3, Size,Widget,UITransform } from 'cc';
+import { _decorator, Component, Node,Label,ScrollView,resources,instantiate, Vec3, Size,Sprite,UITransform, Button } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
@@ -13,17 +13,19 @@ export class PopSummonSettle extends PopBase {
     // @property({type: LabelComponent})
     // public lab_content:LabelComponent | null = null;
 
-    @property({type: Node})
-    public btn_summon:Node | null = null;
+    @property({type: Button})
+    public btn_summon = null as unknown as Button;
 
     // private _submitCallFun:Function | null = null;
 
     @property({type :  ScrollView})
     public scroll_heroicon_view:ScrollView = null as unknown as ScrollView;
 
+
+
     start () {
         super.start();
-        this.btn_summon?.on(Node.EventType.TOUCH_END, this._onSummonClick, this);
+        this.btn_summon.node.on(Node.EventType.TOUCH_END, this._onSummonClick, this);
         this.initUI();
     }
 
@@ -35,6 +37,7 @@ export class PopSummonSettle extends PopBase {
                 reclineup_item.scale = new Vec3(0.75,0.75,1);
                 let subWidget = reclineup_item.getComponent(UITransform) as UITransform;
                 subWidget.contentSize = new Size(113,113);
+                script.initUIHeroIconInfo(3031301,XConsts.HERO_ICON_TYPE.SummonSettle);
                 this.scroll_heroicon_view.content?.addChild(reclineup_item);
         });
     }
@@ -53,9 +56,17 @@ export class PopSummonSettle extends PopBase {
         //         let reclineup_item = instantiate( res );
         //         let script = reclineup_item.getComponent(HeroIcon);
         //         reclineup_item.scale = new Vec3(0.5,0.5,1);
-        //         // script.initRecLineUpHeroIconInfo(id); 
+        //         // script.initUIHeroIconInfo(id);
         //         this.scroll_heroicon_view.content?.addChild(reclineup_item);
         //     }
         // });
+    }
+    
+
+    public initBtnSummonUI(summmonType : Msg.TSummonType,consumeType : Msg.TSummonConsumeType)
+    {
+        var lab = this.btn_summon.node.getChildByName("lab")?.getComponent(Label);
+        var lab_summon_num = this.btn_summon.node.getChildByName("lab_summon_num")?.getComponent(Label);
+        var img_summon_icon = this.btn_summon.node.getChildByName("img_summon_icon")?.getComponent(Sprite);
     }
 }

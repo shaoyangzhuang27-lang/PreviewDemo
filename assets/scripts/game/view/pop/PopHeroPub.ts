@@ -78,7 +78,7 @@ export class PopHeroPub extends PopBase {
     start () {
         super.start();
         GameModel.getInstance().getHeroPubModel().initPubUILabContents();
-        this.curSummonType = Msg.TSummonType.ESummonType_Heroic;
+        this.curSummonType = Msg.TSummonType.ESummonType_Basic;
         // var heroSummon = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_HEROSUMMON) as Config.language_ui.Record
         this.initUILabel()
         this.updateImgPropNum();
@@ -144,7 +144,7 @@ export class PopHeroPub extends PopBase {
          //获取酒馆需要信息
         this._nScorllNum = GameModel.getInstance().getHeroPubModel().getHeroSummonScrollNum();
         this._nFriendHeartNum = GameModel.getInstance().getHeroPubModel().getFriendSummonScrollNum();
-        if(this._curSummonType == Msg.TSummonType.ESummonType_Heroic)
+        if(this._curSummonType == Msg.TSummonType.ESummonType_Basic)
         {
             this.lab_prop_num.string = String(this._nScorllNum);
         }
@@ -159,10 +159,10 @@ export class PopHeroPub extends PopBase {
         switch (event.target.getComponent(Button)) {
             case this.btn_hero_summon:
                 console.log("hero_summon");
-                if(this._curSummonType != Msg.TSummonType.ESummonType_Heroic)
+                if(this._curSummonType != Msg.TSummonType.ESummonType_Basic)
                 {
 
-                    this.curSummonType = Msg.TSummonType.ESummonType_Heroic;
+                    this.curSummonType = Msg.TSummonType.ESummonType_Basic;
                     this.updateImgPropNum();
                     this.updateBtnSummonState();
                 }
@@ -188,8 +188,8 @@ export class PopHeroPub extends PopBase {
                     else{
                         // MsgMgr.getInstance().getMsgLogin().requestDeviceLoginNew();
                         //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                        // this.showSummonSettleWindow("SummonWindow");
-                        this.onSubmit(Msg.TSummonType.ESummonType_Friend,Msg.TSummonConsumeType.ESummonConsumeType_FriendGift,true);
+                         this.showSummonSettleWindow("SummonWindow");
+                        //this.onSubmit(Msg.TSummonType.ESummonType_Friend,Msg.TSummonConsumeType.ESummonConsumeType_FriendGift,true);
                     }
                 }
                 else
@@ -197,16 +197,16 @@ export class PopHeroPub extends PopBase {
                     if(this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_ONE_COSUME)
                     {
                         //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                        // this.showSummonSettleWindow("SummonWindow");
-                        this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll,true);
+                        this.showSummonSettleWindow("SummonWindow");
+                        //this.onSubmit(Msg.TSummonType.ESummonType_Basic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll,true);
                     }
                     else 
                     {
                         if(GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts() >= XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME)
                         {
                             //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                            // this.showSummonSettleWindow("SummonWindow");
-                            this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,true);
+                             this.showSummonSettleWindow("SummonWindow");
+                            //this.onSubmit(Msg.TSummonType.ESummonType_Basic,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,true);
                         }
                         else
                         {
@@ -314,7 +314,7 @@ export class PopHeroPub extends PopBase {
     {
         switch(value)
         {
-            case Msg.TSummonType.ESummonType_Heroic:
+            case Msg.TSummonType.ESummonType_Basic:
                 this.node_diamond.active = true;
                 this.node_friend.active = false;
                 this.btn_hero_summon.interactable = false;
@@ -374,7 +374,7 @@ export class PopHeroPub extends PopBase {
             img_one_remind.node.active = true; 
             img_ten_remind.node.active = true; 
         }
-        if(this._curSummonType == Msg.TSummonType.ESummonType_Heroic)
+        if(this._curSummonType == Msg.TSummonType.ESummonType_Basic)
         {
             if(this._nScorllNum == 0)
             {
@@ -492,6 +492,11 @@ export class PopHeroPub extends PopBase {
             consumeType : nConsumeType,
             isOneOrTen : bIsOneOrTen
         }
+    //     let summonHeroR : Msg.SummonHeroR = {
+    //         summonType : 2,
+    //        consumeType : 2,
+    //        isOneOrTen : false
+    //    }
         MsgMgr.getInstance().getMsgHeroPub().requestSummonHeroR(summonHeroR);
     }
 }

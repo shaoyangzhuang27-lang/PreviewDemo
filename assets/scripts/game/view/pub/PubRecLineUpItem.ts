@@ -85,7 +85,7 @@ export class PubRecLineUpItem extends Component {
             let _heroIcon = instantiate(res) ;
             let script = _heroIcon.getComponent(HeroIcon); 
             // script.setHeroID(this._heroInfo as HeroData);
-            script.initRecLineUpHeroIconInfo(id);   
+            script.initUIHeroIconInfo(id,XConsts.HERO_ICON_TYPE.RecLineUp);
                    
             // _heroIcon.scale = new Vec3(0.5,0.5,1);
             switch(index)

@@ -168,7 +168,7 @@ export class HeroIcon extends Component {
     }
 
     //酒馆推荐阵容英雄icon
-    public initRecLineUpHeroIconInfo(id : number)
+    public initUIHeroIconInfo(id : number,nType : number)
     {
         let info = GameModel.getInstance().getHeroesModel().getHeroIconInfoByHeroId(id);
         this.img_camp.active = true;
@@ -188,9 +188,19 @@ export class HeroIcon extends Component {
         let heroIconPath:string = "ui/hero/" + info.img + "/spriteFrame"
         this._resourceLoad(heroIconPath,this.img_icon);
 
-        this.lab_level.node.active = false;
+        // this.lab_level.node.active = false;
 
         this._setStar(info.star);
+
+        switch (nType) 
+        {
+            case XConsts.HERO_ICON_TYPE.RecLineUp :
+                this.lab_level.node.active = false;
+                break;
+            case XConsts.HERO_ICON_TYPE.SummonSettle:
+                this.lab_level.string = "1"
+                break;
+        }
     }
 }
 
