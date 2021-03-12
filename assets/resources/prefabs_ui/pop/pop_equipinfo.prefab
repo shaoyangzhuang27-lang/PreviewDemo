@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "pop_equipsell",
+    "_name": "pop_equipinfo",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -3497,9 +3497,7 @@
     "__prefab": {
       "__id__": 158
     },
-    "btn_close": {
-      "__id__": 65
-    },
+    "btn_close": null,
     "btn_cancel": null,
     "window": {
       "__id__": 12
@@ -3556,7 +3554,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "fbsaGCYRZMVbkWe1DJui5M"
+    "fileId": "00hCyQ139KAZ2D93ygADDe"
   },
   {
     "__type__": "cc.PrefabInfo",

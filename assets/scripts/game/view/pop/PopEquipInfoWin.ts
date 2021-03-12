@@ -8,8 +8,8 @@ import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
 import { GameModel } from '../../model/GameModel';
 
-@ccclass('PopEquipSellWin')
-export class PopEquipSellWin extends PopBase {
+@ccclass('PopEquipInfoWin')
+export class PopEquipInfoWin extends PopBase {
     @property({type :  Node})
     public btnSell:Node = null as unknown as Node;
 

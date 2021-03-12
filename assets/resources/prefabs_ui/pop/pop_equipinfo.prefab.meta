@@ -2,12 +2,12 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-  "uuid": "7e1597ac-a225-4203-aee7-50d28456c0f0",
+  "uuid": "d5024942-bfca-407e-9a81-2de1af93d205",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "pop_equipsell"
+    "syncNodeName": "pop_equipinfo"
   }
 }
