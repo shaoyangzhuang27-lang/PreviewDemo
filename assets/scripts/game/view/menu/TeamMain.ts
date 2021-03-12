@@ -99,7 +99,7 @@ export class TeamMain extends Component {
         // heroIcon.name = childName;
 
         let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
-        script.setHeroID(value as HeroData);
+        script.setHeroData(value as HeroData);
         script.setBtnCallBack((_data:HeroData)=>{
             this._openHeroUpGradeView(_data);
         });  
@@ -165,11 +165,7 @@ export class TeamMain extends Component {
     //图鉴
     private _openBookLibraryView()
     {
-        // test_xt
-        PopMgr.getInstance().popHeroPromotionView(1,()=>{
-            MsgMgr.getInstance().getMsgFormation().requestHeroLvUp(1,1,1,1);
-        });
-
+        PopMgr.getInstance().popBoolLibraryView();
     }
 
     //宠物
