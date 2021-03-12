@@ -10,6 +10,7 @@ import { TipSkill } from '../view/TipSkill';
 import { PopHeroPub } from "../view/pop/PopHeroPub";
 import { PopRecLineUp } from "../view/pub/PopRecLineUp";
 import { PopSummonSettle } from "../view/pop/PopSummonSettle";
+import { PopFragmentSynthesis } from "../view/pop/PopFragmentSynthesis";
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -211,7 +212,7 @@ export class PopMgr extends PopCore  {
         resources.load('prefabs_ui/pop/pop_reclineup', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
-            let script = p.getComponent("PopRecLineUp");
+            let script = p.getComponent("PopRecLineUp") as PopRecLineUp;
             script.setTitle(title);
             script.setIsMaskClose(isMaskClose);
 
@@ -223,9 +224,29 @@ export class PopMgr extends PopCore  {
         resources.load('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
-            let script = p.getComponent("PopSummonSettle");
+            let script = p.getComponent("PopSummonSettle") as PopSummonSettle;
             // script.setTitle(title);
             script.setIsMaskClose(isMaskClose);
+
+        } );
+    }
+
+
+    public popFragmentSynthesisWindow(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+
+        resources.load('prefabs_ui/pop/pop_fragment_synthesis', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            let script = p.getComponent("PopFragmentSynthesis") as PopFragmentSynthesis;
+            script.setTitle(title);
+            script.setContent(content);
+            script.setSubmitCallBack(submitCallBack);
+            script.setCloseCallBack(closeCallBack);
+            script.setIsMaskClose(isMaskClose);
+            
+            // script.popSelf();
+            // script.setIsNeedHide(false);
 
         } );
     }
