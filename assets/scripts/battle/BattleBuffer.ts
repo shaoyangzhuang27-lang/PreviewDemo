@@ -3,6 +3,7 @@ import { _decorator, Component, Node, instantiate } from 'cc';
 import { BattleEffect } from './BattleEffect';
 import { BattleHero } from './BattleHero';
 import { BattleResMgr } from './BattleResMgr';
+import { DamageType } from './BattleTitleBar';
 import { BattleTest } from './test/BattleTest';
 
 enum EBuffType {
@@ -28,18 +29,26 @@ export class BattleBuffer {
     private _buffEffectNode: Node | null = null;
     private _record: Config.buff_new.Record = null as unknown as Config.buff_new.Record;
     private _target: BattleHero = null as unknown as BattleHero;
-    private _shieldValue: number = 0;
 
-    constructor(target: BattleHero, record: Config.buff_new.Record) {
+    private _shieldValue: number = 0;
+    private _atk: number = 0;
+
+
+    constructor(target: BattleHero, attack: BattleHero, record: Config.buff_new.Record) {
         this._target = target
         this._record = record;
 
-        this.time = Date.now() + record.duration * 1000;
-        this.lastTime = this.time;
+        
+        this.lastTime = Date.now() + record.duration * 1000;
+        this.time = this.lastTime;
         switch (record.effectType) {
             case EBuffType.Dot:            // 伤害 = 1
+                this.time = Date.now() + 1000;
+                this._atk = -attack.atk;
                 break;
             case EBuffType.Hot:            // 加血 = 2
+                this.time = Date.now() + 1000;
+                this._atk = attack.atk;
                 break;
             case EBuffType.Control:        // 控制 = 3
                 target.stopAnim();
@@ -65,16 +74,19 @@ export class BattleBuffer {
 
         if (record.particle != "0") {
             let path: string = BattleTest.getBuffPrefabPath(record.particle);
-            let buffPrefab = BattleResMgr.getInstance().getRes(path);
-            if (buffPrefab) {
-                this._buffEffectNode = instantiate(buffPrefab);
-                if (this._buffEffectNode) {
-                    target.playEffect(this._buffEffectNode);
-                    if ((this._buffEffectNode.getComponent("BattleEffect") as BattleEffect).playTime > 0) {
-                        this._buffEffectNode = null;
-                    }
-                }  
-            }
+            if (path) {
+                let buffPrefab = BattleResMgr.getInstance().getRes(path);
+                if (buffPrefab) {
+                    this._buffEffectNode = instantiate(buffPrefab);
+                    if (this._buffEffectNode) {
+                        target.playEffect(this._buffEffectNode);
+                        if ((this._buffEffectNode.getComponent("BattleEffect") as BattleEffect).playTime > 0) {
+                            this._buffEffectNode = null;
+                            // console.log("-------------sdsdf-----------")
+                        }
+                    }  
+                }
+            } 
         
         }
         
@@ -82,6 +94,13 @@ export class BattleBuffer {
 
     doBuff(buffList: BattleBuffer[], idx: number): boolean {
         // TODO 持续伤害代码在这实现
+        if (this._atk != 0) {
+            if (this._atk > 0){
+                this._target.addHp(this._atk * this._record.effectParam1 / 100, DamageType.Heal);
+            } else {
+                this._target.addHp(this._atk * this._record.effectParam1 / 100, DamageType.Skill);
+            }
+        }
 
         if (this.lastTime > this.time) {
             this.time+=1000;
@@ -139,7 +158,11 @@ export class BattleBuffer {
     onClear(): void {
         if (this._buffEffectNode) {
             this._buffEffectNode.destroy();
+            this._buffEffectNode = null;
         }
+        // else {
+        //     console.log("sdfsd++++++++++++++++++++++++")
+        // }
     }
 
     isControl(): boolean {

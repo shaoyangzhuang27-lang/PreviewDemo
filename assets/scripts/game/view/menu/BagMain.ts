@@ -1,7 +1,9 @@
 
 import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, Vec3, tween, ScrollView, Game, resources, instantiate } from 'cc';
 import { GameModel } from '../../model/GameModel';
-import { ItemEquipCell } from './ItemEquipCell';
+import { ItemEquipType,ItemEquipCell } from './ItemEquipCell';
+import { PopItemUseWin } from '../pop/PopItemUseWin';
+import { PopMgr } from '../../control/PopMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('BagMain')
@@ -35,6 +37,15 @@ export class BagMain extends Component {
 
     @property({type :  ScrollView})
     public scroll_ItemView:ScrollView = null as unknown as ScrollView;
+    
+    @property({type: Node })
+    public bgMask:Node = null as unknown as Node;
+
+    //拥有的所有道具显示对象
+    private _bagItemNodeList:Map<number, Node> = new Map<number, Node>();
+
+    //拥有的所有装备列表显示对象
+    private _bagEquipNodeList:Map<number, Node> = new Map<number, Node>();
 
     start () {
         // [3]
@@ -45,6 +56,7 @@ export class BagMain extends Component {
         containerEventHandler.customEventData = '';
         this.selectGroup?.checkEvents.push(containerEventHandler);
         this.btnClose?.on(Node.EventType.TOUCH_END, this.closeHandle, this);
+        this.bgMask.on(Node.EventType.TOUCH_END, this.closeHandle, this);
         this.show();
     }
     
@@ -93,43 +105,63 @@ export class BagMain extends Component {
 
     private _initEquipScrollview()
     {
+        this._bagEquipNodeList.clear()
         let allEquipList = GameModel.getInstance().getBagModel().getBagEquipList();
-        resources.load('prefabs_ui/main/itemEquipCell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/main/itemequipcell', (err:any,res:any)=>{
             for (let key of allEquipList.keys()) {
-                let value = allEquipList.get(key);  //数量
-                // let equipData = ValueMgr.getInstance().getItemByField(TableName.equip,Number(key)) as Config.equip.Record;
+                let value = allEquipList.get(key);  //数量   
                 let equipCell = instantiate(res) as Node;
                 this.scroll_EquipView.content?.addChild(equipCell);
+                this._initPrefab(equipCell,Number(key),Number(value),ItemEquipType.equip); 
 
-                let script = equipCell.getComponent("ItemEquipCell") as ItemEquipCell;
-                script.setItemType(Number(key),Number(value),2,(id:number,num:number)=>{
-                    this._itemEqipCallBack(id,num)
-                })
+                this._bagEquipNodeList.set(Number(key), equipCell);
             }
         })   
     }
 
     private _initItemScrollview()
     {
-        let allItemList = GameModel.getInstance().getBagModel().getBagItemList();
-        resources.load('prefabs_ui/main/itemEquipCell', (err:any,res:any)=>{
-            for (let key of allItemList.keys()) {
-                let value = allItemList.get(key);  //数量
-                // let equipData = ValueMgr.getInstance().getItemByField(TableName.equip,Number(key)) as Config.equip.Record;
-                let equipCell = instantiate(res) as Node;
-                this.scroll_ItemView.content?.addChild(equipCell);
+        let allGoodsList = GameModel.getInstance().getBagModel().getAllGoods();
+        this._bagItemNodeList.clear()
+        resources.load('prefabs_ui/main/itemequipcell', (err:any,res:any)=>{
+            for (let index = 0; index < allGoodsList.length; index++) {
+                let itemGoods = allGoodsList[index];
 
-                let script = equipCell.getComponent("ItemEquipCell") as ItemEquipCell;
-                script.setItemType(Number(key),Number(value),1,(id:number,num:number)=>{
-                    this._itemEqipCallBack(id,num)
-                })
-            }
+                let itemCell = instantiate(res) as Node;
+                this.scroll_ItemView.content?.addChild(itemCell);
+
+                if(itemGoods[0] == Msg.TObjectType.EObject_UsableItem)
+                {
+                    this._initPrefab(itemCell, Number(itemGoods[1]), Number(itemGoods[2]), ItemEquipType.goods, Number(Msg.TObjectType.EObject_UsableItem));
+                    this._bagItemNodeList.set(Number(itemGoods[1]), itemCell);
+                }
+                else{
+                    this._initPrefab(itemCell, Number(itemGoods[0]), Number(itemGoods[2]), ItemEquipType.goods, Number(itemGoods[0]));
+                    this._bagItemNodeList.set(Number(itemGoods[0]), itemCell);
+                }
+            }            
         })   
     }
 
-    private _itemEqipCallBack(itemID:number,itemType:number)
-    {
+    private _initPrefab(iconNode:Node,key:number,value:number,itemType:ItemEquipType, objType:number = 0)
+    {        
+        let script = iconNode.getComponent("ItemEquipCell") as ItemEquipCell;
+        script.setItemUseType(objType)
+        script.setItemType(Number(key),Number(value),itemType,(id:number,itemClickType:number,objClickType:number)=>{
+            this._itemEqipCallBack(id,itemClickType,objClickType)
+        })
+    }
 
+    private _itemEqipCallBack(itemID:number,itemType:number,objType:number = 0)
+    {
+        if(itemType == ItemEquipType.goods)
+        {
+            PopMgr.getInstance().popItemUseSellView(itemID,objType);
+        }
+        else{
+            PopMgr.getInstance().popEquipInfoView(itemID);            
+        }
+        
     }
 
     onDestroy()

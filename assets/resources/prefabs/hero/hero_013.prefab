@@ -20,23 +20,23 @@
         "__id__": 2
       },
       {
-        "__id__": 193
+        "__id__": 195
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 200
-      },
-      {
         "__id__": 202
       },
       {
         "__id__": 204
+      },
+      {
+        "__id__": 206
       }
     ],
     "_prefab": {
-      "__id__": 206
+      "__id__": 208
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -88,19 +88,22 @@
       },
       {
         "__id__": 185
+      },
+      {
+        "__id__": 187
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 187
+        "__id__": 189
       },
       {
-        "__id__": 190
+        "__id__": 192
       }
     ],
     "_prefab": {
-      "__id__": 192
+      "__id__": 194
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -5111,6 +5114,57 @@
     "fileId": "50B5dkYsRBSIp8RNzS/H3q"
   },
   {
+    "__type__": "cc.Node",
+    "_name": "hpPot",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [],
+    "_prefab": {
+      "__id__": 188
+    },
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 2,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_layer": 1073741824,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__id__": 0
+    },
+    "fileId": "e0GFakV3ZMXLXPQNQ2GuED"
+  },
+  {
     "__type__": "cc.SkeletalAnimation",
     "_name": "",
     "_objFlags": 0,
@@ -5119,7 +5173,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 188
+      "__id__": 190
     },
     "playOnLoad": false,
     "_clips": [
@@ -5146,7 +5200,7 @@
     "_useBakedAnimation": true,
     "_sockets": [
       {
-        "__id__": 189
+        "__id__": 191
       }
     ],
     "_id": ""
@@ -5171,7 +5225,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 191
+      "__id__": 193
     },
     "_id": ""
   },
@@ -5198,13 +5252,13 @@
     },
     "_children": [
       {
-        "__id__": 194
+        "__id__": 196
       }
     ],
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 199
+      "__id__": 201
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -5239,17 +5293,17 @@
     "_name": "Cylinder001",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 193
+      "__id__": 195
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 195
+        "__id__": 197
       }
     ],
     "_prefab": {
-      "__id__": 198
+      "__id__": 200
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -5284,11 +5338,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 194
+      "__id__": 196
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 196
+      "__id__": 198
     },
     "_materials": [
       {
@@ -5297,7 +5351,7 @@
     ],
     "_visFlags": 0,
     "lightmapSettings": {
-      "__id__": 197
+      "__id__": 199
     },
     "_mesh": {
       "__uuid__": "d524359b-0533-49d9-ba46-7c35af86572b@c6160"
@@ -5356,7 +5410,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 201
+      "__id__": 203
     },
     "heroBasePot": {
       "__id__": 183
@@ -5373,6 +5427,9 @@
     "heroCenterPot": {
       "__id__": 185
     },
+    "heroHpPot": {
+      "__id__": 187
+    },
     "_id": ""
   },
   {
@@ -5388,7 +5445,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 203
+      "__id__": 205
     },
     "_material": null,
     "_isTrigger": false,
@@ -5419,7 +5476,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 205
+      "__id__": 207
     },
     "_group": 1,
     "_type": 1,

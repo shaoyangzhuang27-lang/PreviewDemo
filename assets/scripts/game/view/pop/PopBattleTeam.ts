@@ -248,7 +248,7 @@ export class PopBattleTeam extends PopBase {
         heroIcon.name = childName;
 
         let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
-        script.setHeroID(value as HeroData);
+        script.setHeroData(value as HeroData);
         script.setBtnCallBack((_data:HeroData)=>{
             this._heroSelect(_data,false);
         });  

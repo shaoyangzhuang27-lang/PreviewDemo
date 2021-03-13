@@ -1,0 +1,49 @@
+
+import { MsgCore} from "../../../core/network/MsgCore";
+import { NetCallFunc } from "../../../core/network/NetInterface";
+import { NetManager } from "../../../core/network/NetManager";
+import { GameModel } from "../../model/GameModel";
+import { NotifyMgr } from "../NotifyMgr";
+import { PopMgr } from "../PopMgr";
+import { MsgBase } from "./MsgBase";
+
+export class MsgBag extends MsgBase{
+
+    public initData(){
+        this.responeMap = new Map<number,[any,NetCallFunc,any]>([
+            [Msg.MsgType.TheSellEquipA,[Msg.SellEquipA,this.responeSellEquip,this]],
+            [Msg.MsgType.TheUseUsableItemA,[Msg.UseUsableItemA,this.responeUseItemBack,this]],
+        ]);
+    }
+
+    //出售装备
+    public requestSellEquip(equipId:number,num:number)
+    {
+        const buffer_data = Msg.SellEquipR.encode({equipID:equipId, sellNum:num}).finish();
+        this.msgMgr?.sendData(Msg.MsgType.TheSellEquipR,buffer_data);
+    }
+    
+    public responeSellEquip(msgId: number, msgData: any)
+    {
+        console.log("出售装备数据返回",msgId,msgData);
+        let newMsgData = msgData as Msg.SellEquipA;
+
+        //抛出通知 出售装备成功
+    }
+    
+    //使用道具
+    public requestUseItem(goodid:number,num:number,typeNum:number)
+    {
+        const buffer_data = Msg.UseUsableItemR.encode({itemID:goodid, itemNum:num, param:typeNum}).finish();
+        this.msgMgr?.sendData(Msg.MsgType.TheUseUsableItemR,buffer_data);
+    }
+    
+    public responeUseItemBack(msgId: number, msgData: any)
+    {
+        console.log("使用道具数据返回",msgId,msgData);
+        let newMsgData = msgData as Msg.UseUsableItemA;
+
+        PopMgr.getInstance().popItemRewardView(newMsgData.itemID,Number(newMsgData.gainObjList[0].num))
+        //抛出通知 出售装备成功
+    }
+}

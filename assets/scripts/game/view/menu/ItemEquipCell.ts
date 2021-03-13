@@ -1,8 +1,15 @@
 
 import { _decorator, Component, Node, Label, resources, SpriteFrame, Sprite } from 'cc';
 import { XConsts } from '../../model/const/XConsts';
+import { XFuns } from '../../model/const/XFuns';
+import { XShare } from '../../model/const/XShare';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
 const { ccclass, property } = _decorator;
+
+export enum ItemEquipType{
+    goods = 1,      //道具
+    equip = 2       //装备           
+}
 
 @ccclass('ItemEquipCell')
 export class ItemEquipCell extends Component {
@@ -24,15 +31,23 @@ export class ItemEquipCell extends Component {
     @property({type :  Node})
     public img_infoBg:Node = null as unknown as Node;
 
-    private _itemType : number = 1;     //区分道具:1、装备:2 
+    private _itemType : number = 1;     //区分道具:1 、装备:2 ItemEquipType.equip
     private _itemID:number = -1;
     private _itemCount:number = 0;
     private _clickCallback :Function | null = null;
+    private _ObjectType:number = Msg.TObjectType.EObject_NULL;
     start () {
         this.img_bg.on(Node.EventType.TOUCH_END, this._openItemEquipInfoView, this);
     }
 
-    //传入道具id,数量，当前数据类型 道具:1、装备:2 
+    //传入道具id,数量， 
+    /**
+     * 
+     * @param id        道具id
+     * @param count     数量
+     * @param type      类型：道具:1 ItemEquipType.goods、装备:2 ItemEquipType.equip
+     * @param callback  回调方法
+     */
     public setItemType(id:number,count:number,type:number,callback:Function | null)
     {
         this._itemID = id;
@@ -42,11 +57,20 @@ export class ItemEquipCell extends Component {
         this._initIcon();
     }
 
+    /**
+     * @param objType 道具类型 枚举值参考Msg.TObjectType.
+     * @param 可使用道具统一传Msg.TObjectType.EObject_UsableItem
+     */
+    public setItemUseType(objType:number)
+    {
+        this._ObjectType = objType;
+    }
+
     private _initIcon()
     {
         //数量
         let labCount:Label = this.lab_count.getComponent(Label) as Label;
-        labCount.string = this._itemCount.toString();
+        labCount.string = XFuns.FormatNumber(this._itemCount);
         if(this._itemCount == 0)        //不需要显示数量时  数量设置为0
         {
             this.lab_count.active = false;
@@ -65,9 +89,6 @@ export class ItemEquipCell extends Component {
             iconPath = "ui/equip/" + iconName + "/spriteFrame"
             qualityPath = "ui/icon/" + qualityName + "/spriteFrame"
 
-            let name = ValueMgr.getInstance().getItemByField(TableName.language_data,equipData.name) as Config.language_data.Record;
-            console.log("装备的id,名称，品质",this._itemID,name.cn,qualityPath)
-
             for (let index = 0; index < this.starlist.length; index++) {
                 if(index >= starCount)
                 {
@@ -77,22 +98,36 @@ export class ItemEquipCell extends Component {
         }
         else{       //道具
             this._setUIIConVisible(false);
-            let itemData:Config.item_usable.Record = ValueMgr.getInstance().getItemByField(TableName.item_usable,this._itemID) as Config.item_usable.Record;
-            let iconName:string = itemData.icon;            
-            let qualityName:string = XConsts.KQualityBgSpriteName[itemData.quality];
-            let itemUseType:number = itemData.itemType;
-
-            qualityPath = "ui/icon/" + qualityName + "/spriteFrame"
-            if(itemUseType == Msg.TUsableItemType.EUsableItemType_ObjectOffline)
+            
+            if(this._ObjectType != Msg.TObjectType.EObject_UsableItem)
             {
-                this.img_infoBg.active = true;
+                this._itemID = this._ObjectType;    //不可使用道具  id就是道具类型
+                if(XShare.getInstance().KObjectQuality.has(this._ObjectType))
+                {
+                    let quality = Number(XShare.getInstance().KObjectQuality.get(this._ObjectType)) ;
+                    let qualityName:string = XConsts.KQualityBgSpriteName[quality];
+                    qualityPath = "ui/icon/" + qualityName + "/spriteFrame";
+                }
+                let iconName:string = XConsts.KObjectIconSpriteName[this._ObjectType];
+                iconPath = "ui/commonIcon/" + iconName + "/spriteFrame";
             }
+            else{
+                let itemData:Config.item_usable.Record = ValueMgr.getInstance().getItemByField(TableName.item_usable,this._itemID) as Config.item_usable.Record;        
+                let qualityName:string = XConsts.KQualityBgSpriteName[itemData.quality];
+                let itemUseType:number = itemData.itemType;
+
+                qualityPath = "ui/icon/" + qualityName + "/spriteFrame"
+                if(itemUseType == Msg.TUsableItemType.EUsableItemType_ObjectOffline)
+                {
+                    this.img_infoBg.active = true;
+                }
+            }
+            
         }
 
         
         resources.load(iconPath, (err,spriteFrame:SpriteFrame) =>
         {
-            console.log("装备道具errerrerrerrerr",err,iconPath)
             if(!err)
             {
                 let sprite = this.img_icon.getComponent(Sprite) as Sprite;
@@ -103,7 +138,6 @@ export class ItemEquipCell extends Component {
         
         resources.load(qualityPath, (err,spriteFrame:SpriteFrame) =>
         {
-            console.log("装备品质errerrerrerrerr",err,qualityPath)
             if(!err)
             {
                 let sprite = this.img_bg.getComponent(Sprite) as Sprite;
@@ -116,7 +150,7 @@ export class ItemEquipCell extends Component {
     {
         if(this._clickCallback)
         {
-            this._clickCallback(this._itemID,this._itemType)
+            this._clickCallback(this._itemID,this._itemType,this._ObjectType)
         }
     }
 
@@ -128,20 +162,7 @@ export class ItemEquipCell extends Component {
             star.active = show;                
         }
     }
-
-    //资源替换
-    private _resourceLoad (path:string,obj:any)
-    {
-        resources.load(path, (err,spriteFrame:SpriteFrame) =>
-        {
-            console.log("装备道具errerrerrerrerr",err,path)
-            if(!err)
-            {
-                let sprite = obj.getComponent(Sprite) as Sprite;
-                sprite.spriteFrame = spriteFrame;
-            }
-        });
-    }
+    
 }
 
 /**

@@ -8,6 +8,29 @@
     ".json"
   ],
   "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "8cb5a588-942e-40ab-82fa-603acc957f1c@6c48a",
+      "displayName": "主角战靴2",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "8cb5a588-942e-40ab-82fa-603acc957f1c"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
     "f9941": {
       "importer": "sprite-frame",
       "uuid": "8cb5a588-942e-40ab-82fa-603acc957f1c@f9941",
@@ -36,29 +59,6 @@
         "atlasUuid": ""
       },
       "ver": "1.0.9",
-      "imported": true,
-      "files": [
-        ".json"
-      ],
-      "subMetas": {}
-    },
-    "6c48a": {
-      "importer": "texture",
-      "uuid": "8cb5a588-942e-40ab-82fa-603acc957f1c@6c48a",
-      "displayName": "主角战靴2",
-      "id": "6c48a",
-      "name": "texture",
-      "userData": {
-        "wrapModeS": "repeat",
-        "wrapModeT": "repeat",
-        "minfilter": "linear",
-        "magfilter": "linear",
-        "mipfilter": "none",
-        "anisotropy": 1,
-        "isUuid": true,
-        "imageUuidOrDatabaseUri": "8cb5a588-942e-40ab-82fa-603acc957f1c"
-      },
-      "ver": "1.0.20",
       "imported": true,
       "files": [
         ".json"

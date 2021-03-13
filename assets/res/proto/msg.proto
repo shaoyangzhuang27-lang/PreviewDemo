@@ -5126,6 +5126,7 @@ message GetHeroBookAwardA {
 	int32 vrmb = 4;
 }
 
+//使用道具
 message UseUsableItemR {
 	int32 itemID = 1;
 	int32 itemNum = 2;

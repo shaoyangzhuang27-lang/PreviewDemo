@@ -4,6 +4,7 @@ import { BattleTest } from "./battle/test/BattleTest";
 import { BattleResMgr } from "./battle/BattleResMgr";
 
 import { ValueMgr } from './game/model/ValueMgr';
+import { BattleMgr } from './battle/BattleMgr';
 
 const { ccclass, property } = _decorator;
 
@@ -11,10 +12,10 @@ const { ccclass, property } = _decorator;
 export class Loading extends Component {
     
     @property(Node)
-    private loadingNode: Node = null;
+    private loadingNode: Node = null as unknown as Node;
 
     @property(ProgressBar)
-    private loadingBar: ProgressBar = null;
+    private loadingBar: ProgressBar = null as unknown as ProgressBar;
 
 
     private _tmpRoatation = new Vec3()
@@ -25,40 +26,31 @@ export class Loading extends Component {
         let t = Date.parse((new Date()).toString());
         this.loadingNode?.getRotation().getEulerAngles(this._tmpRoatation);
         director.preloadScene("scene_main", (c, t)=>{
-            this._tmpProgress = 0.3 * c / t;
-            if (this.loadingBar.progress < this._tmpProgress) {
-                this.loadingBar.progress = this._tmpProgress;
-            }
-            
-        }, ()=>{
-            director.preloadScene("battle", (c, t)=>{
-                this._tmpProgress = 0.3 + 0.3 * c / t;
+                this._tmpProgress = 0.3 * c / t;
                 if (this.loadingBar.progress < this._tmpProgress) {
                     this.loadingBar.progress = this._tmpProgress;
                 }
-            }, ()=>{
-                console.log(Date.parse((new Date()).toString()) - t);
                 
-                BattleTest.buildTestBattle();
-                BattleResMgr.getInstance().startLoad(BattleTest.getLoadResList(), (c, t)=>{
-                        this._tmpProgress = 0.6 + 0.4 * c / t;
-                        if (this.loadingBar.progress < this._tmpProgress) {
-                            this.loadingBar.progress = this._tmpProgress;
-                        }
-                    }, ()=>{
-                        if (ValueMgr.getInstance().isInit()) {
-                            director.loadScene("battle");
-                        } else {
-                            
-                            ValueMgr.getInstance().loadData((cur:number, total:number)=>{
-                                if(cur == total){
-                                    ValueMgr.getInstance().setInit(true);
-                                    director.loadScene("battle");
+            }, ()=>{
+                director.preloadScene("battle", (c, t)=>{
+                    this._tmpProgress = 0.3 + 0.3 * c / t;
+                    if (this.loadingBar.progress < this._tmpProgress) {
+                        this.loadingBar.progress = this._tmpProgress;
+                    }
+                }, ()=>{
+                    console.log(Date.parse((new Date()).toString()) - t);
+                    
+                    BattleMgr.getInstance().buildTest((c, t)=>{
+                                this._tmpProgress = 0.6 + 0.4 * c / t;
+                                if (this.loadingBar.progress < this._tmpProgress) {
+                                    this.loadingBar.progress = this._tmpProgress;
                                 }
-                            });
-                        }          
-                    });
-            });
+                            }, ()=>{
+
+                            director.loadScene("battle");
+                        })        
+                });
+
         });
     }
 

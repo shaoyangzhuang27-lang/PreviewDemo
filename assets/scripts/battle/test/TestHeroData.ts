@@ -92,6 +92,11 @@ export class TestHeroData extends HeroData{
         return this.getTestCfgValueString("prefab");
     }
 
+    // 普通攻击粒子
+    public getNormalAttackParticleName(): string {
+        return this.getTestCfgValueString("normalAttack");
+    }
+
     // 获得主动技能ID
     public getSkillID(): number {
         return this.getTestCfgValue("skillID");

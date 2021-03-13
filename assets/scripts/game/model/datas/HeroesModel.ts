@@ -57,6 +57,25 @@ export class HeroesModel extends BaseModel{
         }
         return null;
     }
+
+    /**
+     * 升星之后 改变英雄数据
+     * @param id 
+     */
+    public resetHeroStarUpInfo(id:number)
+    {
+        if(this._heroList.has(id))
+        {
+            let oldHeroData = this._heroList.get(id) as HeroData;
+            let newHeroData = new HeroData();
+            let heroInfo  = new Msg.HeroInfo();
+            newHeroData = oldHeroData;
+            this._heroList.delete(id);
+//中间数值变化
+            this._heroList.set(id,newHeroData);
+        }
+
+    }
     
     /////////////////////////////////////////////////////
     //////////////////////图鉴相关///////////////////////
