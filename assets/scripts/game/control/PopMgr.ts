@@ -64,7 +64,7 @@ export class PopMgr extends PopCore  {
     //type
     /**
      * 阵容更换界面  
-     * @param typeIndex 当前使用的阵型索引
+     * @param typeIndex 当前使用的阵型索引 数值参考XConsts的阵容索引
      */
     public popBattleTeamView(typeIndex:number|null = null)
     {
