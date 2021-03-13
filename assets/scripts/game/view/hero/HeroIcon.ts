@@ -1,6 +1,7 @@
 /**
+ * 游戏组件:英雄头像
  * @author 黄志清
- * @see 组件:英雄头像
+ * @version 1.0.0,2021.3.13
  */
 
 import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources, math, UITransform } from 'cc';
