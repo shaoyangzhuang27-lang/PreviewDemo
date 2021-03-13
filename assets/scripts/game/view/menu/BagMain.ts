@@ -41,6 +41,12 @@ export class BagMain extends Component {
     @property({type: Node })
     public bgMask:Node = null as unknown as Node;
 
+    //拥有的所有道具显示对象
+    private _bagItemNodeList:Map<number, Node> = new Map<number, Node>();
+
+    //拥有的所有装备列表显示对象
+    private _bagEquipNodeList:Map<number, Node> = new Map<number, Node>();
+
     start () {
         // [3]
         const containerEventHandler = new EventHandler();
@@ -99,6 +105,7 @@ export class BagMain extends Component {
 
     private _initEquipScrollview()
     {
+        this._bagEquipNodeList.clear()
         let allEquipList = GameModel.getInstance().getBagModel().getBagEquipList();
         resources.load('prefabs_ui/main/itemequipcell', (err:any,res:any)=>{
             for (let key of allEquipList.keys()) {
@@ -106,6 +113,8 @@ export class BagMain extends Component {
                 let equipCell = instantiate(res) as Node;
                 this.scroll_EquipView.content?.addChild(equipCell);
                 this._initPrefab(equipCell,Number(key),Number(value),ItemEquipType.equip); 
+
+                this._bagEquipNodeList.set(Number(key), equipCell);
             }
         })   
     }
@@ -113,7 +122,7 @@ export class BagMain extends Component {
     private _initItemScrollview()
     {
         let allGoodsList = GameModel.getInstance().getBagModel().getAllGoods();
-        let bagModel = GameModel.getInstance().getBagModel();
+        this._bagItemNodeList.clear()
         resources.load('prefabs_ui/main/itemequipcell', (err:any,res:any)=>{
             for (let index = 0; index < allGoodsList.length; index++) {
                 let itemGoods = allGoodsList[index];
@@ -123,11 +132,13 @@ export class BagMain extends Component {
 
                 if(itemGoods[0] == Msg.TObjectType.EObject_UsableItem)
                 {
-                    this._initPrefab(itemCell,Number(itemGoods[1]),Number(itemGoods[2]),ItemEquipType.goods,Number(Msg.TObjectType.EObject_UsableItem));
+                    this._initPrefab(itemCell, Number(itemGoods[1]), Number(itemGoods[2]), ItemEquipType.goods, Number(Msg.TObjectType.EObject_UsableItem));
+                    this._bagItemNodeList.set(Number(itemGoods[1]), itemCell);
                 }
                 else{
-                    this._initPrefab(itemCell,Number(itemGoods[0]),Number(itemGoods[2]),ItemEquipType.goods,Number(itemGoods[0]));
-                }                
+                    this._initPrefab(itemCell, Number(itemGoods[0]), Number(itemGoods[2]), ItemEquipType.goods, Number(itemGoods[0]));
+                    this._bagItemNodeList.set(Number(itemGoods[0]), itemCell);
+                }
             }            
         })   
     }
