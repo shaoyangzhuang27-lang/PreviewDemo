@@ -4,7 +4,9 @@ export class XFuns{
     //数值转化
     public static FormatNumber(num:number):string
     {
-        if (num < 100000)
+        if(num < 10000)
+            return num.toString();
+        else if (num < 100000)
             return (num/1000).toFixed(1) + "K";
         else if (num < 10000000)
             return (num / 1000).toFixed() + "K";
@@ -18,11 +20,5 @@ export class XFuns{
             return (num / 1000000000).toFixed() + "B";
         else
             return num.toString();
-    }
-
-    public getStaticIDFromBookId(bookid:number)
-    {
-        let numString = bookid.toString();
-        let starNum = Number(numString.slice(1,2)); 
     }
 }

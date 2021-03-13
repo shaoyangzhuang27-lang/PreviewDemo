@@ -102,10 +102,24 @@ export class PopBattleTeam extends PopBase {
         this.btn_restraint.on(Node.EventType.TOUCH_END, this._onRestraint, this);
     }
     private _onRestraint() {
+        // let t = new Map<number,Node>();
+        // let k = new Array<[number,Node]>();
         // this._bottomHeroItemList.forEach((value,key)=>{
         //     let ran = Math.floor(Math.random()*100);
-        //     value.setSiblingIndex(ran);
+        //     let se = value.getComponent("HeroSelectIcon") as HeroSelectIcon;
+        //     let heroData = se.getHeroData() as HeroData;
+        //     let sortIndex_1:number = heroData.getLevel() * 10000 + heroData.getStar()*1000 + heroData.getCamp() * 10 + heroData.getClasses();
+        //     let sortIndex_2:number = 3000000 - sortIndex_1;
+        //     value.setSiblingIndex(83);
+        //     console.log(value.getSiblingIndex());
+        //     // t.set(sortIndex_2,value);
+        //     k.push([sortIndex_2,value]);
         // });
+        // k.sort((n1,n2) => n1[0] - n2[0])
+        // k.forEach((value,key)=>{
+        //     value[1].setSiblingIndex(key);
+        // })
+
     }
 
     start()
@@ -162,7 +176,7 @@ export class PopBattleTeam extends PopBase {
 
         resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
             this._bottomHeroItemList.clear()
-
+            let k = new Array<[number,Node]>();     //排序存储对象
             for (let heroData of this._allHeroList.values()) {
                 let heroIcon = instantiate(res) as Node;
                 this.scroll_HeroView.content?.addChild(heroIcon);
@@ -195,8 +209,16 @@ export class PopBattleTeam extends PopBase {
                     
                 });
 
+                let sortIndex_1:number = heroData.getLevel() * 10000 + heroData.getStar()*1000 + heroData.getCamp() * 10 + heroData.getClasses();
+                let sortIndex_2:number = 3000000 - sortIndex_1;
+                k.push([sortIndex_2,heroIcon]);               
+                
                 this._bottomHeroItemList.set(heroData.getDyncID(), heroIcon);
             }
+            k.sort((n1,n2) => n1[0] - n2[0])
+            k.forEach((value,key)=>{
+                value[1].setSiblingIndex(key);
+            })
         });
     }
     private _frushButtonHero(){
@@ -226,7 +248,7 @@ export class PopBattleTeam extends PopBase {
         heroIcon.name = childName;
 
         let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
-        script.setHeroID(value as HeroData);
+        script.setHeroData(value as HeroData);
         script.setBtnCallBack((_data:HeroData)=>{
             this._heroSelect(_data,false);
         });  
@@ -374,15 +396,6 @@ export class PopBattleTeam extends PopBase {
             }
         }
     }
-
-
-
-    //////////////////////////////////////////////////////
-    //设置标题
-    // public setTitle(title:string){
-    //     if(this.lab_title)
-    //         this.lab_title.string = title
-    // }
 
     private _onCampClick(event: Event, customEventData: string){
         let tog:Toggle = (event as any);

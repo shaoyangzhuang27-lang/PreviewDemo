@@ -8,6 +8,29 @@
     ".json"
   ],
   "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "e77bd519-6dd1-402c-9642-b8b06896c622@6c48a",
+      "displayName": "主角武器3",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "e77bd519-6dd1-402c-9642-b8b06896c622"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
     "f9941": {
       "importer": "sprite-frame",
       "uuid": "e77bd519-6dd1-402c-9642-b8b06896c622@f9941",
@@ -36,29 +59,6 @@
         "atlasUuid": ""
       },
       "ver": "1.0.9",
-      "imported": true,
-      "files": [
-        ".json"
-      ],
-      "subMetas": {}
-    },
-    "6c48a": {
-      "importer": "texture",
-      "uuid": "e77bd519-6dd1-402c-9642-b8b06896c622@6c48a",
-      "displayName": "主角武器3",
-      "id": "6c48a",
-      "name": "texture",
-      "userData": {
-        "wrapModeS": "repeat",
-        "wrapModeT": "repeat",
-        "minfilter": "linear",
-        "magfilter": "linear",
-        "mipfilter": "none",
-        "anisotropy": 1,
-        "isUuid": true,
-        "imageUuidOrDatabaseUri": "e77bd519-6dd1-402c-9642-b8b06896c622"
-      },
-      "ver": "1.0.20",
       "imported": true,
       "files": [
         ".json"

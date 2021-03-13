@@ -46,8 +46,12 @@ export class ValueCore{
     }
     protected getUrl(tableName:string){
         // let u:string = assetManager.utils.getUuidFromURL("resources/data/"+tableName+".bytes");
-        let u:string = cc.url.raw("resources/data/"+tableName+".bytes");
-        return u;
+        // let u:string = cc.url.raw("resources/data/"+tableName+".bytes");
+
+        let info = assetManager.resources?.getInfoWithPath("./data/"+tableName);
+        let url = assetManager.utils.getUrlWithUuid(info?.uuid as string,{isNative: true, nativeExt: '.bytes'});
+        return url;
+
     }
     protected getPsw(){
         return "Kp/QG.V|!j7A=utb";
