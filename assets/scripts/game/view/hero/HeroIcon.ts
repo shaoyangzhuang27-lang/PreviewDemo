@@ -37,11 +37,10 @@ export class HeroIcon extends Component {
     @property({type :  Node})
     public starlist:Node[] = [];
     
-
+    //英雄数据
     private _heroData : HeroData | null = null as unknown as HeroData;
-    private _starNameList:string[] = new Array<string>();
+
     start () {
-        this._starNameList = ["初级星星","中级星星","高级星星"]
         // [3]
         // this.btn_frame.on(Node.EventType.TOUCH_END, this.openHeroInfoView, this);        
     }
@@ -61,7 +60,7 @@ export class HeroIcon extends Component {
         if(!this._heroData.isRoleHero())
         {
             this.img_camp.active = true;
-            let campIconPath:string = "ui/team/" + campName + "/spriteFrame"
+            let campIconPath:string = "ui/team/" + campName + "/spriteFrame";
             resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
             {
                 if(!err)
@@ -76,7 +75,7 @@ export class HeroIcon extends Component {
             this.img_camp.active = false;
         }
 
-        let heroIconPath:string = "ui/hero/" + iconName + "/spriteFrame"
+        let heroIconPath:string = "ui/hero/" + iconName + "/spriteFrame";
         this._resourceLoad(heroIconPath,this.img_icon);
         
         this.lab_level.string = level.toString();
@@ -112,8 +111,8 @@ export class HeroIcon extends Component {
         let grade:number = Math.floor(star/5);
         let yu:number = (star - 1) % 5 + 1;
 
-        let starName = this._starNameList[grade];
-        let starPath = "ui/icon/" + starName + "/spriteFrame"
+        let starName = ["初级星星","中级星星","高级星星"];
+        let starPath = "ui/icon/" + starName + "/spriteFrame";
 
         for (let index = 0; index < this.starlist.length; index++) {
             if(index >= yu && yu != 0)
@@ -138,7 +137,7 @@ export class HeroIcon extends Component {
     {
         if(this._heroData)
         {
-            let addStar = this._heroData.getStar()+1
+            let addStar = this._heroData.getStar()+1;
             this._setStar(addStar);
         }
     }
