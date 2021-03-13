@@ -13,4 +13,5 @@ export class NotifyMgr extends NotifyCore {
     // public static event_net_version_check:string = "event_net_version_check";
     // public static event_net_version_check:string = "event_net_version_check";
     // public static event_net_version_check:string = "event_net_version_check";
+    public static event_net_hero_locked:string = "event_net_hero_locked";     //英雄锁定状态变化
 }
