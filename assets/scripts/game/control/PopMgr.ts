@@ -187,6 +187,12 @@ export class PopMgr extends PopCore  {
         } );
     }
     
+      /**
+     * 通用类型一弹窗
+     * @param title     窗口标题
+     * @param content   窗体描述内容
+     * @param mode      底部按钮显示样式
+     */
     public popCommonOneWindow(title:string,content:string,mode : number ,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_common_one', (err:any,res:any)=>{
@@ -206,7 +212,6 @@ export class PopMgr extends PopCore  {
     }
 
      //弹出酒馆推荐阵容
-    //type
     public popRecLineUpWindow(title:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_reclineup', (err:any,res:any)=>{

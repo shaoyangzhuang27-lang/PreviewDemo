@@ -1,3 +1,8 @@
+
+/* 游戏组件:通用类型一弹窗
+* @author 郭刚
+* @version 1.0.0,2021.3.13
+*/
 import { _decorator, Component, Node,LabelComponent,Button,SpriteFrame, Sprite,resources, Label } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 const { ccclass, property } = _decorator;
@@ -45,19 +50,38 @@ export class PopCommonOne extends PopBase {
         if(this.lab_content)
             this.lab_content.string = content
     }
+      /**
+    * 设置弹窗按钮mode = 2情况下取消发送回调
+    * @param func      回调函数
+    */
     public setSubmitCallBack(func:Function){
-        this._submitCallFun = func;
+        if(func)
+            this._submitCallFun = func;
     }
 
+    /**
+    * 设置弹窗按钮mode = 1情况下按钮回调
+    * @param func      回调函数
+    */
     public setGoCallBack(func:Function){
-        this._goCallFun = func;
+        if(func)
+            this._goCallFun = func;
     }
 
+    /**
+    * 设置弹窗按钮mode = 2情况下取消按钮回调
+    * @param func      回调函数
+    */
     public setCloseCallBack(func:Function | null){
         if(func)
             this._closeFunc = func;
     }
 
+    /**
+     * 设置弹窗按钮mode = 2情况下发送按钮
+     * @param spriteFramePath      图片路径
+     * @param content      文本内容
+    */
     public setBtnSummitResource(spriteFramePath : string | null,content : string|null)
     {
         if(spriteFramePath)
@@ -80,6 +104,11 @@ export class PopCommonOne extends PopBase {
         }
     }
 
+    /**
+     * 设置弹窗按钮mode = 2情况下取消按钮
+     * @param spriteFramePath      图片路径
+     * @param content      文本内容
+     */
     public setBtnCancelResource(spriteFramePath : string | null,content : string|null)
     {
         if(spriteFramePath)
@@ -102,7 +131,11 @@ export class PopCommonOne extends PopBase {
         }
     }
 
-
+    /**
+     * 设置弹窗按钮mode = 1情况下按钮
+     * @param spriteFramePath      图片路径
+     * @param content      文本内容
+     */
     public setBtnGoResource(spriteFramePath : string | null,content : string|null)
     {
         if(spriteFramePath)
@@ -125,6 +158,10 @@ export class PopCommonOne extends PopBase {
         }
     }
 
+     /**
+     * 设置按钮显示样式
+     * @param mode      底部按钮显示样式 仅支持显示1,2个按钮
+     */
     public setShowMode(mode : number)
     {
         if(mode == 1)

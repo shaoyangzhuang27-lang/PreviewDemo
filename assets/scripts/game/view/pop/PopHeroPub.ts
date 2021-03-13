@@ -1,3 +1,7 @@
+/* 游戏组件:英雄酒馆
+* @author 郭刚
+* @version 1.0.0,2021.3.13
+*/
 import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger,Sprite, SpriteFrame, Button, ButtonComponent,ProgressBar} from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
