@@ -58,16 +58,16 @@ export class HeroPromotion extends PopBase {
     @property({ type: HeroModel, displayName: "英雄形象" })
     public cur_hero_model: HeroModel = null as unknown as HeroModel;
 
-    @property({ type: SkillItem, displayName: "英雄技能1" })
+    @property({ type: SkillItem, displayName: "主动技能" })
     public skillItem0: SkillItem = null as unknown as SkillItem;
 
-    @property({ type: SkillItem, displayName: "英雄技能2" })
+    @property({ type: SkillItem, displayName: "天赋技能1" })
     public skillItem1: SkillItem = null as unknown as SkillItem;
-
-    @property({ type: SkillItem, displayName: "英雄技能3" })
+    
+    @property({ type: SkillItem, displayName: "天赋技能2" })
     public skillItem2: SkillItem = null as unknown as SkillItem;
 
-    @property({ type: SkillItem, displayName: "英雄技能4" })
+    @property({ type: SkillItem, displayName: "天赋技能3" })
     public skillItem3: SkillItem = null as unknown as SkillItem;
 
     @property({ type: ToggleContainer, displayName: "升级装备tab" })
@@ -95,7 +95,7 @@ export class HeroPromotion extends PopBase {
     private _allHeroList: Map<number, HeroData> = new Map<number, HeroData>(); //拥有的所有英雄
 
     private _isHeroUpView: boolean = true; //true标记当前是英雄升级/阶界面，false标记当前是英雄装备界面
-    private _isLvUpView: boolean = false; //true标记当前是英雄升级界面，false标记当前是英雄升阶界面
+    private _isLvUpView: boolean = true; //true标记当前是英雄升级界面，false标记当前是英雄升阶界面
 
     onLoad() {
         super.onLoad();
@@ -261,8 +261,7 @@ export class HeroPromotion extends PopBase {
         // 英雄等级 this._curHeroData.getLevel();
         // 英雄星级 this._curHeroData.getStar();
         // 英雄品阶 this._curHeroData.tier;
-        let curStar= this._curHeroData.getStar();
-        let curMaxLv= XShare.getInstance().KHeroMaxLevelForTier[curStar];
+        let curMaxLv= XShare.getInstance().KHeroMaxLevelForTier[this._curHeroData.tier];
         if(this._curHeroData.getLevel() < curMaxLv)
         {
             this._isLvUpView = true; // 当前应该显示升级界面
@@ -278,7 +277,13 @@ export class HeroPromotion extends PopBase {
     initCurHeroView() {
         this.showCurHeroModel();
         if (this._isHeroUpView) {
-            this._isLvUpView ? this.showHeroLvUpView() : this.showHeroUpgradeView();
+            if(this._isLvUpView){
+                this.showHeroLvUpView();
+            } 
+            else
+            {
+                this.showHeroUpgradeView();
+            }
         }
         else {
             this.showEquipView();
@@ -295,7 +300,8 @@ export class HeroPromotion extends PopBase {
         this.btn_up_tier.active = !this._isLvUpView;     //升阶按钮
         
         //显示技能
-        // this.showSkillItems();
+        this.showSkillItems();
+
         //显示品阶
 
         //显示等级
@@ -304,6 +310,20 @@ export class HeroPromotion extends PopBase {
 
         //显示升级消耗
 
+    }
+
+    showSkillItems()
+    {
+        // // 英雄等级 
+        // let lv =this._curHeroData.getLevel();
+        // // 英雄品阶 
+        // let tier = this._curHeroData.tier;
+        // 英雄星级 
+        let star = this._curHeroData.getStar();
+        this.skillItem0.setSkillData(this._curHeroData.getSkillID(), star);   
+        this.skillItem1.setTalentData(this._curHeroData.getTalentID(0), star, this._curHeroData.isTalentActive(0) );
+        this.skillItem2.setTalentData(this._curHeroData.getTalentID(1), star, this._curHeroData.isTalentActive(1) );
+        this.skillItem3.setTalentData(this._curHeroData.getTalentID(2), star, this._curHeroData.isTalentActive(2) );
     }
 
     // 展示英雄升阶界面
@@ -316,6 +336,7 @@ export class HeroPromotion extends PopBase {
         this.btn_up_tier.active = !this._isLvUpView;     //升阶按钮
 
         //显示技能
+        this.showSkillItems();
 
         //显示品阶
 

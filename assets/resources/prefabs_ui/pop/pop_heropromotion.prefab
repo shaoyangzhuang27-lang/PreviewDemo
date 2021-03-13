@@ -36,7 +36,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 869
+      "__id__": 868
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -5777,7 +5777,7 @@
     "propertyPath": [
       "name"
     ],
-    "value": "skill_item_2"
+    "value": "skill_item_3"
   },
   {
     "__type__": "cc.Node",
@@ -5849,7 +5849,7 @@
     "propertyPath": [
       "name"
     ],
-    "value": "skill_item_3"
+    "value": "skill_item_2"
   },
   {
     "__type__": "cc.Node",
@@ -14431,7 +14431,7 @@
         "__id__": 756
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 790
@@ -19209,9 +19209,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "__prefab": {
-      "__id__": 868
-    },
+    "__prefab": null,
     "btn_close": {
       "__id__": 87
     },
@@ -19287,10 +19285,6 @@
     "_id": ""
   },
   {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "6aCbCOn81PuY+x8i/fWGQA"
-  },
-  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -19301,22 +19295,22 @@
     "fileId": "caHj1ZL55BiqlPCGdaOPLc",
     "targetOverrides": [
       {
-        "__id__": 870
+        "__id__": 869
       },
       {
-        "__id__": 872
+        "__id__": 871
       },
       {
-        "__id__": 874
+        "__id__": 873
       },
       {
-        "__id__": 876
+        "__id__": 875
       },
       {
-        "__id__": 878
+        "__id__": 877
       },
       {
-        "__id__": 880
+        "__id__": 879
       }
     ]
   },
@@ -19333,29 +19327,7 @@
       "__id__": 156
     },
     "targetInfo": {
-      "__id__": 871
-    }
-  },
-  {
-    "__type__": "cc.TargetInfo",
-    "localID": [
-      "92wGcQl9hJ4aeNoXYDtZwH"
-    ]
-  },
-  {
-    "__type__": "cc.TargetOverrideInfo",
-    "source": {
-      "__id__": 867
-    },
-    "sourceInfo": null,
-    "propertyPath": [
-      "skillItem1"
-    ],
-    "target": {
-      "__id__": 256
-    },
-    "targetInfo": {
-      "__id__": 873
+      "__id__": 870
     }
   },
   {
@@ -19377,7 +19349,7 @@
       "__id__": 156
     },
     "targetInfo": {
-      "__id__": 875
+      "__id__": 872
     }
   },
   {
@@ -19399,29 +19371,7 @@
       "__id__": 268
     },
     "targetInfo": {
-      "__id__": 877
-    }
-  },
-  {
-    "__type__": "cc.TargetInfo",
-    "localID": [
-      "92wGcQl9hJ4aeNoXYDtZwH"
-    ]
-  },
-  {
-    "__type__": "cc.TargetOverrideInfo",
-    "source": {
-      "__id__": 867
-    },
-    "sourceInfo": null,
-    "propertyPath": [
-      "skillItem2"
-    ],
-    "target": {
-      "__id__": 262
-    },
-    "targetInfo": {
-      "__id__": 879
+      "__id__": 874
     }
   },
   {
@@ -19443,13 +19393,57 @@
       "__id__": 31
     },
     "targetInfo": {
-      "__id__": 881
+      "__id__": 876
     }
   },
   {
     "__type__": "cc.TargetInfo",
     "localID": [
       "1emsSFCXFLsoNAJr+fd6qd"
+    ]
+  },
+  {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 867
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "skillItem1"
+    ],
+    "target": {
+      "__id__": 262
+    },
+    "targetInfo": {
+      "__id__": 878
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "92wGcQl9hJ4aeNoXYDtZwH"
+    ]
+  },
+  {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 867
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "skillItem2"
+    ],
+    "target": {
+      "__id__": 256
+    },
+    "targetInfo": {
+      "__id__": 880
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "92wGcQl9hJ4aeNoXYDtZwH"
     ]
   }
 ]

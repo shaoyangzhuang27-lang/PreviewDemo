@@ -37,9 +37,8 @@ export class XShare{
     public KCampDamageBonus = 130; //阵营克制增伤倍数
     public KFragmentNumRequired = new Map<number,number>([[1,5],[2,10],[3,20],[4,30],[5,40],]);
     public KGuardingRadius = 10; //警觉半径
-    //英雄星级对应等级上限
+    //英雄品阶对应等级上限
     public KHeroMaxLevelForTier = new Array<number>(10, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260);
-    // 
     public KHeroQualityUpMaterial = new Array<number>(5, 50, 500, 5000, 50000, 500000);
     public KHeroQualityUpMoney = new Array<number>(2000, 10000, 50000, 200000, 1000000, 5000000);
     public KHeroDecomposeMaterial = new Array<number>(1, 10, 100, 1000,  10000,  100000);
@@ -72,9 +71,8 @@ export class XShare{
     public KHeroTierUpAdvanceExp = new Array<number>(20, 60, 300, 800, 1200, 2400, 3600, 4800, 6000, 10000, 15000, 20000, 30000);
     //升阶金币消耗
     public KHeroTierUpMoney = new Array<number>(1000, 10000, 30000, 60000, 100000, 300000, 500000, 800000, 1000000, 2000000, 3000000, 4000000, 5000000);
-    //
     public KHeroStarUpAdvanceExp = new Array<number>(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    // 
+    //升阶属性提升
     public KHeroPropertyUpByTier = new Array<number>(0, 5, 25, 30, 35, 55, 75, 80, 85, 90, 95, 100, 105, 110, 115);
     public KCampBuffMap = new Map<Msg.TCampType,CampBuff>();// Dictionary<Msg.TCampType, CampBuff>
     public KHeroTalentUnlockTier = new Array<number>(2, 4, 5);

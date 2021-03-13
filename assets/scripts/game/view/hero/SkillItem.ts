@@ -1,4 +1,9 @@
-//单个技能框UI单元
+/** 
+ * 单个技能/天赋框UI单元
+ * @author 徐涛
+ * @version 1.0.0,2021.3.13
+**/
+
 import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources, math, UITransform, Material, Vec3, EventTouch, systemEvent, SystemEvent } from 'cc';
 import { PopMgr } from '../../control/PopMgr';
 const { ccclass, property } = _decorator;
@@ -26,39 +31,147 @@ export class SkillItem extends Component {
     public sp_lv:Node = null as unknown as Node;
 
     private _isGrayStatus: boolean = false; // 技能图标灰化标识
-    private _skillId:number =0 ; //技能id
-    private _skillLv:number =0 ; //当前技能等级
-    private _recordSkill : Config.skill.Record = null as unknown as Config.skill.Record;    //记录的技能
-
+    private _skillId:number =0 ; //主动技能id
+    private _talentId:number =0 ; //被动天赋id
+    private _skillOrTalentLv:number =0 ; // 当前技能/天赋等级    
+    private _isUnLocked: boolean = true; // 当前技能/天赋是否已解锁
+    private _recordSkill : Config.skill.Record = null as unknown as Config.skill.Record;//对应技能表内的一条记录数据
+    private _recordTalent : Config.talent.Record = null as unknown as Config.talent.Record;//对应天赋表内的一条记录数据
 
     start () {
         // [3]
-        if(this._skillId ==0) //todo debug
-        {
-            this._skillId= 535002;//破甲弹2级
-        }
-        this.setDefaultBtnCallBack();
     }
 
-    private init()
+    /** 
+    * 设置技能单个Item的技能数据[英雄升级等UI使用]
+    * @param skillId 主动技能id
+    * @param star 英雄星级
+    **/
+    public setSkillData(skillId : number, star: number=1)
     {
-        // 技能图标
-        let iconPath:string = "ui/skill_icon/" + this._recordSkill.image + "/spriteFrame"        
-        if(this._recordSkill.image == "无")
-        {
-            iconPath = "ui/skill_icon/英雄详情_无";
-        }        
-        this._resourceLoad(iconPath, this.img_icon);
+        if(skillId <=0)
+        {           
+            this._initDefaultView(); 
+            return ;
+        }
         
-        this._setLv(this._skillLv);
+        let recordTmp = ValueMgr.getInstance().getItemByField(TableName.skill, skillId);
+        if(!recordTmp)
+        {
+            this._initDefaultView(); 
+            return ;
+        }
+
+        this._recordSkill = recordTmp as Config.skill.Record;
+        this._skillOrTalentLv = this._recordSkill.level;
+        this._skillId = skillId;
+        
+        // 技能图标
+        let iconPath:string = "ui/skill_icon/" + this._recordSkill.image + "/spriteFrame";    
+        this._resourceLoad(iconPath, this.img_icon);
+        // 技能等级
+        this._setLv(this._skillOrTalentLv);
+        // 技能Item点击默认回调显示技能tip
+        this.setDefaultBtnCallBack();
+        // 技能是否解锁
+        if(star >= this._recordSkill.unlockStar)
+        {
+            this._isUnLocked= true;
+            //还原灰化处理
+            this._doUnGrayNode();
+        }
+        else
+        {
+            this._isUnLocked= false;
+            //灰化处理
+            this._doGrayNode();
+        }
+    }
+    
+    /** 
+    * 设置技能单个Item的天赋数据[英雄升级等UI使用]
+    * @param talentId 被动天赋id
+    * @param star 英雄星级
+    **/
+     public setTalentData(talentId : number, star: number=1, isUnLock: boolean = false)
+     {
+         if(talentId <=0)
+         {           
+             this._initDefaultView(); 
+             return ;
+         }
+         
+         let recordTmp = ValueMgr.getInstance().getItemByField(TableName.talent, talentId);
+         if(!recordTmp)
+         {
+             this._initDefaultView(); 
+             return ;
+         }
+ 
+         this._recordTalent = recordTmp as Config.talent.Record;
+         this._skillOrTalentLv = this._recordTalent.level;
+         this._talentId = talentId;
+         
+         // 图标
+         let iconPath:string = "ui/skill_icon/" + this._recordTalent.image + "/spriteFrame";             
+         // todo 由于天赋图标还没资源,暂时统一用  愈合伤口 替代
+         iconPath = "ui/skill_icon/愈合伤口/spriteFrame";             
+         this._resourceLoad(iconPath, this.img_icon);
+         // 等级
+         this._setLv(this._skillOrTalentLv);
+         // Item点击默认回调显示技能tip
+         this.setDefaultBtnCallBack();
+         // 是否解锁
+         if(star >= this._recordTalent.unlockStar)
+         {
+             this._isUnLocked= true;
+             //还原灰化处理
+             this._doUnGrayNode();
+         }
+         else
+         {
+             this._isUnLocked= false;
+             //灰化处理
+             this._doGrayNode();
+         }
     }
 
+    // 默认空的技能/天赋Item显示
+    private _initDefaultView()
+    {
+        this._skillId = 0;
+        this._talentId = 0;
+        this._skillOrTalentLv =0;
+        this._isGrayStatus= false;
+        this._isUnLocked= false;
+        // 显示无技能图标
+        this._resourceLoad("ui/skill_item/英雄详情_无/spriteFrame", this.img_icon);
+        // 技能等级及等级背景不显示
+        this._setLv();
+        return ;
+    }
+
+    //技能等级及等级背景显示
+    private _setLv(lv:number= 0)
+    {
+        if(lv<=1)
+        {
+            this.sp_lv.active= false;
+            this.lab_level.string = "";
+        }
+        else 
+        {
+            this.sp_lv.active= true; 
+            this.lab_level.string =  lv.toString();
+        }
+    }
+    
     //资源替换
     private _resourceLoad (path:string,obj:any)
     {
-        resources.load(path, (err,spriteFrame:SpriteFrame) =>
+        resources.load(path, SpriteFrame, (err, spriteFrame:SpriteFrame) =>
         {
-            console.log("skillItem icon---------",err)
+            console.log("skillItem icon _resourceLoad ---------",err)
             if(!err)
             {
                 let sprite = obj.getComponent(Sprite) as Sprite;
@@ -67,68 +180,29 @@ export class SkillItem extends Component {
         });
     }
 
-    private _setLv(lv:number)
-    {
-        if(lv<=0)
-        {
-            this.sp_lv.active= false;
-            this.lab_level.string = "";
-            //灰化处理
-            this._doGrayNode();
-        }
-        else 
-        {
-            this.sp_lv.active= true; 
-            this.lab_level.string =  (lv==1) ? "": lv.toString();
-            //还原灰化处理
-            this._doUnGrayNode();
-        }
-    }
-
-    //todo
+    // 灰化图片处理
     private _doGrayNode()
-    {
-        this._isGrayStatus= false;
-        //Material
-        //内建材质
-        //let material:Material = Material.getBuiltinMaterial('2d-gray-sprite')
-       // this.head.setMaterial(0, material);
-       //let sprite = this.img_icon.getComponent(Sprite) as Sprite;
-        //   sprite.setMaterial(Material.get);
-    }
-    //todo
-    private _doUnGrayNode()
     {
         this._isGrayStatus= true;
         //todo
-    }
-    ////////////////////////////////
-    //传入技能id  初始化对象
-    public setSkillData(_skillId : number)
-    {
-        if(_skillId==0)
-        {
-            _skillId=512011;// todo debug 圣盾护体
-        }
-        this._recordSkill = ValueMgr.getInstance().getItemByField(TableName.skill, _skillId) as Config.skill.Record;
-        this._skillLv = this._recordSkill.level;
-        this._skillId = _skillId;
-
-        // this._callBack = _callBack;
-        this.init();
-        this.setDefaultBtnCallBack();
+        // Material
+        // 内建材质
+        // let material:Material = Material.getBuiltinMaterial('2d-gray-sprite')
+        // this.head.setMaterial(0, material);
+        // let sprite = this.img_icon.getComponent(Sprite) as Sprite;
+        // sprite.setMaterial(Material.get);
     }
 
-    public setDefaultBtnCallBack()
+    // 还原灰化图片处理
+    private _doUnGrayNode()
     {
-        // todo 默认点击显示技能Tip
-        // let tipPos0 = this.btn_bg.node.getPosition();        
-        // console.log("tipPos0=====>");
-        // console.log(tipPos0);
-        // let tipPos = this.btn_bg.node.getWorldPosition(); 
-        // console.log("tipPos=====>");
-        // console.log(tipPos);
-        
+        this._isGrayStatus= false;
+        //todo
+    }
+
+    // 默认点击显示技能Tip        
+    private setDefaultBtnCallBack()
+    {        
         this.btn_bg.addComponent(Button);        
         this.btn_bg.node.on(Node.EventType.TOUCH_END, (event:EventTouch)=>{               
             let pos = new Vec3(event.getLocation().x, event.getLocation().y,0);  
@@ -137,7 +211,7 @@ export class SkillItem extends Component {
                 console.log("event.target == this.btn_bg");             
                 pos= this.btn_bg.node.getWorldPosition();
                 console.log(pos);
-                //let _node = this.node.getComponent(UITransform) as UITransform;
+                // let _node = this.node.getComponent(UITransform) as UITransform;
                 // let k = this.btn_bg.node.getComponent(UITransform) as UITransform;
                 // pos.y += k.contentSize.height/2;
             }
