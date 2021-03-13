@@ -269,19 +269,41 @@ export class XConsts{
     public static PUB_UI_FRIENDSUMMON : string = "UI_FriendSummon";
     public static PUB_UI_HEROICSUMMON : string = "UI_HeroicSummon";
 
-
+   //英雄推荐阵容
     public static PUB_RECOMMEND_LINEUP_UI_PACKUP : string = "UI_PackUp";
     public static PUB_RECOMMEND_LINEUP_UI_VIEWDETAIL : string = "UI_Detail";
     public static PUB_RECOMMEND_LINEUP_UI_COREHERO : string = "UI_CoreHero";
     public static PUB_RECOMMEND_LINEUP_UI_KNIGHTARMOR : string = "UI_KnightArmor";
     public static PUB_RECOMMEND_LINEUP_UI_CAMPANALYSE : string = "UI_CampAnalyse";
 
+    //获得英雄界面
     public static SUMMON_SETTLE_TITLE : string = "DATA_Achievement6";  //获得英雄
-
 
     public static HERO_ICON_TYPE  = {
         RecLineUp : 1,
         SummonSettle : 2
     }
+
+    //碎片
+    public static UI_FRAGMENT : string  = "UI_Fragment";  //碎片
+    public static UI_NOTFORSALE : string = "UI_NotForSale";  //不可出售
+    public static UI_FRAGMENTNAME : string = "UI_FragmentName";  //{0}星英雄碎片
+    public static UI_FRAGMENTDESC : string = "UI_FragmentDesc";  //收集{0}个英雄碎片可召唤1个{1}星英雄
+    public static UI_FRAGMENTCAMPNAME : string = "UI_FragmentCampName";  //{0}星{1}英雄碎片
+    public static UI_FRAGMENTCAMPDESC : string = "UI_FragmentCampDesc";  //收集{0}个英雄碎片可召唤1个{1}星{2}英雄
+    public static UI_FRAGMENTCLASSESNAME : string = "UI_FragmentClassesName";  //{0}星{1}英雄碎片
+    public static UI_FRAGMENTCLASSESDESC : string = "UI_FragmentClassesDesc";  //收集{0}个英雄碎片可召唤1个{1}星{2}英雄
+    public static UI_FRAGMENTHERONAME : string = "UI_FragmentHeroName";  //{0}星{1}碎片
+    public static UI_FRAGMENTHERODESC : string = "UI_FragmentHeroDesc";  //收集{0}个碎片可召唤1个{1}星{2}
+    public static UI_FRAGMENTUSE : string = "UI_FragmentUse";  //召唤
+    public static UI_INFO : string = "UI_Info";  //信息
+
+    public static FRAGMENT_SYNTHESIS_TYPE  = {
+        FragmentName : 1,  
+        FragmentCampName : 2,
+        FragmentClassesName : 3,
+        FragmentHeroName : 4
+    }
+
 
 } 

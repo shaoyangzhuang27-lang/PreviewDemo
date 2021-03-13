@@ -21,6 +21,7 @@ export namespace XStruct {
            }
        }
 
+       //英雄icon信息
        namespace hero_icon_info {
            /** Properties of a Record. */
            interface IRecord {
@@ -38,6 +39,34 @@ export namespace XStruct {
                level : number;
                frame :string;
                img : string;
+           }
+       }
+
+       //碎片合成弹窗信息
+       namespace fragment_synthesis_info {
+           /** Properties of a Record. */
+           interface IRecord {
+               frame?:(string|null);
+               camp?: (string|null);
+               star?: (number|null);
+               quality?:(string|null);
+               img?:(string|null);
+               type : (number|null);
+               maxNum :(number|null);
+               curNum : (number|null);
+           }
+           /** Represents a Record. */
+           class Record implements IRecord {
+               constructor(p?: XStruct.fragment_synthesis_info.IRecord);
+               frame :string;
+               camp : string;
+               star : number;
+               quality : string;
+               img : string;
+               type : number;
+               maxNum : number;
+               curNum : number;
+
            }
        }
    }
