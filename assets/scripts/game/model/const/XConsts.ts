@@ -300,10 +300,10 @@ export class XConsts{
     public static UI_INFO : string = "UI_Info";  //信息
 
     public static FRAGMENT_SYNTHESIS_TYPE  = {
-        FragmentName : 1,  
-        FragmentCampName : 2,
-        FragmentClassesName : 3,
-        FragmentHeroName : 4
+        FragmentRandom : 1,
+        FragmentCampRandom : 2,
+        FragmentClassesRandom : 3,
+        FragmentHero : 4
     }
 
 

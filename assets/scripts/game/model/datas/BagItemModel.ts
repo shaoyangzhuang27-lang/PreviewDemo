@@ -15,6 +15,9 @@ export class BagItemModel extends BaseModel{
 
     private _notSellItemStingList:Map<Msg.TObjectType, Array<string>> = new Map<Msg.TObjectType, Array<string>>();
 
+    //玩家所有碎片信息合集
+    private _fragmentSynthesisInfoList : Array<XStruct.fragment_synthesis_info.IRecord> = new Array<XStruct.fragment_synthesis_info.IRecord>();
+    
     public initBagItemList(msg:Msg.GetPlayerDataA)
     {
         this._bagItemList.clear();
@@ -31,7 +34,52 @@ export class BagItemModel extends BaseModel{
             tempMap.set(Number(key), Number(value));
             this._allItemList.push([Msg.TObjectType.EObject_UsableItem, Number(key),Number(value)]);
         }
+
+       
         this._setNotSellItemStringMap()
+    }
+
+
+    public initFragmentSynthesisInfoList(msg : Msg.GetPlayerDataA)
+    {
+        let info : XStruct.fragment_synthesis_info.IRecord = {
+            frame :"",
+            camp : "",
+            star : 0,
+            quality : "",
+            img : "",
+            type : 0,
+            maxNum : 0,
+            curNum : 0
+        }  
+        for(let key in msg.fragmentList){
+            let value = msg.fragmentList[key];
+
+            if(value.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentRandom)
+            {
+                //随机英雄 
+                info.star = value.star;
+            }
+            else if(value.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentCampRandom)
+            {
+                //阵营英雄
+                info.camp = String(value.param);
+                info.star = value.star;
+            }
+            else if(value.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentClassesRandom)
+            {
+                //传奇英雄
+                info.quality = String(value.param);
+                info.star = value.star;
+            }
+            else if(value.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentHero)
+            {
+                //指定英雄
+                var heroId = value.param;
+
+            }
+
+        }
     }
 
     //获取背包道具
