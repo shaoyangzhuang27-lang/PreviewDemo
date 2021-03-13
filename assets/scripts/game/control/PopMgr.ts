@@ -1,5 +1,6 @@
 import {  Node,resources,instantiate,LabelComponent,Vec3,tween,Scene, Script } from 'cc';
 import { PopSimple } from "../view/pop/PopSimple";
+import { PopRisingStarTower } from "../view/pop/PopRisingStarTower";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
 import { TipDemo } from '../view/TipDemo';
@@ -88,6 +89,18 @@ export class PopMgr extends PopCore  {
             let script = p.getComponent("HeroPromotion");
             script.setIsMaskClose(isMaskClose);
             script.setCurrentHeroId(heroId);
+        } );
+    }
+
+    //弹出升星塔界面界面 
+    public popStarUpView(submitCallBack:Function = ()=>{},closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_risingstartower', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopRisingStarTower");
+            script.setIsMaskClose(isMaskClose);
         } );
     }
 

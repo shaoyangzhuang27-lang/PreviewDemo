@@ -11,6 +11,7 @@ import { MsgCore } from "../../core/network/MsgCore";
 import { MsgLogin } from "./msg/MsgLogin";
 import { MsgGame } from "./msg/MsgGame";
 import { MsgFormation } from "./msg/MsgFormation";
+import { MsgStarUp } from "./msg/MsgStarUp";
 import { MsgBag } from "./msg/MsgBag";
 import { MsgBase } from "./msg/MsgBase";
 
@@ -64,6 +65,11 @@ export class MsgMgr extends MsgCore{
     public getMsgBag(){
         return this._msgBag;
     }
+
+    private _msgStarUp : MsgStarUp = new MsgStarUp(this);
+    public getMsgStarUp(){
+        return this._msgStarUp;
+    }
     //消息定义-------------------------------------------------
     
     //消息注册-------------------------------------------------
@@ -72,6 +78,7 @@ export class MsgMgr extends MsgCore{
         this._msgs.push(this._msgGame)
         this._msgs.push(this._msgFormation);
         this._msgs.push(this._msgBag);
+        this._msgs.push(this._msgStarUp);
     }
     //消息注册-------------------------------------------------
 
