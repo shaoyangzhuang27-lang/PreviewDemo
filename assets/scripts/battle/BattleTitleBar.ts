@@ -81,9 +81,8 @@ export class BattleTitleBar extends Component {
         this._battleUiTitleNode.setPosition(this._targetPos);
     }
 
-    createTitleBar(camera: Camera, canvas: Node, isGreen: boolean): void {
+    createTitleBar(camera: Camera, parentNode: Node, isGreen: boolean): void {
         this._camera = camera.getComponent(Camera);
-        // this._canvas = canvas;
         this._battleUiTitleNode = instantiate(this.BattleUiTitlePrefab);
 
         let hpBarList = this._battleUiTitleNode.getChildByName("hp")?.getComponents(ProgressBar) as [ProgressBar];
@@ -101,7 +100,7 @@ export class BattleTitleBar extends Component {
 
         this._powBarComponent = this._battleUiTitleNode.getChildByName("pow")?.getComponent(ProgressBar) as ProgressBar;
         this._fly_words_node = this._battleUiTitleNode.getChildByName("fly_words_node");
-        canvas.addChild(this._battleUiTitleNode);
+        parentNode.addChild(this._battleUiTitleNode);
     }
 
     removeTitleBar(): void {
@@ -124,7 +123,7 @@ export class BattleTitleBar extends Component {
         }
     }
 
-    flyWords(v: number, damageType: number): void {
+    flyWords(v: number, damageType: DamageType): void {
         if(!this.FlyWordsPrefab) {
             return;
         }

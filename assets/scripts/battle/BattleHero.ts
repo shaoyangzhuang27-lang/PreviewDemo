@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, SkeletalAnimation, AnimationState, Vec3, BoxCollider, RigidBody, Enum, instantiate, Prefab, macro, director } from 'cc';
+import { _decorator, Component, Node, SkeletalAnimation, AnimationState, Vec3, BoxCollider, RigidBody, Enum, instantiate, Prefab, macro, director, ParticleSystem } from 'cc';
 const { ccclass, property } = _decorator;
 
 
@@ -13,6 +13,7 @@ import { TableName, ValueMgr } from '../game/model/ValueMgr';
 // TODO
 import { BattleTest } from './test/BattleTest';
 import { BattleBuffer } from './BattleBuffer';
+import { BattleDelayDamage } from './BattleDelayDamage';
 
 
 const RunSpeed = 7;
@@ -74,7 +75,7 @@ enum EEffectCondType {
     TargetHPLessThanSelf    // 目标生命低于自身 = 7
 }
 
-enum EEffectType {
+export enum EEffectType {
     Null,
     Damage,                     // 伤害 = 1, 攻击百分比	
     Heal,                       // 加血 = 2, 攻击百分比	
@@ -158,10 +159,14 @@ export class BattleHero extends Component {
     private _buffPropertyMap = new Map<Msg.THeroPropertyType, number>();
 
     private _recordSkill: Config.skill.Record | null = null;
+
+    private _normalAttackPrefab: Prefab | null = null;
     private _skillPrefab: Prefab | null = null;
     
 
     private _buffList: BattleBuffer[] = [];
+    private _flyDamageList: BattleDelayDamage[] = [];
+
     // public static Event = {
     //     DIE: "DIE",
     // }
@@ -205,11 +210,14 @@ export class BattleHero extends Component {
         this.initTitleBar();
 
         this.refreshData();
+
         this.refreshAttackSpeed();
+        this.refreshSkillSpeed();
     }
 
     initHeroBase(): void {
         let heroBaseNode = instantiate(BattleResMgr.getInstance().getRes(this._heroData.getPrefabPath()));
+        this.node.name =  heroBaseNode.name;
         heroBaseNode.name = "heroBase";
         heroBaseNode.setPosition(0, 0, 0);
         this.node.addChild(heroBaseNode);
@@ -246,21 +254,15 @@ export class BattleHero extends Component {
     }
 
     initBattleData(): void {
-        this.maxHp = Math.ceil(this._heroData.getMaxHP());
-        
-        this.atk = this._heroData.getATK();
-        this.def = 0;
-        this.range = this._heroData.getRange();
-        this.spd = this._heroData.getSpeed();
-        this.skillSpd = 0;
-        this.crt = 0;
-        this.crtDmg = 0;
-        this.hitRat = 0;
-        this.dodge = 0;
-        this.defBreak = 0;
+        this.refreshBattleData();
+        // 普通攻击特效
+        let normalAttackParticleName = this._heroData.getNormalAttackParticleName();
+        if (normalAttackParticleName != "0") {
+            this._normalAttackPrefab = BattleResMgr.getInstance().getRes(normalAttackParticleName);
+        }
 
+        // 主动技能果
         this._recordSkill = null as unknown as Config.skill.Record;
-        
         if (this._heroData.getSkillID()) {
             this._recordSkill = ValueMgr.getInstance().getItemByField(TableName.skill, this._heroData.getSkillID()) as Config.skill.Record;
             if (this._recordSkill) {
@@ -276,7 +278,6 @@ export class BattleHero extends Component {
                 
             }
         }
-
         if (this._recordSkill) {
             this.maxPow = 100;
         } else {
@@ -287,7 +288,18 @@ export class BattleHero extends Component {
     }
 
     refreshBattleData(): void {
+        this.maxHp = Math.ceil(this._heroData.getMaxHP());
         
+        this.atk = this._heroData.getATK();
+        this.def = this._heroData.getDEF();
+        this.range = this._heroData.getRange();
+        this.spd = this._heroData.getSpeed();
+        this.skillSpd = this._heroData.getSkillSpeed();
+        this.crt = 0;
+        this.crtDmg = 0;
+        this.hitRat = 0;
+        this.dodge = 0;
+        this.defBreak = 0;
     }
 
     setEmbattleedSite(sit: number): void {
@@ -301,14 +313,26 @@ export class BattleHero extends Component {
     refreshData(): void {
         this.setHp(this.maxHp);
         this.setPow(0);
+        this.clearBuff();
     }
 
     refreshAttackSpeed(): void {
         let a: AnimationState = this._heroSkeletalAnimation.getState("attack");
-        a.speed = a.length / this.spd
+        if (a) {
+            a.speed = a.length / this.spd
+        }
+        
+    }
+
+    refreshSkillSpeed(): void {
+        let a: AnimationState = this._heroSkeletalAnimation.getState("skill");
+        if (a) {
+            a.speed = a.length / this.skillSpd
+        }
     }
 
     revive(): void {
+        this.refreshBattleData();
         this.refreshData();
         this._heroBase.playIdle();
     }
@@ -327,7 +351,7 @@ export class BattleHero extends Component {
 
     initTitleBar(): void {
            
-        this._battleTitleBar.createTitleBar(this._battleCtrl.camera, this._battleCtrl.canvas, !this.isEnemy());
+        this._battleTitleBar.createTitleBar(this._battleCtrl.camera, this._battleCtrl.battleUiNode, !this.isEnemy());
         
         this._battleTitleBar.setHpPercent(1);
         this._battleTitleBar.setPowPercent(0);
@@ -599,6 +623,8 @@ export class BattleHero extends Component {
     }
 
     onSkill(): void {
+        // let a = new ParticleSystem();
+        
         // 到技能关键帧了
         console.log("onSkill+++++++++++++++++++");
         if (this._recordSkill && this._skillPrefab) {
@@ -639,7 +665,7 @@ export class BattleHero extends Component {
                     console.warn("BattleHero recordSkill.targetType 技能未实现！！！！"); 
                     break;
                 case ESkillTargetType.LowerHpTeammate: // 每个血少己方
-                    targetList = this._armyList.slice(0, this._armyList.length - 1);
+                    targetList = this._armyList.slice(0, this._armyList.length);
                     if (this._recordSkill.targetNumber >= targetList.length) {
                         break;
                     }
@@ -842,7 +868,10 @@ export class BattleHero extends Component {
         this._heroBase.playAttack();
     }
 
-    onAttack(): void {    
+    onAttack(): void {
+        if (this._normalAttackPrefab) {
+
+        }
         this.doHitDamager();
     }
 
@@ -884,17 +913,22 @@ export class BattleHero extends Component {
         //     }
         // }
         
-        let buff: BattleBuffer = new BattleBuffer(this, record);
+        let buff: BattleBuffer = new BattleBuffer(this, attack, record);
+
+        let a: Map<BattleBuffer, BattleBuffer> = new Map<BattleBuffer, BattleBuffer>();
+        a.set(buff, buff);
+
+        console.log(a);
 
         if (this._buffList.length == 0) {
             this._buffList.push(buff);
         } else {
 
-            if (this._buffList[this._buffList.length -1].time < buff.time) {
+            if (this._buffList[this._buffList.length -1].time <= buff.time) {
                 this._buffList.push(buff);
             } else {
                 for (let i = 0; i < this._buffList.length; i++) {
-                    if (this._buffList[0].time > buff.time) {
+                    if (this._buffList[i].time > buff.time) {
                         this._buffList.splice(i, 0, buff);
                         break;
                     }
@@ -945,11 +979,11 @@ export class BattleHero extends Component {
             }
 
             for (; i < l.length; i++) {
-                if (this._buffList[this._buffList.length -1].time < l[i].time) {
+                if (this._buffList[this._buffList.length -1].time <= l[i].time) {
                     this._buffList.push(l[i]);
                 } else {
                     for (let j = 0; j < this._buffList.length; j++) {
-                        if (this._buffList[0].time > l[i].time) {
+                        if (this._buffList[j].time > l[i].time) {
                             this._buffList.splice(j, 0, l[i]);
                             break;
                         }
@@ -961,7 +995,7 @@ export class BattleHero extends Component {
     }
 
     // damage正数为加血
-    addHp(damage: number, damageType: number): void {
+    addHp(damage: number, damageType: DamageType): void {
         damage = Math.ceil(damage);
 
         // 处理护盾 TODO 之后内优化内存换时间
@@ -1055,12 +1089,16 @@ export class BattleHero extends Component {
         this._curActFunc = null;
         this._battleTitleBar.setVisible(false);
         this._heroBase.playDie();
+        this.clearBuff();
+       
+        this._buffList = [];
+        this._battleCtrl.onHeroDie(this);
+    }
 
+    clearBuff(): void {
         for (let i = 0; i < this._buffList.length; i++) {
             this._buffList[i].onClear();
         }
-        this._buffList = [];
-        this._battleCtrl.onHeroDie(this);
     }
 
     playEffect(effectNode: Node): void {

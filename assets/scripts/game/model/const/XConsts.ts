@@ -26,12 +26,13 @@ export class XConsts{
     public static  KIAPNameStarterTenSummon:string = "IAPNameStarterTenSummon";
     public static  KDailyRechargeDayCount:number = 5;
 
-    public static  OrderMainUI = 0;
-    public static  OrderPopHide = 1;
-    public static  OrderPopShow = 2;
-    public static  OrderTip = 2;
-    public static  OrderLoading = 3;
-    public static  OrderToash = 4;
+    public static  OrderStage = 0;
+    public static  OrderMainUI = 1;
+    public static  OrderPopHide = 2;
+    public static  OrderPopShow = 3;
+    public static  OrderTip = 3;
+    public static  OrderLoading = 4;
+    public static  OrderToash = 5;
 
 
     //图集名称
