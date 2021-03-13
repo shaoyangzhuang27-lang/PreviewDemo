@@ -8,7 +8,8 @@ import { XConsts } from '../model/const/XConsts';
 import { TipSkill } from '../view/TipSkill';
 import { PopHeroBookView } from "../view/pop/PopHeroBookView";
 import { PopItemUseWin } from "../view/pop/PopItemUseWin";
-import { PopEquipInfoWin } from "../view/pop/PopEquipSellWin";
+import { PopEquipInfoWin } from "../view/pop/PopEquipInfoWin";
+import { PopEquipSaleView } from "../view/pop/PopEquipSaleView";
 import { PopItemReward } from '../view/pop/popItemReward';
 export class PopMgr extends PopCore  {
 
@@ -60,16 +61,19 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    //弹出阵容更换界面
     //type
-    public popBattleTeamView(type:number,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    /**
+     * 阵容更换界面  
+     * @param typeIndex 当前使用的阵型索引
+     */
+    public popBattleTeamView(typeIndex:number|null = null)
     {
         resources.load('prefabs_ui/pop/pop_battleteam', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
             let script = p.getComponent("PopBattleTeam");
-            script.setIsMaskClose(isMaskClose);
+            // script.setIsMaskClose(isMaskClose);
             // script.setInitTeamView(type)
         } );
     }
@@ -166,7 +170,12 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    //弹出道具使用出售
+    /**
+     * 道具使用(信息)界面
+     * @param id    道具id
+     * @param objType   道具类型  数值对应Msg.TObjectType
+     * @param isVisit   参观模式 不可使用、出售       
+     */
     public popItemUseSellView(id:number,objType:number, isVisit:boolean|null = null)
     {
         resources.load('prefabs_ui/pop/pop_itemuse', (err:any,res:any)=>{
@@ -178,7 +187,23 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    //弹出装备信息
+    
+    public popItemRewardView(id:number,num:number)
+    {
+        resources.load('prefabs_ui/pop/pop_itemreward', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopItemReward") as PopItemReward;
+            script.setItemInfo(id,num);
+        } );
+    }
+
+    /**
+     * 装备信息界面
+     * @param id    装备id
+     * @param isVisit   参观模式   不显示出售按钮
+     */
     public popEquipInfoView(id:number,isVisit:boolean|null = null)
     {
         resources.load('prefabs_ui/pop/pop_equipinfo', (err:any,res:any)=>{
@@ -190,15 +215,18 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    //弹出获得物品弹出（使用道具）
-    public popItemRewardView(id:number,num:number)
+    /**
+     * 装备出售界面
+     * @param id  装备id
+     */
+    public popEquipSellView(id:number)
     {
-        resources.load('prefabs_ui/pop/pop_itemreward', (err:any,res:any)=>{
+        resources.load('prefabs_ui/pop/pop_equipsell', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
-            let script = p.getComponent("PopItemReward") as PopItemReward;
-            script.setItemInfo(id,num);
+            let script = p.getComponent("PopEquipSaleView") as PopEquipSaleView;
+            script.setEquipSaleType(id);
         } );
     }
 }
