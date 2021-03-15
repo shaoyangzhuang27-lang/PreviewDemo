@@ -1,6 +1,7 @@
 import {  Node,resources,instantiate,LabelComponent,Vec3,tween,Scene, Script } from 'cc';
 import { PopSimple } from "../view/pop/PopSimple";
 import { PopRisingStarTower } from "../view/pop/PopRisingStarTower";
+import { PopStarUpResult } from "../view/pop/PopStarUpResult";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
 import { TipDemo } from '../view/TipDemo';
@@ -12,6 +13,7 @@ import { PopItemUseWin } from "../view/pop/PopItemUseWin";
 import { PopEquipInfoWin } from "../view/pop/PopEquipInfoWin";
 import { PopEquipSaleView } from "../view/pop/PopEquipSaleView";
 import { PopItemReward } from '../view/pop/popItemReward';
+import { HeroData } from '../model/datas/HeroData';
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -99,7 +101,21 @@ export class PopMgr extends PopCore  {
             let p = instantiate( res );
             this.pushWindow(p)
 
-            let script = p.getComponent("PopRisingStarTower");
+            let script = p.getComponent("PopRisingStarTower") as PopRisingStarTower;
+            script.setIsMaskClose(isMaskClose);
+        } );
+    }
+
+    //弹出升星成功界面 
+    public popStarUpResultView(HeroInfo:HeroData,newHeroInfo:HeroData,submitCallBack:Function = ()=>{},closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_starup_result', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopStarUpResult") as PopStarUpResult;
+            script.setHeroData(HeroInfo);
+            script.setnewHeroData(newHeroInfo);
             script.setIsMaskClose(isMaskClose);
         } );
     }
