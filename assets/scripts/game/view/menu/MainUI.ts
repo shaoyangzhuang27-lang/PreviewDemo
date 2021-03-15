@@ -59,6 +59,9 @@ export class MainUI extends Component {
     @property({type: Node, displayName: "挂机奖励"})
     public btn_offline:Node | null = null;
 
+    @property({ type: Node, displayName: "挑战首领" })
+    public btn_fight: Node = null as unknown as Node;
+
     onLoad(){
         this.btn_hero.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
         this.btn_team.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
@@ -67,7 +70,9 @@ export class MainUI extends Component {
         this.btn_guild.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
         this.btn_coin.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
         this.btn_diamond.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        // 
         this.btn_offline?.on(Node.EventType.TOUCH_END, this.buttonBtnOffLineClick, this)
+        this.btn_fight?.on(Node.EventType.TOUCH_END, this.buttonBtnFightClick, this)
 
         // 监听事件
         NotifyMgr.getInstance().addNotifyHandler("event_net_offline", this.openOfflineBonus, this);
@@ -119,9 +124,14 @@ export class MainUI extends Component {
         });
     }
     // 点击宝箱
-    buttonBtnOffLineClick(event:any){
+    buttonBtnOffLineClick(event: any){
         // 请求数据
         MsgMgr.getInstance().getMsgOffline().requestGainOfflineAwardR();
+    }
+
+    // 点击挑战首领
+    buttonBtnFightClick(event: any){
+        console.log("点击挑战首领")
     }
 
     buttonBtnClick(event:any){
