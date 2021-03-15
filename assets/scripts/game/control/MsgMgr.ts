@@ -14,6 +14,7 @@ import { MsgFormation } from "./msg/MsgFormation";
 import { MsgStarUp } from "./msg/MsgStarUp";
 import { MsgBag } from "./msg/MsgBag";
 import { MsgBase } from "./msg/MsgBase";
+import { MsgOffline } from "./msg/MsgOffline";
 
 
 class NetTips implements INetworkTips {
@@ -79,10 +80,16 @@ export class MsgMgr extends MsgCore{
         this._msgs.push(this._msgFormation);
         this._msgs.push(this._msgBag);
         this._msgs.push(this._msgStarUp);
+        this._msgs.push(this._msgOffline);
     }
     //消息注册-------------------------------------------------
 
     
+
+    private _msgOffline : MsgOffline = new MsgOffline(this);
+    public getMsgOffline() {
+        return this._msgOffline
+    }
 
     public initLoginServer(){
         this._initMsg()
@@ -105,7 +112,7 @@ export class MsgMgr extends MsgCore{
     }
     
     public connectLoginServer(channelId: number = 0){
-        NetManager.getInstance().connect({ url: "ws://192.168.15.132:17183" },channelId);//开启连接
-        // NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启本地连接
+        //NetManager.getInstance().connect({ url: "ws://192.168.15.68:17183" },channelId);//开启连接
+        NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启本地连接
     }
 }

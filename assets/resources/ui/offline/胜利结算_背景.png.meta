@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "6814273b-4f06-4131-8630-4246f23e825b",
+  "uuid": "6096d88a-5795-4284-b8e8-07ab7801a064",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "6814273b-4f06-4131-8630-4246f23e825b@6c48a",
-      "displayName": "底部弹框-人物属性突破_通用黄按钮小",
+      "uuid": "6096d88a-5795-4284-b8e8-07ab7801a064@6c48a",
+      "displayName": "胜利结算_背景",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "6814273b-4f06-4131-8630-4246f23e825b"
+        "imageUuidOrDatabaseUri": "6096d88a-5795-4284-b8e8-07ab7801a064"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "6814273b-4f06-4131-8630-4246f23e825b@f9941",
-      "displayName": "底部弹框-人物属性突破_通用黄按钮小",
+      "uuid": "6096d88a-5795-4284-b8e8-07ab7801a064@f9941",
+      "displayName": "胜利结算_背景",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 116,
-        "height": 58,
-        "rawWidth": 116,
-        "rawHeight": 58,
+        "width": 471,
+        "height": 532,
+        "rawWidth": 471,
+        "rawHeight": 532,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "6814273b-4f06-4131-8630-4246f23e825b@6c48a",
+        "imageUuidOrDatabaseUri": "6096d88a-5795-4284-b8e8-07ab7801a064@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "6814273b-4f06-4131-8630-4246f23e825b@f9941"
+    "redirect": "6096d88a-5795-4284-b8e8-07ab7801a064@f9941"
   }
 }

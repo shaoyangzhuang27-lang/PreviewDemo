@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "6814273b-4f06-4131-8630-4246f23e825b",
+  "uuid": "35a34e2a-4cc0-4d52-b4d0-1e5f8786af1e",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "6814273b-4f06-4131-8630-4246f23e825b@6c48a",
-      "displayName": "底部弹框-人物属性突破_通用黄按钮小",
+      "uuid": "35a34e2a-4cc0-4d52-b4d0-1e5f8786af1e@6c48a",
+      "displayName": "胜利结算_结算抽奖背景",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "6814273b-4f06-4131-8630-4246f23e825b"
+        "imageUuidOrDatabaseUri": "35a34e2a-4cc0-4d52-b4d0-1e5f8786af1e"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "6814273b-4f06-4131-8630-4246f23e825b@f9941",
-      "displayName": "底部弹框-人物属性突破_通用黄按钮小",
+      "uuid": "35a34e2a-4cc0-4d52-b4d0-1e5f8786af1e@f9941",
+      "displayName": "胜利结算_结算抽奖背景",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 116,
-        "height": 58,
-        "rawWidth": 116,
-        "rawHeight": 58,
-        "borderTop": 0,
-        "borderBottom": 0,
-        "borderLeft": 0,
-        "borderRight": 0,
+        "width": 55,
+        "height": 57,
+        "rawWidth": 55,
+        "rawHeight": 57,
+        "borderTop": 27,
+        "borderBottom": 27,
+        "borderLeft": 27,
+        "borderRight": 27,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "6814273b-4f06-4131-8630-4246f23e825b@6c48a",
+        "imageUuidOrDatabaseUri": "35a34e2a-4cc0-4d52-b4d0-1e5f8786af1e@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "6814273b-4f06-4131-8630-4246f23e825b@f9941"
+    "redirect": "35a34e2a-4cc0-4d52-b4d0-1e5f8786af1e@f9941"
   }
 }
