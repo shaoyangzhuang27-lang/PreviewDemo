@@ -81,14 +81,14 @@ export class HeroesModel extends BaseModel{
             heroInfo.id = dyncHeroID;
             heroInfo.staticID = oldHeroData.getStaticID() + 10000;
             heroInfo.level = oldHeroData.getLevel();
-            //heroInfo.isLocked = 
+            heroInfo.isLocked = oldHeroData.isLocked;
             let newEquipOnList: number[]= [];
             for(let key in equipList){
                 newEquipOnList.push(Number(key));
             }
             heroInfo.equipOnList = newEquipOnList;
             //heroInfo.crystal = 
-            heroInfo.tier = 0;
+            heroInfo.tier = oldHeroData.tier;
 
             let hero = new HeroData();
             hero.initDataByHero(heroInfo as Msg.HeroInfo, this._gameModel);

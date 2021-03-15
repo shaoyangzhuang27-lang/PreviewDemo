@@ -9,7 +9,7 @@ import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
 import { HeroData } from '../../model/datas/HeroData';
 import { HeroIcon } from '../hero/HeroIcon';
-import { HeroSelectIcon_starUp } from '../hero/HeroSelectIcon_starUp';
+import { HeroSelectIconStarUp } from '../hero/HeroSelectIconStarUp';
 import { PopMgr } from '../../control/PopMgr';
 import { MsgMgr } from '../../control/MsgMgr';
 import { XConsts } from "../../model/const/XConsts";
@@ -209,13 +209,13 @@ export class PopRisingStarTower extends PopBase {
             this.scroll_HeroView.content.removeAllChildren()
         }
 
-        resources.load('prefabs_ui/main/hero_selecticon_starUp', (err:any,res:any)=>{
+        resources.load('prefabs_ui/main/hero_selecticonstarup', (err:any,res:any)=>{
             this._bottomHeroItemList.clear()
             let k = new Array<[number,Node]>();     //排序存储对象
             for (let heroData of this._allHeroList.values()) {
                 let heroIcon = instantiate(res) as Node;
                 this.scroll_HeroView.content?.addChild(heroIcon);
-                let heroSelectScript = heroIcon.getComponent("HeroSelectIcon_starUp") as HeroSelectIcon_starUp;  
+                let heroSelectScript = heroIcon.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp;  
                 let itemType =  this._getItemType(heroData);
                 heroSelectScript.setItemType(itemType);
                 heroSelectScript.setSelectData(heroData as HeroData,(data:any,itemType:number)=>{
@@ -329,7 +329,7 @@ export class PopRisingStarTower extends PopBase {
     //根据herodata获取拥有英雄代码
     private _getBottomHeroItemScript(heroData:HeroData){
         for (let value of this._bottomHeroItemList.values()) {
-            let script = value.getComponent("HeroSelectIcon_starUp") as HeroSelectIcon_starUp; 
+            let script = value.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp; 
             let scriptHeroInfo = script.getCurHeroInfo() as HeroData;
             if(scriptHeroInfo.getDyncID() == heroData.getDyncID())
             {
@@ -339,7 +339,7 @@ export class PopRisingStarTower extends PopBase {
     }
     private _frushButtonHero(){
         this._bottomHeroItemList.forEach((heroNode,dyncid)=>{
-            let heroSelectScript = heroNode.getComponent("HeroSelectIcon_starUp") as HeroSelectIcon_starUp;
+            let heroSelectScript = heroNode.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp;
             let heroData = heroSelectScript.getHeroData() as HeroData;
             let itemType =  this._getItemType(heroData);
             heroSelectScript.setItemType(itemType);
@@ -407,7 +407,7 @@ export class PopRisingStarTower extends PopBase {
         }
         this._risingdyncMaiID = 0;
         for (let value2 of this._bottomHeroItemList.values()) {
-            let script2 = value2.getComponent("HeroSelectIcon_starUp") as HeroSelectIcon_starUp; 
+            let script2 = value2.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp; 
             let scriptHeroInfo = script2.getCurHeroInfo() as HeroData;
             script2.setItemType(0);
         }
@@ -483,7 +483,7 @@ export class PopRisingStarTower extends PopBase {
     private _getHeroData(heroID:number){
         let HeroInfo;
         for (let value of this._bottomHeroItemList.values()) {
-            let script = value.getComponent("HeroSelectIcon_starUp") as HeroSelectIcon_starUp; 
+            let script = value.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp; 
             let scriptHeroInfo = script.getCurHeroInfo() as HeroData;
             if(scriptHeroInfo.getDyncID() == heroID)
             {
@@ -496,7 +496,7 @@ export class PopRisingStarTower extends PopBase {
     //滚动区域英雄变化
     private _bottomHeroChange(){
         this._bottomHeroItemList.forEach((heroNode,dyncid)=>{
-            let heroSelectScript = heroNode.getComponent("HeroSelectIcon_starUp") as HeroSelectIcon_starUp;
+            let heroSelectScript = heroNode.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp;
             let heroData = heroSelectScript.getHeroData() as HeroData;
             let itemType =  this._getItemType(heroData);
             heroSelectScript.setItemType(itemType);

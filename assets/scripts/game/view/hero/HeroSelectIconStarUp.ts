@@ -8,8 +8,8 @@ const { ccclass, property } = _decorator;
 import { HeroIcon } from '../hero/HeroIcon';
 import { HeroData } from '../../model/datas/HeroData';
 
-@ccclass('HeroSelectIcon_starUp')
-export class HeroSelectIcon_starUp extends Component {
+@ccclass('HeroSelectIconStarUp')
+export class HeroSelectIconStarUp extends Component {
     @property({type :  Node})
     public btnFrame:Node = null as unknown as Node;
 
