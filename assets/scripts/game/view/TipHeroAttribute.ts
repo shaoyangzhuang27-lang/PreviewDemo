@@ -1,3 +1,9 @@
+/*
+ * @Description: 英雄属性Tip弹窗
+ * @Author: 徐涛
+ * @Date: 2021-03-09 19:30:14
+ * @LastEditTime: 2021-03-15 16:10:20
+ */
 import { _decorator, Component, Node, Sprite, math, Label, Layout, resources, instantiate, UITransform } from 'cc';
 import { DataMgr } from '../model/DataMgr';
 import { HeroData } from '../model/datas/HeroData';
@@ -11,7 +17,6 @@ export class TipHeroAttribute extends TipBase {
     // [1]
     // dummy = '';
     _heroId:number =0 ; //英雄id
-
     
     @property({type: Layout, displayName: "layout"})
     public layout:Layout = null as unknown as Layout;   
@@ -39,7 +44,11 @@ export class TipHeroAttribute extends TipBase {
         super.start();
     }
 
-    setHeroId(heroid:number= 0)
+    /**
+     * @description: 设置英雄属性
+     * @param heroid: 英雄id
+     */    
+    public setHeroId(heroid:number= 0)
     {
         //todo  debug value
         let listNames: string[]= ["血量", "攻击", "防御", "速度", "暴击", "暴击伤害", "命中", "闪避", "破甲", "破甲2", "破甲3"];
@@ -74,11 +83,10 @@ export class TipHeroAttribute extends TipBase {
         //     listValues[8] = herodata.getDEFBreak();
         // }
         
-        this.setContents(listNames, listValues, listTypes);
+        this._setContents(listNames, listValues, listTypes);
     }
 
-
-    setContents(names:string[], values: number[], types: number[])
+    private _setContents(names:string[], values: number[], types: number[])
     {
         if ( (values.length != names.length)  || (values.length !=types.length ) || (values.length==0) )
         {

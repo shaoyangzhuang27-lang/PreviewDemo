@@ -121,7 +121,12 @@ export class PopMgr extends PopCore  {
             script.setWinPos(pos);
         });
     }
-    //英雄属性值弹窗tip
+
+    /**
+     * @description: 英雄属性值弹窗tip
+     * @param {Vec3} pos
+     * @param {number} heroId
+     */
     public tipHeroAttributeWindow(pos:Vec3, heroId:number = 0){
         
         resources.load('prefabs_ui/pop/tip_hero_attribute', (err:any,res:any)=>{
@@ -136,21 +141,25 @@ export class PopMgr extends PopCore  {
         });
     }
 
-    //英雄技能弹窗tip
-    public tipSkillWindow(pos:Vec3, skillId:number){
-    
+    /**
+     * @description: 英雄技能弹窗tip
+     * @param {Vec3} pos
+     * @param {any} skillData={skillId: 技能id, talentId:天赋id, isUnlock:是否解锁, unlockTier:解锁星级(天赋会用到)}
+     */    
+    public tipSkillWindow(pos:Vec3, skillData:any){
+        // // test测试数据
+        // if(!skillData || (!skillData.skillId && !skillData.talentId) )
+        // {
+        //     skillData= {skillId:535002};// 破甲弹2级
+        // }
         resources.load('prefabs_ui/pop/tip_skill', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
             this.parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipSkill") as TipSkill;
-            script.setWinPos(pos, 1);
-            if(skillId ==0)
-            {
-                skillId= 535002;//破甲弹2级
-            }
-            script.setSkillData(skillId);
+            script.setWinPos(pos, 1);           
+            script.setSkillData(skillData);
             script.setIsWinClose(true);
         });
     }
