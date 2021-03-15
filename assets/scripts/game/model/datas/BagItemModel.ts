@@ -17,12 +17,13 @@ export class BagItemModel extends BaseModel{
     private _notSellItemStingList:Map<Msg.TObjectType, Array<string>> = new Map<Msg.TObjectType, Array<string>>();
 
     //玩家所有碎片信息合集
-    private _fragmentSynthesisInfoList : Array<XStruct.fragment_synthesis_info.IRecord> = new Array<XStruct.fragment_synthesis_info.IRecord>();
+    private _fragmentSynthesisInfoList : Array<XStruct.fragment_synthesis_info.IRecord> = []; //new Array<XStruct.fragment_synthesis_info.IRecord>();
     
     public initBagItemList(msg:Msg.GetPlayerDataA)
     {
         this._bagItemList.clear();
         this._bagEquipList.clear();
+        this._fragmentSynthesisInfoList = [];
         for(let key in msg.equipBagList){
             let value = msg.equipBagList[key];
             this._bagEquipList.set(Number(key), Number(value));            
@@ -36,6 +37,7 @@ export class BagItemModel extends BaseModel{
             this._allItemList.push([Msg.TObjectType.EObject_UsableItem, Number(key),Number(value)]);
         }
 
+        this.initFragmentSynthesisInfoList(msg);
        
         this._setNotSellItemStringMap()
     }
@@ -382,5 +384,11 @@ export class BagItemModel extends BaseModel{
         else{
             return []
         }
+    }
+
+    //获取碎片合成信息
+    public getFragmentSynthesisInfoList()
+    {
+        return this._fragmentSynthesisInfoList;
     }
 }

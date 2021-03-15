@@ -3,8 +3,8 @@ import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resourc
 const { ccclass, property } = _decorator;
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 
-@ccclass('HeroDebris')
-export class HeroDebris extends Component {
+@ccclass('HeroFragment')
+export class HeroFragment extends Component {
     // [1]
     // dummy = '';
 
