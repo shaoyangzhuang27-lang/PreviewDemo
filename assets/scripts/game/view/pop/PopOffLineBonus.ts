@@ -30,7 +30,7 @@ export class PopOffLineBonus extends PopBase {
     public m_layoutDetail : Node = null as unknown as Node;
 
     // 领取函数
-    private m_submitCallFun: Function | null = null;
+    // private m_submitCallFun: Function | null = null;
 
     start(){
         super.start();
@@ -120,13 +120,15 @@ export class PopOffLineBonus extends PopBase {
 
     private _onSubmit(){
         console.log("login");
-        // this.hide()
-        if (this.m_submitCallFun) {
-            this.m_submitCallFun()
-        }
+        // 关闭弹窗
+        this.delSelf()
+        // 回调播放动画
+        if(this._closeFunc)
+            this._closeFunc()
     }
 
-    public setSubmitCallBack(func:Function){
-        this.m_submitCallFun = func;
+    public setCloseCallBack(func: Function | null) {
+        if (func)
+            this._closeFunc = func;
     }
 }

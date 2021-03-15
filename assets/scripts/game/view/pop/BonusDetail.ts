@@ -23,7 +23,7 @@ export class BonusDetail extends Component {
             }
         });
         if(this.m_labCount){
-            let str: string = Math.floor(ob.nCount) + "/5秒"
+            let str: string = ob.nCount.toFixed(1) + "/5秒"
             this.m_labCount.string = str;
         }
     }

@@ -62,6 +62,8 @@ export class OfflineModel
         //     Msg.TObjectType.EObject_Exp,
         //     Msg.TObjectType.EObject_UpgradePoint,
         // ]
+
+        this.m_bonusInfo = []
         arrAwardlist.forEach(element => {
             // let ret = arrTempShow.find(obType => obType == element.objType)
             // if (ret == undefined){

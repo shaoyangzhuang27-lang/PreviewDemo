@@ -1,10 +1,12 @@
-import { _decorator, Component, Node,director,tween,Vec3, instantiate, resources } from 'cc';
+import { _decorator, Component, Node,director,tween,Vec3, instantiate, resources, Quat, UITransform, random, Sprite, SpriteFrame, size, Vec2, Layers } from 'cc';
+import { NetNode } from '../../../core/network/NetNode';
 import { MsgMgr } from '../../control/MsgMgr';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { DataMgr } from '../../model/DataMgr';
 import { BagMain } from '../menu/BagMain';
 import { KnightMain } from '../menu/KnightMain';
 import { TeamMain } from '../menu/TeamMain';
+import { FlyItem } from '../pop/FlyItem';
 import { PopOffLineBonus} from '../pop/PopOffLineBonus';
 
 const { ccclass, property } = _decorator;
@@ -78,7 +80,9 @@ export class MainUI extends Component {
             let p = instantiate(res);
             let script = p.getComponent("PopOffLineBonus") as PopOffLineBonus
             script.popSelf()
-            script.setSubmitCallBack(function () { })
+            script.setCloseCallBack(() =>{ 
+                FlyItem.showActionFly(this.node); 
+            })
             script.setIsMaskClose(true);
         });
     }
