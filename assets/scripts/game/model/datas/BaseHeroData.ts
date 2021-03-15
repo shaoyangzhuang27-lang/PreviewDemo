@@ -49,7 +49,7 @@ export class BaseHeroData
 
     //////////////////////////////  分割线  //////////////////////////////
     // 模型预制体路径
-    public getPrefabPath(): string { return ""; }
+    public getPrefabPath(): string { return "0"; }
     // 获得主动技能ID
     public getSkillID(): number { return 0; }
     

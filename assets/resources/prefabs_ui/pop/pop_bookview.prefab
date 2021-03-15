@@ -6453,7 +6453,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 700,
-      "height": 10
+      "height": 320
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -6780,7 +6780,7 @@
       "__id__": 209
     },
     "scrov_book": {
-      "__id__": 255
+      "__id__": 271
     },
     "lab_beforelv": {
       "__id__": 226

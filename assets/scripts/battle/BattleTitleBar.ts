@@ -1,7 +1,26 @@
-import { _decorator, Component, Node, instantiate, Prefab, Vec3, Camera, ProgressBar, Color, TERRAIN_HEIGHT_BASE } from 'cc';
+import { _decorator, Component, Node, instantiate, Prefab, Vec3, Camera, ProgressBar, Color, math } from 'cc';
 const { ccclass, property } = _decorator;
 
 import { FlyWords } from "./FlyWords";
+
+export enum DamageType {
+    None, // None,
+    Miss, // 未命中,
+    Hit, // 被普攻没暴击掉血_还没阵营克制,
+    HitByCrt, // 被普攻暴击掉血_还没阵营克制,
+    HitByCamp, // 被普攻没暴击掉血_有阵营克制,
+    HitByCrtAndCamp, // 被普攻暴击掉血_有阵营克制,
+    Skill, // 被技能没暴击掉血_还没阵营克制,
+    SkillByCrt, // 被技能暴击掉血_还没阵营克制,
+    SkillByCamp, // 被技能没暴击掉血_有阵营克制,
+    SkillByCrtAndCamp, // 被技能暴击掉血_有阵营克制,
+    Heal, // 没暴击奶,
+    HealByCrt, // 暴击奶,
+    AddPow, // 能量加,
+    SubPow, // 能量减,
+    ShieldAbsorption, // 盾吸收伤害,
+    Immunity, // 免疫,
+}
 
 
 @ccclass('BattleTitleBar')
@@ -21,6 +40,8 @@ export class BattleTitleBar extends Component {
     private _targetPos = new Vec3();
 
     private _camera: any = null;
+
+    private _flayWordStartX: number = -15;
 
     // start () {
     //     // Your initialization goes here.
@@ -60,9 +81,8 @@ export class BattleTitleBar extends Component {
         this._battleUiTitleNode.setPosition(this._targetPos);
     }
 
-    createTitleBar(camera: Camera, canvas: Node, isGreen: boolean): void {
+    createTitleBar(camera: Camera, parentNode: Node, isGreen: boolean): void {
         this._camera = camera.getComponent(Camera);
-        // this._canvas = canvas;
         this._battleUiTitleNode = instantiate(this.BattleUiTitlePrefab);
 
         let hpBarList = this._battleUiTitleNode.getChildByName("hp")?.getComponents(ProgressBar) as [ProgressBar];
@@ -80,7 +100,7 @@ export class BattleTitleBar extends Component {
 
         this._powBarComponent = this._battleUiTitleNode.getChildByName("pow")?.getComponent(ProgressBar) as ProgressBar;
         this._fly_words_node = this._battleUiTitleNode.getChildByName("fly_words_node");
-        canvas.addChild(this._battleUiTitleNode);
+        parentNode.addChild(this._battleUiTitleNode);
     }
 
     removeTitleBar(): void {
@@ -103,7 +123,7 @@ export class BattleTitleBar extends Component {
         }
     }
 
-    flyWords(v: number): void {
+    flyWords(v: number, damageType: DamageType): void {
         if(!this.FlyWordsPrefab) {
             return;
         }
@@ -113,10 +133,52 @@ export class BattleTitleBar extends Component {
         let str = v.toString();
         if (v > 0) {
             str = "+" + str;
-            color = Color.GREEN;
         }
+        switch (damageType) {
+            case DamageType.Miss: // 未命中
+                break;
+            case DamageType.Hit: // 被普攻没暴击掉血_还没阵营克制
+                color = Color.RED;
+                str = "普" + str;
+                break;
+            case DamageType.HitByCrt: // 被普攻暴击掉血_还没阵营克制
+                break;
+            case DamageType.HitByCamp: // 被普攻没暴击掉血_有阵营克制
+                break;
+            case DamageType.HitByCrtAndCamp: // 被普攻暴击掉血_有阵营克制
+                break;
+            case DamageType.Skill: // 被技能没暴击掉血_还没阵营克制
+                color = Color.CYAN;
+                str = "技" + str;
+                break;
+            case DamageType.SkillByCrt: // 被技能暴击掉血_还没阵营克制
+                break;
+            case DamageType.SkillByCamp: // 被技能没暴击掉血_有阵营克制
+                break;
+            case DamageType.SkillByCrtAndCamp: // 被技能暴击掉血_有阵营克制
+                break;
+            case DamageType.Heal: // 没暴击奶
+                color = Color.GREEN;
+                str = "血+" + str;
+                break;
+            case DamageType.HealByCrt: // 暴击奶
+                break;
+            case DamageType.AddPow: // 能量加
+                break;
+            case DamageType.SubPow: // 能量减
+                break;
+            case DamageType.ShieldAbsorption: // 盾吸收伤害
+                color = Color.BLUE;
+                str = "盾" + str;
+                break;
+            case DamageType.Immunity: // 免疫
+            default:
+                break;
+        }   
+ 
         this._fly_words_node?.addChild(wordsLabel);
-        (wordsLabel.getComponent("FlyWords") as FlyWords).startFly(str, color);    
+        (wordsLabel.getComponent("FlyWords") as FlyWords).startFly(str, color, this._flayWordStartX);
+        this._flayWordStartX = -this._flayWordStartX;
     }
 
 

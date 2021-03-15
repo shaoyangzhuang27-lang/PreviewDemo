@@ -11,6 +11,8 @@ import { MsgCore } from "../../core/network/MsgCore";
 import { MsgLogin } from "./msg/MsgLogin";
 import { MsgGame } from "./msg/MsgGame";
 import { MsgFormation } from "./msg/MsgFormation";
+import { MsgStarUp } from "./msg/MsgStarUp";
+import { MsgBag } from "./msg/MsgBag";
 import { MsgBase } from "./msg/MsgBase";
 import { MsgOffline } from "./msg/MsgOffline";
 
@@ -54,6 +56,21 @@ export class MsgMgr extends MsgCore{
     public getMsgGame(){
         return this._msgGame;
     }
+
+    private _msgFormation : MsgFormation = new MsgFormation(this);
+    public getMsgFormation(){
+        return this._msgFormation;
+    }
+
+    private _msgBag : MsgBag = new MsgBag(this);
+    public getMsgBag(){
+        return this._msgBag;
+    }
+
+    private _msgStarUp : MsgStarUp = new MsgStarUp(this);
+    public getMsgStarUp(){
+        return this._msgStarUp;
+    }
     //消息定义-------------------------------------------------
     
     //消息注册-------------------------------------------------
@@ -61,14 +78,13 @@ export class MsgMgr extends MsgCore{
         this._msgs.push(this._msgLogin)
         this._msgs.push(this._msgGame)
         this._msgs.push(this._msgFormation);
+        this._msgs.push(this._msgBag);
+        this._msgs.push(this._msgStarUp);
         this._msgs.push(this._msgOffline);
     }
     //消息注册-------------------------------------------------
 
-    private _msgFormation : MsgFormation = new MsgFormation(this);
-    public getMsgFormation(){
-        return this._msgFormation;
-    }
+    
 
     private _msgOffline : MsgOffline = new MsgOffline(this);
     public getMsgOffline() {
@@ -96,6 +112,7 @@ export class MsgMgr extends MsgCore{
     }
     
     public connectLoginServer(channelId: number = 0){
-        NetManager.getInstance().connect({ url: "ws://192.168.15.132:17183" },channelId);//开启连接
+        //NetManager.getInstance().connect({ url: "ws://192.168.15.68:17183" },channelId);//开启连接
+        NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启本地连接
     }
 }

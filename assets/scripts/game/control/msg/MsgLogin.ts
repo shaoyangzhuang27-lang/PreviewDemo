@@ -40,7 +40,7 @@ export class MsgLogin extends MsgBase{
     
     public requestDeviceLoginNew(){
         let data = new Msg.DeviceLoginNewR();
-        data.deviceId = "73f08c52ad36acf31baecfec8db006b8d1af428a";
+        data.deviceId = "(Galaxy Note4)_6518aff70f1257c9bf091f5ae830be16";
         const buffer_data = Msg.DeviceLoginNewR.encode(data).finish();
         this.msgMgr.sendData(Msg.MsgType.TheDeviceLoginNewR,buffer_data);
         }
@@ -93,6 +93,7 @@ export class MsgLogin extends MsgBase{
         // this.requestSyncChat();
         // MsgMgr.getInstance().requestGetCacheChatList();
         GameModel.getInstance().initPlayerBag(msgData);
+        GameModel.getInstance().initPlayerItem(msgData);
     }
     //获取游戏数据-----------------------
 }

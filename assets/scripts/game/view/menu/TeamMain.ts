@@ -49,6 +49,9 @@ export class TeamMain extends Component {
 
     @property({type :  Node})
     public heroPosList:Node[] = [];
+    
+    @property({type: Node })
+    public bgMask:Node = null as unknown as Node;
 
     start () {
         // [3]
@@ -63,6 +66,7 @@ export class TeamMain extends Component {
         this.btnBook.on(Node.EventType.TOUCH_END, this._openBookLibraryView, this);
         this.btnAura.on(Node.EventType.TOUCH_END, this._openAuraInfoView, this);
         this.btnPet.on(Node.EventType.TOUCH_END, this._openPetInfoView, this);
+        this.bgMask.on(Node.EventType.TOUCH_END, this.closeHandle, this);
 
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_formation_change,this._notifyFormationChangeHandle,this);
 
@@ -72,36 +76,37 @@ export class TeamMain extends Component {
 
     private _initHero()
     {
-        let _curFormationList:Map<number,HeroData> = GameModel.getInstance().getFormationModel().getCurrentFormation();
+        let curFormationList:Map<number,HeroData> = GameModel.getInstance().getFormationModel().getCurrentFormation();
         resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{        
             for (let index = 0; index < this.heroPosList.length; index++) {
                 this.heroPosList[index].removeAllChildren();                
             }
 
-            let index = 0;
-            for (let value of _curFormationList.values()) {          
-                let _heroIcon = instantiate(res) as Node;
-                _heroIcon.scale = new Vec3(0.5,0.5,1);
-                _heroIcon.addComponent(Widget);
-                let subWidget = _heroIcon.getComponent(Widget) as Widget;
-                subWidget.updateAlignment();
+            curFormationList.forEach((heroData,key)=>{
+        
+                let heroIcon = instantiate(res) as Node;
+                this._initTopHero(heroIcon, heroData);
+                this.heroPosList[key-1].addChild(heroIcon);
 
-                this.heroPosList[index].addChild(_heroIcon);
-                _heroIcon.position = this.heroPosList[index].position;
-                _heroIcon.name = "formationIcon_" + value.getStaticID().toString();
-
-                let script = _heroIcon.getComponent("HeroIcon") as HeroIcon; 
-                script.setHeroID(value as HeroData);
-                script.setBtnCallBack((_data:any)=>{
-                    this._openHeroUpGradeView(_data);
-                });                
-                
-                index++;
-            }
-            // this.heroPosList[index].addChild();
+            })
             let allFight = GameModel.getInstance().getFormationModel().getCurrentFormationFightPower();
             this.labPower.string = XFuns.FormatNumber(allFight);
         });
+    }
+    private _initTopHero(heroIcon:Node,value:HeroData){
+        
+        // let childName = "formationIcon_" + value.getStaticID().toString();
+        heroIcon.scale = new Vec3(0.5,0.5,1);
+        heroIcon.addComponent(Widget);
+        let subWidget = heroIcon.getComponent(Widget) as Widget;
+        subWidget.updateAlignment();
+        // heroIcon.name = childName;
+
+        let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+        script.setHeroData(value as HeroData);
+        script.setBtnCallBack((_data:HeroData)=>{
+            this._openHeroUpGradeView(_data);
+        });  
     }
 
     test(){
@@ -164,7 +169,7 @@ export class TeamMain extends Component {
     //图鉴
     private _openBookLibraryView()
     {
-
+        PopMgr.getInstance().popBoolLibraryView();
     }
 
     //宠物
@@ -182,7 +187,13 @@ export class TeamMain extends Component {
     //英雄升级界面
     private _openHeroUpGradeView(_heroData:HeroData)
     {
+        PopMgr.getInstance().popHeroPromotionView(_heroData.getDyncID() );
+    }
 
+    //升星塔界面
+    private _openStarUpView()
+    {
+        PopMgr.getInstance().popStarUpView();
     }
     
 

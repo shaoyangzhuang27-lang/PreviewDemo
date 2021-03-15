@@ -1,8 +1,9 @@
-import { _decorator, Component, Node,director,tween,Vec3, instantiate, resources, Quat, UITransform, random, Sprite, SpriteFrame, size, Vec2, Layers } from 'cc';
-import { NetNode } from '../../../core/network/NetNode';
-import { MsgMgr } from '../../control/MsgMgr';
+import { _decorator, Component, Node,director,tween,Vec3, instantiate, resources, Label, ProgressBar } from 'cc';
 import { NotifyMgr } from '../../control/NotifyMgr';
+import { XFuns } from '../../model/const/XFuns';
+import { MsgMgr } from '../../control/MsgMgr';
 import { DataMgr } from '../../model/DataMgr';
+import { GameModel } from '../../model/GameModel';
 import { BagMain } from '../menu/BagMain';
 import { KnightMain } from '../menu/KnightMain';
 import { TeamMain } from '../menu/TeamMain';
@@ -14,55 +15,80 @@ const { ccclass, property } = _decorator;
 @ccclass('MainUI')
 export class MainUI extends Component {
     @property({type: Node, displayName: "英雄"})
-    public btn_hero:Node | null = null;
+    public btn_hero:Node = null as unknown as Node;
 
     @property({type: Node, displayName: "队伍"})
-    public btn_team:Node | null = null;
+    public btn_team:Node = null as unknown as Node;
 
     @property({type: Node, displayName: "主城战斗"})
-    public btn_battle:Node | null = null;
+    public btn_battle:Node = null as unknown as Node;
 
     @property({type: Node, displayName: "背包"})
-    public btn_bag:Node | null = null;
+    public btn_bag:Node = null as unknown as Node;
 
     @property({type: Node, displayName: "公会"})
-    public btn_guild:Node | null = null;
+    public btn_guild:Node = null as unknown as Node;
 
     @property({type: Node, displayName: "选框"})
-    public sprite_select:Node | null = null;
+    public sprite_select:Node = null as unknown as Node;
 
     @property({type: Node, displayName: "战斗图标"})
-    public ico_battle:Node | null = null;
+    public ico_battle:Node = null as unknown as Node;
 
     @property({type: Node, displayName: "主城图标"})
-    public ico_city:Node | null = null;
+    public ico_city:Node = null as unknown as Node;
+    
+    @property({type: ProgressBar, displayName: "等级进度条"})
+    public pro_level:ProgressBar = null as unknown as ProgressBar;
+    
+    @property({type: Label, displayName: "等级"})
+    public txt_level:Label = null as unknown as Label;
+    
+    @property({type: Label, displayName: "金币数量"})
+    public txt_coin:Label = null as unknown as Label;
+    
+    @property({type: Node, displayName: "金币按钮"})
+    public btn_coin:Node = null as unknown as Node;
+
+    @property({type: Label, displayName: "钻石数量"})
+    public txt_diamond:Label = null as unknown as Label;
+    
+    @property({type: Node, displayName: "钻石按钮"})
+    public btn_diamond:Node = null as unknown as Node;
 
     @property({type: Node, displayName: "挂机奖励"})
     public btn_offline:Node | null = null;
 
-
-
     onLoad(){
-        // 点击事件
-        this.btn_hero?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
-        this.btn_team?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
-        this.btn_battle?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
-        this.btn_bag?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
-        this.btn_guild?.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_hero.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_team.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_battle.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_bag.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_guild.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_coin.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        this.btn_diamond.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
         this.btn_offline?.on(Node.EventType.TOUCH_END, this.buttonBtnOffLineClick, this)
 
         // 监听事件
         NotifyMgr.getInstance().addNotifyHandler("event_net_offline", this.openOfflineBonus, this);
         this.locateMenu();
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_coin_diamond_level_change,this._playerDataChange,this);
+    }
+    onDestroy(){
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_coin_diamond_level_change,this._playerDataChange,this) 
+        NotifyMgr.getInstance().removeNotifyHandler("event_net_offline", this.openOfflineBonus, this);
+    }
+
+    private _playerDataChange(data:any) {
+        this.txt_coin.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().money);
+        this.txt_diamond.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().vrmb);
+        this.txt_level.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().level);
     }
     update(){
         if(this.sprite_select)
             this.setPreMenuPos(this.sprite_select.position)
     }
 
-    onDestroy(){
-        NotifyMgr.getInstance().removeNotifyHandler("event_net_offline", this.openOfflineBonus, this);
-    }
     start () {
         this.initView();
     }
@@ -72,6 +98,12 @@ export class MainUI extends Component {
         // console.log("wbdwbd+++++++++++++++++++++")
         // console.log(DataMgr.getInstance().getPlayerInfo())
         // console.log(DataMgr.getInstance().getPlayerInfo().name)
+        
+        // GameModel.getInstance().getPlayerModel().getPlayerInfo().exp;
+        
+        this.txt_coin.string = XFuns.FormatNumber(GameModel.getInstance().getPlayerModel().getPlayerInfo().money);
+        this.txt_diamond.string = XFuns.FormatNumber(GameModel.getInstance().getPlayerModel().getPlayerInfo().vrmb);
+        this.txt_level.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().level + "级");
         
     }
 
@@ -100,9 +132,6 @@ export class MainUI extends Component {
 
         switch (event.target) {
             case this.btn_hero:
-                // console.log("btn_hero")
-                // director.loadScene("loading")
-                
                 this.closeTeam();
                 this.closeBag();
 
@@ -122,8 +151,6 @@ export class MainUI extends Component {
 
                 break;
             case this.btn_team:
-                console.log("btn_team")
-                
                 this.closeKnight();
                 this.closeBag();
 
@@ -142,7 +169,6 @@ export class MainUI extends Component {
 
                 break;
             case this.btn_battle:
-                console.log("btn_battle")
                 if(this.getCurSceneName() == "scene_main"){
                     director.loadScene("battle");
                     this.setCurSceneName("battle");
@@ -159,9 +185,6 @@ export class MainUI extends Component {
                 }
                 break;
             case this.btn_bag:
-                console.log("btn_bag")
-                
-                
                 this.closeKnight();
                 this.closeTeam();
 
@@ -179,8 +202,15 @@ export class MainUI extends Component {
                 } );
                 break;
             case this.btn_guild:
-                console.log("btn_guild")  
+
                 break;
+            case this.btn_coin:
+
+                break;
+            case this.btn_diamond:
+
+                break;
+                
             default:
                 // code...
                 break;
@@ -189,7 +219,6 @@ export class MainUI extends Component {
     closeTeam(){
         let nodeTeam = this.node.getChildByName("node_team")
         if(nodeTeam){
-            // nodeTeam.name = ""
             let script =  nodeTeam.getComponent("TeamMain") as TeamMain;
             script.hide();
         }
@@ -197,7 +226,6 @@ export class MainUI extends Component {
     closeKnight(){
         let nodeKnight = this.node.getChildByName("node_knight")
         if(nodeKnight){
-            // nodeKnight.name = ""
             let script =  nodeKnight.getComponent("KnightMain") as KnightMain;
             script.hide();
         }
@@ -205,7 +233,6 @@ export class MainUI extends Component {
     closeBag(){
         let nodeBag = this.node.getChildByName("node_bag")
         if(nodeBag){
-            // nodeTeam.name = ""
             let script =  nodeBag.getComponent("BagMain") as BagMain;
             script.hide();
         }

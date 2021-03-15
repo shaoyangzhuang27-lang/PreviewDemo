@@ -3,6 +3,7 @@ import { HeroData } from "./datas/HeroData";
 import { HeroesModel } from "./datas/HeroesModel";
 import { PlayerModel } from "./datas/PlayerModel";
 import { TechnologyModel } from "./datas/TechnologyModel";
+import { BagItemModel } from "./datas/BagItemModel";
 import { TableName, ValueMgr } from "./ValueMgr";
 import { OfflineModel } from "./datas/OfflineModel"
 
@@ -18,6 +19,7 @@ export class GameModel{
     private _technologyModel:TechnologyModel = new TechnologyModel(this);
     private _playerModel:PlayerModel =  new PlayerModel(this);
     private _formationModel:FormationModel = new FormationModel(this);
+    private _bagItemModel:BagItemModel = new BagItemModel(this);
     private _offlineModel:OfflineModel = new OfflineModel();
 
     public getHeroesModel(){
@@ -31,6 +33,9 @@ export class GameModel{
     }
     public getFormationModel(){
         return this._formationModel;
+    }
+    public getBagModel(){
+        return this._bagItemModel;
     }
     // 挂机数据
     public getOfflineModel(){
@@ -48,6 +53,10 @@ export class GameModel{
     
     public initPlayerBag(msg:Msg.GetPlayerDataA) {
         this._formationModel.initFormationList(msg);
+    }
+
+    public initPlayerItem(msg:Msg.GetPlayerDataA) {
+        this._bagItemModel.initBagItemList(msg);
     }
     
     //将弃用-----------------

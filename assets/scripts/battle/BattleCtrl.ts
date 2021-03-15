@@ -11,6 +11,7 @@ import { BattleMgr } from "./BattleMgr";
 import { BattleResMgr } from "./BattleResMgr";
 
 import { ValueMgr } from "../game/model/ValueMgr";
+import { XConsts } from '../game/model/const/XConsts';
 
 let bLoadMain = false;
 
@@ -21,29 +22,31 @@ let oldMainLoop: any = null;
 @ccclass('BattleCtrl')
 export class BattleCtrl extends Component {
 
+    @property(Node)
+    public battleUiNode: Node = null as unknown as Node;
+
     private _groundPrefab: Prefab = null as unknown as Prefab;
 
     public static EmbattleCfg = [[-3, 0], [0, 0], [3, 0] 
-                                    ,[-3, 3], [0, 3], [3, 3]]
+                                    ,[-3, 3], [0, 3], [3, 3]];
 
-    private _actTime: number = 0
-    private _curActFunc: any = null
+    private _actTime: number = 0;
+    private _curActFunc: any = null;
 
-    private _battleGrounds: Array<Node> = []
-    private _nextGroundIdx: number = 0
+    private _battleGrounds: Array<Node> = [];
+    private _nextGroundIdx: number = 0;
 
-    private _army: Array<BattleHero> = []
-    private _enemy: Array<BattleHero> = []
+    private _army: Array<BattleHero> = [];
+    private _enemy: Array<BattleHero> = [];
 
-    private _aliveArmy: Array<BattleHero> = []
-    private _aliveEnemy: Array<BattleHero> = []
+    private _aliveArmy: Array<BattleHero> = [];
+    private _aliveEnemy: Array<BattleHero> = [];
 
     private _leaderNode: Node = null as unknown as Node;
+    
+    public camera: any = null;
+    public cameraNode: any = null;
 
-
-    public canvas: any = null
-    public camera: any = null
-    public cameraNode: any = null
 
 
     onLoad() {
@@ -59,38 +62,27 @@ export class BattleCtrl extends Component {
         //     }
         // }
 
+        this.battleUiNode.setSiblingIndex(XConsts.OrderStage);
+
         this.cameraNode = this.node.getChildByName("cameraNode");
         this.camera = this.cameraNode.getChildByName("Main Camera");
-        this.canvas = this.node.getParent()?.getChildByName("Canvas");
     }
 
     start() {
+        
 
         if(BattleTest.isInit) {
             this.doStart();
         } else {
-            BattleTest.buildTestBattle()
-            BattleResMgr.getInstance().startLoad(BattleTest.getLoadResList(), (c, t)=>{
+            
+            BattleMgr.getInstance().buildTest((c, t)=>{
                 
             }, ()=>{
-                
-                if (ValueMgr.getInstance().isInit()) {
-                    this.doStart();
-                } else {
-                    
-                    ValueMgr.getInstance().loadData((cur:number, total:number)=>{
-                        if(cur == total){
-                            ValueMgr.getInstance().setInit(true);
-                            this.doStart();
-                        }
-                    });
-                } 
-            });
+                this.doStart();
+            })
         }
         
-
     }
-
 
     doStart() {
         this.initMap();
@@ -104,7 +96,8 @@ export class BattleCtrl extends Component {
     update(dt: number) {
         // this.cameraNode.setPosition(this._leaderNode.position.x, 0, this._leaderNode.position.z);
         // console.log(this.cameraNode.position)
-
+        
+        
         if(!this._leaderNode) {
             return;
         }
@@ -295,7 +288,7 @@ export class BattleCtrl extends Component {
                 }
             }
 
-            if (this._enemy.length == 0) {
+            if (this._aliveEnemy.length == 0) {
                 this.wait();
             }
         } else {

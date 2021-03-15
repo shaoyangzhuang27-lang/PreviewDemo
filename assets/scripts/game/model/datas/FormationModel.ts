@@ -80,6 +80,7 @@ export class FormationModel extends BaseModel{
             let newValue = _newFormation.formation[item];
             curFormationData?.set(Number(item), newValue);
         }
+        this._currentFormationIndex = msg.defaultFormation;
 
         //抛出通知  阵容发生变化
         NotifyMgr.getInstance().notify(NotifyMgr.event_net_formation_change);

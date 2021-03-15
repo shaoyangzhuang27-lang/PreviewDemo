@@ -1,6 +1,9 @@
 
-import { _decorator, Component, Node, Label, instantiate,resources,SpriteFrame } from 'cc';
+import { _decorator, Component, Node, Label, instantiate,resources,SpriteFrame,Sprite, Vec3 } from 'cc';
 import { HeroData } from '../../model/datas/HeroData';
+import { HeroBookCell } from './HeroBookCell';
+import { XMsgExt } from '../../model/const/XMsgExt'
+import { GameModel } from '../../model/GameModel';
 const { ccclass, property } = _decorator;
 
 @ccclass('HeroBookTitleCell')
@@ -44,18 +47,44 @@ export class HeroBookTitleCell extends Component {
         this._resourceLoad(flowerPath,this.imgFlower);
 
         resources.load('prefabs_ui/main/bookcell', (err:any,res:any)=>{
+            let rowIndex = 0;
             for (let index = 0; index < this._heroListofBook.length; index++) {
                 let bookcell = instantiate(res) as Node;
+                this.imgFlower.addChild(bookcell)
+                let pos:Vec3 = new Vec3(-215+index*220,-35 - rowIndex*305, 1);
+                bookcell.position = pos;
+
+                let script = bookcell.getComponent("HeroBookCell") as HeroBookCell; 
+                let heroId = this._heroListofBook[index];
                 
+                let heroBookInfo:Msg.HeroBookUnit = GameModel.getInstance().getHeroesModel().getBookHeroDataByStaticID(heroId);
+                let showType:number = 0;   //显示类型:0显示遮罩 1可激活 2可升级 3常态无遮罩
+                if(heroBookInfo.level == 0 && heroBookInfo.curTopStar == 0)
+                {
+                    showType = 0
+                }
+                else if(heroBookInfo.level == 0 && heroBookInfo.curTopStar != 0)
+                {
+                    showType = 1
+                }
+                else if(XMsgExt.IsCanLevelUp(heroBookInfo))
+                {
+                    showType = 2
+                }
+                else if(heroBookInfo.level != 0 && heroBookInfo.curTopStar == heroBookInfo.level)
+                {
+                    showType = 3
+                }
+                script.setHeroBookData(showType,heroId,(_data:any)=>{
+                    console.log("图鉴点击回调")
+                });
+
+                if(index % 3 == 0)
+                {
+                    rowIndex++;
+                }
             }
         });
-    }
-    
-    public setBookHeroData(_type:string,_data:number[])
-    {
-            this._titleType = _type;
-            this._heroListofBook = _data;
-            this._initHeroCell();
     }
 
     //资源替换
@@ -70,6 +99,14 @@ export class HeroBookTitleCell extends Component {
                 sprite.spriteFrame = spriteFrame;
             }
         });
+    }
+
+    //设置信息
+    public setBookHeroData(_type:string,_data:number[])
+    {
+            this._titleType = _type;
+            this._heroListofBook = _data;
+            this._initHeroCell();
     }
 }
 

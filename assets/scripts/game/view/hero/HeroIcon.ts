@@ -1,4 +1,9 @@
-//单个英雄头像
+/**
+ * 游戏组件:英雄头像
+ * @author 黄志清
+ * @version 1.0.0,2021.3.13
+ */
+
 import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources, math, UITransform } from 'cc';
 const { ccclass, property } = _decorator;
 import { TableName, ValueMgr } from "../../model/ValueMgr";
@@ -32,12 +37,8 @@ export class HeroIcon extends Component {
     @property({type :  Node})
     public starlist:Node[] = [];
     
-
-    private _heroInfo : HeroData | null = null as unknown as HeroData;
-    private _heroLT : any | null = null as unknown as HeroData;
-
-    private _callBack:Function|null = null as unknown as Function;  //回调方法
-
+    //英雄数据
+    private _heroData : HeroData | null = null as unknown as HeroData;
 
     start () {
         // [3]
@@ -46,21 +47,20 @@ export class HeroIcon extends Component {
     
     private init()
     {
-        if(!this._heroInfo)
+        if(!this._heroData)
         {
             return;
         }
 
-        let _campName:string = XConsts.KHeroCampIcon[this._heroInfo?.getCamp() as number];
-        let _frameName:string = XConsts.GetQualityBgByStar(this._heroInfo?.getStar() as number);
-        let _level : number = Number(this._heroInfo?.getLevel());
-        let _iconName:string = this._heroInfo?.getImageIcon() as string;
-        let _starNum:number = this._heroInfo?.getStar() as number;
+        let campName:string = XConsts.KHeroCampIcon[this._heroData?.getCamp() as number];
+        let level : number = Number(this._heroData?.getLevel());
+        let iconName:string = this._heroData?.getImageIcon() as string;
+        let starNum:number = this._heroData?.getStar() as number;
 
-        if(!this._heroInfo.isRoleHero())
+        if(!this._heroData.isRoleHero())
         {
             this.img_camp.active = true;
-            let campIconPath:string = "ui/team/" + _campName + "/spriteFrame"
+            let campIconPath:string = "ui/team/" + campName + "/spriteFrame";
             resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
             {
                 if(!err)
@@ -74,16 +74,13 @@ export class HeroIcon extends Component {
         {
             this.img_camp.active = false;
         }
-        
-        let framePath:string = "ui/icon/" + _frameName + "/spriteFrame"
-        this._resourceLoad(framePath,this.btn_frame);
 
-        let heroIconPath:string = "ui/hero/" + _iconName + "/spriteFrame"
+        let heroIconPath:string = "ui/hero/" + iconName + "/spriteFrame";
         this._resourceLoad(heroIconPath,this.img_icon);
         
-        this.lab_level.string = _level.toString();
+        this.lab_level.string = level.toString();
 
-        this._setStar(_starNum);
+        this._setStar(starNum);
     }
 
     //开启英雄面板
@@ -108,72 +105,88 @@ export class HeroIcon extends Component {
             }
         });
     }
-
+    
     private _setStar(star:number)
     {
-        if(star > 5 && star <= 10)
-        {
-            star -= 5;
-            //初始化星星，使用中级星星  "resources/ui/icon/星星中级.png"
-        }
-        else if(star > 10)
-        {
-            star -= 10;
-            //初始化星星，使用中级星星  "resources/ui/icon/星星高级.png"
-        }
-        else{
-            //初始化星星，使用中级星星  "resources/ui/icon/星星初级.png"
-        }
+        let grade:number = Math.floor(star/5);
+        let yu:number = (star - 1) % 5 + 1;
+
+        let starName = ["初级星星","中级星星","高级星星"];
+        let starPath = "ui/icon/" + starName + "/spriteFrame";
 
         for (let index = 0; index < this.starlist.length; index++) {
-            if(index > star)
+            if(index >= yu && yu != 0)
             {
                 this.starlist[index].active = false;
             }
             else{
                 this.starlist[index].active = true;
             }
-            
+        }
+
+        let frameName:string = XConsts.GetQualityBgByStar(Number(star));
+        let framePath:string = "ui/icon/" + frameName + "/spriteFrame"
+        this._resourceLoad(framePath,this.btn_frame);
+    }
+
+    /**
+     * 切换当前英雄为加一星状态,升星塔使用
+     * 调用此方法前请先设置英雄数据
+     */
+    public addOneStar()
+    {
+        if(this._heroData)
+        {
+            let addStar = this._heroData.getStar()+1;
+            this._setStar(addStar);
         }
     }
 
-
-    ////////////////////////////////
-    //传入英雄id  初始化对象
-    public setHeroID(_heroData : HeroData)
+    /**
+     * 设置为某英雄
+     * @param heroData 英雄数据
+     */
+    public setHeroData(heroData : HeroData)
     {
-        this._heroInfo = _heroData;
-        this._heroLT = ValueMgr.getInstance().getItemByField(TableName.heroes,this._heroInfo.getStaticID()) as Config.heroes.Record;
-        
-        // this._callBack = _callBack;
+        this._heroData = heroData;
+    
         this.init();
     }
-
-    public setNodeAnchor(point: math.Vec2 | number, y?: number)
+    /**
+     * 设置为蒙版英雄[升星塔使用]
+     * @param campType  阵营类型
+     * @param star      英雄星级
+     */
+    public setMaskHeroData(campType:number,star:number)
     {
-        let _node = this.node.getComponent(UITransform) as UITransform;
-        _node.setAnchorPoint(point);
+        this.lab_level.node.active = false;
+        let campName:string = XConsts.KHeroCampIcon[campType];
+        let campIconPath:string = "ui/team/" + campName + "/spriteFrame"
+        this._resourceLoad(campIconPath,this.img_camp)
+        this._setStar(star)
     }
-
-    public setBtnCallBack(_callBack:Function|null = null)
+    /**
+     * 设置点击头像回调
+     * @param callBack 回调函数
+     */
+    public setBtnCallBack(callBack:Function|null = null)
     {
-        if(_callBack)
+        if(callBack)
         {
             this.btn_frame.addComponent(Button);
             this.btn_frame.on(Node.EventType.TOUCH_END, ()=>{            
-                _callBack(this._heroInfo)                
+                callBack(this._heroData)                
             }, this);
         }
     }
-}
 
-/**
- * [1] Class member could be defined like this.
- * [2] Use `property` decorator if your want the member to be serializable.
- * [3] Your initialization goes here.
- * [4] Your update function goes here.
- *
- * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
- * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
- * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
- */
+    /**
+     * 隐藏等级
+     * @param isShow 是否隐藏
+     */
+    public setLvIconVisib(isShow:boolean = false)
+    {
+        this.lab_level.node.active = isShow
+    }
+
+}
