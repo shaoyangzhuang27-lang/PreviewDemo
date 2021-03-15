@@ -28,7 +28,7 @@ export class MsgBag extends MsgBase{
         console.log("出售装备数据返回",msgId,msgData);
         let newMsgData = msgData as Msg.SellEquipA;
 
-        //抛出通知 出售装备成功
+        GameModel.getInstance().getBagModel().changeBagEquipNumber(newMsgData.equipID,newMsgData.sellNum);
     }
     
     //使用道具

@@ -189,6 +189,12 @@ export class TeamMain extends Component {
     {
         PopMgr.getInstance().popHeroPromotionView(_heroData.getDyncID() );
     }
+
+    //升星塔界面
+    private _openStarUpView()
+    {
+        PopMgr.getInstance().popStarUpView();
+    }
     
 
     // update (deltaTime: number) {

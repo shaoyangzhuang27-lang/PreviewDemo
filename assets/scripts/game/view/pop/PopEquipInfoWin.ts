@@ -7,6 +7,7 @@ import { MsgMgr } from '../../control/MsgMgr';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
 import { GameModel } from '../../model/GameModel';
+import { PopMgr } from '../../control/PopMgr';
 
 @ccclass('PopEquipInfoWin')
 export class PopEquipInfoWin extends PopBase {
@@ -108,6 +109,8 @@ export class PopEquipInfoWin extends PopBase {
 
     private _itemUseOrSell()
     {
+        PopMgr.getInstance().popEquipSellView(this._itemID);
+        this.delSelf()
         //打开装备出售界面
         // MsgMgr.getInstance().getMsgBag().requestUseItem(this._itemID,this._useCount,0);
     }
