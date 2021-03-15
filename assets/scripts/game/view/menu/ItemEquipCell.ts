@@ -52,7 +52,7 @@ export class ItemEquipCell extends Component {
      * @param type      类型：道具:1 ItemEquipType.goods、装备:2 ItemEquipType.equip
      * @param callback  回调方法
      */
-    public setItemType(id:number,count:number,type:ItemEquipType,callback:Function | null)
+    public setItemsInfo(id:number,count:number,type:ItemEquipType,callback:Function | null)
     {
         this._itemID = id;
         this._itemCount = count;
@@ -178,14 +178,3 @@ export class ItemEquipCell extends Component {
         labCount.string = XFuns.FormatNumber(this._itemCount);
     }
 }
-
-/**
- * [1] Class member could be defined like this.
- * [2] Use `property` decorator if your want the member to be serializable.
- * [3] Your initialization goes here.
- * [4] Your update function goes here.
- *
- * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
- * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
- * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
- */

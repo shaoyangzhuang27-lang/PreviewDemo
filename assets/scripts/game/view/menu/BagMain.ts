@@ -156,7 +156,7 @@ export class BagMain extends Component {
     {        
         let script = iconNode.getComponent("ItemEquipCell") as ItemEquipCell;
         script.setItemUseType(objType)
-        script.setItemType(Number(key),Number(value),itemType,(id:number,itemClickType:number,objClickType:number)=>{
+        script.setItemsInfo(Number(key),Number(value),itemType,(id:number,itemClickType:number,objClickType:number)=>{
             this._itemEqipCallBack(id,itemClickType,objClickType)
         })
     }
