@@ -125,7 +125,7 @@ export class MainUI extends Component {
             script.setCloseCallBack(() =>{ 
                 let ret = GameModel.getInstance().getOfflineModel().actionOfflineData()
                 if(ret && ret.length > 0){
-                    FlyItem.showActionFlyWihtObject(this.btn_offline.worldPosition, ret[1], ret[0], this.node);
+                    FlyItem.showActionFlyWihtObject(this.node.worldPosition, ret[1], ret[0], this.node);
                 }
             })
             script.setIsMaskClose(true);
