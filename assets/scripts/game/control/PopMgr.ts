@@ -307,10 +307,10 @@ export class PopMgr extends PopCore  {
             this.pushWindow(p);
 
             let script = p.getComponent("PopFragmentSynthesis") as PopFragmentSynthesis;
-            script.setTitle(title);
-            script.setContent(content);
-            script.setSubmitCallBack(submitCallBack);
-            script.setCloseCallBack(closeCallBack);
+            // script.setTitle(title);
+            // script.setContent(content);
+            // script.setSubmitCallBack(submitCallBack);
+            // script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
             
             // script.popSelf();

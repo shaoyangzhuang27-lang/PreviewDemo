@@ -270,7 +270,7 @@ export class XConsts{
     public static PUB_UI_FRIENDSUMMON : string = "UI_FriendSummon";
     public static PUB_UI_HEROICSUMMON : string = "UI_HeroicSummon";
 
-   //英雄推荐阵容
+   //英雄推荐阵容-
     public static PUB_RECOMMEND_LINEUP_UI_PACKUP : string = "UI_PackUp";
     public static PUB_RECOMMEND_LINEUP_UI_VIEWDETAIL : string = "UI_Detail";
     public static PUB_RECOMMEND_LINEUP_UI_COREHERO : string = "UI_CoreHero";
@@ -305,6 +305,11 @@ export class XConsts{
         FragmentClassesRandom : 3,
         FragmentHero : 4
     }
+
+    //星级合成消耗碎片
+    public static KFragmentNumRequired : number[] = new Array<number> (5,10,20,30,50);
+    public static KFragmentFrameSpriteName:string[] = new Array<string> ( "小卡框_品质随机", "小卡框_品质橙");
+    public static KFragmentQualitySpriteName:string[] = new Array<string> ( "小卡框_碎片品质随机", "小卡框_碎片品质橙");
 
 
 } 

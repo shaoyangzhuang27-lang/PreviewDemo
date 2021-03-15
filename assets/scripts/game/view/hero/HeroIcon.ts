@@ -216,15 +216,14 @@ export class HeroIcon extends Component {
                 break;
         }
     }
-}
 
-/**
+    /**
      * 隐藏等级
      * @param isShow 是否隐藏
- */
+    */
     public setLvIconVisib(isShow:boolean = false)
     {
         this.lab_level.node.active = isShow
     }
-
 }
+
