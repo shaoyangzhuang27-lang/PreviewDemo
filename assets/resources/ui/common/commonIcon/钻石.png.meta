@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "92b5ecc7-eb21-4367-b694-f807b2fcdb68",
+  "uuid": "f62911d8-3c80-424f-8a60-536f20dc131e",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "92b5ecc7-eb21-4367-b694-f807b2fcdb68@6c48a",
-      "displayName": "阵型调整_前中后排英雄背景",
+      "uuid": "f62911d8-3c80-424f-8a60-536f20dc131e@6c48a",
+      "displayName": "钻石",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "92b5ecc7-eb21-4367-b694-f807b2fcdb68"
+        "imageUuidOrDatabaseUri": "f62911d8-3c80-424f-8a60-536f20dc131e"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,29 +33,29 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "92b5ecc7-eb21-4367-b694-f807b2fcdb68@f9941",
-      "displayName": "阵型调整_前中后排英雄背景",
+      "uuid": "f62911d8-3c80-424f-8a60-536f20dc131e@f9941",
+      "displayName": "钻石",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": 0,
-        "offsetY": 0,
-        "trimX": 0,
-        "trimY": 0,
-        "width": 48,
-        "height": 49,
-        "rawWidth": 48,
-        "rawHeight": 49,
-        "borderTop": 39,
-        "borderBottom": 10,
-        "borderLeft": 39,
-        "borderRight": 9,
+        "offsetX": 0.5,
+        "offsetY": -2,
+        "trimX": 6,
+        "trimY": 12,
+        "width": 64,
+        "height": 55,
+        "rawWidth": 75,
+        "rawHeight": 75,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "92b5ecc7-eb21-4367-b694-f807b2fcdb68@6c48a",
+        "imageUuidOrDatabaseUri": "f62911d8-3c80-424f-8a60-536f20dc131e@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "92b5ecc7-eb21-4367-b694-f807b2fcdb68@f9941"
+    "redirect": "f62911d8-3c80-424f-8a60-536f20dc131e@f9941"
   }
 }

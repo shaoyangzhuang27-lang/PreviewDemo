@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "92b5ecc7-eb21-4367-b694-f807b2fcdb68",
+  "uuid": "4c201b84-2dba-4258-9a70-6bb5eefa814d",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "92b5ecc7-eb21-4367-b694-f807b2fcdb68@6c48a",
-      "displayName": "阵型调整_前中后排英雄背景",
+      "uuid": "4c201b84-2dba-4258-9a70-6bb5eefa814d@6c48a",
+      "displayName": "pet1_1",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "92b5ecc7-eb21-4367-b694-f807b2fcdb68"
+        "imageUuidOrDatabaseUri": "4c201b84-2dba-4258-9a70-6bb5eefa814d"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,29 +33,29 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "92b5ecc7-eb21-4367-b694-f807b2fcdb68@f9941",
-      "displayName": "阵型调整_前中后排英雄背景",
+      "uuid": "4c201b84-2dba-4258-9a70-6bb5eefa814d@f9941",
+      "displayName": "pet1_1",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": 0,
-        "offsetY": 0,
-        "trimX": 0,
-        "trimY": 0,
-        "width": 48,
-        "height": 49,
-        "rawWidth": 48,
-        "rawHeight": 49,
-        "borderTop": 39,
-        "borderBottom": 10,
-        "borderLeft": 39,
-        "borderRight": 9,
+        "offsetX": 6.5,
+        "offsetY": -2,
+        "trimX": 17,
+        "trimY": 22,
+        "width": 107,
+        "height": 88,
+        "rawWidth": 128,
+        "rawHeight": 128,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "92b5ecc7-eb21-4367-b694-f807b2fcdb68@6c48a",
+        "imageUuidOrDatabaseUri": "4c201b84-2dba-4258-9a70-6bb5eefa814d@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "92b5ecc7-eb21-4367-b694-f807b2fcdb68@f9941"
+    "redirect": "4c201b84-2dba-4258-9a70-6bb5eefa814d@f9941"
   }
 }
