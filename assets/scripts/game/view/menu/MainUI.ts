@@ -70,8 +70,8 @@ export class MainUI extends Component {
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_coin_diamond_level_change,this._playerDataChange,this) 
     }
     private _playerDataChange(data:any) {
-        this.txt_coin.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().money);
-        this.txt_diamond.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().vrmb);
+        this.txt_coin.string = XFuns.FormatNumber(GameModel.getInstance().getPlayerModel().getPlayerInfo().money);
+        this.txt_diamond.string = XFuns.FormatNumber(GameModel.getInstance().getPlayerModel().getPlayerInfo().vrmb);
         this.txt_level.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().level);
     }
     update(){
