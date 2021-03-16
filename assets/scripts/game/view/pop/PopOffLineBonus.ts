@@ -1,5 +1,5 @@
 
-import { _decorator, Node, LabelComponent, resources, tween, instantiate, Quat} from 'cc';
+import { _decorator, Node, LabelComponent, resources, tween, instantiate, Quat, Vec3} from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
 import { XConsts } from "../../model/const/XConsts";
@@ -51,13 +51,12 @@ export class PopOffLineBonus extends PopBase {
     private _playLightAni(){
         // 播放光动画
         const tw = tween(this.m_sptLight);
-        const quat_start = new Quat();
-        this.m_sptLight.getRotation(quat_start); // 获取起始四元数
+        let eulerAngles = Vec3.clone(this.m_sptLight.eulerAngles); // 获取起始四元数
         tw.to(0.2, {}, {
             onUpdate: (target, ratio) => {
                 // ratio : 0~1
-                quat_start.z -= 0.5 // ratio*45
-                this.m_sptLight.setRotationFromEuler(quat_start.x, quat_start.y, quat_start.z);
+                eulerAngles.z -= 0.5 // ratio*45
+                this.m_sptLight.setRotationFromEuler(eulerAngles.x, eulerAngles.y, eulerAngles.z);
             },
         })
         tw.repeatForever();
