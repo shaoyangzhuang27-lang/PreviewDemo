@@ -3729,7 +3729,7 @@
     "fileId": "59kljxtshCdbM7YITyMPyo"
   },
   {
-    "__type__": "0087epJ7EJGS6xsUjNgrXMy",
+    "__type__": "39fe0QSy19O77T8TvjGG7A0",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -3749,18 +3749,11 @@
     "mask": {
       "__id__": 2
     },
-    "lab_title": {
-      "__id__": 101
-    },
-    "lab_content": null,
-    "btn_submit": {
-      "__id__": 84
-    },
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "0dOoSbEE5CL4PlQfMCLCQE"
+    "fileId": "5d4Rn+3j1KEYCRpWmHl4lT"
   },
   {
     "__type__": "cc.PrefabInfo",

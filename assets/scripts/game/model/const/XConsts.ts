@@ -307,7 +307,7 @@ export class XConsts{
     }
 
     //星级合成消耗碎片
-    public static KFragmentNumRequired : number[] = new Array<number> (5,10,20,30,50);
+    public static KFragmentNumRequired : number[] = new Array<number> (0,5,10,20,30,50);
     public static KFragmentFrameSpriteName:string[] = new Array<string> ( "小卡框_品质随机", "小卡框_品质橙");
     public static KFragmentQualitySpriteName:string[] = new Array<string> ( "小卡框_碎片品质随机", "小卡框_碎片品质橙");
 
