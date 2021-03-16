@@ -75,6 +75,21 @@ export class OfflineModel
         this.m_idleTime = msg.offlineTime
     }
 
+    // 组装数据
+    public actionOfflineData(){
+        if(this.m_bonusInfo.length <= 0){
+            return
+        }
+        let countArr :number[] = []
+        let obTypeArr : Msg.TObjectType[] = []
+        for (let index = 0; index < this.m_bonusInfo.length; index++) {
+            const element = this.m_bonusInfo[index];
+            countArr.push(element.nCount)
+            obTypeArr.push(element.obtype)
+        }
+        return [countArr, obTypeArr]
+    }
+
     /***************************************************************************************/
     private _getPlayerCopyID(){
         // 如果玩家有指定的副本则返回指定副本

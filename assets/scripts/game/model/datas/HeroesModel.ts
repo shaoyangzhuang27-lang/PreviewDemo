@@ -48,6 +48,29 @@ export class HeroesModel extends BaseModel{
         return _campHeroList;
     }
 
+    /**
+     * 排序英雄数据
+     * @param heroDatas       排序数据
+     * @param sortForward     正向排序从小到大 默认false等级高排前面
+     */
+    public sortHeroList(heroDatas : Map<number, HeroData>, sortForward : boolean = false){
+        let sortList = new Array<[number, HeroData]>();
+        heroDatas.forEach(heroInfo => {
+            let sortIndex_1: number = heroInfo.getLevel() * 10000 + heroInfo.getStar() * 1000 + heroInfo.getCamp() * 10 + heroInfo.getClasses();
+            let sortIndex_2: number = 3000000 - sortIndex_1;
+            let sort = sortForward ? sortIndex_1 : sortIndex_2
+            sortList.push([sort, heroInfo]);
+        });
+        sortList.sort((a, b) => a[0] - b[0])
+        // 返回数组
+        let retHeroList: HeroData[] = []
+        sortList.forEach(element => {
+            retHeroList.push(element[1])
+        });
+
+        return retHeroList
+    }
+
     //根据id获取英雄信息
     public getHeroInfoByDyncID(dyncID:number) : HeroData | null
     {
