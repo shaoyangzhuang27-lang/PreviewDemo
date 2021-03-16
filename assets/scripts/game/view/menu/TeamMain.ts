@@ -187,7 +187,13 @@ export class TeamMain extends Component {
     //英雄升级界面
     private _openHeroUpGradeView(_heroData:HeroData)
     {
+        PopMgr.getInstance().popHeroPromotionView(_heroData.getDyncID() );
+    }
 
+    //升星塔界面
+    private _openStarUpView()
+    {
+        PopMgr.getInstance().popStarUpView();
     }
     
 

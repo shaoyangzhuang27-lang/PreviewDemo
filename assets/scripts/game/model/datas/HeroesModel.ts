@@ -3,6 +3,7 @@ import { HeroData } from "./HeroData";
 import { TableName, ValueMgr } from "../ValueMgr";
 import { XMsgExt } from "../const/XMsgExt";
 import { BaseModel } from "./BaseModel";
+import { NotifyMgr } from '../../control/NotifyMgr';
 
 export class HeroesModel extends BaseModel{
 
@@ -55,6 +56,52 @@ export class HeroesModel extends BaseModel{
             return this._heroList.get(dyncID) as HeroData;
         }
         return null;
+    }
+
+    /**
+     * 升星之后 改变英雄数据
+     * @param id 
+     */
+    public resetHeroStarUpInfo(msg:Msg.HeroStarUpA) {
+        let dyncHeroID = msg.heroID;
+        let newStar = msg.newStar;
+        let advanceExpConsume = msg.advanceExpConsume;
+        let materialHeroIDList = msg.materialHeroIDList;
+        let upgradePoint = msg.upgradePoint;
+        let equipList = msg.equipList;
+        let advanceExp = msg.advanceExp;
+        let magicDust = msg.magicDust;
+        let money = msg.money;
+
+        if(this._heroList.has(dyncHeroID))
+        {
+            let oldHeroData = this._heroList.get(dyncHeroID) as HeroData;
+            let newHeroData = new HeroData();
+            let heroInfo  = new Msg.HeroInfo();
+            heroInfo.id = dyncHeroID;
+            heroInfo.staticID = oldHeroData.getStaticID() + 10000;
+            heroInfo.level = oldHeroData.getLevel();
+            heroInfo.isLocked = oldHeroData.isLocked;
+            let newEquipOnList: number[]= [];
+            for(let key in equipList){
+                newEquipOnList.push(Number(key));
+            }
+            heroInfo.equipOnList = newEquipOnList;
+            //heroInfo.crystal = 
+            heroInfo.tier = oldHeroData.tier;
+
+            let hero = new HeroData();
+            hero.initDataByHero(heroInfo as Msg.HeroInfo, this._gameModel);
+            this._heroList.delete(dyncHeroID);
+            this._heroList.set(heroInfo.id as number,hero);
+
+            for(let key in materialHeroIDList){
+                let value = materialHeroIDList[key];
+                this._heroList.delete(value);
+            }
+            //抛出通知  升星发生变化
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_starUp_change);
+        }
     }
     
     /////////////////////////////////////////////////////
@@ -157,5 +204,18 @@ export class HeroesModel extends BaseModel{
         //     }
         // });
         return tempBookHero;
+    }
+
+
+    // 设置英雄锁定状态
+    public setHeroLocked(msg: Msg.SyncHeroLocked) {
+        //根据id获取英雄信息
+        let heroData = this.getHeroInfoByDyncID(msg.heroID); //HeroData
+        if(heroData)
+        {   
+            heroData.isLocked= msg.isLocked;
+            //抛出通知 英雄锁定状态 变化
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_locked, msg);
+        }        
     }
 }

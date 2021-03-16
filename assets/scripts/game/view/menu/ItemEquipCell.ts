@@ -163,6 +163,16 @@ export class ItemEquipCell extends Component {
         }
     }
     
+    /**
+     * 重新传入数量
+     * @param count 装备或道具的数据
+     */
+    public resetItemCount(count:number)
+    {
+        this._itemCount = count;
+        let labCount:Label = this.lab_count.getComponent(Label) as Label;
+        labCount.string = XFuns.FormatNumber(this._itemCount);
+    }
 }
 
 /**
