@@ -49,13 +49,15 @@ export class HeroFragment extends Component {
         img : "",
         type : 0,
         maxNum : 0,
-        curNum : 0
+        curNum : 0,
+        heroName : "",
+        campName : ""
     }  
     
     start () {
         // [3]
         //英雄合成界面
-        this.btn_frame.on(Node.EventType.TOUCH_END, this._onClickIcon, this);        
+      
         // this.img_camp.active = false;
 
     }
@@ -70,12 +72,14 @@ export class HeroFragment extends Component {
     //资源替换
     _resourceLoad (path:string | null | undefined,obj:any)
     {
-
-        path && resources.load(path,SpriteFrame,(err:any,spriteFrame:SpriteFrame) =>
-        {
-            let sprite = obj.getComponent(Sprite) as Sprite;
-            sprite.spriteFrame = spriteFrame;
-        });
+      
+            path && resources.load(path,SpriteFrame,(err:any,spriteFrame:SpriteFrame) =>
+            {
+                obj.active = true;
+                let sprite = obj.getComponent(Sprite) as Sprite;
+                sprite.spriteFrame = spriteFrame;
+            });
+        
     }
 
     _setStar(star:number)
@@ -100,15 +104,19 @@ export class HeroFragment extends Component {
     public set FragmentInfo(info : XStruct.fragment_synthesis_info.IRecord)
     {
         this._fragmentInfo = instantiate(info);
+        this.img_camp.active = false;
         
+        console.log("vvvvvvvvvvvvv",this._fragmentInfo);
         Object.keys(this._fragmentInfo).forEach((val, idx, array) => {
             // val: 当前值
             // idx：当前index
             // array: Array
+
             val == "img" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_icon);
             val == "frame" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.btn_frame);
             val == "camp" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_camp);
             val == "quality" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_debris);
+            
         });
 
         if(info.maxNum && info.curNum )
@@ -138,6 +146,11 @@ export class HeroFragment extends Component {
 
         }
 
+    }
+
+    public setBtnClick()
+    {
+        this.btn_frame.on(Node.EventType.TOUCH_END, this._onClickIcon, this);        
     }
 
     // set FragmentInfo(info : XStruct.fragment_synthesis_info.IRecord)

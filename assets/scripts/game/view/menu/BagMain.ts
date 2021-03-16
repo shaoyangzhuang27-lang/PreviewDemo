@@ -193,6 +193,7 @@ export class BagMain extends Component {
                 let subWidget = fragment_item.getComponent(UITransform) as UITransform;
                 subWidget.contentSize = new Size(105,126);
                 script.FragmentInfo = fragmentSysthesisiInfoList[i];
+                script.setBtnClick();
                 this.scroll_fragment.content?.addChild(fragment_item);
             }
         });

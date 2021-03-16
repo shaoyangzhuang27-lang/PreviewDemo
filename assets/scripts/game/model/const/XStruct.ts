@@ -54,6 +54,8 @@ export namespace XStruct {
                type : (number|null);
                maxNum :(number|null);
                curNum : (number|null);
+               heroName : (string|null);
+               campName : (string|null);
            }
            /** Represents a Record. */
            class Record implements IRecord {
@@ -66,6 +68,8 @@ export namespace XStruct {
                type : number;
                maxNum : number;
                curNum : number;
+               heroName : string;
+               campName : string;
 
            }
        }
