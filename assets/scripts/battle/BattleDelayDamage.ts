@@ -1,21 +1,40 @@
 
 import { _decorator, Component, Node } from 'cc';
-const { ccclass, property } = _decorator;
+import { BattleEffect } from './BattleEffect';
+import { BattleHero } from './BattleHero';
 
-@ccclass('BattleDelayDamage')
-export class BattleDelayDamage extends Component {
-    // [1]
-    // dummy = '';
+export class BattleDelayDamage {
 
-    // [2]
-    // @property
-    // serializableDummy = 0;
+    private _battleEffect: BattleEffect | null = null;
+    private _battleEffectNode: Node | null = null;
+    private _damageFunc: Function | null = null;
 
-    start () {
-        // [3]
+    private _target: BattleHero | null = null;
+
+    constructor(battleEffect: BattleEffect, attack: BattleHero, target: BattleHero, damageFunc: Function) {
+        this._battleEffect = battleEffect;
+        this._battleEffectNode = battleEffect.node;
+        this._target = target;
+        // TODO 只有Fly类型
+        this._damageFunc = damageFunc;
+        this._battleEffect.initFly(attack.getHeroBase(), target.getHeroBase(), ()=>{
+            this.onEnd();
+        })
+
     }
 
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
+    onEnd(): void {
+        if (this._damageFunc) {
+            this._damageFunc(this._target);
+        }
+
+        this._battleEffectNode = null;
+    }
+
+    onClear(): void {
+        if (this._battleEffectNode) {
+            (this._battleEffectNode.getComponent("BattleEffect") as BattleEffect).destroySelf();
+            this._battleEffectNode = null;
+        }
+    }
 }

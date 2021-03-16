@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, instantiate, Prefab, Vec3, Camera, ProgressBar, Color, math } from 'cc';
+import { _decorator, Component, Node, instantiate, Prefab, Vec3, Camera, ProgressBar, Color, math, Label } from 'cc';
 const { ccclass, property } = _decorator;
 
 import { FlyWords } from "./FlyWords";
@@ -36,12 +36,15 @@ export class BattleTitleBar extends Component {
 
     private _battleUiTitleNode: Node | null = null;
     private _fly_words_node: Node | null = null;
+    private _statusLabel: Node | null = null;
 
     private _targetPos = new Vec3();
 
     private _camera: any = null;
 
     private _flayWordStartX: number = -15;
+
+    private _statusStringMap: Map<string, number> = new Map<string, number>()
 
     // start () {
     //     // Your initialization goes here.
@@ -100,6 +103,10 @@ export class BattleTitleBar extends Component {
 
         this._powBarComponent = this._battleUiTitleNode.getChildByName("pow")?.getComponent(ProgressBar) as ProgressBar;
         this._fly_words_node = this._battleUiTitleNode.getChildByName("fly_words_node");
+        this._statusLabel = this._battleUiTitleNode.getChildByName("status") as Node;
+
+        this._statusLabel.active = false;
+
         parentNode.addChild(this._battleUiTitleNode);
     }
 
@@ -123,6 +130,57 @@ export class BattleTitleBar extends Component {
         }
     }
 
+    addStatusString(str: string): void {
+        if (this._statusLabel && str != "") {
+
+            let value = this._statusStringMap.get(str);
+            if (!value) {
+                value = 1; 
+            } else {
+                value++;
+            }
+
+            this._statusStringMap.set(str, value);
+
+            if (value == 1) {
+                str = "";
+                this._statusStringMap.forEach((v: number, k: string) => {
+                    str = str + k + " ";
+                });
+
+                (this._statusLabel.getComponent(Label) as Label).string = str;
+                this._statusLabel.active = true;
+            }          
+        } 
+    }
+
+    removeStatusString(str: string): void {
+        if (this._statusLabel && str != "") {
+
+            let value = this._statusStringMap.get(str);
+            if (!value) {
+                return; 
+            } else {
+                value--;
+            }
+
+            if (value == 0) {
+                this._statusStringMap.delete(str);
+                str = "";
+                this._statusStringMap.forEach((v: number, k: string) => {
+                    str = str + k + " ";
+                });
+
+                (this._statusLabel.getComponent(Label) as Label).string = str;
+                if (str == "") {
+                    this._statusLabel.active = false;
+                }          
+            } else {
+                this._statusStringMap.set(str, value);
+            }         
+        } 
+    }
+
     flyWords(v: number, damageType: DamageType): void {
         if(!this.FlyWordsPrefab) {
             return;
@@ -131,9 +189,7 @@ export class BattleTitleBar extends Component {
 
         let color = Color.RED;
         let str = v.toString();
-        if (v > 0) {
-            str = "+" + str;
-        }
+
         switch (damageType) {
             case DamageType.Miss: // 未命中
                 break;
@@ -188,6 +244,11 @@ export class BattleTitleBar extends Component {
             if (bVisible) {
                 this.lateUpdate();
             } else {
+                if (this._statusLabel) {
+                    this._statusLabel.active = false;
+                }
+                this._statusStringMap.clear();
+                
                 this._fly_words_node?.removeAllChildren();
             }
         }

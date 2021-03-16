@@ -1,0 +1,206 @@
+{
+  "ver": "2.0.10",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "0135d13c-9ba6-40ca-a73e-bbee4462b08e",
+  "files": [],
+  "subMetas": {
+    "3f614": {
+      "importer": "gltf-mesh",
+      "uuid": "0135d13c-9ba6-40ca-a73e-bbee4462b08e@3f614",
+      "displayName": "",
+      "id": "3f614",
+      "name": "Box017.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "008ce": {
+      "importer": "gltf-mesh",
+      "uuid": "0135d13c-9ba6-40ca-a73e-bbee4462b08e@008ce",
+      "displayName": "",
+      "id": "008ce",
+      "name": "Box018.mesh",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "989ed": {
+      "importer": "gltf-animation",
+      "uuid": "0135d13c-9ba6-40ca-a73e-bbee4462b08e@989ed",
+      "displayName": "",
+      "id": "989ed",
+      "name": "attack.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.9583333134651184
+        },
+        "events": [
+          {
+            "frame": 0.43333333333333335,
+            "functionName": "onAttack",
+            "parameters": []
+          }
+        ],
+        "speed": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "438fe": {
+      "importer": "gltf-skeleton",
+      "uuid": "0135d13c-9ba6-40ca-a73e-bbee4462b08e@438fe",
+      "displayName": "",
+      "id": "438fe",
+      "name": "UnnamedSkeleton.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 22
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "8e9ce": {
+      "importer": "gltf-embeded-image",
+      "uuid": "0135d13c-9ba6-40ca-a73e-bbee4462b08e@8e9ce",
+      "displayName": "",
+      "id": "8e9ce",
+      "name": "Map #28.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "cc04f": {
+      "importer": "texture",
+      "uuid": "0135d13c-9ba6-40ca-a73e-bbee4462b08e@cc04f",
+      "displayName": "",
+      "id": "cc04f",
+      "name": "Map #28.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "0135d13c-9ba6-40ca-a73e-bbee4462b08e@8e9ce"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1fdd3": {
+      "importer": "gltf-material",
+      "uuid": "0135d13c-9ba6-40ca-a73e-bbee4462b08e@1fdd3",
+      "displayName": "",
+      "id": "1fdd3",
+      "name": "Material #712.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "cba0a": {
+      "importer": "gltf-scene",
+      "uuid": "0135d13c-9ba6-40ca-a73e-bbee4462b08e@cba0a",
+      "displayName": "",
+      "id": "cba0a",
+      "name": "monster_09_attack.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #28",
+        "uri": "0135d13c-9ba6-40ca-a73e-bbee4462b08e@8e9ce"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 0.9583333134651184,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "attack",
+            "from": 0,
+            "to": 0.9583333134651184,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "0135d13c-9ba6-40ca-a73e-bbee4462b08e@cba0a",
+    "assetFinder": {
+      "meshes": [
+        "0135d13c-9ba6-40ca-a73e-bbee4462b08e@3f614",
+        "0135d13c-9ba6-40ca-a73e-bbee4462b08e@008ce"
+      ],
+      "skeletons": [
+        "0135d13c-9ba6-40ca-a73e-bbee4462b08e@438fe"
+      ],
+      "textures": [
+        "0135d13c-9ba6-40ca-a73e-bbee4462b08e@cc04f"
+      ],
+      "materials": [
+        "0135d13c-9ba6-40ca-a73e-bbee4462b08e@1fdd3"
+      ],
+      "scenes": [
+        "0135d13c-9ba6-40ca-a73e-bbee4462b08e@cba0a"
+      ]
+    }
+  }
+}

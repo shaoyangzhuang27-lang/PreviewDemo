@@ -10,7 +10,6 @@ import { EHeroType, BattleHero } from "./BattleHero";
 import { BattleMgr } from "./BattleMgr";
 import { BattleResMgr } from "./BattleResMgr";
 
-import { ValueMgr } from "../game/model/ValueMgr";
 import { XConsts } from '../game/model/const/XConsts';
 
 let bLoadMain = false;
