@@ -64,6 +64,8 @@ export class MainUI extends Component {
     @property({ type: Node, displayName: "挑战首领" })
     public btn_fight: Node = null as unknown as Node;
 
+    private _onClickBossFight: Function = null as unknown as Function;
+
     onLoad(){
         this.btn_hero.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
         this.btn_team.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
@@ -91,8 +93,8 @@ export class MainUI extends Component {
     }
 
     private _playerDataChange(data:any) {
-        this.txt_coin.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().money);
-        this.txt_diamond.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().vrmb);
+        this.txt_coin.string = XFuns.FormatNumber(GameModel.getInstance().getPlayerModel().getPlayerInfo().money);
+        this.txt_diamond.string = XFuns.FormatNumber(GameModel.getInstance().getPlayerModel().getPlayerInfo().vrmb);
         this.txt_level.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().level);
     }
     update(){
@@ -121,6 +123,10 @@ export class MainUI extends Component {
         UINodeMgr.regNodeWithKey(this.pro_level.node, "mainlevelPro")
     }
 
+    setClickBossFightFunc(func: Function) {
+        this._onClickBossFight = func;
+    }
+
     openOfflineBonus(){
         resources.load('prefabs_ui/offline/pop_offline', (err: any, res: any) => {
             let p = instantiate(res);
@@ -144,6 +150,9 @@ export class MainUI extends Component {
     // 点击挑战首领
     buttonBtnFightClick(event: any){
         console.log("点击挑战首领")
+        if (this._onClickBossFight) {
+            this._onClickBossFight();
+        }
     }
 
     // 弹出后要移动宝箱位置

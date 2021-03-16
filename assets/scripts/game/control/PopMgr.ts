@@ -1,6 +1,7 @@
 import {  Node,resources,instantiate,LabelComponent,Vec3,tween,Scene, Script } from 'cc';
 import { PopSimple } from "../view/pop/PopSimple";
 import { PopRisingStarTower } from "../view/pop/PopRisingStarTower";
+import { PopStarUpResult } from "../view/pop/PopStarUpResult";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
 import { TipDemo } from '../view/TipDemo';
@@ -12,6 +13,7 @@ import { PopItemUseWin } from "../view/pop/PopItemUseWin";
 import { PopEquipInfoWin } from "../view/pop/PopEquipInfoWin";
 import { PopEquipSaleView } from "../view/pop/PopEquipSaleView";
 import { PopItemReward } from '../view/pop/popItemReward';
+import { HeroData } from '../model/datas/HeroData';
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -92,19 +94,51 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    //弹出升星塔界面界面 
-    public popStarUpView(submitCallBack:Function = ()=>{},closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    /**
+     * @description: 弹出升星塔界面界面 
+     * @param {boolean} isMaskClose
+     */
+    public popStarUpView(isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_risingstartower', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
-            let script = p.getComponent("PopRisingStarTower");
+            let script = p.getComponent("PopRisingStarTower") as PopRisingStarTower;
             script.setIsMaskClose(isMaskClose);
         } );
     }
 
+    /**
+     * @description: 弹出升星成功界面 
+     * @param {HeroData} HeroInfo
+     * @param {HeroData} newHeroInfo
+     * @param {Function} closeCallBack
+     * @param {boolean} isMaskClose
+     */
+    public popStarUpResultView(HeroInfo:HeroData,newHeroInfo:HeroData,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_starup_result', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopStarUpResult") as PopStarUpResult;
+            script.setHeroData(HeroInfo);
+            script.setnewHeroData(newHeroInfo);
+            script.setIsMaskClose(isMaskClose);
+            script.setCloseCallBack(closeCallBack);
+        } );
+    }
+
     //弹出说明界面
+    /**
+     * @description: 弹出说明界面 
+     * @param {string} title
+     * @param {string} content
+     * @param {Function} submitCallBack
+     * @param {Function} closeCallBack
+     * @param {boolean} isMaskClose
+     */
     public popExplain(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_explain', (err:any,res:any)=>{
@@ -134,7 +168,12 @@ export class PopMgr extends PopCore  {
             script.setWinPos(pos);
         });
     }
-    //英雄属性值弹窗tip
+
+    /**
+     * @description: 英雄属性值弹窗tip
+     * @param {Vec3} pos
+     * @param {number} heroId
+     */
     public tipHeroAttributeWindow(pos:Vec3, heroId:number = 0){
         
         resources.load('prefabs_ui/pop/tip_hero_attribute', (err:any,res:any)=>{
@@ -149,21 +188,25 @@ export class PopMgr extends PopCore  {
         });
     }
 
-    //英雄技能弹窗tip
-    public tipSkillWindow(pos:Vec3, skillId:number){
-    
+    /**
+     * @description: 英雄技能弹窗tip
+     * @param {Vec3} pos
+     * @param {any} skillData={skillId: 技能id, talentId:天赋id, isUnlock:是否解锁, unlockTier:解锁星级(天赋会用到)}
+     */    
+    public tipSkillWindow(pos:Vec3, skillData:any){
+        // // test测试数据
+        // if(!skillData || (!skillData.skillId && !skillData.talentId) )
+        // {
+        //     skillData= {skillId:535002};// 破甲弹2级
+        // }
         resources.load('prefabs_ui/pop/tip_skill', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
             this.parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipSkill") as TipSkill;
-            script.setWinPos(pos, 1);
-            if(skillId ==0)
-            {
-                skillId= 535002;//破甲弹2级
-            }
-            script.setSkillData(skillId);
+            script.setWinPos(pos, 1);           
+            script.setSkillData(skillData);
             script.setIsWinClose(true);
         });
     }

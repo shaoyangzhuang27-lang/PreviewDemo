@@ -1,4 +1,9 @@
-//单个英雄属性框UI单元
+/*
+ * @Description: 单个英雄属性框UI单元
+ * @Author: 徐涛
+ * @Date: 2021-03-10 20:30:26
+ * @LastEditTime: 2021-03-15 16:12:20
+ */
 import { _decorator, Component, Label } from 'cc';
 const { ccclass, property } = _decorator;
 
@@ -17,16 +22,21 @@ export class TipHeroAttributeItem extends Component {
     @property({type :  Label, displayName: "属性值"})
     public lab_value:Label = null as unknown as Label;
 
-    private _attrType:number =0 ; //属性类型 0:纯数字, 1:数字+秒, 2:数字%, 
+    private _attrType:number =0 ;   //属性类型 0:纯数字, 1:数字+秒, 2:数字%, 
     private _attrName:string = "" ; //属性名
-    private _attrValue:number =0 ; //属性值ord = null as unknown as Config.skill.Record;    //记录的技能
-
-
+    private _attrValue:number =0 ;  //属性值
+    
     start () {
         // [3]
     }
-
-    public setTxtData(attrName : string, attrValue:number, attrType:number =0)
+    
+    /**
+     * @description: 设置属性
+     * @param attrName 属性名
+     * @param attrValue 属性值
+     * @param attrType 属性类型
+     */    
+    public setTxtData(attrName: string, attrValue: number, attrType: number =0)
     {
         this.lab_name.string= attrName;
         let strValue= attrValue.toString();

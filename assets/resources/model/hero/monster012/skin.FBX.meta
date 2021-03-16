@@ -1,0 +1,285 @@
+{
+  "ver": "2.0.10",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "88c4017f-9297-4a91-a9c6-257ee78bf345",
+  "files": [],
+  "subMetas": {
+    "13520": {
+      "importer": "gltf-mesh",
+      "uuid": "88c4017f-9297-4a91-a9c6-257ee78bf345@13520",
+      "displayName": "",
+      "id": "13520",
+      "name": "Box004.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "30732": {
+      "importer": "gltf-skeleton",
+      "uuid": "88c4017f-9297-4a91-a9c6-257ee78bf345@30732",
+      "displayName": "",
+      "id": "30732",
+      "name": "UnnamedSkeleton-0.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 35
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "89291": {
+      "importer": "gltf-mesh",
+      "uuid": "88c4017f-9297-4a91-a9c6-257ee78bf345@89291",
+      "displayName": "",
+      "id": "89291",
+      "name": "Box005.mesh",
+      "userData": {
+        "gltfIndex": 3
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "b16e1": {
+      "importer": "gltf-mesh",
+      "uuid": "88c4017f-9297-4a91-a9c6-257ee78bf345@b16e1",
+      "displayName": "",
+      "id": "b16e1",
+      "name": "Box007.mesh",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "7ec20": {
+      "importer": "gltf-mesh",
+      "uuid": "88c4017f-9297-4a91-a9c6-257ee78bf345@7ec20",
+      "displayName": "",
+      "id": "7ec20",
+      "name": "Box006.mesh",
+      "userData": {
+        "gltfIndex": 2
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "73b7f": {
+      "importer": "gltf-animation",
+      "uuid": "88c4017f-9297-4a91-a9c6-257ee78bf345@73b7f",
+      "displayName": "",
+      "id": "73b7f",
+      "name": "Take 001.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.625
+        },
+        "events": []
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f1394": {
+      "importer": "gltf-skeleton",
+      "uuid": "88c4017f-9297-4a91-a9c6-257ee78bf345@f1394",
+      "displayName": "",
+      "id": "f1394",
+      "name": "UnnamedSkeleton-1.skeleton",
+      "userData": {
+        "gltfIndex": 1,
+        "jointsLength": 28
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "6df82": {
+      "importer": "gltf-embeded-image",
+      "uuid": "88c4017f-9297-4a91-a9c6-257ee78bf345@6df82",
+      "displayName": "",
+      "id": "6df82",
+      "name": "Map #24.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f713f": {
+      "importer": "gltf-embeded-image",
+      "uuid": "88c4017f-9297-4a91-a9c6-257ee78bf345@f713f",
+      "displayName": "",
+      "id": "f713f",
+      "name": "Map #25.image",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "cae2f": {
+      "importer": "texture",
+      "uuid": "88c4017f-9297-4a91-a9c6-257ee78bf345@cae2f",
+      "displayName": "",
+      "id": "cae2f",
+      "name": "Map #24.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "88c4017f-9297-4a91-a9c6-257ee78bf345@6df82"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c21b7": {
+      "importer": "texture",
+      "uuid": "88c4017f-9297-4a91-a9c6-257ee78bf345@c21b7",
+      "displayName": "",
+      "id": "c21b7",
+      "name": "Map #25.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "88c4017f-9297-4a91-a9c6-257ee78bf345@f713f"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "dad16": {
+      "importer": "gltf-scene",
+      "uuid": "88c4017f-9297-4a91-a9c6-257ee78bf345@dad16",
+      "displayName": "",
+      "id": "dad16",
+      "name": "skin.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #24",
+        "uri": "88c4017f-9297-4a91-a9c6-257ee78bf345@6df82"
+      },
+      {
+        "name": "Map #25",
+        "uri": "88c4017f-9297-4a91-a9c6-257ee78bf345@f713f"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 0.625,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "Take 001",
+            "from": 0,
+            "to": 0.625,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "88c4017f-9297-4a91-a9c6-257ee78bf345@dad16",
+    "assetFinder": {
+      "meshes": [
+        "88c4017f-9297-4a91-a9c6-257ee78bf345@13520",
+        "88c4017f-9297-4a91-a9c6-257ee78bf345@b16e1",
+        "88c4017f-9297-4a91-a9c6-257ee78bf345@7ec20",
+        "88c4017f-9297-4a91-a9c6-257ee78bf345@89291"
+      ],
+      "skeletons": [
+        "88c4017f-9297-4a91-a9c6-257ee78bf345@30732",
+        "88c4017f-9297-4a91-a9c6-257ee78bf345@f1394"
+      ],
+      "textures": [
+        "88c4017f-9297-4a91-a9c6-257ee78bf345@cae2f",
+        "88c4017f-9297-4a91-a9c6-257ee78bf345@c21b7"
+      ],
+      "materials": [
+        "cf2520b6-1c4b-44c9-95e8-7c7bb866f9fe",
+        "8bdb2990-9cb6-49b2-9aab-ff498c1403fb"
+      ],
+      "scenes": [
+        "88c4017f-9297-4a91-a9c6-257ee78bf345@dad16"
+      ]
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/resources/model/hero/monster012/Materials_skin"
+  }
+}

@@ -9,7 +9,7 @@ import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
 import { HeroData } from '../../model/datas/HeroData';
 import { HeroIcon } from '../hero/HeroIcon';
-import { HeroSelectIcon_starUp } from '../hero/HeroSelectIcon_starUp';
+import { HeroSelectIconStarUp } from '../hero/HeroSelectIconStarUp';
 import { PopMgr } from '../../control/PopMgr';
 import { MsgMgr } from '../../control/MsgMgr';
 import { XConsts } from "../../model/const/XConsts";
@@ -88,6 +88,9 @@ export class PopRisingStarTower extends PopBase {
 
     @property({type :  ScrollView})
     public scroll_HeroView:ScrollView = null as unknown as ScrollView;
+
+    //原英雄数据
+    private _firstHeroData:HeroData = null as unknown as HeroData;
 
     //拥有的所有英雄
     private _allHeroList:Map<number, HeroData> = new Map<number, HeroData>();
@@ -209,13 +212,13 @@ export class PopRisingStarTower extends PopBase {
             this.scroll_HeroView.content.removeAllChildren()
         }
 
-        resources.load('prefabs_ui/main/hero_selecticon_starUp', (err:any,res:any)=>{
+        resources.load('prefabs_ui/main/hero_selecticonstarup', (err:any,res:any)=>{
             this._bottomHeroItemList.clear()
             let k = new Array<[number,Node]>();     //排序存储对象
             for (let heroData of this._allHeroList.values()) {
                 let heroIcon = instantiate(res) as Node;
                 this.scroll_HeroView.content?.addChild(heroIcon);
-                let heroSelectScript = heroIcon.getComponent("HeroSelectIcon_starUp") as HeroSelectIcon_starUp;  
+                let heroSelectScript = heroIcon.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp;  
                 let itemType =  this._getItemType(heroData);
                 heroSelectScript.setItemType(itemType);
                 heroSelectScript.setSelectData(heroData as HeroData,(data:any,itemType:number)=>{
@@ -252,7 +255,7 @@ export class PopRisingStarTower extends PopBase {
                 });
                 let sortIndex_1:number = heroData.getLevel() * 10000 + heroData.getStar()*1000 + heroData.getCamp() * 10 + heroData.getClasses();
                 let sortIndex_2:number = 3000000 - sortIndex_1;
-                k.push([sortIndex_2,heroIcon]); 
+                k.push([sortIndex_2,heroIcon]);    
 
                 this._bottomHeroItemList.set(heroData.getDyncID(), heroIcon);
             }
@@ -287,6 +290,16 @@ export class PopRisingStarTower extends PopBase {
             this._selectBattleList.set(dyncID, HeroData.GetHeroBookID(staticID));
             if(this._selectBattleList.size == 1){
                 this._risingdyncMaiID = dyncID;
+
+//弹出升星结果界面****************测试**************
+// this._firstHeroData=this._getHeroData(this._risingdyncMaiID)as HeroData
+//         let HeroData = this._getHeroData(this._firstHeroData.getDyncID())as HeroData
+
+
+//         PopMgr.getInstance().popStarUpResultView(this._firstHeroData,HeroData,()=>{
+//             PopMgr.getInstance().deleteWindow();
+//         });
+//弹出升星结果界面****************测试**************
             }else{
                 if(this._risingDyncViceID1 == 0){
                     this._risingDyncViceID1 = dyncID;
@@ -329,7 +342,7 @@ export class PopRisingStarTower extends PopBase {
     //根据herodata获取拥有英雄代码
     private _getBottomHeroItemScript(heroData:HeroData){
         for (let value of this._bottomHeroItemList.values()) {
-            let script = value.getComponent("HeroSelectIcon_starUp") as HeroSelectIcon_starUp; 
+            let script = value.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp; 
             let scriptHeroInfo = script.getCurHeroInfo() as HeroData;
             if(scriptHeroInfo.getDyncID() == heroData.getDyncID())
             {
@@ -339,7 +352,7 @@ export class PopRisingStarTower extends PopBase {
     }
     private _frushButtonHero(){
         this._bottomHeroItemList.forEach((heroNode,dyncid)=>{
-            let heroSelectScript = heroNode.getComponent("HeroSelectIcon_starUp") as HeroSelectIcon_starUp;
+            let heroSelectScript = heroNode.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp;
             let heroData = heroSelectScript.getHeroData() as HeroData;
             let itemType =  this._getItemType(heroData);
             heroSelectScript.setItemType(itemType);
@@ -407,7 +420,7 @@ export class PopRisingStarTower extends PopBase {
         }
         this._risingdyncMaiID = 0;
         for (let value2 of this._bottomHeroItemList.values()) {
-            let script2 = value2.getComponent("HeroSelectIcon_starUp") as HeroSelectIcon_starUp; 
+            let script2 = value2.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp; 
             let scriptHeroInfo = script2.getCurHeroInfo() as HeroData;
             script2.setItemType(0);
         }
@@ -483,7 +496,7 @@ export class PopRisingStarTower extends PopBase {
     private _getHeroData(heroID:number){
         let HeroInfo;
         for (let value of this._bottomHeroItemList.values()) {
-            let script = value.getComponent("HeroSelectIcon_starUp") as HeroSelectIcon_starUp; 
+            let script = value.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp; 
             let scriptHeroInfo = script.getCurHeroInfo() as HeroData;
             if(scriptHeroInfo.getDyncID() == heroID)
             {
@@ -496,7 +509,7 @@ export class PopRisingStarTower extends PopBase {
     //滚动区域英雄变化
     private _bottomHeroChange(){
         this._bottomHeroItemList.forEach((heroNode,dyncid)=>{
-            let heroSelectScript = heroNode.getComponent("HeroSelectIcon_starUp") as HeroSelectIcon_starUp;
+            let heroSelectScript = heroNode.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp;
             let heroData = heroSelectScript.getHeroData() as HeroData;
             let itemType =  this._getItemType(heroData);
             heroSelectScript.setItemType(itemType);
@@ -682,7 +695,16 @@ export class PopRisingStarTower extends PopBase {
                 this.starlist[index].active = true;
             }
         }
+    }
 
+    public setCloseCallBack(func:Function | null){
+        if(func){
+            this._closeFunc = func;
+        }else{
+            this._closeFunc = ()=>{
+                PopMgr.getInstance().deleteWindow();
+            };
+        }  
     }
 
     // 展示当前英雄形象
@@ -729,7 +751,19 @@ export class PopRisingStarTower extends PopBase {
     private _notifyStarUpChangeHandle(){
         this._getAllHeroList();
         this._initBottomHeros();
+
+        //弹出升星结果界面
+        let HeroData:HeroData = null as unknown as HeroData;
+        for (let heroData of this._allHeroList.values()) {
+            if(heroData.getDyncID() == this._firstHeroData.getDyncID()){
+                HeroData = heroData;
+                break;
+            }
+        }
+        PopMgr.getInstance().popStarUpResultView(this._firstHeroData,HeroData);
     }
+
+    //////////////////////////////////////////////////////
 
     // 从heroes文件获取升星材料类型 参数 数量
     private _getHeroesDatas(StaticID:number)
@@ -765,6 +799,7 @@ export class PopRisingStarTower extends PopBase {
     //升星
     private risingstarClick(event: Event, customEventData: string){
         console.log("点击升星");
+        this._firstHeroData = this._getHeroData(this._risingdyncMaiID)as HeroData
         let materialHeroIDs:Msg.HeroIDs = new Msg.HeroIDs();
         materialHeroIDs.heroIDList.push(this._risingDyncViceID1);
         if(this._risingDyncViceID2 != 0){

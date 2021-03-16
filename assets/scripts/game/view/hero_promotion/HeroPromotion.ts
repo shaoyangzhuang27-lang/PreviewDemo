@@ -1,4 +1,9 @@
-
+/*
+ * @Description: 英雄升级/升阶/装备弹窗
+ * @Author: 徐涛
+ * @Date: 2021-03-09 19:30:14
+ * @LastEditTime: 2021-03-15 16:25:53
+ */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
 
@@ -13,7 +18,6 @@ import { NotifyMgr } from '../../control/NotifyMgr';
 import { XShare } from '../../model/const/XShare';
 const { ccclass, property } = _decorator;
 
-//弹窗初始化-----
 @ccclass('HeroPromotion')
 export class HeroPromotion extends PopBase {
     @property({ type: Node, displayName: "锁定" })
@@ -101,17 +105,17 @@ export class HeroPromotion extends PopBase {
         super.onLoad();
         this._allHeroList = GameModel.getInstance().getHeroesModel().getHeroList();
 
-        this.btn_lock?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_unlock?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_share?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_story?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_fight_params?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_arrow_left?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_arrow_right?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_camp?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_career?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_all_unload?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_all_load?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
+        this.btn_lock?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_unlock?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_share?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_story?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_fight_params?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_arrow_left?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_arrow_right?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_camp?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_career?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_all_unload?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_all_load?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
 
         // tabGroup
         const containerEventHandler = new EventHandler();
@@ -152,8 +156,8 @@ export class HeroPromotion extends PopBase {
         }
     }
 
-    buttonBtnClick(event: any) {
-        console.log(" HeroPromotion buttonBtnClick: " + event.target?._name)
+    private _buttonBtnClick(event: any) {
+        console.log(" HeroPromotion _buttonBtnClick: " + event.target?._name)
 
         switch (event.target) {
             case this.btn_lock:
@@ -213,7 +217,7 @@ export class HeroPromotion extends PopBase {
     start() {
         // [3]
         super.start()
-        this.initView();
+        this._initView();
         // this.cur_SkillItem?.setSkillData(0);
         //this.cur_hero_model?.node.setSiblingIndex(100);
         // UIMeshRenderer
@@ -236,9 +240,9 @@ export class HeroPromotion extends PopBase {
         }
     }
 
-    initView() {
+    _initView() {
         let playerInfo = DataMgr.getInstance().getPlayerInfo()
-        console.log(" HeroPromotion initView +++++++++++++++++++++")
+        console.log(" HeroPromotion _initView +++++++++++++++++++++")
     }
 
     update(deltatime: number) {
@@ -246,11 +250,15 @@ export class HeroPromotion extends PopBase {
         // console.log("HeroPromotion update() number= ", deltatime)
     }
 
+    /**
+     * @description: 设置当前英雄id
+     * @param {number} heroId
+     */    
     public setCurrentHeroId(heroId: number = 0) {        
         let heroData = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(heroId);
         if(!heroData)
         {            
-            this.initDefaultKnight();
+            this._initDefaultKnight();
             return ;
         }
 
@@ -270,28 +278,28 @@ export class HeroPromotion extends PopBase {
         {
             this._isLvUpView = false;// 当前应该显示升阶界面
         }
-        this.initCurHeroView();
+        this._initCurHeroView();
     }
 
     // 显示当前英雄数据
-    initCurHeroView() {
-        this.showCurHeroModel();
+    private _initCurHeroView() {
+        this._showCurHeroModel();
         if (this._isHeroUpView) {
             if(this._isLvUpView){
-                this.showHeroLvUpView();
+                this._showHeroLvUpView();
             } 
             else
             {
-                this.showHeroUpgradeView();
+                this._showHeroUpgradeView();
             }
         }
         else {
-            this.showEquipView();
+            this._showEquipView();
         }
     }
 
     // 展示英雄升级界面
-    showHeroLvUpView() {
+    private _showHeroLvUpView() {
         this.node_equip.active = false; //装备界面        
         this.node_up.active = true;//升级升阶大界面            
         this.node_fight_param.active = this._isLvUpView; //升级底部属性界面
@@ -300,7 +308,7 @@ export class HeroPromotion extends PopBase {
         this.btn_up_tier.active = !this._isLvUpView;     //升阶按钮
         
         //显示技能
-        this.showSkillItems();
+        this._showSkillItems();
 
         //显示品阶
 
@@ -312,22 +320,17 @@ export class HeroPromotion extends PopBase {
 
     }
 
-    showSkillItems()
+    private _showSkillItems()
     {
-        // // 英雄等级 
-        // let lv =this._curHeroData.getLevel();
-        // // 英雄品阶 
-        // let tier = this._curHeroData.tier;
-        // 英雄星级 
         let star = this._curHeroData.getStar();
         this.skillItem0.setSkillData(this._curHeroData.getSkillID(), star);   
-        this.skillItem1.setTalentData(this._curHeroData.getTalentID(0), star, this._curHeroData.isTalentActive(0) );
-        this.skillItem2.setTalentData(this._curHeroData.getTalentID(1), star, this._curHeroData.isTalentActive(1) );
-        this.skillItem3.setTalentData(this._curHeroData.getTalentID(2), star, this._curHeroData.isTalentActive(2) );
+        this.skillItem1.setTalentData(this._curHeroData.getTalentID(0), star, this._curHeroData.tier, this._curHeroData.getTalentUnLockTier(0) );
+        this.skillItem2.setTalentData(this._curHeroData.getTalentID(1), star, this._curHeroData.tier, this._curHeroData.getTalentUnLockTier(1) );
+        this.skillItem3.setTalentData(this._curHeroData.getTalentID(2), star, this._curHeroData.tier, this._curHeroData.getTalentUnLockTier(2) );
     }
 
     // 展示英雄升阶界面
-    showHeroUpgradeView() {
+    private _showHeroUpgradeView() {
         this.node_equip.active = false; //装备界面        
         this.node_up.active = true;//升级升阶大界面            
         this.node_fight_param.active = this._isLvUpView; //升级底部属性界面
@@ -336,7 +339,7 @@ export class HeroPromotion extends PopBase {
         this.btn_up_tier.active = !this._isLvUpView;     //升阶按钮
 
         //显示技能
-        this.showSkillItems();
+        this._showSkillItems();
 
         //显示品阶
 
@@ -348,7 +351,7 @@ export class HeroPromotion extends PopBase {
     }
 
     // 展示英雄装备界面
-    showEquipView() {
+    private _showEquipView() {
         this.node_equip.active = true; //装备界面
         this.node_up.active = false;//升级升阶大界面            
         this.node_fight_param.active = this._isLvUpView; //升级底部属性界面
@@ -368,12 +371,12 @@ export class HeroPromotion extends PopBase {
     }
 
     // 展示当前英雄模型形象
-    showCurHeroModel() {
+    private _showCurHeroModel() {
         // this.cur_hero_model.updateByHeroPerfabPath();
     }
 
     // 默认展示骑士主角升级UI
-    initDefaultKnight(){        
+    private _initDefaultKnight(){        
         this._curHeroId = 0;
         //todo
     }

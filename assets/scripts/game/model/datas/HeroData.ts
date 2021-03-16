@@ -115,6 +115,18 @@ export class HeroData extends BaseHeroData {
             return this.tier >= this._record.talentUnlockTier[loc];
         }
     }
+    /**
+     * @description: 获取天赋解锁品阶
+     * @param {number} loc 索引
+     */
+    public getTalentUnLockTier(loc: number=0) {
+        if (this.isRoleHero()) {
+            return this._record.talentUnlockTier[loc];
+        } else {
+            return this._record.talentUnlockTier[loc];
+        }
+    }
+
     public get level() {
         if (!this.isRoleHero()) {
             return 1//Mathf.Min(XLuaFunc.instance.KHeroMaxLevelForTier[_record.Star], PlayerData.instance.HeroCollegeLevel);
