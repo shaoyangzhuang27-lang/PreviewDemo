@@ -69,6 +69,26 @@ export namespace XStruct {
 
            }
        }
+
+
+       //自测数据
+       namespace test_info {
+           /** Properties of a Record. */
+           interface IRecord {
+               fragmentType?:(number|null);
+               param?: (number|null);
+               star :(number|null);
+               num : (number|null);
+           }
+           /** Represents a Record. */
+           class Record implements IRecord {
+               constructor(p?: XStruct.test_info.IRecord);
+               fragmentType :number;
+               param : number;
+               star : number;
+               num : number;
+           }
+       }
    }
 }
    export {}

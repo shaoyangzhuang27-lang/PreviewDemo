@@ -2566,7 +2566,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "node_hero_debris",
+    "_name": "node_hero_fragment",
     "_objFlags": 0,
     "_parent": {
       "__id__": 12
@@ -3748,6 +3748,36 @@
     },
     "mask": {
       "__id__": 2
+    },
+    "lab_title": {
+      "__id__": 101
+    },
+    "lab_fragment_title": {
+      "__id__": 107
+    },
+    "lab_fragment_tips": {
+      "__id__": 117
+    },
+    "lab_ban_sell": {
+      "__id__": 123
+    },
+    "lab_num": {
+      "__id__": 32
+    },
+    "btn_add": {
+      "__id__": 42
+    },
+    "btn_reduce": {
+      "__id__": 56
+    },
+    "btn_info": {
+      "__id__": 126
+    },
+    "btn_summon": {
+      "__id__": 140
+    },
+    "node_hero_fragment": {
+      "__id__": 110
     },
     "_id": ""
   },

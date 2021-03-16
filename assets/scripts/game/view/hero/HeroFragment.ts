@@ -1,6 +1,7 @@
 //英雄碎片
 import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources,ProgressBar,instantiate, CCInteger } from 'cc';
 const { ccclass, property } = _decorator;
+import { PopMgr } from '../../control/PopMgr';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 
 @ccclass('HeroFragment')
@@ -16,10 +17,10 @@ export class HeroFragment extends Component {
     public img_bg:Node = null as unknown as Node;
 
     @property({type :  Node})
-    public btn_icon:Node = null as unknown as Node;
+    public img_icon:Node = null as unknown as Node;
 
     @property({type :  Node})
-    public img_frame:Node = null as unknown as Node;
+    public btn_frame:Node = null as unknown as Node;
 
     @property({type :  Node})
     public img_camp:Node = null as unknown as Node;
@@ -51,55 +52,19 @@ export class HeroFragment extends Component {
         curNum : 0
     }  
     
-
-    private _heroInfo : any | null = null;
-    private _heroLT : any | null = null;
-
-
     start () {
         // [3]
         //英雄合成界面
-        this.btn_icon.on(Node.EventType.TOUCH_END, this.onClickIcon, this);        
+        this.btn_frame.on(Node.EventType.TOUCH_END, this._onClickIcon, this);        
         // this.img_camp.active = false;
 
     }
 
-    //传入英雄id  初始化对象
-    setHeroID(_heroData : Msg.HeroInfo)
-    {
-        this._heroInfo = _heroData;
-        this._heroLT = ValueMgr.getInstance().getItemByField(TableName.heroes,this._heroInfo.id) as Config.heroes.Record;
-        this.init();
-    }
-
-    //初始化碎片信息，碎片阵营、背景、头像、数量、品质
-    //表名不详
-    init()
-    {
-        // let _campName:string = XConsts.KCampSpriteName[this._heroLT.camp];
-        // let _frameName:string = XConsts.GetQualityBgByStar(this._heroLT.star);
-        // // let _level : string = this._heroInfo.level;
-        // let _iconName:string = this._heroLT.image;
-        // let _starNum:number = this._heroLT.star;
-
-        // let campIconPath:string = "resources/ui/icon/" + _campName + ".png"
-        // this._resourceLoad(campIconPath,this.img_camp);
-        
-        // let framePath:string = "resources/ui/icon/" + _frameName + ".png"
-        // this._resourceLoad(framePath,this.btn_frame);
-
-        // let heroIconPath:string = "resources/ui/hero/" + _iconName + ".png"
-        // this._resourceLoad(heroIconPath,this.btn_icon);
-        
-        // this.lab_num.string = "10/50";
-
-        // this._setStar(_starNum);
-    }
-
     //碎片合成弹窗
-    onClickIcon()
+    private _onClickIcon(event:any)
     {
-        
+        console.log("fragment zzzzzzzzzzzzzzzzzzzzzz");
+        PopMgr.getInstance().popFragmentSynthesisWindow(this._fragmentInfo,()=>{console.log("碎片合成")});
     }
 
     //资源替换
@@ -140,8 +105,8 @@ export class HeroFragment extends Component {
             // val: 当前值
             // idx：当前index
             // array: Array
-            val == "img" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.btn_icon);
-            val == "frame" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_frame);
+            val == "img" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_icon);
+            val == "frame" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.btn_frame);
             val == "camp" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_camp);
             val == "quality" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_debris);
         });
