@@ -101,7 +101,7 @@ export class HeroFragment extends Component {
     }
 
 
-    public set FragmentInfo(info : XStruct.fragment_synthesis_info.IRecord)
+    public set fragmentInfo(info : XStruct.fragment_synthesis_info.IRecord)
     {
         this._fragmentInfo = instantiate(info);
         this.img_camp.active = false;

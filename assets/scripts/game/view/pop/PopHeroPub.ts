@@ -475,7 +475,7 @@ export class PopHeroPub extends PopBase {
 
     public showSummonSettleWindow(title : string)
     {
-        PopMgr.getInstance().popSummonSettleWindow(title,()=>{console.log("SummonSettleWindow!!")});
+        PopMgr.getInstance().popSummonSettleWindow(XConsts.POP_SUMMON_TYPE.HeroPub,()=>{console.log("SummonSettleWindow!!")});
     } 
 
 

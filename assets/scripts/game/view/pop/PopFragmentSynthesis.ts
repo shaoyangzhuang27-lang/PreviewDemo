@@ -7,6 +7,7 @@ import { PopBase } from '../../../core/control/PopBase';
 import { XConsts } from '../../model/const/XConsts';
 import { HeroFragment } from '../hero/HeroFragment';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { PopMgr } from '../../control/PopMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopFragmentSynthesis')
@@ -88,7 +89,7 @@ export class PopFragmentSynthesis extends PopBase {
                 fragment_item.scale = new Vec3(0.7,0.7,1);
                 let subWidget = fragment_item.getComponent(UITransform) as UITransform;
                 subWidget.contentSize = new Size(105,126);
-                script.FragmentInfo = this._fragmentSysthesisInfo;
+                script.fragmentInfo = this._fragmentSysthesisInfo;
                 this.node_hero_fragment?.addChild(fragment_item);
         });
 
@@ -233,8 +234,21 @@ export class PopFragmentSynthesis extends PopBase {
         super.start();
         this.btn_add.on(Node.EventType.TOUCH_END, this._onBtnAddClick, this);
         this.btn_reduce.on(Node.EventType.TOUCH_END, this._onBtnReduceClick, this);
+        this.btn_summon.on(Node.EventType.TOUCH_END,this._onBtnSummonClick,this);
+        this.btn_submit.on(Node.EventType.TOUCH_END,this._onBtnSubmitClick,this);
+
     }
 
+
+    private _onBtnSummonClick(event : any)
+    {
+        PopMgr.getInstance().popSummonSettleWindow(XConsts.POP_SUMMON_TYPE.FragmentSysthesis,()=>{console.log("SummonSettleWindow!!")});
+    }
+
+    private _onBtnSubmitClick(event : any)
+    {
+        PopMgr.getInstance().popSummonSettleWindow(XConsts.POP_SUMMON_TYPE.FragmentSysthesis,()=>{console.log("SummonSettleWindow!!")});
+    }
     private _onBtnAddClick(event : any)
     {
         this._nCurSysthesisCounts++;

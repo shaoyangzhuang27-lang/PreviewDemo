@@ -287,13 +287,14 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    public popSummonSettleWindow(title:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    public popSummonSettleWindow(nType : number,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
             let script = p.getComponent("PopSummonSettle") as PopSummonSettle;
             // script.setTitle(title);
+            script.popWindowType = nType ;
             script.setIsMaskClose(isMaskClose);
 
         } );

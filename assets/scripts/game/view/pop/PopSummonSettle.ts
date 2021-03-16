@@ -16,8 +16,15 @@ export class PopSummonSettle extends PopBase {
     @property({type: Button})
     public btn_summon = null as unknown as Button;
 
+    @property({type: Node})
+    public btn_sure = null as unknown as Node;
+
+    @property({type: Node})
+    public btn_fragment_sure = null as unknown as Node;
     // private _submitCallFun:Function | null = null;
 
+
+    private _popWindowType : number = XConsts.POP_SUMMON_TYPE.HeroPub;
     @property({type :  ScrollView})
     public scroll_heroicon_view:ScrollView = null as unknown as ScrollView;
 
@@ -85,5 +92,20 @@ export class PopSummonSettle extends PopBase {
         resources.load(path, SpriteFrame ,(err: any, spriteFrame: SpriteFrame) => {
             objSprite.spriteFrame = spriteFrame;
         });
+    }
+
+
+    public set popWindowType(nType: number)
+    {
+        if(nType == XConsts.POP_SUMMON_TYPE.HeroPub)
+        {
+            this.btn_fragment_sure.active = false;
+        }
+        else if(nType == XConsts.POP_SUMMON_TYPE.FragmentSysthesis)
+        {
+            this.btn_summon.node.active =false;
+            this.btn_sure.active = false;
+        }
+        this._popWindowType = nType;
     }
 }
