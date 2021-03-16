@@ -2,9 +2,9 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-16 17:52:53
+ * @LastEditTime: 2021-03-16 20:36:57
  */
-import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers } from 'cc';
+import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
 
 import { PopBase } from '../../../core/control/PopBase';
@@ -69,6 +69,21 @@ export class HeroPromotion extends PopBase {
     @property({type: Layout, displayName: "layout"})
     public layout_tier:Layout = null as unknown as Layout;   
     
+    @property({ type: Label, displayName: "等级" })
+    public lab_lv: Label = null as unknown as Label;
+    @property({ type: Sprite, displayName: "等级图标" })
+    public sp_lv: Sprite = null as unknown as Sprite;
+
+    
+    @property({ type: Label, displayName: "战力值" })
+    public lab_fight_value: Label = null as unknown as Label;
+    @property({ type: Label, displayName: "血量值" })
+    public lab_hp_value: Label = null as unknown as Label;
+    @property({ type: Label, displayName: "攻击值" })
+    public lab_atk_value: Label = null as unknown as Label;
+    @property({ type: Label, displayName: "防御值" })
+    public lab_def_value: Label = null as unknown as Label;
+
     @property({ type: Node, displayName: "全部卸下" })
     public btn_all_unload: Node = null as unknown as Node;
 
@@ -93,7 +108,7 @@ export class HeroPromotion extends PopBase {
     @property({ type: ToggleContainer, displayName: "升级装备tab" })
     public tabGroup: ToggleContainer = null as unknown as ToggleContainer;
 
-
+    
     @property({ type: Node, displayName: "升级界面" })
     public node_up: Node = null as unknown as Node;
 
@@ -333,12 +348,39 @@ export class HeroPromotion extends PopBase {
         this._showCampAndCareer();
         //显示品阶        
         this._showTier();
-        //显示等级
-
+        //显示等级  
+        this._showLv();
         //显示战力数据 
-
+        this._showFightValues();
         //显示升级消耗
 
+    }
+    
+    private _showFightValues(){       
+        let fightValue=  Math.floor(this._curHeroData.getFighting());
+        this.lab_fight_value.string = XFuns.FormatNumber(fightValue);
+
+        let hp= Math.floor(this._curHeroData.getMaxHP());
+        this.lab_hp_value.string = XFuns.FormatNumber(hp);
+
+        let atk= Math.floor(this._curHeroData.getATK() );
+        this.lab_atk_value.string = XFuns.FormatNumber(atk);
+
+        let def= Math.floor(this._curHeroData.getDEF() );
+        this.lab_def_value.string = XFuns.FormatNumber(def);
+    }
+    
+    private _showLv(lv:number = 1){
+        let star= this._curHeroData.getStar();
+        let tier= this._curHeroData.tier;
+        lv= this._curHeroData.getLevel();
+        let maxLv= XShare.getInstance().KHeroMaxLevelForTier[tier];
+        this.lab_lv.string = lv.toString()+"/"+maxLv.toString();
+        
+        let pos = this.lab_lv.node.getPosition();
+        let tmp = this.lab_lv.node.getComponent(UITransform) as UITransform;
+        pos.x -= (tmp.contentSize.width/2 + 13);
+        this.sp_lv.node.setPosition(pos);
     }
 
     private _showTier(tier:number = 0){        
@@ -367,20 +409,7 @@ export class HeroPromotion extends PopBase {
                     iconPath = "ui/lv_up/进阶宝石/spriteFrame";
                 } 
 
-                XFuns.CreateSprite(iconPath, target.layout_tier.node, "img_grade_gem_"+(items.length+1+index).toString() );           
-                // resources.load(, SpriteFrame, (err, spriteFrame:SpriteFrame) =>
-                // {
-                //     console.log("_showTier icon _resourceLoad1 ---------",err)
-                //     if(!err)
-                //     {
-                //         let node = new Node( );                     
-                //         const sprite = node.addComponent(Sprite);
-                //         sprite.spriteFrame = spriteFrame;
-                //         node.layer = Layers.Enum.UI_2D;
-                        
-                //         target.layout_tier.node.addChild(node);
-                //     }
-                // });
+                XFuns.CreateSprite(iconPath, target.layout_tier.node, "img_grade_gem_"+(items.length+1+index).toString() );    
             }
         }
         else if(items.length > maxTier)
@@ -401,15 +430,6 @@ export class HeroPromotion extends PopBase {
                 }
                 
                 XFuns.ReplaceSpriteFrame(iconPath, itemNews[index]);
-                // resources.load(iconPath, SpriteFrame, (err, spriteFrame:SpriteFrame) =>
-                // {
-                //     console.log("_showTier icon _resourceLoad2 ---------",err)
-                //     if(!err)
-                //     {
-                //          let sprite = itemNews[index];
-                //          sprite.spriteFrame = spriteFrame;
-                //     }
-                // });
             }
         }
     }
@@ -600,8 +620,10 @@ export class HeroPromotion extends PopBase {
         this._showCampAndCareer();
         //显示品阶
         this._showTier();
-        //显示等级
-
+        //显示等级        
+        this._showLv();
+        //显示战力数据
+        this._showFightValues();
         //显示升阶数据
 
         //显示升阶消耗
