@@ -17,6 +17,7 @@ export class SceneBattle extends BaseScene {
     private _battleCtrl: BattleCtrl = null as unknown as BattleCtrl;
 
     onLoad() {
+        super.onLoad();
         this._battleCtrl = this.mainNode.getComponent("BattleCtrl") as BattleCtrl
         
         
