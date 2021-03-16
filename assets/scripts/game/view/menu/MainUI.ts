@@ -84,6 +84,10 @@ export class MainUI extends Component {
     onDestroy(){
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_coin_diamond_level_change,this._playerDataChange,this) 
         NotifyMgr.getInstance().removeNotifyHandler("event_net_offline", this.openOfflineBonus, this);
+
+        UINodeMgr.unRegNodeWithKey("mainCoin")
+        UINodeMgr.unRegNodeWithKey("mainDiamond")
+        UINodeMgr.unRegNodeWithKey("mainlevelPro")
     }
 
     private _playerDataChange(data:any) {
@@ -142,6 +146,7 @@ export class MainUI extends Component {
         console.log("点击挑战首领")
     }
 
+    // 弹出后要移动宝箱位置
     buttonBtnClick(event:any){
         console.log(event)
         tween(this.sprite_select)

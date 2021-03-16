@@ -9,7 +9,7 @@ export class UINodeMgr{
         UINodeMgr.nodeList[key] = node
     }
 
-    static unRegNodeWithKey(node : Node, key : string){
+    static unRegNodeWithKey(key : string){
         UINodeMgr.nodeList[key] = undefined
     }
 
