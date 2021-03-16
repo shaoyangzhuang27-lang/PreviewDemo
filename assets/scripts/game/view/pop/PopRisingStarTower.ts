@@ -89,6 +89,9 @@ export class PopRisingStarTower extends PopBase {
     @property({type :  ScrollView})
     public scroll_HeroView:ScrollView = null as unknown as ScrollView;
 
+    //原英雄数据
+    private _firstHeroData:HeroData = null as unknown as HeroData;
+
     //拥有的所有英雄
     private _allHeroList:Map<number, HeroData> = new Map<number, HeroData>();
     //拥有的所有英雄列表显示对象
@@ -252,7 +255,7 @@ export class PopRisingStarTower extends PopBase {
                 });
                 let sortIndex_1:number = heroData.getLevel() * 10000 + heroData.getStar()*1000 + heroData.getCamp() * 10 + heroData.getClasses();
                 let sortIndex_2:number = 3000000 - sortIndex_1;
-                k.push([sortIndex_2,heroIcon]); 
+                k.push([sortIndex_2,heroIcon]);    
 
                 this._bottomHeroItemList.set(heroData.getDyncID(), heroIcon);
             }
@@ -287,6 +290,16 @@ export class PopRisingStarTower extends PopBase {
             this._selectBattleList.set(dyncID, HeroData.GetHeroBookID(staticID));
             if(this._selectBattleList.size == 1){
                 this._risingdyncMaiID = dyncID;
+
+//弹出升星结果界面****************测试**************
+// this._firstHeroData=this._getHeroData(this._risingdyncMaiID)as HeroData
+//         let HeroData = this._getHeroData(this._firstHeroData.getDyncID())as HeroData
+
+
+//         PopMgr.getInstance().popStarUpResultView(this._firstHeroData,HeroData,()=>{
+//             PopMgr.getInstance().deleteWindow();
+//         });
+//弹出升星结果界面****************测试**************
             }else{
                 if(this._risingDyncViceID1 == 0){
                     this._risingDyncViceID1 = dyncID;
@@ -682,7 +695,16 @@ export class PopRisingStarTower extends PopBase {
                 this.starlist[index].active = true;
             }
         }
+    }
 
+    public setCloseCallBack(func:Function | null){
+        if(func){
+            this._closeFunc = func;
+        }else{
+            this._closeFunc = ()=>{
+                PopMgr.getInstance().deleteWindow();
+            };
+        }  
     }
 
     // 展示当前英雄形象
@@ -729,7 +751,19 @@ export class PopRisingStarTower extends PopBase {
     private _notifyStarUpChangeHandle(){
         this._getAllHeroList();
         this._initBottomHeros();
+
+        //弹出升星结果界面
+        let HeroData:HeroData = null as unknown as HeroData;
+        for (let heroData of this._allHeroList.values()) {
+            if(heroData.getDyncID() == this._firstHeroData.getDyncID()){
+                HeroData = heroData;
+                break;
+            }
+        }
+        PopMgr.getInstance().popStarUpResultView(this._firstHeroData,HeroData);
     }
+
+    //////////////////////////////////////////////////////
 
     // 从heroes文件获取升星材料类型 参数 数量
     private _getHeroesDatas(StaticID:number)
@@ -765,6 +799,7 @@ export class PopRisingStarTower extends PopBase {
     //升星
     private risingstarClick(event: Event, customEventData: string){
         console.log("点击升星");
+        this._firstHeroData = this._getHeroData(this._risingdyncMaiID)as HeroData
         let materialHeroIDs:Msg.HeroIDs = new Msg.HeroIDs();
         materialHeroIDs.heroIDList.push(this._risingDyncViceID1);
         if(this._risingDyncViceID2 != 0){

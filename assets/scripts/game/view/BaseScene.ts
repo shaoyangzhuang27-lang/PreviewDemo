@@ -32,11 +32,14 @@ export class BaseScene extends Component {
         // NotifyMgr.getInstance().removeNotifyHandler("test",this.notifyTest,this);
     }
 
-    protected initUI(){
+    protected initUI(callback?: (node: Node)=>void) {
         resources.load('prefabs_ui/main_ui', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
             this.curCanvas.addChild(p);
             p.setSiblingIndex(XConsts.OrderMainUI)
+            if (callback) {
+                callback(p);
+            }
         } );
     }
 

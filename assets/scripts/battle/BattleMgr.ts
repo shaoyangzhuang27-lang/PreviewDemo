@@ -109,6 +109,9 @@ export class BattleMgr {
 
         let enemyFormation: Map<number, HeroData> = this.getIdleEnemyInfo();
         enemyFormation.forEach(preloadFunc);
+
+        let bossFormation: Map<number, HeroData> = this.getIdleBossInfo();
+        bossFormation.forEach(preloadFunc);
     }
 
     public getIdleArmyInfo() {
@@ -118,6 +121,10 @@ export class BattleMgr {
 
     public getIdleEnemyInfo() {
         return BattleTest.getEnemyFormation();
+    }
+
+    public getIdleBossInfo() {
+        return BattleTest.getBossFormation();
     }
 
     public getPreloadRes() {

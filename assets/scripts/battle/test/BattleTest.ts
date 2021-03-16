@@ -29,23 +29,40 @@ let HeroModelPrefabPath: {[key: string]: string} = {
     "怪_鸟人法师_1": "monster_008",
     "怪_史莱姆_3": "monster_013",
     "怪_树人_3": "monster_014",
+    "怪_血族战士_2": "monster_009",
+    "怪_黑骑士_1": "monster_012",
+    "怪_狼骑兵_1": "monster_006",
 }
 
 let SkillPrefabPath: {[key: number]: string} = {
     1001: "skill_0001",
     512011: "skill_warrior_shield",
     552022: "skill_0001",// TODO 骷髅王技能
+    546022: "skill_priest_aoe_heal", 
+    534012: "skill_mage_lightning",
+    // 技能粒子/火赏金猎人技能施放
 }
 
 let BuffPrefabPath: {[key: string]: string} = {
-    "新Buff粒子/冰冻" : "buff_frozen",
-    "新Buff粒子/护盾" : "buff_warrior_shield",
-    "新Buff粒子/燃烧" : "buff_fire",
-    "新Buff粒子/眩晕" : "buff_vertigo",
+    "新Buff粒子/冰冻": "buff_frozen",
+    "新Buff粒子/护盾": "buff_warrior_shield",
+    "新Buff粒子/燃烧": "buff_fire",
+    "新Buff粒子/眩晕": "buff_vertigo",
 }
 
 let AttackPrefabPath: {[key: string]: string} = {
-    "新普攻粒子/占星师普通攻击" : "normal_attack_priest",
+    "新普攻粒子/占星师普通攻击": "normal_attack_priest",
+    "新普攻粒子/魔导师普通攻击": "normal_attack_priest", // TODO  33 5093401 法师1_55_3
+    "新普攻粒子/火枪手普通攻击": "normal_attack_gun"
+    
+}
+
+let BuffIcon: {[key: string]: string} = {
+    "战斗_buff_攻击+": "攻击+",
+    "战斗_buff_攻击-": "攻击-",
+    "战斗_buff_速度+": "攻速+",
+    "战斗_buff_速度-": "攻速-",
+    
 }
 
 let HeroTestInfo: {[key: number]: any} = {
@@ -54,7 +71,7 @@ let HeroTestInfo: {[key: number]: any} = {
         skillID: 1001,
         hp: 100,
         atk: 5,
-        def:2,
+        def: 2,
         range: 3,
         speed: 1,
         skillSpeed: 0.9,
@@ -64,7 +81,7 @@ let HeroTestInfo: {[key: number]: any} = {
         skillID: 512011,
         hp: 100,
         atk: 4,
-        def:2,
+        def: 2,
         range: 3,
         speed: 1.3,
         skillSpeed: 0.9,
@@ -74,7 +91,7 @@ let HeroTestInfo: {[key: number]: any} = {
         skillID: 552022,
         hp: 100,
         atk: 4,
-        def:2,
+        def: 2,
         range: 3,
         speed: 1.3,
         skillSpeed: 0.9,
@@ -83,7 +100,7 @@ let HeroTestInfo: {[key: number]: any} = {
         prefab: "hero_030",
         hp: 100,
         atk: 4,
-        def:2,
+        def: 2,
         range: 3,
         speed: 1.3,
         skillSpeed: 0.9,
@@ -91,18 +108,20 @@ let HeroTestInfo: {[key: number]: any} = {
     11: { // 5084602 牧师2_55_4
         prefab: "hero_011",
         normalAttack: "normal_attack_priest",
+        skillID: 546022,
         hp: 100,
         atk: 6,
-        def:2,
+        def: 2,
         range: 6,
         speed: 1.3,
-        skillSpeed: 0.9,
+        skillSpeed: 1,
     },
-    13: { // 5072502
+    13: { // 5072502 游侠2_55_2
         prefab: "hero_013",
+        normalAttack: "normal_attack_gun",
         hp: 100,
         atk: 6,
-        def:2,
+        def: 2,
         range: 6,
         speed: 1.3,
         skillSpeed: 0.9,
@@ -111,7 +130,7 @@ let HeroTestInfo: {[key: number]: any} = {
         prefab: "hero_025",
         hp: 100,
         atk: 6,
-        def:2,
+        def: 2,
         range: 6,
         speed: 1.3,
         skillSpeed: 0.9,
@@ -120,7 +139,7 @@ let HeroTestInfo: {[key: number]: any} = {
         prefab: "hero_026",
         hp: 100,
         atk: 6,
-        def:2,
+        def: 2,
         range: 6,
         speed: 1.3,
         skillSpeed: 0.9,
@@ -129,16 +148,18 @@ let HeroTestInfo: {[key: number]: any} = {
         prefab: "hero_033",
         hp: 100,
         atk: 6,
-        def:2,
+        def: 2,
         range: 6,
         speed: 1.3,
         skillSpeed: 0.9,
     },
-    36: { // 5093401
+    36: { // 5093401 法师1_55_3
         prefab: "hero_036",
+        normalAttack: "normal_attack_priest", // TODO
+        skillID: 534012,
         hp: 100,
         atk: 6,
-        def:2,
+        def: 2,
         range: 6,
         speed: 1.3,
         skillSpeed: 0.9,
@@ -151,16 +172,43 @@ let MonsterTestInfo: {[key: number]: any}= {
         prefab: "monster_004",
         hp: 200,
         atk: 2,
-        def:2,
+        def: 2,
         range: 3,
         speed: 1.3,
+        skillSpeed: 0.9,
+    },
+    6: { // 1102071
+        prefab: "monster_006",
+        hp: 300,
+        atk: 8,
+        def: 2,
+        range: 3,
+        speed: 1,
+        skillSpeed: 0.9,
+    },
+    9: { // 1204044
+        prefab: "monster_009",
+        hp: 300,
+        atk: 8,
+        def: 2,
+        range: 3,
+        speed: 1,
+        skillSpeed: 0.9,
+    },
+    12: { // 1101011
+        prefab: "monster_012",
+        hp: 400,
+        atk: 10,
+        def: 2,
+        range: 3,
+        speed: 1,
         skillSpeed: 0.9,
     },
     13: { // 1303011
         prefab: "monster_013",
         hp: 200,
         atk: 2,
-        def:2,
+        def: 2,
         range: 3,
         speed: 1.3,
         skillSpeed: 0.9,
@@ -169,7 +217,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         prefab: "monster_014",
         hp: 200,
         atk: 2,
-        def:2,
+        def: 2,
         range: 3,
         speed: 1.3,
         skillSpeed: 0.9,
@@ -178,7 +226,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         prefab: "hero_040",
         hp: 300,
         atk: 2,
-        def:2,
+        def: 2,
         range: 3,
         speed: 1.3,
         skillSpeed: 0.9,
@@ -187,7 +235,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         prefab: "hero_029",
         hp: 300,
         atk: 2,
-        def:2,
+        def: 2,
         range: 3,
         speed: 1.3,
         skillSpeed: 0.9,
@@ -196,34 +244,36 @@ let MonsterTestInfo: {[key: number]: any}= {
         prefab: "hero_045",
         hp: 300,
         atk: 2,
-        def:2,
+        def: 2,
         range: 3,
         speed: 1.3,
         skillSpeed: 0.9,
     },
     5: { // 1403011
         prefab: "monster_005",
-        hp: 200,
+        normalAttack: "normal_attack_priest", // TODO
+        hp: 150,
         atk: 3,
-        def:2,
+        def: 2,
         range: 6,
         speed: 1.3,
         skillSpeed: 0.9,
     },
-    8: {
+    8: { // 1406011
         prefab: "monster_008",
-        hp: 200,
+        normalAttack: "normal_attack_priest", // TODO
+        hp: 150,
         atk: 3,
-        def:2,
+        def: 2,
         range: 6,
         speed: 1.3,
         skillSpeed: 0.9,
     },
-    41: { // 1406011
+    41: { 
         prefab: "hero_041",
         hp: 200,
         atk: 3,
-        def:2,
+        def: 2,
         range: 6,
         speed: 1.3,
         skillSpeed: 0.9,
@@ -232,7 +282,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         prefab: "hero_042",
         hp: 150,
         atk: 3,
-        def:2,
+        def: 2,
         range: 6,
         speed: 1.3,
         skillSpeed: 0.9,
@@ -241,7 +291,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         prefab: "hero_046",
         hp: 100,
         atk: 3,
-        def:2,
+        def: 2,
         range: 6,
         speed: 1.3,
         skillSpeed: 0.9,
@@ -311,7 +361,42 @@ let EnemyTestInfo = [
 
     },
     {
-        id: 46,
+        id: 5,
+        type: EHeroType.MONSTER,
+        embattleedSite: 5,
+    },
+]
+
+let BossTestInfo = [
+    {
+        id: 6, 
+        type: EHeroType.MONSTER,
+        embattleedSite: 0,
+    },
+    {
+        id: 12,
+        type: EHeroType.MONSTER,
+        embattleedSite: 1,
+    },
+    {
+        id: 9,
+        type: EHeroType.MONSTER,
+        embattleedSite: 2,
+    },
+    {
+        id: 5,
+        type: EHeroType.MONSTER,
+        embattleedSite: 3,
+
+    },
+    {
+        id: 8,
+        type: EHeroType.MONSTER,
+        embattleedSite: 4,
+
+    },
+    {
+        id: 5,
         type: EHeroType.MONSTER,
         embattleedSite: 5,
     },
@@ -346,7 +431,6 @@ for (let k in MonsterTestInfo) {
         MonsterTestInfo[k].normalAttack = "prefabs/battle/attack/" + MonsterTestInfo[k].normalAttack;
     } 
 }
-
 
 const type_map: {[key: string]: string} = {
     '[object Boolean]'  : 'boolean',
@@ -408,6 +492,7 @@ export class BattleTest {
 
     public static armyFormation: Map<number, HeroData> = new Map<number, TestHeroData>();
     public static enemyFormation: Map<number, HeroData> = new Map<number, TestHeroData>();
+    public static bossFormation: Map<number, HeroData> = new Map<number, TestHeroData>();
 
     public static buildMapInfo() {
         // TODO
@@ -449,6 +534,14 @@ export class BattleTest {
         }
     }
 
+    public static buildBossInfo() {
+        let bossInfo = deepClone(BossTestInfo);
+        for (let i in bossInfo) {
+            BattleTest.createHeroInfo(bossInfo[i]);
+            BattleTest.bossFormation.set(bossInfo[i].embattleedSite, BattleTest.createTestHeroData(bossInfo[i].heroInfo));
+        }
+    }
+
     // public static getLoadResList() {
     //     return BattleTest.loadResList
     // }
@@ -465,6 +558,10 @@ export class BattleTest {
         return BattleTest.enemyFormation;
     }
 
+    public static getBossFormation() {
+        return BattleTest.bossFormation;
+    }
+
     public static getSkillPrefabPath(skillID: number) {
         return SkillPrefabPath[skillID];
     }
@@ -472,6 +569,11 @@ export class BattleTest {
     public static getBuffPrefabPath(path: string) {
         return BuffPrefabPath[path];
     }
+
+    public static getBuffIcon(str: string) {
+        return BuffIcon[str];
+    }
+
 
     public static getHeroModelPrefabPath(path: string): string {
         let s = HeroModelPrefabPath[path];
@@ -487,6 +589,7 @@ export class BattleTest {
         BattleTest.buildMapInfo();
         BattleTest.buildArmy();
         BattleTest.buildEnemyInfo();
+        BattleTest.buildBossInfo();
 
 
         // TODO

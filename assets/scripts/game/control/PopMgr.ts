@@ -94,8 +94,11 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    //弹出升星塔界面界面 
-    public popStarUpView(submitCallBack:Function = ()=>{},closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    /**
+     * @description: 弹出升星塔界面界面 
+     * @param {boolean} isMaskClose
+     */
+    public popStarUpView(isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_risingstartower', (err:any,res:any)=>{
             let p = instantiate( res );
@@ -106,8 +109,14 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    //弹出升星成功界面 
-    public popStarUpResultView(HeroInfo:HeroData,newHeroInfo:HeroData,submitCallBack:Function = ()=>{},closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    /**
+     * @description: 弹出升星成功界面 
+     * @param {HeroData} HeroInfo
+     * @param {HeroData} newHeroInfo
+     * @param {Function} closeCallBack
+     * @param {boolean} isMaskClose
+     */
+    public popStarUpResultView(HeroInfo:HeroData,newHeroInfo:HeroData,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_starup_result', (err:any,res:any)=>{
             let p = instantiate( res );
@@ -117,10 +126,19 @@ export class PopMgr extends PopCore  {
             script.setHeroData(HeroInfo);
             script.setnewHeroData(newHeroInfo);
             script.setIsMaskClose(isMaskClose);
+            script.setCloseCallBack(closeCallBack);
         } );
     }
 
     //弹出说明界面
+    /**
+     * @description: 弹出说明界面 
+     * @param {string} title
+     * @param {string} content
+     * @param {Function} submitCallBack
+     * @param {Function} closeCallBack
+     * @param {boolean} isMaskClose
+     */
     public popExplain(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_explain', (err:any,res:any)=>{
