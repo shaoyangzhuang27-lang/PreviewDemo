@@ -20,23 +20,23 @@
         "__id__": 2
       },
       {
-        "__id__": 180
+        "__id__": 182
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 187
-      },
-      {
         "__id__": 189
       },
       {
         "__id__": 191
+      },
+      {
+        "__id__": 193
       }
     ],
     "_prefab": {
-      "__id__": 193
+      "__id__": 195
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -103,10 +103,13 @@
     "_components": [
       {
         "__id__": 175
+      },
+      {
+        "__id__": 179
       }
     ],
     "_prefab": {
-      "__id__": 179
+      "__id__": 181
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -4775,6 +4778,23 @@
     }
   },
   {
+    "__type__": "8eaa6andAhKi7RJ93E/PTor",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 180
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "3cnEfqzF1KhKHPHqLYb3bQ"
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -4793,13 +4813,13 @@
     },
     "_children": [
       {
-        "__id__": 181
+        "__id__": 183
       }
     ],
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 186
+      "__id__": 188
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -4834,17 +4854,17 @@
     "_name": "Cylinder001",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 180
+      "__id__": 182
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 182
+        "__id__": 184
       }
     ],
     "_prefab": {
-      "__id__": 185
+      "__id__": 187
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -4879,11 +4899,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 181
+      "__id__": 183
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 183
+      "__id__": 185
     },
     "_materials": [
       {
@@ -4892,7 +4912,7 @@
     ],
     "_visFlags": 0,
     "lightmapSettings": {
-      "__id__": 184
+      "__id__": 186
     },
     "_mesh": {
       "__uuid__": "d524359b-0533-49d9-ba46-7c35af86572b@c6160"
@@ -4951,7 +4971,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 188
+      "__id__": 190
     },
     "heroBasePot": {
       "__id__": 169
@@ -4986,7 +5006,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 190
+      "__id__": 192
     },
     "_material": null,
     "_isTrigger": false,
@@ -5017,7 +5037,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 192
+      "__id__": 194
     },
     "_group": 1,
     "_type": 1,

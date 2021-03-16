@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Vec3, Canvas, Prefab, instantiate, director } from 'cc';
+import { _decorator, Component, Node, Vec3, Canvas, Prefab, instantiate, director, Button, Label } from 'cc';
 const { ccclass, property } = _decorator;
 
 
@@ -36,6 +36,9 @@ export class BattleCtrl extends Component {
     private _nextGroundIdx: number = 0;
 
     private _army: Array<BattleHero> = [];
+    private _monster: Array<BattleHero> = [];
+    private _boss: Array<BattleHero> = [];
+
     private _enemy: Array<BattleHero> = [];
 
     private _aliveArmy: Array<BattleHero> = [];
@@ -46,7 +49,8 @@ export class BattleCtrl extends Component {
     public camera: any = null;
     public cameraNode: any = null;
 
-
+    private _bSeekBoss: boolean = false;
+    private _bossBtn: Node | null = null;
 
     onLoad() {
         // resources.load("prefabs/battle/pingtai01", Prefab, function name(e, res) {
@@ -87,7 +91,9 @@ export class BattleCtrl extends Component {
         this.initMap();
         this.initHeros();
         
-        
+        if (this._bossBtn) {
+            this._bossBtn.active = true;
+        }
         this.seekEnemy();
         // this.wait();
     }
@@ -176,12 +182,21 @@ export class BattleCtrl extends Component {
             // console.log(this._army[i].node.position)
         }
     
-        let enemyInfo = BattleMgr.getInstance().getIdleEnemyInfo();
+        let monsterInfo = BattleMgr.getInstance().getIdleEnemyInfo();
         // 怪物提前生成，保证游戏顺畅
-        enemyInfo.forEach((v, k) => {
+        monsterInfo.forEach((v, k) => {
             let battleHero = this.createHero(v, EHeroType.MONSTER);
             battleHero.setEmbattleedSite(k);
-            this._enemy.push(battleHero);
+            this._monster.push(battleHero);
+            battleHero.setVisible(false);
+        })
+
+        let bossInfo = BattleMgr.getInstance().getIdleBossInfo();
+        // 怪物提前生成，保证游戏顺畅
+        bossInfo.forEach((v, k) => {
+            let battleHero = this.createHero(v, EHeroType.MONSTER);
+            battleHero.setEmbattleedSite(k);
+            this._boss.push(battleHero);
             battleHero.setVisible(false);
         })
     }
@@ -207,6 +222,19 @@ export class BattleCtrl extends Component {
         this._curActFunc = this.doEmbattle;
         let enemyZ = this._leaderNode.position.z - 50;
 
+        if (this._bSeekBoss) {
+            this._enemy = this._boss;
+            this._bSeekBoss = false;
+            if (this._bossBtn) {
+                (this._bossBtn.getComponent(Button) as Button).interactable = true;
+                (this._bossBtn.getComponent(Button) as Button).enabled = true;
+                let label = this._bossBtn.getChildByName("Label") as Node;  
+                (label.getComponent(Label) as Label).string = "挑战首领!"
+            }
+        } else {
+            this._enemy = this._monster;
+        }
+        
 
         // 重置敌人
         for (let i = 0; i < this._enemy.length; i++) {
@@ -339,6 +367,19 @@ export class BattleCtrl extends Component {
         }
     }
 
+    onClickBossFight(): void {
+        if (this._bossBtn) {
+            this._bSeekBoss = true;
+            (this._bossBtn.getComponent(Button) as Button).interactable = false;
+            (this._bossBtn.getComponent(Button) as Button).enabled = true;
+            let label = this._bossBtn.getChildByName("Label") as Node;  
+            (label.getComponent(Label) as Label).string = "搜寻首领中..."
+        }
+    }
+
+    setBossBtn(bossBtn: Node): void {
+        this._bossBtn = bossBtn;
+    }
 
     onClickMainCity(): void {
         if (bLoadMain) {
@@ -350,7 +391,6 @@ export class BattleCtrl extends Component {
         }
         
     }
-
 
 
 

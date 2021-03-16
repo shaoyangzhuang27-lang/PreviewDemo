@@ -107,55 +107,53 @@ export enum EEffectType {
 @ccclass('BattleHero')
 export class BattleHero extends Component {
 
-    private _battleTitleBar: BattleTitleBar = null as unknown as BattleTitleBar
-    private _heroBase: HeroBase = null as unknown as HeroBase
-    private _battleCtrl: BattleCtrl = null as unknown as BattleCtrl
+    private _battleTitleBar: BattleTitleBar = null as unknown as BattleTitleBar;
+    private _heroBase: HeroBase = null as unknown as HeroBase;
+    private _battleCtrl: BattleCtrl = null as unknown as BattleCtrl;
 
 
-    private _heroSkeletalAnimation: SkeletalAnimation = null as unknown as SkeletalAnimation
-    private _heroBoxCollider: BoxCollider = null as unknown as BoxCollider
-    private _heroRigidBody: RigidBody = null as unknown as RigidBody
+    private _heroSkeletalAnimation: SkeletalAnimation = null as unknown as SkeletalAnimation;
+    private _heroBoxCollider: BoxCollider = null as unknown as BoxCollider;
+    private _heroRigidBody: RigidBody = null as unknown as RigidBody;
 
 
-    private _tmpPos: Vec3 = new Vec3()
-    private _targetPos: Vec3 = new Vec3()
-    private _dirVector: Vec3 = new Vec3()
+    private _tmpPos: Vec3 = new Vec3();
+    private _targetPos: Vec3 = new Vec3();
+    private _dirVector: Vec3 = new Vec3();
 
-    private _targetList: Array<BattleHero> = []
-    private _target: BattleHero = null as unknown as BattleHero
+    private _targetList: Array<BattleHero> = [];
+    private _target: BattleHero = null as unknown as BattleHero;
 
-    private _armyList: Array<BattleHero> = []
+    private _armyList: Array<BattleHero> = [];
 
     
-    private _heroData: BaseHeroData = null as unknown as BaseHeroData
+    private _heroData: BaseHeroData = null as unknown as BaseHeroData;
 
 
-    private _leaderNode: any = null
+    private _leaderNode: any = null;
 
-    private _actTime: number = 0
-    private _curActFunc: any = null
-
+    private _actTime: number = 0;
+    private _curActFunc: any = null;
 
     private _heroType: EHeroType = EHeroType.HERO;
-    private maxHp: number = 0
-    private maxPow: number = 100
+    private maxHp: number = 0;
+    private maxPow: number = 100;
     
 
-    public embattleedSite: number = 0
+    public embattleedSite: number = 0;
 
-    public hp: number = 0
-    public pow: number = 0
-    public atk: number = 0
-    public def: number = 0
-    public spd: number = 0
-    public skillSpd: number = 0
-    public crt: number = 0
-    public crtDmg: number = 0
-    public hitRat: number = 0
-    public dodge: number = 0
-    public defBreak: number = 0
-
-    public range: number = 0
+    public hp: number = 0;
+    public pow: number = 0;
+    public atk: number = 0;
+    public def: number = 0;
+    public spd: number = 0;
+    public skillSpd: number = 0;
+    public crt: number = 0;
+    public crtDmg: number = 0;
+    public hitRat: number = 0;
+    public dodge: number = 0;
+    public defBreak: number = 0;
+    public range: number = 0;
 
     private _buffPropertyMap = new Map<Msg.THeroPropertyType, number>();
 
