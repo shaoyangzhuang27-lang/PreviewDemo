@@ -119,7 +119,7 @@ export class BagMain extends Component {
                 let equipCell = instantiate(res) as Node;
                 this.scroll_EquipView.content?.addChild(equipCell);
                 equipCell.name = "BagEquipCell_" + Number(key);
-                this._initPrefab(equipCell,Number(key),Number(value),ItemEquipType.equip); 
+                this._initPrefab(equipCell, Number(key), Number(value), ItemEquipType.equip, Number(Msg.TObjectType.EObject_Equip)); 
 
                 this._bagEquipNodeList.set(Number(key), equipCell);
             }
@@ -152,16 +152,17 @@ export class BagMain extends Component {
         })   
     }
 
-    private _initPrefab(iconNode:Node,key:number,value:number,itemType:ItemEquipType, objType:number = 0)
+    private _initPrefab(iconNode:Node,key:number,value:number,itemType:ItemEquipType, objType:number)
     {        
         let script = iconNode.getComponent("ItemEquipCell") as ItemEquipCell;
         script.setItemUseType(objType)
+      
         script.setItemType(Number(key),Number(value),itemType,(id:number,itemClickType:number,objClickType:number)=>{
             this._itemEqipCallBack(id,itemClickType,objClickType)
         })
     }
 
-    private _itemEqipCallBack(itemID:number,itemType:number,objType:number = 0)
+    private _itemEqipCallBack(itemID:number,itemType:number,objType:number)
     {
         if(itemType == ItemEquipType.goods)
         {
