@@ -15,7 +15,7 @@ export class MsgCore{
     public initLoginServer(){
     }
     
-    public connectLoginServer(channelId: number = 0){
+    public connectLoginServer(ip:string | null = null,channelId: number = 0){
         // NetManager.getInstance().connect({ url: "ws://192.168.15.132:17183" });//开启连接
         // NetManager.getInstance().connect({ url: "ws://echo.websocket.org" });//开启连接
         // NetManager.getInstance().connect({ url: "ws://121.40.165.18:8800" });//开启连接
@@ -40,7 +40,7 @@ export class MsgCore{
         let buffer_all = this.encodeMessage(msgId,buffer_data)
         let isRight = NetManager.getInstance().send(buffer_all,false, channelId);//发送信息
         if(!isRight){
-            this.connectLoginServer(channelId);
+            this.connectLoginServer(null,channelId);
         }
     }
     public encodeMessage(id:number,buffer_data:any){
