@@ -13,6 +13,7 @@ import { MsgGame } from "./msg/MsgGame";
 import { MsgFormation } from "./msg/MsgFormation";
 import { MsgStarUp } from "./msg/MsgStarUp";
 import { MsgBag } from "./msg/MsgBag";
+import { MsgHeroPub } from "./msg/MsgHeroPub";
 import { MsgBase } from "./msg/MsgBase";
 import { MsgOffline } from "./msg/MsgOffline";
 
@@ -81,14 +82,21 @@ export class MsgMgr extends MsgCore{
         this._msgs.push(this._msgBag);
         this._msgs.push(this._msgStarUp);
         this._msgs.push(this._msgOffline);
+        this._msgs.push(this._msgFormation);
     }
     //消息注册-------------------------------------------------
 
-    
+
 
     private _msgOffline : MsgOffline = new MsgOffline(this);
     public getMsgOffline() {
         return this._msgOffline
+    }
+
+    //HeroPub消息注册
+    private _msgHeroPub : MsgHeroPub = new MsgHeroPub(this);
+    public getMsgHeroPub(){
+        return this._msgHeroPub;
     }
 
     public initLoginServer(){
@@ -114,5 +122,8 @@ export class MsgMgr extends MsgCore{
     public connectLoginServer(channelId: number = 0){
         //NetManager.getInstance().connect({ url: "ws://192.168.15.68:17183" },channelId);//开启连接
         NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启本地连接
+        // NetManager.getInstance().connect({ url: "ws://192.168.15.132:17183" },channelId);//开启连接
+        NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启连接
+        // NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启本地连接
     }
 }

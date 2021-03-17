@@ -6,6 +6,7 @@ import { PopBase } from '../../../core/control/PopBase';
 import { MsgMgr } from '../../control/MsgMgr';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
 import { GameModel } from '../../model/GameModel';
+import { PopMgr } from '../../control/PopMgr';
 
 @ccclass('PopItemUseWin')
 export class PopItemUseWin extends PopBase {
@@ -87,9 +88,15 @@ export class PopItemUseWin extends PopBase {
             this.lab_notSell.active = false;
             // this.lab_access.active = false;
             this.itemEditNode.node.active = true;
-            this.itemEditNode.string = this._useCount.toString();
 
             this._itemData = ValueMgr.getInstance().getItemByField(TableName.item_usable,this._itemID) as Config.item_usable.Record;
+            if(this._itemData.itemType  != Msg.TUsableItemType.EUsableItemType_ObjectOffline)
+            {
+                this._maxCount = 1;
+                this._useCount = 1;
+            }
+            this.itemEditNode.string = this._useCount.toString();
+            
             nameData = ValueMgr.getInstance().getItemByField(TableName.language_data,this._itemData.name) as Config.language_data.Record;
             descData = ValueMgr.getInstance().getItemByField(TableName.language_data,this._itemData.desc) as Config.language_data.Record;
             
@@ -107,10 +114,18 @@ export class PopItemUseWin extends PopBase {
             
         }
         //装备物品名称 描述
-        this.lab_name.string = nameData.cn;
-        this.lab_desc.string = descData.cn;
+        if(nameData)
+        {
+            this.lab_name.string = nameData.cn;
+        }
+        if(descData)
+        {
+            this.lab_desc.string = descData.cn;
+        }
+        
+        
 
-        resources.load('prefabs_ui/main/itemequipcell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
             let itemEquipCell = instantiate(res) as Node;
             this.iconNode.addChild(itemEquipCell);
             let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
@@ -121,10 +136,15 @@ export class PopItemUseWin extends PopBase {
 
     private _itemUseOrSell()
     {   
+        if(this._useCount == 0)
+        {
+            PopMgr.getInstance().popupPrompt("道具使用数量不可为0!");
+            return;
+        }
         //英雄礼包
         if(this._itemData.itemType == Msg.TUsableItemType.EUsableItemType_HeroPack)
         {
-
+            PopMgr.getInstance().popOpenHeroGiftView(this._itemID);
         }
         //阵营礼包
         else if(this._itemData.itemType == Msg.TUsableItemType.EUsableItemType_CampAdvancePack)

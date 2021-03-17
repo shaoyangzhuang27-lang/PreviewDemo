@@ -22,6 +22,9 @@ export class HeroSelectIconStarUp extends Component {
     @property({type :  Node})
     public icoStarUp:Node = null as unknown as Node;
 
+    @property({type :  Node})
+    public icoSymbol:Node = null as unknown as Node;
+
 
     private _choiceCallBack:Function | null = null as unknown as Function;
     private _heroInfo:HeroData | null = null as unknown as HeroData;
@@ -88,6 +91,17 @@ export class HeroSelectIconStarUp extends Component {
             this.icoLock.active = true;
         }else if(type == 3){
             this.icoStarUp.active = true;
+        }
+    }
+    /**是否可以升星标志
+     * @param type 0:未选中 1:选中 
+     */
+    public setItemSymbol(type:number=0)
+    {
+        this.icoSymbol.active = false;
+
+        if(type == 1){
+            this.icoSymbol.active = true;
         }
     }
     public selectSelf(){

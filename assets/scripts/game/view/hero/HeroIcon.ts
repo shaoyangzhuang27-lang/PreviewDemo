@@ -9,6 +9,7 @@ const { ccclass, property } = _decorator;
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { XConsts } from "../../model/const/XConsts";
 import { HeroData } from '../../model/datas/HeroData';
+import {GameModel} from "../../model/GameModel";
 
 @ccclass('HeroIcon')
 export class HeroIcon extends Component {
@@ -74,7 +75,7 @@ export class HeroIcon extends Component {
         {
             this.img_camp.active = false;
         }
-
+        
         let heroIconPath:string = "ui/hero/" + iconName + "/spriteFrame";
         this._resourceLoad(heroIconPath,this.img_icon);
         
@@ -105,7 +106,7 @@ export class HeroIcon extends Component {
             }
         });
     }
-    
+
     private _setStar(star:number)
     {
         let grade:number = Math.floor(star/5);
@@ -123,10 +124,28 @@ export class HeroIcon extends Component {
                 this.starlist[index].active = true;
             }
         }
-
+            
         let frameName:string = XConsts.GetQualityBgByStar(Number(star));
         let framePath:string = "ui/icon/" + frameName + "/spriteFrame"
         this._resourceLoad(framePath,this.btn_frame);
+        }
+
+    private _initHeroIcon(heroinfo:Config.heroes.Record,lv:number)
+    {
+        let campName:string = XConsts.KHeroCampIcon[heroinfo.camp as number];
+        let iconName:string = heroinfo.image as string;
+        let starNum:number = heroinfo.star as number;
+
+        this.img_camp.active = true;
+        let campIconPath:string = "ui/team/" + campName + "/spriteFrame";
+        this._resourceLoad(campIconPath,this.img_camp);
+        
+        let heroIconPath:string = "ui/hero/" + iconName + "/spriteFrame";
+        this._resourceLoad(heroIconPath,this.img_icon);
+        
+        this.lab_level.string = lv.toString();
+
+        this._setStar(starNum);
     }
 
     /**
@@ -139,7 +158,7 @@ export class HeroIcon extends Component {
         {
             let addStar = this._heroData.getStar()+1;
             this._setStar(addStar);
-        }
+    }
     }
 
     /**
@@ -149,7 +168,7 @@ export class HeroIcon extends Component {
     public setHeroData(heroData : HeroData)
     {
         this._heroData = heroData;
-    
+        
         this.init();
     }
     /**
@@ -157,7 +176,7 @@ export class HeroIcon extends Component {
      * @param campType  阵营类型
      * @param star      英雄星级
      */
-    public setMaskHeroData(campType:number,star:number)
+    public setMaskHeroData(campType:number,star:number, id:number)
     {
         this.lab_level.node.active = false;
         let campName:string = XConsts.KHeroCampIcon[campType];
@@ -180,13 +199,62 @@ export class HeroIcon extends Component {
         }
     }
 
+    //酒馆推荐阵容英雄icon
+    public initUIHeroIconInfo(id : number,nType : number)
+    {
+        let info = GameModel.getInstance().getHeroesModel().getHeroIconInfoByHeroId(id);
+        this.img_camp.active = true;
+        let campIconPath:string = "ui/team/" + info.camp + "/spriteFrame"
+        resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
+        {
+            if(!err)
+            {
+                let sprite = this.img_camp.getComponent(Sprite) as Sprite;
+                sprite.spriteFrame = spriteFrame;
+            }
+        });
+
+        let framePath:string = "ui/icon/" + info.frame + "/spriteFrame"
+        this._resourceLoad(framePath,this.btn_frame);
+
+        let heroIconPath:string = "ui/hero/" + info.img + "/spriteFrame"
+        this._resourceLoad(heroIconPath,this.img_icon);
+
+        // this.lab_level.node.active = false;
+
+        this._setStar(info.star);
+
+        switch (nType) 
+        {
+            case XConsts.HERO_ICON_TYPE.RecLineUp :
+                this.lab_level.node.active = false;
+                break;
+            case XConsts.HERO_ICON_TYPE.SummonSettle:
+                this.lab_level.string = "1"
+                break;
+        }
+    }
+
     /**
      * 隐藏等级
      * @param isShow 是否隐藏
-     */
+    */
     public setLvIconVisib(isShow:boolean = false)
     {
         this.lab_level.node.active = isShow
     }
 
+    /**
+     * 根据影响信息创建英雄头像
+     * @param heroinfo 英雄信息
+     */
+    public setHeroInfo(heroinfo:Config.heroes.Record,level:number)
+    {
+        if(!heroinfo)
+        {
+            console.log("英雄信息错误");
+            return;
+        }
+        this._initHeroIcon(heroinfo,level);
+    }
 }
