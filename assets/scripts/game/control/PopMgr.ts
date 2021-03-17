@@ -14,6 +14,7 @@ import { PopEquipInfoWin } from "../view/pop/PopEquipInfoWin";
 import { PopEquipSaleView } from "../view/pop/PopEquipSaleView";
 import { PopItemReward } from '../view/pop/popItemReward';
 import { HeroData } from '../model/datas/HeroData';
+import { PopHeroChoiceGiftView } from '../view/pop/PopHeroChoiceGiftView';
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -283,6 +284,22 @@ export class PopMgr extends PopCore  {
 
             let script = p.getComponent("PopEquipSaleView") as PopEquipSaleView;
             script.setEquipSaleType(id);
+        } );
+    }
+    
+    /**
+     * 打开背包中的礼包道具  海珠区
+     * @param giftId 礼包id
+     * @param visit 预览/参观模式
+     */
+    public popOpenHeroGiftView(giftId:number,visit:boolean = false)
+    {
+        resources.load('prefabs_ui/pop/pop_herogiftview', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopHeroChoiceGiftView") as PopHeroChoiceGiftView;
+            script.setGiftID(giftId, visit);
         } );
     }
 }
