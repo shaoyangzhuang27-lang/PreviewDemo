@@ -35,8 +35,9 @@ export class ItemEquipCell extends Component {
     private _itemID:number = -1;
     private _itemCount:number = 0;
     private _clickCallback :Function | null = null;
-    private _ObjectType:number = Msg.TObjectType.EObject_NULL;
+    private _ObjectType:number = 0;
     start () {
+        this._ObjectType = Msg.TObjectType.EObject_NULL;
         this.img_bg.on(Node.EventType.TOUCH_END, this._openItemEquipInfoView, this);
     }
 

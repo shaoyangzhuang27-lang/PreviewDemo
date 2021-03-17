@@ -3,7 +3,7 @@ const { ccclass } = _decorator;
 
 @ccclass("FlyAniItem")
 export class FlyAniItem extends Component {
-    actionType : number = 2;
+    actionType : number = 3;
 
     bIsFlying : boolean =  false;
 
