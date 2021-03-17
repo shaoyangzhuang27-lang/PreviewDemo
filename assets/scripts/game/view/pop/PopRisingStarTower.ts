@@ -153,6 +153,7 @@ export class PopRisingStarTower extends PopBase {
     {
         super.start();
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_starUp_change,this._notifyStarUpChangeHandle,this);
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_OneKeyStarUp_change,this._notifyOneKeyStarUpChangeHandle,this);
         this._starNameList = ["初级星星","中级星星","高级星星"]
         if(this._selectBattleList == null)
         {
@@ -406,11 +407,6 @@ export class PopRisingStarTower extends PopBase {
             itemType = 0;
         }
         return itemType;
-    }
-
-    //一键升星
-    private _submitHandle(){
-           
     }
 
     //平台主英雄事件
@@ -747,7 +743,8 @@ export class PopRisingStarTower extends PopBase {
         }
     }
 
-    //升星后 阵容变化
+    //////////////////////////////////////////////////////
+    //升星后 阵容变化 弹出升星结果界面
     private _notifyStarUpChangeHandle(){
         this._getAllHeroList();
         this._initBottomHeros();
@@ -763,7 +760,17 @@ export class PopRisingStarTower extends PopBase {
         PopMgr.getInstance().popStarUpResultView(this._firstHeroData,HeroData);
     }
 
+    //一键升星后 阵容变化
+    private _notifyOneKeyStarUpChangeHandle(data:any){
+        this._getAllHeroList();
+        this._initBottomHeros();
+        if(data instanceof Array){
+            let heroNewStar:Msg.HeroStarUpMultiA = data[0];
+        }
+    }
+
     //////////////////////////////////////////////////////
+
 
     // 从heroes文件获取升星材料类型 参数 数量
     private _getHeroesDatas(StaticID:number)
@@ -807,5 +814,10 @@ export class PopRisingStarTower extends PopBase {
         }
         MsgMgr.getInstance().getMsgStarUp().requestHeroStarUp(this._risingdyncMaiID,materialHeroIDs);
         this._platformMainHeadHandle();
+    }
+
+    //一键升星
+    private _submitHandle(){
+        PopMgr.getInstance().popOneKeyStarUpView();
     }
 }

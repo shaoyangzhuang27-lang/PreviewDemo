@@ -99,7 +99,6 @@ export class HeroesModel extends BaseModel{
         if(this._heroList.has(dyncHeroID))
         {
             let oldHeroData = this._heroList.get(dyncHeroID) as HeroData;
-            let newHeroData = new HeroData();
             let heroInfo  = new Msg.HeroInfo();
             heroInfo.id = dyncHeroID;
             heroInfo.staticID = oldHeroData.getStaticID() + 10000;
@@ -125,6 +124,52 @@ export class HeroesModel extends BaseModel{
             //抛出通知  升星发生变化
             NotifyMgr.getInstance().notify(NotifyMgr.event_net_starUp_change);
         }
+    }
+
+    /**
+     * 一键升星之后 改变英雄数据
+     * @param id 
+     */
+    public resetOneKeyStarUpInfo(msg:Msg.HeroStarUpMultiA) {
+        let heroNewStar = msg.heroNewStar;
+        let advanceExpConsume = msg.advanceExpConsume;
+        let materialHeroIDList = msg.materialHeroIDList;
+        let upgradePoint = msg.upgradePoint;
+        let equipList = msg.equipList;
+        let advanceExp = msg.advanceExp;
+        let magicDust = msg.magicDust;
+        let money = msg.money;
+
+        for (let key in heroNewStar){
+            if(this._heroList.has(Number(key)))
+            {
+                let oldHeroData = this._heroList.get(Number(key)) as HeroData;
+                let heroInfo  = new Msg.HeroInfo();
+                heroInfo.id = Number(key);
+                heroInfo.staticID = oldHeroData.getStaticID() + 10000;
+                heroInfo.level = oldHeroData.getLevel();
+                heroInfo.isLocked = oldHeroData.isLocked;
+                let newEquipOnList: number[]= [];
+                for(let key in equipList){
+                    newEquipOnList.push(Number(key));
+                }
+                heroInfo.equipOnList = newEquipOnList;
+                //heroInfo.crystal = 
+                heroInfo.tier = oldHeroData.tier;
+
+                let hero = new HeroData();
+                hero.initDataByHero(heroInfo as Msg.HeroInfo, this._gameModel);
+                this._heroList.delete(Number(key));
+                this._heroList.set(heroInfo.id as number,hero);
+
+                for(let key in materialHeroIDList){
+                    let value = materialHeroIDList[key];
+                    this._heroList.delete(value);
+                }
+            }
+        }
+        //抛出通知  一键升星升星发生变化
+        NotifyMgr.getInstance().notify(NotifyMgr.event_net_OneKeyStarUp_change,[msg]);
     }
     
     /////////////////////////////////////////////////////

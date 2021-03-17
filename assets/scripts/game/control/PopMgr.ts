@@ -2,6 +2,7 @@ import {  Node,resources,instantiate,LabelComponent,Vec3,tween,Scene, Script } f
 import { PopSimple } from "../view/pop/PopSimple";
 import { PopRisingStarTower } from "../view/pop/PopRisingStarTower";
 import { PopStarUpResult } from "../view/pop/PopStarUpResult";
+import { PopOneKeyStarUp } from "../view/pop/PopOneKeyStarUp";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
 import { TipDemo } from '../view/TipDemo';
@@ -126,6 +127,25 @@ export class PopMgr extends PopCore  {
             let script = p.getComponent("PopStarUpResult") as PopStarUpResult;
             script.setHeroData(HeroInfo);
             script.setnewHeroData(newHeroInfo);
+            script.setIsMaskClose(isMaskClose);
+            script.setCloseCallBack(closeCallBack);
+        } );
+    }
+
+    /**
+     * @description: 弹出一键升星界面 
+     * @param {HeroData} HeroInfo
+     * @param {HeroData} newHeroInfo
+     * @param {Function} closeCallBack
+     * @param {boolean} isMaskClose
+     */
+    public popOneKeyStarUpView(closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_onekeystarup', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopOneKeyStarUp") as PopOneKeyStarUp;
             script.setIsMaskClose(isMaskClose);
             script.setCloseCallBack(closeCallBack);
         } );
