@@ -35,8 +35,15 @@ export class ItemEquipCell extends Component {
     private _itemID:number = -1;
     private _itemCount:number = 0;
     private _clickCallback :Function | null = null;
-    private _ObjectType:number = Msg.TObjectType.EObject_NULL;
+    private _objectType:number = 0;
+
+    onLoad()
+    {
+        // this._ObjectType = Msg.TObjectType.EObject_NULL;
+    }
+
     start () {
+        
         this.img_bg.on(Node.EventType.TOUCH_END, this._openItemEquipInfoView, this);
     }
 
@@ -63,7 +70,7 @@ export class ItemEquipCell extends Component {
      */
     public setItemUseType(objType:number)
     {
-        this._ObjectType = objType;
+        this._objectType = objType;
     }
 
     private _initIcon()
@@ -99,16 +106,16 @@ export class ItemEquipCell extends Component {
         else{       //道具
             this._setUIIConVisible(false);
             
-            if(this._ObjectType != Msg.TObjectType.EObject_UsableItem)
+            if(this._objectType != Msg.TObjectType.EObject_UsableItem)
             {
-                this._itemID = this._ObjectType;    //不可使用道具  id就是道具类型
-                if(XShare.getInstance().KObjectQuality.has(this._ObjectType))
+                this._itemID = this._objectType;    //不可使用道具  id就是道具类型
+                if(XShare.getInstance().KObjectQuality.has(this._objectType))
                 {
-                    let quality = Number(XShare.getInstance().KObjectQuality.get(this._ObjectType)) ;
+                    let quality = Number(XShare.getInstance().KObjectQuality.get(this._objectType)) ;
                     let qualityName:string = XConsts.KQualityBgSpriteName[quality];
                     qualityPath = "ui/icon/" + qualityName + "/spriteFrame";
                 }
-                let iconName:string = XConsts.KObjectIconSpriteName[this._ObjectType];
+                let iconName:string = XConsts.KObjectIconSpriteName[this._objectType];
                 iconPath = "ui/commonIcon/" + iconName + "/spriteFrame";
             }
             else{
@@ -150,7 +157,7 @@ export class ItemEquipCell extends Component {
     {
         if(this._clickCallback)
         {
-            this._clickCallback(this._itemID,this._itemType,this._ObjectType)
+            this._clickCallback(this._itemID,this._itemType,this._objectType)
         }
     }
 
@@ -163,6 +170,16 @@ export class ItemEquipCell extends Component {
         }
     }
     
+    /**
+     * 重新传入数量
+     * @param count 装备或道具的数据
+     */
+    public resetItemCount(count:number)
+    {
+        this._itemCount = count;
+        let labCount:Label = this.lab_count.getComponent(Label) as Label;
+        labCount.string = XFuns.FormatNumber(this._itemCount);
+    }
 }
 
 /**

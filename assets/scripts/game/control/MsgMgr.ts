@@ -11,9 +11,11 @@ import { MsgCore } from "../../core/network/MsgCore";
 import { MsgLogin } from "./msg/MsgLogin";
 import { MsgGame } from "./msg/MsgGame";
 import { MsgFormation } from "./msg/MsgFormation";
+import { MsgStarUp } from "./msg/MsgStarUp";
 import { MsgBag } from "./msg/MsgBag";
 import { MsgHeroPub } from "./msg/MsgHeroPub";
 import { MsgBase } from "./msg/MsgBase";
+import { MsgOffline } from "./msg/MsgOffline";
 
 
 class NetTips implements INetworkTips {
@@ -65,6 +67,11 @@ export class MsgMgr extends MsgCore{
     public getMsgBag(){
         return this._msgBag;
     }
+
+    private _msgStarUp : MsgStarUp = new MsgStarUp(this);
+    public getMsgStarUp(){
+        return this._msgStarUp;
+    }
     //消息定义-------------------------------------------------
     
     //消息注册-------------------------------------------------
@@ -73,11 +80,18 @@ export class MsgMgr extends MsgCore{
         this._msgs.push(this._msgGame)
         this._msgs.push(this._msgFormation);
         this._msgs.push(this._msgBag);
+        this._msgs.push(this._msgStarUp);
+        this._msgs.push(this._msgOffline);
         this._msgs.push(this._msgFormation);
     }
     //消息注册-------------------------------------------------
 
 
+
+    private _msgOffline : MsgOffline = new MsgOffline(this);
+    public getMsgOffline() {
+        return this._msgOffline
+    }
 
     //HeroPub消息注册
     private _msgHeroPub : MsgHeroPub = new MsgHeroPub(this);
@@ -106,6 +120,8 @@ export class MsgMgr extends MsgCore{
     }
     
     public connectLoginServer(channelId: number = 0){
+        //NetManager.getInstance().connect({ url: "ws://192.168.15.68:17183" },channelId);//开启连接
+        NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启本地连接
         // NetManager.getInstance().connect({ url: "ws://192.168.15.132:17183" },channelId);//开启连接
         NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启连接
         // NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启本地连接

@@ -4,6 +4,7 @@ import { GameModel } from '../../model/GameModel';
 import { ItemEquipType,ItemEquipCell } from './ItemEquipCell';
 import { PopItemUseWin } from '../pop/PopItemUseWin';
 import { PopMgr } from '../../control/PopMgr';
+import { NotifyMgr } from '../../control/NotifyMgr';
 import { HeroFragment } from '../hero/HeroFragment';
 const { ccclass, property } = _decorator;
 
@@ -50,6 +51,11 @@ export class BagMain extends Component {
 
     //拥有的所有装备列表显示对象
     private _bagEquipNodeList:Map<number, Node> = new Map<number, Node>();
+
+    onLoad()
+    {
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_equip_item_change,this._changeScrollviewItemData,this);
+    }
 
     start () {
         // [3]
@@ -117,7 +123,8 @@ export class BagMain extends Component {
                 let value = allEquipList.get(key);  //数量   
                 let equipCell = instantiate(res) as Node;
                 this.scroll_EquipView.content?.addChild(equipCell);
-                this._initPrefab(equipCell,Number(key),Number(value),ItemEquipType.equip); 
+                equipCell.name = "BagEquipCell_" + Number(key);
+                this._initPrefab(equipCell, Number(key), Number(value), ItemEquipType.equip, Number(Msg.TObjectType.EObject_Equip)); 
 
                 this._bagEquipNodeList.set(Number(key), equipCell);
             }
@@ -139,25 +146,28 @@ export class BagMain extends Component {
                 {
                     this._initPrefab(itemCell, Number(itemGoods[1]), Number(itemGoods[2]), ItemEquipType.goods, Number(Msg.TObjectType.EObject_UsableItem));
                     this._bagItemNodeList.set(Number(itemGoods[1]), itemCell);
+                    itemCell.name = "BagUseItem_" + Number(itemGoods[1]);
                 }
                 else{
                     this._initPrefab(itemCell, Number(itemGoods[0]), Number(itemGoods[2]), ItemEquipType.goods, Number(itemGoods[0]));
                     this._bagItemNodeList.set(Number(itemGoods[0]), itemCell);
+                    itemCell.name = "BagNotUseItem_" + Number(itemGoods[0]);
                 }
             }            
         })   
     }
 
-    private _initPrefab(iconNode:Node,key:number,value:number,itemType:ItemEquipType, objType:number = 0)
+    private _initPrefab(iconNode:Node,key:number,value:number,itemType:ItemEquipType, objType:number)
     {        
         let script = iconNode.getComponent("ItemEquipCell") as ItemEquipCell;
         script.setItemUseType(objType)
+      
         script.setItemType(Number(key),Number(value),itemType,(id:number,itemClickType:number,objClickType:number)=>{
             this._itemEqipCallBack(id,itemClickType,objClickType)
         })
     }
 
-    private _itemEqipCallBack(itemID:number,itemType:number,objType:number = 0)
+    private _itemEqipCallBack(itemID:number,itemType:number,objType:number)
     {
         if(itemType == ItemEquipType.goods)
         {
@@ -169,9 +179,49 @@ export class BagMain extends Component {
         
     }
 
+    //改变背包节点数据
+    private _changeScrollviewItemData(data:any)
+    {
+        if(data instanceof Array)
+        {
+            let id:number = data[1];
+            let name:string = "";
+            if(data[0] == ItemEquipType.goods && this._bagItemNodeList.has(id))
+            {
+                let count:number = GameModel.getInstance().getBagModel().getItemCountByKey(id,ItemEquipType.goods)
+                name = "BagUseItem_" + id
+                let cell = this.scroll_ItemView.content?.getChildByName(name) as Node;
+                let script = cell.getComponent("ItemEquipCell") as ItemEquipCell;
+                if(count == 0)
+                {
+                    this._bagItemNodeList.delete(id);
+                    cell.removeFromParent();
+                }
+                else{
+                    script.resetItemCount(count);
+                }
+            }
+            else if(data[0] == ItemEquipType.equip && this._bagEquipNodeList.has(id))
+            {
+                let count:number = GameModel.getInstance().getBagModel().getItemCountByKey(id,ItemEquipType.equip)
+                name = "BagEquipCell_" + id
+                let cell = this.scroll_EquipView.content?.getChildByName(name) as Node;
+                let script = cell.getComponent("ItemEquipCell") as ItemEquipCell;
+                if(count == 0)
+                {
+                    this._bagItemNodeList.delete(id);
+                    cell.removeFromParent()
+                }
+                else{
+                    script.resetItemCount(count);
+                }
+            }
+        }
+    }
+
     onDestroy()
     {
-
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_equip_item_change,this._changeScrollviewItemData,this);
     }
 
     private _initFragmentScrollview()

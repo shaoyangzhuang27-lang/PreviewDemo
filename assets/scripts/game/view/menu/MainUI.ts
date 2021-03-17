@@ -1,11 +1,16 @@
 import { _decorator, Component, Node,director,tween,Vec3, instantiate, resources, Label, ProgressBar } from 'cc';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { XFuns } from '../../model/const/XFuns';
+import { MsgMgr } from '../../control/MsgMgr';
 import { DataMgr } from '../../model/DataMgr';
 import { GameModel } from '../../model/GameModel';
 import { BagMain } from '../menu/BagMain';
 import { KnightMain } from '../menu/KnightMain';
 import { TeamMain } from '../menu/TeamMain';
+import { FlyItem } from '../pop/FlyItem';
+import { PopOffLineBonus} from '../pop/PopOffLineBonus';
+import { OfflineModel } from '../../model/datas/OfflineModel';
+import { UINodeMgr } from '../UINodeMgr';
 
 const { ccclass, property } = _decorator;
 
@@ -53,7 +58,13 @@ export class MainUI extends Component {
     @property({type: Node, displayName: "钻石按钮"})
     public btn_diamond:Node = null as unknown as Node;
 
+    @property({type: Node, displayName: "挂机奖励"})
+    public btn_offline: Node = null as unknown as Node;
 
+    @property({ type: Node, displayName: "挑战首领" })
+    public btn_fight: Node = null as unknown as Node;
+
+    private _onClickBossFight: Function = null as unknown as Function;
 
     onLoad(){
         this.btn_hero.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
@@ -63,15 +74,27 @@ export class MainUI extends Component {
         this.btn_guild.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
         this.btn_coin.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
         this.btn_diamond.on(Node.EventType.TOUCH_END,this.buttonBtnClick,this);
+        // 
+        this.btn_offline.on(Node.EventType.TOUCH_END, this.buttonBtnOffLineClick, this)
+        this.btn_fight?.on(Node.EventType.TOUCH_END, this.buttonBtnFightClick, this)
+
+        // 监听事件
+        NotifyMgr.getInstance().addNotifyHandler("event_net_offline", this.openOfflineBonus, this);
         this.locateMenu();
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_coin_diamond_level_change,this._playerDataChange,this);
     }
     onDestroy(){
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_coin_diamond_level_change,this._playerDataChange,this) 
+        NotifyMgr.getInstance().removeNotifyHandler("event_net_offline", this.openOfflineBonus, this);
+
+        UINodeMgr.unRegNodeWithKey("mainCoin")
+        UINodeMgr.unRegNodeWithKey("mainDiamond")
+        UINodeMgr.unRegNodeWithKey("mainlevelPro")
     }
+
     private _playerDataChange(data:any) {
-        this.txt_coin.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().money);
-        this.txt_diamond.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().vrmb);
+        this.txt_coin.string = XFuns.FormatNumber(GameModel.getInstance().getPlayerModel().getPlayerInfo().money);
+        this.txt_diamond.string = XFuns.FormatNumber(GameModel.getInstance().getPlayerModel().getPlayerInfo().vrmb);
         this.txt_level.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().level);
     }
     update(){
@@ -95,8 +118,44 @@ export class MainUI extends Component {
         this.txt_diamond.string = XFuns.FormatNumber(GameModel.getInstance().getPlayerModel().getPlayerInfo().vrmb);
         this.txt_level.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().level + "级");
         
+        UINodeMgr.regNodeWithKey(this.btn_coin, "mainCoin")
+        UINodeMgr.regNodeWithKey(this.btn_diamond, "mainDiamond")
+        UINodeMgr.regNodeWithKey(this.pro_level.node, "mainlevelPro")
     }
 
+    setClickBossFightFunc(func: Function) {
+        this._onClickBossFight = func;
+    }
+
+    openOfflineBonus(){
+        resources.load('prefabs_ui/offline/pop_offline', (err: any, res: any) => {
+            let p = instantiate(res);
+            let script = p.getComponent("PopOffLineBonus") as PopOffLineBonus
+            script.popSelf()
+            script.setCloseCallBack(() =>{ 
+                let ret = GameModel.getInstance().getOfflineModel().actionOfflineData()
+                if(ret && ret.length > 0){
+                    FlyItem.showActionFlyWihtObject(this.node.worldPosition, ret[1], ret[0], this.node);
+                }
+            })
+            script.setIsMaskClose(true);
+        });
+    }
+    // 点击宝箱
+    buttonBtnOffLineClick(event: any){
+        // 请求数据
+        MsgMgr.getInstance().getMsgOffline().requestGainOfflineAwardR();
+    }
+
+    // 点击挑战首领
+    buttonBtnFightClick(event: any){
+        console.log("点击挑战首领")
+        if (this._onClickBossFight) {
+            this._onClickBossFight();
+        }
+    }
+
+    // 弹出后要移动宝箱位置
     buttonBtnClick(event:any){
         console.log(event)
         tween(this.sprite_select)

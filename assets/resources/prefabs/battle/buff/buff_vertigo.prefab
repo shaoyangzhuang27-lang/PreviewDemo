@@ -86,7 +86,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0.1,
+      "y": -0.2,
       "z": 0
     },
     "_lrot": {
@@ -130,8 +130,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0.2,
-      "y": 0.2,
+      "x": 0.3,
+      "y": 0,
       "z": 0
     },
     "_lrot": {
@@ -280,9 +280,8 @@
   },
   {
     "__type__": "cc.CurveRange",
-    "mode": 3,
-    "constantMin": 0.2,
-    "constantMax": 0.1,
+    "mode": 0,
+    "constant": 0.3,
     "multiplier": 1
   },
   {
@@ -904,8 +903,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -0.2,
-      "y": 0.2,
+      "x": -0.3,
+      "y": 0,
       "z": 0
     },
     "_lrot": {
@@ -1054,9 +1053,8 @@
   },
   {
     "__type__": "cc.CurveRange",
-    "mode": 3,
-    "constantMin": 0.2,
-    "constantMax": 0.1,
+    "mode": 0,
+    "constant": 0.3,
     "multiplier": 1
   },
   {
@@ -1679,8 +1677,8 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0.2,
-      "z": 0.2
+      "y": 0,
+      "z": 0.3
     },
     "_lrot": {
       "__type__": "cc.Quat",
@@ -1827,9 +1825,8 @@
   },
   {
     "__type__": "cc.CurveRange",
-    "mode": 3,
-    "constantMin": 0.2,
-    "constantMax": 0.1,
+    "mode": 0,
+    "constant": 0.3,
     "multiplier": 1
   },
   {
@@ -2452,8 +2449,8 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0.2,
-      "z": -0.2
+      "y": 0,
+      "z": -0.3
     },
     "_lrot": {
       "__type__": "cc.Quat",
@@ -2600,9 +2597,8 @@
   },
   {
     "__type__": "cc.CurveRange",
-    "mode": 3,
-    "constantMin": 0.2,
-    "constantMax": 0.1,
+    "mode": 0,
+    "constant": 0.3,
     "multiplier": 1
   },
   {
@@ -3145,8 +3141,11 @@
     "__prefab": {
       "__id__": 268
     },
+    "effectType": 0,
     "playPot": 5,
     "playTime": 0,
+    "flySpeed": 8,
+    "endEffectPrefab": null,
     "_id": ""
   },
   {

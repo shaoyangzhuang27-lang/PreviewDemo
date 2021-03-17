@@ -1534,7 +1534,7 @@
     "fileId": "18SSNY3kdONKZjfoQzoS6t"
   },
   {
-    "__type__": "98ebf7TAw5FzprqEqU68C0G",
+    "__type__": "7c3e3Ii8ElNobLvNXUsi0m5",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -1544,13 +1544,16 @@
     "__prefab": {
       "__id__": 131
     },
+    "effectType": 1,
     "playPot": 1,
     "playTime": 0,
+    "flySpeed": 10,
+    "endEffectPrefab": null,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "ccNyuduk9Fp4wgnLE49/Se"
+    "fileId": "d9+OucMfxPCp5YG6vBjsuy"
   },
   {
     "__type__": "cc.PrefabInfo",

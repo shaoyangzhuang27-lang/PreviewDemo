@@ -3,6 +3,7 @@ import { HeroData } from "./HeroData";
 import { TableName, ValueMgr } from "../ValueMgr";
 import { XMsgExt } from "../const/XMsgExt";
 import { BaseModel } from "./BaseModel";
+import { NotifyMgr } from '../../control/NotifyMgr';
 import {XConsts} from "../const/XConsts";
 
 export class HeroesModel extends BaseModel{
@@ -48,6 +49,29 @@ export class HeroesModel extends BaseModel{
         return _campHeroList;
     }
 
+    /**
+     * 排序英雄数据
+     * @param heroDatas       排序数据
+     * @param sortForward     正向排序从小到大 默认false等级高排前面
+     */
+    public sortHeroList(heroDatas : Map<number, HeroData>, sortForward : boolean = false){
+        let sortList = new Array<[number, HeroData]>();
+        heroDatas.forEach(heroInfo => {
+            let sortIndex_1: number = heroInfo.getLevel() * 10000 + heroInfo.getStar() * 1000 + heroInfo.getCamp() * 10 + heroInfo.getClasses();
+            let sortIndex_2: number = 3000000 - sortIndex_1;
+            let sort = sortForward ? sortIndex_1 : sortIndex_2
+            sortList.push([sort, heroInfo]);
+        });
+        sortList.sort((a, b) => a[0] - b[0])
+        // 返回数组
+        let retHeroList: HeroData[] = []
+        sortList.forEach(element => {
+            retHeroList.push(element[1])
+        });
+
+        return retHeroList
+    }
+
     //根据id获取英雄信息
     public getHeroInfoByDyncID(dyncID:number) : HeroData | null
     {
@@ -62,19 +86,91 @@ export class HeroesModel extends BaseModel{
      * 升星之后 改变英雄数据
      * @param id 
      */
-    public resetHeroStarUpInfo(id:number)
-    {
-        if(this._heroList.has(id))
-        {
-            let oldHeroData = this._heroList.get(id) as HeroData;
-            let newHeroData = new HeroData();
-            let heroInfo  = new Msg.HeroInfo();
-            newHeroData = oldHeroData;
-            this._heroList.delete(id);
-//中间数值变化
-            this._heroList.set(id,newHeroData);
-        }
+    public resetHeroStarUpInfo(msg:Msg.HeroStarUpA) {
+        let dyncHeroID = msg.heroID;
+        let newStar = msg.newStar;
+        let advanceExpConsume = msg.advanceExpConsume;
+        let materialHeroIDList = msg.materialHeroIDList;
+        let upgradePoint = msg.upgradePoint;
+        let equipList = msg.equipList;
+        let advanceExp = msg.advanceExp;
+        let magicDust = msg.magicDust;
+        let money = msg.money;
 
+        if(this._heroList.has(dyncHeroID))
+    {
+            let oldHeroData = this._heroList.get(dyncHeroID) as HeroData;
+            let heroInfo  = new Msg.HeroInfo();
+            heroInfo.id = dyncHeroID;
+            heroInfo.staticID = oldHeroData.getStaticID() + 10000;
+            heroInfo.level = oldHeroData.getLevel();
+            heroInfo.isLocked = oldHeroData.isLocked;
+            let newEquipOnList: number[]= [];
+            for(let key in equipList){
+                newEquipOnList.push(Number(key));
+            }
+            heroInfo.equipOnList = newEquipOnList;
+            //heroInfo.crystal = 
+            heroInfo.tier = oldHeroData.tier;
+
+            let hero = new HeroData();
+            hero.initDataByHero(heroInfo as Msg.HeroInfo, this._gameModel);
+            this._heroList.delete(dyncHeroID);
+            this._heroList.set(heroInfo.id as number,hero);
+
+            for(let key in materialHeroIDList){
+                let value = materialHeroIDList[key];
+                this._heroList.delete(value);
+            }
+            //抛出通知  升星发生变化
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_starUp_change);
+        }
+    }
+
+    /**
+     * 一键升星之后 改变英雄数据
+     * @param id 
+     */
+    public resetOneKeyStarUpInfo(msg:Msg.HeroStarUpMultiA) {
+        let heroNewStar = msg.heroNewStar;
+        let advanceExpConsume = msg.advanceExpConsume;
+        let materialHeroIDList = msg.materialHeroIDList;
+        let upgradePoint = msg.upgradePoint;
+        let equipList = msg.equipList;
+        let advanceExp = msg.advanceExp;
+        let magicDust = msg.magicDust;
+        let money = msg.money;
+
+        for (let key in heroNewStar){
+            if(this._heroList.has(Number(key)))
+        {
+                let oldHeroData = this._heroList.get(Number(key)) as HeroData;
+            let heroInfo  = new Msg.HeroInfo();
+                heroInfo.id = Number(key);
+                heroInfo.staticID = oldHeroData.getStaticID() + 10000;
+                heroInfo.level = oldHeroData.getLevel();
+                heroInfo.isLocked = oldHeroData.isLocked;
+                let newEquipOnList: number[]= [];
+                for(let key in equipList){
+                    newEquipOnList.push(Number(key));
+        }
+                heroInfo.equipOnList = newEquipOnList;
+                //heroInfo.crystal = 
+                heroInfo.tier = oldHeroData.tier;
+
+                let hero = new HeroData();
+                hero.initDataByHero(heroInfo as Msg.HeroInfo, this._gameModel);
+                this._heroList.delete(Number(key));
+                this._heroList.set(heroInfo.id as number,hero);
+
+                for(let key in materialHeroIDList){
+                    let value = materialHeroIDList[key];
+                    this._heroList.delete(value);
+    }
+            }
+        }
+        //抛出通知  一键升星升星发生变化
+        NotifyMgr.getInstance().notify(NotifyMgr.event_net_OneKeyStarUp_change,[msg]);
     }
     
     /////////////////////////////////////////////////////
@@ -177,6 +273,19 @@ export class HeroesModel extends BaseModel{
         //     }
         // });
         return tempBookHero;
+    }
+
+
+    // 设置英雄锁定状态
+    public setHeroLocked(msg: Msg.SyncHeroLocked) {
+        //根据id获取英雄信息
+        let heroData = this.getHeroInfoByDyncID(msg.heroID); //HeroData
+        if(heroData)
+        {   
+            heroData.isLocked= msg.isLocked;
+            //抛出通知 英雄锁定状态 变化
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_locked, msg);
+        }        
     }
 
     //酒馆推荐阵容英雄信息

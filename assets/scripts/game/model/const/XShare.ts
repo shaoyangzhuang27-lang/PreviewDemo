@@ -37,6 +37,7 @@ export class XShare{
     public KCampDamageBonus = 130; //阵营克制增伤倍数
     public KFragmentNumRequired = new Map<number,number>([[1,5],[2,10],[3,20],[4,30],[5,40],]);
     public KGuardingRadius = 10; //警觉半径
+    //英雄品阶对应等级上限
     public KHeroMaxLevelForTier = new Array<number>(10, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260);
     public KHeroQualityUpMaterial = new Array<number>(5, 50, 500, 5000, 50000, 500000);
     public KHeroQualityUpMoney = new Array<number>(2000, 10000, 50000, 200000, 1000000, 5000000);
@@ -66,9 +67,12 @@ export class XShare{
     public KWonderSummonCostTen = 5000;
     public KStarterSummonTenUnlockCopy = 302;
     public KStarterSummonTenDuration = 7 * 3600 * 24;
+    //升阶进阶石消耗
     public KHeroTierUpAdvanceExp = new Array<number>(20, 60, 300, 800, 1200, 2400, 3600, 4800, 6000, 10000, 15000, 20000, 30000);
+    //升阶金币消耗
     public KHeroTierUpMoney = new Array<number>(1000, 10000, 30000, 60000, 100000, 300000, 500000, 800000, 1000000, 2000000, 3000000, 4000000, 5000000);
     public KHeroStarUpAdvanceExp = new Array<number>(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    //升阶属性提升
     public KHeroPropertyUpByTier = new Array<number>(0, 5, 25, 30, 35, 55, 75, 80, 85, 90, 95, 100, 105, 110, 115);
     public KCampBuffMap = new Map<Msg.TCampType,CampBuff>();// Dictionary<Msg.TCampType, CampBuff>
     public KHeroTalentUnlockTier = new Array<number>(2, 4, 5);
@@ -243,6 +247,29 @@ export class XShare{
     private KHuntingBossEquipTorment = new Array<number>(45, 37, 38, 39, 40)
     private KHuntingBossEquipNightmare = new Array<number>(53, 37, 38, 39, 40)    
 
+    // 技能表\天赋表通配符 ---------------start-------------------------------- 
+    public getKeyStrSkillOrTalent(key: string, idx: number =0){
+        if(idx==0){
+            return "<"+key+">";
+        }
+        else{
+            return "<"+key+idx.toString()+">";
+        }
+    }
+    public  KStrSki11Range = "rp" ;//技能范围，对应 skill--- range 字段
+    public  KStrSkilTargetNum ="tn";//影响人数，对应 target_num 字段 
+    public  KStrSkil1EffectParam = "ep"; //效果参数1，非BUFF 类效果对应skill或talent表 effect_paraml 字段，BUFF类型效果对应buff_new表的effect_param1字段
+    public  KStrSki11EffectParam2 = "ex"; //效果参数2，非BUFF类效果对应skill或talent表 effect_param2 字段，BUFF类型效果对应buff_new表的effect_param2字段
+    public  KStrSkil1EffectChance = "ec"; //效果几率，对应 skill--- effect_chance 字段
+    public  KStrBuffTime = "bt"; //BUFF类 型持续时间，对应buff_new 表的 duration 字段
+    public  KStrBuffStack = "bs"; //BUFF类型的堆叠层数, 对应buff_new表的 max_stack 字段
+    public  KStrSkil1EffectCondParam = "ecp"; //效果条件参数，对应 talent 表的 effect_cond_param 字段
+    public  KStrSki11EffectIargetNum = "etn" ;//效果目标数量，对应 talent 表的 effect_target_num 字段
+    public  KStrSki11LimitTimes = "1t"; //限制次数, 对应 talent 表limit_times  字段
+    public  KStrSkil1TriggerParam = "tp"; //触发参数，对应 trigger_param
+    public  KStrSki11Name = "<sn>"; //技能名称
+    public  KStrSki11Replace ="<color=#48D56D> {0} </color>";
+    // 技能表\天赋表通配符 -----------------end------------------------------ 
 
     //技能升级需求技能书数量
     private get_role_skill_book_req_num( quality:number, level:number ){

@@ -6,6 +6,8 @@ import { TechnologyModel } from "./datas/TechnologyModel";
 import { BagItemModel } from "./datas/BagItemModel";
 import { HeroPubModel } from "./datas/HeroPubModel";
 import { TableName, ValueMgr } from "./ValueMgr";
+import { OfflineModel } from "./datas/OfflineModel"
+
 
 export class GameModel{
     private static _instance: GameModel = new GameModel();
@@ -19,6 +21,7 @@ export class GameModel{
     private _playerModel:PlayerModel =  new PlayerModel(this);
     private _formationModel:FormationModel = new FormationModel(this);
     private _bagItemModel:BagItemModel = new BagItemModel(this);
+    private _offlineModel:OfflineModel = new OfflineModel();
     private _heroPubModel:HeroPubModel = new HeroPubModel(this);
 
     public getHeroesModel(){
@@ -35,6 +38,10 @@ export class GameModel{
     }
     public getBagModel(){
         return this._bagItemModel;
+    }
+    // 挂机数据
+    public getOfflineModel(){
+        return this._offlineModel;
     }
     public getHeroPubModel(){
         return this._heroPubModel;

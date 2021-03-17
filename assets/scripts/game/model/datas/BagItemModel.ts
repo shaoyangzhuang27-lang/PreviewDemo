@@ -13,7 +13,9 @@ export class BagItemModel extends BaseModel{
 
     //汇总英雄身上所有道具 
     private _allItemList:Array<[Msg.TObjectType, number,number]> = new Array<[Msg.TObjectType,number,number]>();        
-
+    /**
+     * 不可出售道具的描述   Array[0]是名称  Array[1]是描述
+     */
     private _notSellItemStingList:Map<Msg.TObjectType, Array<string>> = new Map<Msg.TObjectType, Array<string>>();
 
     //玩家所有碎片信息合集
@@ -42,6 +44,10 @@ export class BagItemModel extends BaseModel{
         this._setNotSellItemStringMap()
     }
 
+    /**
+     * 
+     * @returns 获取背包可使用道具
+     */
     /**
      * 初始化背包碎片合成信息
      * @param msg  Msg.GetPlayerDataA玩家信息
@@ -130,7 +136,10 @@ export class BagItemModel extends BaseModel{
         return this._bagItemList;
     }    
 
-    //获取背包装备
+    /**
+     * 
+     * @returns 获取背包所有装备
+     */
     public getBagEquipList()
     {
         return this._bagEquipList;
@@ -257,13 +266,12 @@ export class BagItemModel extends BaseModel{
         return this._allItemList;
     }
 
-    //战书数量
-    public getPVPTicket():number
-    {
-        return 0;
-    }
-
-    //返回指定道具/装备数量
+    /**
+     * 
+     * @param key 道具、装备id
+     * @param itemType 类型  区分装备、道具
+     * @returns 
+     */
     public getItemCountByKey(key:number,itemType:number):number
     {
         let count:number = 0;
@@ -284,6 +292,76 @@ export class BagItemModel extends BaseModel{
         
         return count;
     }
+
+    /**
+     * 获取不可使用的道具名称及描述 名字
+     * @param objType  道具类型值
+     * @returns 
+     */
+    public getItemDescByType(objType:Msg.TObjectType)
+    {
+        if(this._notSellItemStingList.has(objType))
+        {
+            let strArr = this._notSellItemStingList.get(objType) as Array<string>
+            return strArr
+        }
+        else{
+            return []
+        }
+    }
+
+    /**
+     * //改变背包道具的数量
+     * @param key 装备道具id
+     * @param count 数量
+     */
+    public changeBagItemNumber(key:number,count:number)
+    {
+        if(this._bagItemList.has(key))
+        {
+            let oldCount = Number(this._bagItemList.get(key));      
+            let newCount = oldCount - count;
+            this._bagItemList.delete(key)  
+            if(newCount != 0)
+            {
+                this._bagItemList.set(key,newCount)
+            }
+            NotifyMgr.getInstance().notify(NotifyMgr.event_equip_item_change,[ItemEquipType.goods,key]);
+        }        
+    }
+
+    /**
+     * //改变背包装备的数量
+     * @param key 装备道具id
+     * @param count 数量
+     */
+     public changeBagEquipNumber(key:number,count:number)
+     {
+         if(this._bagEquipList.has(key))
+         {
+             let oldCount = Number(this._bagEquipList.get(key));      
+             let newCount = oldCount - count;
+             this._bagEquipList.delete(key)  
+             if(newCount != 0)
+             {
+                 this._bagEquipList.set(key,newCount)
+             }
+             NotifyMgr.getInstance().notify(NotifyMgr.event_equip_item_change,[ItemEquipType.equip,key]);
+             NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
+         }        
+     }
+
+
+    ////////////////////////////////////////
+    /////////////////私有方法///////////////
+    ///////////////////////////////////////
+    
+     //战书数量
+    public _getPVPTicket():number
+    {
+        return 0;
+    }
+
 
     private _setNotSellItemStringMap()
     {
@@ -379,18 +457,6 @@ export class BagItemModel extends BaseModel{
 
         templist = ["UI_Name_LoopQuest2Money","UI_Desc_LoopQuest2Money"]
         this._notSellItemStingList.set(Msg.TObjectType.EObject_LoopQuest2Money,templist);
-    }
-
-    public getItemDescByType(objType:Msg.TObjectType)
-    {
-        if(this._notSellItemStingList.has(objType))
-        {
-            let strArr = this._notSellItemStingList.get(objType) as Array<string>
-            return strArr
-        }
-        else{
-            return []
-        }
     }
 
     //获取碎片合成信息

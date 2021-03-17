@@ -72,7 +72,7 @@
         },
         "events": [
           {
-            "frame": 0.6666666666666666,
+            "frame": 0.6333333333333333,
             "functionName": "onAttack",
             "parameters": []
           }

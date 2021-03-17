@@ -33,7 +33,6 @@ export class BattleBuffer {
     private _shieldValue: number = 0;
     private _atk: number = 0;
 
-
     constructor(target: BattleHero, attack: BattleHero, record: Config.buff_new.Record) {
         this._target = target
         this._record = record;
@@ -54,8 +53,8 @@ export class BattleBuffer {
                 target.stopAnim();
                 break;
             case EBuffType.ValueUp:        // 属性增加 = 4
-                break;
             case EBuffType.ValueDown:      // 属性减少 = 5
+                target.addBuffProperty(record, record.effectType == EBuffType.ValueUp);
                 break;
             case EBuffType.Silence:        // 沉默 = 6
                 break;
@@ -80,9 +79,9 @@ export class BattleBuffer {
                     this._buffEffectNode = instantiate(buffPrefab);
                     if (this._buffEffectNode) {
                         target.playEffect(this._buffEffectNode);
+                        // 所有buff的粒子都由BattleBuffer清理
                         if ((this._buffEffectNode.getComponent("BattleEffect") as BattleEffect).playTime > 0) {
-                            this._buffEffectNode = null;
-                            // console.log("-------------sdsdf-----------")
+                            (this._buffEffectNode.getComponent("BattleEffect") as BattleEffect).playTime = 0;
                         }
                     }  
                 }
@@ -135,8 +134,8 @@ export class BattleBuffer {
                 }
                 break;
             case EBuffType.ValueUp:        // 属性增加 = 4
-                break;
             case EBuffType.ValueDown:      // 属性减少 = 5
+                this._target.removeBuffProperty(this._record, this._record.effectType == EBuffType.ValueUp);
                 break;
             case EBuffType.Silence:        // 沉默 = 6
                 break;
@@ -152,12 +151,15 @@ export class BattleBuffer {
                 break;
         }
 
-        this.onClear()
+        if (this._buffEffectNode) {
+            (this._buffEffectNode.getComponent("BattleEffect") as BattleEffect).onEnd();
+            this._buffEffectNode = null;
+        }
     }
 
     onClear(): void {
         if (this._buffEffectNode) {
-            this._buffEffectNode.destroy();
+            (this._buffEffectNode.getComponent("BattleEffect") as BattleEffect).destroySelf();
             this._buffEffectNode = null;
         }
         // else {
