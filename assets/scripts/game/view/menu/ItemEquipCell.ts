@@ -1,4 +1,8 @@
-
+/**
+ * 游戏组件:道具装备cell
+ * @author 黄志清
+ * @version 1.0.0,2021.3.15
+ */
 import { _decorator, Component, Node, Label, resources, SpriteFrame, Sprite } from 'cc';
 import { XConsts } from '../../model/const/XConsts';
 import { XFuns } from '../../model/const/XFuns';
@@ -36,11 +40,6 @@ export class ItemEquipCell extends Component {
     private _itemCount:number = 0;
     private _clickCallback :Function | null = null;
     private _objectType:number = 0;
-
-    onLoad()
-    {
-        // this._ObjectType = Msg.TObjectType.EObject_NULL;
-    }
 
     start () {
         
