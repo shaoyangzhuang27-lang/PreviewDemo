@@ -45,15 +45,15 @@ export class PopSummonSettle extends PopBase {
 
     public _onSummonClick(event : any)
     {
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
-                let reclineup_item = instantiate( res );
-                let script = reclineup_item.getComponent(HeroIcon);
-                reclineup_item.scale = new Vec3(0.75,0.75,1);
-                let subWidget = reclineup_item.getComponent(UITransform) as UITransform;
-                subWidget.contentSize = new Size(113,113);
-                script.initUIHeroIconInfo(3031301,XConsts.HERO_ICON_TYPE.SummonSettle);
-                this.scroll_heroicon_view.content?.addChild(reclineup_item);
-        });
+        // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+        //         let reclineup_item = instantiate( res );
+        //         let script = reclineup_item.getComponent(HeroIcon);
+        //         reclineup_item.scale = new Vec3(0.75,0.75,1);
+        //         let subWidget = reclineup_item.getComponent(UITransform) as UITransform;
+        //         subWidget.contentSize = new Size(113,113);
+        //         script.initUIHeroIconInfo(3031301,XConsts.HERO_ICON_TYPE.SummonSettle);
+        //         this.scroll_heroicon_view.content?.addChild(reclineup_item);
+        // });
     }
 
     public initUI()
