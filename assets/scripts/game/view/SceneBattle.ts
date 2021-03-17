@@ -29,7 +29,11 @@ export class SceneBattle extends BaseScene {
         this.initUI((node: Node)=> {
             this._mainUI = node.getComponent("MainUI") as MainUI;
             this._battleCtrl.setBossBtn(this._mainUI.btn_fight);
-            this._mainUI.btn_fight.active = false;
+            
+            if (!this._battleCtrl.isStart()) {
+                this._mainUI.btn_fight.active = false;
+            }
+
             this._mainUI.setClickBossFightFunc(()=>{
                 this._battleCtrl.onClickBossFight();
             })
