@@ -2,11 +2,7 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-<<<<<<< HEAD
-  "uuid": "48b8a2be-445a-42b8-b3f0-db5a72701e13",
-=======
-  "uuid": "39c0f06b-add0-46bc-a494-38765908ae57",
->>>>>>> origin/develop
+  "uuid": "5d4969b4-26e2-4bda-9bc1-5ef9a4a94a92",
   "files": [
     ".json"
   ],

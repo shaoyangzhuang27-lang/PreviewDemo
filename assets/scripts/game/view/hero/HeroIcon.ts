@@ -243,7 +243,6 @@ export class HeroIcon extends Component {
     {
         this.lab_level.node.active = isShow
     }
-}
 
     /**
      * 根据影响信息创建英雄头像
@@ -258,5 +257,4 @@ export class HeroIcon extends Component {
         }
         this._initHeroIcon(heroinfo,level);
     }
-
 }

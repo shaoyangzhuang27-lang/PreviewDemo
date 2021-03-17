@@ -96,9 +96,6 @@ export class PopHeroPub extends PopBase {
         this.btn_introduce?.on(Node.EventType.TOUCH_END, this._onIntroduceClick, this);
         this.btn_recteam?.on(Node.EventType.TOUCH_END, this._onRecommendTeamClick, this);
 
-        // var str0 = "再召唤{0}次必得五星传奇英雄";
-        // var newStr = str0.replace("{0}","10");
-        // console.log("pppppppppppppppp",newStr);
 
         let diamond =  GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts();
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
