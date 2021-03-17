@@ -1,0 +1,292 @@
+{
+  "ver": "2.0.10",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "8cc5ef92-5727-4bec-ab8e-2806037807e7",
+  "files": [],
+  "subMetas": {
+    "30732": {
+      "importer": "gltf-skeleton",
+      "uuid": "8cc5ef92-5727-4bec-ab8e-2806037807e7@30732",
+      "displayName": "",
+      "id": "30732",
+      "name": "UnnamedSkeleton-0.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 23
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "41844": {
+      "importer": "gltf-embeded-image",
+      "uuid": "8cc5ef92-5727-4bec-ab8e-2806037807e7@41844",
+      "displayName": "",
+      "id": "41844",
+      "name": "Map #21.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "70038": {
+      "importer": "gltf-scene",
+      "uuid": "8cc5ef92-5727-4bec-ab8e-2806037807e7@70038",
+      "displayName": "",
+      "id": "70038",
+      "name": "monster_06_attack.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "af529": {
+      "importer": "gltf-mesh",
+      "uuid": "8cc5ef92-5727-4bec-ab8e-2806037807e7@af529",
+      "displayName": "",
+      "id": "af529",
+      "name": "Object002.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "0a80a": {
+      "importer": "gltf-mesh",
+      "uuid": "8cc5ef92-5727-4bec-ab8e-2806037807e7@0a80a",
+      "displayName": "",
+      "id": "0a80a",
+      "name": "Box015.mesh",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "47e89": {
+      "importer": "gltf-mesh",
+      "uuid": "8cc5ef92-5727-4bec-ab8e-2806037807e7@47e89",
+      "displayName": "",
+      "id": "47e89",
+      "name": "Box016.mesh",
+      "userData": {
+        "gltfIndex": 2
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "46c84": {
+      "importer": "gltf-mesh",
+      "uuid": "8cc5ef92-5727-4bec-ab8e-2806037807e7@46c84",
+      "displayName": "",
+      "id": "46c84",
+      "name": "Box014.mesh",
+      "userData": {
+        "gltfIndex": 3
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "989ed": {
+      "importer": "gltf-animation",
+      "uuid": "8cc5ef92-5727-4bec-ab8e-2806037807e7@989ed",
+      "displayName": "",
+      "id": "989ed",
+      "name": "attack.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.9583333134651184
+        },
+        "events": [
+          {
+            "frame": 0.5333333333333333,
+            "functionName": "onAttack",
+            "parameters": []
+          }
+        ],
+        "speed": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f1394": {
+      "importer": "gltf-skeleton",
+      "uuid": "8cc5ef92-5727-4bec-ab8e-2806037807e7@f1394",
+      "displayName": "",
+      "id": "f1394",
+      "name": "UnnamedSkeleton-1.skeleton",
+      "userData": {
+        "gltfIndex": 1,
+        "jointsLength": 26
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "57d50": {
+      "importer": "gltf-embeded-image",
+      "uuid": "8cc5ef92-5727-4bec-ab8e-2806037807e7@57d50",
+      "displayName": "",
+      "id": "57d50",
+      "name": "Map #22.image",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "9da75": {
+      "importer": "texture",
+      "uuid": "8cc5ef92-5727-4bec-ab8e-2806037807e7@9da75",
+      "displayName": "",
+      "id": "9da75",
+      "name": "Map #21.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "8cc5ef92-5727-4bec-ab8e-2806037807e7@41844"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "81e17": {
+      "importer": "texture",
+      "uuid": "8cc5ef92-5727-4bec-ab8e-2806037807e7@81e17",
+      "displayName": "",
+      "id": "81e17",
+      "name": "Map #22.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "8cc5ef92-5727-4bec-ab8e-2806037807e7@57d50"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #21",
+        "uri": "8cc5ef92-5727-4bec-ab8e-2806037807e7@41844"
+      },
+      {
+        "name": "Map #22",
+        "uri": "8cc5ef92-5727-4bec-ab8e-2806037807e7@57d50"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 0.9583333134651184,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "attack",
+            "from": 0,
+            "to": 0.9583333134651184,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "8cc5ef92-5727-4bec-ab8e-2806037807e7@70038",
+    "assetFinder": {
+      "meshes": [
+        "8cc5ef92-5727-4bec-ab8e-2806037807e7@af529",
+        "8cc5ef92-5727-4bec-ab8e-2806037807e7@0a80a",
+        "8cc5ef92-5727-4bec-ab8e-2806037807e7@47e89",
+        "8cc5ef92-5727-4bec-ab8e-2806037807e7@46c84"
+      ],
+      "skeletons": [
+        "8cc5ef92-5727-4bec-ab8e-2806037807e7@30732",
+        "8cc5ef92-5727-4bec-ab8e-2806037807e7@f1394"
+      ],
+      "textures": [
+        "8cc5ef92-5727-4bec-ab8e-2806037807e7@9da75",
+        "8cc5ef92-5727-4bec-ab8e-2806037807e7@81e17"
+      ],
+      "materials": [
+        "f7ff44a0-d510-4593-898d-f695b1643ed3",
+        "ba73a296-cc6a-4dcf-afc2-432c695945f3"
+      ],
+      "scenes": [
+        "8cc5ef92-5727-4bec-ab8e-2806037807e7@70038"
+      ]
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/resources/model/hero/monster006/mat"
+  }
+}

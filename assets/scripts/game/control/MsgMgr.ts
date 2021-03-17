@@ -14,6 +14,7 @@ import { MsgFormation } from "./msg/MsgFormation";
 import { MsgStarUp } from "./msg/MsgStarUp";
 import { MsgBag } from "./msg/MsgBag";
 import { MsgBase } from "./msg/MsgBase";
+import { MsgOffline } from "./msg/MsgOffline";
 
 
 class NetTips implements INetworkTips {
@@ -80,10 +81,16 @@ export class MsgMgr extends MsgCore{
         this._msgs.push(this._msgFormation);
         this._msgs.push(this._msgBag);
         this._msgs.push(this._msgStarUp);
+        this._msgs.push(this._msgOffline);
     }
     //消息注册-------------------------------------------------
 
     
+
+    private _msgOffline : MsgOffline = new MsgOffline(this);
+    public getMsgOffline() {
+        return this._msgOffline
+    }
 
     public initLoginServer(){
         this._initMsg()

@@ -1711,10 +1711,12 @@
       "b": 255,
       "a": 255
     },
-    "_type": 0,
+    "_type": 3,
     "_inverted": false,
-    "_segments": 64,
-    "_spriteFrame": null,
+    "_segments": 100,
+    "_spriteFrame": {
+      "__uuid__": "be7aa1cc-80f1-402f-b7c5-28563866b0fd@f9941"
+    },
     "_alphaThreshold": 0.1,
     "_id": ""
   },

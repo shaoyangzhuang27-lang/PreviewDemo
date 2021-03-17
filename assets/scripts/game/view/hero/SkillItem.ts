@@ -33,6 +33,7 @@ export class SkillItem extends Component {
     private _isGrayStatus: boolean = false; // 技能图标灰化标识
     private _skillId:number =0 ; //主动技能id
     private _talentId:number =0 ; //被动天赋id
+    private _unlockTier:number =0 ; // 天赋解锁品阶
     private _skillOrTalentLv:number =0 ; // 当前技能/天赋等级    
     private _isUnLocked: boolean = true; // 当前技能/天赋是否已解锁
     private _recordSkill : Config.skill.Record = null as unknown as Config.skill.Record;//对应技能表内的一条记录数据
@@ -65,14 +66,15 @@ export class SkillItem extends Component {
         this._recordSkill = recordTmp as Config.skill.Record;
         this._skillOrTalentLv = this._recordSkill.level;
         this._skillId = skillId;
-        
+        this._unlockTier= 0;
+        this._talentId = 0;        
         // 技能图标
         let iconPath:string = "ui/skill_icon/" + this._recordSkill.image + "/spriteFrame";    
         this._resourceLoad(iconPath, this.img_icon);
         // 技能等级
         this._setLv(this._skillOrTalentLv);
         // 技能Item点击默认回调显示技能tip
-        this.setDefaultBtnCallBack();
+        this._setDefaultBtnCallBack();
         // 技能是否解锁
         if(star >= this._recordSkill.unlockStar)
         {
@@ -92,8 +94,10 @@ export class SkillItem extends Component {
     * 设置技能单个Item的天赋数据[英雄升级等UI使用]
     * @param talentId 被动天赋id
     * @param star 英雄星级
+    * @param tier 英雄品阶
+    * @param unlockTier 天赋解锁品阶
     **/
-     public setTalentData(talentId : number, star: number=1, isUnLock: boolean = false)
+	 public setTalentData(talentId : number, star: number=1, tier:number= 1, unlockTier:number= 1)
      {
          if(talentId <=0)
          {           
@@ -111,18 +115,19 @@ export class SkillItem extends Component {
          this._recordTalent = recordTmp as Config.talent.Record;
          this._skillOrTalentLv = this._recordTalent.level;
          this._talentId = talentId;
-         
+         this._unlockTier= unlockTier;
+         this._skillId = 0;
          // 图标
-         let iconPath:string = "ui/skill_icon/" + this._recordTalent.image + "/spriteFrame";             
+         let framePath:string = "ui/skill_icon/" + this._recordTalent.image + "/spriteFrame";             
          // todo 由于天赋图标还没资源,暂时统一用  愈合伤口 替代
-         iconPath = "ui/skill_icon/愈合伤口/spriteFrame";             
-         this._resourceLoad(iconPath, this.img_icon);
+         framePath = "ui/skill_icon/愈合伤口/spriteFrame";             
+         this._resourceLoad(framePath, this.img_icon);
          // 等级
          this._setLv(this._skillOrTalentLv);
          // Item点击默认回调显示技能tip
-         this.setDefaultBtnCallBack();
-         // 是否解锁
-         if(star >= this._recordTalent.unlockStar)
+         this._setDefaultBtnCallBack();
+         // 天赋是否解锁
+         if(tier >= unlockTier)
          {
              this._isUnLocked= true;
              //还原灰化处理
@@ -144,6 +149,7 @@ export class SkillItem extends Component {
         this._skillOrTalentLv =0;
         this._isGrayStatus= false;
         this._isUnLocked= false;
+        this._unlockTier= 0;
         // 显示无技能图标
         this._resourceLoad("ui/skill_item/英雄详情_无/spriteFrame", this.img_icon);
         // 技能等级及等级背景不显示
@@ -201,7 +207,7 @@ export class SkillItem extends Component {
     }
 
     // 默认点击显示技能Tip        
-    private setDefaultBtnCallBack()
+    private _setDefaultBtnCallBack()
     {        
         this.btn_bg.addComponent(Button);        
         this.btn_bg.node.on(Node.EventType.TOUCH_END, (event:EventTouch)=>{               
@@ -216,7 +222,8 @@ export class SkillItem extends Component {
                 // pos.y += k.contentSize.height/2;
             }
             
-            PopMgr.getInstance().tipSkillWindow(pos, this._skillId);
+            PopMgr.getInstance().tipSkillWindow(pos, {skillId: this._skillId, talentId:this._talentId, 
+                isUnlock:this._isUnLocked, unlockTier:this._unlockTier});
         }, this);
     }
 }

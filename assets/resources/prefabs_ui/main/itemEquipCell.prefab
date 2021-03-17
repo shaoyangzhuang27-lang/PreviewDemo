@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "itemequipcell",
+    "_name": "itemEquipCell",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -42,7 +42,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 71
+      "__id__": 72
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -361,7 +361,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "68299ec1-f89b-4070-8a43-5895aa04c13b@f9941"
+      "__uuid__": "03939ded-4000-480d-a455-51066b2ff809@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -552,7 +552,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "5cee433b-02c7-4012-9c3d-52bffa0623d6@f9941"
+      "__uuid__": "a969e491-49f1-46d7-8138-5934371460fb@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -682,7 +682,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "5cee433b-02c7-4012-9c3d-52bffa0623d6@f9941"
+      "__uuid__": "a969e491-49f1-46d7-8138-5934371460fb@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -812,7 +812,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "5cee433b-02c7-4012-9c3d-52bffa0623d6@f9941"
+      "__uuid__": "a969e491-49f1-46d7-8138-5934371460fb@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -942,7 +942,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "5cee433b-02c7-4012-9c3d-52bffa0623d6@f9941"
+      "__uuid__": "a969e491-49f1-46d7-8138-5934371460fb@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -1072,7 +1072,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "5cee433b-02c7-4012-9c3d-52bffa0623d6@f9941"
+      "__uuid__": "a969e491-49f1-46d7-8138-5934371460fb@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -1504,7 +1504,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "46d6c1bc-0bfb-4eca-bf18-76a6c1d36e7a@f9941"
+      "__uuid__": "b88202dc-420f-4d45-8a02-9706bd57c4b6@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -1571,6 +1571,9 @@
       "__id__": 1
     },
     "_enabled": true,
+    "__prefab": {
+      "__id__": 71
+    },
     "img_bg": {
       "__id__": 2
     },
@@ -1604,6 +1607,10 @@
       "__id__": 56
     },
     "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "c6yRxnj7pP96UbC9EKYfdT"
   },
   {
     "__type__": "cc.PrefabInfo",

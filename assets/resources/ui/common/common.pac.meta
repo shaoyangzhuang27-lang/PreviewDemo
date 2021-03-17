@@ -22,7 +22,7 @@
     "filterUnused": false,
     "compressSettings": {
       "useCompressTexture": true,
-      "presetId": "transparent"
+      "presetId": "f7kr/EOKxDKogoWJ5kkIyF"
     },
     "textureSetting": {
       "wrapModeS": "repeat",
@@ -30,7 +30,7 @@
       "minfilter": "linear",
       "magfilter": "linear",
       "mipfilter": "none",
-      "anisotropy": 1
+      "anisotropy": 3
     }
   }
 }

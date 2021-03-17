@@ -1,8 +1,4 @@
-/**
- * 游戏组件:英雄头像
- * @author 黄志清
- * @version 1.0.0,2021.3.13
- */
+
 import { _decorator, Component, Node, Label, resources, SpriteFrame, Sprite } from 'cc';
 import { XConsts } from '../../model/const/XConsts';
 import { XFuns } from '../../model/const/XFuns';
@@ -40,11 +36,18 @@ export class ItemEquipCell extends Component {
     private _itemCount:number = 0;
     private _clickCallback :Function | null = null;
     private _objectType:number = 0;
+
+    onLoad()
+    {
+        // this._ObjectType = Msg.TObjectType.EObject_NULL;
+    }
+
     start () {
-        this._objectType = Msg.TObjectType.EObject_NULL;
+        
         this.img_bg.on(Node.EventType.TOUCH_END, this._openItemEquipInfoView, this);
     }
 
+    //传入道具id,数量， 
     /**
      * 
      * @param id        道具id
@@ -52,7 +55,7 @@ export class ItemEquipCell extends Component {
      * @param type      类型：道具:1 ItemEquipType.goods、装备:2 ItemEquipType.equip
      * @param callback  回调方法
      */
-    public setItemsInfo(id:number,count:number,type:ItemEquipType,callback:Function | null)
+    public setItemType(id:number,count:number,type:number,callback:Function | null)
     {
         this._itemID = id;
         this._itemCount = count;
@@ -178,3 +181,14 @@ export class ItemEquipCell extends Component {
         labCount.string = XFuns.FormatNumber(this._itemCount);
     }
 }
+
+/**
+ * [1] Class member could be defined like this.
+ * [2] Use `property` decorator if your want the member to be serializable.
+ * [3] Your initialization goes here.
+ * [4] Your update function goes here.
+ *
+ * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
+ * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
+ * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
+ */

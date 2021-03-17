@@ -1,5 +1,10 @@
-
-import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math } from 'cc';
+/*
+ * @Description: 英雄升级/升阶/装备弹窗
+ * @Author: 徐涛
+ * @Date: 2021-03-09 19:30:14
+ * @LastEditTime: 2021-03-16 17:52:53
+ */
+import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
 
 import { PopBase } from '../../../core/control/PopBase';
@@ -11,9 +16,10 @@ import { HeroModel } from '../hero/HeroModel';
 import { SkillItem } from '../hero/SkillItem';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { XShare } from '../../model/const/XShare';
+import { XConsts } from '../../model/const/XConsts';
+import { XFuns } from '../../model/const/XFuns';
 const { ccclass, property } = _decorator;
 
-//弹窗初始化-----
 @ccclass('HeroPromotion')
 export class HeroPromotion extends PopBase {
     @property({ type: Node, displayName: "锁定" })
@@ -49,6 +55,20 @@ export class HeroPromotion extends PopBase {
     @property({ type: Node, displayName: "职业" })
     public btn_career: Node = null as unknown as Node;
 
+    @property({ type: Node, displayName: "星级1" })
+    public img_star1: Node = null as unknown as Node;
+    @property({ type: Node, displayName: "星级2" })
+    public img_star2: Node = null as unknown as Node;
+    @property({ type: Node, displayName: "星级3" })
+    public img_star3: Node = null as unknown as Node;
+    @property({ type: Node, displayName: "星级4" })
+    public img_star4: Node = null as unknown as Node;
+    @property({ type: Node, displayName: "星级5" })
+    public img_star5: Node = null as unknown as Node;
+    
+    @property({type: Layout, displayName: "layout"})
+    public layout_tier:Layout = null as unknown as Layout;   
+    
     @property({ type: Node, displayName: "全部卸下" })
     public btn_all_unload: Node = null as unknown as Node;
 
@@ -63,7 +83,7 @@ export class HeroPromotion extends PopBase {
 
     @property({ type: SkillItem, displayName: "天赋技能1" })
     public skillItem1: SkillItem = null as unknown as SkillItem;
-    
+
     @property({ type: SkillItem, displayName: "天赋技能2" })
     public skillItem2: SkillItem = null as unknown as SkillItem;
 
@@ -93,25 +113,29 @@ export class HeroPromotion extends PopBase {
     private _curHeroData: HeroData = null as unknown as HeroData; //当前英雄数据
     // private _curHeroEquipData: EquipData= null as unknown as Data; //当前英雄装备数据
     private _allHeroList: Map<number, HeroData> = new Map<number, HeroData>(); //拥有的所有英雄
-
+    private _starNodeList: Node[] = [];
+    private _starsMiddlePos: Vec3 = new Vec3;
+    private _starXSub : number = 10; //星级图片X轴间隔
     private _isHeroUpView: boolean = true; //true标记当前是英雄升级/阶界面，false标记当前是英雄装备界面
     private _isLvUpView: boolean = true; //true标记当前是英雄升级界面，false标记当前是英雄升阶界面
 
     onLoad() {
         super.onLoad();
         this._allHeroList = GameModel.getInstance().getHeroesModel().getHeroList();
-
-        this.btn_lock?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_unlock?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_share?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_story?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_fight_params?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_arrow_left?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_arrow_right?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_camp?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_career?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_all_unload?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
-        this.btn_all_load?.on(Node.EventType.TOUCH_END, this.buttonBtnClick, this);
+        this._starNodeList = [this.img_star1, this.img_star2, this.img_star3, this.img_star4, this.img_star5];
+        this._starsMiddlePos = this.img_star3.getPosition();
+        
+        this.btn_lock?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_unlock?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_share?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_story?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_fight_params?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_arrow_left?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_arrow_right?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_camp?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_career?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_all_unload?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_all_load?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
 
         // tabGroup
         const containerEventHandler = new EventHandler();
@@ -120,6 +144,9 @@ export class HeroPromotion extends PopBase {
         containerEventHandler.handler = '_onTabClick';
         containerEventHandler.customEventData = '';
         this.tabGroup?.checkEvents.push(containerEventHandler);
+
+        //
+        
     }
 
     private _onTabClick(event: Event, customEventData: string) {
@@ -128,9 +155,9 @@ export class HeroPromotion extends PopBase {
         if (tog.node.name == "btn_tab_up") //升级tab
         {
             console.log(" btn_tab_up clicked!");
-            this._isHeroUpView= true;
+            this._isHeroUpView = true;
             this.node_equip.active = false; //装备界面
-            
+
             this.node_up.active = true;//升级升阶大界面            
             this.node_fight_param.active = this._isLvUpView; //升级底部属性界面
             this.btn_up_lv.active = this._isLvUpView;        //升级按钮
@@ -141,7 +168,7 @@ export class HeroPromotion extends PopBase {
         else if (tog.node.name == "btn_tab_equip")//装备tab
         {
             console.log(" btn_tab_equip clicked!");
-            this._isHeroUpView= false;
+            this._isHeroUpView = false;
             this.node_equip.active = true; //装备界面
 
             this.node_up.active = false;//升级升阶大界面            
@@ -152,8 +179,8 @@ export class HeroPromotion extends PopBase {
         }
     }
 
-    buttonBtnClick(event: any) {
-        console.log(" HeroPromotion buttonBtnClick: " + event.target?._name)
+    private _buttonBtnClick(event: any) {
+        console.log(" HeroPromotion _buttonBtnClick: " + event.target?._name)
 
         switch (event.target) {
             case this.btn_lock:
@@ -213,7 +240,7 @@ export class HeroPromotion extends PopBase {
     start() {
         // [3]
         super.start()
-        this.initView();
+        this._initView();
         // this.cur_SkillItem?.setSkillData(0);
         //this.cur_hero_model?.node.setSiblingIndex(100);
         // UIMeshRenderer
@@ -236,9 +263,8 @@ export class HeroPromotion extends PopBase {
         }
     }
 
-    initView() {
-        let playerInfo = DataMgr.getInstance().getPlayerInfo()
-        console.log(" HeroPromotion initView +++++++++++++++++++++")
+    _initView() {
+        // let playerInfo = DataMgr.getInstance().getPlayerInfo()
     }
 
     update(deltatime: number) {
@@ -246,88 +272,319 @@ export class HeroPromotion extends PopBase {
         // console.log("HeroPromotion update() number= ", deltatime)
     }
 
-    public setCurrentHeroId(heroId: number = 0) {        
+    /**
+     * @description: 设置当前英雄id
+     * @param {number} heroId
+     */
+    public setCurrentHeroId(heroId: number = 0) {
         let heroData = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(heroId);
-        if(!heroData)
-        {            
-            this.initDefaultKnight();
-            return ;
+        if (!heroData) {
+            this._initDefaultKnight();
+            return;
         }
 
-        this._curHeroData  = heroData as HeroData;        
+        this._curHeroData = heroData as HeroData;
         this._curHeroId = heroId;
 
         // 星级下的每个品阶有对应的等级最大限制，当等级提升到最大限制后，通过升阶操作扩展更高的等级上限。       
         // 英雄等级 this._curHeroData.getLevel();
         // 英雄星级 this._curHeroData.getStar();
         // 英雄品阶 this._curHeroData.tier;
-        let curMaxLv= XShare.getInstance().KHeroMaxLevelForTier[this._curHeroData.tier];
-        if(this._curHeroData.getLevel() < curMaxLv)
-        {
+        let curMaxLv = XShare.getInstance().KHeroMaxLevelForTier[this._curHeroData.tier];
+        if (this._curHeroData.getLevel() < curMaxLv) {
             this._isLvUpView = true; // 当前应该显示升级界面
         }
-        else
-        {
+        else {
             this._isLvUpView = false;// 当前应该显示升阶界面
         }
-        this.initCurHeroView();
+        this._initCurHeroView();
     }
 
     // 显示当前英雄数据
-    initCurHeroView() {
-        this.showCurHeroModel();
+    private _initCurHeroView() {
+        this._showCurHeroModel();
         if (this._isHeroUpView) {
-            if(this._isLvUpView){
-                this.showHeroLvUpView();
-            } 
-            else
-            {
-                this.showHeroUpgradeView();
+            if (this._isLvUpView) {
+                this._showHeroLvUpView();
+            }
+            else {
+                this._showHeroUpgradeView();
             }
         }
         else {
-            this.showEquipView();
+            this._showEquipView();
         }
     }
 
     // 展示英雄升级界面
-    showHeroLvUpView() {
+    private _showHeroLvUpView() {
         this.node_equip.active = false; //装备界面        
         this.node_up.active = true;//升级升阶大界面            
         this.node_fight_param.active = this._isLvUpView; //升级底部属性界面
         this.btn_up_lv.active = this._isLvUpView;        //升级按钮
         this.node_upgrade.active = !this._isLvUpView;    //升阶底部属性界面
         this.btn_up_tier.active = !this._isLvUpView;     //升阶按钮
-        
+
         //显示技能
-        this.showSkillItems();
-
-        //显示品阶
-
+        this._showSkillItems();
+        //显示星级
+        this._showStars();        
+        //显示阵营，职业
+        this._showCampAndCareer();
+        //显示品阶        
+        this._showTier();
         //显示等级
 
-        //显示战力数据
+        //显示战力数据 
 
         //显示升级消耗
 
     }
 
-    showSkillItems()
-    {
-        // // 英雄等级 
-        // let lv =this._curHeroData.getLevel();
-        // // 英雄品阶 
-        // let tier = this._curHeroData.tier;
-        // 英雄星级 
+    private _showTier(tier:number = 0){        
         let star = this._curHeroData.getStar();
-        this.skillItem0.setSkillData(this._curHeroData.getSkillID(), star);   
-        this.skillItem1.setTalentData(this._curHeroData.getTalentID(0), star, this._curHeroData.isTalentActive(0) );
-        this.skillItem2.setTalentData(this._curHeroData.getTalentID(1), star, this._curHeroData.isTalentActive(1) );
-        this.skillItem3.setTalentData(this._curHeroData.getTalentID(2), star, this._curHeroData.isTalentActive(2) );
+        let maxTier= star;//星级就是当前英雄能达到的最大品阶
+        tier = this._curHeroData.tier;
+        if(tier > XShare.getInstance().KMaxHeroTier)
+        {
+            tier= XShare.getInstance().KMaxHeroTier;   
+        }
+        else if( tier <0)
+        {
+            tier=0;
+        }
+                
+        let target= this;
+        let iconPath :string;
+        let items: Sprite[]= this.layout_tier.node.getComponentsInChildren(Sprite) as [Sprite];
+        if(items.length < maxTier)
+        {
+            let nSub= maxTier - items.length;
+            for (let index = 0; index < nSub; index++) {
+                iconPath = "ui/lv_up/黑白进阶宝石/spriteFrame";
+                if(tier >= (index+items.length) )
+                {
+                    iconPath = "ui/lv_up/进阶宝石/spriteFrame";
+                } 
+
+                XFuns.CreateSprite(iconPath, target.layout_tier.node, "img_grade_gem_"+(items.length+1+index).toString() );           
+                // resources.load(, SpriteFrame, (err, spriteFrame:SpriteFrame) =>
+                // {
+                //     console.log("_showTier icon _resourceLoad1 ---------",err)
+                //     if(!err)
+                //     {
+                //         let node = new Node( );                     
+                //         const sprite = node.addComponent(Sprite);
+                //         sprite.spriteFrame = spriteFrame;
+                //         node.layer = Layers.Enum.UI_2D;
+                        
+                //         target.layout_tier.node.addChild(node);
+                //     }
+                // });
+            }
+        }
+        else if(items.length > maxTier)
+        {
+            let nSub1= items.length - maxTier;
+            let pos= this.layout_tier.node.getPosition();
+            for (let i = 0; i < nSub1; i++) {                  
+                items[i].node.active =false;
+                items[i].onDestroy();
+            }
+            
+            let itemNews: Sprite[]= this.layout_tier.node.getComponentsInChildren(Sprite) as [Sprite];
+            for (let index = 0; index < itemNews.length; index++) {
+                iconPath = "ui/lv_up/黑白进阶宝石/spriteFrame";
+                if(index < tier)
+                {
+                    iconPath = "ui/lv_up/进阶宝石/spriteFrame";
+                }
+                
+                XFuns.ReplaceSpriteFrame(iconPath, itemNews[index]);
+                // resources.load(iconPath, SpriteFrame, (err, spriteFrame:SpriteFrame) =>
+                // {
+                //     console.log("_showTier icon _resourceLoad2 ---------",err)
+                //     if(!err)
+                //     {
+                //          let sprite = itemNews[index];
+                //          sprite.spriteFrame = spriteFrame;
+                //     }
+                // });
+            }
+        }
+    }
+    
+    private _showCampAndCareer(){       
+        if(!this._curHeroData.isRoleHero() )
+        {            
+            let name = XConsts.KCampSpriteName[this._curHeroData.getCamp() as number]; 
+            let iconPath:string = "ui/lv_up/" + name + "/spriteFrame";
+            this._resourceLoad(iconPath, this.btn_camp);
+            this.btn_camp.active = true;
+
+            name = XConsts.KClassesSpriteName[this._curHeroData.getClasses() as number];
+            iconPath = "ui/lv_up/" + name + "/spriteFrame";
+            this._resourceLoad(iconPath, this.btn_career);
+            this.btn_career.active = true;
+        }
+        else
+        {
+            this.btn_camp.active = false;
+            this.btn_career.active = false;
+        }
+    }
+
+    private _showStars(star: number = 1)
+    {
+        // star= math.randomRangeInt(1,6);
+        star = this._curHeroData.getStar();
+        if(star > XShare.getInstance().KMaxHeroStar)
+        {
+            star= XShare.getInstance().KMaxHeroStar;   
+        }
+        else if( star <1)
+        {
+            star=1;
+        }
+        
+        let pos= this._starsMiddlePos; 
+        let newStarValue= star;
+        if(star > 5)
+        {            
+            newStarValue= star% 5;                      
+        }
+        
+        // 根据星级替换高等级星星图片资源      
+        this._starNodeList.forEach(starNode => {
+            starNode.active= false;
+            let starName:string = "星星初级";    
+            if(star > 5){            
+                starName= "星星中级";                    
+            }
+            else if(star > 10){        
+                starName= "星星高级";                            
+            }
+            let iconPath:string = "ui/icon/"+starName+"/spriteFrame";
+            this._resourceLoad(iconPath, starNode);
+        });
+
+        switch(newStarValue)
+        {
+            case 1:
+                {
+                    this.img_star1.position= pos;                    
+                    this.img_star1.active = true;
+                }
+                break;
+            case 2:
+                {
+                    pos.x -= this._starXSub;
+                    this.img_star1.position= pos;    
+                    
+                    let posNew = new Vec3(this._starsMiddlePos); 
+                    posNew.x += this._starXSub;
+                    this.img_star2.position= posNew;   
+                                     
+                    this.img_star1.active = true;
+                    this.img_star2.active = true;                    
+                }
+                break;
+            case 3:
+                {
+                    this.img_star2.position= pos;  
+
+                    let posNew = new Vec3(pos); 
+                    posNew.x -=this._starXSub;
+                    this.img_star1.position= posNew;    
+                    
+                    let posNew1 = new Vec3(pos); 
+                    posNew1.x += this._starXSub;
+                    this.img_star3.position= posNew1;     
+
+                    this.img_star1.active = true;
+                    this.img_star2.active = true;                    
+                    this.img_star3.active = true;    
+                }
+                break;
+            case 4:
+                {
+                    pos.x += this._starXSub/2;
+                    this.img_star3.position= pos;
+                    
+                    let posNew = new Vec3(pos);                       
+                    posNew.x += this._starXSub;
+                    this.img_star4.position= posNew;  
+                                        
+                    let posNew1 = new Vec3(pos); 
+                    posNew1.x -= this._starXSub;
+                    this.img_star2.position= posNew1; 
+
+                    let posNew2 = new Vec3(posNew1); 
+                    posNew2.x -= this._starXSub;
+                    this.img_star1.position= posNew2; 
+
+                    this.img_star1.active = true;
+                    this.img_star2.active = true;                    
+                    this.img_star3.active = true;    
+                    this.img_star4.active = true;    
+                }
+                break;
+            case 5:
+                {                    
+                    this.img_star3.position= pos; 
+                                        
+                    let posNew = new Vec3(pos); 
+                    posNew.x -= this._starXSub;
+                    this.img_star2.position= posNew;  
+
+                    let posNew1 = new Vec3(posNew); 
+                    posNew1.x -= this._starXSub;
+                    this.img_star1.position= posNew1;                      
+                    
+                    let posNew2 = new Vec3(this._starsMiddlePos); 
+                    posNew2.x += this._starXSub;
+                    this.img_star4.position= posNew2; 
+
+                    let posNew3 = new Vec3(posNew2); 
+                    posNew3.x += this._starXSub;
+                    this.img_star5.position= posNew3; 
+
+                    this.img_star1.active = true;
+                    this.img_star2.active = true;                    
+                    this.img_star3.active = true;    
+                    this.img_star4.active = true;    
+                    this.img_star5.active = true;  
+                }
+                break;                
+            deault:
+                break;
+        }
+    }
+    
+    //资源替换
+    private _resourceLoad (path:string,obj:any)
+    {
+        resources.load(path, SpriteFrame, (err, spriteFrame:SpriteFrame) =>
+        {
+            console.log("HeroPromotion _resourceLoad ---------",err)
+            if(!err)
+            {
+                let sprite = obj.getComponent(Sprite) as Sprite;
+                sprite.spriteFrame = spriteFrame;
+            }
+        });
+    }
+
+    private _showSkillItems() {
+        let star = this._curHeroData.getStar();
+        this.skillItem0.setSkillData(this._curHeroData.getSkillID(), star);
+        this.skillItem1.setTalentData(this._curHeroData.getTalentID(0), star, this._curHeroData.tier, this._curHeroData.getTalentUnLockTier(0));
+        this.skillItem2.setTalentData(this._curHeroData.getTalentID(1), star, this._curHeroData.tier, this._curHeroData.getTalentUnLockTier(1));
+        this.skillItem3.setTalentData(this._curHeroData.getTalentID(2), star, this._curHeroData.tier, this._curHeroData.getTalentUnLockTier(2));
     }
 
     // 展示英雄升阶界面
-    showHeroUpgradeView() {
+    private _showHeroUpgradeView() {
         this.node_equip.active = false; //装备界面        
         this.node_up.active = true;//升级升阶大界面            
         this.node_fight_param.active = this._isLvUpView; //升级底部属性界面
@@ -336,10 +593,13 @@ export class HeroPromotion extends PopBase {
         this.btn_up_tier.active = !this._isLvUpView;     //升阶按钮
 
         //显示技能
-        this.showSkillItems();
-
+        this._showSkillItems();
+        //显示星级
+        this._showStars(this._curHeroData.getStar() );        
+        //显示阵营，职业
+        this._showCampAndCareer();
         //显示品阶
-
+        this._showTier();
         //显示等级
 
         //显示升阶数据
@@ -348,7 +608,7 @@ export class HeroPromotion extends PopBase {
     }
 
     // 展示英雄装备界面
-    showEquipView() {
+    private _showEquipView() {
         this.node_equip.active = true; //装备界面
         this.node_up.active = false;//升级升阶大界面            
         this.node_fight_param.active = this._isLvUpView; //升级底部属性界面
@@ -368,12 +628,12 @@ export class HeroPromotion extends PopBase {
     }
 
     // 展示当前英雄模型形象
-    showCurHeroModel() {
+    private _showCurHeroModel() {
         // this.cur_hero_model.updateByHeroPerfabPath();
     }
 
     // 默认展示骑士主角升级UI
-    initDefaultKnight(){        
+    private _initDefaultKnight() {
         this._curHeroId = 0;
         //todo
     }

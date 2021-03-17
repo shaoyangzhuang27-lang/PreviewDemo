@@ -25,7 +25,8 @@ export class FlyWords extends Component {
 
         this._actTime -= dt;
         if (this._actTime < 0) {
-            this.node.destroy();
+            // this.node.destroy();
+            this.node.removeFromParent();
         }
     }
 }
