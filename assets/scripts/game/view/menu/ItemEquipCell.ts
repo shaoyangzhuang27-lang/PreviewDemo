@@ -93,8 +93,8 @@ export class ItemEquipCell extends Component {
             let starCount:number = equipData.star;
             let qualityName:string = XConsts.KQualityBgSpriteName[equipData.quality];
 
-            iconPath = "ui/equip/" + iconName + "/spriteFrame"
-            qualityPath = "ui/icon/" + qualityName + "/spriteFrame"
+            iconPath = "ui/common/equip/" + iconName + "/spriteFrame"
+            qualityPath = "ui/common/icon/" + qualityName + "/spriteFrame"
 
             for (let index = 0; index < this.starlist.length; index++) {
                 if(index >= starCount)
@@ -113,17 +113,17 @@ export class ItemEquipCell extends Component {
                 {
                     let quality = Number(XShare.getInstance().KObjectQuality.get(this._objectType)) ;
                     let qualityName:string = XConsts.KQualityBgSpriteName[quality];
-                    qualityPath = "ui/icon/" + qualityName + "/spriteFrame";
+                    qualityPath = "ui/common/icon/" + qualityName + "/spriteFrame";
                 }
                 let iconName:string = XConsts.KObjectIconSpriteName[this._objectType];
-                iconPath = "ui/commonIcon/" + iconName + "/spriteFrame";
+                iconPath = "ui/common/commonIcon/" + iconName + "/spriteFrame";
             }
             else{
                 let itemData:Config.item_usable.Record = ValueMgr.getInstance().getItemByField(TableName.item_usable,this._itemID) as Config.item_usable.Record;        
                 let qualityName:string = XConsts.KQualityBgSpriteName[itemData.quality];
                 let itemUseType:number = itemData.itemType;
 
-                qualityPath = "ui/icon/" + qualityName + "/spriteFrame"
+                qualityPath = "ui/common/icon/" + qualityName + "/spriteFrame"
                 if(itemUseType == Msg.TUsableItemType.EUsableItemType_ObjectOffline)
                 {
                     this.img_infoBg.active = true;

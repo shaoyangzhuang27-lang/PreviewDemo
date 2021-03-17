@@ -74,9 +74,9 @@ export class SceneMgr{
         })
         ResMgr.getInstance().loadMainUI();
         ResMgr.getInstance().loadBattleScene();
-        ResMgr.getInstance().startLoad((finished:number,total:number)=>{
+        ResMgr.getInstance().startLoad((finished:number,total:number,resName:string)=>{
             if(this.loadingScript){
-                this.loadingScript.setProgress(finished/total);
+                this.loadingScript.setProgress(finished/total,resName);
             }
         },
         (objArray:any) => {
