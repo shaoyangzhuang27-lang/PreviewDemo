@@ -2,9 +2,9 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-16 20:36:57
+ * @LastEditTime: 2021-03-17 17:01:11
  */
-import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label } from 'cc';
+import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
 
 import { PopBase } from '../../../core/control/PopBase';
@@ -18,6 +18,7 @@ import { NotifyMgr } from '../../control/NotifyMgr';
 import { XShare } from '../../model/const/XShare';
 import { XConsts } from '../../model/const/XConsts';
 import { XFuns } from '../../model/const/XFuns';
+import { TableName, ValueMgr } from '../../model/ValueMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('HeroPromotion')
@@ -83,6 +84,24 @@ export class HeroPromotion extends PopBase {
     public lab_atk_value: Label = null as unknown as Label;
     @property({ type: Label, displayName: "防御值" })
     public lab_def_value: Label = null as unknown as Label;
+
+    @property({ type: Label, displayName: "灵魂碎片" })
+    public lab_need_exp_1: Label = null as unknown as Label;
+    @property({ type: Label, displayName: "灵魂碎片消耗" })
+    public lab_need_exp_2: Label = null as unknown as Label;
+    @property({ type: Label, displayName: "金币升级" })
+    public lab_need_gold_1: Label = null as unknown as Label;
+    @property({ type: Label, displayName: "金币消耗升级" })
+    public lab_need_gold_2: Label = null as unknown as Label;
+
+    @property({ type: Label, displayName: "灵魂水晶" })
+    public lab_need_exp_1_tier: Label = null as unknown as Label;
+    @property({ type: Label, displayName: "灵魂水晶消耗" })
+    public lab_need_exp_2_tier: Label = null as unknown as Label;
+    @property({ type: Label, displayName: "金币升阶" })
+    public lab_need_gold_1_tier: Label = null as unknown as Label;
+    @property({ type: Label, displayName: "金币消耗升阶" })
+    public lab_need_gold_2_tier: Label = null as unknown as Label;
 
     @property({ type: Node, displayName: "全部卸下" })
     public btn_all_unload: Node = null as unknown as Node;
@@ -279,7 +298,6 @@ export class HeroPromotion extends PopBase {
     }
 
     _initView() {
-        // let playerInfo = DataMgr.getInstance().getPlayerInfo()
     }
 
     update(deltatime: number) {
@@ -302,9 +320,6 @@ export class HeroPromotion extends PopBase {
         this._curHeroId = heroId;
 
         // 星级下的每个品阶有对应的等级最大限制，当等级提升到最大限制后，通过升阶操作扩展更高的等级上限。       
-        // 英雄等级 this._curHeroData.getLevel();
-        // 英雄星级 this._curHeroData.getStar();
-        // 英雄品阶 this._curHeroData.tier;
         let curMaxLv = XShare.getInstance().KHeroMaxLevelForTier[this._curHeroData.tier];
         if (this._curHeroData.getLevel() < curMaxLv) {
             this._isLvUpView = true; // 当前应该显示升级界面
@@ -353,9 +368,62 @@ export class HeroPromotion extends PopBase {
         //显示战力数据 
         this._showFightValues();
         //显示升级消耗
+        this._showUpLvCost();
 
     }
     
+    private _showUpTierCost(){
+        let tier= this._curHeroData.tier;
+        let costExp = XShare.getInstance().KHeroTierUpAdvanceExp[tier];
+        let costGold = XShare.getInstance().KHeroTierUpMoney[tier];
+
+        let playerInfo = GameModel.getInstance().getPlayerModel().getPlayerInfo();
+        let color = Color.WHITE;
+        // 升阶消耗金币
+        if(playerInfo.money < costGold)
+        {
+            color = Color.RED;
+        }
+        this.lab_need_gold_1_tier.string= XFuns.FormatNumber(playerInfo.money);
+        this.lab_need_gold_1_tier.color = color;
+        this.lab_need_gold_2_tier.string= "/"+XFuns.FormatNumber(costGold);
+
+        // 升阶消耗灵魂水晶
+        color = Color.WHITE;
+        if(playerInfo.heroAdvanceExp< costExp)
+        {
+            color = Color.RED;
+        }
+        this.lab_need_exp_1_tier.string= XFuns.FormatNumber(playerInfo.heroUpgradeExp);
+        this.lab_need_exp_1_tier.color = color;
+        this.lab_need_exp_2_tier.string= "/"+XFuns.FormatNumber(costExp);        
+    }
+
+    private _showUpLvCost(){
+        let lv= this._curHeroData.getLevel();
+        let record = ValueMgr.getInstance().getItemByField(TableName.upgrade_exp, lv) as Config.upgrade_exp.Record;
+        let playerInfo = GameModel.getInstance().getPlayerModel().getPlayerInfo();
+        let color = Color.WHITE;
+        // 升级消耗金币
+        if(playerInfo.money < record.heroMoney)
+        {
+            color = Color.RED;
+        }
+        this.lab_need_gold_1.string= XFuns.FormatNumber(playerInfo.money);
+        this.lab_need_gold_1.color = color;
+        this.lab_need_gold_2.string= "/"+XFuns.FormatNumber(record.heroMoney);
+
+        // 升级消耗灵魂碎片
+        color = Color.WHITE;
+        if(playerInfo.heroUpgradeExp< record.heroExp)
+        {
+            color = Color.RED;
+        }
+        this.lab_need_exp_1.string= XFuns.FormatNumber(playerInfo.heroUpgradeExp);
+        this.lab_need_exp_1.color = color;
+        this.lab_need_exp_2.string= "/"+XFuns.FormatNumber(record.heroExp);
+    }
+
     private _showFightValues(){       
         let fightValue=  Math.floor(this._curHeroData.getFighting());
         this.lab_fight_value.string = XFuns.FormatNumber(fightValue);
@@ -627,6 +695,7 @@ export class HeroPromotion extends PopBase {
         //显示升阶数据
 
         //显示升阶消耗
+        this._showUpTierCost();
     }
 
     // 展示英雄装备界面
