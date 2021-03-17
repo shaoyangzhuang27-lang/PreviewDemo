@@ -9,7 +9,7 @@ import { PopMgr } from '../../control/PopMgr';
 import { XConsts } from '../../model/const/XConsts';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { MsgMgr } from '../../control/MsgMgr';
-// import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { TableName, ValueMgr } from "../../model/ValueMgr";
 const { ccclass, property } = _decorator;
 
 @ccclass('PopHeroPub')
@@ -134,7 +134,10 @@ export class PopHeroPub extends PopBase {
     }
     private _onIntroduceClick(event : any)
     {
-        PopMgr.getInstance().popRecLineUpWindow("推荐阵容",()=>{console.log("")});
+
+        var title = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_SUMMONDESCTITLE) as Config.language_ui.Record;
+        var desc = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_SUMMONDESC) as Config.language_ui.Record;
+        PopMgr.getInstance().popExplain(title.cn,desc.cn,()=>{ PopMgr.getInstance().deleteWindow();});
     }
     private _onRecommendTeamClick(event : any)
     {

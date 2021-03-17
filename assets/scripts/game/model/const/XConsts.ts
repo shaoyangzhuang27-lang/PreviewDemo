@@ -277,6 +277,10 @@ export class XConsts{
     public static PUB_RECOMMEND_LINEUP_UI_KNIGHTARMOR : string = "UI_KnightArmor";
     public static PUB_RECOMMEND_LINEUP_UI_CAMPANALYSE : string = "UI_CampAnalyse";
 
+    public static PUB_UI_SUMMONDESCTITLE : string = "UI_SummonDescTitle";
+    public static PUB_UI_SUMMONDESC : string = "UI_SummonDesc";
+
+
     //获得英雄界面
     public static SUMMON_SETTLE_TITLE : string = "DATA_Achievement6";  //获得英雄
 
