@@ -99,7 +99,7 @@ export class PopEquipInfoWin extends PopBase {
         //装备物品名称
         this.lab_name.string = nameData.cn;
 
-        resources.load('prefabs_ui/main/itemequipcell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
             let itemEquipCell = instantiate(res) as Node;
             this.iconNode.addChild(itemEquipCell);
             let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;

@@ -118,7 +118,7 @@ export class BagMain extends Component {
     {
         this._bagEquipNodeList.clear()
         let allEquipList = GameModel.getInstance().getBagModel().getBagEquipList();
-        resources.load('prefabs_ui/main/itemequipcell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
             for (let key of allEquipList.keys()) {
                 let value = allEquipList.get(key);  //数量   
                 let equipCell = instantiate(res) as Node;
@@ -135,7 +135,7 @@ export class BagMain extends Component {
     {
         let allGoodsList = GameModel.getInstance().getBagModel().getAllGoods();
         this._bagItemNodeList.clear()
-        resources.load('prefabs_ui/main/itemequipcell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
             for (let index = 0; index < allGoodsList.length; index++) {
                 let itemGoods = allGoodsList[index];
 
