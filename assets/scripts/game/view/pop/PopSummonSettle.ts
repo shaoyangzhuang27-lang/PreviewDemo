@@ -1,4 +1,4 @@
-import { _decorator, Component, Node,Label,ScrollView,resources,instantiate, Vec3, Size,Sprite,UITransform, Button,SpriteFrame } from 'cc';
+import { _decorator, Component, Node,Label,ScrollView,resources,instantiate, Vec3, Size,Sprite,UITransform, Button,SpriteFrame, Layout } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
@@ -25,6 +25,8 @@ export class PopSummonSettle extends PopBase {
 
 
     private _popWindowType : number = XConsts.POP_SUMMON_TYPE.HeroPub;
+
+    private _nSummonCounts : number = 6;
     @property({type :  ScrollView})
     public scroll_heroicon_view:ScrollView = null as unknown as ScrollView;
 
@@ -34,6 +36,11 @@ export class PopSummonSettle extends PopBase {
         super.start();
         this.btn_summon.node.on(Node.EventType.TOUCH_END, this._onSummonClick, this);
         this.initUI();
+        var lay = this.scroll_heroicon_view.content?.getComponent(Layout);
+        if(this._nSummonCounts < 5 && lay)
+        {
+            lay.type = 1;
+        }
     }
 
     public _onSummonClick(event : any)

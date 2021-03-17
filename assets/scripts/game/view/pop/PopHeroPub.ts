@@ -201,8 +201,9 @@ export class PopHeroPub extends PopBase {
                     if(this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_ONE_COSUME)
                     {
                         //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                        this.showSummonSettleWindow("SummonWindow");
-                        //this.onSubmit(Msg.TSummonType.ESummonType_Basic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll,true);
+                        // this.showSummonSettleWindow("SummonWindow");
+                        console.log("pub 卷轴");
+                        this.onSubmit(Msg.TSummonType.ESummonType_Basic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll,true);
                     }
                     else 
                     {
@@ -210,6 +211,7 @@ export class PopHeroPub extends PopBase {
                         {
                             //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
                              this.showSummonSettleWindow("SummonWindow");
+                            // console.log("pub 钻石");
                             //this.onSubmit(Msg.TSummonType.ESummonType_Basic,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,true);
                         }
                         else
@@ -501,6 +503,7 @@ export class PopHeroPub extends PopBase {
     //        consumeType : 2,
     //        isOneOrTen : false
     //    }
+        console.log("pub submit",summonHeroR);
         MsgMgr.getInstance().getMsgHeroPub().requestSummonHeroR(summonHeroR);
     }
 }
