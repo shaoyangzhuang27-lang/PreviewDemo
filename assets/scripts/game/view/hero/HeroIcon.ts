@@ -129,6 +129,24 @@ export class HeroIcon extends Component {
         this._resourceLoad(framePath,this.btn_frame);
     }
 
+    private _initHeroIcon(heroinfo:Config.heroes.Record,lv:number)
+    {
+        let campName:string = XConsts.KHeroCampIcon[heroinfo.camp as number];
+        let iconName:string = heroinfo.image as string;
+        let starNum:number = heroinfo.star as number;
+
+        this.img_camp.active = true;
+        let campIconPath:string = "ui/team/" + campName + "/spriteFrame";
+        this._resourceLoad(campIconPath,this.img_camp);
+        
+        let heroIconPath:string = "ui/hero/" + iconName + "/spriteFrame";
+        this._resourceLoad(heroIconPath,this.img_icon);
+        
+        this.lab_level.string = lv.toString();
+
+        this._setStar(starNum);
+    }
+
     /**
      * 切换当前英雄为加一星状态,升星塔使用
      * 调用此方法前请先设置英雄数据
@@ -157,7 +175,7 @@ export class HeroIcon extends Component {
      * @param campType  阵营类型
      * @param star      英雄星级
      */
-    public setMaskHeroData(campType:number,star:number)
+    public setMaskHeroData(campType:number,star:number, id:number)
     {
         this.lab_level.node.active = false;
         let campName:string = XConsts.KHeroCampIcon[campType];
@@ -187,6 +205,20 @@ export class HeroIcon extends Component {
     public setLvIconVisib(isShow:boolean = false)
     {
         this.lab_level.node.active = isShow
+    }
+
+    /**
+     * 根据影响信息创建英雄头像
+     * @param heroinfo 英雄信息
+     */
+    public setHeroInfo(heroinfo:Config.heroes.Record,level:number)
+    {
+        if(!heroinfo)
+        {
+            console.log("英雄信息错误");
+            return;
+        }
+        this._initHeroIcon(heroinfo,level);
     }
 
 }

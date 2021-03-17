@@ -269,12 +269,16 @@ export class BattleHero extends Component {
                 if (path) {
                     this._skillPrefab = BattleResMgr.getInstance().getRes(path);
                     if (!this._skillPrefab) {
-                        this._recordSkill = null as unknown as Config.skill.Record; 
+                        this._recordSkill = null as unknown as Config.skill.Record;
+                        console.warn("技能id" + this._heroData.getSkillID() + "特效预制体不存在")
                     }
                 } else {
                     this._recordSkill = null as unknown as Config.skill.Record;
+                    console.warn("技能id" + this._heroData.getSkillID() + "特效预制体测试路径不存在")
                 }
                 
+            } else {
+                console.warn("技能id" + this._heroData.getSkillID() + "不存在配置表")
             }
         }
         if (this._recordSkill) {
@@ -629,10 +633,9 @@ export class BattleHero extends Component {
     }
 
     onSkill(): void {
-        // let a = new ParticleSystem();
         
         // 到技能关键帧了
-        console.log("onSkill+++++++++++++++++++");
+        // console.log("onSkill+++++++++++++++++++");
         if (this._recordSkill && this._skillPrefab) {
             
             let targetList: Array<BattleHero> = [];
@@ -673,7 +676,25 @@ export class BattleHero extends Component {
                     this.buildLowerHpList(targetList, this._recordSkill.targetNumber);
                     break;
                 case ESkillTargetType.LowerHpEnemy: // 每个血少敌方
+                    break;
                 case ESkillTargetType.BackEnemy: // 优先后排每个敌方
+                    let tmpList: Array<BattleHero> = []
+
+                    for (let i = 0; i < this._targetList.length; i++) {
+                        if (!this._targetList[i].isFontSite()) {
+                            targetList.push(this._targetList[i]);
+                        } else {
+                            tmpList.push(this._targetList[i]);
+                        }
+                    }
+
+                    if (targetList.length < this._recordSkill.targetNumber) {
+                        this.buildRandomList(tmpList, this._recordSkill.targetNumber - targetList.length);
+                        targetList.splice(targetList.length, 0, ...tmpList);
+                    } else {
+                        this.buildRandomList(targetList, this._recordSkill.targetNumber);
+                    }
+                    break;
                 case ESkillTargetType.FrontEnemy: // 优先前排每个敌方
                 case ESkillTargetType.RandomEnemyByTarget: // 目标范围内的敌方单位
                 case ESkillTargetType.BackTeammate: // 优先后排每个己方
@@ -889,16 +910,12 @@ export class BattleHero extends Component {
                     return true;
                 }
             case EEffectCondType.EveryHPLostX:
-                if (condParam == 1) {
-                    if (attack.embattleedSite >= 1 && attack.embattleedSite <= 3) {
-                        return true;
-                    }
-                } else if (condParam == 2) {
-                    if (attack.embattleedSite >= 4 && attack.embattleedSite <= 6) {
-                        return true;
-                    }
-                }
-                console.error("BattleHero.checkEffectCondtion EEffectCondType.EveryHPLostX condParam 配置了未实现的功能：" + condParam);
+                if (condParam == 1 && attack.isFontSite()) {
+                    return true;
+                } else if (condParam == 2 && !attack.isFontSite()) {
+                    return true;
+                } 
+                // console.error("BattleHero.checkEffectCondtion EEffectCondType.EveryHPLostX condParam 配置了未实现的功能：" + condParam);
                 return false;
             case EEffectCondType.TargetHPLessThanSelf:
                 if (target.hp < attack.hp) {
@@ -928,9 +945,10 @@ export class BattleHero extends Component {
             } else {
                 let delayDamage = new BattleDelayDamage(battleEffect, this, this._target, (target: BattleHero)=> {
                     this.doHitDamager(target);
-                    this._flyDamagePool.delete(delayDamage);
+                    target.removeFlyDamagePool(delayDamage);
                 });
-                this._flyDamagePool.set(delayDamage, delayDamage);
+
+                this._target.addFlyDamagePool(delayDamage);
             }
             
             return;
@@ -956,8 +974,12 @@ export class BattleHero extends Component {
         return this.hp === 0;
     }
 
-    addFlyDamagePool(): void {
-        
+    addFlyDamagePool(flyDelayDamage: BattleDelayDamage): void {
+        this._flyDamagePool.set(flyDelayDamage, flyDelayDamage);
+    }
+
+    removeFlyDamagePool(flyDelayDamage: BattleDelayDamage): void {
+        this._flyDamagePool.delete(flyDelayDamage);
     }
 
     addBuff(attack: BattleHero, buffID: number): void {
@@ -1144,6 +1166,10 @@ export class BattleHero extends Component {
 
     isFullHp(): boolean {
         return this.hp == this.maxHp;
+    }
+
+    isFontSite(): boolean {
+        return this.embattleedSite < 3;
     }
 
     addPow(pow: number): void {
