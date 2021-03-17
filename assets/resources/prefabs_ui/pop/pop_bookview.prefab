@@ -1298,7 +1298,7 @@
       "__id__": 48
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 50
@@ -1802,7 +1802,7 @@
       "__id__": 48
     },
     "checkEvents": [],
-    "_isChecked": false,
+    "_isChecked": true,
     "_checkMark": {
       "__id__": 52
     },
@@ -6453,7 +6453,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 700,
-      "height": 320
+      "height": 315
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -6478,30 +6478,30 @@
       "__id__": 283
     },
     "_resizeMode": 1,
-    "_layoutType": 2,
+    "_layoutType": 3,
     "_cellSize": {
       "__type__": "cc.Size",
-      "width": 80,
-      "height": 80
+      "width": 40,
+      "height": 40
     },
     "_startAxis": 0,
-    "_paddingLeft": 10,
-    "_paddingRight": 10,
+    "_paddingLeft": 40,
+    "_paddingRight": 40,
     "_paddingTop": 10,
     "_paddingBottom": 10,
-    "_spacingX": 20,
+    "_spacingX": 10,
     "_spacingY": 10,
     "_verticalDirection": 1,
     "_horizontalDirection": 0,
     "_constraint": 0,
     "_constraintNum": 2,
     "_affectedByScale": false,
-    "_isAlign": false,
+    "_isAlign": true,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "28ujsNILJHtZSWwD0n8/8I"
+    "fileId": "92LbLm6dRFa6yc95oiF5LL"
   },
   {
     "__type__": "cc.PrefabInfo",

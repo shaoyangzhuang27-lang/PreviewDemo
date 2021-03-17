@@ -10,6 +10,7 @@ import { XFuns } from "../../model/const/XFuns";
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { XMsgExt } from "../../model/const/XMsgExt";
 import { HeroBookTitleCell} from '../../view/hero/HeroBookTitleCell';
+import { HeroBookCell } from '../hero/HeroBookCell';
 
 @ccclass('PopHeroBookView')
 export class PopHeroBookView extends PopBase {
@@ -74,6 +75,8 @@ export class PopHeroBookView extends PopBase {
         let countSenior:number = 0; //高级数量
         let countOrdinary:number = 0; //普通数量
 
+        this._itemHeroListForBook.clear()
+        this._heroStaticIdList = new Array<number>();
 
         let heroStaticId2List:number[] = new Array<number>();
         let heroStaticId3List:number[] = new Array<number>();
@@ -129,15 +132,74 @@ export class PopHeroBookView extends PopBase {
             this.scrov_book.content.removeAllChildren()
         }
         resources.load('prefabs_ui/main/booktitlecell', (err:any,res:any)=>{
+            let k = new Array<[number,Node]>();     //排序存储对象
             for (let key of this._itemHeroListForBook.keys()) {  
                 let bookTitleCell = instantiate(res) as Node;
                 this.scrov_book.content?.addChild(bookTitleCell);
 
                 let value = this._itemHeroListForBook.get(key) as number[];
-                let script = bookTitleCell.getComponent("HeroBookTitleCell") as HeroBookTitleCell;
-                script.setBookHeroData(key,value);            
-            }
+                let titleScript = bookTitleCell.getComponent("HeroBookTitleCell") as HeroBookTitleCell;
+                titleScript.setBookHeroData(key);                  
 
+                let sortIndex = 1000;
+                if(key == "senior")
+                {
+                    sortIndex = 2000;
+                }
+                else if(key == "ordinary")
+                {
+                    sortIndex = 3000;
+                }
+                bookTitleCell.name = sortIndex.toString()
+                k.push([sortIndex,bookTitleCell]);
+                resources.load('prefabs_ui/main/bookcell', (err:any,res:any)=>{                    
+                    for (let index = 0; index < value.length; index++) {
+                        let bookcell = instantiate(res) as Node;
+                        this.scrov_book.content?.addChild(bookcell);
+                        let script = bookcell.getComponent("HeroBookCell") as HeroBookCell; 
+                        let heroId = value[index];
+                
+                        let heroBookInfo:Msg.HeroBookUnit = GameModel.getInstance().getHeroesModel().getBookHeroDataByStaticID(heroId);
+                        let showType:number = 0;   //显示类型:0显示遮罩 1可激活 2可升级 3常态无遮罩
+                        if(heroBookInfo.level == 0 && heroBookInfo.curTopStar == 0)
+                        {
+                            showType = 0
+                        }
+                        else if(heroBookInfo.level == 0 && heroBookInfo.curTopStar != 0)
+                        {
+                            showType = 1
+                        }
+                        else if(XMsgExt.IsCanLevelUp(heroBookInfo))
+                        {
+                            showType = 2
+                        }
+                        else if(heroBookInfo.level != 0 && heroBookInfo.curTopStar == heroBookInfo.level)
+                        {
+                            showType = 3
+                        }
+                        script.setHeroBookData(showType,heroId,(_data:any)=>{
+                            console.log("图鉴点击回调")
+                        });
+
+                        sortIndex = 1000 + index + 1;
+                        if(key == "senior")
+                        {
+                            sortIndex = 2000 + index + 1;;
+                        }
+                        else if(key == "ordinary")
+                        {
+                            sortIndex = 3000 + index + 1;;
+                        }
+                        bookcell.name = sortIndex.toString()
+                        k.push([sortIndex,bookcell]);
+                    }
+                    k.sort((n1,n2) => n1[0] - n2[0])
+                    k.forEach((value,key)=>{
+                        value[1].setSiblingIndex(key);
+                    })
+                })       
+            }
+            
         })
     }
 
