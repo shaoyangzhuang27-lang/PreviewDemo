@@ -1547,7 +1547,7 @@
     "effectType": 1,
     "playPot": 1,
     "playTime": 0,
-    "flySpeed": 8,
+    "flySpeed": 10,
     "endEffectPrefab": null,
     "_id": ""
   },

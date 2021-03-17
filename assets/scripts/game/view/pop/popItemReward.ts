@@ -35,7 +35,7 @@ export class PopItemReward extends PopBase {
     private _initView()
     {
         this.lab_Count.string = "x" +  XFuns.FormatNumber(this._count).toString();
-        resources.load('prefabs_ui/main/itemequipcell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
             let itemEquipCell = instantiate(res) as Node;
             this.iconCell.addChild(itemEquipCell);
             let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;

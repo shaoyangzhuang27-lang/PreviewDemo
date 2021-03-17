@@ -153,6 +153,7 @@ export class PopRisingStarTower extends PopBase {
     {
         super.start();
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_starUp_change,this._notifyStarUpChangeHandle,this);
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_OneKeyStarUp_change,this._notifyOneKeyStarUpChangeHandle,this);
         this._starNameList = ["初级星星","中级星星","高级星星"]
         if(this._selectBattleList == null)
         {
@@ -215,12 +216,18 @@ export class PopRisingStarTower extends PopBase {
         resources.load('prefabs_ui/main/hero_selecticonstarup', (err:any,res:any)=>{
             this._bottomHeroItemList.clear()
             let k = new Array<[number,Node]>();     //排序存储对象
+            let isShowOneKey = 0;       //是否显示一键升星按钮
             for (let heroData of this._allHeroList.values()) {
                 let heroIcon = instantiate(res) as Node;
                 this.scroll_HeroView.content?.addChild(heroIcon);
                 let heroSelectScript = heroIcon.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp;  
                 let itemType =  this._getItemType(heroData);
+                let isStarUp = this._isStarUp(heroData);
+                if(isStarUp){
+                    isShowOneKey = 1;
+                }
                 heroSelectScript.setItemType(itemType);
+                heroSelectScript.setItemSymbol(Number(isStarUp));
                 heroSelectScript.setSelectData(heroData as HeroData,(data:any,itemType:number)=>{
                     //第一个是升星主体 型号3
                     if(this._risingdyncMaiID == heroData.getDyncID() && itemType != 3)
@@ -255,15 +262,63 @@ export class PopRisingStarTower extends PopBase {
                 });
                 let sortIndex_1:number = heroData.getLevel() * 10000 + heroData.getStar()*1000 + heroData.getCamp() * 10 + heroData.getClasses();
                 let sortIndex_2:number = 3000000 - sortIndex_1;
-                k.push([sortIndex_2,heroIcon]);    
+                //排序 可以升星的放前面
+                if(isStarUp){
+                    sortIndex_2 -= 10000000;
+                }
+                k.push([sortIndex_2,heroIcon]);
+                
+
 
                 this._bottomHeroItemList.set(heroData.getDyncID(), heroIcon);
             }
+            if(this.btn_submit && isShowOneKey == 1){
+                this.btn_submit.active = true;
+            }
+            
             k.sort((n1,n2) => n1[0] - n2[0])
             k.forEach((value,key)=>{
                 value[1].setSiblingIndex(key);
             })
         });
+    }
+
+    //是否能升星
+    private _isStarUp(curHeroData:HeroData){
+        let num = 0;
+        let curStarupType;
+        let curStarupParam;
+        let curStarupNum;
+        let heroDataes = ValueMgr.getInstance().getTableByName(TableName.heroes).records ;
+        for (let herodata of heroDataes) {
+            let record = herodata as Config.heroes.Record;
+            if(record.id == curHeroData.getStaticID()) { 
+                curStarupType = record.starupType;
+                curStarupParam = record.starupParam;
+                curStarupNum = record.starupNum;
+                break;
+            }
+        }
+        for (let heroData of this._allHeroList.values()){
+            if(curStarupType == 1){
+                if(curHeroData.getStaticID()  == heroData.getStaticID() 
+                && curHeroData.getDyncID() != heroData.getDyncID() ){
+                    num++;
+                    if(num == curStarupNum){
+                        return true;
+                    }
+                }
+            }else if(curStarupType == 2){
+                if(heroData.getStar() == curStarupParam
+                && curHeroData.getDyncID() != heroData.getDyncID() ){
+                    num++;
+                    if(num == curStarupNum){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     //点选英雄
@@ -406,11 +461,6 @@ export class PopRisingStarTower extends PopBase {
             itemType = 0;
         }
         return itemType;
-    }
-
-    //一键升星
-    private _submitHandle(){
-           
     }
 
     //平台主英雄事件
@@ -747,7 +797,8 @@ export class PopRisingStarTower extends PopBase {
         }
     }
 
-    //升星后 阵容变化
+    //////////////////////////////////////////////////////
+    //升星后 阵容变化 弹出升星结果界面
     private _notifyStarUpChangeHandle(){
         this._getAllHeroList();
         this._initBottomHeros();
@@ -763,7 +814,17 @@ export class PopRisingStarTower extends PopBase {
         PopMgr.getInstance().popStarUpResultView(this._firstHeroData,HeroData);
     }
 
+    //一键升星后 阵容变化
+    private _notifyOneKeyStarUpChangeHandle(data:any){
+        this._getAllHeroList();
+        this._initBottomHeros();
+        if(data instanceof Array){
+            let heroNewStar:Msg.HeroStarUpMultiA = data[0];
+        }
+    }
+
     //////////////////////////////////////////////////////
+
 
     // 从heroes文件获取升星材料类型 参数 数量
     private _getHeroesDatas(StaticID:number)
@@ -807,5 +868,10 @@ export class PopRisingStarTower extends PopBase {
         }
         MsgMgr.getInstance().getMsgStarUp().requestHeroStarUp(this._risingdyncMaiID,materialHeroIDs);
         this._platformMainHeadHandle();
+    }
+
+    //一键升星
+    private _submitHandle(){
+        PopMgr.getInstance().popOneKeyStarUpView();
     }
 }

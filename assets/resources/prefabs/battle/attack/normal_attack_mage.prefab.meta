@@ -2,12 +2,12 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-  "uuid": "9b00ac15-4aaa-4fcb-97f1-258d7ac3adf9",
+  "uuid": "52d190ef-ff12-4913-9e5e-002ff8a9c8c9",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "hero_debris"
+    "syncNodeName": "normal_attack_mage"
   }
 }

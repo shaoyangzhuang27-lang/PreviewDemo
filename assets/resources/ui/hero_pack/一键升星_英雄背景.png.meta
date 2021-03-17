@@ -1,0 +1,74 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "b0bde7ea-02d2-4e08-84ab-3e12eced6d73",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "b0bde7ea-02d2-4e08-84ab-3e12eced6d73@6c48a",
+      "displayName": "一键升星_英雄背景",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "b0bde7ea-02d2-4e08-84ab-3e12eced6d73"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "b0bde7ea-02d2-4e08-84ab-3e12eced6d73@f9941",
+      "displayName": "一键升星_英雄背景",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 66,
+        "height": 67,
+        "rawWidth": 66,
+        "rawHeight": 67,
+        "borderTop": 34,
+        "borderBottom": 33,
+        "borderLeft": 33,
+        "borderRight": 33,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "b0bde7ea-02d2-4e08-84ab-3e12eced6d73@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "b0bde7ea-02d2-4e08-84ab-3e12eced6d73@f9941"
+  }
+}
