@@ -1,4 +1,4 @@
-import { _decorator, Component, Node,Vec3,tween,Scene, EventTouch, UITransform, math, view, UIOpacity } from 'cc';
+import { _decorator, Component, Node,Vec3,tween,Scene, EventTouch, UITransform, math, view, UIOpacity,Button} from 'cc';
 import { PopMgr } from '../../game/control/PopMgr';
 const { ccclass, property } = _decorator;
 
@@ -12,7 +12,7 @@ export class PopBase extends Component {
     // public btn_submit:Node | null = null;
 
     @property({type: Node, displayName: "取消按钮[选填项]"})
-    public btn_cancel:Node | null = null;
+    public btn_cancel = null as unknown as Node;
 
     @property({type: Node, displayName: "弹出窗口[必填项]"})
     public window:Node = null as unknown as Node;

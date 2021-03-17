@@ -95,6 +95,13 @@ export class MainCity extends Component {
             });
         });
 
+        // beast.popHeroPubWindow("酒馆英雄","我是内容"+buildName,()=>{
+        //     console.log("提交内容!")
+        //     beast.popHeroPubWindow("删除建筑?","删除",()=>{
+        //         // console.log("提交内容!")
+        //         beast.popupPrompt("无法删除");
+        //     });
+        // });
     }
 
     // update (deltaTime: number) {

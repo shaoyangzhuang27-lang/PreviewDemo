@@ -251,4 +251,72 @@ export class XConsts{
     public static KSoundMusic_Idle:string = "主城挂机音乐";
     public static KSoundMusic_Fight:string = "战斗音乐";
     public static KSoundMusic_City:string = "主城音乐";
+
+    //英雄酒馆
+    public static PUB_SUMMON_COUNT_MAX:number = 30 ;
+    public static PUB_SUMMON_DIAMOND_ONE_COSUME:number = 30 ;
+    public static PUB_SUMMON_DIAMOND_TEN_COSUME:number = 3000 ;
+    public static PUB_SUMMON_SCROLL_ONE_COSUME:number = 1 ;
+    public static PUB_SUMMON_SCROLL_TEN_COSUME:number = 10 ;
+    public static PUB_SUMMON_FRIEND_ONE_COSUME:number = 10 ;
+    public static PUB_SUMMON_FRIEND_TEN_COSUME:number = 100 ;
+
+    public static PUB_UI_HEROSUMMON : string = "UI_HeroSummon";  //英雄酒馆
+    public static PUB_UI_CAMPRECOMMEND : string = "UI_CampRecommend";  //推荐阵容
+    public static PUB_UI_NEWSUMMONHEROLOTTO: string = "UI_NewSummonHeroLotto";  //10连英雄召唤
+    public static PUB_UI_NEWSUMMONJEWELCONSUMEO: string = "UI_NewSummonJewelConsume";  //钻石消耗直降
+    public static PUB_UI_NEWSUMMONRESIDUE: string = "UI_NewSummonResidue";  //再召唤{0}次必得五星传奇英雄
+    public static PUB_UI_NEWSUMMONFRIENDCONTENT: string = "UI_NewSummonFriendContent";  //添加好友，每日互送爱心，即可免费召唤英雄。
+    public static PUB_UI_FRIENDSUMMON : string = "UI_FriendSummon";
+    public static PUB_UI_HEROICSUMMON : string = "UI_HeroicSummon";
+
+   //英雄推荐阵容-
+    public static PUB_RECOMMEND_LINEUP_UI_PACKUP : string = "UI_PackUp";
+    public static PUB_RECOMMEND_LINEUP_UI_VIEWDETAIL : string = "UI_Detail";
+    public static PUB_RECOMMEND_LINEUP_UI_COREHERO : string = "UI_CoreHero";
+    public static PUB_RECOMMEND_LINEUP_UI_KNIGHTARMOR : string = "UI_KnightArmor";
+    public static PUB_RECOMMEND_LINEUP_UI_CAMPANALYSE : string = "UI_CampAnalyse";
+
+    public static PUB_UI_SUMMONDESCTITLE : string = "UI_SummonDescTitle";
+    public static PUB_UI_SUMMONDESC : string = "UI_SummonDesc";
+
+
+    //获得英雄界面
+    public static SUMMON_SETTLE_TITLE : string = "DATA_Achievement6";  //获得英雄
+
+    public static HERO_ICON_TYPE  = {
+        RecLineUp : 1,
+        SummonSettle : 2
+    }
+
+    //碎片
+    public static UI_FRAGMENT : string  = "UI_Fragment";  //碎片
+    public static UI_NOTFORSALE : string = "UI_NotForSale";  //不可出售
+    public static UI_FRAGMENTNAME : string = "UI_FragmentName";  //{0}星英雄碎片
+    public static UI_FRAGMENTDESC : string = "UI_FragmentDesc";  //收集{0}个英雄碎片可召唤1个{1}星英雄
+    public static UI_FRAGMENTCAMPNAME : string = "UI_FragmentCampName";  //{0}星{1}英雄碎片
+    public static UI_FRAGMENTCAMPDESC : string = "UI_FragmentCampDesc";  //收集{0}个英雄碎片可召唤1个{1}星{2}英雄
+    public static UI_FRAGMENTCLASSESNAME : string = "UI_FragmentClassesName";  //{0}星{1}英雄碎片
+    public static UI_FRAGMENTCLASSESDESC : string = "UI_FragmentClassesDesc";  //收集{0}个英雄碎片可召唤1个{1}星{2}英雄
+    public static UI_FRAGMENTHERONAME : string = "UI_FragmentHeroName";  //{0}星{1}碎片
+    public static UI_FRAGMENTHERODESC : string = "UI_FragmentHeroDesc";  //收集{0}个碎片可召唤1个{1}星{2}
+    public static UI_FRAGMENTUSE : string = "UI_FragmentUse";  //召唤
+    public static UI_INFO : string = "UI_Info";  //信息
+
+    public static FRAGMENT_SYNTHESIS_TYPE  = {
+        FragmentRandom : 1,
+        FragmentCampRandom : 2,
+        FragmentClassesRandom : 3,
+        FragmentHero : 4
+    }
+
+    //星级合成消耗碎片
+    public static KFragmentNumRequired : number[] = new Array<number> (0,5,10,20,30,50);
+    public static KFragmentFrameSpriteName:string[] = new Array<string> ( "小卡框_品质随机", "小卡框_品质橙");
+    public static KFragmentQualitySpriteName:string[] = new Array<string> ( "小卡框_碎片品质随机", "小卡框_碎片品质橙");
+
+    public static POP_SUMMON_TYPE  = {
+        HeroPub : 1,
+        FragmentSysthesis : 2,
+    }
 } 

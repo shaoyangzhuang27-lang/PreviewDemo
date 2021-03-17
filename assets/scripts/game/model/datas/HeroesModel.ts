@@ -4,6 +4,7 @@ import { TableName, ValueMgr } from "../ValueMgr";
 import { XMsgExt } from "../const/XMsgExt";
 import { BaseModel } from "./BaseModel";
 import { NotifyMgr } from '../../control/NotifyMgr';
+import {XConsts} from "../const/XConsts";
 
 export class HeroesModel extends BaseModel{
 
@@ -97,7 +98,7 @@ export class HeroesModel extends BaseModel{
         let money = msg.money;
 
         if(this._heroList.has(dyncHeroID))
-        {
+    {
             let oldHeroData = this._heroList.get(dyncHeroID) as HeroData;
             let heroInfo  = new Msg.HeroInfo();
             heroInfo.id = dyncHeroID;
@@ -142,9 +143,9 @@ export class HeroesModel extends BaseModel{
 
         for (let key in heroNewStar){
             if(this._heroList.has(Number(key)))
-            {
+        {
                 let oldHeroData = this._heroList.get(Number(key)) as HeroData;
-                let heroInfo  = new Msg.HeroInfo();
+            let heroInfo  = new Msg.HeroInfo();
                 heroInfo.id = Number(key);
                 heroInfo.staticID = oldHeroData.getStaticID() + 10000;
                 heroInfo.level = oldHeroData.getLevel();
@@ -152,7 +153,7 @@ export class HeroesModel extends BaseModel{
                 let newEquipOnList: number[]= [];
                 for(let key in equipList){
                     newEquipOnList.push(Number(key));
-                }
+        }
                 heroInfo.equipOnList = newEquipOnList;
                 //heroInfo.crystal = 
                 heroInfo.tier = oldHeroData.tier;
@@ -165,7 +166,7 @@ export class HeroesModel extends BaseModel{
                 for(let key in materialHeroIDList){
                     let value = materialHeroIDList[key];
                     this._heroList.delete(value);
-                }
+    }
             }
         }
         //抛出通知  一键升星升星发生变化
@@ -285,5 +286,24 @@ export class HeroesModel extends BaseModel{
             //抛出通知 英雄锁定状态 变化
             NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_locked, msg);
         }        
+    }
+
+    //酒馆推荐阵容英雄信息
+    public getHeroIconInfoByHeroId(id : number) : XStruct.hero_icon_info.Record{
+
+        let info :  XStruct.hero_icon_info.Record = {
+            camp : "",
+            star : 0,
+            level : 1,
+            frame : "",
+            img : "",
+
+        }
+        var _hero = ValueMgr.getInstance().getItemByField(TableName.heroes, id) as Config.heroes.Record;
+        info.camp = XConsts.KHeroCampIcon[_hero.camp];
+        info.star = _hero.star;
+        info.frame = XConsts.GetQualityBgByStar(_hero.star);
+        info.img = _hero.image;
+        return info
     }
 }

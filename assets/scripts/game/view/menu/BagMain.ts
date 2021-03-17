@@ -1,10 +1,11 @@
 
-import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, Vec3, tween, ScrollView, Game, resources, instantiate } from 'cc';
+import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, Vec3, tween, ScrollView, Game,Size, resources, instantiate, Layout ,UITransform} from 'cc';
 import { GameModel } from '../../model/GameModel';
 import { ItemEquipType,ItemEquipCell } from './ItemEquipCell';
 import { PopItemUseWin } from '../pop/PopItemUseWin';
 import { PopMgr } from '../../control/PopMgr';
 import { NotifyMgr } from '../../control/NotifyMgr';
+import { HeroFragment } from '../hero/HeroFragment';
 const { ccclass, property } = _decorator;
 
 @ccclass('BagMain')
@@ -38,6 +39,9 @@ export class BagMain extends Component {
 
     @property({type :  ScrollView})
     public scroll_ItemView:ScrollView = null as unknown as ScrollView;
+
+    @property({type :  ScrollView})
+    public scroll_fragment:ScrollView = null as unknown as ScrollView;
     
     @property({type: Node })
     public bgMask:Node = null as unknown as Node;
@@ -107,6 +111,7 @@ export class BagMain extends Component {
     {
         this._initEquipScrollview();
         this._initItemScrollview();
+        this._initFragmentScrollview();
     }
 
     private _initEquipScrollview()
@@ -135,7 +140,7 @@ export class BagMain extends Component {
                 let itemGoods = allGoodsList[index];
 
                 let itemCell = instantiate(res) as Node;
-                this.scroll_ItemView.content?.addChild(itemCell);                
+                this.scroll_ItemView.content?.addChild(itemCell);
 
                 if(itemGoods[0] == Msg.TObjectType.EObject_UsableItem)
                 {
@@ -219,6 +224,30 @@ export class BagMain extends Component {
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_equip_item_change,this._changeScrollviewItemData,this);
     }
 
+    private _initFragmentScrollview()
+    {
+        if(this.scroll_fragment.content)
+        {
+            this.scroll_fragment.content.removeAllChildren()
+        }
+
+         
+
+       GameModel.getInstance().getBagModel().initTestFragmentList();
+       let fragmentSysthesisiInfoList = GameModel.getInstance().getBagModel().getFragmentSynthesisInfoList();
+        resources.load('prefabs_ui/main/hero_fragment', (err:any,res:any)=>{
+            for (var i = 0 ; i < fragmentSysthesisiInfoList.length; i++) {
+                let fragment_item = instantiate( res );
+                let script = fragment_item.getComponent(HeroFragment);
+                fragment_item.scale = new Vec3(0.7,0.7,1);
+                let subWidget = fragment_item.getComponent(UITransform) as UITransform;
+                subWidget.contentSize = new Size(105,126);
+                script.fragmentInfo = fragmentSysthesisiInfoList[i];
+                script.setBtnClick();
+                this.scroll_fragment.content?.addChild(fragment_item);
+            }
+        });
+    }
     // update (deltaTime: number) {
     //     // [4]
     // }

@@ -3,6 +3,7 @@ import { PopSimple } from "../view/pop/PopSimple";
 import { PopRisingStarTower } from "../view/pop/PopRisingStarTower";
 import { PopStarUpResult } from "../view/pop/PopStarUpResult";
 import { PopOneKeyStarUp } from "../view/pop/PopOneKeyStarUp";
+import { PopCommonOne } from "../view/pop/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
 import { TipDemo } from '../view/TipDemo';
@@ -16,6 +17,10 @@ import { PopEquipSaleView } from "../view/pop/PopEquipSaleView";
 import { PopItemReward } from '../view/pop/popItemReward';
 import { HeroData } from '../model/datas/HeroData';
 import { PopHeroChoiceGiftView } from '../view/pop/PopHeroChoiceGiftView';
+import { PopHeroPub } from "../view/pop/PopHeroPub";
+import { PopRecLineUp } from "../view/pub/PopRecLineUp";
+import { PopSummonSettle } from "../view/pop/PopSummonSettle";
+import { PopFragmentSynthesis } from "../view/pop/PopFragmentSynthesis";
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -81,9 +86,9 @@ export class PopMgr extends PopCore  {
             // script.setIsMaskClose(isMaskClose);
             // script.setInitTeamView(type)
         } );
-    }
-    
-    //弹出英雄升级,升阶,装备界面 
+            }
+
+    //弹出英雄升级,升阶,装备界面
     public popHeroPromotionView(heroId:number=0,submitCallBack:Function = ()=>{},closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_heropromotion', (err:any,res:any)=>{
@@ -188,7 +193,7 @@ export class PopMgr extends PopCore  {
             let script = p.getComponent("TipDemo") as TipDemo;
             script.setWinPos(pos);
         });
-    }
+            }
 
     /**
      * @description: 英雄属性值弹窗tip
@@ -196,7 +201,7 @@ export class PopMgr extends PopCore  {
      * @param {number} heroId
      */
     public tipHeroAttributeWindow(pos:Vec3, heroId:number = 0){
-        
+
         resources.load('prefabs_ui/pop/tip_hero_attribute', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
             this.parent?.addChild(p);
@@ -226,7 +231,7 @@ export class PopMgr extends PopCore  {
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipSkill") as TipSkill;
-            script.setWinPos(pos, 1);           
+            script.setWinPos(pos, 1);
             script.setSkillData(skillData);
             script.setIsWinClose(true);
         });
@@ -320,6 +325,84 @@ export class PopMgr extends PopCore  {
 
             let script = p.getComponent("PopHeroChoiceGiftView") as PopHeroChoiceGiftView;
             script.setGiftID(giftId, visit);
+        } );
+    }
+    public popHeroPubWindow(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+
+        resources.load('prefabs_ui/pop_hero_pub', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopHeroPub") as PopHeroPub;
+            // script.setTitle(title)
+            // script.setContent(content)
+            script.setSubmitCallBack(submitCallBack)
+            script.setCloseCallBack(closeCallBack);
+            script.setIsMaskClose(isMaskClose);
+
+        } );
+    }
+    
+      /**
+     * 通用类型一弹窗
+     * @param title     窗口标题
+     * @param content   窗体描述内容
+     * @param mode      底部按钮显示样式
+     */
+    public popCommonOneWindow(title:string,content:string,mode : number ,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+
+        resources.load('prefabs_ui/pop/pop_common_one', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+            let script = p.getComponent("PopCommonOne") as PopCommonOne;
+            script.setTitle(title);
+            script.setContent(content);
+            script.setShowMode(mode);
+            script.setSubmitCallBack(submitCallBack)
+            script.setCloseCallBack(closeCallBack);
+            script.setIsMaskClose(isMaskClose);
+            // script.popSelf();
+            // script.setIsNeedHide(false);
+
+        } );
+    }
+
+     //弹出酒馆推荐阵容
+    public popRecLineUpWindow(title:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_reclineup', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+            let script = p.getComponent("PopRecLineUp") as PopRecLineUp;
+            script.setTitle(title);
+            script.setIsMaskClose(isMaskClose);
+
+        } );
+    }
+
+    public popSummonSettleWindow(nType : number,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+            let script = p.getComponent("PopSummonSettle") as PopSummonSettle;
+            // script.setTitle(title);
+            script.popWindowType = nType ;
+            script.setIsMaskClose(isMaskClose);
+
+        } );
+    }
+
+
+    public popFragmentSynthesisWindow(data : XStruct.fragment_synthesis_info.IRecord,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+
+        resources.load('prefabs_ui/pop/pop_fragment_synthesis', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            let script = p.getComponent("PopFragmentSynthesis") as PopFragmentSynthesis;
+            script.FragmentSysthesisInfo = data;
+            script.setIsMaskClose(isMaskClose);
         } );
     }
 }
