@@ -199,7 +199,12 @@ export class HeroIcon extends Component {
         }
     }
 
-    //酒馆推荐阵容英雄icon
+
+    /**
+     * 设置英雄icon
+     * @param id 英雄id
+     * @param nType 显示类型
+     */
     public initUIHeroIconInfo(id : number,nType : number)
     {
         let info = GameModel.getInstance().getHeroesModel().getHeroIconInfoByHeroId(id);

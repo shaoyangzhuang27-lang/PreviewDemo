@@ -82,7 +82,7 @@ export class HeroFragment extends Component {
         
     }
 
-    _setStar(star:number)
+    private _setStar(star:number)
     {
         for (let index = 0; index < this.starlist.length; index++) {
             if(index > star-1)
