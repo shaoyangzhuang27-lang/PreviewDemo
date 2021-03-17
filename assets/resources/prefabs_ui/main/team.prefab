@@ -2635,7 +2635,9 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "cfe0f946-03d8-46a5-95d3-2ee98b7b4c35@f9941"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 0,
@@ -3371,7 +3373,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "0dec49df-b441-4676-9f2d-c0e0a2de4e17@f9941"
+      "__uuid__": "43311cfe-33cc-4526-b798-47295a7fe929@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -3501,7 +3503,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "d41da452-06a4-42e6-85fb-f96b5763e368@f9941"
+      "__uuid__": "08798ead-5e44-47f1-9929-485fc0938ece@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -3631,7 +3633,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "be03f023-c06a-430c-8b6d-03792580f7ec@f9941"
+      "__uuid__": "5534138b-e540-45b7-9c3c-e3e62111ec3e@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -3821,9 +3823,7 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": {
-      "__uuid__": "da62077b-4035-4dd6-b5a3-22a6f2a40b31@f9941"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -3951,9 +3951,7 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": {
-      "__uuid__": "da62077b-4035-4dd6-b5a3-22a6f2a40b31@f9941"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -4081,9 +4079,7 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": {
-      "__uuid__": "da62077b-4035-4dd6-b5a3-22a6f2a40b31@f9941"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -4211,9 +4207,7 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": {
-      "__uuid__": "da62077b-4035-4dd6-b5a3-22a6f2a40b31@f9941"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -4341,9 +4335,7 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": {
-      "__uuid__": "da62077b-4035-4dd6-b5a3-22a6f2a40b31@f9941"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
