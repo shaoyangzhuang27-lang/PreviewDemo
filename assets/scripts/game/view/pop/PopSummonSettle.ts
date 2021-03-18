@@ -118,7 +118,7 @@ export class PopSummonSettle extends PopBase {
 
         //5051402
         let heroInfo = ValueMgr.getInstance().getItemByField(TableName.heroes, heroId ) as Config.heroes.Record;
-        var camp = "ui/team/" + XConsts.KHeroCampIcon[heroInfo.camp] + "/spriteFrame";
+        var camp = "ui/common/team/" + XConsts.KHeroCampIcon[heroInfo.camp] + "/spriteFrame";
         var profession = "ui/book/" + XConsts.KClassesSpriteName[heroInfo.classes] + "/spriteFrame";
 
         var heroName = ValueMgr.getInstance().getItemByField(TableName.language_data,heroInfo.name) as Config.language_data.Record;
