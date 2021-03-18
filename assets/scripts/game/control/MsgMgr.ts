@@ -49,6 +49,7 @@ export class MsgMgr extends MsgCore{
 
     //消息定义-------------------------------------------------
     private _msgLogin:MsgLogin = new MsgLogin(this);
+    private _ip:string = "";
     public getMsgLogin(){
         return this._msgLogin;
     }
@@ -119,9 +120,13 @@ export class MsgMgr extends MsgCore{
 
     }
     
-    public connectLoginServer(channelId: number = 0){
-        //NetManager.getInstance().connect({ url: "ws://192.168.15.68:17183" },channelId);//开启连接
-        NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启本地连接
+    public connectLoginServer(ip:string | null = null,channelId: number = 0){
+        if(ip){
+            this._ip = ip;
+        }
+        let serverUrl = "ws://"+this._ip+":17183";
+        NetManager.getInstance().connect({ url:  serverUrl},channelId);//开启连接
+        // NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启本地连接
         // NetManager.getInstance().connect({ url: "ws://192.168.15.132:17183" },channelId);//开启连接
         NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启连接
         // NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启本地连接

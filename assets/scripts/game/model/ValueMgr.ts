@@ -65,5 +65,46 @@ export class ValueMgr extends ValueCore{
             return tabMap.get(key);
         }
     }
+    public optimizationTable(){
+        // return;
+        let tab = (this.getTableByName(TableName.language_data) as Config.language_data).records;
+        tab.forEach((value,index)=>{
+            value.en = "";
+            value.ja = "";
+            value.kr = "";
+            value.tw = "";
+        })
+        let tab2 = (this.getTableByName(TableName.language_ui) as Config.language_ui).records;
+        tab2.forEach((value,index)=>{
+            value.en = "";
+            value.ja = "";
+            value.kr = "";
+            value.tw = "";
+        })
+        let tab3 = (this.getTableByName(TableName.copy_loot) as Config.copy_loot).records;
+        let index2 = 0;
+        while(index2 < tab3.length){
+            let value = tab3[index2];
+            let id = value.id as number;
+            if(id >= 0 && id <= 200){
+                index2++;
+            }else{
+                tab3.splice(index2, 1);
+            }
+        }
+        let tab4 = (this.getTableByName(TableName.copy) as Config.copy_loot).records;
+        let index3 = 0;
+        while(index3 < tab4.length){
+            let value = tab4[index3];
+            let id = value.id as number;
+            if(id >= 0 && id <= 200){
+                index3++;
+            }else{
+                tab4.splice(index3, 1);
+            }
+        }
+
+    }
+
 }
 // ValueMgr.getInstance().getTableByName(TableName.language_data)["id"]
