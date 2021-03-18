@@ -61,7 +61,7 @@ export class HeroIcon extends Component {
         if(!this._heroData.isRoleHero())
         {
             this.img_camp.active = true;
-            let campIconPath:string = "ui/team/" + campName + "/spriteFrame";
+            let campIconPath:string = "ui/common/team/" + campName + "/spriteFrame";
             resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
             {
                 if(!err)
@@ -76,7 +76,7 @@ export class HeroIcon extends Component {
             this.img_camp.active = false;
         }
         
-        let heroIconPath:string = "ui/hero/" + iconName + "/spriteFrame";
+        let heroIconPath:string = "ui/common/hero/" + iconName + "/spriteFrame";
         this._resourceLoad(heroIconPath,this.img_icon);
         
         this.lab_level.string = level.toString();
@@ -113,7 +113,7 @@ export class HeroIcon extends Component {
         let yu:number = (star - 1) % 5 + 1;
 
         let starName = ["初级星星","中级星星","高级星星"];
-        let starPath = "ui/icon/" + starName + "/spriteFrame";
+        let starPath = "ui/common/icon/" + starName + "/spriteFrame";
 
         for (let index = 0; index < this.starlist.length; index++) {
             if(index >= yu && yu != 0)
@@ -126,7 +126,7 @@ export class HeroIcon extends Component {
         }
             
         let frameName:string = XConsts.GetQualityBgByStar(Number(star));
-        let framePath:string = "ui/icon/" + frameName + "/spriteFrame"
+        let framePath:string = "ui/common/icon/" + frameName + "/spriteFrame"
         this._resourceLoad(framePath,this.btn_frame);
         }
 
@@ -137,10 +137,10 @@ export class HeroIcon extends Component {
         let starNum:number = heroinfo.star as number;
 
         this.img_camp.active = true;
-        let campIconPath:string = "ui/team/" + campName + "/spriteFrame";
+        let campIconPath:string = "ui/common/team/" + campName + "/spriteFrame";
         this._resourceLoad(campIconPath,this.img_camp);
         
-        let heroIconPath:string = "ui/hero/" + iconName + "/spriteFrame";
+        let heroIconPath:string = "ui/common/hero/" + iconName + "/spriteFrame";
         this._resourceLoad(heroIconPath,this.img_icon);
         
         this.lab_level.string = lv.toString();
@@ -180,7 +180,7 @@ export class HeroIcon extends Component {
     {
         this.lab_level.node.active = false;
         let campName:string = XConsts.KHeroCampIcon[campType];
-        let campIconPath:string = "ui/team/" + campName + "/spriteFrame"
+        let campIconPath:string = "ui/common/team/" + campName + "/spriteFrame"
         this._resourceLoad(campIconPath,this.img_camp)
         this._setStar(star)
     }
@@ -204,7 +204,7 @@ export class HeroIcon extends Component {
     {
         let info = GameModel.getInstance().getHeroesModel().getHeroIconInfoByHeroId(id);
         this.img_camp.active = true;
-        let campIconPath:string = "ui/team/" + info.camp + "/spriteFrame"
+        let campIconPath:string = "ui/common/team/" + info.camp + "/spriteFrame"
         resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
         {
             if(!err)
@@ -214,10 +214,10 @@ export class HeroIcon extends Component {
             }
         });
 
-        let framePath:string = "ui/icon/" + info.frame + "/spriteFrame"
+        let framePath:string = "ui/common/icon/" + info.frame + "/spriteFrame"
         this._resourceLoad(framePath,this.btn_frame);
 
-        let heroIconPath:string = "ui/hero/" + info.img + "/spriteFrame"
+        let heroIconPath:string = "ui/common/hero/" + info.img + "/spriteFrame"
         this._resourceLoad(heroIconPath,this.img_icon);
 
         // this.lab_level.node.active = false;

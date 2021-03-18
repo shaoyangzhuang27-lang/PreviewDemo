@@ -86,6 +86,10 @@ export class MainCity extends Component {
 
         let beast = PopMgr.getInstance();
         // beast.initPop(this.node)
+        if(buildName == "building_02"){
+            PopMgr.getInstance().popStarUpView();
+            return;
+        }
 
         beast.popupSimpleWindow("建筑:"+buildName,"我是内容"+buildName,()=>{
             console.log("提交内容!")

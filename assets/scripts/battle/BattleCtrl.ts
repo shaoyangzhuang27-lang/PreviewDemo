@@ -20,14 +20,18 @@ let oldMainLoop: any = null;
 
 @ccclass('BattleCtrl')
 export class BattleCtrl extends Component {
+    public static EmbattleCfg = [[-3, 0], [0, 0], [3, 0] 
+        ,[-3, 3], [0, 3], [3, 3]];
 
     @property(Node)
     public battleUiNode: Node = null as unknown as Node;
 
+
+    private _bStart: boolean = false;
+
     private _groundPrefab: Prefab = null as unknown as Prefab;
 
-    public static EmbattleCfg = [[-3, 0], [0, 0], [3, 0] 
-                                    ,[-3, 3], [0, 3], [3, 3]];
+
 
     private _actTime: number = 0;
     private _curActFunc: any = null;
@@ -94,8 +98,14 @@ export class BattleCtrl extends Component {
         if (this._bossBtn) {
             this._bossBtn.active = true;
         }
+
+        this._bStart = true;
         this.seekEnemy();
         // this.wait();
+    }
+
+    isStart() {
+        return this._bStart;
     }
 
     update(dt: number) {

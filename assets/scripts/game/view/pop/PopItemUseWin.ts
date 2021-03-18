@@ -130,7 +130,7 @@ export class PopItemUseWin extends PopBase {
             this.iconNode.addChild(itemEquipCell);
             let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
             script.setItemUseType(this._objectType);
-            script.setItemType(this._itemID, 0, ItemEquipType.goods, null);
+            script.setItemsInfo(this._itemID, 0, ItemEquipType.goods, null);
         })
     }
 

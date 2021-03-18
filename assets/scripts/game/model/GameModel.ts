@@ -21,7 +21,7 @@ export class GameModel{
     private _playerModel:PlayerModel =  new PlayerModel(this);
     private _formationModel:FormationModel = new FormationModel(this);
     private _bagItemModel:BagItemModel = new BagItemModel(this);
-    private _offlineModel:OfflineModel = new OfflineModel();
+    // private _offlineModel:OfflineModel = new OfflineModel(this);
     private _heroPubModel:HeroPubModel = new HeroPubModel(this);
 
     public getHeroesModel(){
@@ -40,9 +40,10 @@ export class GameModel{
         return this._bagItemModel;
     }
     // 挂机数据
-    public getOfflineModel(){
-        return this._offlineModel;
-    }
+    // public getOfflineModel(){
+    //     return this._offlineModel;
+    // }
+    
     public getHeroPubModel(){
         return this._heroPubModel;
     }
