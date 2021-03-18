@@ -89,7 +89,7 @@ export class PopMgr extends PopCore  {
             // script.setIsMaskClose(isMaskClose);
             // script.setInitTeamView(type)
         } );
-            }
+    }
 
     //弹出英雄升级,升阶,装备界面
     public popHeroPromotionView(heroId:number=0,submitCallBack:Function = ()=>{},closeCallBack:Function|null = null,isMaskClose:boolean = true)
@@ -423,14 +423,14 @@ export class PopMgr extends PopCore  {
     }
 
 
-    public popHeroEquipReplaceWindow(title:string,content:string,mode : number ,closeCallBack:Function|null = null){
+    public popHeroEquipReplaceWindow(heroId: number, equipId:number=0, closeCallBack:Function|null = null){
 
         resources.load('prefabs_ui/pop/pop_replaceequip', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
             let script = p.getComponent("PopHeroEquipReplace") as PopHeroEquipReplace;
-            script.setTitle(title);
-           script.setCloseCallBack(closeCallBack);
+            script.setEquipData(heroId, equipId);
+            script.setCloseCallBack(closeCallBack);
         } );
     }
 

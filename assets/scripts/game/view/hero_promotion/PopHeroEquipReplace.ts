@@ -61,7 +61,7 @@ export class PopHeroEquipReplace extends PopBase {
 
     private _showCurEquip(){
         var eqName = this.node_equip_drag.getChildByName("equip_name")?.getComponent(Label) as Label;
-        var 
+        // var 
 
     }
 
@@ -101,6 +101,19 @@ export class PopHeroEquipReplace extends PopBase {
             }
         });
 
+    }
+
+    /**
+     * @description: 设置装备数据
+     * @param {number} equipId 装备id
+     * @param {number} heroId 英雄id
+     */
+    public setEquipData(heroId: number, equipId:number=0){
+        if(equipId ==0){
+            //无装备
+        }else{
+            
+        }
     }
 
     //设置标题
