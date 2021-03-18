@@ -51,7 +51,8 @@ export class HeroFragment extends Component {
         maxNum : 0,
         curNum : 0,
         heroName : "",
-        campName : ""
+        campName : "",
+        classesName : ""
     }  
     
     start () {

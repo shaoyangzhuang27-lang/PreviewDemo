@@ -67,7 +67,8 @@ export class BagItemModel extends BaseModel{
                 maxNum : 0,
                 curNum : 0,
                 heroName : "",
-                campName : ""
+                campName : "",
+                classesName : ""
             }  
             let value = msg.fragmentList[key];
 
@@ -100,12 +101,13 @@ export class BagItemModel extends BaseModel{
                 //param 职业   star 星级
                 //传奇英雄
                 info.type = value.fragmentType;
-                info.frame = "ui/icon/" + XConsts.KFragmentFrameSpriteName[1] + "/spriteFrame";
-                info.quality = "ui/icon/" + XConsts.KFragmentQualitySpriteName[1] + "/spriteFrame";
+                info.frame = "ui/common/icon/" + XConsts.KFragmentFrameSpriteName[1] + "/spriteFrame";
+                info.quality = "ui/common/icon/" + XConsts.KFragmentQualitySpriteName[1] + "/spriteFrame";
 
                 info.star = value.star;
                 info.maxNum = XConsts.KFragmentNumRequired[value.star ? value.star : 1];
                 info.curNum = value.num ? value.num : 0;
+                info.classesName = XConsts.KFragmentClassesName[2];
             }
             else if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentHero)
             {
@@ -122,7 +124,7 @@ export class BagItemModel extends BaseModel{
                 info.maxNum = XConsts.KFragmentNumRequired[info.star ? info.star : 1];
                 info.curNum = value.num ? value.num : 0;
                 info.heroName = heroInfo.name;
-                
+                info.campName = XConsts.KCampName[heroInfo.camp];
             }
 
 
@@ -506,7 +508,8 @@ export class BagItemModel extends BaseModel{
                 maxNum : 0,
                 curNum : 0,
                 heroName : "",
-                campName : ""
+                campName : "",
+                classesName : ""
             }  
             let value = test.get(key);
 
@@ -545,6 +548,7 @@ export class BagItemModel extends BaseModel{
                 info.star = value.star;
                 info.maxNum = XConsts.KFragmentNumRequired[value.star ? value.star : 1];
                 info.curNum = value.num ? value.num : 0;
+                info.classesName = XConsts.KFragmentClassesName[2];
             }
             else if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentHero)
             {

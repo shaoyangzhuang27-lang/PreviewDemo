@@ -513,7 +513,9 @@
       "b": 124,
       "a": 255
     },
-    "_normalSprite": null,
+    "_normalSprite": {
+      "__uuid__": "781f7d2e-f557-4655-a511-a3fdce13cd5e@f9941"
+    },
     "_hoverSprite": null,
     "_pressedSprite": null,
     "_disabledSprite": null,
@@ -775,7 +777,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "ec9b8066-8a1c-43cd-8069-3f85b7de9796@f9941"
+      "__uuid__": "ee3da7af-7774-4812-863a-2e31ebbd87dd@f9941"
     },
     "_type": 0,
     "_fillType": 0,

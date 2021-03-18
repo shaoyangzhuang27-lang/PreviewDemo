@@ -315,6 +315,8 @@ export class XConsts{
     public static KFragmentFrameSpriteName:string[] = new Array<string> ( "小卡框_品质随机", "小卡框_品质橙");
     public static KFragmentQualitySpriteName:string[] = new Array<string> ( "小卡框_碎片品质随机", "小卡框_碎片品质橙");
 
+
+    public static KFragmentClassesName : string[] = new Array<string>("UI_OrdinaryHero","UI_SeniorHero","UI_LegendHero")
     public static POP_SUMMON_TYPE  = {
         HeroPub : 1,
         FragmentSysthesis : 2,
