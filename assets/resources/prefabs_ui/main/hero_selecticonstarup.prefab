@@ -27,19 +27,22 @@
       },
       {
         "__id__": 22
+      },
+      {
+        "__id__": 28
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 28
+        "__id__": 34
       },
       {
-        "__id__": 30
+        "__id__": 36
       }
     ],
     "_prefab": {
-      "__id__": 32
+      "__id__": 38
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -301,7 +304,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "03939ded-4000-480d-a455-51066b2ff809@f9941"
+      "__uuid__": "68299ec1-f89b-4070-8a43-5895aa04c13b@f9941"
     },
     "_type": 1,
     "_fillType": 0,
@@ -365,7 +368,7 @@
       "a": 255
     },
     "_normalSprite": {
-      "__uuid__": "03939ded-4000-480d-a455-51066b2ff809@f9941"
+      "__uuid__": "68299ec1-f89b-4070-8a43-5895aa04c13b@f9941"
     },
     "_hoverSprite": {
       "__uuid__": "03939ded-4000-480d-a455-51066b2ff809@f9941"
@@ -496,7 +499,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "00c24087-be56-4b1e-a286-face8fc2b91c@f9941"
+      "__uuid__": "b10d534f-dab9-4986-a972-050a99ebbbe4@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -626,7 +629,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "18a5995a-e1fc-4080-8c6d-2f13b64f1aa7@f9941"
+      "__uuid__": "f43c4822-c533-4f36-b7a1-20470a130441@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -658,6 +661,136 @@
     "fileId": "18oiVLpdNFGIMfBt17p0Ex"
   },
   {
+    "__type__": "cc.Node",
+    "_name": "ico_symbol",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_active": false,
+    "_components": [
+      {
+        "__id__": 29
+      },
+      {
+        "__id__": 31
+      }
+    ],
+    "_prefab": {
+      "__id__": 33
+    },
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 42.726,
+      "y": 42.726,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_layer": 33554432,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.UITransform",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 28
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 30
+    },
+    "_priority": 0,
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 34,
+      "height": 34
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "30m+YWSx9KiJU/Y0bM4WXs"
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 28
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 32
+    },
+    "_visFlags": 0,
+    "_customMaterial": null,
+    "_srcBlendFactor": 2,
+    "_dstBlendFactor": 4,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_spriteFrame": {
+      "__uuid__": "fc0fea05-031a-4cd2-a49f-4dfdb5e53487@f9941"
+    },
+    "_type": 0,
+    "_fillType": 0,
+    "_sizeMode": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_useGrayscale": false,
+    "_atlas": null,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "5bkA6qRtRHJq7vbJku3ZKP"
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__id__": 0
+    },
+    "fileId": "43AAvDOLFHqZyJMuWvk134"
+  },
+  {
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
@@ -666,7 +799,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 29
+      "__id__": 35
     },
     "_priority": 0,
     "_contentSize": {
@@ -694,7 +827,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 31
+      "__id__": 37
     },
     "btnFrame": {
       "__id__": 8
@@ -707,6 +840,9 @@
     },
     "icoStarUp": {
       "__id__": 2
+    },
+    "icoSymbol": {
+      "__id__": 28
     },
     "_id": ""
   },

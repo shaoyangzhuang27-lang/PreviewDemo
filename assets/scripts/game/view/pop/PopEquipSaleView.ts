@@ -70,11 +70,11 @@ export class PopEquipSaleView extends PopBase {
         this.lab_gold.string = (this._equipData.price * this._selectCount).toString();
         this.itemEditNode.string = this._selectCount.toString();
 
-        resources.load('prefabs_ui/main/itemequipcell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
             let itemEquipCell = instantiate(res) as Node;
             this.iconNode.addChild(itemEquipCell);
             let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
-            script.setItemType(this._equipId, 0, ItemEquipType.equip, null);
+            script.setItemsInfo(this._equipId, 0, ItemEquipType.equip, null);
         })
     }
 

@@ -21,6 +21,7 @@ import { PopHeroPub } from "../view/pop/PopHeroPub";
 import { PopRecLineUp } from "../view/pub/PopRecLineUp";
 import { PopSummonSettle } from "../view/pop/PopSummonSettle";
 import { PopFragmentSynthesis } from "../view/pop/PopFragmentSynthesis";
+import { PopBookActive } from '../view/pop/PopBookActive';
 import { PopMultiItemReward } from "../view/pop/PopMultiItemReward";
 export class PopMgr extends PopCore  {
 
@@ -328,6 +329,8 @@ export class PopMgr extends PopCore  {
             script.setGiftID(giftId, visit);
         } );
     }
+
+
     public popHeroPubWindow(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop_hero_pub', (err:any,res:any)=>{
@@ -404,6 +407,17 @@ export class PopMgr extends PopCore  {
             let script = p.getComponent("PopFragmentSynthesis") as PopFragmentSynthesis;
             script.FragmentSysthesisInfo = data;
             script.setIsMaskClose(isMaskClose);
+        } );
+    }
+
+    public popHeroActiveView(id:number)
+    {
+        resources.load('prefabs_ui/pop/pop_bookactive', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            let script = p.getComponent("PopBookActive") as PopBookActive;
+            script.setActiveHeroInfo(id);
         } );
     }
 
