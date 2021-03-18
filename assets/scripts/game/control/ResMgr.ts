@@ -1,5 +1,5 @@
 import { assetManager,AssetManager,Prefab,resources,instantiate, director } from 'cc';
-import {ResCore} from "../../core/control/ResCore";
+import {ResCore, ResType} from "../../core/control/ResCore";
 
 export class ResMgr extends ResCore{
     private static _instance: ResMgr = new ResMgr();
@@ -10,49 +10,41 @@ export class ResMgr extends ResCore{
 
     //加载游戏必要资源(主ui资源,其他ui资源[是否另外加载待定])
     public loadGameNecessaryRes(){
-        let item = this.getLoadArrItem("common")
-        if(!item){
-            this.loadArr.push(["common","common",true,null]);
-        }
+        // this.pushRes("common",ResType.common,true,null,"通用资源");
+        this.pushRes("ui/common/bg_mask",ResType.common,true,null,"通用资源");
     }
     //卸载游戏必要资源(主ui资源)
     public releaseGameNecessaryRes(){
-        this.removeLoadArrItem("common");
+        this.popRes("ui/common/bg_mask");
     }
 
     //加载主ui资源-------------------------
     public loadMainUI(){
-        let item = this.getLoadArrItem("prefabs_ui/main_ui")
-        if(!item){
-            this.loadArr.push(["prefabs_ui/main_ui","screendynamic",true,null]);
-        }
+        this.pushRes("prefabs_ui/main_ui",ResType.screendynamic,true,null,"主界面");
     }
     public releaseMainUI(){
-        this.removeLoadArrItem("prefabs_ui/main_ui");
+        this.popRes("prefabs_ui/main_ui");
     }
     //加载主ui资源-------------------------
 
     //加载主城资源-----------------------------
     public loadMainCity(){
-        let item = this.getLoadArrItem("prefabs_ui/main_city")
-        if(!item){
-            this.loadArr.push(["prefabs_ui/main_city","screendynamic",true,null]);
-        }
+        this.pushRes("prefabs_ui/main_city",ResType.screendynamic,true,null,"主城");
     }
     public releaseMainCity(){
-        this.removeLoadArrItem("prefabs_ui/main_city");
+        this.popRes("prefabs_ui/main_city");
     }
     //加载主城资源-----------------------------
 
     //加载主界面场景---------------------------
     public loadMainScene(){
-        this.loadArr.push(["scene_main","screenstatic",false,null]);
+        this.pushRes("scene_main",ResType.screenstatic,false,null,"主场景");
     }
     //加载主界面场景---------------------------
 
     //加载战斗场景------------------------------
     public loadBattleScene(){
-        this.loadArr.push(["battle","screenstatic",false,null]);
+        this.pushRes("battle",ResType.screenstatic,false,null,"战斗场景");
     }
     //加载战斗场景------------------------------
 

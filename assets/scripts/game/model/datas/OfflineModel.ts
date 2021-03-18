@@ -1,8 +1,9 @@
 import { TableName, ValueMgr } from "../ValueMgr";
 import { GameModel } from "../GameModel";
+import { BaseModel } from "./BaseModel";
 
 // 挂机数据
-export class OfflineModel
+export class OfflineModel extends BaseModel
 {
     // 存储奖励信息
     private m_bonusInfo: any = []
