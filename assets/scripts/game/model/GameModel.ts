@@ -6,7 +6,7 @@ import { TechnologyModel } from "./datas/TechnologyModel";
 import { BagItemModel } from "./datas/BagItemModel";
 import { HeroPubModel } from "./datas/HeroPubModel";
 import { TableName, ValueMgr } from "./ValueMgr";
-import { OfflineModel } from "./datas/OfflineModel"
+// import { OfflineModel } from "./datas/OfflineModel"
 import { ForgeModel } from "./datas/ForgeModel"
 
 export class GameModel{
