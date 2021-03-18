@@ -6,6 +6,7 @@ import { GameModel } from "../GameModel";
 import { TableName, ValueMgr } from "../ValueMgr";
 import { XConsts } from "../const/XConsts";
 import { XShare } from "../const/XShare";
+import { math } from "cc";
 
 export class HeroData extends BaseHeroData {
     private _recordSkill: Config.skill.Record = new Config.skill.Record();    //记录的技能
@@ -144,16 +145,23 @@ export class HeroData extends BaseHeroData {
 
     public get tier() {
         if (!this.isRoleHero()) {
-            return 1;// Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);
+            return 1;//this.GetMaxTier();// Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);            
         } else
             return this._heroInfo.tier;
     }
     public set tier(_tier: number) {
         if (!this.isRoleHero()) {
-            // Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);
+            this._record.star= _tier;
         } else {
             this._heroInfo.tier = _tier;
         }
+    }
+
+    public GetMaxTier() {
+        if (this._record.star > XShare.getInstance().KMaxHeroTier)
+            return XShare.getInstance().KMaxHeroTier;
+
+        return this._record.star;
     }
 
     public get isLocked() {
@@ -300,7 +308,7 @@ export class HeroData extends BaseHeroData {
 
 
     private getPropertyUpByTier() {
-        let n = 1//Tier;
+        let n = this.tier;
         if (n < XShare.getInstance().KHeroPropertyUpByTier.length) {
             return XShare.getInstance().KHeroPropertyUpByTier[n] / 100.0;
         }
