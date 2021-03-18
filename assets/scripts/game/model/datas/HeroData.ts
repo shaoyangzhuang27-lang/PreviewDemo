@@ -854,10 +854,9 @@ export class HeroData extends BaseHeroData {
 
     //返回英雄头衔
     public getTitleName(): string {
-        let _title = "";
-        if (this._record != null) {
-            return this._record.title;
-        }
-        return _title
+        if ( (this._record != null) && (this._record.title != "0") )
+            return (ValueMgr.getInstance().getItemByField(TableName.language_data, this._record.title) as Config.language_data.Record).cn;
+    
+        return "";
     }
 }

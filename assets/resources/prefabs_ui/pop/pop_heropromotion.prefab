@@ -910,7 +910,7 @@
     "propertyPath": [
       "active"
     ],
-    "value": true
+    "value": false
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -1673,7 +1673,7 @@
       "__id__": 12
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 76
@@ -1727,7 +1727,7 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 32,
+      "width": 30,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1758,16 +1758,16 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 240,
+      "g": 216,
+      "b": 122,
       "a": 255
     },
     "_string": "剑圣",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 16,
-    "_fontSize": 16,
+    "_actualFontSize": 15,
+    "_fontSize": 15,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
     "_overflow": 0,
@@ -1818,7 +1818,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 376,
+      "y": 387,
       "z": 0
     },
     "_lrot": {
@@ -1857,7 +1857,7 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 40,
+      "width": 42,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1896,8 +1896,8 @@
     "_string": "萨罗",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 20,
-    "_fontSize": 20,
+    "_actualFontSize": 21,
+    "_fontSize": 21,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
     "_overflow": 0,
@@ -2735,7 +2735,9 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "5cee433b-02c7-4012-9c3d-52bffa0623d6@f9941"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -2863,7 +2865,9 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "5cee433b-02c7-4012-9c3d-52bffa0623d6@f9941"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -2991,7 +2995,9 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "5cee433b-02c7-4012-9c3d-52bffa0623d6@f9941"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -3119,7 +3125,9 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "5cee433b-02c7-4012-9c3d-52bffa0623d6@f9941"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -3247,7 +3255,9 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "5cee433b-02c7-4012-9c3d-52bffa0623d6@f9941"
+    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -20681,6 +20691,15 @@
     },
     "layout_tier": {
       "__id__": 573
+    },
+    "lab_title": {
+      "__id__": 78
+    },
+    "lab_name": {
+      "__id__": 84
+    },
+    "sp_title_bg": {
+      "__id__": 46
     },
     "lab_lv": {
       "__id__": 589

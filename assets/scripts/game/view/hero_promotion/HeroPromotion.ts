@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-17 20:28:48
+ * @LastEditTime: 2021-03-18 17:12:31
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -70,6 +70,13 @@ export class HeroPromotion extends PopBase {
     @property({ type: Layout, displayName: "layout" })
     public layout_tier: Layout = null as unknown as Layout;
 
+    @property({ type: Label, displayName: "称号" })
+    public lab_title: Label = null as unknown as Label;
+    @property({ type: Label, displayName: "姓名" })
+    public lab_name: Label = null as unknown as Label;
+    @property({ type: Sprite, displayName: "姓名背景" })
+    public sp_title_bg: Sprite = null as unknown as Sprite;
+    
     @property({ type: Label, displayName: "等级" })
     public lab_lv: Label = null as unknown as Label;
     @property({ type: Layout, displayName: "layout_lv" })
@@ -181,7 +188,7 @@ export class HeroPromotion extends PopBase {
 
     onLoad() {
         super.onLoad();
-        this._allHeroList = GameModel.getInstance().getHeroesModel().getHeroList();
+        this._allHeroList = GameModel.getInstance().getHeroesModel().getHeroList();        
         this._starNodeList = [this.img_star1, this.img_star2, this.img_star3, this.img_star4, this.img_star5];
         this._starsMiddlePos = this.img_star3.getPosition();
 
@@ -267,11 +274,15 @@ export class HeroPromotion extends PopBase {
                 pos.y += nodeSize.height / 2;
                 PopMgr.getInstance().tipHeroAttributeWindow(pos);
                 break;
-            case this.btn_up_lv:
-                console.log("HeroPromotion btn_up_lv")
+            case this.btn_arrow_left:
+                console.log("HeroPromotion btn_arrow_left");
+                let preHeroData =GameModel.getInstance().getHeroesModel().getPrevHero(this._curHeroData);
+                this.setCurrentHeroId(preHeroData.getDyncID() );                
                 break;
-            case this.btn_up_lv:
-                console.log("HeroPromotion btn_up_lv")
+            case this.btn_arrow_right:
+                let nextHeroData =GameModel.getInstance().getHeroesModel().getNextHero(this._curHeroData);
+                this.setCurrentHeroId(nextHeroData.getDyncID() );
+                console.log("HeroPromotion btn_arrow_right");
                 break;
             case this.btn_up_lv:
                 console.log("HeroPromotion btn_up_lv")
@@ -359,6 +370,7 @@ export class HeroPromotion extends PopBase {
     // 显示当前英雄数据
     private _initCurHeroView() {
         this._showCurHeroModel();
+        this._showTitleAndName();
         if (this._isHeroUpView) {
             if (this._isLvUpView) {
                 this._showHeroLvUpView();
@@ -371,7 +383,30 @@ export class HeroPromotion extends PopBase {
             this._showEquipView();
         }
     }
-
+    
+    private _showTitleAndName(){                
+        this.lab_name.string = this._curHeroData.getName();
+        let pos= this.lab_name.node.getPosition();
+        let title= this._curHeroData.getTitleName();
+        if(title != ""){
+            this.lab_title.string = title;            
+            pos.y= 378;//下移显示            
+            this.lab_title.node.active= true;
+        }else{                    
+            this.lab_title.node.active= false;
+            pos.y= 387;//居中显示
+        }
+        this.lab_name.node.setPosition(pos);
+        let id1st = Number((this._curHeroId/1000000).toFixed())
+        // if(id1st == 5) // 传奇
+        // else if(id1st == 3){// 高级
+        // else if(id1st == 1 || id1st == 2){// 普通
+        let imgPath = "ui/lv_up/英雄详情_标题背景品质紫/spriteFrame";// 高级
+        // if (id1st==5) {// 传奇
+            imgPath = "ui/lv_up/英雄详情_标题背景品质橙/spriteFrame";
+        // }
+        XFuns.ReplaceSpriteFrame(imgPath, this.sp_title_bg);        
+    }
     // 展示英雄升级界面
     private _showHeroLvUpView() {
         this.node_equip.active = false; //装备界面        
@@ -595,7 +630,7 @@ export class HeroPromotion extends PopBase {
             star = 1;
         }
 
-        let pos = this._starsMiddlePos;
+        let pos = new Vec3(this._starsMiddlePos);
         let newStarValue = star;
         if (star > 5) {
             newStarValue = star % 5;
@@ -611,7 +646,7 @@ export class HeroPromotion extends PopBase {
             else if (star > 10) {
                 starName = "星星高级";
             }
-            let iconPath: string = "ui/icon/" + starName + "/spriteFrame";
+            let iconPath: string = "ui/common/icon/" + starName + "/spriteFrame";
             this._resourceLoad(iconPath, starNode);
         });
 
