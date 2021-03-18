@@ -89,10 +89,11 @@ export namespace XStruct {
             //    frame?:(string|null);
             //    icon?:(string|null);
             //    bg?:(string|null);
-               nType :(number|null);
-               nLevel: (number | null);
-               nPropId : (number | null);
-               num?:(number|null);
+                nType ?:(number|null);
+                nLevel?: (number | null);
+                nPropId ?: (number | null);
+                nPropQuality?:(number|null);
+                num?:(number|null);
            }
            /** Represents a Record. */
            class Record implements IRecord {
@@ -106,6 +107,7 @@ export namespace XStruct {
                nType :number;
                nPropId : number;
                nLevel : number;
+               nPropQuality : number;
                num :number;
            }
         }

@@ -1,5 +1,4 @@
-
-//英雄碎片
+//升星物品
 import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources,ProgressBar,instantiate, CCInteger } from 'cc';
 const { ccclass, property } = _decorator;
 import { PopMgr } from '../../control/PopMgr';
@@ -35,18 +34,23 @@ export class ItemMultiReward extends Component {
     public lab_level:Label = null as unknown as Label;
 
     @property({type :  Node})
+    public node_satr:Node = null as unknown as Node;
+
+    @property({type :  Node})
     public starlist:Node[] = [];
 
 
     private _propInfo : XStruct.starup_prop_info.IRecord = {
-        nType : Msg.TObjectType.EObject_Hero,
+        nType : XConsts.KSTARUP_PROP_TYPE.Hero,
         nPropId : 0,
         nLevel : 0,
+        nPropQuality: 0,
         num : 0,
     }  
     
     start () {
-        this.btn_frame.on(Node.EventType.TOUCH_END, this._onClickIcon, this);     
+        this.btn_frame.on(Node.EventType.TOUCH_END, this._onClickIcon, this);
+        this.initUI()
     }
 
     //碎片合成弹窗
@@ -90,19 +94,72 @@ export class ItemMultiReward extends Component {
 
     public initUI()
     {
-        switch(this._propInfo.nType)
+        if(this._propInfo.nType)
         {
-            case Msg.TObjectType.EObject_Hero : 
-                break;
-            case Msg.TObjectType.EObject_Hero : 
-                this.img_camp.active = false;
-                this.lab_level.node.active = false;
+            let frame = "";
+            let icon = "";
+            let bg = "";
+            switch(this._propInfo.nType)
+            {
+                case XConsts.KSTARUP_PROP_TYPE.Hero : 
+                    let heroInfo = ValueMgr.getInstance().getItemByField(TableName.heroes, this._propInfo.nPropId ? this._propInfo.nPropId : 0) as Config.heroes.Record;
+                    let star = heroInfo.star;
+                    frame = "ui/common/icon/" +  XConsts.GetQualityBgByStar(heroInfo.star) + "/spriteFrame";
+                    icon = "ui/common/hero/" + heroInfo.image + "/spriteFrame";
 
+                    this.lab_level.string = String(this._propInfo.nLevel);
+                    this._resourceLoad(frame,this.btn_frame);
+                    this._resourceLoad(icon,this.img_icon);
+                    this._setStar(star);
+                    // this._resourceLoad()
+                    break;
+                case XConsts.KSTARUP_PROP_TYPE.Money : 
+                    this.img_camp.active = false;
+                    this.lab_level.node.active = false;
+                    this.node_satr.active = false;
+                    // this.lab_num.string = "x" + String(this._propInfo.num);
+                    icon = "ui/common/commonIcon/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
+                    bg = "ui/common/icon/" +  XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ?this._propInfo.nPropQuality : 2] + "/spriteFrame"
+                    this._resourceLoad(icon,this.img_icon);
+                    this._resourceLoad(bg,this.img_bg);
+                    break;
+                case XConsts.KSTARUP_PROP_TYPE.Exp : 
+                    this.img_camp.active = false;
+                    this.lab_level.node.active = false;
+                    this.node_satr.active = false;
+                    // this.lab_num.string = "x" + String(this._propInfo.num);
+                    icon = "ui/common/commonIcon/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
+                    bg = "ui/common/icon/" +  XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ?this._propInfo.nPropQuality : 2] + "/spriteFrame"
+                    this._resourceLoad(icon,this.img_icon);
+                    this._resourceLoad(bg,this.img_bg);
+                    break;
+            }
 
-                break;
-            case Msg.TObjectType.EObject_Exp : 
-                break;
+            this.lab_num.string =  "x" + String(this._propInfo.num);
+            // let name: string = XConsts.KObjectIconSpriteName[this._propInfo.nType]
+            // let icon = "ui/main/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
+            // let bg = "ui/common/icon/" +  XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ?this._propInfo.nPropQuality : 2] + "/spriteFrame"
         }
+       
+
+        // let name: string = XConsts.KObjectIconSpriteName[this._propInfo.nType]
+        // let iconPath: string = "ui/main/" + name + "/spriteFrame"
+        // resources.load(iconPath, (err, spriteFrame: SpriteFrame) => {
+        //     if (!err && this.m_sptIcon) {
+        //         let sprite = this.m_sptIcon.getComponent(Sprite) as Sprite;
+        //         sprite.spriteFrame = spriteFrame;
+        //     }
+        // });
+       
+                // info.frame = "ui/common/icon/" +  XConsts.GetQualityBgByStar(heroInfo.star) + "/spriteFrame";
+                // info.quality = "ui/common/icon/" + XConsts.KFragmentQualitySpriteName[1] + "/spriteFrame";
+                // info.icon = "ui/common/hero/" + heroInfo.image + "/spriteFrame";
+                // info.camp = "ui/common/team/" + XConsts.KHeroCampIcon[heroInfo.camp] + "/spriteFrame";
+                // info.star = heroInfo.star;
+                // info.maxNum = XConsts.KFragmentNumRequired[info.star ? info.star : 1];
+                // info.curNum = value.num ? value.num : 0;
+                // info.heroName = heroInfo.name;
+                // info.campName = XConsts.KCampName[heroInfo.camp];
         // if(this._propInfo.nType == Msg.TObjectType.EObject_Hero)
         // {
 
@@ -158,11 +215,5 @@ export class ItemMultiReward extends Component {
            this._propInfo = instantiate(data);
     }
 
-    // set FragmentInfo(info : XStruct.fragment_synthesis_info.IRecord)
-    // {
 
-    // }
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
 }

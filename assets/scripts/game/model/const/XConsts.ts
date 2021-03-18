@@ -324,5 +324,10 @@ export class XConsts{
 
     //升星塔获得物品
     public static KStarUpGainObjectTitle : string = "UI_GainObject_Title" ;  //获得物品
+    public static KSTARUP_PROP_TYPE  = {
+        Hero : 5,
+        Money: 1,
+        Exp : 2,
+    }
 
 } 
