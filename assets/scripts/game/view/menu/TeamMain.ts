@@ -141,7 +141,11 @@ export class TeamMain extends Component {
     // 英雄背包节点
     private _initHeroNode(campType ?: Msg.TCampType){
         // 清空子节点
-        this.layHero.removeAllChildren()
+        // this.layHero.removeAllChildren()
+        let childrens = this.layHero.children
+        childrens.forEach(element => {
+            element?.destroy()
+        });
         // 数据排序
         let heroModel = GameModel.getInstance().getHeroesModel()
         let heroList = campType ? heroModel.getHeroListByCampType(campType) : heroModel.getHeroList();

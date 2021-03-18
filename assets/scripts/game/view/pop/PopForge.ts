@@ -68,15 +68,21 @@ export class PopForge extends PopBase {
 
     _initView(){
         // 获取装备数据
-        let list = GameModel.getInstance().getForgeModel().getConfigEquip()
-
-        resources.load('prefabs_ui/main/itemequipcell', (err: any, res: any) => {
-            let itemEquipCell = instantiate(res) as Node;
-            itemEquipCell.parent = this.layoutEquip
-            let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
-            // script.setItemType(this._itemID, 0, ItemEquipType.equip, null);
+        let forgeModel = GameModel.getInstance().getForgeModel()
+        let list = forgeModel.getConfigEquipsByPos(Msg.TEquipLocationType.EEquipLocationType_Weapon)
+        resources.load('prefabs_ui/main/itemEquipcell', (err: any, res: any) => {
+            if (list == undefined || list.length < 0) {
+                console.log("获取配置装备数据失败")
+                return
+            }
+            list.forEach(element => {
+                let itemEquipCell = instantiate(res) as Node;
+                itemEquipCell.parent = this.layoutEquip
+                let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
+                script.setItemType(element.id, 0, ItemEquipType.equip, null);
+            })
         })
-    }
+}
 
     _tabClick(event: Event, customEventData: string){
         let tog: Toggle = (event as any);
