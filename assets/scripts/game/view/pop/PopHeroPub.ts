@@ -210,9 +210,9 @@ export class PopHeroPub extends PopBase {
                         if(GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts() >= XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME)
                         {
                             //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                             this.showSummonSettleWindow("SummonWindow");
-                            // console.log("pub 钻石");
-                            //this.onSubmit(Msg.TSummonType.ESummonType_Basic,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,true);
+                             //this.showSummonSettleWindow("SummonWindow");
+                            console.log("pub 钻石");
+                            this.onSubmit(Msg.TSummonType.ESummonType_Basic,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,true);
                         }
                         else
                         {

@@ -314,11 +314,15 @@ export class XConsts{
     public static KFragmentNumRequired : number[] = new Array<number> (0,5,10,20,30,50);
     public static KFragmentFrameSpriteName:string[] = new Array<string> ( "小卡框_品质随机", "小卡框_品质橙");
     public static KFragmentQualitySpriteName:string[] = new Array<string> ( "小卡框_碎片品质随机", "小卡框_碎片品质橙");
-
+    public static KFragmentBgSpriteName:string[] = new Array<string> ( "小卡框_品质普通背景", "小卡框_品质金背景");
 
     public static KFragmentClassesName : string[] = new Array<string>("UI_OrdinaryHero","UI_SeniorHero","UI_LegendHero")
     public static POP_SUMMON_TYPE  = {
         HeroPub : 1,
         FragmentSysthesis : 2,
     }
+
+    //升星塔获得物品
+    public static KStarUpGainObjectTitle : string = "UI_GainObject_Title" ;  //获得物品
+
 } 

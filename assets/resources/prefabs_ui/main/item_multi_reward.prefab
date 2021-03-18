@@ -42,13 +42,10 @@
     "_components": [
       {
         "__id__": 75
-      },
-      {
-        "__id__": 77
       }
     ],
     "_prefab": {
-      "__id__": 79
+      "__id__": 77
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -80,7 +77,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "bg",
+    "_name": "img_bg",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -177,7 +174,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "2cdc8a2e-083a-419d-bd91-c5db83c6e456@f9941"
+      "__uuid__": "57911c20-eb88-4239-925a-b065f0a85d5b@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -307,7 +304,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "8d9d6c5a-4667-4344-b3b7-a65dda0a092d@f9941"
+      "__uuid__": "104e845f-5f3c-4942-8a66-1776187d40a7@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -440,7 +437,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "3656d112-1ed6-4443-970d-c829f274e292@f9941"
+      "__uuid__": "781f7d2e-f557-4655-a511-a3fdce13cd5e@f9941"
     },
     "_type": 1,
     "_fillType": 0,
@@ -508,17 +505,11 @@
       "a": 255
     },
     "_normalSprite": {
-      "__uuid__": "3656d112-1ed6-4443-970d-c829f274e292@f9941"
+      "__uuid__": "781f7d2e-f557-4655-a511-a3fdce13cd5e@f9941"
     },
-    "_hoverSprite": {
-      "__uuid__": "0a8762ae-db88-4ac6-9bcd-a55314686f44@f9941"
-    },
-    "_pressedSprite": {
-      "__uuid__": "0a8762ae-db88-4ac6-9bcd-a55314686f44@f9941"
-    },
-    "_disabledSprite": {
-      "__uuid__": "0a8762ae-db88-4ac6-9bcd-a55314686f44@f9941"
-    },
+    "_hoverSprite": null,
+    "_pressedSprite": null,
+    "_disabledSprite": null,
     "_duration": 0.1,
     "_zoomScale": 1.2,
     "_target": {
@@ -786,7 +777,7 @@
     "_overflow": 0,
     "_enableWrapText": true,
     "_font": {
-      "__uuid__": "8b4ba15c-3d55-48f0-bafb-881b9f77cfd7"
+      "__uuid__": "d09e0386-910a-431a-acca-9df5fd90afd0"
     },
     "_isSystemFontUsed": false,
     "_isItalic": false,
@@ -970,7 +961,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "a969e491-49f1-46d7-8138-5934371460fb@f9941"
+      "__uuid__": "5cee433b-02c7-4012-9c3d-52bffa0623d6@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -1100,7 +1091,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "a969e491-49f1-46d7-8138-5934371460fb@f9941"
+      "__uuid__": "5cee433b-02c7-4012-9c3d-52bffa0623d6@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -1230,7 +1221,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "a969e491-49f1-46d7-8138-5934371460fb@f9941"
+      "__uuid__": "5cee433b-02c7-4012-9c3d-52bffa0623d6@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -1360,7 +1351,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "a969e491-49f1-46d7-8138-5934371460fb@f9941"
+      "__uuid__": "5cee433b-02c7-4012-9c3d-52bffa0623d6@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -1490,7 +1481,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "a969e491-49f1-46d7-8138-5934371460fb@f9941"
+      "__uuid__": "5cee433b-02c7-4012-9c3d-52bffa0623d6@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -1561,7 +1552,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "lab_process_num",
+    "_name": "lab_num",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -1718,58 +1709,6 @@
   {
     "__type__": "cc.CompPrefabInfo",
     "fileId": "b9O25tiixAgabxJvDwjuiS"
-  },
-  {
-    "__type__": "194897GAtlHx4phzEpBIZ+G",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 78
-    },
-    "img_bg": {
-      "__id__": 2
-    },
-    "img_icon": {
-      "__id__": 8
-    },
-    "btn_frame": {
-      "__id__": 14
-    },
-    "img_camp": {
-      "__id__": 23
-    },
-    "img_debris": null,
-    "lab_process_num": {
-      "__id__": 72
-    },
-    "probar_fragment": null,
-    "img_point": null,
-    "starlist": [
-      {
-        "__id__": 48
-      },
-      {
-        "__id__": 54
-      },
-      {
-        "__id__": 42
-      },
-      {
-        "__id__": 60
-      },
-      {
-        "__id__": 36
-      }
-    ],
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "bfeHtyrrxOub3ORF0zFf7x"
   },
   {
     "__type__": "cc.PrefabInfo",

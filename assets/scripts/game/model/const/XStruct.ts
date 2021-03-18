@@ -29,7 +29,7 @@ export namespace XStruct {
                star?: (number|null);
                level?:(number|null);
                frame?:(string|null);
-               img?:(string|null);
+               icon?:(string|null);
            }
            /** Represents a Record. */
            class Record implements IRecord {
@@ -38,7 +38,7 @@ export namespace XStruct {
                star : number;
                level : number;
                frame :string;
-               img : string;
+               icon : string;
            }
        }
 
@@ -50,13 +50,14 @@ export namespace XStruct {
                camp?: (string|null);
                star?: (number|null);
                quality?:(string|null);
-               img?:(string|null);
+               icon?:(string|null);
                type : (number|null);
                maxNum :(number|null);
                curNum : (number|null);
                heroName : (string|null);
                campName : (string|null);
                classesName : (string|null);
+               bg?: (string|null);
            }
            /** Represents a Record. */
            class Record implements IRecord {
@@ -65,16 +66,51 @@ export namespace XStruct {
                camp : string;
                star : number;
                quality : string;
-               img : string;
+               icon : string;
                type : number;
                maxNum : number;
                curNum : number;
                heroName : string;
                campName : string;
                classesName:string;
+               bg : string;
 
            }
        }
+
+
+          //升星塔获取物品信息
+          namespace starup_prop_info {
+            /** Properties of a Record. */
+            interface IRecord {
+            //    camp?: (string|null);
+            //    star?: (number|null);
+            //    level?:(number|null);
+            //    frame?:(string|null);
+            //    icon?:(string|null);
+            //    bg?:(string|null);
+               nType :(number|null);
+               nLevel: (number | null);
+               nPropId : (number | null);
+               num?:(number|null);
+           }
+           /** Represents a Record. */
+           class Record implements IRecord {
+               constructor(p?: XStruct.starup_prop_info.IRecord);
+            //    camp : string;
+            //    star : number;
+            //    level : number;
+            //    frame :string;
+            //    icon : string;
+            //    bg : string;
+               nType :number;
+               nPropId : number;
+               nLevel : number;
+               num :number;
+           }
+        }
+
+
 
 
        //自测数据

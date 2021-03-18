@@ -296,14 +296,14 @@ export class HeroesModel extends BaseModel{
             star : 0,
             level : 1,
             frame : "",
-            img : "",
+            icon : "",
 
         }
         var _hero = ValueMgr.getInstance().getItemByField(TableName.heroes, id) as Config.heroes.Record;
         info.camp = XConsts.KHeroCampIcon[_hero.camp];
         info.star = _hero.star;
         info.frame = XConsts.GetQualityBgByStar(_hero.star);
-        info.img = _hero.image;
+        info.icon = _hero.image;
         return info
     }
 }

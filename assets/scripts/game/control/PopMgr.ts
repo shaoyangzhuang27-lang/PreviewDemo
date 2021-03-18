@@ -421,7 +421,7 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    public popMultiItemRewardWindow(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+    public popMultiItemRewardWindow(title:string,content:string,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_multi_itemreward', (err:any,res:any)=>{
             let p = instantiate( res );

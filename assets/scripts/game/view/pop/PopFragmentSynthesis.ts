@@ -67,13 +67,14 @@ export class PopFragmentSynthesis extends PopBase {
         camp : "",
         star : 0,
         quality : "",
-        img : "",
+        icon : "",
         type : 0,
         maxNum : 0,
         curNum : 0,
         heroName : "",
         campName : "",
-        classesName : ""
+        classesName : "",
+        bg : ""
     }  
 
     public set FragmentSysthesisInfo(data : XStruct.fragment_synthesis_info.IRecord)

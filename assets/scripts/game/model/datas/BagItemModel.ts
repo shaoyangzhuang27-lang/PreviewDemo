@@ -62,13 +62,14 @@ export class BagItemModel extends BaseModel{
                 camp : "",
                 star : 0,
                 quality : "",
-                img : "",
+                icon : "",
                 type : 0,
                 maxNum : 0,
                 curNum : 0,
                 heroName : "",
                 campName : "",
-                classesName : ""
+                classesName : "",
+                bg : "",
             }  
             let value = msg.fragmentList[key];
 
@@ -118,7 +119,7 @@ export class BagItemModel extends BaseModel{
                 let heroInfo = ValueMgr.getInstance().getItemByField(TableName.heroes, value.param ? value.param : 5051402) as Config.heroes.Record;
                 info.frame = "ui/common/icon/" +  XConsts.GetQualityBgByStar(heroInfo.star) + "/spriteFrame";
                 info.quality = "ui/common/icon/" + XConsts.KFragmentQualitySpriteName[1] + "/spriteFrame";
-                info.img = "ui/common/hero/" + heroInfo.image + "/spriteFrame";
+                info.icon = "ui/common/hero/" + heroInfo.image + "/spriteFrame";
                 info.camp = "ui/common/team/" + XConsts.KHeroCampIcon[heroInfo.camp] + "/spriteFrame";
                 info.star = heroInfo.star;
                 info.maxNum = XConsts.KFragmentNumRequired[info.star ? info.star : 1];
@@ -475,7 +476,7 @@ export class BagItemModel extends BaseModel{
             fragmentType : XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentRandom,
             param : 1,
             star : 4,
-            num : 60,
+            num : 10,
         }
         test.set(1,instantiate(testInfo));
         testInfo.fragmentType = XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentCampRandom;
@@ -509,7 +510,8 @@ export class BagItemModel extends BaseModel{
                 curNum : 0,
                 heroName : "",
                 campName : "",
-                classesName : ""
+                classesName : "",
+                bg : ""
             }  
             let value = test.get(key);
 
@@ -549,6 +551,7 @@ export class BagItemModel extends BaseModel{
                 info.maxNum = XConsts.KFragmentNumRequired[value.star ? value.star : 1];
                 info.curNum = value.num ? value.num : 0;
                 info.classesName = XConsts.KFragmentClassesName[2];
+                info.bg = "ui/common/icon/" + XConsts.KFragmentBgSpriteName[1] + "/spriteFrame";
             }
             else if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentHero)
             {

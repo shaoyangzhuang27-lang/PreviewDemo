@@ -1,14 +1,19 @@
-import { _decorator, Component, Node,LabelComponent,resources,ScrollView,instantiate,Vec3,UITransform,Size } from 'cc';
+import { _decorator, Component, Node,LabelComponent,resources,ScrollView,instantiate,Vec3,UITransform,Size, Label } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
+import { PopMgr } from '../../control/PopMgr';
+import { XConsts } from '../../model/const/XConsts';
+import { TableName, ValueMgr } from "../../model/ValueMgr";
 const { ccclass, property } = _decorator;
 
 @ccclass('PopMultiItemReward')
 export class PopMultiItemReward extends PopBase {
-    @property({type: LabelComponent})
-    public lab_title:LabelComponent | null = null;
+    @property({type: Label})
+    public lab_title = null as unknown as Label;
 
-    @property({type: LabelComponent})
-    public lab_content:LabelComponent | null = null;
+
+    @property({type: Label})
+    public lab_content = null as unknown as Label;
+
 
     @property({type: Node})
     public btn_submit:Node | null = null;
@@ -37,7 +42,7 @@ export class PopMultiItemReward extends PopBase {
             this.lab_content.string = content
     }
     public setSubmitCallBack(func:Function){
-        this._submitCallFun = func;
+        func ? this._submitCallFun = func : this._submitCallFun = ()=>{PopMgr.getInstance().deleteWindow()};
     }
 
     public setCloseCallBack(func:Function | null){
@@ -48,6 +53,9 @@ export class PopMultiItemReward extends PopBase {
 
     public initUI()
     {
+        var title = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.KStarUpGainObjectTitle) as Config.language_ui.Record;
+        this.lab_title.string = title.cn;
+
           resources.load('prefabs_ui/main/item_multi_reward', (err:any,res:any)=>{
             for (var i = 0 ; i < 9; i++) {
                 let reclineup_item = instantiate( res );
