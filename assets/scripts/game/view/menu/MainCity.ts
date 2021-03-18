@@ -87,14 +87,15 @@ export class MainCity extends Component {
         let beast = PopMgr.getInstance();
         // beast.initPop(this.node)
 
-        beast.popupSimpleWindow("建筑:"+buildName,"我是内容"+buildName,()=>{
-            console.log("提交内容!")
-            beast.popupSimpleWindow("删除建筑?","删除",()=>{
-                // console.log("提交内容!")
-                beast.popupPrompt("无法删除");
-            });
-        });
+        PopMgr.getInstance().popForge()
 
+        // beast.popupSimpleWindow("建筑:"+buildName,"我是内容"+buildName,()=>{
+        //     console.log("提交内容!")
+        //     beast.popupSimpleWindow("删除建筑?","删除",()=>{
+        //         // console.log("提交内容!")
+        //         beast.popupPrompt("无法删除");
+        //     });
+        // });
     }
 
     // update (deltaTime: number) {
