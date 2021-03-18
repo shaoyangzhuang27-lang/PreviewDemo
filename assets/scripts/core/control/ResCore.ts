@@ -1,16 +1,18 @@
 import { assetManager,AssetManager,Prefab,resources,instantiate, director } from 'cc';
 
+export enum ResType{
+    screenstatic,//场景预加载,加载完成后,切换场景自动释放
+    screendynamic,//当前场景必要资源,切换场景后手动释放
+    common,//每个场景都需要使用到的通用资源,加载一次,后期不做释放操作
+    single//临时使用资源,随用随删,不在场景加载界面中使用
+}
+
 export class ResCore{
 
     protected prefab_ui:any = null;
     protected prefab_city:any = null;
-    //[资源路径,资源类型,是否控制引用,资源对象]
-    //资源类型:
-    //screenstatic:场景预加载,加载完成后,切换场景自动释放
-    //screendynamic:当前场景必要资源,切换场景后手动释放
-    //common:每个场景都需要使用到的通用资源,加载一次,后期不做释放操作
-    //single:临时使用资源,随用随删,不在场景加载界面中使用
-    protected loadArr:Array<[string,string,boolean,any]> = [];
+    //[资源路径,资源类型,是否控制引用,资源对象,资源名]
+    protected loadArr:Array<[string,ResType,boolean,any,string]> = [];
     protected tempArr:Map<string,Map<string,any>> =  new Map();
 
     /*
@@ -71,41 +73,51 @@ export class ResCore{
 
     //[0资源路径,1资源类型,2是否控制引用,3资源对象]
     public startLoad(pro_callback:any,com_callback:any){
-        let fun = (loadArr:Array<[string,string,boolean,any]>,index:number)=> {
+        let fun = (loadArr:Array<[string,ResType,boolean,any,string]>,index:number)=> {
             let curArr = this.loadArr[index];
             let resurl = curArr[0];
             let resType = curArr[1];
             let isAddRef = curArr[2];
-            if(resType == "screenstatic"){
-                director.preloadScene(resurl,(finished:number,total:number)=>{
-                    pro_callback(finished + total*index,total*3)                
-                },(err, obj) => {
-                    com_callback(this.loadArr);
-                    this.loadArr.splice(index, 1);
-                })
-            }else if(resType == "screendynamic" || resType == "common"){
-                resources.load(resurl,(finished,total)=>{
-                    pro_callback(finished + total*index,total*3)                
-                },
-                (err, obj) => {
-                    if(index < loadArr.length - 1){
-                        curArr[3] = obj;
-                        if(isAddRef){
-                            curArr[3].addRef();
-                        }
-    
-                        index++;
-                        fun(loadArr,index);
-                    }else{ 
-                        curArr[3] = obj;
-                        if(isAddRef){
-                            curArr[3].addRef();
-                        }
+            let resName = curArr[4];
 
-                        com_callback(this.loadArr);
-                    }
+            switch(resType){
+                case ResType.screenstatic:
                     
-                });
+                    director.preloadScene(resurl,(finished:number,total:number)=>{
+                        pro_callback(finished + total*index,total*3,resName);
+                    },(err, obj) => {
+                        com_callback(this.loadArr);
+                        this.loadArr.splice(index, 1);
+                    })
+
+                    break;
+                case ResType.screendynamic:
+                case ResType.common:
+                    
+                    resources.load(resurl,(finished,total)=>{
+                        pro_callback(finished + total*index,total*3,resName)                
+                    },
+                    (err, obj) => {
+                        if(index < loadArr.length - 1){
+                            curArr[3] = obj;
+                            if(isAddRef){
+                                curArr[3].addRef();
+                            }
+        
+                            index++;
+                            fun(loadArr,index);
+                        }else{ 
+                            curArr[3] = obj;
+                            if(isAddRef){
+                                curArr[3].addRef();
+                            }
+
+                            com_callback(this.loadArr);
+                        }
+                        
+                    });
+
+                    break;
             }
         }
   
@@ -113,7 +125,17 @@ export class ResCore{
         
     }
     
-    protected getLoadArrItem(str:string){
+    protected pushRes(resUrl:string,resType:ResType,isRef:boolean,res:any = null,resName:string = ""){
+        let item = this.getLoadArrItem(resUrl)
+        if(!item){
+            this.loadArr.push([resUrl,resType,true,null,resName]);
+        }
+    }
+    protected popRes(resUrl:string){
+        this.removeLoadArrItem(resUrl);
+    }
+
+    private getLoadArrItem(str:string){
         for (let i = 0; i < this.loadArr.length; i++) {
             const element = this.loadArr[i];
             if(element[0] == str){
@@ -122,7 +144,7 @@ export class ResCore{
         }
         return null;
     }
-    protected removeLoadArrItem(str:string){
+    private removeLoadArrItem(str:string){
         for (let i = 0; i < this.loadArr.length; i++) {
             const element = this.loadArr[i];
             if(element[0] == str){

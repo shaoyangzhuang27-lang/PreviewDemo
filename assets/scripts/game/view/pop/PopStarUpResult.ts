@@ -3,7 +3,7 @@
  * @author 施敏昭
  * @version 1.0.0,2021.3.15
  */
-import { _decorator, Sprite,Vec3,tween, Component,SpriteFrame,Label,Node, resources,LabelComponent } from 'cc';
+import { _decorator,EventHandler,Button, Sprite,Vec3,tween, Component,SpriteFrame,Label,Node, resources,LabelComponent } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { HeroModel } from '../hero/HeroModel';
 import { HeroData } from '../../model/datas/HeroData';
@@ -13,6 +13,9 @@ const { ccclass, property } = _decorator;
 
 @ccclass('PopStarUpResult')
 export class PopStarUpResult extends PopBase {
+
+    @property({type: Button, displayName: "确定按钮"})
+    public btn_submit:Button | null = null;
 
     @property({type: Label, displayName: "英雄名"})
     public lab_Name:Label = null as unknown as Label;
@@ -71,6 +74,13 @@ export class PopStarUpResult extends PopBase {
 
     start () {
         super.start(); 
+        var clickEventHandler = new EventHandler();
+        clickEventHandler.target = this.node; //这个 node 节点是你的事件处理代码组件所属的节点
+        clickEventHandler.component = "PopStarUpResult";//这个是代码文件名
+        clickEventHandler.handler = "_onSubmitClick";
+        clickEventHandler.customEventData = "";
+        this.btn_submit?.clickEvents.push(clickEventHandler);
+
         for (let index = 0; index < this.nodelist.length; index++) {
             this.nodelist[index].active = false;
         }
@@ -93,6 +103,10 @@ export class PopStarUpResult extends PopBase {
     public setCloseCallBack(func:Function | null){
         if(func)
             this._closeFunc = func;
+    }
+
+    private _onSubmitClick(event: Event, customEventData: string){
+        this.delSelf();
     }
 
     //平台显示英雄信息
@@ -153,7 +167,7 @@ export class PopStarUpResult extends PopBase {
     {
         if(this.cur_hero_model)
         {
-            this.cur_hero_model.updateByHeroPerfabPath(_iconName);
+            //this.cur_hero_model.updateByHeroPerfabPath(_iconName);
         }
     }
 

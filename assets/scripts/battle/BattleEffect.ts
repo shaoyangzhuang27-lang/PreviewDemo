@@ -40,10 +40,21 @@ export class BattleEffect extends Component {
     private _targetNode: Node | null = null;
     private _endTargetList: HeroBase[] = [];
 
+    private _tmpLLTime: number = 15;
+
     update(dt: number) {
         if (this._actFun) {
             this._actFun.call(this, dt);
         }
+
+        this._tmpLLTime-=dt;
+        if (this._tmpLLTime <= 0) {
+            this.node.destroy();
+            console.warn("注意资源没有释放++++++++++++++++++++++++++++++++")
+            return;
+        }
+
+        
 
         if (this.playTime == 0) {
             return;
@@ -69,8 +80,8 @@ export class BattleEffect extends Component {
     }
 
     destroySelf(): void {
-        // this.node.destroy();
-        this.node.removeFromParent();
+        this.node.destroy();
+        // this.node.removeFromParent();
     }
 
     isImmediately(): boolean {

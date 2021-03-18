@@ -1,4 +1,8 @@
-
+/**
+ * 游戏组件:道具装备cell
+ * @author 黄志清
+ * @version 1.0.0,2021.3.15
+ */
 import { _decorator, Component, Node, Label, resources, SpriteFrame, Sprite } from 'cc';
 import { XConsts } from '../../model/const/XConsts';
 import { XFuns } from '../../model/const/XFuns';
@@ -35,9 +39,10 @@ export class ItemEquipCell extends Component {
     private _itemID:number = -1;
     private _itemCount:number = 0;
     private _clickCallback :Function | null = null;
-    private _ObjectType:number = 0;
+    private _objectType:number = 0;
+
     start () {
-        this._ObjectType = Msg.TObjectType.EObject_NULL;
+        
         this.img_bg.on(Node.EventType.TOUCH_END, this._openItemEquipInfoView, this);
     }
 
@@ -64,7 +69,7 @@ export class ItemEquipCell extends Component {
      */
     public setItemUseType(objType:number)
     {
-        this._ObjectType = objType;
+        this._objectType = objType;
     }
 
     private _initIcon()
@@ -87,8 +92,8 @@ export class ItemEquipCell extends Component {
             let starCount:number = equipData.star;
             let qualityName:string = XConsts.KQualityBgSpriteName[equipData.quality];
 
-            iconPath = "ui/equip/" + iconName + "/spriteFrame"
-            qualityPath = "ui/icon/" + qualityName + "/spriteFrame"
+            iconPath = "ui/common/equip/" + iconName + "/spriteFrame"
+            qualityPath = "ui/common/icon/" + qualityName + "/spriteFrame"
 
             for (let index = 0; index < this.starlist.length; index++) {
                 if(index >= starCount)
@@ -100,24 +105,24 @@ export class ItemEquipCell extends Component {
         else{       //道具
             this._setUIIConVisible(false);
             
-            if(this._ObjectType != Msg.TObjectType.EObject_UsableItem)
+            if(this._objectType != Msg.TObjectType.EObject_UsableItem)
             {
-                this._itemID = this._ObjectType;    //不可使用道具  id就是道具类型
-                if(XShare.getInstance().KObjectQuality.has(this._ObjectType))
+                this._itemID = this._objectType;    //不可使用道具  id就是道具类型
+                if(XShare.getInstance().KObjectQuality.has(this._objectType))
                 {
-                    let quality = Number(XShare.getInstance().KObjectQuality.get(this._ObjectType)) ;
+                    let quality = Number(XShare.getInstance().KObjectQuality.get(this._objectType)) ;
                     let qualityName:string = XConsts.KQualityBgSpriteName[quality];
-                    qualityPath = "ui/icon/" + qualityName + "/spriteFrame";
+                    qualityPath = "ui/common/icon/" + qualityName + "/spriteFrame";
                 }
-                let iconName:string = XConsts.KObjectIconSpriteName[this._ObjectType];
-                iconPath = "ui/commonIcon/" + iconName + "/spriteFrame";
+                let iconName:string = XConsts.KObjectIconSpriteName[this._objectType];
+                iconPath = "ui/common/commonIcon/" + iconName + "/spriteFrame";
             }
             else{
                 let itemData:Config.item_usable.Record = ValueMgr.getInstance().getItemByField(TableName.item_usable,this._itemID) as Config.item_usable.Record;        
                 let qualityName:string = XConsts.KQualityBgSpriteName[itemData.quality];
                 let itemUseType:number = itemData.itemType;
 
-                qualityPath = "ui/icon/" + qualityName + "/spriteFrame"
+                qualityPath = "ui/common/icon/" + qualityName + "/spriteFrame"
                 if(itemUseType == Msg.TUsableItemType.EUsableItemType_ObjectOffline)
                 {
                     this.img_infoBg.active = true;
@@ -151,7 +156,7 @@ export class ItemEquipCell extends Component {
     {
         if(this._clickCallback)
         {
-            this._clickCallback(this._itemID,this._itemType,this._ObjectType)
+            this._clickCallback(this._itemID,this._itemType,this._objectType)
         }
     }
 

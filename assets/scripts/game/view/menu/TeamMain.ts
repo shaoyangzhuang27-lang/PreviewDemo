@@ -251,16 +251,14 @@ export class TeamMain extends Component {
     //更换阵容
     private _openChangeFormationView()
     {
-        PopMgr.getInstance().popBattleTeamView(1,()=>{
-            // MsgMgr.getInstance().getMsgFormation().requestChangeBattleTeam();
-        });
+        PopMgr.getInstance().popBattleTeamView(1);
         // this.hide();
     }
 
     //图鉴
     private _openBookLibraryView()
     {
-        PopMgr.getInstance().popBoolLibraryView();
+        PopMgr.getInstance().popBookLibraryView();
     }
 
     //宠物

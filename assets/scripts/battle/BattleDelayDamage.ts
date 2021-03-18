@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, ParticleSystem } from 'cc';
 import { BattleEffect } from './BattleEffect';
 import { BattleHero } from './BattleHero';
 
@@ -16,11 +16,15 @@ export class BattleDelayDamage {
         this._battleEffectNode = battleEffect.node;
         this._target = target;
         // TODO 只有Fly类型
-        this._damageFunc = damageFunc;
-        this._battleEffect.initFly(attack.getHeroBase(), target.getHeroBase(), ()=>{
-            this.onEnd();
-        })
-
+        
+        if (this._battleEffect.isImmediately()) {
+            console.warn("BattleDelayDamage this._battleEffect.isImmediately() 功能未实现！！");
+        } else {
+            this._damageFunc = damageFunc;
+            this._battleEffect.initFly(attack.getHeroBase(), target.getHeroBase(), ()=>{
+                this.onEnd();
+            })
+        }
     }
 
     onEnd(): void {

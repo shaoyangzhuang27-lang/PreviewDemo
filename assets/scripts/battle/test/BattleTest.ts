@@ -1,5 +1,3 @@
-import {resources, instantiate} from 'cc';
-
 import { EHeroType } from "../BattleHero";
 import { HeroData } from "../../game/model/datas/HeroData";
 
@@ -40,6 +38,7 @@ let SkillPrefabPath: {[key: number]: string} = {
     552022: "skill_0001",// TODO 骷髅王技能
     546022: "skill_priest_aoe_heal", 
     534012: "skill_mage_lightning",
+    523011: "skill_dark_knight"
     // 技能粒子/火赏金猎人技能施放
 }
 
@@ -48,11 +47,12 @@ let BuffPrefabPath: {[key: string]: string} = {
     "新Buff粒子/护盾": "buff_warrior_shield",
     "新Buff粒子/燃烧": "buff_fire",
     "新Buff粒子/眩晕": "buff_vertigo",
+    "新Buff粒子/流血": "buff_bleed",
 }
 
 let AttackPrefabPath: {[key: string]: string} = {
     "新普攻粒子/占星师普通攻击": "normal_attack_priest",
-    "新普攻粒子/魔导师普通攻击": "normal_attack_priest", // TODO  33 5093401 法师1_55_3
+    "新普攻粒子/魔导师普通攻击": "normal_attack_mage", //  33 5093401 法师1_55_3
     "新普攻粒子/火枪手普通攻击": "normal_attack_gun"
     
 }
@@ -155,7 +155,7 @@ let HeroTestInfo: {[key: number]: any} = {
     },
     36: { // 5093401 法师1_55_3
         prefab: "hero_036",
-        normalAttack: "normal_attack_priest", // TODO
+        normalAttack: "normal_attack_mage", // TODO
         skillID: 534012,
         hp: 100,
         atk: 6,
@@ -197,6 +197,7 @@ let MonsterTestInfo: {[key: number]: any}= {
     },
     12: { // 1101011
         prefab: "monster_012",
+        skillID: 523011,
         hp: 400,
         atk: 10,
         def: 2,
@@ -251,7 +252,7 @@ let MonsterTestInfo: {[key: number]: any}= {
     },
     5: { // 1403011
         prefab: "monster_005",
-        normalAttack: "normal_attack_priest", // TODO
+        normalAttack: "normal_attack_mage", // TODO   
         hp: 150,
         atk: 3,
         def: 2,
