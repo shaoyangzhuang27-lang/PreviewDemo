@@ -20779,6 +20779,21 @@
     "lab_need_gold_2_tier": {
       "__id__": 277
     },
+    "btn_equip_1": {
+      "__id__": 388
+    },
+    "btn_equip_2": {
+      "__id__": 408
+    },
+    "btn_equip_3": {
+      "__id__": 434
+    },
+    "btn_equip_4": {
+      "__id__": 466
+    },
+    "btn_equip_5": {
+      "__id__": 486
+    },
     "btn_all_unload": {
       "__id__": 540
     },
