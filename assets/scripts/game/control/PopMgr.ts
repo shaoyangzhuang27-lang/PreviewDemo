@@ -21,6 +21,7 @@ import { PopHeroPub } from "../view/pop/PopHeroPub";
 import { PopRecLineUp } from "../view/pub/PopRecLineUp";
 import { PopSummonSettle } from "../view/pop/PopSummonSettle";
 import { PopFragmentSynthesis } from "../view/pop/PopFragmentSynthesis";
+import { PopMultiItemReward } from "../view/pop/PopMultiItemReward";
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -405,4 +406,24 @@ export class PopMgr extends PopCore  {
             script.setIsMaskClose(isMaskClose);
         } );
     }
+
+    public popMultiItemRewardWindow(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+
+        resources.load('prefabs_ui/pop/pop_multi_itemreward', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            let script = p.getComponent("PopMultiItemReward") as PopMultiItemReward;
+            // script.setTitle(title);
+            // script.setContent(content);
+            script.setSubmitCallBack(submitCallBack);
+            script.setCloseCallBack(closeCallBack);
+            script.setIsMaskClose(isMaskClose);
+            
+            // script.popSelf();
+            // script.setIsNeedHide(false);
+
+        } );
+    }
+
 }
