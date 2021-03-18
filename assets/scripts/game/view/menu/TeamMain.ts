@@ -254,7 +254,7 @@ export class TeamMain extends Component {
     //图鉴
     private _openBookLibraryView()
     {
-        // PopMgr.getInstance().popBoolLibraryView();
+        PopMgr.getInstance().popBookLibraryView();
     }
 
     //宠物

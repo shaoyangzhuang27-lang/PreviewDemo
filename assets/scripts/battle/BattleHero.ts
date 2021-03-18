@@ -1022,7 +1022,7 @@ export class BattleHero extends Component {
 
     removeBuff(buff: BattleBuffer): void {
         for (let i = 0; i < this._buffList.length; i++) {
-            if (this._buffList[0] == buff) {
+            if (this._buffList[i] == buff) {
                 this._buffList.splice(i, 1);
                 break;
             }

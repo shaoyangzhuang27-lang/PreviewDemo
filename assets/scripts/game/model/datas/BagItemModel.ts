@@ -5,6 +5,7 @@ import { BaseModel } from "./BaseModel";
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { TableName, ValueMgr } from "../ValueMgr";
 import { ItemEquipType } from '../../view/menu/ItemEquipCell';
+import { instantiate } from "cc";
 
 export class BagItemModel extends BaseModel{
     private _bagItemList:Map<number,number> = new Map<number,number>(); //道具id 对应数量
@@ -17,10 +18,14 @@ export class BagItemModel extends BaseModel{
      */
     private _notSellItemStingList:Map<Msg.TObjectType, Array<string>> = new Map<Msg.TObjectType, Array<string>>();
 
+    //玩家所有碎片信息合集
+    private _fragmentSynthesisInfoList : Array<XStruct.fragment_synthesis_info.IRecord> = []; //new Array<XStruct.fragment_synthesis_info.IRecord>();
+    
     public initBagItemList(msg:Msg.GetPlayerDataA)
     {
         this._bagItemList.clear();
         this._bagEquipList.clear();
+        this._fragmentSynthesisInfoList = [];
         for(let key in msg.equipBagList){
             let value = msg.equipBagList[key];
             this._bagEquipList.set(Number(key), Number(value));            
@@ -33,6 +38,9 @@ export class BagItemModel extends BaseModel{
             tempMap.set(Number(key), Number(value));
             this._allItemList.push([Msg.TObjectType.EObject_UsableItem, Number(key),Number(value)]);
         }
+
+        this.initFragmentSynthesisInfoList(msg);
+       
         this._setNotSellItemStringMap()
     }
 
@@ -40,6 +48,89 @@ export class BagItemModel extends BaseModel{
      * 
      * @returns 获取背包可使用道具
      */
+    /**
+     * 初始化背包碎片合成信息
+     * @param msg  Msg.GetPlayerDataA玩家信息
+     */
+
+    public initFragmentSynthesisInfoList(msg : Msg.GetPlayerDataA)
+    {
+
+        for(let key in msg.fragmentList){
+            let info : XStruct.fragment_synthesis_info.IRecord = {
+                frame :"",
+                camp : "",
+                star : 0,
+                quality : "",
+                img : "",
+                type : 0,
+                maxNum : 0,
+                curNum : 0,
+                heroName : "",
+                campName : ""
+            }  
+            let value = msg.fragmentList[key];
+
+            if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentRandom)
+            {
+                //star 星级
+                //随机英雄 
+                info.type = value.fragmentType;
+
+                info.star = value.star;
+                info.maxNum = XConsts.KFragmentNumRequired[value.star ? value.star : 1];
+                info.curNum = value.num ? value.num : 0;
+                // info.frame = "ui/icon/" + XConsts.KFragmentFrameSpriteName[0] + "/spriteFrame";
+                // info.quality = "ui/icon/" + XConsts.KFragmentQualitySpriteName[0] + "/spriteFrame";
+               
+            }
+            else if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentCampRandom)
+            {
+                //param 阵营  star 星级
+                //阵营英雄
+                info.type = value.fragmentType;
+                info.camp = "ui/team/" + XConsts.KHeroCampIcon[value.param ? value.param : 1] + "/spriteFrame";
+                info.star = value.star;
+                info.maxNum = XConsts.KFragmentNumRequired[value.star ? value.star : 1];
+                info.curNum = value.num ? value.num : 0;
+                info.campName = XConsts.KCampName[value.param ? value.param : 1];
+            }
+            else if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentClassesRandom)
+            {
+                //param 职业   star 星级
+                //传奇英雄
+                info.type = value.fragmentType;
+                info.frame = "ui/icon/" + XConsts.KFragmentFrameSpriteName[1] + "/spriteFrame";
+                info.quality = "ui/icon/" + XConsts.KFragmentQualitySpriteName[1] + "/spriteFrame";
+
+                info.star = value.star;
+                info.maxNum = XConsts.KFragmentNumRequired[value.star ? value.star : 1];
+                info.curNum = value.num ? value.num : 0;
+            }
+            else if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentHero)
+            {
+                //param 英雄静态ID 
+                //指定英雄
+                info.type = value.fragmentType;
+
+                let heroInfo = ValueMgr.getInstance().getItemByField(TableName.heroes, value.param ? value.param : 5051402) as Config.heroes.Record;
+                info.frame = "ui/icon/" +  XConsts.GetQualityBgByStar(heroInfo.star) + "/spriteFrame";
+                info.quality = "ui/icon/" + XConsts.KFragmentQualitySpriteName[1] + "/spriteFrame";
+                info.img = "ui/hero/" + heroInfo.image + "/spriteFrame";
+                info.camp = "ui/team/" + XConsts.KHeroCampIcon[heroInfo.camp] + "/spriteFrame";
+                info.star = heroInfo.star;
+                info.maxNum = XConsts.KFragmentNumRequired[info.star ? info.star : 1];
+                info.curNum = value.num ? value.num : 0;
+                info.heroName = heroInfo.name;
+                
+            }
+
+
+            this._fragmentSynthesisInfoList.push(instantiate(info));    
+        }
+    }
+
+    //获取背包道具
     public getBagItemList()
     {
         return this._bagItemList;
@@ -366,5 +457,114 @@ export class BagItemModel extends BaseModel{
 
         templist = ["UI_Name_LoopQuest2Money","UI_Desc_LoopQuest2Money"]
         this._notSellItemStingList.set(Msg.TObjectType.EObject_LoopQuest2Money,templist);
+    }
+
+    //获取碎片合成信息
+    public getFragmentSynthesisInfoList()
+    {
+        return this._fragmentSynthesisInfoList;
+    }
+
+    public initTestFragmentList()
+    {
+        let test: Map<number | string,XStruct.test_info.IRecord> = new Map<number,XStruct.test_info.IRecord>();
+
+        var testInfo : XStruct.test_info.Record ={
+            fragmentType : XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentRandom,
+            param : 1,
+            star : 4,
+            num : 60,
+        }
+        test.set(1,instantiate(testInfo));
+        testInfo.fragmentType = XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentCampRandom;
+        testInfo.param = 2,
+        testInfo.star = 5,
+        testInfo.num = 166,
+        test.set(2,instantiate(testInfo));
+
+        testInfo.fragmentType = XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentClassesRandom;
+        testInfo.param = 2,
+        testInfo.star = 5,
+        testInfo.num = 99,
+        test.set(3,instantiate(testInfo));
+
+        testInfo.fragmentType = XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentHero;
+        testInfo.param = 5051401,
+        testInfo.star = 5,
+        testInfo.num = 150,
+        test.set(4,instantiate(testInfo));
+
+        //msg.fragmentList
+        for(let key of test.keys()){
+            let info : XStruct.fragment_synthesis_info.IRecord = {
+                frame :"",
+                camp : "",
+                star : 0,
+                quality : "",
+                img : "",
+                type : 0,
+                maxNum : 0,
+                curNum : 0,
+                heroName : "",
+                campName : ""
+            }  
+            let value = test.get(key);
+
+            if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentRandom)
+            {
+                //star 星级
+                //随机英雄 
+                info.type = value.fragmentType;
+
+                info.star = value.star;
+                info.maxNum = XConsts.KFragmentNumRequired[value.star ? value.star : 1];
+                info.curNum = value.num ? value.num : 0;
+                // info.frame = "ui/icon/" + XConsts.KFragmentFrameSpriteName[0] + "/spriteFrame";
+                // info.quality = "ui/icon/" + XConsts.KFragmentQualitySpriteName[0] + "/spriteFrame";
+               
+            }
+            else if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentCampRandom)
+            {
+                //param 阵营  star 星级
+                //阵营英雄
+                info.type = value.fragmentType;
+                info.camp = "ui/team/" + XConsts.KHeroCampIcon[value.param ? value.param : 1] + "/spriteFrame";
+                info.star = value.star;
+                info.maxNum = XConsts.KFragmentNumRequired[value.star ? value.star : 1];
+                info.curNum = value.num ? value.num : 0;
+                info.campName = XConsts.KCampName[value.param ? value.param : 1];
+            }
+            else if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentClassesRandom)
+            {
+                //param 职业   star 星级
+                //传奇英雄
+                info.type = value.fragmentType;
+                info.frame = "ui/icon/" + XConsts.KFragmentFrameSpriteName[1] + "/spriteFrame";
+                info.quality = "ui/icon/" + XConsts.KFragmentQualitySpriteName[1] + "/spriteFrame";
+
+                info.star = value.star;
+                info.maxNum = XConsts.KFragmentNumRequired[value.star ? value.star : 1];
+                info.curNum = value.num ? value.num : 0;
+            }
+            else if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentHero)
+            {
+                //param 英雄静态ID 
+                //指定英雄
+                info.type = value.fragmentType;
+
+                let heroInfo = ValueMgr.getInstance().getItemByField(TableName.heroes, value.param ? value.param : 5051402) as Config.heroes.Record;
+                info.frame = "ui/icon/" +  XConsts.GetQualityBgByStar(heroInfo.star) + "/spriteFrame";
+                info.quality = "ui/icon/" + XConsts.KFragmentQualitySpriteName[1] + "/spriteFrame";
+                info.img = "ui/hero/" + heroInfo.image + "/spriteFrame";
+                info.camp = "ui/team/" + XConsts.KHeroCampIcon[heroInfo.camp] + "/spriteFrame";
+                info.star = heroInfo.star;
+                info.maxNum = XConsts.KFragmentNumRequired[info.star ? info.star : 1];
+                info.curNum = value.num ? value.num : 0;
+                info.heroName = heroInfo.name;
+                info.campName = XConsts.KCampName[heroInfo.camp];
+            }
+
+            this._fragmentSynthesisInfoList.push(instantiate(info));    
+        }
     }
 }

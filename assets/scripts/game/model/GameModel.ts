@@ -4,6 +4,7 @@ import { HeroesModel } from "./datas/HeroesModel";
 import { PlayerModel } from "./datas/PlayerModel";
 import { TechnologyModel } from "./datas/TechnologyModel";
 import { BagItemModel } from "./datas/BagItemModel";
+import { HeroPubModel } from "./datas/HeroPubModel";
 import { TableName, ValueMgr } from "./ValueMgr";
 import { OfflineModel } from "./datas/OfflineModel"
 
@@ -20,7 +21,8 @@ export class GameModel{
     private _playerModel:PlayerModel =  new PlayerModel(this);
     private _formationModel:FormationModel = new FormationModel(this);
     private _bagItemModel:BagItemModel = new BagItemModel(this);
-    private _offlineModel:OfflineModel = new OfflineModel();
+    // private _offlineModel:OfflineModel = new OfflineModel(this);
+    private _heroPubModel:HeroPubModel = new HeroPubModel(this);
 
     public getHeroesModel(){
         return this._heroesModel;
@@ -38,8 +40,12 @@ export class GameModel{
         return this._bagItemModel;
     }
     // 挂机数据
-    public getOfflineModel(){
-        return this._offlineModel;
+    // public getOfflineModel(){
+    //     return this._offlineModel;
+    // }
+    
+    public getHeroPubModel(){
+        return this._heroPubModel;
     }
     //数据类定义---------------------
     
@@ -54,7 +60,7 @@ export class GameModel{
     public initPlayerBag(msg:Msg.GetPlayerDataA) {
         this._formationModel.initFormationList(msg);
     }
-
+    
     public initPlayerItem(msg:Msg.GetPlayerDataA) {
         this._bagItemModel.initBagItemList(msg);
     }

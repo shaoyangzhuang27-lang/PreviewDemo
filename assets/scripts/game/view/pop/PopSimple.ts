@@ -30,7 +30,6 @@ export class PopSimple extends PopBase {
             this.lab_title.string = title
     }
     public setContent(content:string){
-        console.log(content)
         if(this.lab_content)
             this.lab_content.string = content
     }

@@ -1,5 +1,3 @@
-import {resources, instantiate} from 'cc';
-
 import { EHeroType } from "../BattleHero";
 import { HeroData } from "../../game/model/datas/HeroData";
 

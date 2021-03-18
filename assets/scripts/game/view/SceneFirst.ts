@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node,ProgressBarComponent } from 'cc';
+import { _decorator, Component, Node,ProgressBarComponent, assetManager, macro, dynamicAtlasManager, EditBox } from 'cc';
 import { MsgMgr } from '../control/MsgMgr';
 import { NotifyMgr } from '../control/NotifyMgr';
 import { SceneMgr } from '../control/SceneMgr';
@@ -18,33 +18,60 @@ export class SceneFirst extends BaseScene {
     
     @property({type: Node})
     public progress_bar:Node | null = null;
+    
+    @property({type: EditBox})
+    public txt_ip:EditBox = null as unknown as EditBox;
+    
+    @property({type: Node})
+    public btn_enter:Node = null as unknown as Node;
 
     private isVersionComplete = false;
     private isConfigComplete = false;
 
     start () {
-        this.initNet();
+        // macro.CLEANUP_IMAGE_CACHE = false;
+        dynamicAtlasManager.enabled = false;
+        // this._checkVersion();
+        // this._initNet();
         ValueMgr.getInstance().loadData((cur:number,total:number)=>{this.setProgress(cur,total)});
+        this.btn_enter.on(Node.EventType.TOUCH_END, this._enterGame, this);
     }
-    setProgress(cur:number,total:number){
+    // private _checkVersion(){
+        // assetManager.downloader._remoteServerAddress = window.SERVER_PATH;
+        // console.log("checkVersion---1");
+        // console.log(assetManager.downloader._remoteServerAddress);
+        // console.log(assetManager.downloader.remoteServerAddress);
+        // console.log("checkVersion---2");
+    // }
+
+    private _enterGame(){
+        this._initNet();
+    }
+    public setProgress(cur:number,total:number){
         let p = this.progress_bar?.getComponent(ProgressBarComponent) as ProgressBarComponent;
         p.progress = cur/total;
         if(cur == total){
             this.isConfigComplete = true;
             ValueMgr.getInstance().setInit(true);
         }
-        // console.log("loading files:")
-        // console.log(cur)
-        // console.log(total) 
-        this.checkComplete();
+        this._checkComplete();
     }
-    initNet(){
+    private _initNet(){
+
+        let ip = "192.168.15.132";
+        if(this.txt_ip.string!=""){
+            ip = this.txt_ip.string;
+        }
+
         MsgMgr.getInstance().initLoginServer();
-        MsgMgr.getInstance().connectLoginServer();
+        MsgMgr.getInstance().connectLoginServer(ip);
         MsgMgr.getInstance().getMsgLogin().requestVersionCheck();
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_version_check,this.notifyVersionCheckHandle,this);
     }
-    checkComplete(){
+    private _checkComplete(){
+        if(this.isConfigComplete){
+            ValueMgr.getInstance().optimizationTable();
+        }
         if(this.isConfigComplete && this.isVersionComplete){
             //let tab = ValueMgr.getInstance().getTableByName(TableName.achievement) as Config.achievement;
             //console.log("data::::::::::::::")
@@ -59,13 +86,12 @@ export class SceneFirst extends BaseScene {
             
 
             SceneMgr.getInstance().changeToLogin();
-
         }
     }
     notifyVersionCheckHandle(data:any){
         //进入登陆界面
         this.isVersionComplete = true;
-        this.checkComplete();
+        this._checkComplete();
     }
 
 
