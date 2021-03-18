@@ -91,13 +91,15 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    //弹出英雄升级,升阶,装备界面
-    public popHeroPromotionView(heroId:number=0,submitCallBack:Function = ()=>{},closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    /**
+     * @description:  英雄升级,升阶,装备弹窗
+     * @param {heroId} 英雄动态Id
+     */
+    public popHeroPromotionView(heroId:number=0,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_heropromotion', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
-
             let script = p.getComponent("HeroPromotion");
             script.setIsMaskClose(isMaskClose);
             script.setCurrentHeroId(heroId);
@@ -424,7 +426,7 @@ export class PopMgr extends PopCore  {
 
 
     /**
-     * @description: 弹窗准备替换窗
+     * @description: 装备替换弹窗
      * @param {number} heroId 英雄动态Id
      * @param {number} equipId 装备Id
      * @param {Function} closeCallBack
