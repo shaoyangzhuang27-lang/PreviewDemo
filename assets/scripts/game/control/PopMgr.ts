@@ -22,6 +22,8 @@ import { PopRecLineUp } from "../view/pub/PopRecLineUp";
 import { PopSummonSettle } from "../view/pop/PopSummonSettle";
 import { PopFragmentSynthesis } from "../view/pop/PopFragmentSynthesis";
 import { PopBookActive } from '../view/pop/PopBookActive';
+import { PopHeroEquipReplace } from '../view/hero_promotion/PopHeroEquipReplace';
+
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -419,4 +421,18 @@ export class PopMgr extends PopCore  {
             script.setActiveHeroInfo(id);
         } );
     }
+
+
+    public popHeroEquipReplaceWindow(title:string,content:string,mode : number ,closeCallBack:Function|null = null){
+
+        resources.load('prefabs_ui/pop/pop_replaceequip', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+            let script = p.getComponent("PopHeroEquipReplace") as PopHeroEquipReplace;
+            script.setTitle(title);
+           script.setCloseCallBack(closeCallBack);
+        } );
+    }
+
+
 }
