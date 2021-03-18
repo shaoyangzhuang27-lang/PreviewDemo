@@ -64,6 +64,13 @@ export class ItemEquipCell extends Component {
     }
 
     /**
+     * @description: 获取当前道具id
+     * @param {*}
+     */
+    public getItemId(){
+        return this._itemID ;
+    }
+    /**
      * @param objType 道具类型 枚举值参考Msg.TObjectType.
      * @param 可使用道具统一传Msg.TObjectType.EObject_UsableItem
      */

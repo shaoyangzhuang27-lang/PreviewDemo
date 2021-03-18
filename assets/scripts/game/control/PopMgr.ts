@@ -423,6 +423,12 @@ export class PopMgr extends PopCore  {
     }
 
 
+    /**
+     * @description: 弹窗准备替换窗
+     * @param {number} heroId 英雄动态Id
+     * @param {number} equipId 装备Id
+     * @param {Function} closeCallBack
+     */    
     public popHeroEquipReplaceWindow(heroId: number, equipId:number=0, closeCallBack:Function|null = null){
 
         resources.load('prefabs_ui/pop/pop_replaceequip', (err:any,res:any)=>{

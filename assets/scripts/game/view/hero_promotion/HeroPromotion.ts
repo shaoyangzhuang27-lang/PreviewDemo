@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-18 20:17:15
+ * @LastEditTime: 2021-03-18 20:39:44
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -308,7 +308,7 @@ export class HeroPromotion extends PopBase {
                     console.log("HeroPromotion btn_equip_1");
                     let equipCell =this._equipNodeMap.get(Msg.TEquipLocationType.EEquipLocationType_Weapon);
                     if(equipCell){
-
+                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId() );
                     }                    
                 }
                 break;
@@ -317,7 +317,7 @@ export class HeroPromotion extends PopBase {
                     console.log("HeroPromotion btn_equip_2");
                     let equipCell =this._equipNodeMap.get(Msg.TEquipLocationType.EEquipLocationType_Head);
                     if(equipCell){
-                        
+                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId() );                        
                     }                    
                 }
                 break;
@@ -326,7 +326,7 @@ export class HeroPromotion extends PopBase {
                     console.log("HeroPromotion btn_equip_3");
                     let equipCell =this._equipNodeMap.get(Msg.TEquipLocationType.EEquipLocationType_Chest);
                     if(equipCell){
-                        
+                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId() );
                     }                    
                 }
                 break;
@@ -335,7 +335,7 @@ export class HeroPromotion extends PopBase {
                     console.log("HeroPromotion btn_equip_4");
                     let equipCell =this._equipNodeMap.get(Msg.TEquipLocationType.EEquipLocationType_Trinket);
                     if(equipCell){
-                        
+                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId() );
                     }                    
                 }
                 break;
@@ -877,14 +877,17 @@ export class HeroPromotion extends PopBase {
                         equipCell.name = "equipCell_" + key.toString();                                      
                         equipCell.setItemType(equipData.id, 0, ItemEquipType.equip,()=>{
                             console.log(" 显示装备具体界面 ");
+                            PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId() );
                         });
 
                         this._equipNodeMap.set(key, equipCell);
                     })   
                 }
                 else{
-                    itemEquipCell.setItemType(equipData.id, 0, ItemEquipType.equip,()=>{
+                    let equipCell = itemEquipCell as ItemEquipCell;
+                    equipCell.setItemType(equipData.id, 0, ItemEquipType.equip,()=>{
                         console.log(" 显示装备具体界面 ");
+                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId() );
                     });
                 }                
             });
