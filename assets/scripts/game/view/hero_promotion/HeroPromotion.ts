@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-19 21:57:01
+ * @LastEditTime: 2021-03-19 22:06:54
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -305,43 +305,31 @@ export class HeroPromotion extends PopBase {
             case this.btn_equip_1:
                 {
                     console.log("HeroPromotion btn_equip_1");
-                    let equipCell = this._equipNodeMap.get(Msg.TEquipLocationType.EEquipLocationType_Weapon);
-                    if (equipCell) {
-                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId());
-                    }
+                    PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), Msg.TEquipLocationType.EEquipLocationType_Weapon );
                 }
                 break;
             case this.btn_equip_2:
                 {
                     console.log("HeroPromotion btn_equip_2");
-                    let equipCell = this._equipNodeMap.get(Msg.TEquipLocationType.EEquipLocationType_Head);
-                    if (equipCell) {
-                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId());
-                    }
+                    PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), Msg.TEquipLocationType.EEquipLocationType_Head);
                 }
                 break;
             case this.btn_equip_3:
                 {
                     console.log("HeroPromotion btn_equip_3");
-                    let equipCell = this._equipNodeMap.get(Msg.TEquipLocationType.EEquipLocationType_Chest);
-                    if (equipCell) {
-                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId());
-                    }
+                    // 钻石下阶段待开发 
                 }
                 break;
             case this.btn_equip_4:
                 {
-                    console.log("HeroPromotion btn_equip_4");
-                    let equipCell = this._equipNodeMap.get(Msg.TEquipLocationType.EEquipLocationType_Trinket);
-                    if (equipCell) {
-                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId());
-                    }
+                    console.log("HeroPromotion btn_equip_4");                    
+                    PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), Msg.TEquipLocationType.EEquipLocationType_Chest);
                 }
                 break;
             case this.btn_equip_5:
                 {
-                    console.log("HeroPromotion btn_equip_5");
-                    // 钻石下阶段待开发                                    
+                    console.log("HeroPromotion btn_equip_5");                                                       
+                    PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), Msg.TEquipLocationType.EEquipLocationType_Trinket);
                 }
                 break;
             case this.btn_all_load:
