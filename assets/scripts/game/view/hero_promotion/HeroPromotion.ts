@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-19 16:20:44
+ * @LastEditTime: 2021-03-19 16:55:51
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -77,16 +77,16 @@ export class HeroPromotion extends PopBase {
     public lab_name: Label = null as unknown as Label;
     @property({ type: Sprite, displayName: "姓名背景" })
     public sp_title_bg: Sprite = null as unknown as Sprite;
-    
+
     @property({ type: Label, displayName: "等级" })
     public lab_lv: Label = null as unknown as Label;
     @property({ type: Layout, displayName: "layout_lv" })
-    public layout_lv: Layout = null as unknown as Layout; 
-       
+    public layout_lv: Layout = null as unknown as Layout;
+
     @property({ type: Sprite, displayName: "升阶等级箭头绿图标" })
     public sp_arrow_tier: Sprite = null as unknown as Sprite;
 
-    @property({ type: Layout, displayName: "layout_lv_tier" })    
+    @property({ type: Layout, displayName: "layout_lv_tier" })
     public layout_lv_tier: Layout = null as unknown as Layout;
     @property({ type: Label, displayName: "升阶等级" })
     public lab_lv_tier: Label = null as unknown as Label;
@@ -149,7 +149,7 @@ export class HeroPromotion extends PopBase {
     public btn_equip_5: Node = null as unknown as Node;
     // @property({ type: Node, displayName: "法器-待开放" })
     // public btn_equip_6: Node = null as unknown as Node;
-    
+
     @property({ type: Node, displayName: "全部卸下" })
     public btn_all_unload: Node = null as unknown as Node;
 
@@ -197,12 +197,12 @@ export class HeroPromotion extends PopBase {
     private _isHeroUpView: boolean = true; //true标记当前是英雄升级/阶界面，false标记当前是英雄装备界面
     private _isLvUpView: boolean = true; //true标记当前是英雄升级界面，false标记当前是英雄升阶界面
     private _equipNodeMap: Map<Msg.TEquipLocationType, ItemEquipCell> = new Map<Msg.TEquipLocationType, ItemEquipCell>();  //装备宝石列表
-    
+
     onLoad() {
-        super.onLoad();  
+        super.onLoad();
         this._starNodeList = [this.img_star1, this.img_star2, this.img_star3, this.img_star4, this.img_star5];
         this._starsMiddlePos = this.img_star3.getPosition();
-        
+
         this.btn_lock?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_unlock?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_share?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
@@ -213,12 +213,12 @@ export class HeroPromotion extends PopBase {
         this.btn_camp?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_career?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_all_unload?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
-        this.btn_all_load?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);        
+        this.btn_all_load?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_equip_1?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_equip_2?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_equip_3?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_equip_4?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
-        this.btn_equip_5?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);        
+        this.btn_equip_5?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
 
         // tabGroup
         const containerEventHandler = new EventHandler();
@@ -292,48 +292,48 @@ export class HeroPromotion extends PopBase {
                 break;
             case this.btn_arrow_left:
                 console.log("HeroPromotion btn_arrow_left");
-                let preHeroData =GameModel.getInstance().getHeroesModel().getPrevHero(this._curHeroData);
-                this.setCurrentHeroId(preHeroData.getDyncID() );                
+                let preHeroData = GameModel.getInstance().getHeroesModel().getPrevHero(this._curHeroData);
+                this.setCurrentHeroId(preHeroData.getDyncID());
                 break;
             case this.btn_arrow_right:
-                let nextHeroData =GameModel.getInstance().getHeroesModel().getNextHero(this._curHeroData);
-                this.setCurrentHeroId(nextHeroData.getDyncID() );
+                let nextHeroData = GameModel.getInstance().getHeroesModel().getNextHero(this._curHeroData);
+                this.setCurrentHeroId(nextHeroData.getDyncID());
                 console.log("HeroPromotion btn_arrow_right");
                 break;
             case this.btn_equip_1:
                 {
                     console.log("HeroPromotion btn_equip_1");
-                    let equipCell =this._equipNodeMap.get(Msg.TEquipLocationType.EEquipLocationType_Weapon);
-                    if(equipCell){
-                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId() );
-                    }                    
+                    let equipCell = this._equipNodeMap.get(Msg.TEquipLocationType.EEquipLocationType_Weapon);
+                    if (equipCell) {
+                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId());
+                    }
                 }
                 break;
             case this.btn_equip_2:
                 {
                     console.log("HeroPromotion btn_equip_2");
-                    let equipCell =this._equipNodeMap.get(Msg.TEquipLocationType.EEquipLocationType_Head);
-                    if(equipCell){
-                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId() );                        
-                    }                    
+                    let equipCell = this._equipNodeMap.get(Msg.TEquipLocationType.EEquipLocationType_Head);
+                    if (equipCell) {
+                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId());
+                    }
                 }
                 break;
             case this.btn_equip_3:
                 {
                     console.log("HeroPromotion btn_equip_3");
-                    let equipCell =this._equipNodeMap.get(Msg.TEquipLocationType.EEquipLocationType_Chest);
-                    if(equipCell){
-                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId() );
-                    }                    
+                    let equipCell = this._equipNodeMap.get(Msg.TEquipLocationType.EEquipLocationType_Chest);
+                    if (equipCell) {
+                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId());
+                    }
                 }
                 break;
             case this.btn_equip_4:
                 {
                     console.log("HeroPromotion btn_equip_4");
-                    let equipCell =this._equipNodeMap.get(Msg.TEquipLocationType.EEquipLocationType_Trinket);
-                    if(equipCell){
-                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId() );
-                    }                    
+                    let equipCell = this._equipNodeMap.get(Msg.TEquipLocationType.EEquipLocationType_Trinket);
+                    if (equipCell) {
+                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId());
+                    }
                 }
                 break;
             case this.btn_equip_5:
@@ -344,30 +344,30 @@ export class HeroPromotion extends PopBase {
                 break;
             case this.btn_all_load:
                 {
-                    console.log("HeroPromotion btn_all_load");                   
-                    let putonEquipIDList:number[] = [];
-                    for(let i=Msg.TEquipLocationType.EEquipLocationType_NULL; i< Msg.TEquipLocationType.EEquipLocationType_Trinket; i++){
-                        let bestEquipInBag = GameModel.getInstance().getBagModel().getBestEquipInBag (i);
-                        if (bestEquipInBag == null){
-                            continue;                            
+                    console.log("HeroPromotion btn_all_load");
+                    let putonEquipIDList: number[] = [];
+                    for (let i = Msg.TEquipLocationType.EEquipLocationType_NULL; i < Msg.TEquipLocationType.EEquipLocationType_Trinket; i++) {
+                        let bestEquipInBag = GameModel.getInstance().getBagModel().getBestEquipInBag(i);
+                        if (bestEquipInBag == null) {
+                            continue;
                         }
                         else {
-                            let itemEquipCell= this._equipNodeMap.get(i);
-                            if (!itemEquipCell || itemEquipCell.getItemId()==0 ){
-                                putonEquipIDList.push(bestEquipInBag.id);                                
+                            let itemEquipCell = this._equipNodeMap.get(i);
+                            if (!itemEquipCell || itemEquipCell.getItemId() == 0) {
+                                putonEquipIDList.push(bestEquipInBag.id);
                             }
                             else {
-                                let record = ValueMgr.getInstance().getItemByField(TableName.equip, itemEquipCell.getItemId() ); 
+                                let record = ValueMgr.getInstance().getItemByField(TableName.equip, itemEquipCell.getItemId());
                                 if (record) {
-                                    let curEquipRecord= record as Config.equip.Record;
+                                    let curEquipRecord = record as Config.equip.Record;
                                     if (bestEquipInBag.quality > curEquipRecord.quality ||
-                                        (bestEquipInBag.quality == curEquipRecord.quality && bestEquipInBag.star > curEquipRecord.star)){                                         
-                                            putonEquipIDList.push(bestEquipInBag.id);   
-                                        }
+                                        (bestEquipInBag.quality == curEquipRecord.quality && bestEquipInBag.star > curEquipRecord.star)) {
+                                        putonEquipIDList.push(bestEquipInBag.id);
+                                    }
                                 }
                             }
                         }
-                    }                                        
+                    }
 
                     MsgMgr.getInstance().getMsgFormation().requestHeroPutOnEquip(this._curHeroId, putonEquipIDList);
                 }
@@ -375,10 +375,10 @@ export class HeroPromotion extends PopBase {
             case this.btn_all_unload:
                 {
                     console.log("HeroPromotion btn_all_unload");
-                    let takeoffEquipLocList: number[] =[];
-                    this._equipNodeMap.forEach((itemEquipCell, locType, m)=>{
-                        if (itemEquipCell && itemEquipCell.getItemId()!=0 ){
-                            takeoffEquipLocList.push(locType);                                
+                    let takeoffEquipLocList: number[] = [];
+                    this._equipNodeMap.forEach((itemEquipCell, locType, m) => {
+                        if (itemEquipCell && itemEquipCell.getItemId() != 0) {
+                            takeoffEquipLocList.push(locType);
                         }
                     });
                     MsgMgr.getInstance().getMsgFormation().requestHeroTakeOffEquip(this._curHeroId, takeoffEquipLocList);
@@ -393,7 +393,7 @@ export class HeroPromotion extends PopBase {
         // [3]
         super.start()
         this._initView();
-        
+
         //this.cur_hero_model?.node.setSiblingIndex(100);
         // UIMeshRenderer
 
@@ -408,32 +408,32 @@ export class HeroPromotion extends PopBase {
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_put_on_equip, this._notifyHeroAllLoadEquipHandle, this);
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_take_off_equip, this._notifyHeroAllUnLoadEquipHandle, this);
     }
-    
-    private _notifyHeroAllUnLoadEquipHandle(data: any= null){
+
+    private _notifyHeroAllUnLoadEquipHandle(data: any = null) {
         if (!data) {
-            return ;
+            return;
         }
-        let msg = data as Msg.TakeOffEquipA; 
-        if (msg.err == Msg.TErrorCode.ERR_OK){
+        let msg = data as Msg.TakeOffEquipA;
+        if (msg.err == Msg.TErrorCode.ERR_OK) {
             if (msg.heroID == this._curHeroId) {
-                let proBefore = new Map<Msg.THeroPropertyType, number> (); // 之前属性
-                for (let i:Msg.THeroPropertyType  = Msg.THeroPropertyType.EHeroPropertyType_NULL; i <= Msg.THeroPropertyType.EHeroPropertyType_DEFBreak; i++) {
-                    if (i == Msg.THeroPropertyType.EHeroPropertyType_NULL ){
-                        proBefore.set(i, this._curHeroData.getFighting() );
+                let proBefore = new Map<Msg.THeroPropertyType, number>(); // 之前属性
+                for (let i: Msg.THeroPropertyType = Msg.THeroPropertyType.EHeroPropertyType_NULL; i <= Msg.THeroPropertyType.EHeroPropertyType_DEFBreak; i++) {
+                    if (i == Msg.THeroPropertyType.EHeroPropertyType_NULL) {
+                        proBefore.set(i, this._curHeroData.getFighting());
                     }
-                    else{
-                        proBefore.set(i, this._curHeroData.getProperty(i, false) );
+                    else {
+                        proBefore.set(i, this._curHeroData.getProperty(i, false));
                     }
                 }
 
                 //换下装备
-                for (let i:number = 0; i < msg.takeoffEquipLocList.length; i++) {
-                    let equipTmp = ValueMgr.getInstance().getItemByField(TableName.equip,msg.takeoffEquipLocList[i]); 
-                    if(!equipTmp){
-                        let equipData = equipTmp as Config.equip.Record;                            
-                        if(equipData&& this._curHeroData.equipOnList.get(equipData.locationType) ) {
-                                this._curHeroData.equipOnList.delete(equipData.locationType);
-                                GameModel.getInstance().getBagModel().addEquipBag (equipData.id, 1);
+                for (let i: number = 0; i < msg.takeoffEquipLocList.length; i++) {
+                    let equipTmp = ValueMgr.getInstance().getItemByField(TableName.equip, msg.takeoffEquipLocList[i]);
+                    if (!equipTmp) {
+                        let equipData = equipTmp as Config.equip.Record;
+                        if (equipData && this._curHeroData.equipOnList.get(equipData.locationType)) {
+                            this._curHeroData.equipOnList.delete(equipData.locationType);
+                            GameModel.getInstance().getBagModel().addEquipBag(equipData.id, 1);
                         }
                     }
                 }
@@ -442,11 +442,11 @@ export class HeroPromotion extends PopBase {
                 this._curHeroData.refreshEquipProperty();
 
                 //计算属性变化
-                let proChangeMap = new Map<Msg.THeroPropertyType, number> (); // 改变后的属性
-                for (let i:Msg.THeroPropertyType = Msg.THeroPropertyType.EHeroPropertyType_NULL; i <= Msg.THeroPropertyType.EHeroPropertyType_DEFBreak; i++) {
-                    let pro:number = 0;
+                let proChangeMap = new Map<Msg.THeroPropertyType, number>(); // 改变后的属性
+                for (let i: Msg.THeroPropertyType = Msg.THeroPropertyType.EHeroPropertyType_NULL; i <= Msg.THeroPropertyType.EHeroPropertyType_DEFBreak; i++) {
+                    let pro: number = 0;
                     let tmp = proBefore.get(i) as unknown as number;
-                    if (i == (Msg.THeroPropertyType.EHeroPropertyType_NULL) ) {
+                    if (i == (Msg.THeroPropertyType.EHeroPropertyType_NULL)) {
                         pro = this._curHeroData.getFighting();
                         if (pro != tmp)
                             proChangeMap.set(i, pro - tmp);
@@ -471,63 +471,63 @@ export class HeroPromotion extends PopBase {
                 // UINotificationCenter.Instance ().PostNotification ((int) NotificationMsg.RefreshGuide);                
             }
         }
-        else{            
-            console.log(msg.errStr+" errCode="+ msg.err.toString() );
+        else {
+            console.log(msg.errStr + " errCode=" + msg.err.toString());
             // TipsMgr.instance.ShowErrDialog(msg.Err);
         }
     }
-    
-    private _notifyHeroAllLoadEquipHandle(data: any= null){
+
+    private _notifyHeroAllLoadEquipHandle(data: any = null) {
         if (!data) {
-            return ;
+            return;
         }
 
-        let msg = data as Msg.PutOnEquipA; 
-        if (msg.err == Msg.TErrorCode.ERR_OK) {        
+        let msg = data as Msg.PutOnEquipA;
+        if (msg.err == Msg.TErrorCode.ERR_OK) {
             if (msg.heroID == this._curHeroId) {
-                let proBefore = new Map<Msg.THeroPropertyType, number> (); // 之前属性
-                for (let i:Msg.THeroPropertyType  = Msg.THeroPropertyType.EHeroPropertyType_NULL; i <= Msg.THeroPropertyType.EHeroPropertyType_DEFBreak; i++) {
-                    if (i == Msg.THeroPropertyType.EHeroPropertyType_NULL ){
-                        proBefore.set(i, this._curHeroData.getFighting() );
+                let proBefore = new Map<Msg.THeroPropertyType, number>(); // 之前属性
+                for (let i: Msg.THeroPropertyType = Msg.THeroPropertyType.EHeroPropertyType_NULL; i <= Msg.THeroPropertyType.EHeroPropertyType_DEFBreak; i++) {
+                    if (i == Msg.THeroPropertyType.EHeroPropertyType_NULL) {
+                        proBefore.set(i, this._curHeroData.getFighting());
                     }
-                    else{
-                        proBefore.set(i, this._curHeroData.getProperty(i, false) );
+                    else {
+                        proBefore.set(i, this._curHeroData.getProperty(i, false));
                     }
                 }
 
                 //换下装备
-                for (let i:number = 0; i < msg.takeoffEquipIDList.length; i++) {
-                    let equipTmp = ValueMgr.getInstance().getItemByField(TableName.equip,msg.takeoffEquipIDList[i]); 
-                    if(!equipTmp){
-                        let equipData = equipTmp as Config.equip.Record;                            
-                        if(equipData&& this._curHeroData.equipOnList.get(equipData.locationType) ) {
-                                this._curHeroData.equipOnList.set(equipData.locationType, null);
-                                GameModel.getInstance().getBagModel().addEquipBag (equipData.id, 1);
+                for (let i: number = 0; i < msg.takeoffEquipIDList.length; i++) {
+                    let equipTmp = ValueMgr.getInstance().getItemByField(TableName.equip, msg.takeoffEquipIDList[i]);
+                    if (!equipTmp) {
+                        let equipData = equipTmp as Config.equip.Record;
+                        if (equipData && this._curHeroData.equipOnList.get(equipData.locationType)) {
+                            this._curHeroData.equipOnList.delete(equipData.locationType);
+                            GameModel.getInstance().getBagModel().addEquipBag(equipData.id, 1);
                         }
                     }
                 }
 
                 //换上装备
-                for (let i:number = 0; i < msg.putonEquipIDList.length; i++) {
-                    let equipTmp = ValueMgr.getInstance().getItemByField(TableName.equip,msg.takeoffEquipIDList[i]); 
-                    if(!equipTmp){
-                        let equipData = equipTmp as Config.equip.Record;                            
-                        if(equipData) {
+                for (let i: number = 0; i < msg.putonEquipIDList.length; i++) {
+                    let equipTmp = ValueMgr.getInstance().getItemByField(TableName.equip, msg.takeoffEquipIDList[i]);
+                    if (!equipTmp) {
+                        let equipData = equipTmp as Config.equip.Record;
+                        if (equipData) {
                             this._curHeroData.equipOnList.set(equipData.locationType, equipData);
-                            GameModel.getInstance().getBagModel().subEquipBag (equipData.id, 1);
+                            GameModel.getInstance().getBagModel().subEquipBag(equipData.id, 1);
                         }
-                    }                        
+                    }
                 }
-                
+
                 //刷新套装属性
                 this._curHeroData.refreshEquipProperty();
 
                 //计算属性变化
-                let proChangeMap = new Map<Msg.THeroPropertyType, number> (); // 改变后的属性
-                for (let i:Msg.THeroPropertyType = Msg.THeroPropertyType.EHeroPropertyType_NULL; i <= Msg.THeroPropertyType.EHeroPropertyType_DEFBreak; i++) {
-                    let pro:number = 0;
+                let proChangeMap = new Map<Msg.THeroPropertyType, number>(); // 改变后的属性
+                for (let i: Msg.THeroPropertyType = Msg.THeroPropertyType.EHeroPropertyType_NULL; i <= Msg.THeroPropertyType.EHeroPropertyType_DEFBreak; i++) {
+                    let pro: number = 0;
                     let tmp = proBefore.get(i) as unknown as number;
-                    if (i == (Msg.THeroPropertyType.EHeroPropertyType_NULL) ) {
+                    if (i == (Msg.THeroPropertyType.EHeroPropertyType_NULL)) {
                         pro = this._curHeroData.getFighting();
                         if (pro != tmp)
                             proChangeMap.set(i, pro - tmp);
@@ -553,13 +553,13 @@ export class HeroPromotion extends PopBase {
             }
         } else {
             // TipsMgr.instance.ShowErrDialog(msg.Err);
-            console.log(msg.errStr+" errCode="+ msg.err.toString() );
+            console.log(msg.errStr + " errCode=" + msg.err.toString());
         }
-    
+
     }
 
     private _notifyHeroLockedHandle(data: any = null) {
-        
+
         if (data) {
             let msg = data as Msg.SyncHeroLocked;
             if (msg.heroID == this._curHeroId) {
@@ -619,29 +619,29 @@ export class HeroPromotion extends PopBase {
             this._showEquipView();
         }
     }
-    
-    private _showTitleAndName(){                
+
+    private _showTitleAndName() {
         this.lab_name.string = this._curHeroData.getName();
-        let pos= this.lab_name.node.getPosition();
-        let title= this._curHeroData.getTitleName();
-        if(title != ""){
-            this.lab_title.string = title;            
-            pos.y= 378;//下移显示            
-            this.lab_title.node.active= true;
-        }else{                    
-            this.lab_title.node.active= false;
-            pos.y= 387;//居中显示
+        let pos = this.lab_name.node.getPosition();
+        let title = this._curHeroData.getTitleName();
+        if (title != "") {
+            this.lab_title.string = title;
+            pos.y = 378;//下移显示            
+            this.lab_title.node.active = true;
+        } else {
+            this.lab_title.node.active = false;
+            pos.y = 387;//居中显示
         }
         this.lab_name.node.setPosition(pos);
-        let id1st = Number((this._curHeroId/1000000).toFixed())
+        let id1st = Number((this._curHeroId / 1000000).toFixed())
         // if(id1st == 5) // 传奇
         // else if(id1st == 3){// 高级
         // else if(id1st == 1 || id1st == 2){// 普通
         let imgPath = "ui/lv_up/英雄详情_标题背景品质紫/spriteFrame";// 高级
         // if (id1st==5) {// 传奇
-            imgPath = "ui/lv_up/英雄详情_标题背景品质橙/spriteFrame";
+        imgPath = "ui/lv_up/英雄详情_标题背景品质橙/spriteFrame";
         // }
-        XFuns.ReplaceSpriteFrame(imgPath, this.sp_title_bg);        
+        XFuns.ReplaceSpriteFrame(imgPath, this.sp_title_bg);
     }
     // 展示英雄升级界面
     private _showHeroLvUpView() {
@@ -732,16 +732,16 @@ export class HeroPromotion extends PopBase {
     }
 
     private _showUpTierFightValues() {
-        let _nextTierHeroData=  new HeroData;
+        let _nextTierHeroData = new HeroData;
         _nextTierHeroData = this._curHeroData;
-        _nextTierHeroData.tier= this._curHeroData.tier+1;
+        _nextTierHeroData.tier = this._curHeroData.tier + 1;
 
         let fightValue = Math.floor(this._curHeroData.getFighting());
         this.lab_fight_upgrade_value_1.string = XFuns.FormatNumber(fightValue);
         let fightValueNext = Math.floor(_nextTierHeroData.getFighting());
         this.lab_fight_upgrade_value_2.string = XFuns.FormatNumber(fightValueNext);
 
-        
+
         let hp = Math.floor(this._curHeroData.getMaxHP());
         this.lab_hp_upgrade_value_1.string = XFuns.FormatNumber(hp);
         let hpNext = Math.floor(_nextTierHeroData.getMaxHP());
@@ -751,7 +751,7 @@ export class HeroPromotion extends PopBase {
         this.lab_atk_upgrade_value_1.string = XFuns.FormatNumber(atk);
         let atkNext = Math.floor(_nextTierHeroData.getATK());
         this.lab_atk_upgrade_value_2.string = XFuns.FormatNumber(atkNext);
-        
+
         let def = Math.floor(this._curHeroData.getDEF());
         this.lab_def_upgrade_value_1.string = XFuns.FormatNumber(def);
         let defNext = Math.floor(_nextTierHeroData.getDEF());
@@ -759,7 +759,7 @@ export class HeroPromotion extends PopBase {
     }
 
     private _showUpTierLv() {
-       this._showLv(true);
+        this._showLv(true);
     }
 
     private _showLv(isUpTier: boolean = false) {
@@ -768,29 +768,29 @@ export class HeroPromotion extends PopBase {
         let maxLv = XShare.getInstance().KHeroMaxLevelForTier[tier];
         this.lab_lv.string = lv.toString() + "/" + maxLv.toString();
 
-        let tierNext = this._curHeroData.tier+1;
-        let isMaxTier= tierNext > XShare.getInstance().KMaxHeroTier;
+        let tierNext = this._curHeroData.tier + 1;
+        let isMaxTier = tierNext > XShare.getInstance().KMaxHeroTier;
 
-        
-        let pos= this.layout_lv.node.getPosition();
+
+        let pos = this.layout_lv.node.getPosition();
         let nodeSize = this.layout_lv.getComponent(UITransform)?.contentSize as math.Size;
         // 升级界面等级显示
-        if(!isUpTier || isMaxTier){
-            pos.x = nodeSize.width/2;
+        if (!isUpTier || isMaxTier) {
+            pos.x = nodeSize.width / 2;
             this.layout_lv.node.setPosition(pos);
-            
-            this.sp_arrow_tier.node.active= false;
-            this.layout_lv_tier.node.active= false;        
-        }else{//升阶界面等级显示            
-            pos.x = -nodeSize.width/2;
+
+            this.sp_arrow_tier.node.active = false;
+            this.layout_lv_tier.node.active = false;
+        } else {//升阶界面等级显示            
+            pos.x = -nodeSize.width / 2;
             this.layout_lv.node.setPosition(pos);
-            
-            this.lab_lv_tier.string = maxLv.toString()+ "/";
-            let nextMaxLv= XShare.getInstance().KHeroMaxLevelForTier[tierNext];
+
+            this.lab_lv_tier.string = maxLv.toString() + "/";
+            let nextMaxLv = XShare.getInstance().KHeroMaxLevelForTier[tierNext];
             this.lab_lv_max_tier.string = nextMaxLv.toString();
-            this.sp_arrow_tier.node.active= true;
-            this.layout_lv_tier.node.active= true;        
-        }        
+            this.sp_arrow_tier.node.active = true;
+            this.layout_lv_tier.node.active = true;
+        }
     }
 
     private _showTier(tier: number = 0) {
@@ -1045,39 +1045,39 @@ export class HeroPromotion extends PopBase {
         this._showEquipCells();
     }
 
-    private _showEquipCells(){        
-        if(!this._curHeroData.equipOnList){     
-            this._equipNodeMap.forEach ( (v, k, m)=>{
-                v.node.active= false;
+    private _showEquipCells() {
+        if (!this._curHeroData.equipOnList) {
+            this._equipNodeMap.forEach((v, k, m) => {
+                v.node.active = false;
             });
-            
-        }else{
-            let equipOnList = this._curHeroData.equipOnList as unknown as Map<Msg.TEquipLocationType, Config.equip.Record>;            
-            equipOnList.forEach((equipData,key, m)=>{
-                console.log("!!!!!!!!!!!!!!!! equipData=",equipData);
-                console.log(" key=",key);
-                console.log(" m=",m);
 
-                let itemEquipCell= this._equipNodeMap.get(key);                
-                if(!itemEquipCell){
-                    resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+        } else {
+            let equipOnList = this._curHeroData.equipOnList as unknown as Map<Msg.TEquipLocationType, Config.equip.Record>;
+            equipOnList.forEach((equipData, key, m) => {
+                console.log("!!!!!!!!!!!!!!!! equipData=", equipData);
+                console.log(" key=", key);
+                console.log(" m=", m);
+
+                let itemEquipCell = this._equipNodeMap.get(key);
+                if (!itemEquipCell) {
+                    resources.load('prefabs_ui/main/itemequip_cell', (err: any, res: any) => {
                         let equipCell = instantiate(res) as ItemEquipCell;
-                        equipCell.name = "equipCell_" + key.toString();                                      
-                        equipCell.setItemType(equipData.id, 0, ItemEquipType.equip,()=>{
+                        equipCell.name = "equipCell_" + key.toString();
+                        equipCell.setItemType(equipData.id, 0, ItemEquipType.equip, () => {
                             console.log(" 显示装备具体界面 ");
-                            PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId() );
+                            PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId());
                         });
 
                         this._equipNodeMap.set(key, equipCell);
-                    })   
+                    })
                 }
-                else{
+                else {
                     let equipCell = itemEquipCell as ItemEquipCell;
-                    equipCell.setItemType(equipData.id, 0, ItemEquipType.equip,()=>{
+                    equipCell.setItemType(equipData.id, 0, ItemEquipType.equip, () => {
                         console.log(" 显示装备具体界面 ");
-                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId() );
+                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId());
                     });
-                }                
+                }
             });
         }
     }
