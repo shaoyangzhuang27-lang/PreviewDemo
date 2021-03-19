@@ -331,16 +331,12 @@ export class PopMgr extends PopCore  {
     }
 
 
-    public popHeroPubWindow(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+    public popHeroPubWindow(closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop_hero_pub', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
-
             let script = p.getComponent("PopHeroPub") as PopHeroPub;
-            // script.setTitle(title)
-            // script.setContent(content)
-            script.setSubmitCallBack(submitCallBack)
             script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
 
