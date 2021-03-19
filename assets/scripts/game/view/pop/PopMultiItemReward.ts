@@ -64,34 +64,6 @@ export class PopMultiItemReward extends PopBase {
     {
         var title = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.KStarUpGainObjectTitle) as Config.language_ui.Record;
         this.lab_title.string = title.cn;
-        let test: Array<XStruct.prop_info.IRecord> = [];
-
-        var testInfo : XStruct.prop_info.Record ={
-            nType : XConsts.KSTARUP_PROP_TYPE.Hero,
-            nPropId : 3042500,
-            nLevel : 20,
-            nPropQuality : 0,
-            num : 1,
-        }
-        this._propInfoArray.push(instantiate(testInfo));
-        testInfo.nType = XConsts.KSTARUP_PROP_TYPE.Money;
-        testInfo.nPropId = 0,
-        testInfo.nLevel = 0,
-        testInfo.num = 166,
-        this._propInfoArray.push(instantiate(testInfo));
-
-        testInfo.nType = XConsts.KSTARUP_PROP_TYPE.Exp;
-        testInfo.nPropId = 0,
-        testInfo.nLevel = 0,
-        testInfo.num = 3332,
-        this._propInfoArray.push(instantiate(testInfo));
-
-        testInfo.nType = XConsts.KSTARUP_PROP_TYPE.Hero;
-        testInfo.nPropId = 5051401,
-        testInfo.nLevel = 19,
-        testInfo.num = 1,
-        this._propInfoArray.push(instantiate(testInfo));
-
           resources.load('prefabs_ui/main/item_multi_reward', (err:any,res:any)=>{
             for (var i = 0 ; i < this._propInfoArray.length; i++) {
                 let prop_item = instantiate( res );
@@ -103,18 +75,6 @@ export class PopMultiItemReward extends PopBase {
                 this.scroll_item_view.content?.addChild(prop_item);
             }
         });
-
-        // resources.load('prefabs_ui/main/item_multi_reward', (err:any,res:any)=>{
-        //     for (var i = 0 ; i < this._propInfoArray.length; i++) {
-        //         let prop_item = instantiate( res );
-        //         prop_item.scale = new Vec3(0.7,0.7,1);
-        //         let subWidget = prop_item.getComponent(UITransform) as UITransform;
-        //         subWidget.contentSize = new Size(105,126);
-        //         let script = prop_item.getComponent(ItemMultiReward);
-        //         script.setPropInfo(this._propInfoArray[i]);
-        //         this.scroll_item_view.content?.addChild(prop_item);
-        //     }
-        // });
     }
 
 
