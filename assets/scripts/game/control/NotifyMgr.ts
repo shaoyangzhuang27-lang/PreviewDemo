@@ -10,7 +10,6 @@ export class NotifyMgr extends NotifyCore {
     public static event_net_player_login:string = "event_net_player_login";
     public static event_coin_diamond_level_change:string = "event_coin_diamond_level_change";       //金币钻石变化
     public static event_net_formation_change:string = "event_net_formation_change";     //英雄阵容变化
-    public static event_coin_diamond_level_change:string = "event_coin_diamond_level_change";
     public static event_net_offline: string = "event_net_offline"
     
     public static event_equip_item_change:string = "event_equip_item_change";       //装备道具数量变化
@@ -21,6 +20,7 @@ export class NotifyMgr extends NotifyCore {
     public static event_net_starUp_change:string = "event_net_starUp_change";     //升星变化
     public static event_net_OneKeyStarUp_change:string = "event_net_OneKeyStarUp_change";     //一键升星变化
 
-
     public static event_net_pub_summon_hero : string = "event_net_pub_summon_hero";     //酒馆召唤
+    public static event_hero_book_active:string = "event_hero_book_active";         //英雄图鉴激活
+    public static event_hero_book_upgrade:string = "event_hero_book_upgrade";         //英雄图鉴升级
 }
