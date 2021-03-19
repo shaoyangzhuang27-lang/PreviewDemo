@@ -396,6 +396,14 @@ export class HeroData extends BaseHeroData {
         return 0;
     }
 
+    public getEquipPropertyList() {
+        return this._equipPropertyList;
+    }
+    
+    public getSuitPropertyList() {
+        return this._suitPropertyList;
+    }
+
     /*
         //////////////////////////////////
         ///////////英雄属性获取////////////
