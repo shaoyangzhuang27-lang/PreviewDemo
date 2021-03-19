@@ -1,4 +1,8 @@
-//升星物品
+/**
+ * 游戏组件:获得物品弹窗
+ * @author 郭刚
+ * @version 1.0.0,2021.3.19
+ */
 import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources,ProgressBar,instantiate, CCInteger } from 'cc';
 const { ccclass, property } = _decorator;
 import { PopMgr } from '../../control/PopMgr';
@@ -41,7 +45,7 @@ export class ItemMultiReward extends Component {
     public starlist:Node[] = [];
 
 
-    private _propInfo : XStruct.starup_prop_info.IRecord = {
+    private _propInfo : XStruct.prop_info.IRecord = {
         nType : XConsts.KSTARUP_PROP_TYPE.Hero,
         nPropId : 0,
         nLevel : 0,
@@ -61,7 +65,12 @@ export class ItemMultiReward extends Component {
         // PopMgr.getInstance().popFragmentSynthesisWindow(this._propInfo,()=>{console.log("hu")});
     }
 
-    //资源替换
+
+    /**
+     * @description: SpriteFame资源替换
+     * @param path 资源路径
+     * @param obj 节点类型Node
+     */  
     _resourceLoad (path:string | null | undefined,obj:any)
     {
       
@@ -112,13 +121,11 @@ export class ItemMultiReward extends Component {
                     this._resourceLoad(frame,this.btn_frame);
                     this._resourceLoad(icon,this.img_icon);
                     this._setStar(star);
-                    // this._resourceLoad()
                     break;
                 case XConsts.KSTARUP_PROP_TYPE.Money : 
                     this.img_camp.active = false;
                     this.lab_level.node.active = false;
                     this.node_satr.active = false;
-                    // this.lab_num.string = "x" + String(this._propInfo.num);
                     icon = "ui/common/commonIcon/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
                     bg = "ui/common/icon/" +  XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ?this._propInfo.nPropQuality : 2] + "/spriteFrame"
                     this._resourceLoad(icon,this.img_icon);
@@ -128,7 +135,6 @@ export class ItemMultiReward extends Component {
                     this.img_camp.active = false;
                     this.lab_level.node.active = false;
                     this.node_satr.active = false;
-                    // this.lab_num.string = "x" + String(this._propInfo.num);
                     icon = "ui/common/commonIcon/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
                     bg = "ui/common/icon/" +  XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ?this._propInfo.nPropQuality : 2] + "/spriteFrame"
                     this._resourceLoad(icon,this.img_icon);
@@ -136,11 +142,16 @@ export class ItemMultiReward extends Component {
                     break;
             }
 
-            this.lab_num.string =  "x" + XFuns.FormatNumber(this._propInfo.num ? this._propInfo.num : 0);;
+            this.lab_num.string =  "x" + XFuns.FormatNumber(this._propInfo.num ? this._propInfo.num : 0);
         }
     }
 
-    public setPropInfo(data : XStruct.starup_prop_info.IRecord)
+
+    /**
+     * @description: 设置物品信息
+     * @param data 物品信息结构
+     */    
+    public setPropInfo(data : XStruct.prop_info.IRecord)
     {
            this._propInfo = instantiate(data);
     }

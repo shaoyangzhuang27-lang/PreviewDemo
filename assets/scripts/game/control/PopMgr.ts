@@ -384,14 +384,20 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    public popSummonSettleWindow(nType : number,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    /**
+     * @description: 召唤结算界面弹窗
+     * @param {number} nType  召唤类型
+     * @param {number} nCounts 召唤个数
+     * @param {Function} closeCallBack
+     */ 
+    public popSummonSettleWindow(nType : number,nCounts : number ,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
             let script = p.getComponent("PopSummonSettle") as PopSummonSettle;
-            // script.setTitle(title);
             script.popWindowType = nType ;
+            script.summonCounts = nCounts;
             script.setIsMaskClose(isMaskClose);
 
         } );
@@ -458,17 +464,20 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    public popMultiItemRewardWindow(submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+     /**
+     * @description: 获得物品(多个)弹窗
+     * @param {Array<XStruct.prop_info.IRecord>} 物品信息
+     * @param {Function} closeCallBack
+     */
+    public popMultiItemRewardWindow(data :Array<XStruct.prop_info.IRecord>,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_multi_itemreward', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
-
             let script = p.getComponent("PopMultiItemReward") as PopMultiItemReward;
-            // script.setSubmitCallBack(submitCallBack);
+            script.setPropsInfo(data);
             script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
-
         } );
     }
 
