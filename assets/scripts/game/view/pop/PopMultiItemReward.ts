@@ -29,6 +29,9 @@ export class PopMultiItemReward extends PopBase {
     @property({type :  ScrollView})
     public scroll_item_view:ScrollView = null as unknown as ScrollView;
 
+    @property({type: Label})
+    public lab_decompose = null as unknown as Label;
+
     //所有道具信息
     private _propInfoArray : Array<XStruct.prop_info.IRecord> = [];
 
@@ -50,7 +53,7 @@ export class PopMultiItemReward extends PopBase {
         if(this.lab_content)
             this.lab_content.string = content
     }
-    public setSubmitCallBack(func:Function){
+    public setSubmitCallBack(func:Function | null){
         func ? this._submitCallFun = func : this._submitCallFun = ()=>{PopMgr.getInstance().deleteWindow()};
     }
 

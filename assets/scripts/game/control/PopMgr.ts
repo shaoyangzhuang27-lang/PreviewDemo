@@ -469,7 +469,7 @@ export class PopMgr extends PopCore  {
      * @param {Array<XStruct.prop_info.IRecord>} 物品信息
      * @param {Function} closeCallBack
      */
-    public popMultiItemRewardWindow(data :Array<XStruct.prop_info.IRecord>,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+    public popMultiItemRewardWindow(data :Array<XStruct.prop_info.IRecord>,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_multi_itemreward', (err:any,res:any)=>{
             let p = instantiate( res );

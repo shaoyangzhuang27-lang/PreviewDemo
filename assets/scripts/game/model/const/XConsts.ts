@@ -338,4 +338,6 @@ export class XConsts{
         Exp : 2,
     }
 
+    public static UI_AUTODECOMPOSEGET : string = "UI_AutoDecomposeGet"; //普通英雄自动分解获得
+
 } 
