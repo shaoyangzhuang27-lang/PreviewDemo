@@ -80,8 +80,8 @@ export class BattleEffect extends Component {
     }
 
     destroySelf(): void {
-        // this.node.destroy();
-        this.node.removeFromParent();
+        this.node.destroy();
+        // this.node.removeFromParent();
     }
 
     isImmediately(): boolean {

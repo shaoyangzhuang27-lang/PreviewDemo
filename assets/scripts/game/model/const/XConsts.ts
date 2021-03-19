@@ -322,6 +322,14 @@ export class XConsts{
         FragmentSysthesis : 2,
     }
 
+    //图鉴英雄状态
+    public static HeroBookState = {
+        Null : 0,   //未激活
+        CanActive : 1,      //可激活
+        CanUpGrade : 2,      //可升级
+        Normal : 3,      //常态
+    }
+
     //升星塔获得物品
     public static KStarUpGainObjectTitle : string = "UI_GainObject_Title" ;  //获得物品
     public static KSTARUP_PROP_TYPE  = {

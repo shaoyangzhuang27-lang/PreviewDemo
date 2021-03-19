@@ -254,6 +254,7 @@ export class TeamMain extends Component {
     //图鉴
     private _openBookLibraryView()
     {
+        // PopMgr.getInstance().popBookHeroActiveView(5135501);
         PopMgr.getInstance().popBookLibraryView();
     }
 
@@ -272,7 +273,12 @@ export class TeamMain extends Component {
     //英雄升级界面
     private _openHeroUpGradeView(_heroData:HeroData)
     {
-        PopMgr.getInstance().popHeroPromotionView(_heroData.getDyncID() );
+        if(!_heroData.isRoleHero() ){
+            console.log(" 英雄界面 ");
+            PopMgr.getInstance().popHeroPromotionView(_heroData.getDyncID() );
+        }else{
+            console.log(" 骑士界面 ");
+        }
     }
 
     //升星塔界面

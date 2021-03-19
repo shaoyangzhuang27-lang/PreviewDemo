@@ -6,6 +6,7 @@ import { GameModel } from "../GameModel";
 import { TableName, ValueMgr } from "../ValueMgr";
 import { XConsts } from "../const/XConsts";
 import { XShare } from "../const/XShare";
+import { math } from "cc";
 
 export class HeroData extends BaseHeroData {
     private _recordSkill: Config.skill.Record = new Config.skill.Record();    //记录的技能
@@ -144,16 +145,23 @@ export class HeroData extends BaseHeroData {
 
     public get tier() {
         if (!this.isRoleHero()) {
-            return 1;// Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);
+            return 1;//this.GetMaxTier();// Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);            
         } else
             return this._heroInfo.tier;
     }
     public set tier(_tier: number) {
         if (!this.isRoleHero()) {
-            // Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);
+            this._record.star= _tier;
         } else {
             this._heroInfo.tier = _tier;
         }
+    }
+
+    public GetMaxTier() {
+        if (this._record.star > XShare.getInstance().KMaxHeroTier)
+            return XShare.getInstance().KMaxHeroTier;
+
+        return this._record.star;
     }
 
     public get isLocked() {
@@ -300,7 +308,7 @@ export class HeroData extends BaseHeroData {
 
 
     private getPropertyUpByTier() {
-        let n = 1//Tier;
+        let n = this.tier;
         if (n < XShare.getInstance().KHeroPropertyUpByTier.length) {
             return XShare.getInstance().KHeroPropertyUpByTier[n] / 100.0;
         }
@@ -801,6 +809,28 @@ export class HeroData extends BaseHeroData {
     public static GetHeroStar(staticID: number) {
         return Math.floor(staticID / 10000) % 100;
     }
+    //根据英雄图鉴id倒推最高星级的静态id
+    public static getHeroStaticIdByBookId(bookId:number){
+        let heroStaticID = bookId;
+        let id1st = Number((bookId/1000000).toFixed())
+        if(id1st == 5)
+        {
+            heroStaticID += 130000;
+        }
+        else if(id1st == 3)
+        {
+            heroStaticID += 80000;
+        }
+        else if(id1st == 2)
+        {
+            heroStaticID += 20000;
+        }
+        else if(id1st == 1)
+        {
+            heroStaticID += 10000;
+        }
+        return heroStaticID;
+    }
 
     private getHeroBookPropertyByHero(proType: Msg.THeroPropertyType) {
         if (this._gameModel != null) {
@@ -846,10 +876,9 @@ export class HeroData extends BaseHeroData {
 
     //返回英雄头衔
     public getTitleName(): string {
-        let _title = "";
-        if (this._record != null) {
-            return this._record.title;
-        }
-        return _title
+        if ( (this._record != null) && (this._record.title != "0") )
+            return (ValueMgr.getInstance().getItemByField(TableName.language_data, this._record.title) as Config.language_data.Record).cn;
+    
+        return "";
     }
 }

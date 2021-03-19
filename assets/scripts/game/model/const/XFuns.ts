@@ -2,9 +2,9 @@
  * @Description: 通用函数类
  * @Author: xxx
  * @Date: 2021-03-08 10:30:05
- * @LastEditTime: 2021-03-16 17:58:31
+ * @LastEditTime: 2021-03-16 19:51:31
  */
-import {  resources, Node, Sprite, SpriteFrame, Layers } from "cc";
+import {  resources, Node, Sprite, SpriteFrame, Layers, Component } from "cc";
 export class XFuns{
 
     /**
@@ -36,19 +36,23 @@ export class XFuns{
      * @param imgPath resources目录下资源路径 eg."ui/lv_up/黑白进阶宝石/spriteFrame"
      * @param parent 父节点
      * @param spriteName 图片名字
+     * @param callBack 回调函数
      */
-    public static CreateSprite(imgPath:string, parent: Node, spriteName:string="sp") 
+    public static CreateSprite(imgPath:string, parent: Node, spriteName:string="sp", callBack:Function|null = null) 
     {           
         resources.load(imgPath, SpriteFrame, (err, spriteFrame:SpriteFrame) =>
         {
             console.log("XFuns CreateSprite _resourceLoad ---------",err)
-            if(!err)
-            {
+            if(!err){
                 let node = new Node(spriteName);                     
                 const sprite = node.addComponent(Sprite);
                 sprite.spriteFrame = spriteFrame;
                 node.layer = Layers.Enum.UI_2D; //设置显示层级!
                 parent.addChild(node);
+                
+                if(callBack){
+                    callBack();
+                }
             }
         });
     }
@@ -57,15 +61,19 @@ export class XFuns{
      * @description: 资源替换SpriteFrame
      * @param imgPath resources目录下资源路径 eg."ui/lv_up/黑白进阶宝石/spriteFrame"
      * @param sp 图片节点
+     * @param callBack 回调函数
      */
-    public static ReplaceSpriteFrame(imgPath:string, sp: Sprite) 
+    public static ReplaceSpriteFrame(imgPath:string, sp: Sprite, callBack:Function|null = null)  
     {           
         resources.load(imgPath, SpriteFrame, (err, spriteFrame:SpriteFrame) =>
         {
-            console.log("XFuns SpriteFrameLoad _resourceLoad ---------",err)
-            if(!err)
-            {
-                sp.spriteFrame = spriteFrame;
+            console.log("XFuns ReplaceSpriteFrame _resourceLoad ---------",err)
+            if(!err){
+                sp.spriteFrame = spriteFrame;                
+
+                if(callBack){
+                    callBack();
+                }
             }
         });
     }

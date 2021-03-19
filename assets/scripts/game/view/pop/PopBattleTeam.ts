@@ -391,7 +391,10 @@ export class PopBattleTeam extends PopBase {
                 this._selectBattleHeroList.delete(dyncID);
                     
                 let node = this._getTopHeroByStaticID(staticID)
-                if(node)node.removeFromParent();
+                if(node){
+                    node.removeFromParent();
+                    node.destroy();
+                }
 
             }
         }

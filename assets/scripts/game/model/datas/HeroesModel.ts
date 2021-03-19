@@ -5,12 +5,14 @@ import { XMsgExt } from "../const/XMsgExt";
 import { BaseModel } from "./BaseModel";
 import { NotifyMgr } from '../../control/NotifyMgr';
 import {XConsts} from "../const/XConsts";
+import { XList } from "../const/XList";
 
 export class HeroesModel extends BaseModel{
 
     
     private _heroList:Map<number,HeroData> = new Map<number,HeroData>();
     private _heroBookMap:Map<number, Msg.HeroBookUnit> = new Map<number, Msg.HeroBookUnit>();//图鉴
+    private _sortedHeroList = new XList<HeroData> (); //已排序的英雄队列
 
     public getHeroList(){
         return this._heroList;
@@ -35,6 +37,52 @@ export class HeroesModel extends BaseModel{
             this._heroBookMap.set(Number(key),value as Msg.HeroBookUnit);
         }
         this.refreshHeroBookProperty(); //收到消息后刷新
+
+        this._sortHeroList();
+    }
+
+    //排序英雄,英雄升级界面左右按钮用到
+    private _sortHeroList(){
+        this._sortedHeroList.Clear();  
+
+        //优先加入当前阵容英雄
+        let curFormationList:Map<number,HeroData> = GameModel.getInstance().getFormationModel().getCurrentFormation();   
+        curFormationList.forEach((heroData,key, m)=>{
+            console.log(" heroData=",heroData)
+            console.log(" key=",key)
+            console.log(" m=",m)
+            this._sortedHeroList.Add(heroData);
+        });
+
+        //接着加入剩余所有已排序后的英雄
+        let retHeroList= this.sortHeroList(this._heroList);
+        retHeroList.forEach(element => {
+            if( !this._sortedHeroList.Contains(element) )
+                this._sortedHeroList.Add(element);
+        });
+    }
+
+    /**
+     * @description: 获取前一个英雄
+     * @param {HeroData} curHero 当前英雄数据
+     */    
+    public getPrevHero (curHero:HeroData) {
+        let i = this._sortedHeroList.IndexOf(curHero);
+        if (i > 0)
+            return this._sortedHeroList.Get(i-1);
+        else
+            return this._sortedHeroList.Get(this._sortedHeroList.Count - 1);
+    }
+    /**
+     * @description: 获取后一个英雄
+     * @param {HeroData} curHero 当前英雄数据
+     */
+    public getNextHero (curHero:HeroData) {
+        let i = this._sortedHeroList.IndexOf(curHero);
+        if (i < (this._sortedHeroList.Count - 1) )
+            return this._sortedHeroList.Get(i+1);
+        else
+            return this._sortedHeroList.Get(0);
     }
 
     //根据阵营获取当前英雄
@@ -260,18 +308,18 @@ export class HeroesModel extends BaseModel{
     public getBookHeroDataByStaticID(staticId:number):Msg.HeroBookUnit
     {
         let tempBookId = HeroData.GetHeroBookID(staticId);
+        let tempBookHero = this.getBookHeroDataByBookId(tempBookId);
+        return tempBookHero;
+    }
+
+    //根据图鉴id获取图鉴英雄信息
+    public getBookHeroDataByBookId(bookid:number)
+    {
         let tempBookHero:Msg.HeroBookUnit = new Msg.HeroBookUnit();
-        if(this._heroBookMap.has(tempBookId))
+        if(this._heroBookMap.has(bookid))
         {
-            tempBookHero = this._heroBookMap.get(tempBookId) as Msg.HeroBookUnit;
+            tempBookHero = this._heroBookMap.get(bookid) as Msg.HeroBookUnit;
         }
-        // this._heroBookMap.forEach((heroInfo)=>{
-        //     var _hero = ValueMgr.getInstance().getItemByField(TableName.heroes, heroInfo.heroBookId as number) as Config.heroes.Record;
-        //     if(heroInfo && heroInfo.heroBookId == tempBookId){
-        //         tempBookHero = heroInfo;      
-        //         return;          
-        //     }
-        // });
         return tempBookHero;
     }
 

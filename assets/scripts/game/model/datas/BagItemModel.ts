@@ -350,7 +350,7 @@ export class BagItemModel extends BaseModel{
                  this._bagEquipList.set(key,newCount)
              }
              NotifyMgr.getInstance().notify(NotifyMgr.event_equip_item_change,[ItemEquipType.equip,key]);
-             NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
+            //  NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
          }        
      }
 

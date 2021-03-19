@@ -22,6 +22,8 @@ import { PopRecLineUp } from "../view/pub/PopRecLineUp";
 import { PopSummonSettle } from "../view/pop/PopSummonSettle";
 import { PopFragmentSynthesis } from "../view/pop/PopFragmentSynthesis";
 import { PopBookActive } from '../view/pop/PopBookActive';
+import { PopHeroEquipReplace } from '../view/hero_promotion/PopHeroEquipReplace';
+import { PopBookUpGrade } from '../view/pop/PopBookUpgrade';
 import { PopMultiItemReward } from "../view/pop/PopMultiItemReward";
 export class PopMgr extends PopCore  {
 
@@ -90,13 +92,15 @@ export class PopMgr extends PopCore  {
         } );
             }
 
-    //弹出英雄升级,升阶,装备界面
-    public popHeroPromotionView(heroId:number=0,submitCallBack:Function = ()=>{},closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    /**
+     * @description:  英雄升级,升阶,装备弹窗
+     * @param {heroId} 英雄动态Id
+     */
+    public popHeroPromotionView(heroId:number=0,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_heropromotion', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
-
             let script = p.getComponent("HeroPromotion");
             script.setIsMaskClose(isMaskClose);
             script.setCurrentHeroId(heroId);
@@ -406,7 +410,11 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    public popHeroActiveView(id:number)
+    /**
+     * 图鉴激活界面
+     * @param id 英雄id
+     */
+    public popBookHeroActiveView(id:number)
     {
         resources.load('prefabs_ui/pop/pop_bookactive', (err:any,res:any)=>{
             let p = instantiate( res );
@@ -414,6 +422,39 @@ export class PopMgr extends PopCore  {
 
             let script = p.getComponent("PopBookActive") as PopBookActive;
             script.setActiveHeroInfo(id);
+        } );
+    }
+
+    /**
+     * 图鉴升级界面
+     * @param id 
+     */
+     public popBookHeroUpgradeView(id:number)
+     {
+         resources.load('prefabs_ui/pop/pop_bookupgrade', (err:any,res:any)=>{
+             let p = instantiate( res );
+             this.pushWindow(p);
+ 
+             let script = p.getComponent("PopBookUpGrade") as PopBookUpGrade;
+             script.setBookUpgradeHeroData(id);
+         } );
+     }
+
+
+    /**
+     * @description: 装备替换弹窗
+     * @param {number} heroId 英雄动态Id
+     * @param {number} equipId 装备Id
+     * @param {Function} closeCallBack
+     */    
+    public popHeroEquipReplaceWindow(heroId: number, equipId:number=0, closeCallBack:Function|null = null){
+
+        resources.load('prefabs_ui/pop/pop_replaceequip', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+            let script = p.getComponent("PopHeroEquipReplace") as PopHeroEquipReplace;
+            script.setEquipData(heroId, equipId);
+            script.setCloseCallBack(closeCallBack);
         } );
     }
 
