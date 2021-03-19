@@ -877,7 +877,7 @@ export class HeroPromotion extends PopBase {
                         equipCell.name = "equipCell_" + key.toString();                                      
                         equipCell.setItemType(equipData.id, 0, ItemEquipType.equip,()=>{
                             console.log(" 显示装备具体界面 ");
-                            PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId() );
+                            PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), key);
                         });
 
                         this._equipNodeMap.set(key, equipCell);
@@ -887,7 +887,7 @@ export class HeroPromotion extends PopBase {
                     let equipCell = itemEquipCell as ItemEquipCell;
                     equipCell.setItemType(equipData.id, 0, ItemEquipType.equip,()=>{
                         console.log(" 显示装备具体界面 ");
-                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId() );
+                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), key );
                     });
                 }                
             });

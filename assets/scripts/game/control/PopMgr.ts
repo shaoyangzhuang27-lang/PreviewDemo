@@ -431,13 +431,13 @@ export class PopMgr extends PopCore  {
      * @param {number} equipId 装备Id
      * @param {Function} closeCallBack
      */    
-    public popHeroEquipReplaceWindow(heroId: number, equipId:number=0, closeCallBack:Function|null = null){
+    public popHeroEquipReplaceWindow(heroId: number, locationType:Msg.TEquipLocationType | 0, closeCallBack:Function|null = null){
 
         resources.load('prefabs_ui/pop/pop_replaceequip', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
             let script = p.getComponent("PopHeroEquipReplace") as PopHeroEquipReplace;
-            script.setEquipData(heroId, equipId);
+            script.setEquipData(heroId, locationType);
             script.setCloseCallBack(closeCallBack);
         } );
     }
