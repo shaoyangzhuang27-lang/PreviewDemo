@@ -86,7 +86,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "bg",
+    "_name": "img_bg",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -1840,7 +1840,9 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "01f19513-3ecf-46cf-b93e-d8f0477c0bf3@f9941"
+    },
     "_type": 1,
     "_fillType": 0,
     "_sizeMode": 0,
