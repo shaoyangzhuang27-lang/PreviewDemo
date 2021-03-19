@@ -3,6 +3,7 @@ import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resourc
 const { ccclass, property } = _decorator;
 import { PopMgr } from '../../control/PopMgr';
 import { XConsts } from '../../model/const/XConsts';
+import { XFuns } from '../../model/const/XFuns';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 
 @ccclass('ItemMultiReward')
@@ -135,79 +136,8 @@ export class ItemMultiReward extends Component {
                     break;
             }
 
-            this.lab_num.string =  "x" + String(this._propInfo.num);
-            // let name: string = XConsts.KObjectIconSpriteName[this._propInfo.nType]
-            // let icon = "ui/main/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
-            // let bg = "ui/common/icon/" +  XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ?this._propInfo.nPropQuality : 2] + "/spriteFrame"
+            this.lab_num.string =  "x" + XFuns.FormatNumber(this._propInfo.num ? this._propInfo.num : 0);;
         }
-       
-
-        // let name: string = XConsts.KObjectIconSpriteName[this._propInfo.nType]
-        // let iconPath: string = "ui/main/" + name + "/spriteFrame"
-        // resources.load(iconPath, (err, spriteFrame: SpriteFrame) => {
-        //     if (!err && this.m_sptIcon) {
-        //         let sprite = this.m_sptIcon.getComponent(Sprite) as Sprite;
-        //         sprite.spriteFrame = spriteFrame;
-        //     }
-        // });
-       
-                // info.frame = "ui/common/icon/" +  XConsts.GetQualityBgByStar(heroInfo.star) + "/spriteFrame";
-                // info.quality = "ui/common/icon/" + XConsts.KFragmentQualitySpriteName[1] + "/spriteFrame";
-                // info.icon = "ui/common/hero/" + heroInfo.image + "/spriteFrame";
-                // info.camp = "ui/common/team/" + XConsts.KHeroCampIcon[heroInfo.camp] + "/spriteFrame";
-                // info.star = heroInfo.star;
-                // info.maxNum = XConsts.KFragmentNumRequired[info.star ? info.star : 1];
-                // info.curNum = value.num ? value.num : 0;
-                // info.heroName = heroInfo.name;
-                // info.campName = XConsts.KCampName[heroInfo.camp];
-        // if(this._propInfo.nType == Msg.TObjectType.EObject_Hero)
-        // {
-
-        // }
-        // else if()
-        // this.img_camp.active = false;
-        
-        // console.log("vvvvvvvvvvvvv",this._propInfo);
-        // Object.keys(this._propInfo).forEach((val, idx, array) => {
-        //     // val: 当前值
-        //     // idx：当前index
-        //     // array: Array
-
-        //     val == "icon" && this._propInfo[val] && this._resourceLoad(this._propInfo[val],this.img_icon);
-        //     val == "frame" && this._propInfo[val] && this._resourceLoad(this._propInfo[val],this.btn_frame);
-        //     val == "camp" && this._propInfo[val] && this._resourceLoad(this._propInfo[val],this.img_camp);
-        //     val == "quality" && this._propInfo[val] && this._resourceLoad(this._propInfo[val],this.img_debris);
-        //     val == "bg" && this._propInfo[val] && this._resourceLoad(this._propInfo[val],this.img_bg);
-            
-        // });
-
-        // if(info.maxNum && info.curNum )
-        // {
-        //     let nPreocess = info.curNum / info.maxNum ;
-        //     if(nPreocess > 1)
-        //     {
-        //         nPreocess = 1;
-        //     }
-
-        //     let bar = this.probar_fragment.node.getChildByName("bar");
-        //     let path = nPreocess !=1 ? "ui/common/icon/" + "碎片未满进度条" + "/spriteFrame" : "ui/common/icon/" + "碎片已满进度条" + "/spriteFrame";
-        //     this._resourceLoad(path,bar);
-           
-        //     var barCompoent =  this.probar_fragment?.getComponent(ProgressBar);
-        //     if(barCompoent)
-        //     {
-        //         barCompoent.progress = nPreocess ;
-        //     }
-
-        //     var str = String(info.curNum) + "/" + String(info.maxNum);
-        //     this.lab_process_num.string = str;
-
-        //     nPreocess != 1 ? this.img_point.active = false : this.img_point.active = true;
-
-        //     this._setStar(info.star ? info.star : 0);
-
-        // }
-
     }
 
     public setPropInfo(data : XStruct.starup_prop_info.IRecord)
