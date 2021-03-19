@@ -174,7 +174,7 @@ export class HeroData extends BaseHeroData {
     public get equipOnList() {
 
         if (!this.isRoleHero()) {
-            return null;// Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);
+            return new Map<Msg.TEquipLocationType, Config.equip.Record>();// Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);
         } else
             return this._equipOnList;
     }

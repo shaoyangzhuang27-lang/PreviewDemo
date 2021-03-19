@@ -324,15 +324,46 @@ export class HeroesModel extends BaseModel{
     }
 
 
-    // 设置英雄锁定状态
+    /**
+     * @description: 设置英雄锁定状态
+     * @param {*}
+     */    
     public setHeroLocked(msg: Msg.SyncHeroLocked) {
         //根据id获取英雄信息
-        let heroData = this.getHeroInfoByDyncID(msg.heroID); //HeroData
+        let heroData = this.getHeroInfoByDyncID(msg.heroID); 
         if(heroData)
         {   
             heroData.isLocked= msg.isLocked;
             //抛出通知 英雄锁定状态 变化
             NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_locked, msg);
+        }        
+    }
+    
+    /**
+     * @description: 英雄穿上装备
+     * @param {Msg} msg
+     */
+    public setHeroPutOnEquip(msg: Msg.PutOnEquipA) {
+        //根据id获取英雄信息
+        let heroData = this.getHeroInfoByDyncID(msg.heroID); 
+        if(heroData)
+        {   
+            //抛出通知 英雄穿上装备 
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_put_on_equip, msg);
+        }        
+    }
+
+    /**
+     * @description: 英雄卸下装备
+     * @param {Msg} msg
+     */
+    public setHeroTakeOffEquip(msg: Msg.TakeOffEquipA) {
+        //根据id获取英雄信息
+        let heroData = this.getHeroInfoByDyncID(msg.heroID); 
+        if(heroData)
+        {   
+            //抛出通知 英雄卸下装备 
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_take_off_equip, msg);
         }        
     }
 

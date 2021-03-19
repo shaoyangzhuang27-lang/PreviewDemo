@@ -129,6 +129,63 @@ export class BagItemModel extends BaseModel{
             this._fragmentSynthesisInfoList.push(instantiate(info));    
         }
     }
+    
+    /**
+     * @description: 增加装备到背包
+     * @param {number} equipID 装备id
+     * @param {number} num 增加数量
+     */ 
+    public addEquipBag( equipID:number, num:number) {
+        let tmpNum = this._bagEquipList.get(equipID);
+        if (tmpNum)
+            this._bagEquipList.set(equipID, tmpNum+num);
+        else
+            this._bagEquipList.set(equipID, num);
+
+        // UINotificationCenter.Instance ().PostNotification ((int) NotificationMsg.RPCity);
+    }
+
+     /**
+     * @description: 从背包减少装备
+     * @param {number} equipID 装备id
+     * @param {number} num 减少数量
+     */ 
+    public subEquipBag( equipID:number, num:number) {
+        let tmpNum = this._bagEquipList.get(equipID);
+        if (tmpNum){            
+            if(num < tmpNum){
+                this._bagEquipList.set(equipID, tmpNum-num);
+            }else{
+                this._bagEquipList.delete(equipID);
+            }
+            // UINotificationCenter.Instance ().PostNotification ((int) NotificationMsg.RPCity);
+        }
+    }
+    /**
+     * @description: 获得背包中某位置的最好装备ID
+     * @param {Msg.TEquipLocationType} locType
+     */
+    getBestEquipInBag(locType: Msg.TEquipLocationType ): Config.equip.Record | null {
+        let bestEquipRecord : Config.equip.Record | null  = null;
+        this._bagEquipList.forEach((num, equipID, m)=>{
+            let recordTmp = ValueMgr.getInstance().getItemByField(TableName.equip, equipID); 
+            if (recordTmp){
+                let record=  recordTmp as Config.equip.Record;
+                if(record.locationType == locType) {
+                    if (bestEquipRecord == null)
+                        bestEquipRecord = record;
+                    else {
+                        if (record.quality > bestEquipRecord.quality ||
+                            (record.quality == bestEquipRecord.quality && record.star > bestEquipRecord.star)) {
+                            bestEquipRecord = record;
+                        }
+                    }
+                }
+            }
+        });
+        
+        return bestEquipRecord;
+    }
 
     //获取背包道具
     public getBagItemList()
