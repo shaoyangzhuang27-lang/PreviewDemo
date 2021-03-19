@@ -57,7 +57,7 @@ export class HeroBookCell extends Component {
 
     /**
      * 设置图鉴英雄信息
-     * @param showType 
+     * @param showType 界面显示状态
      * @param heroStaticId 
      * @param callback 
      */
@@ -69,6 +69,17 @@ export class HeroBookCell extends Component {
         this._heroUb = GameModel.getInstance().getHeroesModel().getBookHeroDataByStaticID(this._heroStaticId);
         this._callBack = callback;
         this._initUIIcon()
+    }
+
+    /**
+     * 重设界面显示状态
+     * @param showType 界面显示状态
+     */
+    public resetBookView(showType:number)
+    {
+        this._itemType = showType;
+        this._heroUb = GameModel.getInstance().getHeroesModel().getBookHeroDataByStaticID(this._heroStaticId);
+        this._initNodeActive();
     }
 
     private _initUIIcon()
@@ -87,51 +98,8 @@ export class HeroBookCell extends Component {
         this._resourceLoad(campBgPath,this.img_bg)
 
         this.lab_heroName.string = heroName.toString();
-        this.lab_lv.string = "Lv." + this._heroUb.level.toString();
 
-        let labActice:Label = this.lab_active.getComponent(Label) as Label;
-        if(this._itemType == 0)
-        {            
-            labActice.string = "未激活";
-            this.img_mask.active = true;
-            this.lab_active.active = true;
-
-            this.img_lvUp.active = false;
-            this.img_bookicon.active = false;
-            this.img_active.active = false;
-        }
-        else if(this._itemType == 1)
-        {            
-            labActice.string = "激活"
-            this.lab_active.active = true;
-            this.img_active.active = true;
-
-            this.img_mask.active = false;           
-            this.img_lvUp.active = false;
-            this.img_bookicon.active = false;   
-
-            labActice.color = XConsts.KColorGray;
-            // labActice.color = "淡蓝色"
-        }
-        else if(this._itemType == 2)
-        {            
-            labActice.string = "升级";
-            this.lab_active.active = true;
-            this.img_lvUp.active = true;
-
-            this.img_mask.active = false;            
-            this.img_bookicon.active = false;
-            this.img_active.active = false;
-            labActice.color = XConsts.KColorGreen;
-        }
-        else 
-        {
-            this.img_bookicon.active = true;
-            this.img_active.active = false;
-            this.lab_active.active = false;
-            this.img_mask.active = false;
-            this.img_lvUp.active = false;
-        }
+        this._initNodeActive()
     }
 
     private _onClickItemCallback()
@@ -156,17 +124,55 @@ export class HeroBookCell extends Component {
         });
     }
 
+    private _initNodeActive()
+    {
+        let labActice:Label = this.lab_active.getComponent(Label) as Label;
+        if(this._itemType == XConsts.HeroBookState.Null)
+        {            
+            labActice.string = "未激活";
+            this.img_mask.active = true;
+            this.lab_active.active = true;
+
+            this.img_lvUp.active = false;
+            this.img_bookicon.active = false;
+            this.img_active.active = false;
+        }
+        else if(this._itemType == XConsts.HeroBookState.CanActive)
+        {            
+            labActice.string = "激活"
+            this.lab_active.active = true;
+            this.img_active.active = true;
+
+            this.img_mask.active = false;           
+            this.img_lvUp.active = false;
+            this.img_bookicon.active = false;   
+
+            labActice.color = XConsts.KColorGray;
+            // labActice.color = "淡蓝色"
+        }
+        else if(this._itemType == XConsts.HeroBookState.CanUpGrade)
+        {            
+            labActice.string = "升级";
+            this.lab_active.active = true;
+            this.img_lvUp.active = true;
+
+            this.img_mask.active = false;            
+            this.img_bookicon.active = false;
+            this.img_active.active = false;
+            labActice.color = XConsts.KColorGreen;
+        }
+        else 
+        {
+            this.img_bookicon.active = true;
+            this.img_active.active = false;
+            this.lab_active.active = false;
+            this.img_mask.active = false;
+            this.img_lvUp.active = false;
+        }
+
+        this.lab_lv.string = "Lv." + this._heroUb.level.toString();
+    }
+
 
 
 }
-
-/**
- * [1] Class member could be defined like this.
- * [2] Use `property` decorator if your want the member to be serializable.
- * [3] Your initialization goes here.
- * [4] Your update function goes here.
- *
- * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
- * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
- * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
- */

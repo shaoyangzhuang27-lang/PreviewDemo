@@ -67,12 +67,14 @@ export class PopFragmentSynthesis extends PopBase {
         camp : "",
         star : 0,
         quality : "",
-        img : "",
+        icon : "",
         type : 0,
         maxNum : 0,
         curNum : 0,
         heroName : "",
-        campName : ""
+        campName : "",
+        classesName : "",
+        bg : ""
     }  
 
     public set FragmentSysthesisInfo(data : XStruct.fragment_synthesis_info.IRecord)
@@ -115,6 +117,12 @@ export class PopFragmentSynthesis extends PopBase {
         {
             var heroName = ValueMgr.getInstance().getItemByField(TableName.language_data,this._fragmentSysthesisInfo.heroName) as Config.language_data.Record;
             content = heroName.cn;
+        }
+
+        if(this._fragmentSysthesisInfo.classesName)
+        {
+            var classesName = ValueMgr.getInstance().getItemByField(TableName.language_ui,this._fragmentSysthesisInfo.classesName) as Config.language_ui.Record;
+            content = classesName.cn;
         }
         this.initFragmentNameAndDesc(this._fragmentSysthesisInfo.type,this._fragmentSysthesisInfo.star,this._fragmentSysthesisInfo.maxNum,content);
 

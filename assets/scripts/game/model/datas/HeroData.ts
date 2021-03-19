@@ -809,6 +809,28 @@ export class HeroData extends BaseHeroData {
     public static GetHeroStar(staticID: number) {
         return Math.floor(staticID / 10000) % 100;
     }
+    //根据英雄图鉴id倒推最高星级的静态id
+    public static getHeroStaticIdByBookId(bookId:number){
+        let heroStaticID = bookId;
+        let id1st = Number((bookId/1000000).toFixed())
+        if(id1st == 5)
+        {
+            heroStaticID += 130000;
+        }
+        else if(id1st == 3)
+        {
+            heroStaticID += 80000;
+        }
+        else if(id1st == 2)
+        {
+            heroStaticID += 20000;
+        }
+        else if(id1st == 1)
+        {
+            heroStaticID += 10000;
+        }
+        return heroStaticID;
+    }
 
     private getHeroBookPropertyByHero(proType: Msg.THeroPropertyType) {
         if (this._gameModel != null) {

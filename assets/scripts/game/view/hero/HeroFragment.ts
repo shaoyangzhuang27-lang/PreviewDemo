@@ -46,12 +46,14 @@ export class HeroFragment extends Component {
         camp : "",
         star : 0,
         quality : "",
-        img : "",
+        icon : "",
         type : 0,
         maxNum : 0,
         curNum : 0,
         heroName : "",
-        campName : ""
+        campName : "",
+        classesName : "",
+        bg : ""
     }  
     
     start () {
@@ -82,7 +84,7 @@ export class HeroFragment extends Component {
         
     }
 
-    _setStar(star:number)
+    private _setStar(star:number)
     {
         for (let index = 0; index < this.starlist.length; index++) {
             if(index > star-1)
@@ -112,10 +114,11 @@ export class HeroFragment extends Component {
             // idx：当前index
             // array: Array
 
-            val == "img" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_icon);
+            val == "icon" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_icon);
             val == "frame" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.btn_frame);
             val == "camp" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_camp);
             val == "quality" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_debris);
+            val == "bg" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_bg);
             
         });
 
@@ -128,7 +131,7 @@ export class HeroFragment extends Component {
             }
 
             let bar = this.probar_fragment.node.getChildByName("bar");
-            let path = nPreocess !=1 ? "ui/icon/" + "碎片未满进度条" + "/spriteFrame" : "ui/icon/" + "碎片已满进度条" + "/spriteFrame";
+            let path = nPreocess !=1 ? "ui/common/icon/" + "碎片未满进度条" + "/spriteFrame" : "ui/common/icon/" + "碎片已满进度条" + "/spriteFrame";
             this._resourceLoad(path,bar);
            
             var barCompoent =  this.probar_fragment?.getComponent(ProgressBar);
