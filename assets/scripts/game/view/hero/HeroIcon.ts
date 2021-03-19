@@ -230,15 +230,15 @@ export class HeroIcon extends Component {
             }
         });
 
-        let framePath:string = "ui/common/icon/" + info.frame + "/spriteFrame"
-        this._resourceLoad(framePath,this.btn_frame);
+        // let framePath:string = "ui/common/icon/" + info.frame + "/spriteFrame"
+        // this._resourceLoad(framePath,this.btn_frame);
 
-        let heroIconPath:string = "ui/common/hero/" + info.img + "/spriteFrame"
+        let heroIconPath:string = "ui/common/hero/" + info.icon + "/spriteFrame"
         this._resourceLoad(heroIconPath,this.img_icon);
 
         // this.lab_level.node.active = false;
 
-        this._setStar(info.star);
+        this._setStar(info.star,id);
 
         switch (nType) 
         {
