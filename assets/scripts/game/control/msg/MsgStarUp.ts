@@ -4,7 +4,10 @@
  * @version 1.0.0,2021.3.13
  */
 import { NetCallFunc } from "../../../core/network/NetInterface";
+import { HeroData } from "../../model/datas/HeroData";
 import { GameModel } from "../../model/GameModel";
+import { NotifyMgr } from "../NotifyMgr";
+import { PopMgr } from "../PopMgr";
 import { MsgBase } from "./MsgBase";
 
 export class MsgStarUp extends MsgBase{
@@ -13,6 +16,8 @@ export class MsgStarUp extends MsgBase{
         this.responeMap = new Map<number,[any,NetCallFunc,any]>([
             [Msg.MsgType.TheHeroStarUpA,[Msg.HeroStarUpA,this.responeStarUpResult,this]],
             [Msg.MsgType.TheHeroStarUpMultiA,[Msg.HeroStarUpMultiA,this.responeOneKeyStarUpResult,this]],
+            [Msg.MsgType.TheHeroBookActiveA,[Msg.HeroBookActiveA,this._responeHeroBookActiveRsp,this]],
+            [Msg.MsgType.TheHeroBookLevelUpA,[Msg.HeroBookLevelUpA,this._responeUpgradeHeroBookRsp,this]],
         ]);
     }
 
@@ -57,4 +62,58 @@ export class MsgStarUp extends MsgBase{
             console.log("打印输出错误码",newMsgData.err,newMsgData.errStr)
         }
      }
+
+    //请求激活图鉴
+    public requestHeroBookActive(bookHeroid:number)
+    {
+       const buffer_data = Msg.HeroBookActiveR.encode({heroBookId:bookHeroid}).finish();
+       this.msgMgr?.sendData(Msg.MsgType.TheHeroBookActiveR,buffer_data);
+    }
+
+    private _responeHeroBookActiveRsp(msgId: number, msgData: any)
+    {        
+        let newMsgData = msgData as Msg.HeroBookActiveA;
+        console.log("激活图鉴返回",msgId,msgData.hbu.heroBookId);
+        let bookHeroList = GameModel.getInstance().getHeroesModel().getBookMap();
+        if(bookHeroList.has(msgData.hbu.heroBookId))
+        {
+            let bookHeroData = GameModel.getInstance().getHeroesModel().getBookHeroDataByBookId(msgData.hbu.heroBookId);
+            bookHeroData = msgData.hbu;
+            bookHeroList.delete(bookHeroData.heroBookId);
+            bookHeroList.set(bookHeroData.heroBookId,bookHeroData);
+            let value = bookHeroList.get(msgData.hbu.heroBookId);
+
+            let heroStaticID = HeroData.getHeroStaticIdByBookId(msgData.hbu.heroBookId)
+            PopMgr.getInstance().popBookHeroActiveView(heroStaticID)
+            //抛通知  界面数据变化
+            NotifyMgr.getInstance().notify(NotifyMgr.event_hero_book_active,bookHeroData);
+        } 
+    }
+
+    //请求升级英雄图鉴
+    public requestUpgradeHeroBook(bookHeroid:number)
+    {
+        const buffer_data = Msg.HeroBookLevelUpR.encode({heroBookId:bookHeroid}).finish();
+        this.msgMgr?.sendData(Msg.MsgType.TheHeroBookLevelUpR,buffer_data);
+        
+    }
+
+    private _responeUpgradeHeroBookRsp(msgId: number, msgData: any)
+    {        
+        let newMsgData = msgData as Msg.HeroBookLevelUpA;
+        console.log("升级英雄图鉴返回",msgId,msgData.hbu.heroBookId);
+        let bookHeroList = GameModel.getInstance().getHeroesModel().getBookMap();
+        if(bookHeroList.has(msgData.hbu.heroBookId))
+        {
+            let bookHeroData = GameModel.getInstance().getHeroesModel().getBookHeroDataByBookId(msgData.hbu.heroBookId);
+            bookHeroData = msgData.hbu;
+            bookHeroList.delete(bookHeroData.heroBookId);
+            bookHeroList.set(bookHeroData.heroBookId,bookHeroData);
+            let value = bookHeroList.get(msgData.hbu.heroBookId);
+
+            let heroStaticID = HeroData.getHeroStaticIdByBookId(msgData.hbu.heroBookId)
+            //抛通知  界面数据变化
+            NotifyMgr.getInstance().notify(NotifyMgr.event_hero_book_upgrade,bookHeroData);
+        }
+    }
 }

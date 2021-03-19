@@ -308,31 +308,62 @@ export class HeroesModel extends BaseModel{
     public getBookHeroDataByStaticID(staticId:number):Msg.HeroBookUnit
     {
         let tempBookId = HeroData.GetHeroBookID(staticId);
+        let tempBookHero = this.getBookHeroDataByBookId(tempBookId);
+        return tempBookHero;
+    }
+
+    //根据图鉴id获取图鉴英雄信息
+    public getBookHeroDataByBookId(bookid:number)
+    {
         let tempBookHero:Msg.HeroBookUnit = new Msg.HeroBookUnit();
-        if(this._heroBookMap.has(tempBookId))
+        if(this._heroBookMap.has(bookid))
         {
-            tempBookHero = this._heroBookMap.get(tempBookId) as Msg.HeroBookUnit;
+            tempBookHero = this._heroBookMap.get(bookid) as Msg.HeroBookUnit;
         }
-        // this._heroBookMap.forEach((heroInfo)=>{
-        //     var _hero = ValueMgr.getInstance().getItemByField(TableName.heroes, heroInfo.heroBookId as number) as Config.heroes.Record;
-        //     if(heroInfo && heroInfo.heroBookId == tempBookId){
-        //         tempBookHero = heroInfo;      
-        //         return;          
-        //     }
-        // });
         return tempBookHero;
     }
 
 
-    // 设置英雄锁定状态
+    /**
+     * @description: 设置英雄锁定状态
+     * @param {*}
+     */    
     public setHeroLocked(msg: Msg.SyncHeroLocked) {
         //根据id获取英雄信息
-        let heroData = this.getHeroInfoByDyncID(msg.heroID); //HeroData
+        let heroData = this.getHeroInfoByDyncID(msg.heroID); 
         if(heroData)
         {   
             heroData.isLocked= msg.isLocked;
             //抛出通知 英雄锁定状态 变化
             NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_locked, msg);
+        }        
+    }
+    
+    /**
+     * @description: 英雄穿上装备
+     * @param {Msg} msg
+     */
+    public setHeroPutOnEquip(msg: Msg.PutOnEquipA) {
+        //根据id获取英雄信息
+        let heroData = this.getHeroInfoByDyncID(msg.heroID); 
+        if(heroData)
+        {   
+            //抛出通知 英雄穿上装备 
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_put_on_equip, msg);
+        }        
+    }
+
+    /**
+     * @description: 英雄卸下装备
+     * @param {Msg} msg
+     */
+    public setHeroTakeOffEquip(msg: Msg.TakeOffEquipA) {
+        //根据id获取英雄信息
+        let heroData = this.getHeroInfoByDyncID(msg.heroID); 
+        if(heroData)
+        {   
+            //抛出通知 英雄卸下装备 
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_take_off_equip, msg);
         }        
     }
 
@@ -344,14 +375,14 @@ export class HeroesModel extends BaseModel{
             star : 0,
             level : 1,
             frame : "",
-            img : "",
+            icon : "",
 
         }
         var _hero = ValueMgr.getInstance().getItemByField(TableName.heroes, id) as Config.heroes.Record;
         info.camp = XConsts.KHeroCampIcon[_hero.camp];
         info.star = _hero.star;
         info.frame = XConsts.GetQualityBgByStar(_hero.star);
-        info.img = _hero.image;
+        info.icon = _hero.image;
         return info
     }
 }

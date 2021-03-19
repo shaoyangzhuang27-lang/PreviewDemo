@@ -23,7 +23,8 @@ import { PopSummonSettle } from "../view/pop/PopSummonSettle";
 import { PopFragmentSynthesis } from "../view/pop/PopFragmentSynthesis";
 import { PopBookActive } from '../view/pop/PopBookActive';
 import { PopHeroEquipReplace } from '../view/hero_promotion/PopHeroEquipReplace';
-
+import { PopBookUpGrade } from '../view/pop/PopBookUpgrade';
+import { PopMultiItemReward } from "../view/pop/PopMultiItemReward";
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -89,7 +90,7 @@ export class PopMgr extends PopCore  {
             // script.setIsMaskClose(isMaskClose);
             // script.setInitTeamView(type)
         } );
-    }
+            }
 
     /**
      * @description:  英雄升级,升阶,装备弹窗
@@ -334,16 +335,12 @@ export class PopMgr extends PopCore  {
     }
 
 
-    public popHeroPubWindow(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+    public popHeroPubWindow(closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop_hero_pub', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
-
             let script = p.getComponent("PopHeroPub") as PopHeroPub;
-            // script.setTitle(title)
-            // script.setContent(content)
-            script.setSubmitCallBack(submitCallBack)
             script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
 
@@ -413,7 +410,11 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    public popHeroActiveView(id:number)
+    /**
+     * 图鉴激活界面
+     * @param id 英雄id
+     */
+    public popBookHeroActiveView(id:number)
     {
         resources.load('prefabs_ui/pop/pop_bookactive', (err:any,res:any)=>{
             let p = instantiate( res );
@@ -423,6 +424,21 @@ export class PopMgr extends PopCore  {
             script.setActiveHeroInfo(id);
         } );
     }
+
+    /**
+     * 图鉴升级界面
+     * @param id 
+     */
+     public popBookHeroUpgradeView(id:number)
+     {
+         resources.load('prefabs_ui/pop/pop_bookupgrade', (err:any,res:any)=>{
+             let p = instantiate( res );
+             this.pushWindow(p);
+ 
+             let script = p.getComponent("PopBookUpGrade") as PopBookUpGrade;
+             script.setBookUpgradeHeroData(id);
+         } );
+     }
 
 
     /**
@@ -442,5 +458,18 @@ export class PopMgr extends PopCore  {
         } );
     }
 
+    public popMultiItemRewardWindow(submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+
+        resources.load('prefabs_ui/pop/pop_multi_itemreward', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            let script = p.getComponent("PopMultiItemReward") as PopMultiItemReward;
+            // script.setSubmitCallBack(submitCallBack);
+            script.setCloseCallBack(closeCallBack);
+            script.setIsMaskClose(isMaskClose);
+
+        } );
+    }
 
 }

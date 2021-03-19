@@ -83,7 +83,7 @@ export class MsgMgr extends MsgCore{
         this._msgs.push(this._msgBag);
         this._msgs.push(this._msgStarUp);
         this._msgs.push(this._msgOffline);
-        this._msgs.push(this._msgFormation);
+        this._msgs.push(this._msgHeroPub);
     }
     //消息注册-------------------------------------------------
 
@@ -125,10 +125,10 @@ export class MsgMgr extends MsgCore{
             this._ip = ip;
         }
         let serverUrl = "ws://"+this._ip+":17183";
-        NetManager.getInstance().connect({ url:  serverUrl},channelId);//开启连接
-        // NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启本地连接
+        // NetManager.getInstance().connect({ url:  serverUrl},channelId);//开启连接
+        NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启本地连接
         // NetManager.getInstance().connect({ url: "ws://192.168.15.132:17183" },channelId);//开启连接
-        NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启连接
+        // NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启连接
         // NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启本地连接
     }
 }

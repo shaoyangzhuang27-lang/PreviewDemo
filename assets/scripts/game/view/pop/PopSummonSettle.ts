@@ -13,8 +13,21 @@ export class PopSummonSettle extends PopBase {
     // @property({type: LabelComponent})
     // public lab_content:LabelComponent | null = null;
 
+    @property({type: Label})
+    public lab_hero_name = null as unknown as Label;
+
+    
+    @property({type: Sprite})
+    public img_profession= null as unknown as Sprite;
+
+    @property({type: Sprite})
+    public img_camp= null as unknown as Sprite;
+
     @property({type: Button})
     public btn_summon = null as unknown as Button;
+
+    @property({type :  Node})
+    public starlist:Node[] = [];
 
     @property({type: Node})
     public btn_sure = null as unknown as Node;
@@ -23,13 +36,17 @@ export class PopSummonSettle extends PopBase {
     public btn_fragment_sure = null as unknown as Node;
     // private _submitCallFun:Function | null = null;
 
+    @property({type: Node})
+    public node_hero = null as unknown as Node;
+    
 
-    private _popWindowType : number = XConsts.POP_SUMMON_TYPE.HeroPub;
-
-    private _nSummonCounts : number = 6;
     @property({type :  ScrollView})
     public scroll_heroicon_view:ScrollView = null as unknown as ScrollView;
 
+    
+    private _popWindowType : number = XConsts.POP_SUMMON_TYPE.HeroPub;
+
+    private _nSummonCounts : number = 6;
 
 
     start () {
@@ -41,6 +58,8 @@ export class PopSummonSettle extends PopBase {
         {
             lay.type = 1;
         }
+
+        this.initHeroModelInfo(3042500);
     }
 
     public _onSummonClick(event : any)
@@ -92,6 +111,40 @@ export class PopSummonSettle extends PopBase {
             img_summon_icon && this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",img_summon_icon);
         }
 
+    }
+
+    public initHeroModelInfo(heroId : number)
+    {
+
+        //5051402
+        let heroInfo = ValueMgr.getInstance().getItemByField(TableName.heroes, heroId ) as Config.heroes.Record;
+        var camp = "ui/common/team/" + XConsts.KHeroCampIcon[heroInfo.camp] + "/spriteFrame";
+        var profession = "ui/book/" + XConsts.KClassesSpriteName[heroInfo.classes] + "/spriteFrame";
+
+        var heroName = ValueMgr.getInstance().getItemByField(TableName.language_data,heroInfo.name) as Config.language_data.Record;
+        this.lab_hero_name.string = heroName.cn
+        this.resetResourcesSpriFame(camp,this.img_camp);
+        this._setStar(heroInfo.star);
+        this.resetResourcesSpriFame(profession,this.img_profession);
+
+    }
+
+    private _setStar(star:number)
+    {
+        for (let index = 0; index < this.starlist.length; index++) {
+            if(index > star-1)
+            {
+                this.starlist[index].active = false;
+            }
+            else{
+                this.starlist[index].active = true;
+                if(star % 2 == 0)
+                {
+                   var pos =  this.starlist[index].getPosition();
+                   this.starlist[index].setPosition(pos.x + 7,pos.y);
+                }
+            } 
+        }
     }
 
     public resetResourcesSpriFame(path:string,objSprite : Sprite)

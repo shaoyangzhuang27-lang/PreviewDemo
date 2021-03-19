@@ -254,6 +254,7 @@ export class TeamMain extends Component {
     //图鉴
     private _openBookLibraryView()
     {
+        // PopMgr.getInstance().popBookHeroActiveView(5135501);
         PopMgr.getInstance().popBookLibraryView();
     }
 
