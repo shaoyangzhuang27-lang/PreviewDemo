@@ -417,21 +417,16 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    public popMultiItemRewardWindow(title:string,content:string,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+    public popMultiItemRewardWindow(submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_multi_itemreward', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 
             let script = p.getComponent("PopMultiItemReward") as PopMultiItemReward;
-            // script.setTitle(title);
-            // script.setContent(content);
-            script.setSubmitCallBack(submitCallBack);
+            // script.setSubmitCallBack(submitCallBack);
             script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
-            
-            // script.popSelf();
-            // script.setIsNeedHide(false);
 
         } );
     }
