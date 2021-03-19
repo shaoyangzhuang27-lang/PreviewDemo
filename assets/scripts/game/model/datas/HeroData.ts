@@ -21,8 +21,27 @@ export class HeroData extends BaseHeroData {
 
     private _talentSkillPropertyList = new Map<Msg.THeroPropertyType, number>();
     private _suitActiveList = new Map<number, number>();
-    private _gameModel: GameModel = null as unknown as GameModel;//待修改
+    private _gameModel: GameModel = null as unknown as GameModel;//待修改    
+    private _crystalLevel: number = 0;
 
+    
+    /**
+     * @description: 拷贝一个HeroData
+     * @param {HeroData} hd
+     */
+    public CopyHeroData( hd:HeroData) {
+        this._heroInfo = new Msg.HeroInfo(hd._heroInfo);
+        this._record = new Config.heroes.Record(hd._record);
+        this._recordSkill = new Config.skill.Record(hd._recordSkill);
+        this._equipOnList = new Map<Msg.TEquipLocationType, Config.equip.Record>(hd._equipOnList);
+        
+        this._crystalLevel = hd._crystalLevel;
+        this._crystalPropertyList = new Map<Msg.THeroPropertyType, number>(hd._crystalPropertyList);
+
+        this.calcTalentSkillProperty();
+        this.refreshEquipProperty();
+        return this;
+    }
 
     public initDataByKnight(pi: Msg.PlayerInfo, gameModel: GameModel) {
         this._heroInfo.id = 0;
@@ -58,8 +77,6 @@ export class HeroData extends BaseHeroData {
         this.refreshEquipProperty();
     }
 
-
-    private _crystalLevel: number = 0;
     public setCrystalInfo(level: number, proList: Array<Msg.THeroPropertyType>) {
         this._crystalLevel = level;
         this._crystalPropertyList.clear();
@@ -155,6 +172,17 @@ export class HeroData extends BaseHeroData {
         } else {
             this._heroInfo.tier = _tier;
         }
+    }
+
+    public isMaxLevel() {
+        return this.level >= this.getMaxLevel();
+    }
+
+    public getMaxLevel() {
+        if (this.tier >= XShare.getInstance().KMaxHeroTier)
+            return XShare.getInstance().KHeroMaxLevelForTier[this._record.star];
+        else
+            return XShare.getInstance().KHeroMaxLevelForTier[this.tier];
     }
 
     public GetMaxTier() {

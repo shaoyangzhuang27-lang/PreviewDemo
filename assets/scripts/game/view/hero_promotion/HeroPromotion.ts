@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-19 16:55:51
+ * @LastEditTime: 2021-03-19 21:57:01
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -219,6 +219,8 @@ export class HeroPromotion extends PopBase {
         this.btn_equip_3?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_equip_4?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_equip_5?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_up_lv?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        this.btn_up_tier?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
 
         // tabGroup
         const containerEventHandler = new EventHandler();
@@ -384,9 +386,52 @@ export class HeroPromotion extends PopBase {
                     MsgMgr.getInstance().getMsgFormation().requestHeroTakeOffEquip(this._curHeroId, takeoffEquipLocList);
                 }
                 break;
+            case this.btn_up_lv:
+                {
+                    console.log("HeroPromotion btn_up_lv");
+                }
+                break;
+            case this.btn_up_tier:
+                {
+                    console.log("HeroPromotion btn_up_tier");
+                    this._onBtnTierUp();
+                    
+                }
+                break;
             default:
                 break;
         }
+    }
+
+    private _onBtnTierUp(){
+        let tier = this._curHeroData.tier;
+        let moneyConsume = XShare.getInstance().KHeroTierUpMoney[tier];
+        let advanceExpConsume = XShare.getInstance().KHeroTierUpAdvanceExp[tier];
+        let playerInfo = GameModel.getInstance().getPlayerModel().getPlayerInfo();
+        // 升阶消耗金币
+        if (playerInfo.money < moneyConsume) {
+            // TipsMgr.instance.ShowErrTips (TErrorCode.ErrMoneyNotEnough);
+            console.log("  TErrorCode.ErrMoneyNotEnough");
+            return;
+        }
+        if (playerInfo.heroAdvanceExp < advanceExpConsume) {
+            //TipsMgr.instance.ShowErrTips (TErrorCode.ErrAdvanceExpNotEnough);
+            console.log("  TErrorCode.ErrAdvanceExpNotEnough");
+            return;
+        }
+
+        if (!this._curHeroData.isMaxLevel ()) {
+            // TipsMgr.instance.ShowErrTips (TErrorCode.ErrHeroTierUpLevel);
+            console.log("  TErrorCode.ErrHeroTierUpLevel");
+            return;
+        }
+        
+        MsgMgr.getInstance().getMsgFormation().requestHeroTierUp(this._curHeroId);
+        // HeroTierUpR msg = new HeroTierUpR () {
+        //     HeroID = _heroData.HeroInfo.Id
+        // };
+        // MainClient.instance.RequestMessage (MsgType.TheHeroTierUpR, msg, MsgType.TheHeroTierUpA, OnRecvHeroTierUp);
+    
     }
 
     start() {
@@ -400,6 +445,8 @@ export class HeroPromotion extends PopBase {
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_locked, this._notifyHeroLockedHandle, this);
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_put_on_equip, this._notifyHeroAllLoadEquipHandle, this);
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_take_off_equip, this._notifyHeroAllUnLoadEquipHandle, this);
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_lv_up, this._notifyHeroLvUpHandle, this);
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_tier_up, this._notifyHeroTierUpHandle, this);
     }
 
     onDestroy() {
@@ -407,8 +454,66 @@ export class HeroPromotion extends PopBase {
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_locked, this._notifyHeroLockedHandle, this);
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_put_on_equip, this._notifyHeroAllLoadEquipHandle, this);
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_take_off_equip, this._notifyHeroAllUnLoadEquipHandle, this);
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_lv_up, this._notifyHeroLvUpHandle, this);
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_tier_up, this._notifyHeroTierUpHandle, this);
     }
 
+    private _notifyHeroLvUpHandle(data: any = null){
+        
+    }
+
+    private _notifyHeroTierUpHandle(data: any = null){
+        if (!data) {
+            return;
+        }
+        let msg = data as Msg.HeroTierUpA;
+        if (msg.err == Msg.TErrorCode.ERR_OK) {
+            if (msg.heroID != this._curHeroId) {
+                // todo 修改数据
+                return ;
+            }else{
+                // 修改数据及显示
+                let heroData = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(msg.heroID);                
+                if(!heroData){
+                    return ;
+                }
+                
+                let hdOld = new HeroData();
+                hdOld = hdOld.CopyHeroData(heroData); 
+                heroData.tier = msg.newTier;
+                //重新计算天赋属性
+                heroData.calcTalentSkillProperty();
+                //消耗
+                let playerModel= GameModel.getInstance().getPlayerModel();
+                playerModel.subMoney(msg.consumeMoney, Msg.TMoneySubType.EMoneySubType_HeroTierUp);
+                playerModel.consumeObjectEx (Msg.TObjectType.EObject_AdvanceExp, msg.consumeAdvanceExp, Msg.TObjectConsumeType.EObjectConsumeType_HeroTierUp);                
+                this._curHeroData = heroData;
+                // 刷新升阶引起的UI变化
+                this._showCurHeroView(false);
+                // RefreshInfo ();
+                // //刷新学院信息
+                // PlayerData.instance.RefreshHeroesCollege ();
+                // UINotificationCenter.Instance ().PostNotification ((int) NotificationMsg.HeroInfoChange, this, new EventOneLong (hd.HeroInfo.Id));
+                // UINotificationCenter.Instance ().PostNotification ((int) NotificationMsg.RPFormation);
+                // UINotificationCenter.Instance ().PostNotification ((int) NotificationMsg.HeroTalentChange, this, new EventOneLong (hd.HeroInfo.Id));
+                // //升品结果动画
+                // HeroTierUpUI htUI = UIManager.instance.ShowUIForms (Constant.HeroTierUpUI) as HeroTierUpUI;
+                // htUI.SetData (hdOld, hd);
+
+                // if (BokeEvent.instance != null && GameConfigManager.instance.IsChannelBoke) {
+                //     List<string> rewards_list = new List<string> () {
+                //     "金币-" + msg.ConsumeMoney + ",",
+                //     "进阶点-" + msg.ConsumeAdvanceExp + ",",
+                //     };
+                //     BokeEvent.instance.SendEvent ("hero_upgrade", msg.HeroID, msg.NewTier - 1, msg.NewTier, "TierUp", rewards_list);
+                // }
+            }
+        } else {
+            // TipsMgr.instance.ShowErrDialog (msg.Err);
+            console.log(msg.errStr + " errCode=" + msg.err.toString());
+        }
+    }
+    
     private _notifyHeroAllUnLoadEquipHandle(data: any = null) {
         if (!data) {
             return;
@@ -591,7 +696,16 @@ export class HeroPromotion extends PopBase {
 
         this._curHeroData = heroData as HeroData;
         this._curHeroId = heroId;
+        this._showCurHeroView();
+    }
 
+    // 显示当前英雄数据
+    private _showCurHeroView(isNeedRefreshModleAndName:boolean = true) {
+        if(isNeedRefreshModleAndName){
+            this._showCurHeroModel();
+            this._showTitleAndName();
+        }
+               
         // 星级下的每个品阶有对应的等级最大限制，当等级提升到最大限制后，通过升阶操作扩展更高的等级上限。       
         let curMaxLv = XShare.getInstance().KHeroMaxLevelForTier[this._curHeroData.tier];
         if (this._curHeroData.getLevel() < curMaxLv) {
@@ -600,19 +714,13 @@ export class HeroPromotion extends PopBase {
         else {
             this._isLvUpView = false;// 当前应该显示升阶界面
         }
-        this._initCurHeroView();
-    }
-
-    // 显示当前英雄数据
-    private _initCurHeroView() {
-        this._showCurHeroModel();
-        this._showTitleAndName();
+        
         if (this._isHeroUpView) {
             if (this._isLvUpView) {
                 this._showHeroLvUpView();
             }
             else {
-                this._showHeroUpgradeView();
+                this._showHeroTierUpView();
             }
         }
         else {
@@ -998,7 +1106,7 @@ export class HeroPromotion extends PopBase {
     }
 
     // 展示英雄升阶界面
-    private _showHeroUpgradeView() {
+    private _showHeroTierUpView() {
         this.node_equip.active = false; //装备界面        
         this.node_up.active = true;//升级升阶大界面            
         this.node_fight_param.active = this._isLvUpView; //升级底部属性界面

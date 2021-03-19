@@ -2,7 +2,7 @@
  * @Description: 事件通知管理器
  * @Author: xxxx
  * @Date: 2021-02-23 16:07:59
- * @LastEditTime: 2021-03-19 15:28:45
+ * @LastEditTime: 2021-03-19 20:15:34
  */
 import { NotifyCore } from "../../core/control/NotifyCore";
 
@@ -22,7 +22,9 @@ export class NotifyMgr extends NotifyCore {
     // public static event_net_version_check:string = "event_net_version_check";
     // public static event_net_version_check:string = "event_net_version_check";
     // public static event_net_version_check:string = "event_net_version_check";
-    public static event_net_hero_locked:string = "event_net_hero_locked";        //英雄锁定状态变化
+    public static event_net_hero_tier_up:string = "event_net_hero_tier_up";         //英雄升阶事件
+    public static event_net_hero_lv_up:string = "event_net_hero_lv_up";             //英雄升级事件
+    public static event_net_hero_locked:string = "event_net_hero_locked";           //英雄锁定状态变化
     public static event_net_hero_put_on_equip:string = "event_net_hero_put_on_equip";//英雄穿上装备事件
     public static event_net_hero_take_off_equip:string = "event_net_hero_take_off_equip";//英雄卸下装备事件
     public static event_net_starUp_change:string = "event_net_starUp_change";    //升星变化

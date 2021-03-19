@@ -323,6 +323,30 @@ export class HeroesModel extends BaseModel{
         return tempBookHero;
     }
 
+    /**
+     * @description: 英雄升阶
+     * @param {Msg} msg
+     */
+    public setHeroTierUp(msg: Msg.HeroTierUpA){
+        let heroData = this.getHeroInfoByDyncID(msg.heroID); 
+        if(heroData)
+        {   
+            //抛出通知 英雄升级 变化
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_tier_up, msg);
+        }  
+    }
+    /**
+     * @description: 英雄升级
+     * @param {Msg} msg
+     */
+    public setHeroLvUp(msg: Msg.HeroUpgradeA){
+        let heroData = this.getHeroInfoByDyncID(msg.heroID); 
+        if(heroData)
+        {   
+            //抛出通知 英雄升级 变化
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_lv_up, msg);
+        }  
+    }
 
     /**
      * @description: 设置英雄锁定状态

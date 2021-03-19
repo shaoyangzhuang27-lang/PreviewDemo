@@ -2,7 +2,7 @@
  * @Description: 协议收发处理
  * @Author: xxxxxx
  * @Date: 2021-03-02 13:53:04
- * @LastEditTime: 2021-03-19 16:24:31
+ * @LastEditTime: 2021-03-19 20:20:21
  */
 
 import { MsgCore} from "../../../core/network/MsgCore";
@@ -45,23 +45,36 @@ export class MsgFormation extends MsgBase{
     }
     //更换阵容
 
-    //英雄升级,升阶,装备(一键装备,全部卸下)--------------------start
-    public requestHeroLvUp(heroID:number, consumeAdvanceExp:number,consumeMoney:number,newTier:number)
+    //英雄升级,升阶,装备(一键装备,全部卸下)--------------------start    
+    public requestHeroTierUp(heroID:number)
     {
-        console.log("英雄升级请求");
+        console.log("英雄升阶-----请求");
         const buffer_data = Msg.HeroTierUpR.encode({heroID:heroID}).finish();
         this.msgMgr?.sendData(Msg.MsgType.TheHeroTierUpR,buffer_data);
     }
-    public responeHeroLvUp(msgId: number, msgData: any){
-        console.log("英雄升级数据返回",msgId);
-        let newMsgData = msgData as Msg.HeroTierUpR;
+    public responeHeroTierUp(msgId: number, msgData: any){
+        console.log("英雄升阶-----返回",msgId);
+        let newMsgData = msgData as Msg.HeroTierUpA;
         if(newMsgData)
         {
-            //GameModel.getInstance().getFormationModel().setCurFormationChange(newMsgData)      
-        }
-        
+            GameModel.getInstance().getHeroesModel().setHeroTierUp(newMsgData)      
+        }        
     }
 
+    public requestHeroLvUp(heroID:number)
+    {
+        console.log("英雄升级-----请求");
+        const buffer_data = Msg.HeroUpgradeR.encode({heroID:heroID}).finish();
+        this.msgMgr?.sendData(Msg.MsgType.TheSyncHeroUpgrade,buffer_data);
+    }
+    public responeHeroLvUp(msgId: number, msgData: any){
+        console.log("英雄升级-----返回",msgId);
+        let newMsgData = msgData as Msg.HeroUpgradeA;
+        if(newMsgData)
+        {
+            GameModel.getInstance().getHeroesModel().setHeroLvUp(newMsgData)      
+        }        
+    }
 
     public requestHeroLocked(heroID:number, isLocked:boolean){
         console.log("英雄锁定-----请求");
