@@ -14,11 +14,11 @@ const { ccclass, property } = _decorator;
 @ccclass('PopMultiItemReward')
 export class PopMultiItemReward extends PopBase {
     @property({type: Label})
-    public lab_title = null as unknown as Label;
+    public lab_title : Label = null as unknown as Label;
 
 
     @property({type: Label})
-    public lab_content = null as unknown as Label;
+    public lab_content : Label = null as unknown as Label;
 
 
     @property({type: Node})
@@ -29,8 +29,8 @@ export class PopMultiItemReward extends PopBase {
     @property({type :  ScrollView})
     public scroll_item_view:ScrollView = null as unknown as ScrollView;
 
-    @property({type: Label})
-    public lab_decompose = null as unknown as Label;
+    // @property({type: Label})
+    // public lab_decompose = null as unknown as Label;
 
     //所有道具信息
     private _propInfoArray : Array<XStruct.prop_info.IRecord> = [];
