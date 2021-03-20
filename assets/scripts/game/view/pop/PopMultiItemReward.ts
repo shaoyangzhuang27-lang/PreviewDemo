@@ -29,8 +29,11 @@ export class PopMultiItemReward extends PopBase {
     @property({type :  ScrollView})
     public scroll_item_view:ScrollView = null as unknown as ScrollView;
 
-    // @property({type: Label})
-    // public lab_decompose = null as unknown as Label;
+    @property({type: Label})
+    public lab_decompse : Label = null as unknown as Label;
+
+
+    private _isAutoPop : boolean = false;
 
     //所有道具信息
     private _propInfoArray : Array<XStruct.prop_info.IRecord> = [];
@@ -88,6 +91,15 @@ export class PopMultiItemReward extends PopBase {
     public setPropsInfo(data :Array<XStruct.prop_info.IRecord>)
     {
         this._propInfoArray = data;
+    }
+
+    public set autoPop(bState : boolean)
+    {
+        var content = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.UI_AUTODECOMPOSEGET) as Config.language_ui.Record;
+        this.lab_decompse.string = content.cn;
+        bState ? this.lab_decompse.node.active = true : this.lab_decompse.node.active = false;
+        this._isAutoPop = bState;
+       
     }
 }
 
