@@ -90,7 +90,7 @@ export class PopBookUpGrade extends PopBase {
     //升级按钮
     private _upGradeBookInfo()
     {
-        MsgMgr.getInstance().getMsgStarUp().requestUpgradeHeroBook(this._bookid)
+        MsgMgr.getInstance().getMsgFormation().requestUpgradeHeroBook(this._bookid)
     }
 
     //刷新界面

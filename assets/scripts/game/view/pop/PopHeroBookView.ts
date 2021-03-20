@@ -234,7 +234,9 @@ export class PopHeroBookView extends PopBase {
     //打开规则界面
     private _openRuleView()
     {
-
+        var title = ValueMgr.getInstance().getItemByField(TableName.language_ui,"UI_HeroBookExplain") as Config.language_ui.Record;
+        var desc = ValueMgr.getInstance().getItemByField(TableName.language_ui,"UI_HeroBookContent") as Config.language_ui.Record;
+        PopMgr.getInstance().popExplain(title.cn,desc.cn,()=>{ PopMgr.getInstance().deleteWindow();});
     }
 
     //加成细节
@@ -255,15 +257,14 @@ export class PopHeroBookView extends PopBase {
         let heroBookId = HeroData.GetHeroBookID(heroid);
         if(itemState == XConsts.HeroBookState.CanActive)
         {
-            console.log("图鉴激活小小操场",heroid,heroBookId)
-            MsgMgr.getInstance().getMsgStarUp().requestHeroBookActive(heroBookId)
+            MsgMgr.getInstance().getMsgFormation().requestHeroBookActive(heroBookId)
         }
         else if(itemState == XConsts.HeroBookState.CanUpGrade)
         {
-            PopMgr.getInstance().popBookHeroUpgradeView(heroid)
-            // console.log("图鉴升级阿斯达",heroid,heroBookId)
-            // MsgMgr.getInstance().getMsgStarUp().requestUpgradeHeroBook(heroBookId)
-            
+            PopMgr.getInstance().popBookHeroUpgradeView(heroid)            
+        }
+        else{
+            PopMgr.getInstance().popOpenBookHeroDetail(heroid);
         }
     }
 

@@ -5115,6 +5115,7 @@ message GiftCodeAwardA {
 	repeated LootObject awardList = 3;
 }
 
+//领取图鉴奖励
 message GetHeroBookAwardR {
 	int32 heroStaticID = 1;
 }
