@@ -107,6 +107,7 @@ export class ItemMultiReward extends Component {
         if(this._propInfo.nType)
         {
             let frame = "";
+            let camp = "";
             let icon = "";
             let bg = "";
             switch(this._propInfo.nType)
@@ -116,10 +117,11 @@ export class ItemMultiReward extends Component {
                     let star = heroInfo.star;
                     frame = "ui/common/icon/" +  XConsts.GetQualityBgByStar(heroInfo.star) + "/spriteFrame";
                     icon = "ui/common/hero/" + heroInfo.image + "/spriteFrame";
-
+                    camp = "ui/common/team/" + XConsts.KHeroCampIcon[heroInfo.camp]  + "/spriteFrame"
                     this.lab_level.string = String(this._propInfo.nLevel);
                     this._resourceLoad(frame,this.btn_frame);
                     this._resourceLoad(icon,this.img_icon);
+                    this._resourceLoad(camp,this.img_camp);
                     this._setStar(star);
                     break;
                 case XConsts.KSTARUP_PROP_TYPE.Money : 
@@ -128,8 +130,10 @@ export class ItemMultiReward extends Component {
                     this.node_satr.active = false;
                     icon = "ui/common/commonIcon/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
                     bg = "ui/common/icon/" +  XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ?this._propInfo.nPropQuality : 2] + "/spriteFrame"
+                    this.img_icon.setScale(0.5,0.5,1);
                     this._resourceLoad(icon,this.img_icon);
                     this._resourceLoad(bg,this.img_bg);
+                   
                     break;
                 case XConsts.KSTARUP_PROP_TYPE.Exp : 
                     this.img_camp.active = false;
@@ -137,6 +141,7 @@ export class ItemMultiReward extends Component {
                     this.node_satr.active = false;
                     icon = "ui/common/commonIcon/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
                     bg = "ui/common/icon/" +  XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ?this._propInfo.nPropQuality : 2] + "/spriteFrame"
+                    this.img_icon.setScale(0.5,0.5,1);
                     this._resourceLoad(icon,this.img_icon);
                     this._resourceLoad(bg,this.img_bg);
                     break;

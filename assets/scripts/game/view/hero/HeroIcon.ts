@@ -220,7 +220,7 @@ export class HeroIcon extends Component {
     {
         let info = GameModel.getInstance().getHeroesModel().getHeroIconInfoByHeroId(id);
         this.img_camp.active = true;
-        let campIconPath:string = "ui/common/team/" + info.camp + "/spriteFrame"
+        let campIconPath:string = "ui/common/team/" + info.camp + "/spriteFrame";
         resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
         {
             if(!err)
@@ -233,7 +233,7 @@ export class HeroIcon extends Component {
         // let framePath:string = "ui/common/icon/" + info.frame + "/spriteFrame"
         // this._resourceLoad(framePath,this.btn_frame);
 
-        let heroIconPath:string = "ui/common/hero/" + info.icon + "/spriteFrame"
+        let heroIconPath:string = "ui/common/hero/" + info.icon + "/spriteFrame";
         this._resourceLoad(heroIconPath,this.img_icon);
 
         // this.lab_level.node.active = false;
