@@ -466,17 +466,18 @@ export class PopMgr extends PopCore  {
 
      /**
      * @description: 获得物品(多个)弹窗
-     * @param {Array<XStruct.prop_info.IRecord>} 物品信息
+     * @param {Array<XStruct.prop_info.IRecord>} data 物品信息
+     * @param {boolean} bAutoDecompsePop 是否自动分解弹窗
      * @param {Function} closeCallBack
      */
-    public popMultiItemRewardWindow(data :Array<XStruct.prop_info.IRecord>,bAutoPop : boolean = false,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+    public popMultiItemRewardWindow(data :Array<XStruct.prop_info.IRecord>,bAutoDecompsePop : boolean = false,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_multi_itemreward', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
             let script = p.getComponent("PopMultiItemReward") as PopMultiItemReward;
             script.setPropsInfo(data);
-            script.autoPop = bAutoPop;
+            script.autoDecompsePop = bAutoDecompsePop;
             script.setSubmitCallBack(submitCallBack);
             script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);

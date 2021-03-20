@@ -33,7 +33,7 @@ export class PopMultiItemReward extends PopBase {
     public lab_decompse : Label = null as unknown as Label;
 
 
-    private _isAutoPop : boolean = false;
+    private _isAutoDecomposePop : boolean = false;
 
     //所有道具信息
     private _propInfoArray : Array<XStruct.prop_info.IRecord> = [];
@@ -93,12 +93,12 @@ export class PopMultiItemReward extends PopBase {
         this._propInfoArray = data;
     }
 
-    public set autoPop(bState : boolean)
+    public set autoDecompsePop(bState : boolean)
     {
         var content = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.UI_AUTODECOMPOSEGET) as Config.language_ui.Record;
         this.lab_decompse.string = content.cn;
         bState ? this.lab_decompse.node.active = true : this.lab_decompse.node.active = false;
-        this._isAutoPop = bState;
+        this._isAutoDecomposePop = bState;
        
     }
 }
