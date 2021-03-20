@@ -1,3 +1,9 @@
+/*
+ * @Description: 协议收发处理
+ * @Author: xxxxxx
+ * @Date: 2021-03-02 13:53:04
+ * @LastEditTime: 2021-03-19 16:24:31
+ */
 
 import { MsgCore} from "../../../core/network/MsgCore";
 import { NetCallFunc } from "../../../core/network/NetInterface";
@@ -13,6 +19,9 @@ export class MsgFormation extends MsgBase{
             [Msg.MsgType.TheChangeFormationA,[Msg.ChangeFormationA,this.responeChangeBattleTeam,this]],
             [Msg.MsgType.TheHeroTierUpA,[Msg.HeroTierUpA,this.responeHeroLvUp,this]],
             [Msg.MsgType.TheSyncHeroLocked,[Msg.SyncHeroLocked,this.responeHeroLocked,this]],
+            [Msg.MsgType.ThePutOnEquipA,[Msg.PutOnEquipA,this.responeHeroPutOnEquip,this]],
+            [Msg.MsgType.TheTakeOffEquipA,[Msg.TakeOffEquipA,this.responeHeroTakeOffEquip,this]],
+            
         ]);
     }
 
@@ -66,6 +75,36 @@ export class MsgFormation extends MsgBase{
         if(newMsgData)
         {
             GameModel.getInstance().getHeroesModel().setHeroLocked(newMsgData);
+        }
+    }
+
+    // 英雄穿上装备
+    public requestHeroPutOnEquip(heroID:number, putonEquipIDList:number[]){
+        console.log("英雄穿上装备-----请求");
+        const buffer_data = Msg.PutOnEquipR.encode({heroID: heroID, putonEquipIDList: putonEquipIDList}).finish();
+        this.msgMgr?.sendData(Msg.MsgType.ThePutOnEquipR, buffer_data);
+    }
+    public responeHeroPutOnEquip(msgId: number, msgData: any){
+        console.log("英雄穿上装备-----响应",msgId);
+        let newMsgData = msgData as Msg.PutOnEquipA;
+        if(newMsgData)
+        {
+            GameModel.getInstance().getHeroesModel().setHeroPutOnEquip(newMsgData);
+        }
+    }
+
+    // 英雄卸下装备
+    public requestHeroTakeOffEquip(heroID:number, takeoffEquipLocList:number[]){
+        console.log("英雄卸下装备-----请求");
+        const buffer_data = Msg.TakeOffEquipR.encode({heroID: heroID, takeoffEquipLocList: takeoffEquipLocList}).finish();
+        this.msgMgr?.sendData(Msg.MsgType.TheTakeOffEquipR, buffer_data);
+    }
+    public responeHeroTakeOffEquip(msgId: number, msgData: any){
+        console.log("英雄卸下装备-----响应",msgId);
+        let newMsgData = msgData as Msg.TakeOffEquipA;
+        if(newMsgData)
+        {
+            GameModel.getInstance().getHeroesModel().setHeroTakeOffEquip(newMsgData);
         }
     }
     //英雄升级,升阶,装备(一键装备,全部卸下)--------------------start

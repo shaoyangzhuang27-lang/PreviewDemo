@@ -1,3 +1,9 @@
+/*
+ * @Description: 事件通知管理器
+ * @Author: xxxx
+ * @Date: 2021-02-23 16:07:59
+ * @LastEditTime: 2021-03-19 15:28:45
+ */
 import { NotifyCore } from "../../core/control/NotifyCore";
 
 
@@ -16,8 +22,10 @@ export class NotifyMgr extends NotifyCore {
     // public static event_net_version_check:string = "event_net_version_check";
     // public static event_net_version_check:string = "event_net_version_check";
     // public static event_net_version_check:string = "event_net_version_check";
-    public static event_net_hero_locked:string = "event_net_hero_locked";     //英雄锁定状态变化
-    public static event_net_starUp_change:string = "event_net_starUp_change";     //升星变化
+    public static event_net_hero_locked:string = "event_net_hero_locked";        //英雄锁定状态变化
+    public static event_net_hero_put_on_equip:string = "event_net_hero_put_on_equip";//英雄穿上装备事件
+    public static event_net_hero_take_off_equip:string = "event_net_hero_take_off_equip";//英雄卸下装备事件
+    public static event_net_starUp_change:string = "event_net_starUp_change";    //升星变化
     public static event_net_OneKeyStarUp_change:string = "event_net_OneKeyStarUp_change";     //一键升星变化
 
     public static event_net_pub_summon_hero : string = "event_net_pub_summon_hero";     //酒馆召唤
