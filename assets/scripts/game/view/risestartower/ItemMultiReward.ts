@@ -46,7 +46,7 @@ export class ItemMultiReward extends Component {
 
 
     private _propInfo : XStruct.prop_info.IRecord = {
-        nType : XConsts.KSTARUP_PROP_TYPE.Hero,
+        nType : 0,
         nPropId : 0,
         nLevel : 0,
         nPropQuality: 0,
