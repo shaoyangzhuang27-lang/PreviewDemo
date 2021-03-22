@@ -26,6 +26,16 @@ export class XConsts{
     public static  KIAPNameStarterTenSummon:string = "IAPNameStarterTenSummon";
     public static  KDailyRechargeDayCount:number = 5;
 
+    // 装备合成材料数量
+    public static  KEquipComposeMaterialNum:number = 3;
+
+    // 英雄背包每次购买格子个数
+    public static KBuyHeroagNumEach:number = 5;
+    // vip等级对应英雄背包格子数增加
+    public static KVipHeroBagAddition:number[] = []
+    // 英雄背包初始最大 100格子
+    public static KHeroBagMaxNum:number = 100;
+
     public static  OrderStage = 0;
     public static  OrderMainUI = 1;
     public static  OrderPopHide = 2;

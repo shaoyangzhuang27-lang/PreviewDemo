@@ -27,6 +27,7 @@ import { PopBookUpGrade } from '../view/pop/PopBookUpgrade';
 import { PopMultiItemReward } from "../view/pop/PopMultiItemReward";
 import { PopBookHeroDetail } from '../view/pop/PopBookHeroDetail';
 import { PopHeroStoryUI } from '../view/pop/PopHeroStoryUI';
+import { PopForge } from '../view/pop/PopForge';
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -516,5 +517,21 @@ export class PopMgr extends PopCore  {
             script.setStoryData(sid);
 
         } );
+    }
+
+    /**
+     * 锻造屋
+     * @param p1
+     */
+    public popForge() {
+        resources.load('prefabs_ui/pop/pop_forge', (err: any, res: any) => {
+            let p = instantiate(res);
+            this.pushWindow(p)
+            let script = p.getComponent("PopForge") as PopForge;
+            script.setIsMaskClose(true);
+            // script.setCloseCallBack(()=>{
+            //     console.log("关闭窗口回调")
+            // });
+        });
     }
 }
