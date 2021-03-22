@@ -69,7 +69,7 @@ export class HeroData extends BaseHeroData {
         for (let index = 0; index < this._heroInfo.equipOnList.length; index++) {
             let equipId = this._heroInfo.equipOnList[index];
             let equipRecord = ValueMgr.getInstance().getItemByField(TableName.equip, equipId) as Config.equip.Record;
-            this._equipOnList.set(equipId as number, equipRecord);
+            this._equipOnList.set(equipRecord.locationType, equipRecord);
         }
         this._crystalPropertyList = new Map<Msg.THeroPropertyType, number>();
         this.setCrystalInfo(this._heroInfo.crystal?.level as number, this._heroInfo.crystal?.propertyList as Msg.THeroPropertyType[])
@@ -197,11 +197,7 @@ export class HeroData extends BaseHeroData {
     }
 
     public get equipOnList() {
-
-        if (!this.isRoleHero()) {
-            return new Map<Msg.TEquipLocationType, Config.equip.Record>();// Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);
-        } else
-            return this._equipOnList;
+        return this._equipOnList;
     }
     public get record() {
         return this._record
