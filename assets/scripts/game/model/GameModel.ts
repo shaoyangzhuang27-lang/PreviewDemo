@@ -6,8 +6,8 @@ import { TechnologyModel } from "./datas/TechnologyModel";
 import { BagItemModel } from "./datas/BagItemModel";
 import { HeroPubModel } from "./datas/HeroPubModel";
 import { TableName, ValueMgr } from "./ValueMgr";
-import { OfflineModel } from "./datas/OfflineModel"
-
+// import { OfflineModel } from "./datas/OfflineModel"
+import { ForgeModel } from "./datas/ForgeModel"
 
 export class GameModel{
     private static _instance: GameModel = new GameModel();
@@ -23,6 +23,7 @@ export class GameModel{
     private _bagItemModel:BagItemModel = new BagItemModel(this);
     // private _offlineModel:OfflineModel = new OfflineModel(this);
     private _heroPubModel:HeroPubModel = new HeroPubModel(this);
+    private _forgeModel: ForgeModel = new ForgeModel(this);
 
     public getHeroesModel(){
         return this._heroesModel;
@@ -46,6 +47,10 @@ export class GameModel{
     
     public getHeroPubModel(){
         return this._heroPubModel;
+    }
+    // 锻造模块
+    public getForgeModel(){
+        return this._forgeModel;
     }
     //数据类定义---------------------
     
