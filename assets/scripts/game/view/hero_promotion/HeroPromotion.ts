@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-22 15:04:41
+ * @LastEditTime: 2021-03-22 16:21:36
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -283,8 +283,17 @@ export class HeroPromotion extends PopBase {
             case this.btn_share:
                 //todo
                 break;
-            case this.btn_story:
+            case this.btn_camp:
                 //todo
+                break;
+            case this.btn_career:
+                //todo
+                break;
+            case this.btn_story:
+                if(this._curHeroData&& this._curHeroData.getStaticID() )
+                {
+                    PopMgr.getInstance().popOpenHeroStoryUI(this._curHeroData.getStaticID());                    
+                }
                 break;
             case this.btn_fight_params:
                 //todo
