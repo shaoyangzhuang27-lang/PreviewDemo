@@ -1955,7 +1955,7 @@
     "propertyPath": [
       "active"
     ],
-    "value": true
+    "value": false
   },
   {
     "__type__": "cc.Node",
@@ -3361,7 +3361,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "幽魂头盔",
+    "_string": "",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 26,
@@ -3892,7 +3892,7 @@
     "propertyPath": [
       "active"
     ],
-    "value": true
+    "value": false
   },
   {
     "__type__": "cc.Node",
@@ -3956,7 +3956,7 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 85.05,
+      "width": 22.8,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -3992,7 +3992,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "+646血量",
+    "_string": "",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 20,
@@ -4045,7 +4045,7 @@
         "__id__": 200
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 206
@@ -4934,10 +4934,10 @@
     },
     "_disabledColor": {
       "__type__": "cc.Color",
-      "r": 124,
-      "g": 124,
-      "b": 124,
-      "a": 255
+      "r": 104,
+      "g": 104,
+      "b": 104,
+      "a": 200
     },
     "_normalSprite": {
       "__uuid__": "adaf5ad5-7a79-4e88-bd6f-f3b90d90688b@f9941"
@@ -6232,7 +6232,6 @@
       "__id__": 1
     },
     "_enabled": true,
-    "__prefab": null,
     "btn_close": {
       "__id__": 27
     },
