@@ -331,7 +331,7 @@ export class HeroesModel extends BaseModel{
         let heroData = this.getHeroInfoByDyncID(msg.heroID); 
         if(heroData)
         {   
-            //抛出通知 英雄升级 变化
+            //抛出通知 英雄升阶 变化
             NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_tier_up, msg);
         }  
     }
