@@ -513,7 +513,7 @@ export class PopMgr extends PopCore  {
             this.pushWindow(p);
 
             let script = p.getComponent("PopHeroStoryUI") as PopHeroStoryUI;
-            script.setBookData(sid);
+            script.setStoryData(sid);
 
         } );
     }

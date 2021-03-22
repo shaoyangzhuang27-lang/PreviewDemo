@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "214c5aab-bbfd-431e-98fc-1cbdf72d14d2",
+  "uuid": "78bf7428-41e9-4dc3-b64c-d8eb70219ee2",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "214c5aab-bbfd-431e-98fc-1cbdf72d14d2@6c48a",
+      "uuid": "78bf7428-41e9-4dc3-b64c-d8eb70219ee2@6c48a",
       "displayName": "进阶点",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "214c5aab-bbfd-431e-98fc-1cbdf72d14d2"
+        "imageUuidOrDatabaseUri": "78bf7428-41e9-4dc3-b64c-d8eb70219ee2"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "214c5aab-bbfd-431e-98fc-1cbdf72d14d2@f9941",
+      "uuid": "78bf7428-41e9-4dc3-b64c-d8eb70219ee2@f9941",
       "displayName": "进阶点",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "214c5aab-bbfd-431e-98fc-1cbdf72d14d2@6c48a",
+        "imageUuidOrDatabaseUri": "78bf7428-41e9-4dc3-b64c-d8eb70219ee2@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "214c5aab-bbfd-431e-98fc-1cbdf72d14d2@f9941"
+    "redirect": "78bf7428-41e9-4dc3-b64c-d8eb70219ee2@f9941"
   }
 }

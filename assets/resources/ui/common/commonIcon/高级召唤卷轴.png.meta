@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "919435ad-03dc-45ae-8b3f-2dcfc9f0c5a4",
+  "uuid": "5be2a03e-4b8b-49e5-8354-147f6f650f61",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "919435ad-03dc-45ae-8b3f-2dcfc9f0c5a4@6c48a",
+      "uuid": "5be2a03e-4b8b-49e5-8354-147f6f650f61@6c48a",
       "displayName": "高级召唤卷轴",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "919435ad-03dc-45ae-8b3f-2dcfc9f0c5a4"
+        "imageUuidOrDatabaseUri": "5be2a03e-4b8b-49e5-8354-147f6f650f61"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "919435ad-03dc-45ae-8b3f-2dcfc9f0c5a4@f9941",
+      "uuid": "5be2a03e-4b8b-49e5-8354-147f6f650f61@f9941",
       "displayName": "高级召唤卷轴",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "919435ad-03dc-45ae-8b3f-2dcfc9f0c5a4@6c48a",
+        "imageUuidOrDatabaseUri": "5be2a03e-4b8b-49e5-8354-147f6f650f61@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "919435ad-03dc-45ae-8b3f-2dcfc9f0c5a4@f9941"
+    "redirect": "5be2a03e-4b8b-49e5-8354-147f6f650f61@f9941"
   }
 }

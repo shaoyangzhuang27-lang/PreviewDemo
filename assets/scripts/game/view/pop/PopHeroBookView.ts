@@ -96,7 +96,7 @@ export class PopHeroBookView extends PopBase {
             if(record.classes == 1 || record.nextId != 0) { continue; }
             if(record.camp == this._curCampType)
             {
-                let id1st = Number((record.id/1000000).toFixed())
+                let id1st = HeroData.getInitialStarByID(record.id);
                 if(id1st == 5)
                 {
                     if(countLegend >= this._heroStaticIdList.length)

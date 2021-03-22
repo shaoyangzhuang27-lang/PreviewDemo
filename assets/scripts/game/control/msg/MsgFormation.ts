@@ -25,7 +25,7 @@ export class MsgFormation extends MsgBase{
             [Msg.MsgType.TheTakeOffEquipA,[Msg.TakeOffEquipA,this.responeHeroTakeOffEquip,this]],
             [Msg.MsgType.TheHeroBookActiveA,[Msg.HeroBookActiveA,this._responeHeroBookActiveRsp,this]],
             [Msg.MsgType.TheHeroBookLevelUpA,[Msg.HeroBookLevelUpA,this._responeUpgradeHeroBookRsp,this]],
-            
+            [Msg.MsgType.TheGetHeroBookAwardA,[Msg.GetHeroBookAwardA,this._responGetBookHeroRewardRsp,this]],
         ]);
     }
 
@@ -158,8 +158,7 @@ export class MsgFormation extends MsgBase{
     public requestUpgradeHeroBook(bookHeroid:number)
     {
         const buffer_data = Msg.HeroBookLevelUpR.encode({heroBookId:bookHeroid}).finish();
-        this.msgMgr?.sendData(Msg.MsgType.TheHeroBookLevelUpR,buffer_data);
-        
+        this.msgMgr?.sendData(Msg.MsgType.TheHeroBookLevelUpR,buffer_data);        
     }
 
     private _responeUpgradeHeroBookRsp(msgId: number, msgData: any)
@@ -179,6 +178,35 @@ export class MsgFormation extends MsgBase{
             //抛通知  界面数据变化
             NotifyMgr.getInstance().notify(NotifyMgr.event_hero_book_upgrade,bookHeroData);
         }
+    }
+
+    //请求领取图鉴奖励
+    public requestGetBookHeroReward(staticId:number)
+    {
+        const buffer_data = Msg.GetHeroBookAwardR.encode({heroStaticID:staticId}).finish();
+        this.msgMgr?.sendData(Msg.MsgType.TheGetHeroBookAwardR,buffer_data);
+    }
+
+    private _responGetBookHeroRewardRsp(msgId:number,msgData:any)
+    {
+        let newMsgData = msgData as Msg.GetHeroBookAwardA;
+        let bookid = HeroData.GetHeroBookID(newMsgData.heroStaticID);
+        let bookHeroList = GameModel.getInstance().getHeroesModel().getBookMap();
+        if(bookHeroList.has(bookid))
+        {
+            let bookHeroData = GameModel.getInstance().getHeroesModel().getBookHeroDataByBookId(bookid);
+            bookHeroData.isGetAward = true;
+            bookHeroList.delete(bookHeroData.heroBookId);
+            bookHeroList.set(bookHeroData.heroBookId,bookHeroData);
+            let value = bookHeroList.get(bookid);
+
+            let heroStaticID = HeroData.getHeroStaticIdByBookId(bookid)
+            //抛通知  界面数据变化
+            NotifyMgr.getInstance().notify(NotifyMgr.event_hero_book_upgrade,bookHeroData);
+        }
+        //获得道具--钻石
+        PopMgr.getInstance().popItemRewardView(Msg.TObjectType.EObject_VRmb, newMsgData.vrmb)
+
     }
 
 
