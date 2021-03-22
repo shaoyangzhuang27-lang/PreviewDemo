@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "9b5a05d0-7827-4b4b-a4d4-50246260c176",
+  "uuid": "7c4bf17c-b33c-4279-b7f8-20f9bc1836c9",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "9b5a05d0-7827-4b4b-a4d4-50246260c176@6c48a",
+      "uuid": "7c4bf17c-b33c-4279-b7f8-20f9bc1836c9@6c48a",
       "displayName": "宠物技能材料",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "9b5a05d0-7827-4b4b-a4d4-50246260c176"
+        "imageUuidOrDatabaseUri": "7c4bf17c-b33c-4279-b7f8-20f9bc1836c9"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "9b5a05d0-7827-4b4b-a4d4-50246260c176@f9941",
+      "uuid": "7c4bf17c-b33c-4279-b7f8-20f9bc1836c9@f9941",
       "displayName": "宠物技能材料",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "9b5a05d0-7827-4b4b-a4d4-50246260c176@6c48a",
+        "imageUuidOrDatabaseUri": "7c4bf17c-b33c-4279-b7f8-20f9bc1836c9@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "9b5a05d0-7827-4b4b-a4d4-50246260c176@f9941"
+    "redirect": "7c4bf17c-b33c-4279-b7f8-20f9bc1836c9@f9941"
   }
 }

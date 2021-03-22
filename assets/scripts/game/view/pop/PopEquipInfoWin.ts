@@ -103,7 +103,7 @@ export class PopEquipInfoWin extends PopBase {
             let itemEquipCell = instantiate(res) as Node;
             this.iconNode.addChild(itemEquipCell);
             let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
-            script.setItemsInfo(this._itemID, 0, ItemEquipType.equip, null);
+            script.setItemType(this._itemID, 0, ItemEquipType.equip, null);
         })
     }
 

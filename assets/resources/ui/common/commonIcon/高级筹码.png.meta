@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "c0253e2b-98ce-48fa-8ed5-6f0fc2b4b642",
+  "uuid": "c0248e2e-0026-443e-98bc-56b4fa90ea99",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "c0253e2b-98ce-48fa-8ed5-6f0fc2b4b642@6c48a",
+      "uuid": "c0248e2e-0026-443e-98bc-56b4fa90ea99@6c48a",
       "displayName": "高级筹码",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "c0253e2b-98ce-48fa-8ed5-6f0fc2b4b642"
+        "imageUuidOrDatabaseUri": "c0248e2e-0026-443e-98bc-56b4fa90ea99"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "c0253e2b-98ce-48fa-8ed5-6f0fc2b4b642@f9941",
+      "uuid": "c0248e2e-0026-443e-98bc-56b4fa90ea99@f9941",
       "displayName": "高级筹码",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "c0253e2b-98ce-48fa-8ed5-6f0fc2b4b642@6c48a",
+        "imageUuidOrDatabaseUri": "c0248e2e-0026-443e-98bc-56b4fa90ea99@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "c0253e2b-98ce-48fa-8ed5-6f0fc2b4b642@f9941"
+    "redirect": "c0248e2e-0026-443e-98bc-56b4fa90ea99@f9941"
   }
 }

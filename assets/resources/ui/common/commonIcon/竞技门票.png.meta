@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "28849a72-3bc8-423e-8cfa-1aff11ed4f85",
+  "uuid": "7f373bbe-6244-4fd5-a48d-70d660f5e4c7",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "28849a72-3bc8-423e-8cfa-1aff11ed4f85@6c48a",
+      "uuid": "7f373bbe-6244-4fd5-a48d-70d660f5e4c7@6c48a",
       "displayName": "竞技门票",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "28849a72-3bc8-423e-8cfa-1aff11ed4f85"
+        "imageUuidOrDatabaseUri": "7f373bbe-6244-4fd5-a48d-70d660f5e4c7"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "28849a72-3bc8-423e-8cfa-1aff11ed4f85@f9941",
+      "uuid": "7f373bbe-6244-4fd5-a48d-70d660f5e4c7@f9941",
       "displayName": "竞技门票",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "28849a72-3bc8-423e-8cfa-1aff11ed4f85@6c48a",
+        "imageUuidOrDatabaseUri": "7f373bbe-6244-4fd5-a48d-70d660f5e4c7@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "28849a72-3bc8-423e-8cfa-1aff11ed4f85@f9941"
+    "redirect": "7f373bbe-6244-4fd5-a48d-70d660f5e4c7@f9941"
   }
 }

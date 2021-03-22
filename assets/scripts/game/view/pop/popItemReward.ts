@@ -39,7 +39,7 @@ export class PopItemReward extends PopBase {
             let itemEquipCell = instantiate(res) as Node;
             this.iconCell.addChild(itemEquipCell);
             let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
-            script.setItemsInfo(this._itemData.id, 0, ItemEquipType.goods, (id:number,num:number,objType:number)=>{
+            script.setItemType(this._itemData.id, 0, ItemEquipType.goods, (id:number,num:number,objType:number)=>{
                 this._itemEqipCallBack(id,num,objType)
             });
         })

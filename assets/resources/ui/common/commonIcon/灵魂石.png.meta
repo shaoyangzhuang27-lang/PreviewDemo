@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "0cb08ca9-c262-4585-8832-1937749bf725",
+  "uuid": "0bd97380-07dc-4896-9b44-ff08f73bcca0",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "0cb08ca9-c262-4585-8832-1937749bf725@6c48a",
+      "uuid": "0bd97380-07dc-4896-9b44-ff08f73bcca0@6c48a",
       "displayName": "灵魂石",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "0cb08ca9-c262-4585-8832-1937749bf725"
+        "imageUuidOrDatabaseUri": "0bd97380-07dc-4896-9b44-ff08f73bcca0"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "0cb08ca9-c262-4585-8832-1937749bf725@f9941",
+      "uuid": "0bd97380-07dc-4896-9b44-ff08f73bcca0@f9941",
       "displayName": "灵魂石",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "0cb08ca9-c262-4585-8832-1937749bf725@6c48a",
+        "imageUuidOrDatabaseUri": "0bd97380-07dc-4896-9b44-ff08f73bcca0@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "0cb08ca9-c262-4585-8832-1937749bf725@f9941"
+    "redirect": "0bd97380-07dc-4896-9b44-ff08f73bcca0@f9941"
   }
 }

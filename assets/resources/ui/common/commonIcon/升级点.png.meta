@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "949e802c-e2db-4f5c-bc38-a6dedfe40e5d",
+  "uuid": "801d31c2-70f1-4a62-9170-aab6fa770495",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "949e802c-e2db-4f5c-bc38-a6dedfe40e5d@6c48a",
+      "uuid": "801d31c2-70f1-4a62-9170-aab6fa770495@6c48a",
       "displayName": "升级点",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "949e802c-e2db-4f5c-bc38-a6dedfe40e5d"
+        "imageUuidOrDatabaseUri": "801d31c2-70f1-4a62-9170-aab6fa770495"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "949e802c-e2db-4f5c-bc38-a6dedfe40e5d@f9941",
+      "uuid": "801d31c2-70f1-4a62-9170-aab6fa770495@f9941",
       "displayName": "升级点",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "949e802c-e2db-4f5c-bc38-a6dedfe40e5d@6c48a",
+        "imageUuidOrDatabaseUri": "801d31c2-70f1-4a62-9170-aab6fa770495@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "949e802c-e2db-4f5c-bc38-a6dedfe40e5d@f9941"
+    "redirect": "801d31c2-70f1-4a62-9170-aab6fa770495@f9941"
   }
 }
