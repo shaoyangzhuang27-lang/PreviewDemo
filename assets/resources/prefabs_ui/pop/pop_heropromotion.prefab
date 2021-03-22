@@ -505,7 +505,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "59f58de9-1e31-461e-8122-f342072ed1f8@f9941"
+      "__uuid__": "39a48b6a-ac1d-4be2-83a5-41f61d3bd0b3@f9941"
     },
     "_type": 1,
     "_fillType": 0,
@@ -9513,7 +9513,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_equip_3",
+    "_name": "btn_equip_5",
     "_objFlags": 0,
     "_parent": {
       "__id__": 387
@@ -10234,7 +10234,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_equip_4",
+    "_name": "btn_equip_3",
     "_objFlags": 0,
     "_parent": {
       "__id__": 387
@@ -10689,7 +10689,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_equip_5",
+    "_name": "btn_equip_4",
     "_objFlags": 0,
     "_parent": {
       "__id__": 387
@@ -20778,6 +20778,21 @@
     },
     "lab_need_gold_2_tier": {
       "__id__": 277
+    },
+    "btn_equip_1": {
+      "__id__": 388
+    },
+    "btn_equip_2": {
+      "__id__": 408
+    },
+    "btn_equip_3": {
+      "__id__": 466
+    },
+    "btn_equip_4": {
+      "__id__": 486
+    },
+    "btn_equip_5": {
+      "__id__": 434
     },
     "btn_all_unload": {
       "__id__": 540

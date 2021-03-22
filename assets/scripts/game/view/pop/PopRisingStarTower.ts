@@ -814,13 +814,14 @@ export class PopRisingStarTower extends PopBase {
         PopMgr.getInstance().popStarUpResultView(this._firstHeroData,HeroData);
     }
 
-    //一键升星后 阵容变化
+    //一键升星后 阵容变化 弹出获得物品窗口
     private _notifyOneKeyStarUpChangeHandle(data:any){
         this._getAllHeroList();
         this._initBottomHeros();
         if(data instanceof Array){
             let heroNewStar:Msg.HeroStarUpMultiA = data[0];
         }
+        PopMgr.getInstance().popMultiItemRewardWindow(data);
     }
 
     //////////////////////////////////////////////////////

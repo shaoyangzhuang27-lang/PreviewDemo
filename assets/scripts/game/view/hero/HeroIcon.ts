@@ -52,9 +52,10 @@ export class HeroIcon extends Component {
         {
             return;
         }
+        
+        let level : number = Number(this._heroData?.getLevel());
 
         let campName:string = XConsts.KHeroCampIcon[this._heroData?.getCamp() as number];
-        let level : number = Number(this._heroData?.getLevel());
         let iconName:string = this._heroData?.getImageIcon() as string;
         let starNum:number = this._heroData?.getStar() as number;
 
@@ -81,7 +82,7 @@ export class HeroIcon extends Component {
         
         this.lab_level.string = level.toString();
 
-        this._setStar(starNum);
+        this._setStar(starNum,this._heroData.getStaticID());
     }
 
     //开启英雄面板
@@ -107,7 +108,7 @@ export class HeroIcon extends Component {
         });
     }
 
-    private _setStar(star:number)
+    private _setStar(star:number,firstid:number = 0)
     {
         let grade:number = Math.floor(star/5);
         let yu:number = (star - 1) % 5 + 1;
@@ -124,8 +125,14 @@ export class HeroIcon extends Component {
                 this.starlist[index].active = true;
             }
         }
-            
-        let frameName:string = XConsts.GetQualityBgByStar(Number(star));
+        
+        firstid = firstid || Number(this._heroData?.getStaticID());
+        let id1st = Number((firstid/1000000).toFixed())
+        let frameName:string = XConsts.GetQualityBgByStar(id1st);
+        if(firstid == 5 || this._heroData?.isRoleHero())    //传奇英雄、主角才需要更换外框
+        {
+            frameName = XConsts.GetQualityBgByStar(star);            
+        }
         let framePath:string = "ui/common/icon/" + frameName + "/spriteFrame"
         this._resourceLoad(framePath,this.btn_frame);
         }
@@ -144,8 +151,12 @@ export class HeroIcon extends Component {
         this._resourceLoad(heroIconPath,this.img_icon);
         
         this.lab_level.string = lv.toString();
+        if(lv == 0)
+        {
+            this.lab_level.node.active = false
+        }
 
-        this._setStar(starNum);
+        this._setStar(starNum,heroinfo.id);
     }
 
     /**
@@ -157,7 +168,7 @@ export class HeroIcon extends Component {
         if(this._heroData)
         {
             let addStar = this._heroData.getStar()+1;
-            this._setStar(addStar);
+            this._setStar(addStar,this._heroData.getStaticID());
     }
     }
 
@@ -199,12 +210,17 @@ export class HeroIcon extends Component {
         }
     }
 
-    //酒馆推荐阵容英雄icon
+
+    /**
+     * 设置英雄icon
+     * @param id 英雄id
+     * @param nType 显示类型
+     */
     public initUIHeroIconInfo(id : number,nType : number)
     {
         let info = GameModel.getInstance().getHeroesModel().getHeroIconInfoByHeroId(id);
         this.img_camp.active = true;
-        let campIconPath:string = "ui/common/team/" + info.camp + "/spriteFrame"
+        let campIconPath:string = "ui/common/team/" + info.camp + "/spriteFrame";
         resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
         {
             if(!err)
@@ -214,15 +230,15 @@ export class HeroIcon extends Component {
             }
         });
 
-        let framePath:string = "ui/common/icon/" + info.frame + "/spriteFrame"
-        this._resourceLoad(framePath,this.btn_frame);
+        // let framePath:string = "ui/common/icon/" + info.frame + "/spriteFrame"
+        // this._resourceLoad(framePath,this.btn_frame);
 
-        let heroIconPath:string = "ui/common/hero/" + info.img + "/spriteFrame"
+        let heroIconPath:string = "ui/common/hero/" + info.icon + "/spriteFrame";
         this._resourceLoad(heroIconPath,this.img_icon);
 
         // this.lab_level.node.active = false;
 
-        this._setStar(info.star);
+        this._setStar(info.star,id);
 
         switch (nType) 
         {

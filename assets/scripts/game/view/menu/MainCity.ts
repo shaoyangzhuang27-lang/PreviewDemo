@@ -91,6 +91,10 @@ export class MainCity extends Component {
             return;
         }
 
+        if(buildName == "building_01"){
+            PopMgr.getInstance().popHeroPubWindow();
+            return;
+        }
         if (buildName == "building_03") {
             PopMgr.getInstance().popForge();
             return;
@@ -104,13 +108,7 @@ export class MainCity extends Component {
             });
         });
 
-        // beast.popHeroPubWindow("酒馆英雄","我是内容"+buildName,()=>{
-        //     console.log("提交内容!")
-        //     beast.popHeroPubWindow("删除建筑?","删除",()=>{
-        //         // console.log("提交内容!")
-        //         beast.popupPrompt("无法删除");
-        //     });
-        // });
+        // beast.popMultiItemRewardWindow();
     }
 
     // update (deltaTime: number) {

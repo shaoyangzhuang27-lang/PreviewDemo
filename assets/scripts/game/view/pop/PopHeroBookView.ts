@@ -1,4 +1,8 @@
-
+/**
+ * 游戏组件:英雄图鉴主界面
+ * @author 黄志清
+ * @version 1.0.0,2021.3.17
+ */
 import { _decorator, Component, Node, ToggleContainer, Label, instantiate, EventHandler,Toggle,resources,ScrollView } from 'cc';
 const { ccclass, property } = _decorator;
 import { HeroData } from '../../model/datas/HeroData';
@@ -11,6 +15,8 @@ import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { XMsgExt } from "../../model/const/XMsgExt";
 import { HeroBookTitleCell} from '../../view/hero/HeroBookTitleCell';
 import { HeroBookCell } from '../hero/HeroBookCell';
+import { NotifyMgr } from '../../control/NotifyMgr';
+import { PopMgr } from '../../control/PopMgr';
 
 @ccclass('PopHeroBookView')
 export class PopHeroBookView extends PopBase {
@@ -42,11 +48,13 @@ export class PopHeroBookView extends PopBase {
     //图鉴列表
     private _bookHeroList:Map<number, Msg.HeroBookUnit> = new Map<number, Msg.HeroBookUnit>();
     //阵营图鉴列表
-    private _bookHeroToggleList:Map<number, Msg.HeroBookUnit>[] = new Array();
     private _curCampType:number = 1;
     private _heroStaticIdList:number[] = new Array<number>()
 
     private _itemHeroListForBook:Map<string,number[]> = new Map<string, number[]>();
+
+    //储存当前阵营的图鉴节点
+    private _bookCellList:Map<number,Node> = new Map<number,Node>();
 
     start () {        
         super.start()
@@ -57,15 +65,16 @@ export class PopHeroBookView extends PopBase {
         containerEventHandler.customEventData = '';
         this.selectGroup?.checkEvents.push(containerEventHandler);
 
-        this.btnRules.on(Node.EventType.TOUCH_END, this.openRuleView, this);
-        this.btnDetails.on(Node.EventType.TOUCH_END, this.openDetailInfoView, this);
-        this.btnProperty.on(Node.EventType.TOUCH_END, this.openPropertyView, this);
+        this.btnRules.on(Node.EventType.TOUCH_END, this._openRuleView, this);
+        this.btnDetails.on(Node.EventType.TOUCH_END, this._openDetailInfoView, this);
+        this.btnProperty.on(Node.EventType.TOUCH_END, this._openPropertyView, this);
         // this.btnRules.on(Node.EventType.TOUCH_END, this.openRuleView, this);
 
-        this._bookHeroList = GameModel.getInstance().getHeroesModel().getBookMap();
-        // for (let iterator of this._bookHeroList.keys()) {
-        //     console.log("sdaczxcascascq",iterator)
-        // }
+        // this._bookHeroList = GameModel.getInstance().getHeroesModel().getBookMap();
+
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_hero_book_active,this._notifyBookChangeHandle,this);
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_hero_book_upgrade,this._notifyBookChangeHandle,this);
+        
         this._refreshData()
     }
 
@@ -156,29 +165,33 @@ export class PopHeroBookView extends PopBase {
                     for (let index = 0; index < value.length; index++) {
                         let bookcell = instantiate(res) as Node;
                         this.scrov_book.content?.addChild(bookcell);
+                        
+
                         let script = bookcell.getComponent("HeroBookCell") as HeroBookCell; 
                         let heroId = value[index];
+                        this._bookCellList.set(heroId, bookcell);
                 
                         let heroBookInfo:Msg.HeroBookUnit = GameModel.getInstance().getHeroesModel().getBookHeroDataByStaticID(heroId);
-                        let showType:number = 0;   //显示类型:0显示遮罩 1可激活 2可升级 3常态无遮罩
+                        let showType:number = XConsts.HeroBookState.Null;   //显示类型:0显示遮罩 1可激活 2可升级 3常态无遮罩
                         if(heroBookInfo.level == 0 && heroBookInfo.curTopStar == 0)
                         {
-                            showType = 0
+                            showType = XConsts.HeroBookState.Null;
                         }
                         else if(heroBookInfo.level == 0 && heroBookInfo.curTopStar != 0)
                         {
-                            showType = 1
+                            showType = XConsts.HeroBookState.CanActive;
                         }
                         else if(XMsgExt.IsCanLevelUp(heroBookInfo))
                         {
-                            showType = 2
+                            showType = XConsts.HeroBookState.CanUpGrade;
                         }
                         else if(heroBookInfo.level != 0 && heroBookInfo.curTopStar == heroBookInfo.level)
                         {
-                            showType = 3
+                            showType = XConsts.HeroBookState.Normal;
                         }
-                        script.setHeroBookData(showType,heroId,(_data:any)=>{
+                        script.setHeroBookData(showType,heroId,(itemState:number, heroid:number)=>{
                             console.log("图鉴点击回调")
+                            this._bookCellClickCallback(itemState,heroid);
                         });
 
                         sortIndex = 1000 + index + 1;
@@ -193,10 +206,12 @@ export class PopHeroBookView extends PopBase {
                         bookcell.name = sortIndex.toString()
                         k.push([sortIndex,bookcell]);
                     }
-                    k.sort((n1,n2) => n1[0] - n2[0])
-                    k.forEach((value,key)=>{
-                        value[1].setSiblingIndex(key);
-                    })
+                    // k.sort((n1,n2) => n1[0] - n2[0])
+                    // k.forEach((value,key)=>{
+                    //     value[1].setSiblingIndex(key);
+                    // })
+
+                    console.log("界十大杀手打出",this._bookCellList.size);
                 })       
             }
             
@@ -217,39 +232,65 @@ export class PopHeroBookView extends PopBase {
     }
 
     //打开规则界面
-    private openRuleView()
+    private _openRuleView()
     {
-
+        var title = ValueMgr.getInstance().getItemByField(TableName.language_ui,"UI_HeroBookExplain") as Config.language_ui.Record;
+        var desc = ValueMgr.getInstance().getItemByField(TableName.language_ui,"UI_HeroBookContent") as Config.language_ui.Record;
+        PopMgr.getInstance().popExplain(title.cn,desc.cn,()=>{ PopMgr.getInstance().deleteWindow();});
     }
 
     //加成细节
-    private openDetailInfoView()
+    private _openDetailInfoView()
     {
         
     }
 
     //加成属性
-    private openPropertyView()
+    private _openPropertyView()
     {
         
+    }
+
+    //图鉴点击回调
+    private _bookCellClickCallback(itemState:number, heroid:number)
+    {   
+        let heroBookId = HeroData.GetHeroBookID(heroid);
+        if(itemState == XConsts.HeroBookState.CanActive)
+        {
+            MsgMgr.getInstance().getMsgFormation().requestHeroBookActive(heroBookId)
+        }
+        else if(itemState == XConsts.HeroBookState.CanUpGrade)
+        {
+            PopMgr.getInstance().popBookHeroUpgradeView(heroid)            
+        }
+        else{
+            PopMgr.getInstance().popOpenBookHeroDetail(heroid);
+        }
+    }
+
+    //图鉴激活通知
+    private _notifyBookChangeHandle(data:any)
+    {
+        let hbu = data as Msg.HeroBookUnit;
+        let heroStaticID = HeroData.getHeroStaticIdByBookId(hbu.heroBookId);
+        if(this._bookCellList.has(heroStaticID))
+        {
+            let isCanUpgrade = XMsgExt.IsCanLevelUp(hbu);
+            let showType = XConsts.HeroBookState.Normal;
+            if(isCanUpgrade)
+            {
+                showType = XConsts.HeroBookState.CanUpGrade;
+            }
+            let bookNode = this._bookCellList.get(heroStaticID) as Node;
+            let script = bookNode.getComponent("HeroBookCell") as HeroBookCell;
+            script.resetBookView(showType);
+        }
     }
 
     onDestroy()
     {
-        
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_hero_book_active,this._notifyBookChangeHandle,this);
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_hero_book_upgrade,this._notifyBookChangeHandle,this);
     }
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
-}
 
-/**
- * [1] Class member could be defined like this.
- * [2] Use `property` decorator if your want the member to be serializable.
- * [3] Your initialization goes here.
- * [4] Your update function goes here.
- *
- * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
- * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
- * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
- */
+}

@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "ebdcda8b-08d4-415c-b555-0e54cc6a2d9b",
+  "uuid": "fd4e1aea-4b8d-4da4-ab10-7e589e65707b",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "ebdcda8b-08d4-415c-b555-0e54cc6a2d9b@6c48a",
+      "uuid": "fd4e1aea-4b8d-4da4-ab10-7e589e65707b@6c48a",
       "displayName": "英雄详情_无",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "ebdcda8b-08d4-415c-b555-0e54cc6a2d9b"
+        "imageUuidOrDatabaseUri": "fd4e1aea-4b8d-4da4-ab10-7e589e65707b"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "ebdcda8b-08d4-415c-b555-0e54cc6a2d9b@f9941",
+      "uuid": "fd4e1aea-4b8d-4da4-ab10-7e589e65707b@f9941",
       "displayName": "英雄详情_无",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "ebdcda8b-08d4-415c-b555-0e54cc6a2d9b@6c48a",
+        "imageUuidOrDatabaseUri": "fd4e1aea-4b8d-4da4-ab10-7e589e65707b@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "ebdcda8b-08d4-415c-b555-0e54cc6a2d9b@f9941"
+    "redirect": "fd4e1aea-4b8d-4da4-ab10-7e589e65707b@f9941"
   }
 }

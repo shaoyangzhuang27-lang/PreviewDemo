@@ -233,7 +233,7 @@ export class BagMain extends Component {
 
          
 
-       GameModel.getInstance().getBagModel().initTestFragmentList();
+    //    GameModel.getInstance().getBagModel().initTestFragmentList();
        let fragmentSysthesisiInfoList = GameModel.getInstance().getBagModel().getFragmentSynthesisInfoList();
         resources.load('prefabs_ui/main/hero_fragment', (err:any,res:any)=>{
             for (var i = 0 ; i < fragmentSysthesisiInfoList.length; i++) {
