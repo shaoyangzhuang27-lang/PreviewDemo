@@ -6,7 +6,7 @@ import { TechnologyModel } from "./datas/TechnologyModel";
 import { BagItemModel } from "./datas/BagItemModel";
 import { HeroPubModel } from "./datas/HeroPubModel";
 import { TableName, ValueMgr } from "./ValueMgr";
-// import { OfflineModel } from "./datas/OfflineModel"
+import { OfflineModel } from "./datas/OfflineModel"
 import { ForgeModel } from "./datas/ForgeModel"
 
 export class GameModel{
@@ -21,7 +21,7 @@ export class GameModel{
     private _playerModel:PlayerModel =  new PlayerModel(this);
     private _formationModel:FormationModel = new FormationModel(this);
     private _bagItemModel:BagItemModel = new BagItemModel(this);
-    // private _offlineModel:OfflineModel = new OfflineModel(this);
+    private _offlineModel:OfflineModel = new OfflineModel(this);
     private _heroPubModel:HeroPubModel = new HeroPubModel(this);
     private _forgeModel: ForgeModel = new ForgeModel(this);
 
@@ -41,9 +41,9 @@ export class GameModel{
         return this._bagItemModel;
     }
     // 挂机数据
-    // public getOfflineModel(){
-    //     return this._offlineModel;
-    // }
+    public getOfflineModel(){
+        return this._offlineModel;
+    }
     
     public getHeroPubModel(){
         return this._heroPubModel;
