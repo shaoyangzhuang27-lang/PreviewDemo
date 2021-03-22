@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "d26db09a-7a69-4d0f-b945-84f34491941f",
+  "uuid": "c8333b85-3d37-41fc-8a05-c9c25eaf759a",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "d26db09a-7a69-4d0f-b945-84f34491941f@6c48a",
+      "uuid": "c8333b85-3d37-41fc-8a05-c9c25eaf759a@6c48a",
       "displayName": "技能突破材料",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "d26db09a-7a69-4d0f-b945-84f34491941f"
+        "imageUuidOrDatabaseUri": "c8333b85-3d37-41fc-8a05-c9c25eaf759a"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "d26db09a-7a69-4d0f-b945-84f34491941f@f9941",
+      "uuid": "c8333b85-3d37-41fc-8a05-c9c25eaf759a@f9941",
       "displayName": "技能突破材料",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "d26db09a-7a69-4d0f-b945-84f34491941f@6c48a",
+        "imageUuidOrDatabaseUri": "c8333b85-3d37-41fc-8a05-c9c25eaf759a@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "d26db09a-7a69-4d0f-b945-84f34491941f@f9941"
+    "redirect": "c8333b85-3d37-41fc-8a05-c9c25eaf759a@f9941"
   }
 }

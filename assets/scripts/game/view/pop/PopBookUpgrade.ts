@@ -112,7 +112,7 @@ export class PopBookUpGrade extends PopBase {
     {
         let heroInfo = ValueMgr.getInstance().getItemByField(TableName.heroes,this._heroId) as Config.heroes.Record;
         let hubInfo = hbu || this._heroUnit;
-        let id1st = Number((heroInfo.id/1000000).toFixed())
+        let id1st = HeroData.getInitialStarByID(heroInfo.id);
         let oldProId = id1st *100 + hbu.level;
         let isCanUpgrade = XMsgExt.IsCanLevelUp(hbu);
 

@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "03b24d84-a82d-4709-af83-a6c390d68557",
+  "uuid": "eeb928ab-06bd-44b9-b552-287faf4d1597",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "03b24d84-a82d-4709-af83-a6c390d68557@6c48a",
+      "uuid": "eeb928ab-06bd-44b9-b552-287faf4d1597@6c48a",
       "displayName": "奇迹碎片",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "03b24d84-a82d-4709-af83-a6c390d68557"
+        "imageUuidOrDatabaseUri": "eeb928ab-06bd-44b9-b552-287faf4d1597"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "03b24d84-a82d-4709-af83-a6c390d68557@f9941",
+      "uuid": "eeb928ab-06bd-44b9-b552-287faf4d1597@f9941",
       "displayName": "奇迹碎片",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "03b24d84-a82d-4709-af83-a6c390d68557@6c48a",
+        "imageUuidOrDatabaseUri": "eeb928ab-06bd-44b9-b552-287faf4d1597@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "03b24d84-a82d-4709-af83-a6c390d68557@f9941"
+    "redirect": "eeb928ab-06bd-44b9-b552-287faf4d1597@f9941"
   }
 }

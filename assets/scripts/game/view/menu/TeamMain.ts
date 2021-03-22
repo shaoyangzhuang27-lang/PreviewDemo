@@ -7,6 +7,7 @@ import { HeroData } from '../../model/datas/HeroData';
 import { GameModel } from '../../model/GameModel';
 import { HeroIcon } from '../hero/HeroIcon';
 import { XFuns } from '../../model/const/XFuns';
+import { XConsts } from '../../model/const/XConsts';
 const { ccclass, property } = _decorator;
 
 @ccclass('TeamMain')
@@ -64,6 +65,9 @@ export class TeamMain extends Component {
 
     @property({ type: Node, displayName: "背包扩展" })
     public btnExtend: Node = null as unknown as Node;
+
+    @property({ type: Label, displayName: "英雄数量" })
+    public labHeroCount: Label = null as unknown as Label;
 
     start () {
         // [3]
@@ -141,7 +145,11 @@ export class TeamMain extends Component {
     // 英雄背包节点
     private _initHeroNode(campType ?: Msg.TCampType){
         // 清空子节点
-        this.layHero.removeAllChildren()
+        // this.layHero.removeAllChildren()
+        let childrens = this.layHero.children
+        childrens.forEach(element => {
+            element?.destroy()
+        });
         // 数据排序
         let heroModel = GameModel.getInstance().getHeroesModel()
         let heroList = campType ? heroModel.getHeroListByCampType(campType) : heroModel.getHeroList();
@@ -166,6 +174,7 @@ export class TeamMain extends Component {
                 });
             })
         });
+        this._updateHerosCount()
     }
     
     tabClick(event: Event, customEventData: string){
@@ -205,8 +214,24 @@ export class TeamMain extends Component {
     // 背包扩充
     _clickExtend(target: Button){
         console.log("点击背包扩充")
-
         // PlayerInfo.BoughtBagTimes //购买背包容量次数
+        MsgMgr.getInstance().getMsgHeroBagExtend().requestBuyHeroBagNumR();
+    }
+
+    // 更新背包数量
+    _updateHerosCount(){
+        let heroModel = GameModel.getInstance().getHeroesModel()
+        let herosMap = heroModel.getHeroList()
+        let herosCount = 0
+        herosMap.forEach(element => {
+            herosCount++
+        });
+        let PlayerData = GameModel.getInstance().getPlayerModel()
+        let bagCount = XConsts.KHeroBagMaxNum 
+        bagCount += XConsts.KBuyHeroagNumEach * PlayerData.getPlayerInfo().BoughtBagTimes 
+        bagCount += XConsts.KVipHeroBagAddition[PlayerData.getPlayerInfo().vipLevel] || 0
+
+        this.labHeroCount.string = herosCount + "/" + bagCount
     }
 
     show(){

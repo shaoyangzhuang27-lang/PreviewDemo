@@ -98,7 +98,7 @@ export class OfflineModel extends BaseModel
             return this.m_copyId
         }
         // 获取当前的关卡进度
-        const playerData = GameModel.getInstance().getPlayerModel().getPlayerInfo()
+        const playerData = this._gameModel.getPlayerModel().getPlayerInfo()
         const copyInfo = playerData.copy;
         return copyInfo?.copyID
     }

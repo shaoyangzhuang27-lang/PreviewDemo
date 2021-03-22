@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "02a26301-4191-4909-811a-34c1ee43ff94",
+  "uuid": "d42dd08a-44f0-452b-be90-850f2a04e63e",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "02a26301-4191-4909-811a-34c1ee43ff94@6c48a",
+      "uuid": "d42dd08a-44f0-452b-be90-850f2a04e63e@6c48a",
       "displayName": "奇迹卷轴",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "02a26301-4191-4909-811a-34c1ee43ff94"
+        "imageUuidOrDatabaseUri": "d42dd08a-44f0-452b-be90-850f2a04e63e"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "02a26301-4191-4909-811a-34c1ee43ff94@f9941",
+      "uuid": "d42dd08a-44f0-452b-be90-850f2a04e63e@f9941",
       "displayName": "奇迹卷轴",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "02a26301-4191-4909-811a-34c1ee43ff94@6c48a",
+        "imageUuidOrDatabaseUri": "d42dd08a-44f0-452b-be90-850f2a04e63e@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "02a26301-4191-4909-811a-34c1ee43ff94@f9941"
+    "redirect": "d42dd08a-44f0-452b-be90-850f2a04e63e@f9941"
   }
 }

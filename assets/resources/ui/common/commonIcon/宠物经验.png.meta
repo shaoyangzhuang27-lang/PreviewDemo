@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "1217e7b3-2d04-41b8-9349-c9385cdbacc7",
+  "uuid": "0bc3bf57-cd99-4a6c-b752-6009b7133f69",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "1217e7b3-2d04-41b8-9349-c9385cdbacc7@6c48a",
+      "uuid": "0bc3bf57-cd99-4a6c-b752-6009b7133f69@6c48a",
       "displayName": "宠物经验",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "1217e7b3-2d04-41b8-9349-c9385cdbacc7"
+        "imageUuidOrDatabaseUri": "0bc3bf57-cd99-4a6c-b752-6009b7133f69"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "1217e7b3-2d04-41b8-9349-c9385cdbacc7@f9941",
+      "uuid": "0bc3bf57-cd99-4a6c-b752-6009b7133f69@f9941",
       "displayName": "宠物经验",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "1217e7b3-2d04-41b8-9349-c9385cdbacc7@6c48a",
+        "imageUuidOrDatabaseUri": "0bc3bf57-cd99-4a6c-b752-6009b7133f69@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "1217e7b3-2d04-41b8-9349-c9385cdbacc7@f9941"
+    "redirect": "0bc3bf57-cd99-4a6c-b752-6009b7133f69@f9941"
   }
 }

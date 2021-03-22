@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "31af1b6e-e0eb-43ef-b6c0-0ddfaa119236",
+  "uuid": "9ca396be-d1f1-4cef-94c7-ab0149e2bd34",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "31af1b6e-e0eb-43ef-b6c0-0ddfaa119236@6c48a",
+      "uuid": "9ca396be-d1f1-4cef-94c7-ab0149e2bd34@6c48a",
       "displayName": "奇迹宝石",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "31af1b6e-e0eb-43ef-b6c0-0ddfaa119236"
+        "imageUuidOrDatabaseUri": "9ca396be-d1f1-4cef-94c7-ab0149e2bd34"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "31af1b6e-e0eb-43ef-b6c0-0ddfaa119236@f9941",
+      "uuid": "9ca396be-d1f1-4cef-94c7-ab0149e2bd34@f9941",
       "displayName": "奇迹宝石",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "31af1b6e-e0eb-43ef-b6c0-0ddfaa119236@6c48a",
+        "imageUuidOrDatabaseUri": "9ca396be-d1f1-4cef-94c7-ab0149e2bd34@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "31af1b6e-e0eb-43ef-b6c0-0ddfaa119236@f9941"
+    "redirect": "9ca396be-d1f1-4cef-94c7-ab0149e2bd34@f9941"
   }
 }

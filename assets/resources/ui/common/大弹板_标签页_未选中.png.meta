@@ -1,0 +1,74 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "1cec98b3-3ee7-43e1-8f92-82f229737353",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "1cec98b3-3ee7-43e1-8f92-82f229737353@6c48a",
+      "displayName": "大弹板_标签页_未选中",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "1cec98b3-3ee7-43e1-8f92-82f229737353"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "1cec98b3-3ee7-43e1-8f92-82f229737353@f9941",
+      "displayName": "大弹板_标签页_未选中",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": -0.5,
+        "trimX": 0,
+        "trimY": 2,
+        "width": 78,
+        "height": 71,
+        "rawWidth": 78,
+        "rawHeight": 74,
+        "borderTop": 20,
+        "borderBottom": 35,
+        "borderLeft": 35,
+        "borderRight": 35,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "1cec98b3-3ee7-43e1-8f92-82f229737353@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "1cec98b3-3ee7-43e1-8f92-82f229737353@f9941"
+  }
+}
