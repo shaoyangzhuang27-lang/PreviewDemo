@@ -16,7 +16,8 @@ import { MsgBag } from "./msg/MsgBag";
 import { MsgHeroPub } from "./msg/MsgHeroPub";
 import { MsgBase } from "./msg/MsgBase";
 import { MsgOffline } from "./msg/MsgOffline";
-
+import { MsgHeroBagExtend } from "./msg/MsgHeroBagExtend";
+import { MsgForge } from "./msg/MsgForge";
 
 class NetTips implements INetworkTips {
     requestTips(isShow: boolean): void {}
@@ -84,10 +85,19 @@ export class MsgMgr extends MsgCore{
         this._msgs.push(this._msgStarUp);
         this._msgs.push(this._msgOffline);
         this._msgs.push(this._msgFormation);
+        this._msgs.push(this._msgHeroBagExtend)
+        this._msgs.push(this._msgForge)
     }
     //消息注册-------------------------------------------------
+    private _msgForge: MsgForge = new MsgForge(this);
+    public getMsgForge() {
+        return this._msgForge
+    }
 
-
+    private _msgHeroBagExtend: MsgHeroBagExtend = new MsgHeroBagExtend(this);
+    public getMsgHeroBagExtend() {
+        return this._msgHeroBagExtend
+    }
 
     private _msgOffline : MsgOffline = new MsgOffline(this);
     public getMsgOffline() {
@@ -125,7 +135,7 @@ export class MsgMgr extends MsgCore{
             this._ip = ip;
         }
         let serverUrl = "ws://"+this._ip+":17183";
-        NetManager.getInstance().connect({ url:  serverUrl},channelId);//开启连接
+        // NetManager.getInstance().connect({ url:  serverUrl},channelId);//开启连接
         // NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启本地连接
         // NetManager.getInstance().connect({ url: "ws://192.168.15.132:17183" },channelId);//开启连接
         NetManager.getInstance().connect({ url: "ws://localhost:17183" },channelId);//开启连接

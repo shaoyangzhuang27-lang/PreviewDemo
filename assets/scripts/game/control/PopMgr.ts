@@ -430,6 +430,10 @@ export class PopMgr extends PopCore  {
             let p = instantiate(res);
             this.pushWindow(p)
             let script = p.getComponent("PopForge") as PopForge;
+            script.setIsMaskClose(true);
+            // script.setCloseCallBack(()=>{
+            //     console.log("关闭窗口回调")
+            // });
         });
     }
 }

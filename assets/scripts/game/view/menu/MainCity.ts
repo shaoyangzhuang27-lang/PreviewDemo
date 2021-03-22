@@ -91,6 +91,11 @@ export class MainCity extends Component {
             return;
         }
 
+        if (buildName == "building_03") {
+            PopMgr.getInstance().popForge();
+            return;
+        }
+
         beast.popupSimpleWindow("建筑:"+buildName,"我是内容"+buildName,()=>{
             console.log("提交内容!")
             beast.popupSimpleWindow("删除建筑?","删除",()=>{
