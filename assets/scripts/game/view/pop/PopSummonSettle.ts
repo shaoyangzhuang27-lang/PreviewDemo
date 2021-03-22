@@ -4,6 +4,9 @@ import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { HeroIcon } from '../hero/HeroIcon';
 import { GameModel } from '../../model/GameModel';
+import { NotifyMgr } from '../../control/NotifyMgr';
+import { MsgMgr } from '../../control/MsgMgr';
+import { PopMgr } from '../../control/PopMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopSummonSettle')
@@ -41,6 +44,9 @@ export class PopSummonSettle extends PopBase {
     public node_hero = null as unknown as Node;
     
 
+    @property({type: Label})
+    public lab_summon_desc = null as unknown as Label;
+
     @property({type :  ScrollView})
     public scroll_heroicon_view:ScrollView = null as unknown as ScrollView;
 
@@ -62,13 +68,48 @@ export class PopSummonSettle extends PopBase {
 
     start () {
         super.start();
-        this.btn_summon.node.on(Node.EventType.TOUCH_END, this._onSummonClick, this);
+        var settleTitle = ValueMgr.getInstance().getItemByField(TableName.language_data,XConsts.SUMMON_SETTLE_TITLE) as Config.language_data.Record;
+        this.lab_title.string = settleTitle.cn;
+        this.btn_summon.node.on(Node.EventType.TOUCH_END, this._onBtnSummonClick, this);
+        this.btn_sure.on(Node.EventType.TOUCH_END, this._onBtnSureClick, this);
+
         this.initUI();
+
+        if(this._popWindowType ==XConsts.POP_SUMMON_TYPE.HeroPub)
+        {
+            NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+        }
+
         // this.initHeroModelInfo(3042500);
     }
 
-    public _onSummonClick(event : any)
+    
+    private _onBtnSureClick(event : any)
     {
+        PopMgr.getInstance().deleteWindow();
+    }
+
+    public notifyPubSummonHeroHandle ( msgData: Msg.SummonHeroA){
+        if (msgData.err == Msg.TErrorCode.ERR_OK) {
+            console.log("zzzzzzzzzzzzzz SummonSettleHeroSummon",msgData);
+            console.log("zzzzzzzzzzzz diamond", GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts());
+            this.initDataFromMsgData(msgData,this._popWindowType);
+            this.initUI();
+        }
+        else
+        {
+            //此处消息错误处理 
+        }
+    }
+
+    public _onBtnSummonClick(event : any)
+    {
+        let summonHeroR : Msg.SummonHeroR = {
+            summonType : this._nSummonType,
+           consumeType : this._nSummonConsumeType,
+           isOneOrTen : this._bIsOne,
+       }
+        MsgMgr.getInstance().getMsgHeroPub().requestSummonHeroR(summonHeroR);
         //按钮点击再次召唤请请求，在服务器回调函数中添加 重置scrollview按钮
         // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
         //         let reclineup_item = instantiate( res );
@@ -83,16 +124,15 @@ export class PopSummonSettle extends PopBase {
 
     public initUI()
     {
-        var settleTitle = ValueMgr.getInstance().getItemByField(TableName.language_data,XConsts.SUMMON_SETTLE_TITLE) as Config.language_data.Record;
-        this.lab_title.string = settleTitle.cn;
+        
 
         if(this.scroll_heroicon_view.content)
         {
             this.scroll_heroicon_view.content.removeAllChildren()
         }
 
-        this._HeroList
-
+        console.log("hhhhhhhhhhh",this._HeroList);
+        console.log("ffffffffffff",this._HeroList.length);
         resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
                 for(var i = 0; i < this._HeroList.length; i++)
                 {
@@ -128,6 +168,8 @@ export class PopSummonSettle extends PopBase {
         var lab_summon_num = this.btn_summon.node.getChildByName("lab_summon_num")?.getComponent(Label);
         var img_summon_icon = this.btn_summon.node.getChildByName("img_summon_icon")?.getComponent(Sprite);
 
+        var strBtnSummonDescOne  = "召唤 1";  
+        var strBtnSummonDescTen  = "召唤 10";  
         var changeLabColor = (nCounts : number,curNum : number)=>{
             if(nCounts < curNum)
             {
@@ -147,12 +189,14 @@ export class PopSummonSettle extends PopBase {
             }
             var curNum = bIsOne ? XConsts.PUB_SUMMON_SCROLL_ONE_COSUME : XConsts.PUB_SUMMON_SCROLL_TEN_COSUME
             lab_summon_num && (lab_summon_num.string = String(curNum));
+            this.lab_summon_desc.string = bIsOne ? strBtnSummonDescOne : strBtnSummonDescTen;
             changeLabColor(GameModel.getInstance().getHeroPubModel().getBaseSummonScrollNum(),curNum);
 
         } //消耗钻石  暂时只处理80级之前的显示
         else if (consumeType == Msg.TSummonConsumeType.ESummonConsumeType_VRmb) {
             var curNum = bIsOne ? XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME : XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME
             lab_summon_num && (lab_summon_num.string = String(curNum));
+            this.lab_summon_desc.string = bIsOne ? strBtnSummonDescOne : strBtnSummonDescTen;
             changeLabColor(GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts(),curNum);
         }//消耗友情
         else if (consumeType == Msg.TSummonConsumeType.ESummonConsumeType_FriendGift) 
@@ -161,12 +205,13 @@ export class PopSummonSettle extends PopBase {
             
             var curNum = bIsOne ? XConsts.PUB_SUMMON_FRIEND_ONE_COSUME : XConsts.PUB_SUMMON_FRIEND_TEN_COSUME
             lab_summon_num && (lab_summon_num.string = String(curNum));
+            this.lab_summon_desc.string = bIsOne ? strBtnSummonDescOne : strBtnSummonDescTen;
             changeLabColor(GameModel.getInstance().getHeroPubModel().getFriendSummonScrollNum(),curNum);
         } 
 
     }
 
-    public initHeroModelInfo(heroId : number)
+    public initHeroModelInfo(heroId : number | null | undefined)
     {
 
         if(heroId)
@@ -241,9 +286,16 @@ export class PopSummonSettle extends PopBase {
         this._nSummonType = msgData.summonType;
         this._nSummonConsumeType = msgData.consumeType;
         this._bIsOne = msgData.heroList.length > 1 ? false : true;
+        this._HeroList = [];
         this._HeroList = this._HeroList.concat(msgData.heroList);
         this.initBtnSummonUI(this._nSummonType, this._nSummonConsumeType, this._bIsOne);
         this.setShowScrollViewType(msgData.heroList.length);
         this.popWindowType = nType;
+    }
+
+    onDestroy(){
+        // this.node.emit("OpenPubNotify");
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+        
     }
 }

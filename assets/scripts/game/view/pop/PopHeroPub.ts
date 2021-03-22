@@ -96,7 +96,9 @@ export class PopHeroPub extends PopBase {
 
 
         let diamond =  GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts();
-        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+        this.addPubNotifyHandler();
+        // NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+        // this.node.on('OpenPubNotify', this.addPubNotifyHandler, this);   //自定义事件监听事件
     }
 
 
@@ -464,6 +466,8 @@ export class PopHeroPub extends PopBase {
         if (msgData.err == Msg.TErrorCode.ERR_OK) {
             console.log("Notify PubHeroSummon",msgData);
             console.log("diamond", GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts());
+            // NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+            this.removePubNotifyHandler();
             PopMgr.getInstance().popSummonSettleWindow(msgData,XConsts.POP_SUMMON_TYPE.HeroPub);
         }
         else
@@ -472,7 +476,9 @@ export class PopHeroPub extends PopBase {
         }
     }
     onDestroy(){
-        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+        // NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+        this.removePubNotifyHandler();
+        // this.node.off("OpenPubNotify");
     }
 
     public onSubmit(nSummonType : Msg.TSummonType,nConsumeType : Msg.TSummonConsumeType, bIsOneOrTen : boolean)
@@ -489,6 +495,24 @@ export class PopHeroPub extends PopBase {
     //    }
         console.log("pub submit",summonHeroR);
         MsgMgr.getInstance().getMsgHeroPub().requestSummonHeroR(summonHeroR);
+    }
+
+    public addPubNotifyHandler()
+    {
+        console.log("开启");
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+    }
+
+    public removePubNotifyHandler()
+    {
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+    }
+
+
+    public show()
+    {
+        super.show();
+        this.addPubNotifyHandler();
     }
 }
 
