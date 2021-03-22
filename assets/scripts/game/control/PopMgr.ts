@@ -25,6 +25,8 @@ import { PopBookActive } from '../view/pop/PopBookActive';
 import { PopHeroEquipReplace } from '../view/hero_promotion/PopHeroEquipReplace';
 import { PopBookUpGrade } from '../view/pop/PopBookUpgrade';
 import { PopMultiItemReward } from "../view/pop/PopMultiItemReward";
+import { PopBookHeroDetail } from '../view/pop/PopBookHeroDetail';
+import { PopHeroStoryUI } from '../view/pop/PopHeroStoryUI';
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -384,14 +386,20 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    public popSummonSettleWindow(nType : number,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    /**
+     * @description: 召唤结算界面弹窗
+     * @param {number} nType  召唤类型
+     * @param {number} nCounts 召唤个数
+     * @param {Function} closeCallBack
+     */ 
+    public popSummonSettleWindow(nType : number,nCounts : number ,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
             let script = p.getComponent("PopSummonSettle") as PopSummonSettle;
-            // script.setTitle(title);
             script.popWindowType = nType ;
+            script.summonCounts = nCounts;
             script.setIsMaskClose(isMaskClose);
 
         } );
@@ -458,18 +466,55 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    public popMultiItemRewardWindow(submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+     /**
+     * @description: 获得物品(多个)弹窗
+     * @param {Array<XStruct.prop_info.IRecord>} data 物品信息
+     * @param {boolean} bAutoDecompsePop 是否自动分解弹窗
+     * @param {Function} closeCallBack
+     */
+    public popMultiItemRewardWindow(data :Array<XStruct.prop_info.IRecord>,bAutoDecompsePop : boolean = false,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_multi_itemreward', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
-
             let script = p.getComponent("PopMultiItemReward") as PopMultiItemReward;
-            // script.setSubmitCallBack(submitCallBack);
+            script.setPropsInfo(data);
+            script.autoDecompsePop = bAutoDecompsePop;
+            script.setSubmitCallBack(submitCallBack);
             script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
+        } );
+    }
+
+    /**
+     * 打开图鉴详情
+     * @param sid 英雄静态id
+     */
+    public popOpenBookHeroDetail(sid:number)
+    {
+        resources.load('prefabs_ui/pop/pop_bookherodetail', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            let script = p.getComponent("PopBookHeroDetail") as PopBookHeroDetail;
+            script.setBookData(sid);
 
         } );
     }
 
+    /**
+     * 打开英雄故事
+     * @param sid 英雄静态id
+     */
+    public popOpenHeroStoryUI(sid:number)
+    {
+        resources.load('prefabs_ui/pop/pop_herostory', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            let script = p.getComponent("PopHeroStoryUI") as PopHeroStoryUI;
+            script.setBookData(sid);
+
+        } );
+    }
 }

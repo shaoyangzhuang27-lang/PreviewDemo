@@ -46,24 +46,19 @@ export class PopSummonSettle extends PopBase {
     
     private _popWindowType : number = XConsts.POP_SUMMON_TYPE.HeroPub;
 
-    private _nSummonCounts : number = 6;
+    private _nSummonCounts : number = 0;
 
 
     start () {
         super.start();
         this.btn_summon.node.on(Node.EventType.TOUCH_END, this._onSummonClick, this);
         this.initUI();
-        var lay = this.scroll_heroicon_view.content?.getComponent(Layout);
-        if(this._nSummonCounts < 5 && lay)
-        {
-            lay.type = 1;
-        }
-
-        this.initHeroModelInfo(3042500);
+        // this.initHeroModelInfo(3042500);
     }
 
     public _onSummonClick(event : any)
     {
+        //按钮点击再次召唤请请求，在服务器回调函数中添加 重置scrollview按钮
         // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
         //         let reclineup_item = instantiate( res );
         //         let script = reclineup_item.getComponent(HeroIcon);
@@ -84,6 +79,7 @@ export class PopSummonSettle extends PopBase {
         {
             this.scroll_heroicon_view.content.removeAllChildren()
         }
+
         // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
         //     for (var i = 0 ; i < 2; i++) {
         //         let reclineup_item = instantiate( res );
@@ -167,5 +163,15 @@ export class PopSummonSettle extends PopBase {
             this.btn_sure.active = false;
         }
         this._popWindowType = nType;
+    }
+
+    public set summonCounts(nCounts: number)
+    {
+        var lay = this.scroll_heroicon_view.content?.getComponent(Layout);
+        if(nCounts < 5 && lay)
+        {
+            lay.type = 1;
+        }
+        this._nSummonCounts = nCounts;
     }
 }

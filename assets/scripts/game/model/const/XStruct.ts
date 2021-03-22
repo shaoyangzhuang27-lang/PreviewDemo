@@ -79,16 +79,20 @@ export namespace XStruct {
        }
 
 
-          //升星塔获取物品信息
-          namespace starup_prop_info {
+        //获取物品信息
+        //   {
+        //     /*属性值必填   
+        //     *没有用到的属性值默认手动填写 string设置"" number设置 0
+        //     */  
+        //     nType 物品类型
+        //     nLevel 物品等级
+        //     nPropId 物品ID
+        //     nPropQuality 物品品质
+        //     num 物品数量
+        //   }
+          namespace prop_info {
             /** Properties of a Record. */
             interface IRecord {
-            //    camp?: (string|null);
-            //    star?: (number|null);
-            //    level?:(number|null);
-            //    frame?:(string|null);
-            //    icon?:(string|null);
-            //    bg?:(string|null);
                 nType ?:(number|null);
                 nLevel?: (number | null);
                 nPropId ?: (number | null);
@@ -97,13 +101,7 @@ export namespace XStruct {
            }
            /** Represents a Record. */
            class Record implements IRecord {
-               constructor(p?: XStruct.starup_prop_info.IRecord);
-            //    camp : string;
-            //    star : number;
-            //    level : number;
-            //    frame :string;
-            //    icon : string;
-            //    bg : string;
+               constructor(p?: XStruct.prop_info.IRecord);
                nType :number;
                nPropId : number;
                nLevel : number;
