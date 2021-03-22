@@ -250,12 +250,14 @@ export class PopFragmentSynthesis extends PopBase {
 
     private _onBtnSummonClick(event : any)
     {
-        PopMgr.getInstance().popSummonSettleWindow(XConsts.POP_SUMMON_TYPE.FragmentSysthesis,1);
+        //20200322
+        //PopMgr.getInstance().popSummonSettleWindow(XConsts.POP_SUMMON_TYPE.FragmentSysthesis,1);
     }
 
     private _onBtnSubmitClick(event : any)
     {
-        PopMgr.getInstance().popSummonSettleWindow(XConsts.POP_SUMMON_TYPE.FragmentSysthesis,1);
+        //20210322
+        // PopMgr.getInstance().popSummonSettleWindow(XConsts.POP_SUMMON_TYPE.FragmentSysthesis,1);
     }
     private _onBtnAddClick(event : any)
     {

@@ -111,11 +111,17 @@ export class HeroPubModel extends BaseModel{
     // }
 
     //英雄普通召唤卷轴
-    public getHeroSummonScrollNum()
+    public getBaseSummonScrollNum()
     {
         return this._gameModel.getPlayerModel().getPlayerInfo().basicSummonScroll || 0;
     }
 
+
+    //英雄高级召唤卷轴
+    public getHeroicSummonScrollNum()
+    {
+        return this._gameModel.getPlayerModel().getPlayerInfo().heroicSummonScroll || 0;
+    }
     //友情英雄召唤卷轴
     public getFriendSummonScrollNum()
     {
