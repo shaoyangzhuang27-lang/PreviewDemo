@@ -25,6 +25,8 @@ import { PopBookActive } from '../view/pop/PopBookActive';
 import { PopHeroEquipReplace } from '../view/hero_promotion/PopHeroEquipReplace';
 import { PopBookUpGrade } from '../view/pop/PopBookUpgrade';
 import { PopMultiItemReward } from "../view/pop/PopMultiItemReward";
+import { PopBookHeroDetail } from '../view/pop/PopBookHeroDetail';
+import { PopHeroStoryUI } from '../view/pop/PopHeroStoryUI';
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -484,4 +486,35 @@ export class PopMgr extends PopCore  {
         } );
     }
 
+    /**
+     * 打开图鉴详情
+     * @param sid 英雄静态id
+     */
+    public popOpenBookHeroDetail(sid:number)
+    {
+        resources.load('prefabs_ui/pop/pop_bookherodetail', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            let script = p.getComponent("PopBookHeroDetail") as PopBookHeroDetail;
+            script.setBookData(sid);
+
+        } );
+    }
+
+    /**
+     * 打开英雄故事
+     * @param sid 英雄静态id
+     */
+    public popOpenHeroStoryUI(sid:number)
+    {
+        resources.load('prefabs_ui/pop/pop_herostory', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            let script = p.getComponent("PopHeroStoryUI") as PopHeroStoryUI;
+            script.setBookData(sid);
+
+        } );
+    }
 }
