@@ -13,8 +13,21 @@ export class PopSummonSettle extends PopBase {
     // @property({type: LabelComponent})
     // public lab_content:LabelComponent | null = null;
 
+    @property({type: Label})
+    public lab_hero_name = null as unknown as Label;
+
+    
+    @property({type: Sprite})
+    public img_profession= null as unknown as Sprite;
+
+    @property({type: Sprite})
+    public img_camp= null as unknown as Sprite;
+
     @property({type: Button})
     public btn_summon = null as unknown as Button;
+
+    @property({type :  Node})
+    public starlist:Node[] = [];
 
     @property({type: Node})
     public btn_sure = null as unknown as Node;
@@ -23,28 +36,29 @@ export class PopSummonSettle extends PopBase {
     public btn_fragment_sure = null as unknown as Node;
     // private _submitCallFun:Function | null = null;
 
+    @property({type: Node})
+    public node_hero = null as unknown as Node;
+    
 
-    private _popWindowType : number = XConsts.POP_SUMMON_TYPE.HeroPub;
-
-    private _nSummonCounts : number = 6;
     @property({type :  ScrollView})
     public scroll_heroicon_view:ScrollView = null as unknown as ScrollView;
 
+    
+    private _popWindowType : number = XConsts.POP_SUMMON_TYPE.HeroPub;
+
+    private _nSummonCounts : number = 0;
 
 
     start () {
         super.start();
         this.btn_summon.node.on(Node.EventType.TOUCH_END, this._onSummonClick, this);
         this.initUI();
-        var lay = this.scroll_heroicon_view.content?.getComponent(Layout);
-        if(this._nSummonCounts < 5 && lay)
-        {
-            lay.type = 1;
-        }
+        // this.initHeroModelInfo(3042500);
     }
 
     public _onSummonClick(event : any)
     {
+        //按钮点击再次召唤请请求，在服务器回调函数中添加 重置scrollview按钮
         // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
         //         let reclineup_item = instantiate( res );
         //         let script = reclineup_item.getComponent(HeroIcon);
@@ -65,6 +79,7 @@ export class PopSummonSettle extends PopBase {
         {
             this.scroll_heroicon_view.content.removeAllChildren()
         }
+
         // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
         //     for (var i = 0 ; i < 2; i++) {
         //         let reclineup_item = instantiate( res );
@@ -94,6 +109,40 @@ export class PopSummonSettle extends PopBase {
 
     }
 
+    public initHeroModelInfo(heroId : number)
+    {
+
+        //5051402
+        let heroInfo = ValueMgr.getInstance().getItemByField(TableName.heroes, heroId ) as Config.heroes.Record;
+        var camp = "ui/common/team/" + XConsts.KHeroCampIcon[heroInfo.camp] + "/spriteFrame";
+        var profession = "ui/book/" + XConsts.KClassesSpriteName[heroInfo.classes] + "/spriteFrame";
+
+        var heroName = ValueMgr.getInstance().getItemByField(TableName.language_data,heroInfo.name) as Config.language_data.Record;
+        this.lab_hero_name.string = heroName.cn
+        this.resetResourcesSpriFame(camp,this.img_camp);
+        this._setStar(heroInfo.star);
+        this.resetResourcesSpriFame(profession,this.img_profession);
+
+    }
+
+    private _setStar(star:number)
+    {
+        for (let index = 0; index < this.starlist.length; index++) {
+            if(index > star-1)
+            {
+                this.starlist[index].active = false;
+            }
+            else{
+                this.starlist[index].active = true;
+                if(star % 2 == 0)
+                {
+                   var pos =  this.starlist[index].getPosition();
+                   this.starlist[index].setPosition(pos.x + 7,pos.y);
+                }
+            } 
+        }
+    }
+
     public resetResourcesSpriFame(path:string,objSprite : Sprite)
     {
         resources.load(path, SpriteFrame ,(err: any, spriteFrame: SpriteFrame) => {
@@ -114,5 +163,15 @@ export class PopSummonSettle extends PopBase {
             this.btn_sure.active = false;
         }
         this._popWindowType = nType;
+    }
+
+    public set summonCounts(nCounts: number)
+    {
+        var lay = this.scroll_heroicon_view.content?.getComponent(Layout);
+        if(nCounts < 5 && lay)
+        {
+            lay.type = 1;
+        }
+        this._nSummonCounts = nCounts;
     }
 }

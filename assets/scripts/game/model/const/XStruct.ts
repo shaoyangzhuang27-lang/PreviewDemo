@@ -29,7 +29,7 @@ export namespace XStruct {
                star?: (number|null);
                level?:(number|null);
                frame?:(string|null);
-               img?:(string|null);
+               icon?:(string|null);
            }
            /** Represents a Record. */
            class Record implements IRecord {
@@ -38,7 +38,7 @@ export namespace XStruct {
                star : number;
                level : number;
                frame :string;
-               img : string;
+               icon : string;
            }
        }
 
@@ -50,12 +50,14 @@ export namespace XStruct {
                camp?: (string|null);
                star?: (number|null);
                quality?:(string|null);
-               img?:(string|null);
+               icon?:(string|null);
                type : (number|null);
                maxNum :(number|null);
                curNum : (number|null);
                heroName : (string|null);
                campName : (string|null);
+               classesName : (string|null);
+               bg?: (string|null);
            }
            /** Represents a Record. */
            class Record implements IRecord {
@@ -64,15 +66,51 @@ export namespace XStruct {
                camp : string;
                star : number;
                quality : string;
-               img : string;
+               icon : string;
                type : number;
                maxNum : number;
                curNum : number;
                heroName : string;
                campName : string;
+               classesName:string;
+               bg : string;
 
            }
        }
+
+
+        //获取物品信息
+        //   {
+        //     /*属性值必填   
+        //     *没有用到的属性值默认手动填写 string设置"" number设置 0
+        //     */  
+        //     nType 物品类型
+        //     nLevel 物品等级
+        //     nPropId 物品ID
+        //     nPropQuality 物品品质
+        //     num 物品数量
+        //   }
+          namespace prop_info {
+            /** Properties of a Record. */
+            interface IRecord {
+                nType ?:(number|null);
+                nLevel?: (number | null);
+                nPropId ?: (number | null);
+                nPropQuality?:(number|null);
+                num?:(number|null);
+           }
+           /** Represents a Record. */
+           class Record implements IRecord {
+               constructor(p?: XStruct.prop_info.IRecord);
+               nType :number;
+               nPropId : number;
+               nLevel : number;
+               nPropQuality : number;
+               num :number;
+           }
+        }
+
+
 
 
        //自测数据

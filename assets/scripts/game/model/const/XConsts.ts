@@ -26,6 +26,16 @@ export class XConsts{
     public static  KIAPNameStarterTenSummon:string = "IAPNameStarterTenSummon";
     public static  KDailyRechargeDayCount:number = 5;
 
+    // 装备合成材料数量
+    public static  KEquipComposeMaterialNum:number = 3;
+
+    // 英雄背包每次购买格子个数
+    public static KBuyHeroagNumEach:number = 5;
+    // vip等级对应英雄背包格子数增加
+    public static KVipHeroBagAddition:number[] = []
+    // 英雄背包初始最大 100格子
+    public static KHeroBagMaxNum:number = 100;
+
     public static  OrderStage = 0;
     public static  OrderMainUI = 1;
     public static  OrderPopHide = 2;
@@ -314,9 +324,30 @@ export class XConsts{
     public static KFragmentNumRequired : number[] = new Array<number> (0,5,10,20,30,50);
     public static KFragmentFrameSpriteName:string[] = new Array<string> ( "小卡框_品质随机", "小卡框_品质橙");
     public static KFragmentQualitySpriteName:string[] = new Array<string> ( "小卡框_碎片品质随机", "小卡框_碎片品质橙");
+    public static KFragmentBgSpriteName:string[] = new Array<string> ( "小卡框_品质普通背景", "小卡框_品质金背景");
 
+    public static KFragmentClassesName : string[] = new Array<string>("UI_OrdinaryHero","UI_SeniorHero","UI_LegendHero")
     public static POP_SUMMON_TYPE  = {
         HeroPub : 1,
         FragmentSysthesis : 2,
     }
+
+    //图鉴英雄状态
+    public static HeroBookState = {
+        Null : 0,   //未激活
+        CanActive : 1,      //可激活
+        CanUpGrade : 2,      //可升级
+        Normal : 3,      //常态
+    }
+
+    //升星塔获得物品
+    public static KStarUpGainObjectTitle : string = "UI_GainObject_Title" ;  //获得物品
+    public static KSTARUP_PROP_TYPE  = {
+        Hero : 5,
+        Money: 1,
+        Exp : 2,
+    }
+
+    public static UI_AUTODECOMPOSEGET : string = "UI_AutoDecomposeGet"; //普通英雄自动分解获得
+
 } 

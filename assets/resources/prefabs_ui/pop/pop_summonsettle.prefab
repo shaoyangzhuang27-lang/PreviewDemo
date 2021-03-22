@@ -2152,7 +2152,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "star_1",
+    "_name": "star_4",
     "_objFlags": 0,
     "_parent": {
       "__id__": 88
@@ -2224,7 +2224,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "ceeKMAENtERqdskUc3FHHO"
+    "fileId": "5aHaH6/aBNpJQsLPPgH4JF"
   },
   {
     "__type__": "cc.Sprite",
@@ -2268,7 +2268,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "ccJ6Khk9VFXbmkHLK7C/lP"
+    "fileId": "d8UmySe6BLaIgjNHxrr3DD"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2278,7 +2278,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "85rQqttBRDqY+nb3Etsdzf"
+    "fileId": "42JHJeloBNn4JSE/Z3HzTZ"
   },
   {
     "__type__": "cc.Node",
@@ -2354,7 +2354,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "56kOUHiL1O3ZGuwVX8Nuj0"
+    "fileId": "2fZW1l0idOR45y3oS8zRao"
   },
   {
     "__type__": "cc.Sprite",
@@ -2398,7 +2398,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "3dNJkLiS9C2Zesmpuk3cPr"
+    "fileId": "89oBszxaBOHYldBIWSJbNp"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2408,11 +2408,11 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "16JsK+WxtDUavEHUbFCijg"
+    "fileId": "2c9SUZOVhDboritAmtF8RU"
   },
   {
     "__type__": "cc.Node",
-    "_name": "star_3",
+    "_name": "star_0",
     "_objFlags": 0,
     "_parent": {
       "__id__": 88
@@ -2484,7 +2484,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "9dn9uu0xlHLJwHI1bbP1wK"
+    "fileId": "56g4uTVJ1CVJKkEjb7CWOe"
   },
   {
     "__type__": "cc.Sprite",
@@ -2528,7 +2528,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "c71Yl2hM1DUqYKHxLmAMeD"
+    "fileId": "68MKyphx5JhY13D53BNO1m"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2538,11 +2538,11 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "23EzTTaENBIaKTRwqAzGnh"
+    "fileId": "a1ziPWIoBHYYjDSF6tbpgL"
   },
   {
     "__type__": "cc.Node",
-    "_name": "star_4",
+    "_name": "star_1",
     "_objFlags": 0,
     "_parent": {
       "__id__": 88
@@ -2614,7 +2614,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "02StG3N+ZEcbwtF+52Fe6K"
+    "fileId": "6btvrhZYxAmIDgWKixj/pZ"
   },
   {
     "__type__": "cc.Sprite",
@@ -2658,7 +2658,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "23WsXwIA5KrampwlO4MMOS"
+    "fileId": "ae21aglW1KJrbi2auBm5CV"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2668,11 +2668,11 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "51e7R/CdBDZatHytojSbvF"
+    "fileId": "60+8G1HqZOPo1qu4nELEUf"
   },
   {
     "__type__": "cc.Node",
-    "_name": "star_5",
+    "_name": "star_3",
     "_objFlags": 0,
     "_parent": {
       "__id__": 88
@@ -2744,7 +2744,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "56H2Vl6XZN0bWvCA88Nvfj"
+    "fileId": "79Qps5ORhNIaulJSiLdKXS"
   },
   {
     "__type__": "cc.Sprite",
@@ -2788,7 +2788,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "c0lN2rQt1Hja2kiz5N1sp7"
+    "fileId": "24sZYPm4tF76ggnYeWr8jf"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2798,7 +2798,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "8ehbR0P+pM+bjxwBdaQM4/"
+    "fileId": "6aekcNvo1DxpcmprMk+ejf"
   },
   {
     "__type__": "cc.UITransform",
@@ -2814,8 +2814,8 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
+      "width": 5,
+      "height": 5
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2826,7 +2826,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "fdaaik9l9GT5S8DnQP2DZk"
+    "fileId": "6amcnRHxtIXbbHs8NpyJb4"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2836,7 +2836,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "83jiyAjk5AabErU/EKEcom"
+    "fileId": "3b+nMHOnpDHqgNzTUIbR/d"
   },
   {
     "__type__": "cc.UITransform",
@@ -5408,14 +5408,43 @@
     "lab_title": {
       "__id__": 57
     },
+    "lab_hero_name": {
+      "__id__": 74
+    },
+    "img_profession": {
+      "__id__": 80
+    },
+    "img_camp": {
+      "__id__": 68
+    },
     "btn_summon": {
       "__id__": 214
     },
+    "starlist": [
+      {
+        "__id__": 101
+      },
+      {
+        "__id__": 107
+      },
+      {
+        "__id__": 95
+      },
+      {
+        "__id__": 113
+      },
+      {
+        "__id__": 89
+      }
+    ],
     "btn_sure": {
       "__id__": 177
     },
     "btn_fragment_sure": {
       "__id__": 217
+    },
+    "node_hero": {
+      "__id__": 83
     },
     "scroll_heroicon_view": {
       "__id__": 150

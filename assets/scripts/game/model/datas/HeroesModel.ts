@@ -5,12 +5,14 @@ import { XMsgExt } from "../const/XMsgExt";
 import { BaseModel } from "./BaseModel";
 import { NotifyMgr } from '../../control/NotifyMgr';
 import {XConsts} from "../const/XConsts";
+import { XList } from "../const/XList";
 
 export class HeroesModel extends BaseModel{
 
     
     private _heroList:Map<number,HeroData> = new Map<number,HeroData>();
     private _heroBookMap:Map<number, Msg.HeroBookUnit> = new Map<number, Msg.HeroBookUnit>();//图鉴
+    private _sortedHeroList = new XList<HeroData> (); //已排序的英雄队列
 
     public getHeroList(){
         return this._heroList;
@@ -35,6 +37,52 @@ export class HeroesModel extends BaseModel{
             this._heroBookMap.set(Number(key),value as Msg.HeroBookUnit);
         }
         this.refreshHeroBookProperty(); //收到消息后刷新
+
+        this._sortHeroList();
+    }
+
+    //排序英雄,英雄升级界面左右按钮用到
+    private _sortHeroList(){
+        this._sortedHeroList.Clear();  
+
+        //优先加入当前阵容英雄
+        let curFormationList:Map<number,HeroData> = GameModel.getInstance().getFormationModel().getCurrentFormation();   
+        curFormationList.forEach((heroData,key, m)=>{
+            console.log(" heroData=",heroData)
+            console.log(" key=",key)
+            console.log(" m=",m)
+            this._sortedHeroList.Add(heroData);
+        });
+
+        //接着加入剩余所有已排序后的英雄
+        let retHeroList= this.sortHeroList(this._heroList);
+        retHeroList.forEach(element => {
+            if( !this._sortedHeroList.Contains(element) )
+                this._sortedHeroList.Add(element);
+        });
+    }
+
+    /**
+     * @description: 获取前一个英雄
+     * @param {HeroData} curHero 当前英雄数据
+     */    
+    public getPrevHero (curHero:HeroData) {
+        let i = this._sortedHeroList.IndexOf(curHero);
+        if (i > 0)
+            return this._sortedHeroList.Get(i-1);
+        else
+            return this._sortedHeroList.Get(this._sortedHeroList.Count - 1);
+    }
+    /**
+     * @description: 获取后一个英雄
+     * @param {HeroData} curHero 当前英雄数据
+     */
+    public getNextHero (curHero:HeroData) {
+        let i = this._sortedHeroList.IndexOf(curHero);
+        if (i < (this._sortedHeroList.Count - 1) )
+            return this._sortedHeroList.Get(i+1);
+        else
+            return this._sortedHeroList.Get(0);
     }
 
     //根据阵营获取当前英雄
@@ -260,31 +308,86 @@ export class HeroesModel extends BaseModel{
     public getBookHeroDataByStaticID(staticId:number):Msg.HeroBookUnit
     {
         let tempBookId = HeroData.GetHeroBookID(staticId);
-        let tempBookHero:Msg.HeroBookUnit = new Msg.HeroBookUnit();
-        if(this._heroBookMap.has(tempBookId))
-        {
-            tempBookHero = this._heroBookMap.get(tempBookId) as Msg.HeroBookUnit;
-        }
-        // this._heroBookMap.forEach((heroInfo)=>{
-        //     var _hero = ValueMgr.getInstance().getItemByField(TableName.heroes, heroInfo.heroBookId as number) as Config.heroes.Record;
-        //     if(heroInfo && heroInfo.heroBookId == tempBookId){
-        //         tempBookHero = heroInfo;      
-        //         return;          
-        //     }
-        // });
+        let tempBookHero = this.getBookHeroDataByBookId(tempBookId);
         return tempBookHero;
     }
 
+    //根据图鉴id获取图鉴英雄信息
+    public getBookHeroDataByBookId(bookid:number)
+    {
+        let tempBookHero:Msg.HeroBookUnit = new Msg.HeroBookUnit();
+        if(this._heroBookMap.has(bookid))
+        {
+            tempBookHero = this._heroBookMap.get(bookid) as Msg.HeroBookUnit;
+        }
+        return tempBookHero;
+    }
 
-    // 设置英雄锁定状态
+    /**
+     * @description: 英雄升阶
+     * @param {Msg} msg
+     */
+    public setHeroTierUp(msg: Msg.HeroTierUpA){
+        let heroData = this.getHeroInfoByDyncID(msg.heroID); 
+        if(heroData)
+        {   
+            //抛出通知 英雄升级 变化
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_tier_up, msg);
+        }  
+    }
+    /**
+     * @description: 英雄升级
+     * @param {Msg} msg
+     */
+    public setHeroLvUp(msg: Msg.HeroUpgradeA){
+        let heroData = this.getHeroInfoByDyncID(msg.heroID); 
+        if(heroData)
+        {   
+            //抛出通知 英雄升级 变化
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_lv_up, msg);
+        }  
+    }
+
+    /**
+     * @description: 设置英雄锁定状态
+     * @param {*}
+     */    
     public setHeroLocked(msg: Msg.SyncHeroLocked) {
         //根据id获取英雄信息
-        let heroData = this.getHeroInfoByDyncID(msg.heroID); //HeroData
+        let heroData = this.getHeroInfoByDyncID(msg.heroID); 
         if(heroData)
         {   
             heroData.isLocked= msg.isLocked;
             //抛出通知 英雄锁定状态 变化
             NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_locked, msg);
+        }        
+    }
+    
+    /**
+     * @description: 英雄穿上装备
+     * @param {Msg} msg
+     */
+    public setHeroPutOnEquip(msg: Msg.PutOnEquipA) {
+        //根据id获取英雄信息
+        let heroData = this.getHeroInfoByDyncID(msg.heroID); 
+        if(heroData)
+        {   
+            //抛出通知 英雄穿上装备 
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_put_on_equip, msg);
+        }        
+    }
+
+    /**
+     * @description: 英雄卸下装备
+     * @param {Msg} msg
+     */
+    public setHeroTakeOffEquip(msg: Msg.TakeOffEquipA) {
+        //根据id获取英雄信息
+        let heroData = this.getHeroInfoByDyncID(msg.heroID); 
+        if(heroData)
+        {   
+            //抛出通知 英雄卸下装备 
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_take_off_equip, msg);
         }        
     }
 
@@ -296,14 +399,14 @@ export class HeroesModel extends BaseModel{
             star : 0,
             level : 1,
             frame : "",
-            img : "",
+            icon : "",
 
         }
         var _hero = ValueMgr.getInstance().getItemByField(TableName.heroes, id) as Config.heroes.Record;
         info.camp = XConsts.KHeroCampIcon[_hero.camp];
         info.star = _hero.star;
         info.frame = XConsts.GetQualityBgByStar(_hero.star);
-        info.img = _hero.image;
+        info.icon = _hero.image;
         return info
     }
 }

@@ -64,6 +64,13 @@ export class ItemEquipCell extends Component {
     }
 
     /**
+     * @description: 获取当前道具id
+     * @param {*}
+     */
+    public getItemId(){
+        return this._itemID ;
+    }
+    /**
      * @param objType 道具类型 枚举值参考Msg.TObjectType.
      * @param 可使用道具统一传Msg.TObjectType.EObject_UsableItem
      */
@@ -115,7 +122,7 @@ export class ItemEquipCell extends Component {
                     qualityPath = "ui/common/icon/" + qualityName + "/spriteFrame";
                 }
                 let iconName:string = XConsts.KObjectIconSpriteName[this._objectType];
-                iconPath = "ui/common/commonIcon/" + iconName + "/spriteFrame";
+                iconPath = "ui/common/commonicon/" + iconName + "/spriteFrame";
             }
             else{
                 let itemData:Config.item_usable.Record = ValueMgr.getInstance().getItemByField(TableName.item_usable,this._itemID) as Config.item_usable.Record;        
