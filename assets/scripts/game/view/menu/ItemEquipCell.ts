@@ -122,7 +122,7 @@ export class ItemEquipCell extends Component {
                     qualityPath = "ui/common/icon/" + qualityName + "/spriteFrame";
                 }
                 let iconName:string = XConsts.KObjectIconSpriteName[this._objectType];
-                iconPath = "ui/common/commonIcon/" + iconName + "/spriteFrame";
+                iconPath = "ui/common/commonicon/" + iconName + "/spriteFrame";
             }
             else{
                 let itemData:Config.item_usable.Record = ValueMgr.getInstance().getItemByField(TableName.item_usable,this._itemID) as Config.item_usable.Record;        

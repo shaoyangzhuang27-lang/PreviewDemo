@@ -868,6 +868,13 @@ export class HeroData extends BaseHeroData {
         return heroStaticID;
     }
 
+    //根据英雄id获取起始星级
+    public static getInitialStarByID(heroid:number):number
+    {
+        let starNum:number = Number((heroid/1000000).toFixed())
+        return starNum
+    }
+
     private getHeroBookPropertyByHero(proType: Msg.THeroPropertyType) {
         if (this._gameModel != null) {
             return this._gameModel.getHeroBookPropertyByHero(proType);
