@@ -11,6 +11,7 @@ import { XShare } from '../../model/const/XShare';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('PopHeroEquipReplace')
@@ -67,7 +68,11 @@ export class PopHeroEquipReplace extends PopBase {
     @property({type :  ScrollView})
     public scroll_equip:ScrollView = null as unknown as ScrollView;
     
-    private _curheroId : number  = 0;  //当前装备的英雄ID
+    private _curHeroId : number  = 0;  //当前装备的英雄ID
+
+    private _replaceEquipId : number = 0;//当前要替换的装备ID
+
+    private _curEquipId : number = 0;//当前穿戴的装备ID
 
     private  TEquipLocationTypeIcon:string[] = new Array<string> ( "无", "英雄详情_装备图标1", "英雄详情_装备图标2", "英雄详情_装备图标3", "英雄详情_装备图标4");
 
@@ -77,28 +82,63 @@ export class PopHeroEquipReplace extends PopBase {
 
     start () {
         super.start();
-
-        // var name =  this.node_equip_drag.getChildByName("equip_name")?.getComponent(Label) as Label;
-        // name.string = "丛林兜帽"; 
-    
         this.btn_wear.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_drag.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
-
-        //初始化可替换装备列表
-        this._initEquipScrollview()
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_put_on_equip, this._notifyHeroAllLoadEquipHandle, this);
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_take_off_equip, this._notifyHeroAllUnLoadEquipHandle, this);
     }
+
+    onDestroy() {
+        super.onDestroy();
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_put_on_equip, this._notifyHeroAllLoadEquipHandle, this);
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_take_off_equip, this._notifyHeroAllUnLoadEquipHandle, this);
+    }
+
+    private _notifyHeroAllUnLoadEquipHandle(data: any = null) {
+        if (!data) {
+            return;
+        }
+        let msg = data as Msg.TakeOffEquipA;
+        if (msg.err == Msg.TErrorCode.ERR_OK) {
+            if (msg.heroID == this._curHeroId) {
+                this.delSelf();              
+            }
+        }
+        else {
+            console.log(msg.errStr + " errCode=" + msg.err.toString());
+            // TipsMgr.instance.ShowErrDialog(msg.Err);
+        }
+    }
+
+    private _notifyHeroAllLoadEquipHandle(data: any = null) {
+        if (!data) {
+            return;
+        }
+        
+        let msg = data as Msg.PutOnEquipA;
+        if (msg.err == Msg.TErrorCode.ERR_OK) {
+            if (msg.heroID == this._curHeroId) {
+                this.delSelf();
+            }
+        } else {
+            // TipsMgr.instance.ShowErrDialog(msg.Err);
+            console.log(msg.errStr + " errCode=" + msg.err.toString());
+        }
+
+    }
+
 
     private _onButtonClick(event:any){
 
         switch (event.target.getComponent(Button)) {
             case this.btn_drag:
                 console.log("equip_drag");
-      
+                MsgMgr.getInstance().getMsgFormation().requestHeroTakeOffEquip(this._curHeroId, [this._curEquipId]);
 
                 break;
             case this.btn_wear:
                 console.log("equip_wear");
-
+                MsgMgr.getInstance().getMsgFormation().requestHeroPutOnEquip(this._curHeroId, [this._replaceEquipId]);
                 break;        
         }
 
@@ -126,9 +166,9 @@ export class PopHeroEquipReplace extends PopBase {
                 let equip_item = instantiate( res );
                 this.scroll_equip.content?.addChild(equip_item);
                 let equipData = curlocationEquipData[i];
-                equip_item.setItemType(equipData.id,0,ItemEquipType.equip,(id:number,itemClickType:number,objClickType:number)=>{
-                    console.log(" 当前装备=>",id);
-                    
+                equip_item.getComponent(ItemEquipCell).setItemType(equipData.id,0,ItemEquipType.equip,(id:number,itemClickType:number,objClickType:number)=>{
+                    console.log(" 当前点击的背包装备ID=>",id);
+                    this._refreshReplaceEquip(id)
                 });
             }
         });
@@ -150,7 +190,7 @@ export class PopHeroEquipReplace extends PopBase {
             }
         });  
 
-        if(equipData.id !=0){
+        if(equipData && equipData.id !=0){
             this.node_equip_drag.active = true;
             this.node_equip_wear.setPosition(150,0);
             this._showCurEquip(equipData)
@@ -158,12 +198,14 @@ export class PopHeroEquipReplace extends PopBase {
             //无装备
             this.node_equip_drag.active = false;
             this.node_equip_wear.setPosition(0,0);
+            this.btn_wear.interactable = false;
         }
     }
 
 
     private _showCurEquip(equipData:Config.equip.Record){
 
+        this._curEquipId = equipData.id;
         //单个装备属性
         let propertyType:number = equipData.propertyType[0];
         let propertyNum:number = equipData.propertyNum[0];
@@ -180,8 +222,9 @@ export class PopHeroEquipReplace extends PopBase {
         var suitID = equipData.quality * 100 + equipData.star;
         if(suitID != 0)
         {
-            this.node_suit_drag.active = true;
             let suitEquipData = ValueMgr.getInstance().getItemByField(TableName.suit,suitID) as Config.suit.Record;
+            if(!suitEquipData) {return;}; //低级装备没有套装属性，通过suitID 获取不到套装属性
+            this.node_suit_drag.active = true;
             //suitEquipData.name
    
             var lab_suit_attribute1 : Label =  this.node_suit_drag.getChildByName("lab_suit_attribute1")?.getComponent(Label) as Label;
@@ -191,14 +234,14 @@ export class PopHeroEquipReplace extends PopBase {
             var attributeLabels: Label[] = [lab_suit_attribute1,lab_suit_attribute2,lab_suit_attribute3];
             
             for(var i=0;i < suitEquipData.propertyType.length;i++){
-                let uiLan = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.KPropertyName[propertyType]) as Config.language_ui.Record;
-                let propertyStr:string = uiLan.cn + " +" + suitEquipData.propertyNum.toString();
+                let uiLan = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.KPropertyName[suitEquipData.propertyType[i]]) as Config.language_ui.Record;
+                let propertyStr:string = " +" + Number(suitEquipData.propertyNum[i]).toFixed(2).toString() +"%"  +uiLan.cn;
                 attributeLabels[i].string = propertyStr;
                 attributeLabels[i].color = XConsts.KColorGray;
             }
 
             var suitName : Label =  this.node_suit_drag.getChildByName("lab_suit")?.getComponent(Label) as Label;
-            suitName.color = XConsts.KColorGolden
+            // suitName.color = XConsts.KColorGolden
 
             if(this._suitPropertyList){
                 this._suitPropertyList.forEach((value, key) => {
@@ -220,15 +263,88 @@ export class PopHeroEquipReplace extends PopBase {
         this.itemequip_cell_drag.setItemType(equipData.id,0,ItemEquipType.equip,(id:number,itemClickType:number,objClickType:number)=>{
             console.log(" 当前装备=>",id);
             // this._itemEqipCallBack(id,itemClickType,objClickType)
+
         });
 
 
     }
 
-    private _refreshReplaceEquip(){
+    private _refreshReplaceEquip(equipID: number){
+        //如果第二次点击同一个装备，默认脱下，不替换
+        this._replaceEquipId = this._replaceEquipId == equipID ? 0 : equipID;
 
-        
+        if(this._replaceEquipId == 0){
+            this.equip_name_wear.string = "";
+            this.lab_main_attribute_wear.string ="";
+            this.node_suit_wear.active = false;
+            this.btn_wear.interactable = false;
+            this.itemequip_cell_wear.node.active = false;
+        }
+        else{
 
+            let equipData:Config.equip.Record = ValueMgr.getInstance().getItemByField(TableName.equip,equipID) as Config.equip.Record;
+            if(!equipData) {return;}
+
+            this.node_suit_wear.active = true;
+            this.btn_wear.interactable = true;
+            this.itemequip_cell_wear.node.active = true;
+             //单个装备属性
+            let propertyType:number = equipData.propertyType[0];
+            let propertyNum:number = equipData.propertyNum[0];
+            let uiLan = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.KPropertyName[propertyType]) as Config.language_ui.Record;
+
+            let propertyStr:string = uiLan.cn + " +" + propertyNum.toString()
+            this.lab_main_attribute_wear.string = propertyStr
+            this.lab_main_attribute_wear.color = XConsts.KQualityColor[0];
+
+            let nameData = ValueMgr.getInstance().getItemByField(TableName.language_data,equipData.name) as Config.language_data.Record;
+            this.equip_name_wear.string = nameData.cn;
+            this.equip_name_wear.color = XConsts.KQualityColor[equipData.quality];
+            this.itemequip_cell_wear.setItemType(equipData.id,0,ItemEquipType.equip,null);
+            var suitID = equipData.quality * 100 + equipData.star;
+            if(suitID != 0)
+            {
+                let suitEquipData = ValueMgr.getInstance().getItemByField(TableName.suit,suitID) as Config.suit.Record;
+                if(!suitEquipData) {
+                    
+                    this.node_suit_wear.active = false;
+                    return;}; //低级装备没有套装属性，通过suitID 获取不到套装属性
+                this.node_suit_wear.active = true;
+                //suitEquipData.name
+                var lab_suit_attribute1 : Label =  this.node_suit_wear.getChildByName("lab_suit_attribute1")?.getComponent(Label) as Label;
+                var lab_suit_attribute2 : Label =  this.node_suit_wear.getChildByName("lab_suit_attribute2")?.getComponent(Label) as Label;
+                var lab_suit_attribute3 : Label =  this.node_suit_wear.getChildByName("lab_suit_attribute3")?.getComponent(Label) as Label;
+                
+                var attributeLabels: Label[] = [lab_suit_attribute1,lab_suit_attribute2,lab_suit_attribute3];
+                
+                for(var i=0;i < suitEquipData.propertyType.length;i++){
+                    let uiLan = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.KPropertyName[suitEquipData.propertyType[i]]) as Config.language_ui.Record;
+                    let propertyStr:string = " +" + Number(suitEquipData.propertyNum[i]).toFixed(2).toString() +"%"  +uiLan.cn;
+                    attributeLabels[i].string = propertyStr;
+                    attributeLabels[i].color = XConsts.KColorGray;
+                }
+
+                var suitName : Label =  this.node_suit_wear.getChildByName("lab_suit")?.getComponent(Label) as Label;
+                // suitName.color = XConsts.KColorGolden
+
+                if(this._suitPropertyList){
+                    this._suitPropertyList.forEach((value, key) => {
+                        if (key == suitID)
+                        {
+                            let record = ValueMgr.getInstance().getItemByField(TableName.suit, key) as Config.suit.Record;
+                            if (record != null) {
+                                suitName.string = suitEquipData.name +"(" + value +"/4)"  
+                                for (var j = 0; i <value - 1; i++) 
+                                {
+                                    attributeLabels[i].color = XConsts.KColorGreen;
+                                }    
+                            }
+                        }
+                    })
+                }
+            }
+     
+        }
     }
 
     /**
@@ -237,7 +353,7 @@ export class PopHeroEquipReplace extends PopBase {
      * @param {number} heroId 英雄id
      */
     public setEquipData(heroId: number, locationType:Msg.TEquipLocationType | 0){
-        this._curheroId = heroId;
+        this._curHeroId = heroId;
         let heroData = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(heroId);
         if(!heroData)   return
 
@@ -245,7 +361,10 @@ export class PopHeroEquipReplace extends PopBase {
         let equipOnList : Map<Msg.TEquipLocationType, Config.equip.Record> = heroData?.equipOnList as unknown as Map<Msg.TEquipLocationType, Config.equip.Record>;   
         if(!equipOnList) return
         let equipData :Config.equip.Record = equipOnList.get(locationType) as unknown as Config.equip.Record;
-        if(!equipData) return
+        //if(!equipData) return
+        this._locationType = locationType;
+        //初始化可替换装备列表
+        this._initEquipScrollview()
 
         //初始化装备显示
         this._initView(equipData,locationType)
