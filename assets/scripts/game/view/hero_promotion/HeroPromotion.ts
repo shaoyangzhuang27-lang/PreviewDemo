@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-22 17:52:17
+ * @LastEditTime: 2021-03-22 19:29:34
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -1264,13 +1264,13 @@ export class HeroPromotion extends PopBase {
     }
 
     private _showEquipCells() {
-        if (!this._curHeroData.equipOnList) {
+        if (!this._curHeroData.equipOnList || this._curHeroData.equipOnList.size ==0) {
             this._equipCellsMap.forEach((v, k, m) => {
                 v.node.active = false;
             });
 
         } else {
-            let equipOnList = this._curHeroData.equipOnList as unknown as Map<Msg.TEquipLocationType, Config.equip.Record>;
+            let equipOnList = this._curHeroData.equipOnList as unknown as Map<Msg.TEquipLocationType, Config.equip.Record>;           
             equipOnList.forEach((equipData, key, m) => {
                 // console.log("!!!!!!!!!!!!!!!! equipData=", equipData);
                 // console.log(" key=", key);
@@ -1304,6 +1304,7 @@ export class HeroPromotion extends PopBase {
                         console.log(" 显示装备具体界面 ");
                         PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), key);
                     });
+                    equipCell.node.active= true;
                 }
             });
         }
