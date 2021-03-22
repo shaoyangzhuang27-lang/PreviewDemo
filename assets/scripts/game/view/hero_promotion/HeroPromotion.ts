@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-22 16:21:36
+ * @LastEditTime: 2021-03-22 17:02:27
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -196,7 +196,8 @@ export class HeroPromotion extends PopBase {
     private _starXSub: number = 10; //星级图片X轴间隔
     private _isHeroUpView: boolean = true; //true标记当前是英雄升级/阶界面，false标记当前是英雄装备界面
     private _isLvUpView: boolean = true; //true标记当前是英雄升级界面，false标记当前是英雄升阶界面
-    private _equipNodeMap: Map<Msg.TEquipLocationType, ItemEquipCell> = new Map<Msg.TEquipLocationType, ItemEquipCell>();  //装备宝石列表
+    private _equipCellsMap: Map<Msg.TEquipLocationType, ItemEquipCell> = new Map<Msg.TEquipLocationType, ItemEquipCell>();  //装备宝石列表
+    private _equipBtnsMap: Map<Msg.TEquipLocationType, Node> = new Map<Msg.TEquipLocationType, Node>();  //装备宝石按钮列表
     
     static readonly _longPressTime = 0.5;//
 
@@ -204,6 +205,11 @@ export class HeroPromotion extends PopBase {
         super.onLoad();
         this._starNodeList = [this.img_star1, this.img_star2, this.img_star3, this.img_star4, this.img_star5];
         this._starsMiddlePos = this.img_star3.getPosition();
+        this._equipBtnsMap.set(1, this.btn_equip_1);
+        this._equipBtnsMap.set(2, this.btn_equip_2);
+        this._equipBtnsMap.set(3, this.btn_equip_3);
+        this._equipBtnsMap.set(4, this.btn_equip_4);
+        this._equipBtnsMap.set(5, this.btn_equip_5);
 
         this.btn_lock?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_unlock?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
@@ -223,7 +229,7 @@ export class HeroPromotion extends PopBase {
         this.btn_equip_5?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_up_lv?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_up_tier?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
-
+        
         // tabGroup
         const containerEventHandler = new EventHandler();
         containerEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
@@ -242,27 +248,34 @@ export class HeroPromotion extends PopBase {
         if (tog.node.name == "btn_tab_up") //升级tab
         {
             console.log(" btn_tab_up clicked!");
-            this._isHeroUpView = true;
-            this.node_equip.active = false; //装备界面
+            this._isHeroUpView = true;            
+            if(this._curHeroId){
+                this._showCurHeroView(this._curHeroId, false);
+            }
 
-            this.node_up.active = true;//升级升阶大界面            
-            this.node_fight_param.active = this._isLvUpView; //升级底部属性界面
-            this.btn_up_lv.active = this._isLvUpView;        //升级按钮
-            this.node_upgrade.active = !this._isLvUpView;    //升阶底部属性界面
-            this.btn_up_tier.active = !this._isLvUpView;     //升阶按钮
+            // this.node_equip.active = false; //装备界面
+
+            // this.node_up.active = true;//升级升阶大界面            
+            // this.node_fight_param.active = this._isLvUpView; //升级底部属性界面
+            // this.btn_up_lv.active = this._isLvUpView;        //升级按钮
+            // this.node_upgrade.active = !this._isLvUpView;    //升阶底部属性界面
+            // this.btn_up_tier.active = !this._isLvUpView;     //升阶按钮
 
         }
         else if (tog.node.name == "btn_tab_equip")//装备tab
         {
             console.log(" btn_tab_equip clicked!");
             this._isHeroUpView = false;
-            this.node_equip.active = true; //装备界面
+            if(this._curHeroId){
+                this._showCurHeroView(this._curHeroId, false);
+            }
+            // this.node_equip.active = true; //装备界面
 
-            this.node_up.active = false;//升级升阶大界面            
-            this.node_fight_param.active = this._isLvUpView; //升级底部属性界面
-            this.btn_up_lv.active = false;        //升级按钮
-            this.node_upgrade.active = !this._isLvUpView;    //升阶底部属性界面
-            this.btn_up_tier.active = false;     //升阶按钮
+            // this.node_up.active = false;//升级升阶大界面            
+            // this.node_fight_param.active = this._isLvUpView; //升级底部属性界面
+            // this.btn_up_lv.active = false;        //升级按钮
+            // this.node_upgrade.active = !this._isLvUpView;    //升阶底部属性界面
+            // this.btn_up_tier.active = false;     //升阶按钮            
         }
     }
 
@@ -353,7 +366,7 @@ export class HeroPromotion extends PopBase {
                             continue;
                         }
                         else {
-                            let itemEquipCell = this._equipNodeMap.get(i);
+                            let itemEquipCell = this._equipCellsMap.get(i);
                             if (!itemEquipCell || itemEquipCell.getItemId() == 0) {
                                 putonEquipIDList.push(bestEquipInBag.id);
                             }
@@ -377,7 +390,7 @@ export class HeroPromotion extends PopBase {
                 {
                     console.log("HeroPromotion btn_all_unload");
                     let takeoffEquipLocList: number[] = [];
-                    this._equipNodeMap.forEach((itemEquipCell, locType, m) => {
+                    this._equipCellsMap.forEach((itemEquipCell, locType, m) => {
                         if (itemEquipCell && itemEquipCell.getItemId() != 0) {
                             takeoffEquipLocList.push(locType);
                         }
@@ -1255,35 +1268,43 @@ export class HeroPromotion extends PopBase {
 
     private _showEquipCells() {
         if (!this._curHeroData.equipOnList) {
-            this._equipNodeMap.forEach((v, k, m) => {
+            this._equipCellsMap.forEach((v, k, m) => {
                 v.node.active = false;
             });
 
         } else {
             let equipOnList = this._curHeroData.equipOnList as unknown as Map<Msg.TEquipLocationType, Config.equip.Record>;
             equipOnList.forEach((equipData, key, m) => {
-                console.log("!!!!!!!!!!!!!!!! equipData=", equipData);
-                console.log(" key=", key);
-                console.log(" m=", m);
+                // console.log("!!!!!!!!!!!!!!!! equipData=", equipData);
+                // console.log(" key=", key);
+                // console.log(" m=", m);
 
-                let itemEquipCell = this._equipNodeMap.get(key);
+                let itemEquipCell = this._equipCellsMap.get(key);
                 if (!itemEquipCell) {
                     resources.load('prefabs_ui/main/itemequip_cell', (err: any, res: any) => {
-                        let equipCell = instantiate(res) as ItemEquipCell;
-                        equipCell.name = "equipCell_" + key.toString();
+
+                        let node = instantiate(res) as Node;
+                        let equip_btn_node = this._equipBtnsMap.get(key);
+                        if(equip_btn_node){
+                            equip_btn_node.addChild(node);
+                        }else{
+                            this.btn_equip_1.addChild(node);
+                        }                        
+                        node.name = "BagEquipCell_" + Number(key);
+                        let equipCell = node.getComponent("ItemEquipCell") as ItemEquipCell;
                         equipCell.setItemType(equipData.id, 0, ItemEquipType.equip, () => {
                             console.log(" 显示装备具体界面 ");
-                            PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId());
+                            PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), key);
                         });
 
-                        this._equipNodeMap.set(key, equipCell);
+                        this._equipCellsMap.set(key, equipCell);
                     })
                 }
                 else {
                     let equipCell = itemEquipCell as ItemEquipCell;
                     equipCell.setItemType(equipData.id, 0, ItemEquipType.equip, () => {
                         console.log(" 显示装备具体界面 ");
-                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), equipCell.getItemId());
+                        PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), key);
                     });
                 }
             });
