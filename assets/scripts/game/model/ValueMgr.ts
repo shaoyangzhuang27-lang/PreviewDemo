@@ -2,7 +2,7 @@
  * @Description: 表格管理器
  * @Author: xxxxxx
  * @Date: 2021-02-23 16:07:59
- * @LastEditTime: 2021-03-23 20:16:37
+ * @LastEditTime: 2021-03-23 20:31:29
  */
 
 import { ValueCore } from '../../core/control/ValueCore';
@@ -146,7 +146,7 @@ export class ValueMgr extends ValueCore {
             return strDefault;
         }        
         
-        let record = ValueMgr.getInstance().getItemByField(tablename, languageKey) as Config.language_data.Record;
+        let record = this.getItemByField(tablename, languageKey) as Config.language_data.Record;
         switch (this._languageType) {
             case TLanguageType.ELanguage_cn:
                 return record.cn;
