@@ -102,8 +102,8 @@ export class PopHeroEquipReplace extends PopBase {
         let msg = data as Msg.TakeOffEquipA;
         if (msg.err == Msg.TErrorCode.ERR_OK) {
             if (msg.heroID == this._curHeroId) {
-                
-                GameModel.getInstance().getBagModel().changeBagEquipNumber(msg.takeoffEquipLocList[0],1);
+                // 由于英雄升级界面HeroPromotion只是隐藏了，这边就不进行数据处理，统一由HeroPromotion处理
+                // GameModel.getInstance().getBagModel().changeBagEquipNumber(msg.takeoffEquipLocList[0],1);
                 this.delSelf();              
             }
         }
@@ -122,8 +122,8 @@ export class PopHeroEquipReplace extends PopBase {
         if (msg.err == Msg.TErrorCode.ERR_OK) {
             if (msg.heroID == this._curHeroId) {
                 //更新背包数据
-                GameModel.getInstance().getBagModel().changeBagEquipNumber(msg.takeoffEquipIDList[0],-1);
-                GameModel.getInstance().getBagModel().changeBagEquipNumber(msg.putonEquipIDList[0],1);
+                // GameModel.getInstance().getBagModel().changeBagEquipNumber(msg.takeoffEquipIDList[0],-1);
+                // GameModel.getInstance().getBagModel().changeBagEquipNumber(msg.putonEquipIDList[0],1);
                 this.delSelf();
             }
         } else {
@@ -270,7 +270,7 @@ export class PopHeroEquipReplace extends PopBase {
                 let uiLan = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.KPropertyName[suitEquipData.propertyType[i]]) as Config.language_ui.Record;
                 let propertyStr:string = " +" + Number(suitEquipData.propertyNum[i]).toFixed(2).toString() +"%"  +uiLan.cn;
                 attributeLabels[i].string = propertyStr;
-                attributeLabels[i].color = Color.GRAY;
+                attributeLabels[i].color = XConsts.KColorGray;//Color.GRAY;
             }
 
             var suitName : Label =  this.node_suit_drag.getChildByName("lab_suit")?.getComponent(Label) as Label;
@@ -289,7 +289,7 @@ export class PopHeroEquipReplace extends PopBase {
                             isNotSuit = false; 
                             for (var j = 0; j <value - 1; j++) 
                             {
-                                attributeLabels[j].color = Color.GREEN;
+                                attributeLabels[j].color = XConsts.KColorGreen;//Color.GREEN;
                             }   
                         }
                     }
@@ -355,7 +355,7 @@ export class PopHeroEquipReplace extends PopBase {
                     let uiLan = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.KPropertyName[suitEquipData.propertyType[i]]) as Config.language_ui.Record;
                     let propertyStr:string = " +" + Number(suitEquipData.propertyNum[i]).toFixed(2).toString() +"%"  +uiLan.cn;
                     attributeLabels[i].string = propertyStr;
-                    attributeLabels[i].color = Color.GRAY;
+                    attributeLabels[i].color = XConsts.KColorGray;//Color.GRAY;
                 }
 
                 var suitName : Label =  this.node_suit_wear.getChildByName("lab_suit")?.getComponent(Label) as Label;
@@ -374,7 +374,7 @@ export class PopHeroEquipReplace extends PopBase {
                                 isNotSuit = false; 
                                 for (var j = 0; j <value - 1; j++) 
                                 {
-                                    attributeLabels[j].color = Color.GREEN;
+                                    attributeLabels[j].color = XConsts.KColorGreen;//Color.GREEN;
                                 }    
                             }
                         }

@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-23 11:15:58
+ * @LastEditTime: 2021-03-23 15:45:19
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -359,18 +359,19 @@ export class HeroPromotion extends PopBase {
                 {
                     console.log("HeroPromotion btn_all_load");
                     let putonEquipIDList: number[] = [];
-                    for (let i = Msg.TEquipLocationType.EEquipLocationType_NULL; i < Msg.TEquipLocationType.EEquipLocationType_Trinket; i++) {
+                    for (let i = Msg.TEquipLocationType.EEquipLocationType_Weapon; i <= Msg.TEquipLocationType.EEquipLocationType_Trinket; i++) {
                         let bestEquipInBag = GameModel.getInstance().getBagModel().getBestEquipInBag(i);
                         if (bestEquipInBag == null) {
                             continue;
                         }
                         else {
-                            let itemEquipCell = this._equipCellsMap.get(i);
-                            if (!itemEquipCell || itemEquipCell.getItemId() == 0) {
+
+                            if (!this._curHeroData.equipOnList.has(i)) {
                                 putonEquipIDList.push(bestEquipInBag.id);
                             }
                             else {
-                                let record = ValueMgr.getInstance().getItemByField(TableName.equip, itemEquipCell.getItemId());
+                                let equipRecord = this._curHeroData.equipOnList.get(i) as Config.equip.Record;
+                                let record = ValueMgr.getInstance().getItemByField(TableName.equip, equipRecord.id);
                                 if (record) {
                                     let curEquipRecord = record as Config.equip.Record;
                                     if (bestEquipInBag.quality > curEquipRecord.quality ||
@@ -644,7 +645,7 @@ export class HeroPromotion extends PopBase {
                         let equipData = equipTmp as Config.equip.Record;
                         if (equipData && this._curHeroData.equipOnList.get(equipData.locationType)) {
                             this._curHeroData.equipOnList.delete(equipData.locationType);
-                            GameModel.getInstance().getBagModel().addEquipBag(equipData.id, 1);
+                            GameModel.getInstance().getBagModel().changeBagEquipNumber(equipData.id, 1);
                         }
                     }
                 }
@@ -713,7 +714,7 @@ export class HeroPromotion extends PopBase {
                         let equipData = equipTmp as Config.equip.Record;
                         if (equipData && this._curHeroData.equipOnList.get(equipData.locationType)) {
                             this._curHeroData.equipOnList.delete(equipData.locationType);
-                            GameModel.getInstance().getBagModel().addEquipBag(equipData.id, 1);
+                            GameModel.getInstance().getBagModel().changeBagEquipNumber(equipData.id, 1);
                         }
                     }
                 }
@@ -725,13 +726,10 @@ export class HeroPromotion extends PopBase {
                         let equipData = equipTmp as Config.equip.Record;
                         if (equipData) {
                             this._curHeroData.equipOnList.set(equipData.locationType, equipData);
-                            GameModel.getInstance().getBagModel().subEquipBag(equipData.id, 1);
+                            GameModel.getInstance().getBagModel().changeBagEquipNumber(equipData.id, -1);
                         }
                     }
                 }
-
-
-
                 // let heroData = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID( this._curHeroData.getDyncID() ) as HeroData;
                 // console.log(" this._curHeroData.equipOnList=",this._curHeroData.equipOnList.size)
                 // console.log(" heroData.equipOnList=",heroData?.equipOnList.size)
