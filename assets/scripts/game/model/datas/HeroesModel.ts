@@ -226,7 +226,7 @@ export class HeroesModel extends BaseModel{
     /////////////////////////////////////////////////////
     private _heroBookLevel = 0;
     private _heroBookPoint = 0;
-    private refreshHeroBookProperty() { //刷新英雄图鉴提供的属性
+    public refreshHeroBookProperty() { //刷新英雄图鉴提供的属性
         if (this._heroBookPropertyByHero == null)
         this._heroBookPropertyByHero = new Map<Msg.THeroPropertyType, number>();
         this._heroBookPropertyByHero.clear();
@@ -281,6 +281,18 @@ export class HeroesModel extends BaseModel{
             return this._heroBookPropertyByHero.get(proType) as number;
         }
         return 0;
+    }
+
+    //获取当前图鉴所有英雄等级
+    public getCurHeroBookPoint()
+    {
+        return this._heroBookPoint;
+    }
+
+    //获取当前图鉴等级
+    public getCurHeroBookLevel()
+    {
+        return this._heroBookLevel;
     }
     
     //图鉴等级提供的属性
