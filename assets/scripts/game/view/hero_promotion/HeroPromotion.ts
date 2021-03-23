@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-23 10:27:28
+ * @LastEditTime: 2021-03-23 11:15:58
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -640,7 +640,7 @@ export class HeroPromotion extends PopBase {
                 //换下装备
                 for (let i: number = 0; i < msg.takeoffEquipLocList.length; i++) {
                     let equipTmp = ValueMgr.getInstance().getItemByField(TableName.equip, msg.takeoffEquipLocList[i]);
-                    if (!equipTmp) {
+                    if (equipTmp) {
                         let equipData = equipTmp as Config.equip.Record;
                         if (equipData && this._curHeroData.equipOnList.get(equipData.locationType)) {
                             this._curHeroData.equipOnList.delete(equipData.locationType);
@@ -729,7 +729,9 @@ export class HeroPromotion extends PopBase {
                         }
                     }
                 }
-                
+
+
+
                 // let heroData = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID( this._curHeroData.getDyncID() ) as HeroData;
                 // console.log(" this._curHeroData.equipOnList=",this._curHeroData.equipOnList.size)
                 // console.log(" heroData.equipOnList=",heroData?.equipOnList.size)
@@ -1267,50 +1269,49 @@ export class HeroPromotion extends PopBase {
     }
 
     private _showEquipCells() {
-        if (!this._curHeroData.equipOnList || this._curHeroData.equipOnList.size ==0) {
-            this._equipCellsMap.forEach((v, k, m) => {
-                v.node.active = false;
-            });
 
-        } else {
-            let equipOnList = this._curHeroData.equipOnList as unknown as Map<Msg.TEquipLocationType, Config.equip.Record>;           
-            equipOnList.forEach((equipData, key, m) => {
-                // console.log("!!!!!!!!!!!!!!!! equipData=", equipData);
-                // console.log(" key=", key);
-                // console.log(" m=", m);
+        this._equipCellsMap.forEach((v, k, m) => {
+            v.node.active = false;
+        });
 
-                let itemEquipCell = this._equipCellsMap.get(key);
-                if (!itemEquipCell) {
-                    resources.load('prefabs_ui/main/itemequip_cell', (err: any, res: any) => {
+        let equipOnList = this._curHeroData.equipOnList as unknown as Map<Msg.TEquipLocationType, Config.equip.Record>;
+        equipOnList.forEach((equipData, key, m) => {
+            // console.log("!!!!!!!!!!!!!!!! equipData=", equipData);
+            // console.log(" key=", key);
+            // console.log(" m=", m);
 
-                        let node = instantiate(res) as Node;
-                        let equip_btn_node = this._equipBtnsMap.get(key);
-                        if (equip_btn_node) {
-                            equip_btn_node.addChild(node);
-                        } else {
-                            this.btn_equip_1.addChild(node);
-                        }
-                        node.name = "BagEquipCell_" + Number(key);
-                        node.setScale(new Vec3(0.8, 0.8, 1));
-                        let equipCell = node.getComponent("ItemEquipCell") as ItemEquipCell;
-                        equipCell.setItemType(equipData.id, 0, ItemEquipType.equip, () => {
-                            console.log(" 显示装备具体界面 ");
-                            PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), key);
-                        });
+            let itemEquipCell = this._equipCellsMap.get(key);
+            if (!itemEquipCell) {
+                resources.load('prefabs_ui/main/itemequip_cell', (err: any, res: any) => {
 
-                        this._equipCellsMap.set(key, equipCell);
-                    })
-                }
-                else {
-                    let equipCell = itemEquipCell as ItemEquipCell;
+                    let node = instantiate(res) as Node;
+                    let equip_btn_node = this._equipBtnsMap.get(key);
+                    if (equip_btn_node) {
+                        equip_btn_node.addChild(node);
+                    } else {
+                        this.btn_equip_1.addChild(node);
+                    }
+                    node.name = "BagEquipCell_" + Number(key);
+                    node.setScale(new Vec3(0.8, 0.8, 1));
+                    let equipCell = node.getComponent("ItemEquipCell") as ItemEquipCell;
                     equipCell.setItemType(equipData.id, 0, ItemEquipType.equip, () => {
                         console.log(" 显示装备具体界面 ");
                         PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), key);
                     });
-                    equipCell.node.active= true;
-                }
-            });
-        }
+
+                    this._equipCellsMap.set(key, equipCell);
+                })
+            }
+            else {
+                let equipCell = itemEquipCell as ItemEquipCell;
+                equipCell.setItemType(equipData.id, 0, ItemEquipType.equip, () => {
+                    console.log(" 显示装备具体界面 ");
+                    PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), key);
+                });
+                equipCell.node.active = true;
+            }
+        });
+
     }
 
     // 展示当前英雄模型形象
