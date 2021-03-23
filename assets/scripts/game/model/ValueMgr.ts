@@ -2,7 +2,7 @@
  * @Description: 表格管理器
  * @Author: xxxxxx
  * @Date: 2021-02-23 16:07:59
- * @LastEditTime: 2021-03-23 20:31:29
+ * @LastEditTime: 2021-03-23 20:35:36
  */
 
 import { ValueCore } from '../../core/control/ValueCore';
@@ -33,7 +33,7 @@ export class ValueMgr extends ValueCore {
     }
 
     private _bInit: boolean = false;
-    private _languageType:TLanguageType =TLanguageType.ELanguage_cn;
+    private _languageType:TLanguageType =TLanguageType.ELanguage_cn; //默认语言类型为中文
     private dataMap: Map<string, Map<number | string, {}>> = new Map<string, Map<number | string, {}>>();
 
     public setInit(b: boolean) {
@@ -43,7 +43,10 @@ export class ValueMgr extends ValueCore {
     public isInit(): boolean {
         return this._bInit;
     }
-
+    /**
+     * @description: 设置表格语言类型
+     * @param {TLanguageType} type
+     */
     public setLanguageType(type:TLanguageType){
         this._languageType = type;
     }
@@ -125,15 +128,15 @@ export class ValueMgr extends ValueCore {
     }
 
     /**
-     * @description: 获取语言表对应文字
-     * @param {string} languageKey
-     * @param {TLanguageType} type
+     * @description: 根据languageKey的前缀获取对应表的文字，默认都是返回中文cn
+     * @param {string} strLanguageKey  语言表格key
+     * @param {string} strDefault 默认值
      */
-    public getLanguageString(languageKey: string, strDefault:string ="") {
+    public getLanguageString(strLanguageKey: string, strDefault:string ="") {
         let tablename: TableName= TableName.language_data;
 
-        //languageKey前缀判断属于哪个静态表
-        let strKeytype = languageKey.substring(0, languageKey.indexOf("_"));
+        // strLanguageKey 前缀判断属于哪个静态表
+        let strKeytype = strLanguageKey.substring(0, strLanguageKey.indexOf("_"));
         if (strKeytype == XConsts.KLanguegeTypeUI) {
             tablename = TableName.language_ui;
         } else if (strKeytype == XConsts.KLanguegeTypeError) {
@@ -146,7 +149,7 @@ export class ValueMgr extends ValueCore {
             return strDefault;
         }        
         
-        let record = this.getItemByField(tablename, languageKey) as Config.language_data.Record;
+        let record = this.getItemByField(tablename, strLanguageKey) as Config.language_data.Record;
         switch (this._languageType) {
             case TLanguageType.ELanguage_cn:
                 return record.cn;
