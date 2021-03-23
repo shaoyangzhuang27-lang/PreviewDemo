@@ -149,6 +149,7 @@ export class MsgFormation extends MsgBase{
 
             let heroStaticID = HeroData.getHeroStaticIdByBookId(msgData.hbu.heroBookId)
             PopMgr.getInstance().popBookHeroActiveView(heroStaticID)
+            GameModel.getInstance().getHeroesModel().refreshHeroBookProperty()
             //抛通知  界面数据变化
             NotifyMgr.getInstance().notify(NotifyMgr.event_hero_book_active,bookHeroData);
         } 
@@ -174,9 +175,10 @@ export class MsgFormation extends MsgBase{
             bookHeroList.set(bookHeroData.heroBookId,bookHeroData);
             let value = bookHeroList.get(msgData.hbu.heroBookId);
 
-            let heroStaticID = HeroData.getHeroStaticIdByBookId(msgData.hbu.heroBookId)
+            GameModel.getInstance().getHeroesModel().refreshHeroBookProperty()
             //抛通知  界面数据变化
             NotifyMgr.getInstance().notify(NotifyMgr.event_hero_book_upgrade,bookHeroData);
+            
         }
     }
 
