@@ -53,7 +53,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": false,
-        "imageUuidOrDatabaseUri": "db://assets/resources/model/map/folder/dimian.tga"
+        "imageUuidOrDatabaseUri": "db://assets/resources/model/map/idle/dimian.tga"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -99,7 +99,7 @@
     "imageMetas": [
       {
         "name": "Map #16",
-        "remap": "db://assets/resources/model/map/folder/dimian.tga",
+        "remap": "db://assets/resources/model/map/idle/dimian.tga",
         "uri": "5bbb1a7b-60d9-442d-9009-a6418cc35387@33728"
       }
     ],
