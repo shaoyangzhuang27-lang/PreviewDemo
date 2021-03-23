@@ -29,6 +29,7 @@ import { PopBookHeroDetail } from '../view/pop/PopBookHeroDetail';
 import { PopHeroStoryUI } from '../view/pop/PopHeroStoryUI';
 import { PopForge } from '../view/pop/PopForge';
 import { PopBookProUI } from '../view/pop/PopBookProUI';
+import { TipCampOrCareer } from '../view/TipCampOrCareer';
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -247,6 +248,24 @@ export class PopMgr extends PopCore  {
         });
     }
 
+    /**
+     * @description: 英雄阵营克制或者职业说明弹窗tip
+     * @param {Vec3} pos
+     * @param {number} career
+     * @param {number} camp
+     */
+    public tipCampOrCareerWindow(pos:Vec3, career:number, camp:number =0){
+        resources.load('prefabs_ui/pop/tip_camp_or_career', (err:any,res:any)=>{
+            let p = instantiate( res ) as Node;
+            this.parent?.addChild(p);
+            p.setSiblingIndex(XConsts.OrderTip);
+
+            let script = p.getComponent("TipCampOrCareer") as TipCampOrCareer;
+            script.setWinPos(pos, 1);
+            script.setData(career, camp);
+            script.setIsWinClose(true);
+        });
+    }
 
     //弹出提示窗放这里-------------------------------------------------
 
