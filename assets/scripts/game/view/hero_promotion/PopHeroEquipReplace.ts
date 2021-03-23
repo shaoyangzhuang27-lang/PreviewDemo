@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node ,Label,resources,Vec3,Sprite, SpriteFrame, Button, instantiate,ScrollView} from 'cc';
+import { _decorator, Component, Node ,Label,resources,Color,Sprite, SpriteFrame, Button, instantiate,ScrollView} from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
 import { HeroData } from '../../model/datas/HeroData';
@@ -76,8 +76,9 @@ export class PopHeroEquipReplace extends PopBase {
 
     private  TEquipLocationTypeIcon:string[] = new Array<string> ( "无", "英雄详情_装备图标1", "英雄详情_装备图标2", "英雄详情_装备图标3", "英雄详情_装备图标4");
 
-    private _suitPropertyList: Map<Msg.THeroPropertyType, number> = new Map<Msg.THeroPropertyType, number>();      //套装属性
+    // private _suitPropertyList: Map<Msg.THeroPropertyType, number> = new Map<Msg.THeroPropertyType, number>();      //套装属性
 
+    private _suitIdList :Map<number,number> = new Map<number,number>();
     private _locationType :Msg.TEquipLocationType = 0;
 
     start () {
@@ -269,24 +270,32 @@ export class PopHeroEquipReplace extends PopBase {
                 let uiLan = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.KPropertyName[suitEquipData.propertyType[i]]) as Config.language_ui.Record;
                 let propertyStr:string = " +" + Number(suitEquipData.propertyNum[i]).toFixed(2).toString() +"%"  +uiLan.cn;
                 attributeLabels[i].string = propertyStr;
-                attributeLabels[i].color = XConsts.KColorGray;
+                attributeLabels[i].color = Color.GRAY;
             }
 
             var suitName : Label =  this.node_suit_drag.getChildByName("lab_suit")?.getComponent(Label) as Label;
             // suitName.color = XConsts.KColorGolden
 
-            if(this._suitPropertyList){
-                this._suitPropertyList.forEach((value, key) => {
+            if(this._suitIdList){
+                var isNotSuit = true;
+                this._suitIdList.forEach((value, key) => {
+                    let nameData = ValueMgr.getInstance().getItemByField(TableName.language_data,suitEquipData.name) as Config.language_data.Record;
                     if (key == suitID)
                     {
                         let record = ValueMgr.getInstance().getItemByField(TableName.suit, key) as Config.suit.Record;
                         if (record != null) {
-                            suitName.string = suitEquipData.name +"(" + value +"/4)"  
-                            for (var j = 0; i <value - 1; i++) 
+                            value = value == 1 ? 0: value;
+                            suitName.string = nameData.cn +"(" + value +"/4)" 
+                            isNotSuit = false; 
+                            for (var j = 0; j <value - 1; j++) 
                             {
-                                attributeLabels[i].color = XConsts.KColorGreen;
-                            }    
+                                attributeLabels[j].color = Color.GREEN;
+                            }   
                         }
+                    }
+
+                    if(isNotSuit){
+                        suitName.string = nameData.cn +"(" + 0 +"/4)" 
                     }
                 })
             }
@@ -346,24 +355,31 @@ export class PopHeroEquipReplace extends PopBase {
                     let uiLan = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.KPropertyName[suitEquipData.propertyType[i]]) as Config.language_ui.Record;
                     let propertyStr:string = " +" + Number(suitEquipData.propertyNum[i]).toFixed(2).toString() +"%"  +uiLan.cn;
                     attributeLabels[i].string = propertyStr;
-                    attributeLabels[i].color = XConsts.KColorGray;
+                    attributeLabels[i].color = Color.GRAY;
                 }
 
                 var suitName : Label =  this.node_suit_wear.getChildByName("lab_suit")?.getComponent(Label) as Label;
                 // suitName.color = XConsts.KColorGolden
 
-                if(this._suitPropertyList){
-                    this._suitPropertyList.forEach((value, key) => {
+                if(this._suitIdList){
+                    var isNotSuit = true;
+                    this._suitIdList.forEach((value, key) => {
+                        let nameData = ValueMgr.getInstance().getItemByField(TableName.language_data,suitEquipData.name) as Config.language_data.Record;
                         if (key == suitID)
                         {
                             let record = ValueMgr.getInstance().getItemByField(TableName.suit, key) as Config.suit.Record;
                             if (record != null) {
-                                suitName.string = suitEquipData.name +"(" + value +"/4)"  
-                                for (var j = 0; i <value - 1; i++) 
+                                value = value == 1 ? 0: value;
+                                suitName.string = nameData.cn +"(" + value +"/4)" 
+                                isNotSuit = false; 
+                                for (var j = 0; j <value - 1; j++) 
                                 {
-                                    attributeLabels[i].color = XConsts.KColorGreen;
+                                    attributeLabels[j].color = Color.GREEN;
                                 }    
                             }
+                        }
+                        if(isNotSuit){
+                            suitName.string = nameData.cn +"(" + 0 +"/4)" 
                         }
                     })
                 }
@@ -382,11 +398,24 @@ export class PopHeroEquipReplace extends PopBase {
         let heroData = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(heroId);
         if(!heroData)   return
 
-        this._suitPropertyList =  heroData.getSuitPropertyList() as unknown as Map<Msg.THeroPropertyType, number>;
+        // this._suitPropertyList =  heroData.getSuitPropertyList() as unknown as Map<Msg.THeroPropertyType, number>;
         let equipOnList : Map<Msg.TEquipLocationType, Config.equip.Record> = heroData?.equipOnList as unknown as Map<Msg.TEquipLocationType, Config.equip.Record>;   
         if(!equipOnList) return
+        this._suitIdList.clear();
+        equipOnList.forEach((Record,key) => {
+            if(Record) {
+                var suitId = Record.quality * 100 + Record.star;
+                if(this._suitIdList.has(suitId)){
+                    var count = this._suitIdList.get(suitId) as number;
+                    this._suitIdList.set(suitId,count +1);
+                }
+                else{
+                    this._suitIdList.set(suitId,1);
+                }
+            }
+        });
+
         let equipData :Config.equip.Record = equipOnList.get(locationType) as unknown as Config.equip.Record;
-        //if(!equipData) return
         this._locationType = locationType;
         //初始化可替换装备列表
         this._initEquipScrollview()
