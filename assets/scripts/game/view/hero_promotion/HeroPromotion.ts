@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-22 19:29:34
+ * @LastEditTime: 2021-03-23 10:27:28
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -720,7 +720,7 @@ export class HeroPromotion extends PopBase {
 
                 //换上装备
                 for (let i: number = 0; i < msg.putonEquipIDList.length; i++) {
-                    let equipTmp = ValueMgr.getInstance().getItemByField(TableName.equip, msg.takeoffEquipIDList[i]);
+                    let equipTmp = ValueMgr.getInstance().getItemByField(TableName.equip, msg.putonEquipIDList[i]);
                     if (equipTmp) {
                         let equipData = equipTmp as Config.equip.Record;
                         if (equipData) {
@@ -729,7 +729,10 @@ export class HeroPromotion extends PopBase {
                         }
                     }
                 }
-
+                
+                // let heroData = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID( this._curHeroData.getDyncID() ) as HeroData;
+                // console.log(" this._curHeroData.equipOnList=",this._curHeroData.equipOnList.size)
+                // console.log(" heroData.equipOnList=",heroData?.equipOnList.size)
                 //刷新套装属性
                 this._curHeroData.refreshEquipProperty();
 
