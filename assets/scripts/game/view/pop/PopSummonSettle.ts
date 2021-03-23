@@ -328,7 +328,8 @@ export class PopSummonSettle extends PopBase {
 
     onDestroy(){
         // this.node.emit("OpenPubNotify");
-        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this); 
+        //NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this); 
+        this.removeNotifyPubHeroDecomposeHandler();
     }
 
     
@@ -341,6 +342,7 @@ export class PopSummonSettle extends PopBase {
     public removeNotifyPubHeroDecomposeHandler()
     {
         console.log("decompose关闭");
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this); 
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_hero_decompose,this.notifyPubHeroDecomposeHandle,this);
     }
 
