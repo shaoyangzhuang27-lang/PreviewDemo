@@ -73,7 +73,7 @@ export class BagItemModel extends BaseModel{
             }  
             let value = msg.fragmentList[key];
 
-            if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentRandom)
+            if(value?.fragmentType == Msg.TFragmentType.EFragmentType_Random)
             {
                 //star 星级
                 //随机英雄 
@@ -86,7 +86,7 @@ export class BagItemModel extends BaseModel{
                 // info.quality = "ui/icon/" + XConsts.KFragmentQualitySpriteName[0] + "/spriteFrame";
                
             }
-            else if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentCampRandom)
+            else if(value?.fragmentType == Msg.TFragmentType.EFragmentType_CampRandom)
             {
                 //param 阵营  star 星级
                 //阵营英雄
@@ -97,7 +97,7 @@ export class BagItemModel extends BaseModel{
                 info.curNum = value.num ? value.num : 0;
                 info.campName = XConsts.KCampName[value.param ? value.param : 1];
             }
-            else if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentClassesRandom)
+            else if(value?.fragmentType == Msg.TFragmentType.EFragmentType_ClassesRandom)
             {
                 //param 职业   star 星级
                 //传奇英雄
@@ -111,7 +111,7 @@ export class BagItemModel extends BaseModel{
                 info.classesName = XConsts.KFragmentClassesName[2];
                 info.bg = "ui/common/icon/" + XConsts.KFragmentBgSpriteName[1] + "/spriteFrame";
             }
-            else if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentHero)
+            else if(value?.fragmentType == Msg.TFragmentType.EFragmentType_Hero)
             {
                 //param 英雄静态ID 
                 //指定英雄
@@ -531,25 +531,25 @@ export class BagItemModel extends BaseModel{
     //     let test: Map<number | string,XStruct.test_info.IRecord> = new Map<number,XStruct.test_info.IRecord>();
 
     //     var testInfo : XStruct.test_info.Record ={
-    //         fragmentType : XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentRandom,
+    //         fragmentType : Msg.TFragmentType.EFragmentType_Random,
     //         param : 1,
     //         star : 4,
     //         num : 10,
     //     }
     //     test.set(1,instantiate(testInfo));
-    //     testInfo.fragmentType = XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentCampRandom;
+    //     testInfo.fragmentType = Msg.TFragmentType.EFragmentType_CampRandom;
     //     testInfo.param = 2,
     //     testInfo.star = 5,
     //     testInfo.num = 166,
     //     test.set(2,instantiate(testInfo));
 
-    //     testInfo.fragmentType = XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentClassesRandom;
+    //     testInfo.fragmentType = Msg.TFragmentType.EFragmentType_ClassesRandom;
     //     testInfo.param = 2,
     //     testInfo.star = 5,
     //     testInfo.num = 99,
     //     test.set(3,instantiate(testInfo));
 
-    //     testInfo.fragmentType = XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentHero;
+    //     testInfo.fragmentType = Msg.TFragmentType.EFragmentType_Hero;
     //     testInfo.param = 5051401,
     //     testInfo.star = 5,
     //     testInfo.num = 150,
@@ -573,7 +573,7 @@ export class BagItemModel extends BaseModel{
     //         }  
     //         let value = test.get(key);
 
-    //         if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentRandom)
+    //         if(value?.fragmentType == Msg.TFragmentType.EFragmentType_Random)
     //         {
     //             //star 星级
     //             //随机英雄 
@@ -586,7 +586,7 @@ export class BagItemModel extends BaseModel{
     //             // info.quality = "ui/icon/" + XConsts.KFragmentQualitySpriteName[0] + "/spriteFrame";
                
     //         }
-    //         else if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentCampRandom)
+    //         else if(value?.fragmentType == Msg.TFragmentType.EFragmentType_CampRandom)
     //         {
     //             //param 阵营  star 星级
     //             //阵营英雄
@@ -597,7 +597,7 @@ export class BagItemModel extends BaseModel{
     //             info.curNum = value.num ? value.num : 0;
     //             info.campName = XConsts.KCampName[value.param ? value.param : 1];
     //         }
-    //         else if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentClassesRandom)
+    //         else if(value?.fragmentType == Msg.TFragmentType.EFragmentType_ClassesRandom)
     //         {
     //             //param 职业   star 星级
     //             //传奇英雄
@@ -611,7 +611,7 @@ export class BagItemModel extends BaseModel{
     //             info.classesName = XConsts.KFragmentClassesName[2];
     //             info.bg = "ui/common/icon/" + XConsts.KFragmentBgSpriteName[1] + "/spriteFrame";
     //         }
-    //         else if(value?.fragmentType == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentHero)
+    //         else if(value?.fragmentType == Msg.TFragmentType.EFragmentType_Hero)
     //         {
     //             //param 英雄静态ID 
     //             //指定英雄

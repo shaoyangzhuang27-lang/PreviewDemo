@@ -1,4 +1,4 @@
-import { _decorator, Component, Node,Label,ScrollView,resources,instantiate, Vec3, Size,Sprite,UITransform,Button,SpriteFrame, Layout, Color } from 'cc';
+import { _decorator, Component, Node,Label,ScrollView,resources,instantiate, Vec3, Size,Sprite,UITransform,Button,SpriteFrame, Layout, Color, Game } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
@@ -67,6 +67,8 @@ export class PopSummonSettle extends PopBase {
 
     private _arrDecomposeHeroId : Array<number> = [];
 
+    private _arrStarPos : Array<Vec3> = [];
+
 
 
     start () {
@@ -75,7 +77,7 @@ export class PopSummonSettle extends PopBase {
         this.lab_title.string = settleTitle.cn;
         this.btn_summon.node.on(Node.EventType.TOUCH_END, this._onBtnSummonClick, this);
         this.btn_sure.on(Node.EventType.TOUCH_END, this._onBtnSureClick, this);
-
+        this._initStarPos();
         this.initUI();
 
         if(this._popWindowType ==XConsts.POP_SUMMON_TYPE.HeroPub)
@@ -94,12 +96,18 @@ export class PopSummonSettle extends PopBase {
     {
         if(GameModel.getInstance().getHeroPubModel().getIsAutoDecompose())
         {
+            this._arrDecomposeHeroId = GameModel.getInstance().getHeroesModel().getAutoDecomposeHeroDyncIDList(XConsts.AUTODECOMPOSE_MAX_STARS);
             if(this._arrDecomposeHeroId.length > 0)
             {
+                console.log("decompose id",this._arrDecomposeHeroId);
                 let msg : Msg.HeroDecomposeR  = new Msg.HeroDecomposeR();
                 msg.heroIDList = Array.from(this._arrDecomposeHeroId);
                 // MainClient.instance.RequestMessage (Msg.MsgType.TheHeroDecomposeR, msg, Msg.MsgType.TheHeroDecomposeA, OnRecvHeroDecompose);
                 MsgMgr.getInstance().getMsgHeroPub().requestHeroDecomposeR(msg);
+            }
+            else
+            {
+                PopMgr.getInstance().deleteWindow();
             }
         }
         else
@@ -230,9 +238,18 @@ export class PopSummonSettle extends PopBase {
 
     }
 
+    private _initStarPos()
+    {
+        for (let index = 0; index < this.starlist.length; index++) {
+            var pos =  this.starlist[index].getPosition();
+            this._arrStarPos.push(instantiate(pos));
+        }
+    }
+
     private _setStar(star:number)
     {
         for (let index = 0; index < this.starlist.length; index++) {
+            this.starlist[index].setPosition(this._arrStarPos[index]);
             if(index > star-1)
             {
                 this.starlist[index].active = false;
@@ -294,16 +311,17 @@ export class PopSummonSettle extends PopBase {
        
         GameModel.getInstance().getHeroesModel().updateHeroListFromSummon(this._HeroList);
 
-        this._HeroList.forEach((heroInfo)=>{
-            if(heroInfo.staticID && heroInfo.id)
-            {
-                let hero = ValueMgr.getInstance().getItemByField(TableName.heroes, heroInfo.staticID) as Config.heroes.Record;
-                if(hero.star < XConsts.AUTODECOMPOSE_MAX_STARS)
-                {
-                    this._arrDecomposeHeroId.push(heroInfo.id);
-                }
-            }
-        })
+
+        // this._HeroList.forEach((heroInfo)=>{
+        //     if(heroInfo.staticID && heroInfo.id)
+        //     {
+        //         let hero = ValueMgr.getInstance().getItemByField(TableName.heroes, heroInfo.staticID) as Config.heroes.Record;
+        //         if(hero.star < XConsts.AUTODECOMPOSE_MAX_STARS)
+        //         {
+        //             this._arrDecomposeHeroId.push(heroInfo.id);
+        //         }
+        //     }
+        // })
       
         
     }
@@ -329,6 +347,43 @@ export class PopSummonSettle extends PopBase {
 
     public notifyPubHeroDecomposeHandle(msgData: Msg.HeroDecomposeA)
     {
-        console.log("dddddddddecompose",msgData);
+        console.log("dddddddddecompose 111",msgData);
+
+        if (msgData.err == Msg.TErrorCode.ERR_OK) {
+            msgData.heroIDList.forEach((id)=>{
+                GameModel.getInstance().getHeroesModel().removeHeroByHeroDyncID(id);
+            })
+            let arrProp: Array<XStruct.prop_info.Record> = [];
+            let stuProp : XStruct.prop_info.Record = {
+                nType : 0,
+                nPropId : 0,
+                nLevel : 0,
+                nPropQuality : 0,
+                num : 0,
+            }
+            if(msgData.advanceExp)
+            {
+                stuProp.nType = Msg.TObjectType.EObject_Exp;
+                stuProp.num = msgData.advanceExp;
+                arrProp.push(instantiate(stuProp));    
+            }
+
+            if(msgData.soulStone)
+            {
+                stuProp.nType = Msg.TObjectType.EObject_SoulStone;
+                stuProp.num = msgData.soulStone;
+                arrProp.push(instantiate(stuProp));    
+            }
+
+            if(msgData.money)
+            {
+                stuProp.nType = Msg.TObjectType.EObject_Money;
+                stuProp.num = msgData.money;
+                arrProp.push(instantiate(stuProp));    
+            }  
+            PopMgr.getInstance().deleteWindow();
+            PopMgr.getInstance().popMultiItemRewardWindow(arrProp);         
+        }
+       
     }
 }

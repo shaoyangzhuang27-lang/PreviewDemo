@@ -304,12 +304,6 @@ export class XConsts{
     public static UI_FRAGMENTUSE : string = "UI_FragmentUse";  //召唤
     public static UI_INFO : string = "UI_Info";  //信息
 
-    public static FRAGMENT_SYNTHESIS_TYPE  = {
-        FragmentRandom : 1,
-        FragmentCampRandom : 2,
-        FragmentClassesRandom : 3,
-        FragmentHero : 4
-    }
 
     //星级合成消耗碎片
     public static KFragmentNumRequired : number[] = new Array<number> (0,5,10,20,30,50);
@@ -333,12 +327,6 @@ export class XConsts{
 
     //升星塔获得物品
     public static KStarUpGainObjectTitle : string = "UI_GainObject_Title" ;  //获得物品
-    public static KSTARUP_PROP_TYPE  = {
-        Hero : 5,
-        Money: 1,
-        Exp : 2,
-    }
-
     public static UI_AUTODECOMPOSEGET : string = "UI_AutoDecomposeGet"; //普通英雄自动分解获得
     public static AUTODECOMPOSE_MAX_STARS : number = 3;  //分解最大星级
 

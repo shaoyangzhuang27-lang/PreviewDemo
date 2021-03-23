@@ -397,4 +397,22 @@ export class HeroesModel extends BaseModel{
                 }
             })
     }
+
+
+    
+    public getAutoDecomposeHeroDyncIDList(starCounts : number)
+    {
+        let dyncIDList:Array<number> = [];
+        this._heroList.forEach((heroInfo)=>{
+            if(ValueMgr.getInstance().getItemByField(TableName.heroes, heroInfo.getStaticID() as number) && heroInfo.getStar() < starCounts){
+                dyncIDList.push(heroInfo.getDyncID() as number);
+            }
+        });
+        return dyncIDList;
+    }
+
+    public removeHeroByHeroDyncID(dyncID : number)
+    {
+        this._heroList.delete(dyncID);
+    }
 }

@@ -152,7 +152,7 @@ export class PopFragmentSynthesis extends PopBase {
             if(this._fragmentSysthesisInfo.curNum < this._fragmentSysthesisInfo.maxNum)
             {
                 this.node_summon_counts.active = false;
-                if(this._fragmentSysthesisInfo.type == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentHero)
+                if(this._fragmentSysthesisInfo.type == Msg.TFragmentType.EFragmentType_Hero)
                 {
                     this.initLabelFromBtn(this.btn_submit,XConsts.UI_INFO);
                     this.btn_info.active = false;
@@ -169,7 +169,7 @@ export class PopFragmentSynthesis extends PopBase {
             else{
                 this.lab_fragment_tips.node.active = false;
                 this.lab_ban_sell.node.active =false;
-                if(this._fragmentSysthesisInfo.type == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentHero)
+                if(this._fragmentSysthesisInfo.type == Msg.TFragmentType.EFragmentType_Hero)
                 {
                     this.btn_submit.active = false;
                 }
@@ -198,14 +198,14 @@ export class PopFragmentSynthesis extends PopBase {
         };
         switch(nType)
         {
-            case XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentRandom :
+            case Msg.TFragmentType.EFragmentType_Random :
                 strName = callFunc(XConsts.UI_FRAGMENTNAME);
                 strDesc = callFunc(XConsts.UI_FRAGMENTDESC);
                 strFragmentName = strName.replace("{0}",String(nStar));
                 strDesc = strDesc.replace("{0}",String(nCounts));
                 strFragmentDesc = strDesc.replace("{1}",String(nStar));
                 break;
-            case XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentCampRandom :
+            case Msg.TFragmentType.EFragmentType_CampRandom :
                 strName = callFunc(XConsts.UI_FRAGMENTCAMPNAME);
                 strDesc = callFunc(XConsts.UI_FRAGMENTCAMPDESC);
                 strName = strName.replace("{0}",String(nStar));
@@ -214,7 +214,7 @@ export class PopFragmentSynthesis extends PopBase {
                 strDesc = strDesc.replace("{1}",String(nStar));
                 strFragmentDesc = strDesc.replace("{2}",content);
                 break;
-            case XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentClassesRandom :
+            case Msg.TFragmentType.EFragmentType_ClassesRandom :
                 strName = callFunc(XConsts.UI_FRAGMENTCLASSESNAME);
                 strDesc = callFunc(XConsts.UI_FRAGMENTCLASSESDESC);
                 strName = strName.replace("{0}",String(nStar));
@@ -223,7 +223,7 @@ export class PopFragmentSynthesis extends PopBase {
                 strDesc = strDesc.replace("{1}",String(nStar));
                 strFragmentDesc = strDesc.replace("{2}",content);
                 break;
-            case XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentHero :
+            case Msg.TFragmentType.EFragmentType_Hero :
                 strName = callFunc(XConsts.UI_FRAGMENTHERONAME);
                 strDesc = callFunc(XConsts.UI_FRAGMENTHERODESC);
                 strName = strName.replace("{0}",String(nStar));

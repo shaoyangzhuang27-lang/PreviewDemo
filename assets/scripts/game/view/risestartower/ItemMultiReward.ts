@@ -112,7 +112,7 @@ export class ItemMultiReward extends Component {
             let bg = "";
             switch(this._propInfo.nType)
             {
-                case XConsts.KSTARUP_PROP_TYPE.Hero : 
+                case Msg.TObjectType.EObject_Hero : 
                     let heroInfo = ValueMgr.getInstance().getItemByField(TableName.heroes, this._propInfo.nPropId ? this._propInfo.nPropId : 0) as Config.heroes.Record;
                     let star = heroInfo.star;
                     frame = "ui/common/icon/" +  XConsts.GetQualityBgByStar(heroInfo.star) + "/spriteFrame";
@@ -124,7 +124,7 @@ export class ItemMultiReward extends Component {
                     this._resourceLoad(camp,this.img_camp);
                     this._setStar(star);
                     break;
-                case XConsts.KSTARUP_PROP_TYPE.Money : 
+                case Msg.TObjectType.EObject_Money :
                     this.img_camp.active = false;
                     this.lab_level.node.active = false;
                     this.node_satr.active = false;
@@ -135,7 +135,17 @@ export class ItemMultiReward extends Component {
                     this._resourceLoad(bg,this.img_bg);
                    
                     break;
-                case XConsts.KSTARUP_PROP_TYPE.Exp : 
+                case Msg.TObjectType.EObject_Exp :
+                    this.img_camp.active = false;
+                    this.lab_level.node.active = false;
+                    this.node_satr.active = false;
+                    icon = "ui/common/commonIcon/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
+                    bg = "ui/common/icon/" +  XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ?this._propInfo.nPropQuality : 2] + "/spriteFrame"
+                    this.img_icon.setScale(0.5,0.5,1);
+                    this._resourceLoad(icon,this.img_icon);
+                    this._resourceLoad(bg,this.img_bg);
+                    break;
+                case Msg.TObjectType.EObject_SoulStone :
                     this.img_camp.active = false;
                     this.lab_level.node.active = false;
                     this.node_satr.active = false;
