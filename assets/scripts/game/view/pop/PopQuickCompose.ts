@@ -1,7 +1,7 @@
 /*
  * @Author: zsy
  * @Date: 2021-03-18 17:51:30
- * @LastEditTime: 2021-03-23 11:38:33
+ * @LastEditTime: 2021-03-23 17:09:44
  * @LastEditors: Please set LastEditors
  * @Description: 锻造屋 一键合成
  * @FilePath: \PreviewDemo\assets\scripts\game\view\pop\PopQuickCompose.ts
@@ -20,7 +20,7 @@ const { ccclass, property } = _decorator;
 export class PopQuickCompose extends PopBase {
     // [1]
     // dummy = '';
-
+    curType: number = 0
     // [2]
     // @property
     // serializableDummy = 0;
@@ -53,7 +53,7 @@ export class PopQuickCompose extends PopBase {
      * @param {Msg} composeCost 花费的金币
      * @return {*}
      */   
-    initComposeEquipView(composeMap:Map<number, number>, composeCost: number){
+    initComposeEquipView(composeMap:Map<number, number>, composeCost: number, curType: Msg.TEquipLocationType){
         // 清空容器
         let childrens = this.layoutEquip.children
         childrens.forEach(element => {
@@ -74,6 +74,7 @@ export class PopQuickCompose extends PopBase {
             }
         })
         this.labCost.string = XFuns.FormatNumber(composeCost)
+        this.curType = curType
     }
 
     // _clickCancel(event: Event){
@@ -82,7 +83,8 @@ export class PopQuickCompose extends PopBase {
 
     _clickQCompose(event : Event){
         console.log("_clickQCompose 点击事件 合成")
-        // MsgMgr.getInstance().getMsgForge().requestComposeEquipR(this.selectEquipData.id, this.composeCount);
+        MsgMgr.getInstance().getMsgForge().requestComposeEquipMultiR(this.curType);
+        this.delSelf()
     }
 }
 

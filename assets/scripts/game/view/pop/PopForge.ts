@@ -1,7 +1,7 @@
 /*
  * @Author: zsy
  * @Date: 2021-03-18 17:51:30
- * @LastEditTime: 2021-03-23 16:34:06
+ * @LastEditTime: 2021-03-23 17:07:54
  * @LastEditors: Please set LastEditors
  * @Description: 锻造屋 弹窗
  * @FilePath: \PreviewDemo\assets\scripts\game\view\pop\PopForge.ts
@@ -240,20 +240,22 @@ export class PopForge extends PopBase {
         // 绘制选中图片
         let iconPath = "ui/common/team/阵型调整_出战英雄选中/spriteFrame"
         resources.load(iconPath, (err, spriteFrame: SpriteFrame) => {
-            let node = new Node("cellSelect")
-            node.parent = cell
-            node.layer = Layers.Enum.UI_2D
+            if (cell && cell.activeInHierarchy){
+                let node = new Node("cellSelect")
+                node.parent = cell
+                node.layer = Layers.Enum.UI_2D
 
-            let composeNode = cell?.getChildByName("cellCompose")
-            if(composeNode){
-                composeNode.setSiblingIndex(node.getSiblingIndex() + 1)
+                let composeNode = cell.getChildByName("cellCompose")
+                if (composeNode) {
+                    composeNode.setSiblingIndex(node.getSiblingIndex() + 1)
+                }
+                // 图片
+                let sprite = node.addComponent(Sprite);
+                sprite.spriteFrame = spriteFrame;
+                // 设置icon显示大小
+                let uitrans = sprite.addComponent(UITransform) as UITransform;
+                uitrans.contentSize = size(110, 110)
             }
-            // 图片
-            let sprite = node.addComponent(Sprite);
-            sprite.spriteFrame = spriteFrame;
-            // 设置icon显示大小
-            let uitrans = sprite.addComponent(UITransform) as UITransform;
-            uitrans.contentSize = size(110, 110)
         });     
     }
 
@@ -265,7 +267,7 @@ export class PopForge extends PopBase {
             this.curPageEquipData.forEach((element: Config.equip.Record) => {
                 let maxCount = GameModel.getInstance().getForgeModel().canCompose(element.id)
                 let cell = this.layoutEquip.getChildByName("equipCell" + element.id)
-                if (cell && maxCount > 0) {
+                if (cell && cell.activeInHierarchy && maxCount > 0) {
                     let node = new Node("cellCompose")
                     node.parent = cell
                     node.layer = Layers.Enum.UI_2D
@@ -311,7 +313,7 @@ export class PopForge extends PopBase {
             let script = p.getComponent("PopQuickCompose") as PopQuickCompose
             script.popSelf()
             script.setIsMaskClose(true);
-            script.initComposeEquipView(ret.composeMap, ret.composeCost)
+            script.initComposeEquipView(ret.composeMap, ret.composeCost, this.curPage)
         });
     }
 
