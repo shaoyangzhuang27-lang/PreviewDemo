@@ -385,4 +385,16 @@ export class HeroesModel extends BaseModel{
         info.icon = _hero.image;
         return info
     }
+
+
+    public updateHeroListFromSummon(msgData: Array<Msg.IHeroInfo>)
+    {
+        msgData.forEach((heroInfo)=>{
+                if(ValueMgr.getInstance().getItemByField(TableName.heroes,heroInfo.staticID as number)){
+                    let hero = new HeroData();
+                    hero.initDataByHero(heroInfo as Msg.HeroInfo, this._gameModel);
+                    this._heroList.set(heroInfo.id as number,hero);
+                }
+            })
+    }
 }

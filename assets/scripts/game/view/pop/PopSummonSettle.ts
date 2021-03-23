@@ -1,4 +1,4 @@
-import { _decorator, Component, Node,Label,ScrollView,resources,instantiate, Vec3, Size,Sprite,UITransform, Button,SpriteFrame, Layout, Color } from 'cc';
+import { _decorator, Component, Node,Label,ScrollView,resources,instantiate, Vec3, Size,Sprite,UITransform,Button,SpriteFrame, Layout, Color } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
@@ -7,6 +7,7 @@ import { GameModel } from '../../model/GameModel';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { MsgMgr } from '../../control/MsgMgr';
 import { PopMgr } from '../../control/PopMgr';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('PopSummonSettle')
@@ -64,6 +65,8 @@ export class PopSummonSettle extends PopBase {
 
     private _HeroList : Array<Msg.IHeroInfo> = [];
 
+    private _arrDecomposeHeroId : Array<number> = [];
+
 
 
     start () {
@@ -80,13 +83,29 @@ export class PopSummonSettle extends PopBase {
             NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
         }
 
+        this.addNotifyPubHeroDecomposeHandler();
+        console.log("zzzzzzzzzzzz diamond", GameModel.getInstance().getHeroPubModel().getIsAutoDecompose());
+        console.log("palyer heros", GameModel.getInstance().getHeroesModel().getHeroList());
         // this.initHeroModelInfo(3042500);
     }
 
     
     private _onBtnSureClick(event : any)
     {
-        PopMgr.getInstance().deleteWindow();
+        if(GameModel.getInstance().getHeroPubModel().getIsAutoDecompose())
+        {
+            if(this._arrDecomposeHeroId.length > 0)
+            {
+                let msg : Msg.HeroDecomposeR  = new Msg.HeroDecomposeR();
+                msg.heroIDList = Array.from(this._arrDecomposeHeroId);
+                // MainClient.instance.RequestMessage (Msg.MsgType.TheHeroDecomposeR, msg, Msg.MsgType.TheHeroDecomposeA, OnRecvHeroDecompose);
+                MsgMgr.getInstance().getMsgHeroPub().requestHeroDecomposeR(msg);
+            }
+        }
+        else
+        {
+            PopMgr.getInstance().deleteWindow();
+        }
     }
 
     public notifyPubSummonHeroHandle ( msgData: Msg.SummonHeroA){
@@ -110,16 +129,6 @@ export class PopSummonSettle extends PopBase {
            isOneOrTen : this._bIsOne,
        }
         MsgMgr.getInstance().getMsgHeroPub().requestSummonHeroR(summonHeroR);
-        //按钮点击再次召唤请请求，在服务器回调函数中添加 重置scrollview按钮
-        // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
-        //         let reclineup_item = instantiate( res );
-        //         let script = reclineup_item.getComponent(HeroIcon);
-        //         reclineup_item.scale = new Vec3(0.75,0.75,1);
-        //         let subWidget = reclineup_item.getComponent(UITransform) as UITransform;
-        //         subWidget.contentSize = new Size(113,113);
-        //         script.initUIHeroIconInfo(3031301,XConsts.HERO_ICON_TYPE.SummonSettle);
-        //         this.scroll_heroicon_view.content?.addChild(reclineup_item);
-        // });
     }
 
     public initUI()
@@ -149,16 +158,6 @@ export class PopSummonSettle extends PopBase {
                     }
                 }    
         });
-
-        // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
-        //     for (var i = 0 ; i < 2; i++) {
-        //         let reclineup_item = instantiate( res );
-        //         let script = reclineup_item.getComponent(HeroIcon);
-        //         reclineup_item.scale = new Vec3(0.5,0.5,1);
-        //         // script.initUIHeroIconInfo(id);
-        //         this.scroll_heroicon_view.content?.addChild(reclineup_item);
-        //     }
-        // });
     }
     
 
@@ -274,7 +273,7 @@ export class PopSummonSettle extends PopBase {
     public setShowScrollViewType(nCounts: number)
     {
         var lay = this.scroll_heroicon_view.content?.getComponent(Layout);
-        if(nCounts < 5 && lay)
+        if(nCounts < XConsts.SUMMON_SETTLE_HORIZONTAL_COUNTS && lay)
         {
             lay.type = 1;
         }
@@ -291,11 +290,45 @@ export class PopSummonSettle extends PopBase {
         this.initBtnSummonUI(this._nSummonType, this._nSummonConsumeType, this._bIsOne);
         this.setShowScrollViewType(msgData.heroList.length);
         this.popWindowType = nType;
+
+       
+        GameModel.getInstance().getHeroesModel().updateHeroListFromSummon(this._HeroList);
+
+        this._HeroList.forEach((heroInfo)=>{
+            if(heroInfo.staticID && heroInfo.id)
+            {
+                let hero = ValueMgr.getInstance().getItemByField(TableName.heroes, heroInfo.staticID) as Config.heroes.Record;
+                if(hero.star < XConsts.AUTODECOMPOSE_MAX_STARS)
+                {
+                    this._arrDecomposeHeroId.push(heroInfo.id);
+                }
+            }
+        })
+      
+        
     }
 
     onDestroy(){
         // this.node.emit("OpenPubNotify");
-        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
-        
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this); 
+    }
+
+    
+    public addNotifyPubHeroDecomposeHandler()
+    {
+        console.log("decompose开启");
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_hero_decompose,this.notifyPubHeroDecomposeHandle,this);
+    }
+
+    public removeNotifyPubHeroDecomposeHandler()
+    {
+        console.log("decompose关闭");
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_hero_decompose,this.notifyPubHeroDecomposeHandle,this);
+    }
+
+
+    public notifyPubHeroDecomposeHandle(msgData: Msg.HeroDecomposeA)
+    {
+        console.log("dddddddddecompose",msgData);
     }
 }

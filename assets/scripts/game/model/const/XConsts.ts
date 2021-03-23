@@ -283,6 +283,7 @@ export class XConsts{
 
     //获得英雄界面
     public static SUMMON_SETTLE_TITLE : string = "DATA_Achievement6";  //获得英雄
+    public static SUMMON_SETTLE_HORIZONTAL_COUNTS : number = 5;
 
     public static HERO_ICON_TYPE  = {
         RecLineUp : 1,
@@ -339,5 +340,6 @@ export class XConsts{
     }
 
     public static UI_AUTODECOMPOSEGET : string = "UI_AutoDecomposeGet"; //普通英雄自动分解获得
+    public static AUTODECOMPOSE_MAX_STARS : number = 3;  //分解最大星级
 
 } 

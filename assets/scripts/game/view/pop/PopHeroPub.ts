@@ -463,6 +463,7 @@ export class PopHeroPub extends PopBase {
 
     public notifyPubSummonHeroHandle ( msgData: Msg.SummonHeroA){
 
+        console.log("palyer heros", GameModel.getInstance().getHeroesModel().getHeroList());
         if (msgData.err == Msg.TErrorCode.ERR_OK) {
             console.log("Notify PubHeroSummon",msgData);
             console.log("diamond", GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts());
