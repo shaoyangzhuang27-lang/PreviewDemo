@@ -101,6 +101,8 @@ export class PopHeroEquipReplace extends PopBase {
         let msg = data as Msg.TakeOffEquipA;
         if (msg.err == Msg.TErrorCode.ERR_OK) {
             if (msg.heroID == this._curHeroId) {
+                
+                GameModel.getInstance().getBagModel().changeBagEquipNumber(msg.takeoffEquipLocList[0],1);
                 this.delSelf();              
             }
         }
@@ -118,6 +120,9 @@ export class PopHeroEquipReplace extends PopBase {
         let msg = data as Msg.PutOnEquipA;
         if (msg.err == Msg.TErrorCode.ERR_OK) {
             if (msg.heroID == this._curHeroId) {
+                //更新背包数据
+                GameModel.getInstance().getBagModel().changeBagEquipNumber(msg.takeoffEquipIDList[0],-1);
+                GameModel.getInstance().getBagModel().changeBagEquipNumber(msg.putonEquipIDList[0],1);
                 this.delSelf();
             }
         } else {
@@ -161,6 +166,22 @@ export class PopHeroEquipReplace extends PopBase {
             }
         }
 
+        curlocationEquipData.sort((equip1, equip2) => {
+            if (equip1.quality > equip2.quality)
+                return -1;
+            else if (equip1.quality < equip2.quality)
+                return 1;
+            else
+            {
+                if (equip1.star > equip2.star)
+                    return -1;
+                else if (equip1.star < equip2.star)
+                    return 1;
+                else
+                    return 0;
+            }
+        });
+
         resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
             for (var i = 0 ; i < curlocationEquipData.length; i++) {
                 let equip_item = instantiate( res );
@@ -174,7 +195,11 @@ export class PopHeroEquipReplace extends PopBase {
         });
 
     }
-
+/**
+ * 
+ * @param equipData 装备数据
+ * @param locationType 装备位置（武器、帽子、衣服等）
+ */
     private _initView(equipData:Config.equip.Record,locationType:Msg.TEquipLocationType){
 
         let iconName:string = this.TEquipLocationTypeIcon[locationType];
@@ -193,6 +218,7 @@ export class PopHeroEquipReplace extends PopBase {
         if(equipData && equipData.id !=0){
             this.node_equip_drag.active = true;
             this.node_equip_wear.setPosition(150,0);
+            this.btn_wear.interactable = false;
             this._showCurEquip(equipData)
         }else{
             //无装备
@@ -222,8 +248,14 @@ export class PopHeroEquipReplace extends PopBase {
         var suitID = equipData.quality * 100 + equipData.star;
         if(suitID != 0)
         {
+            this.itemequip_cell_drag.node.active = true;
+            this.itemequip_cell_drag.setItemType(equipData.id,0,ItemEquipType.equip,null);
+            
             let suitEquipData = ValueMgr.getInstance().getItemByField(TableName.suit,suitID) as Config.suit.Record;
-            if(!suitEquipData) {return;}; //低级装备没有套装属性，通过suitID 获取不到套装属性
+            if(!suitEquipData) {
+                this.node_suit_wear.active = false;
+                return;
+            }; //低级装备没有套装属性，通过suitID 获取不到套装属性
             this.node_suit_drag.active = true;
             //suitEquipData.name
    
@@ -259,14 +291,6 @@ export class PopHeroEquipReplace extends PopBase {
                 })
             }
         }
-
-        this.itemequip_cell_drag.setItemType(equipData.id,0,ItemEquipType.equip,(id:number,itemClickType:number,objClickType:number)=>{
-            console.log(" 当前装备=>",id);
-            // this._itemEqipCallBack(id,itemClickType,objClickType)
-
-        });
-
-
     }
 
     private _refreshReplaceEquip(equipID: number){
@@ -308,7 +332,8 @@ export class PopHeroEquipReplace extends PopBase {
                 if(!suitEquipData) {
                     
                     this.node_suit_wear.active = false;
-                    return;}; //低级装备没有套装属性，通过suitID 获取不到套装属性
+                    return;
+                }; //低级装备没有套装属性，通过suitID 获取不到套装属性
                 this.node_suit_wear.active = true;
                 //suitEquipData.name
                 var lab_suit_attribute1 : Label =  this.node_suit_wear.getChildByName("lab_suit_attribute1")?.getComponent(Label) as Label;
@@ -377,6 +402,7 @@ export class PopHeroEquipReplace extends PopBase {
         if(this.lab_title)
             this.lab_title.string = title
     }
+
 
     public setCloseCallBack(func:Function | null){
 

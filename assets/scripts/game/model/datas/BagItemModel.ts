@@ -394,7 +394,7 @@ export class BagItemModel extends BaseModel{
     /**
      * //改变背包装备的数量
      * @param key 装备道具id
-     * @param count 数量
+     * @param count 数量负为补充数量，正为消耗数量
      */
      public changeBagEquipNumber(key:number,count:number)
      {
@@ -402,17 +402,27 @@ export class BagItemModel extends BaseModel{
          {
              let oldCount = Number(this._bagEquipList.get(key));      
              let newCount = oldCount - count;
-             this._bagEquipList.delete(key)  
+         
              if(newCount != 0)
              {
                  this._bagEquipList.set(key,newCount)
              }
+             else
+             {
+                this._bagEquipList.delete(key)
+             }
              NotifyMgr.getInstance().notify(NotifyMgr.event_equip_item_change,[ItemEquipType.equip,key]);
             //  NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
+         }
+         else{
+            if(count < 0){ //当卸下装备的时候，背包里面没有该装备的时候，加一个出来 
+                this._bagEquipList.set(key,-count)
+                NotifyMgr.getInstance().notify(NotifyMgr.event_equip_item_change,[ItemEquipType.equip,key]);
+            }
          }        
      }
 
-
+     
     ////////////////////////////////////////
     /////////////////私有方法///////////////
     ///////////////////////////////////////
