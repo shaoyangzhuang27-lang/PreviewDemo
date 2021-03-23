@@ -28,6 +28,7 @@ import { PopMultiItemReward } from "../view/pop/PopMultiItemReward";
 import { PopBookHeroDetail } from '../view/pop/PopBookHeroDetail';
 import { PopHeroStoryUI } from '../view/pop/PopHeroStoryUI';
 import { PopForge } from '../view/pop/PopForge';
+import { PopBookProUI } from '../view/pop/PopBookProUI';
 export class PopMgr extends PopCore  {
 
     private static _instance: PopMgr = new PopMgr();
@@ -534,4 +535,30 @@ export class PopMgr extends PopCore  {
             // });
         });
     }
+
+    /**
+     * 打开图鉴总加成属性界面
+     */
+    public popOpenBookAllPropretyUI()
+    {
+        resources.load('prefabs_ui/pop/pop_bookallproperty', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            // let script = p.getComponent("PopBookProUI") as PopBookProUI;
+        } );
+    }
+
+    /**
+     * 打开图鉴属性总等级加成界面
+     */
+     public popOpenBookPropretyLevelUI()
+     {
+         resources.load('prefabs_ui/pop/pop_bookallpropretyview', (err:any,res:any)=>{
+             let p = instantiate( res );
+             this.pushWindow(p);
+ 
+             // let script = p.getComponent("PopBookProUI") as PopBookProUI;
+         } );
+     }
 }

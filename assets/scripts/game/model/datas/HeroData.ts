@@ -69,7 +69,7 @@ export class HeroData extends BaseHeroData {
         for (let index = 0; index < this._heroInfo.equipOnList.length; index++) {
             let equipId = this._heroInfo.equipOnList[index];
             let equipRecord = ValueMgr.getInstance().getItemByField(TableName.equip, equipId) as Config.equip.Record;
-            this._equipOnList.set(equipId as number, equipRecord);
+            this._equipOnList.set(equipRecord.locationType, equipRecord);
         }
         this._crystalPropertyList = new Map<Msg.THeroPropertyType, number>();
         this.setCrystalInfo(this._heroInfo.crystal?.level as number, this._heroInfo.crystal?.propertyList as Msg.THeroPropertyType[])
@@ -147,28 +147,25 @@ export class HeroData extends BaseHeroData {
 
     public get level() {
         if (!this.isRoleHero()) {
-            return 1//Mathf.Min(XLuaFunc.instance.KHeroMaxLevelForTier[_record.Star], PlayerData.instance.HeroCollegeLevel);
+            return Math.min(XShare.getInstance().KHeroMaxLevelForTier[this._record.star], 1);//学院等级待处理
+            //Mathf.Min(XLuaFunc.instance.KHeroMaxLevelForTier[_record.Star], PlayerData.instance.HeroCollegeLevel);
         } else
             return this._heroInfo.level;
     }
     public set level(_lv: number) {
-        if (this.isRoleHero()) {
-            this._heroInfo.level = _lv;
-        }
-        else {
-            //KHeroMaxLevelForTier
-        }
+        this._heroInfo.level = _lv;
     }
 
     public get tier() {
         if (!this.isRoleHero()) {
-            return 1;//this.GetMaxTier();// Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);            
+            return  Math.min(this.GetMaxTier(), 1); //学院品阶待处理
+            // Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);            
         } else
             return this._heroInfo.tier;
     }
     public set tier(_tier: number) {
         if (!this.isRoleHero()) {
-            this._record.star= _tier;
+            this._record.star= _tier;//todo
         } else {
             this._heroInfo.tier = _tier;
         }
@@ -200,11 +197,7 @@ export class HeroData extends BaseHeroData {
     }
 
     public get equipOnList() {
-
-        if (!this.isRoleHero()) {
-            return new Map<Msg.TEquipLocationType, Config.equip.Record>();// Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);
-        } else
-            return this._equipOnList;
+        return this._equipOnList;
     }
     public get record() {
         return this._record
