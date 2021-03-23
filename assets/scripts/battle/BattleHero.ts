@@ -941,7 +941,14 @@ export class BattleHero extends Component {
             let normalAttackEffect = instantiate(this._normalAttackPrefab);
             let battleEffect = normalAttackEffect.getComponent("BattleEffect") as BattleEffect;
             if (battleEffect.isImmediately()) {
+                // TODO 普通刀光
                 this.doHitDamager(this._target);
+
+                this.playEffect(normalAttackEffect);
+
+                if (battleEffect.endEffectPrefab) {
+                    this._target.playEffect(instantiate(battleEffect.endEffectPrefab));
+                }
             } else {
                 let delayDamage = new BattleDelayDamage(battleEffect, this, this._target, (target: BattleHero)=> {
                     this.doHitDamager(target);
