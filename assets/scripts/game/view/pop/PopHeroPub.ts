@@ -239,7 +239,8 @@ export class PopHeroPub extends PopBase {
                     else
                     {
                         //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                        this.showSummonSettleWindow("SummonWindow");
+                        // this.showSummonSettleWindow("SummonWindow");
+                        this.onSubmit(Msg.TSummonType.ESummonType_Friend,Msg.TSummonConsumeType.ESummonConsumeType_FriendGift,false);
                     }
                 }
                 else
