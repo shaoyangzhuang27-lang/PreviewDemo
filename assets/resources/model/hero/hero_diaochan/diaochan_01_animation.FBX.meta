@@ -1,0 +1,304 @@
+{
+  "ver": "2.0.10",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "086edf3d-0c44-424d-bda4-a2a96706ae48",
+  "files": [],
+  "subMetas": {
+    "19360": {
+      "importer": "gltf-scene",
+      "uuid": "086edf3d-0c44-424d-bda4-a2a96706ae48@19360",
+      "displayName": "",
+      "id": "19360",
+      "name": "diaochan_01_animation.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "27295": {
+      "importer": "gltf-mesh",
+      "uuid": "086edf3d-0c44-424d-bda4-a2a96706ae48@27295",
+      "displayName": "",
+      "id": "27295",
+      "name": "Box012.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "78391": {
+      "importer": "gltf-animation",
+      "uuid": "086edf3d-0c44-424d-bda4-a2a96706ae48@78391",
+      "displayName": "",
+      "id": "78391",
+      "name": "skill.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 5.7,
+          "to": 7.666666507720947
+        },
+        "events": [
+          {
+            "frame": 0.8333333333333334,
+            "functionName": "onSkill",
+            "parameters": []
+          }
+        ],
+        "speed": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1f586": {
+      "importer": "gltf-animation",
+      "uuid": "086edf3d-0c44-424d-bda4-a2a96706ae48@1f586",
+      "displayName": "",
+      "id": "1f586",
+      "name": "idle.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.6666666666666667
+        },
+        "events": [],
+        "speed": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "cf5ee": {
+      "importer": "gltf-animation",
+      "uuid": "086edf3d-0c44-424d-bda4-a2a96706ae48@cf5ee",
+      "displayName": "",
+      "id": "cf5ee",
+      "name": "run.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 1.8333333333333333,
+          "to": 2.7
+        },
+        "events": []
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "b4251": {
+      "importer": "gltf-animation",
+      "uuid": "086edf3d-0c44-424d-bda4-a2a96706ae48@b4251",
+      "displayName": "",
+      "id": "b4251",
+      "name": "die.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 1,
+        "sample": 30,
+        "span": {
+          "from": 2.8666666666666667,
+          "to": 4.366666666666666
+        },
+        "events": []
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "989ed": {
+      "importer": "gltf-animation",
+      "uuid": "086edf3d-0c44-424d-bda4-a2a96706ae48@989ed",
+      "displayName": "",
+      "id": "989ed",
+      "name": "attack.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 4.533333333333333,
+          "to": 5.533333333333333
+        },
+        "events": [
+          {
+            "frame": 0.4666666666666667,
+            "functionName": "onAttack",
+            "parameters": []
+          }
+        ],
+        "speed": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "438fe": {
+      "importer": "gltf-skeleton",
+      "uuid": "086edf3d-0c44-424d-bda4-a2a96706ae48@438fe",
+      "displayName": "",
+      "id": "438fe",
+      "name": "UnnamedSkeleton.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 43
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ace8f": {
+      "importer": "gltf-embeded-image",
+      "uuid": "086edf3d-0c44-424d-bda4-a2a96706ae48@ace8f",
+      "displayName": "",
+      "id": "ace8f",
+      "name": "Map #4.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f8008": {
+      "importer": "texture",
+      "uuid": "086edf3d-0c44-424d-bda4-a2a96706ae48@f8008",
+      "displayName": "",
+      "id": "f8008",
+      "name": "Map #4.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "086edf3d-0c44-424d-bda4-a2a96706ae48@ace8f"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #4",
+        "uri": "086edf3d-0c44-424d-bda4-a2a96706ae48@ace8f"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 7.666666507720947,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "idle",
+            "from": 0,
+            "to": 1.6666666666666667,
+            "fps": 30,
+            "wrapMode": 2
+          },
+          {
+            "name": "run",
+            "from": 1.8333333333333333,
+            "to": 2.7,
+            "wrapMode": 2
+          },
+          {
+            "name": "die",
+            "from": 2.8666666666666667,
+            "to": 4.366666666666666,
+            "wrapMode": 1
+          },
+          {
+            "name": "attack",
+            "from": 4.533333333333333,
+            "to": 5.533333333333333,
+            "wrapMode": 2
+          },
+          {
+            "name": "skill",
+            "from": 5.7,
+            "to": 7.666666507720947,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "086edf3d-0c44-424d-bda4-a2a96706ae48@19360",
+    "assetFinder": {
+      "meshes": [
+        "086edf3d-0c44-424d-bda4-a2a96706ae48@27295"
+      ],
+      "skeletons": [
+        "086edf3d-0c44-424d-bda4-a2a96706ae48@438fe"
+      ],
+      "textures": [
+        "086edf3d-0c44-424d-bda4-a2a96706ae48@f8008"
+      ],
+      "materials": [
+        "96fed002-c813-4630-87f9-ed7115af74ba"
+      ],
+      "scenes": [
+        "086edf3d-0c44-424d-bda4-a2a96706ae48@19360"
+      ]
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/resources/model/hero/hero_diaochan/mat",
+    "disableMeshSplit": true
+  }
+}
