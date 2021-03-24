@@ -110,17 +110,18 @@ export class HeroPubModel extends BaseModel{
     //     return formation;
     // }
 
-    //英雄普通召唤卷轴
+    //普通-英雄召唤卷轴
     public getBaseSummonScrollNum()
     {
-        return this._gameModel.getPlayerModel().getPlayerInfo().basicSummonScroll || 0;
+        return this._gameModel.getPlayerModel().getPlayerInfo().heroicSummonScroll || 0;
     }
 
 
-    //英雄高级召唤卷轴
+    //高级 -英雄高级召唤卷轴 80 级以上的高级酒馆
     public getHeroicSummonScrollNum()
     {
-        return this._gameModel.getPlayerModel().getPlayerInfo().heroicSummonScroll || 0;
+        // console.log("zzzzzzzzzzz",this._gameModel.getPlayerModel().getPlayerInfo());
+        return this._gameModel.getPlayerModel().getPlayerInfo().WonderGem || 0;
     }
     //友情英雄召唤卷轴
     public getFriendSummonScrollNum()
