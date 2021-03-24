@@ -99,6 +99,8 @@ export class PopHeroPub extends PopBase {
         this.addPubNotifyHandler();
         // NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
         // this.node.on('OpenPubNotify', this.addPubNotifyHandler, this);   //自定义事件监听事件
+
+        // var strTest =  String.Format(ValueMgr.getInstance().getLanguageString("UI_BuySummonScroll"),10,20);
     }
 
 
