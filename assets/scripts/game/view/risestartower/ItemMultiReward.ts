@@ -8,6 +8,7 @@ const { ccclass, property } = _decorator;
 import { PopMgr } from '../../control/PopMgr';
 import { XConsts } from '../../model/const/XConsts';
 import { XFuns } from '../../model/const/XFuns';
+import { GameModel } from '../../model/GameModel';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 
 @ccclass('ItemMultiReward')
@@ -154,6 +155,18 @@ export class ItemMultiReward extends Component {
                     this.img_icon.setScale(0.5,0.5,1);
                     this._resourceLoad(icon,this.img_icon);
                     this._resourceLoad(bg,this.img_bg);
+                    break;
+                case Msg.TObjectType.EObject_Equip :
+                    this.img_camp.active = false;
+                    this.lab_level.node.active = false;
+                    let equipData = GameModel.getInstance().getForgeModel().getConfigEquipDataById(this._propInfo.nPropId as number)
+                    icon = "ui/common/equip/" + equipData.imageName + "/spriteFrame"
+                    bg = "ui/common/icon/" + XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ? this._propInfo.nPropQuality : 2] + "/spriteFrame"
+                    this._resourceLoad(icon, this.img_icon);
+                    this._resourceLoad(bg, this.img_bg);
+                    break;
+                default:
+                    console.log("传入相应Msg.TObjectType, 自己写")
                     break;
             }
 

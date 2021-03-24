@@ -1,3 +1,11 @@
+/*
+ * @Author: zsy
+ * @Date: 2021-03-15 12:04:23
+ * @LastEditTime: 2021-03-24 20:27:04
+ * @LastEditors: Please set LastEditors
+ * @Description: 挂机奖励icon
+ * @FilePath: \PreviewDemo\assets\scripts\game\view\pop\BonusIcon.ts
+ */
 
 import { _decorator, Component, Node, LabelComponent, resources, Sprite, SpriteFrame} from 'cc';
 import { XConsts } from '../../model/const/XConsts';
@@ -16,7 +24,7 @@ export class BonusIcon extends Component {
     }
 
     public updateView(data:any){
-        let name: string = XConsts.KObjectIconSpriteName[data.obtype]
+        let name: string = XConsts.KObjectIconSpriteName[data.objType]
         let iconPath: string = "ui/main/" + name + "/spriteFrame"
         resources.load(iconPath, (err, spriteFrame: SpriteFrame) => {
             if (!err && this.m_sptIcon) {
@@ -25,7 +33,7 @@ export class BonusIcon extends Component {
             }
         });
         if (this.m_labCount) {
-            let str: string = "x" + data.nCount
+            let str: string = "x" + data.num
             this.m_labCount.string = str;
         }
     }

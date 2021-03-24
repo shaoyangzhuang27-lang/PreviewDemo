@@ -41,7 +41,7 @@ export class FlyItem extends Component {
     update(){
     }
 
-    getTargetPos(obType? : Msg.TObjectType) {
+    getTargetPos(ob? : Msg.ILootObject) {
         // let config {
         //     "mainCoin" : Msg.TObjectType.EObject_Money,
         //     "mainDiamond": Msg.TObjectType.EObject_VRmb,
@@ -49,11 +49,11 @@ export class FlyItem extends Component {
         //     "mainlevelPro": Msg.TObjectType.EObject_UpgradePoint,
         // }
         let nodeGold = null;
-        if (obType == Msg.TObjectType.EObject_Money){
+        if (ob?.objType == Msg.TObjectType.EObject_Money){
             nodeGold = UINodeMgr.getNodeWithKey("mainCoin")
-        } else if (obType == Msg.TObjectType.EObject_Exp){
+        } else if (ob?.objType == Msg.TObjectType.EObject_Exp){
             nodeGold = UINodeMgr.getNodeWithKey("mainlevelPro")
-        } else if (obType == Msg.TObjectType.EObject_UpgradePoint){
+        } else if (ob?.objType == Msg.TObjectType.EObject_UpgradePoint){
             nodeGold = UINodeMgr.getNodeWithKey("mainlevelPro")
         }
 
@@ -66,27 +66,26 @@ export class FlyItem extends Component {
         return localdtPos
     }
 
-    getTargetPath(obType : Msg.TObjectType){
-        let name: string = XConsts.KObjectIconSpriteName[obType]
-        let iconPath: string = "ui/main/" + name + "/spriteFrame"
+    getTargetPath(ob: Msg.ILootObject){
+        if(!ob || !ob.objType){
+            return
+        }
+        let name: string = XConsts.KObjectIconSpriteName[ob.objType]
+        let iconPath: string = "ui/common/main/" + name + "/spriteFrame"
        return iconPath
     }
 
-    createReward(itemTypes: Msg.TObjectType[], itemCounts: number[], srcWPos: Vec3) {
-        if (itemTypes.length != itemCounts.length) {
-            console.log("传入参数有错，itemTypes长度与itemCounts长度不一致")
-            return
-        }
-
+    createReward(items: Msg.ILootObject[], srcWPos: Vec3) {
         this.itemCount = 0
-        for (const key in itemTypes) {
-            if (!Object.prototype.hasOwnProperty.call(itemTypes, key)) {
+        for (const key in items) {
+            if (!Object.prototype.hasOwnProperty.call(items, key)) {
                 return
             }
-            const itemType = itemTypes[key];
-            const nCount = itemCounts[key] > MAX_REWARD_COUNT ? MAX_REWARD_COUNT : itemCounts[key]
-            let iconPath = this.getTargetPath(itemType)
-            let targetWPos = this.getTargetPos(itemType)
+            const item = items[key];
+            let nCount = item.num || 0 
+            nCount = nCount > MAX_REWARD_COUNT ? MAX_REWARD_COUNT : nCount
+            let iconPath = this.getTargetPath(item) || ""
+            let targetWPos = this.getTargetPos(item)
             resources.load(iconPath, (err, spriteFrame: SpriteFrame) => {
                 if (!err) {
                     this._createAniItem(nCount, spriteFrame, targetWPos, srcWPos)
@@ -94,10 +93,6 @@ export class FlyItem extends Component {
                 }
             });
         }
-        // let dtPos = this.node_gold.getWorldPosition()
-        // let parent = this.sprite_select.getParent() as unknown as Node;
-        // let localdtPos = parent.getComponent(UITransform)?.convertToNodeSpaceAR(dtPos)
-        // let targetPos = this.getTargetPos();
     }
 
     _createAniItem(nCount: number, imgReward: SpriteFrame, targetWPos: Vec3, srcWPos?: Vec3) {
@@ -163,17 +158,16 @@ export class FlyItem extends Component {
     /**
      * 曲线飞行到目标位置
      * @param srcWPos           初始位置(worldPos)
-     * @param itemTypes         物品类型
-     * @param itemCounts        对应的物品数量
+     * @param items             物品
      * @param parent            指定父节点
      */
-    static showActionFlyWihtObject(srcWPos: Vec3, itemTypes: Msg.TObjectType[], itemCounts: number[], parent: Node): void {
+    static showActionFlyWihtObject(srcWPos: Vec3, items: Msg.ILootObject[], parent: Node): void {
         resources.load('prefabs_ui/fly_item', (err: any, res: any) => {
             let p = instantiate(res);
             // 当前running的scene上？
             p.parent = parent
             let component = p.getComponent("FlyItem") as FlyItem
-            component.createReward(itemTypes, itemCounts, srcWPos)
+            component.createReward(items, srcWPos)
         });
     }
 
