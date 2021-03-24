@@ -1,3 +1,11 @@
+/*
+ * @Author: zsy
+ * @Date: 2021-03-15 12:04:23
+ * @LastEditTime: 2021-03-24 20:27:17
+ * @LastEditors: Please set LastEditors
+ * @Description: 挂机奖励详情
+ * @FilePath: \PreviewDemo\assets\scripts\game\view\pop\BonusDetail.ts
+ */
 
 import { _decorator, Component, Node, LabelComponent, SpriteFrame, resources, Sprite} from 'cc';
 const { ccclass, property } = _decorator;
@@ -15,7 +23,7 @@ export class BonusDetail extends Component {
     }
 
     public updateView(ob: {nCount : number, strPath : string}){
-        let iconPath: string = "ui/main/" + ob.strPath + "/spriteFrame"
+        let iconPath: string = "ui/common/main/" + ob.strPath + "/spriteFrame"
         resources.load(iconPath, (err, spriteFrame:SpriteFrame) =>{
             if(!err && this.m_sptIcon){
                 let sprite = this.m_sptIcon.getComponent(Sprite) as Sprite;
