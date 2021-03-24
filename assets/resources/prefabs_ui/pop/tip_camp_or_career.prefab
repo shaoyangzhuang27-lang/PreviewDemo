@@ -36,7 +36,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 79
+      "__id__": 80
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -789,7 +789,7 @@
       "__id__": 14
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 34
@@ -879,7 +879,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "牧师:奶量十足是胜利的关键",
+    "_string": "",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 16,
@@ -1707,7 +1707,9 @@
       "__id__": 1
     },
     "_enabled": true,
-    "__prefab": null,
+    "__prefab": {
+      "__id__": 79
+    },
     "mask": {
       "__id__": 2
     },
@@ -1739,6 +1741,10 @@
       "__id__": 24
     },
     "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "04BghhmFJMh4araQLppah0"
   },
   {
     "__type__": "cc.PrefabInfo",

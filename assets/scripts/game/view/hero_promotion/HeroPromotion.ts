@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-24 10:52:44
+ * @LastEditTime: 2021-03-24 20:21:58
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -189,6 +189,10 @@ export class HeroPromotion extends PopBase {
     @property({ type: Node, displayName: "升级底部属性" })
     public node_fight_param: Node = null as unknown as Node;
 
+    @property({ type: Node, displayName: "当前等级满级" })
+    public node_max_lv: Node = null as unknown as Node;
+
+
     private _curHeroId: number = 0; //当前英雄ID
     private _curHeroData: HeroData = null as unknown as HeroData; //当前英雄数据    
     private _starNodeList: Node[] = [];
@@ -237,9 +241,6 @@ export class HeroPromotion extends PopBase {
         containerEventHandler.handler = '_onTabClick';
         containerEventHandler.customEventData = '';
         this.tabGroup?.checkEvents.push(containerEventHandler);
-
-        //
-
     }
 
     private _onTabClick(event: Event, customEventData: string) {
@@ -252,15 +253,6 @@ export class HeroPromotion extends PopBase {
             if (this._curHeroId) {
                 this._showCurHeroView(this._curHeroId, false);
             }
-
-            // this.node_equip.active = false; //装备界面
-
-            // this.node_up.active = true;//升级升阶大界面            
-            // this.node_fight_param.active = this._isLvUpView; //升级底部属性界面
-            // this.btn_up_lv.active = this._isLvUpView;        //升级按钮
-            // this.node_upgrade.active = !this._isLvUpView;    //升阶底部属性界面
-            // this.btn_up_tier.active = !this._isLvUpView;     //升阶按钮
-
         }
         else if (tog.node.name == "btn_tab_equip")//装备tab
         {
@@ -268,14 +260,7 @@ export class HeroPromotion extends PopBase {
             this._isHeroUpView = false;
             if (this._curHeroId) {
                 this._showCurHeroView(this._curHeroId, false);
-            }
-            // this.node_equip.active = true; //装备界面
-
-            // this.node_up.active = false;//升级升阶大界面            
-            // this.node_fight_param.active = this._isLvUpView; //升级底部属性界面
-            // this.btn_up_lv.active = false;        //升级按钮
-            // this.node_upgrade.active = !this._isLvUpView;    //升阶底部属性界面
-            // this.btn_up_tier.active = false;     //升阶按钮            
+            }            
         }
     }
 
@@ -298,7 +283,12 @@ export class HeroPromotion extends PopBase {
                 break;
             case this.btn_camp:
                 {
+                    let pos1 = new Vec3(event.getLocation());  
+                    console.log("pos1=", pos1);                    
+                    let pos2= new Vec3(this.btn_camp.getPosition());
+                    console.log("pos2=", pos2);
                     let pos= this.btn_camp.getWorldPosition();
+                    console.log("pos=", pos);
                     PopMgr.getInstance().tipCampOrCareerWindow(pos, Msg.TClassesType.EClassesType_NULL, this._curHeroData.getCamp());                    
                 }
                 break;
@@ -479,9 +469,7 @@ export class HeroPromotion extends PopBase {
 
     start() {
         // [3]
-        super.start()
-        this._initView();
-
+        super.start();
         //this.cur_hero_model?.node.setSiblingIndex(100);
         // UIMeshRenderer
 
@@ -826,8 +814,8 @@ export class HeroPromotion extends PopBase {
         }
 
         // 星级下的每个品阶有对应的等级最大限制，当等级提升到最大限制后，通过升阶操作扩展更高的等级上限。       
-        let curMaxLv = XShare.getInstance().KHeroMaxLevelForTier[this._curHeroData.tier];
-        if (this._curHeroData.getLevel() < curMaxLv) {
+        let curcurTierMaxLv = XShare.getInstance().KHeroMaxLevelForTier[this._curHeroData.tier];
+        if (this._curHeroData.getLevel() < curcurTierMaxLv  && (this._curHeroData.tier <= XShare.getInstance().KMaxHeroTier)) {
             this._isLvUpView = true; // 当前应该显示升级界面
         }
         else {
@@ -900,7 +888,10 @@ export class HeroPromotion extends PopBase {
         let tier = this._curHeroData.tier;
         let costExp = XShare.getInstance().KHeroTierUpAdvanceExp[tier];
         let costGold = XShare.getInstance().KHeroTierUpMoney[tier];
-
+        if(!costGold || !costExp){
+            console.log(" _showUpTierCost error   ");
+            return ;
+        }
         let playerInfo = GameModel.getInstance().getPlayerModel().getPlayerInfo();
         let color = Color.WHITE;
         // 升阶消耗金币
@@ -959,8 +950,8 @@ export class HeroPromotion extends PopBase {
     }
 
     private _showUpTierFightValues() {
-        let _nextTierHeroData = new HeroData;
-        _nextTierHeroData = this._curHeroData;
+        let _nextTierHeroData = new HeroData;        
+        _nextTierHeroData = _nextTierHeroData.CopyHeroData(this._curHeroData);
         _nextTierHeroData.tier = this._curHeroData.tier + 1;
 
         let fightValue = Math.floor(this._curHeroData.getFighting());
@@ -992,9 +983,11 @@ export class HeroPromotion extends PopBase {
     private _showLv(isUpTier: boolean = false) {
         let tier = this._curHeroData.tier;
         let lv = this._curHeroData.getLevel();
-        let maxLv = XShare.getInstance().KHeroMaxLevelForTier[tier];
-        this.lab_lv.string = lv.toString() + "/" + maxLv.toString();
-
+        let curTierMaxLv = XShare.getInstance().KHeroMaxLevelForTier[tier];
+        this.lab_lv.string = lv.toString() + "/" + curTierMaxLv.toString();
+        
+        let isCurStarMaxLv = (this._curHeroData.getStar()==tier) && (lv == curTierMaxLv);
+        
         let tierNext = this._curHeroData.tier + 1;
         let isMaxTier = tierNext > XShare.getInstance().KMaxHeroTier;
 
@@ -1008,16 +1001,23 @@ export class HeroPromotion extends PopBase {
 
             this.sp_arrow_tier.node.active = false;
             this.layout_lv_tier.node.active = false;
+            
+            this.btn_up_lv.active = !isCurStarMaxLv;
         } else {//升阶界面等级显示            
             pos.x = -nodeSize.width / 2;
             this.layout_lv.node.setPosition(pos);
 
-            this.lab_lv_tier.string = maxLv.toString() + "/";
-            let nextMaxLv = XShare.getInstance().KHeroMaxLevelForTier[tierNext];
-            this.lab_lv_max_tier.string = nextMaxLv.toString();
+            this.lab_lv_tier.string = curTierMaxLv.toString() + "/";
+            let nextcurTierMaxLv = XShare.getInstance().KHeroMaxLevelForTier[tierNext];
+            this.lab_lv_max_tier.string = nextcurTierMaxLv.toString();
             this.sp_arrow_tier.node.active = true;
             this.layout_lv_tier.node.active = true;
+
+            this.btn_up_tier.active = !isCurStarMaxLv;
         }
+
+        // 满级显示
+        this.node_max_lv.active= isCurStarMaxLv;
     }
 
     private _showTier(tier: number = 0) {
@@ -1032,34 +1032,43 @@ export class HeroPromotion extends PopBase {
         }
 
         let target = this;
-        let iconPath: string;
         let items: Sprite[] = this.layout_tier.node.getComponentsInChildren(Sprite) as [Sprite];
         if (items.length < maxTier) {
-            let nSub = maxTier - items.length;
-            for (let index = 0; index < nSub; index++) {
-                iconPath = "ui/lv_up/黑白进阶宝石/spriteFrame";
-                if (tier >= (index + items.length)) {
+            // 1.品阶图标原来的也需要保证设置成正确的样式
+            for (let index = 0; index < items.length; index++) {
+                let iconPath = "ui/lv_up/黑白进阶宝石/spriteFrame";
+                if (tier >= (index +1)) {
                     iconPath = "ui/lv_up/进阶宝石/spriteFrame";
                 }
-
-                XFuns.CreateSprite(iconPath, target.layout_tier.node, "img_grade_gem_" + (items.length + 1 + index).toString());
+                XFuns.ReplaceSpriteFrame(iconPath, items[index]);                
             }
+            // 2.品阶原先图标不足的，需要创建新的图标补充
+            let nSub = maxTier - items.length;
+            for (let index = 0; index < nSub; index++) {
+                let iconPath0 = "ui/lv_up/黑白进阶宝石/spriteFrame";
+                if (tier >= (index + items.length+1)) {
+                    iconPath0 = "ui/lv_up/进阶宝石/spriteFrame";
+                }
+
+                XFuns.CreateSprite(iconPath0, target.layout_tier.node, "img_grade_gem_" + (items.length + 1 + index).toString());
+            }
+            
         }
         else if (items.length > maxTier) {
+            // 1.品阶图标多的需要先释放
             let nSub1 = items.length - maxTier;
             let pos = this.layout_tier.node.getPosition();
-            for (let i = 0; i < nSub1; i++) {
-                items[i].node.active = false;
+            for (let i = 0; i < nSub1; i++) {  
+                items[i].node.removeFromParent();
                 items[i].onDestroy();
             }
-
+             // 2.品阶图标需要保证设置成正确的样式
             let itemNews: Sprite[] = this.layout_tier.node.getComponentsInChildren(Sprite) as [Sprite];
             for (let index = 0; index < itemNews.length; index++) {
-                iconPath = "ui/lv_up/黑白进阶宝石/spriteFrame";
+                let iconPath = "ui/lv_up/黑白进阶宝石/spriteFrame";
                 if (index < tier) {
                     iconPath = "ui/lv_up/进阶宝石/spriteFrame";
                 }
-
                 XFuns.ReplaceSpriteFrame(iconPath, itemNews[index]);
             }
         }
@@ -1122,11 +1131,11 @@ export class HeroPromotion extends PopBase {
                 break;
             case 2:
                 {
-                    pos.x -= this._starXSub;
+                    pos.x -= this._starXSub/2;
                     this.img_star1.position = pos;
 
                     let posNew = new Vec3(this._starsMiddlePos);
-                    posNew.x += this._starXSub;
+                    posNew.x += this._starXSub/2;
                     this.img_star2.position = posNew;
 
                     this.img_star1.active = true;
