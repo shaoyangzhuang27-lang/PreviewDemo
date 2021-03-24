@@ -3,6 +3,7 @@ import { PopSimple } from "../view/pop/PopSimple";
 import { PopRisingStarTower } from "../view/pop/PopRisingStarTower";
 import { PopStarUpResult } from "../view/pop/PopStarUpResult";
 import { PopOneKeyStarUp } from "../view/pop/PopOneKeyStarUp";
+import { PopDecompose } from "../view/pop/PopDecompose";
 import { PopCommonOne } from "../view/pop/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
@@ -30,8 +31,9 @@ import { PopHeroStoryUI } from '../view/pop/PopHeroStoryUI';
 import { PopForge } from '../view/pop/PopForge';
 import { PopBookProUI } from '../view/pop/PopBookProUI';
 import { TipCampOrCareer } from '../view/TipCampOrCareer';
-export class PopMgr extends PopCore  {
+import { PopHaloView } from '../view/pop/PopHaloView';
 
+export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
     public static getInstance() {
         return this._instance;
@@ -111,6 +113,22 @@ export class PopMgr extends PopCore  {
             script.setCurrentHeroId(heroId);
         } );
     }
+
+    /**
+     * @description: 弹出融魂祭坛界面 
+     * @param {boolean} isMaskClose
+     */
+    public popDecomposeView(isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_decompose', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopDecompose") as PopDecompose;
+            script.setIsMaskClose(isMaskClose);
+        } );
+    }
+
 
     /**
      * @description: 弹出升星塔界面界面 
@@ -281,6 +299,19 @@ export class PopMgr extends PopCore  {
         } );
     }
 
+    //弹出光环界面
+    public popHaloView(heroIds:[]=[], isHideSkill:boolean=false)
+    {
+        resources.load('prefabs_ui/pop/pop_halo', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopHaloView") as PopHaloView;
+            script.setIsMaskClose(false);
+            script.setHeroData(heroIds, isHideSkill)
+        } );
+    }
+
     /**
      * 道具使用(信息)界面
      * @param id    道具id
@@ -413,14 +444,13 @@ export class PopMgr extends PopCore  {
      * @param {number} nCounts 召唤个数
      * @param {Function} closeCallBack
      */ 
-    public popSummonSettleWindow(nType : number,nCounts : number ,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    public popSummonSettleWindow(msgData: Msg.SummonHeroA,nType : number,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
             let script = p.getComponent("PopSummonSettle") as PopSummonSettle;
-            script.popWindowType = nType ;
-            script.summonCounts = nCounts;
+            script.initDataFromMsgData(msgData,nType);
             script.setIsMaskClose(isMaskClose);
 
         } );

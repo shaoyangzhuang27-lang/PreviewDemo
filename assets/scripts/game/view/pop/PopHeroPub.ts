@@ -96,7 +96,9 @@ export class PopHeroPub extends PopBase {
 
 
         let diamond =  GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts();
-        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+        this.addPubNotifyHandler();
+        // NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+        // this.node.on('OpenPubNotify', this.addPubNotifyHandler, this);   //自定义事件监听事件
     }
 
 
@@ -144,7 +146,7 @@ export class PopHeroPub extends PopBase {
     public updateImgPropNum()
     {
          //获取酒馆需要信息
-        this._nScorllNum = GameModel.getInstance().getHeroPubModel().getHeroSummonScrollNum();
+        this._nScorllNum = GameModel.getInstance().getHeroPubModel().getBaseSummonScrollNum();
         this._nFriendHeartNum = GameModel.getInstance().getHeroPubModel().getFriendSummonScrollNum();
         if(this._curSummonType == Msg.TSummonType.ESummonType_Basic)
         {
@@ -190,8 +192,8 @@ export class PopHeroPub extends PopBase {
                     else{
                         // MsgMgr.getInstance().getMsgLogin().requestDeviceLoginNew();
                         //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                         this.showSummonSettleWindow("SummonWindow");
-                        //this.onSubmit(Msg.TSummonType.ESummonType_Friend,Msg.TSummonConsumeType.ESummonConsumeType_FriendGift,true);
+                        //  this.showSummonSettleWindow("SummonWindow");
+                        this.onSubmit(Msg.TSummonType.ESummonType_Friend,Msg.TSummonConsumeType.ESummonConsumeType_FriendGift,true);
                     }
                 }
                 else
@@ -209,8 +211,9 @@ export class PopHeroPub extends PopBase {
                         {
                             //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
                              //this.showSummonSettleWindow("SummonWindow");
-                            console.log("pub 钻石");
-                            this.onSubmit(Msg.TSummonType.ESummonType_Basic,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,true);
+                            console.log("pub 一次 钻石 ESummonType_Heroic");
+                            //普通召唤 中的钻石召唤
+                            this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,true);
                         }
                         else
                         {
@@ -245,7 +248,11 @@ export class PopHeroPub extends PopBase {
                         if(GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts() >= XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME)
                         {
                             //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                            this.showSummonSettleWindow("SummonWindow");
+                            // this.showSummonSettleWindow("SummonWindow");
+
+                            console.log("pub 十次 钻石 ESummonType_Heroic");
+                            //普通召唤 中的钻石召唤
+                            this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,false);
                         }
                         else
                         {
@@ -337,7 +344,7 @@ export class PopHeroPub extends PopBase {
 
     public showPromptWindow(title : string, content : string, mode: number)
     {
-        PopMgr.getInstance().popCommonOneWindow(title,content,mode,()=>{console.log("召唤道具不足提示！")});
+        PopMgr.getInstance().popCommonOneWindow(title,content,mode,()=>{PopMgr.getInstance().deleteWindow();});
     } 
 
 
@@ -374,7 +381,7 @@ export class PopHeroPub extends PopBase {
                 if(lab_ten && img_ten)
                 {
                     this.resetResourcesSpriFame("ui/hero_pub/pub_diamond/spriteFrame",img_ten);
-                    lab_ten.string = "x" + String(XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME * 0.9);
+                    lab_ten.string = "x" + String(XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME);
                 }
                
             }
@@ -453,18 +460,30 @@ export class PopHeroPub extends PopBase {
 
     public showSummonSettleWindow(title : string)
     {
-        PopMgr.getInstance().popSummonSettleWindow(XConsts.POP_SUMMON_TYPE.HeroPub,1);
+        //20210322
+        //PopMgr.getInstance().popSummonSettleWindow(XConsts.POP_SUMMON_TYPE.HeroPub,1);
     } 
 
 
-    public notifyPubSummonHeroHandle (data:any){
-        console.log("Notify PubHeroSummon",data);
-        // MsgMgr.getInstance().getMsgLogin().requestGetHeroList();
-        // MsgMgr.getInstance().getMsgLogin().requestGetPlayerData();
-        // SceneMgr.getInstance().changeToBattle();
+    public notifyPubSummonHeroHandle ( msgData: Msg.SummonHeroA){
+
+        console.log("palyer heros", GameModel.getInstance().getHeroesModel().getHeroList());
+        if (msgData.err == Msg.TErrorCode.ERR_OK) {
+            console.log("Notify PubHeroSummon",msgData);
+            console.log("diamond", GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts());
+            // NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+            this.removePubNotifyHandler();
+            PopMgr.getInstance().popSummonSettleWindow(msgData,XConsts.POP_SUMMON_TYPE.HeroPub);
+        }
+        else
+        {
+            //此处消息错误处理 
+        }
     }
     onDestroy(){
-        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+        // NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+        this.removePubNotifyHandler();
+        // this.node.off("OpenPubNotify");
     }
 
     public onSubmit(nSummonType : Msg.TSummonType,nConsumeType : Msg.TSummonConsumeType, bIsOneOrTen : boolean)
@@ -481,6 +500,24 @@ export class PopHeroPub extends PopBase {
     //    }
         console.log("pub submit",summonHeroR);
         MsgMgr.getInstance().getMsgHeroPub().requestSummonHeroR(summonHeroR);
+    }
+
+    public addPubNotifyHandler()
+    {
+        console.log("开启");
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+    }
+
+    public removePubNotifyHandler()
+    {
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+    }
+
+
+    public show()
+    {
+        super.show();
+        this.addPubNotifyHandler();
     }
 }
 
