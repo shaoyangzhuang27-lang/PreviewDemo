@@ -2,7 +2,7 @@
  * @Description: 协议收发处理
  * @Author: xxxxxx
  * @Date: 2021-03-02 13:53:04
- * @LastEditTime: 2021-03-19 16:24:31
+ * @LastEditTime: 2021-03-19 20:20:21
  */
 
 import { MsgCore} from "../../../core/network/MsgCore";
@@ -25,7 +25,7 @@ export class MsgFormation extends MsgBase{
             [Msg.MsgType.TheTakeOffEquipA,[Msg.TakeOffEquipA,this.responeHeroTakeOffEquip,this]],
             [Msg.MsgType.TheHeroBookActiveA,[Msg.HeroBookActiveA,this._responeHeroBookActiveRsp,this]],
             [Msg.MsgType.TheHeroBookLevelUpA,[Msg.HeroBookLevelUpA,this._responeUpgradeHeroBookRsp,this]],
-            
+            [Msg.MsgType.TheGetHeroBookAwardA,[Msg.GetHeroBookAwardA,this._responGetBookHeroRewardRsp,this]],
         ]);
     }
 
@@ -49,23 +49,36 @@ export class MsgFormation extends MsgBase{
     }
     //更换阵容
 
-    //英雄升级,升阶,装备(一键装备,全部卸下)--------------------start
-    public requestHeroLvUp(heroID:number, consumeAdvanceExp:number,consumeMoney:number,newTier:number)
+    //英雄升级,升阶,装备(一键装备,全部卸下)--------------------start    
+    public requestHeroTierUp(heroID:number)
     {
-        console.log("英雄升级请求");
+        console.log("英雄升阶-----请求");
         const buffer_data = Msg.HeroTierUpR.encode({heroID:heroID}).finish();
         this.msgMgr?.sendData(Msg.MsgType.TheHeroTierUpR,buffer_data);
     }
-    public responeHeroLvUp(msgId: number, msgData: any){
-        console.log("英雄升级数据返回",msgId);
-        let newMsgData = msgData as Msg.HeroTierUpR;
+    public responeHeroTierUp(msgId: number, msgData: any){
+        console.log("英雄升阶-----返回",msgId);
+        let newMsgData = msgData as Msg.HeroTierUpA;
         if(newMsgData)
         {
-            //GameModel.getInstance().getFormationModel().setCurFormationChange(newMsgData)      
-        }
-        
+            GameModel.getInstance().getHeroesModel().setHeroTierUp(newMsgData)      
+        }        
     }
 
+    public requestHeroLvUp(heroID:number)
+    {
+        console.log("英雄升级-----请求");
+        const buffer_data = Msg.HeroUpgradeR.encode({heroID:heroID}).finish();
+        this.msgMgr?.sendData(Msg.MsgType.TheSyncHeroUpgrade,buffer_data);
+    }
+    public responeHeroLvUp(msgId: number, msgData: any){
+        console.log("英雄升级-----返回",msgId);
+        let newMsgData = msgData as Msg.HeroUpgradeA;
+        if(newMsgData)
+        {
+            GameModel.getInstance().getHeroesModel().setHeroLvUp(newMsgData)      
+        }        
+    }
 
     public requestHeroLocked(heroID:number, isLocked:boolean){
         console.log("英雄锁定-----请求");
@@ -136,6 +149,7 @@ export class MsgFormation extends MsgBase{
 
             let heroStaticID = HeroData.getHeroStaticIdByBookId(msgData.hbu.heroBookId)
             PopMgr.getInstance().popBookHeroActiveView(heroStaticID)
+            GameModel.getInstance().getHeroesModel().refreshHeroBookProperty()
             //抛通知  界面数据变化
             NotifyMgr.getInstance().notify(NotifyMgr.event_hero_book_active,bookHeroData);
         } 
@@ -145,8 +159,7 @@ export class MsgFormation extends MsgBase{
     public requestUpgradeHeroBook(bookHeroid:number)
     {
         const buffer_data = Msg.HeroBookLevelUpR.encode({heroBookId:bookHeroid}).finish();
-        this.msgMgr?.sendData(Msg.MsgType.TheHeroBookLevelUpR,buffer_data);
-        
+        this.msgMgr?.sendData(Msg.MsgType.TheHeroBookLevelUpR,buffer_data);        
     }
 
     private _responeUpgradeHeroBookRsp(msgId: number, msgData: any)
@@ -162,10 +175,40 @@ export class MsgFormation extends MsgBase{
             bookHeroList.set(bookHeroData.heroBookId,bookHeroData);
             let value = bookHeroList.get(msgData.hbu.heroBookId);
 
-            let heroStaticID = HeroData.getHeroStaticIdByBookId(msgData.hbu.heroBookId)
+            GameModel.getInstance().getHeroesModel().refreshHeroBookProperty()
+            //抛通知  界面数据变化
+            NotifyMgr.getInstance().notify(NotifyMgr.event_hero_book_upgrade,bookHeroData);
+            
+        }
+    }
+
+    //请求领取图鉴奖励
+    public requestGetBookHeroReward(staticId:number)
+    {
+        const buffer_data = Msg.GetHeroBookAwardR.encode({heroStaticID:staticId}).finish();
+        this.msgMgr?.sendData(Msg.MsgType.TheGetHeroBookAwardR,buffer_data);
+    }
+
+    private _responGetBookHeroRewardRsp(msgId:number,msgData:any)
+    {
+        let newMsgData = msgData as Msg.GetHeroBookAwardA;
+        let bookid = HeroData.GetHeroBookID(newMsgData.heroStaticID);
+        let bookHeroList = GameModel.getInstance().getHeroesModel().getBookMap();
+        if(bookHeroList.has(bookid))
+        {
+            let bookHeroData = GameModel.getInstance().getHeroesModel().getBookHeroDataByBookId(bookid);
+            bookHeroData.isGetAward = true;
+            bookHeroList.delete(bookHeroData.heroBookId);
+            bookHeroList.set(bookHeroData.heroBookId,bookHeroData);
+            let value = bookHeroList.get(bookid);
+
+            let heroStaticID = HeroData.getHeroStaticIdByBookId(bookid)
             //抛通知  界面数据变化
             NotifyMgr.getInstance().notify(NotifyMgr.event_hero_book_upgrade,bookHeroData);
         }
+        //获得道具--钻石
+        PopMgr.getInstance().popItemRewardView(Msg.TObjectType.EObject_VRmb, newMsgData.vrmb)
+
     }
 
 

@@ -26,6 +26,16 @@ export class XConsts{
     public static  KIAPNameStarterTenSummon:string = "IAPNameStarterTenSummon";
     public static  KDailyRechargeDayCount:number = 5;
 
+    // 装备合成材料数量
+    public static KEquipComposeMaterialNum: number = 3;
+
+    // 英雄背包每次购买格子个数
+    public static KBuyHeroagNumEach: number = 5;
+    // vip等级对应英雄背包格子数增加
+    public static KVipHeroBagAddition: number[] = []
+    // 英雄背包初始最大 100格子
+    public static KHeroBagMaxNum: number = 100;
+
     public static  OrderStage = 0;
     public static  OrderMainUI = 1;
     public static  OrderPopHide = 2;
@@ -63,14 +73,14 @@ export class XConsts{
     public static GodSkillFull:string[] = new Array<string> ("技能按钮_闪电充满发光", "技能按钮_水球充满发光", "技能按钮_火球充满发光", "技能按钮_毒球充满发光", "技能按钮_光球充满发光", "技能按钮_暗球充满发光");
 
     //常用颜色定义
-    public static KColorGreen:Color =  new Color(61 / 255, 229 / 255, 144 / 255);
-    public static KColorRed:Color = new Color(221 / 255, 27 / 255, 27 / 255);
-    public static KColorGray:Color = new Color(160 / 255, 160 / 255, 160 / 255);
-    //public static Color KColorGray = new Color(200 / 255, 222 / 255, 255 / 255);
-    public static KColorBlack:Color = new Color(71 / 255, 71 / 255, 73 / 255);
-    public static KColorGolden:Color = new Color(234 / 255, 185 / 255, 44 / 255);
-    public static KColorOrange:Color = new Color(234 / 255, 90 / 255, 12 / 255);
-    public static KColorCollegeLevel:Color = new Color(139 / 255,186/255,252/255);
+    public static KColorGreen: Color = new Color(61, 229, 144);
+    public static KColorRed: Color = new Color(221, 27, 27);
+    public static KColorGray: Color = new Color(160, 160, 160);
+    //public static Color KColorGray = new Color(200 , 222 , 255 );
+    public static KColorBlack: Color = new Color(71, 71, 73);
+    public static KColorGolden: Color = new Color(234, 185, 44);
+    public static KColorOrange: Color = new Color(234, 90, 12);
+    public static KColorCollegeLevel: Color = new Color(139, 186, 252);
 
     public static KCampSkillAndTalentsName:string[] = new Array<string> ("UI_None","UI_CampSkillWater","UI_CampSkillFire","UI_CampSkillWood","UI_CampSkillLight","UI_CampSkillDark");
     public static KCampSkillAndTalentsImgName:string[] = new Array<string> ("无", "光环_水球技能", "光环_火球技能", "光环_毒球技能", "光环_光球技能", "光环_暗球技能");
@@ -91,12 +101,12 @@ export class XConsts{
     
     public static  KQualityColor:Color[] = new Array<Color> (
         Color.WHITE, 
-        new Color(187.0 / 255.0, 187.0 / 255.0, 187.0 / 255.0),
-        new Color(120.0 / 255.0, 247.0 / 255.0, 103.0 / 255.0), 
-        new Color(103.0 / 255.0, 195.0 / 255.0, 247.0 / 255.0),
-        new Color(247.0 / 255.0, 103.0 / 255.0, 234.0 / 255.0),
-        new Color(254.0 / 255.0, 216.0 / 255.0, 87.0 / 255.0),
-        new Color(249.0 / 255.0, 206.0 / 255.0, 120.0 / 255.0));
+        new Color(187.0, 187.0, 187.0),
+        new Color(120.0, 247.0, 103.0),
+        new Color(103.0, 195.0, 247.0),
+        new Color(247.0, 103.0, 234.0),
+        new Color(254.0, 216.0, 87.0),
+        new Color(249.0, 206.0, 120.0));
 
     public static KHeroDetailTierSpriteName:string[] = new Array<string> ( "英雄详情_标题背景品质灰", "英雄详情_标题背景品质绿","英雄详情_标题背景品质蓝", "英雄详情_标题背景品质紫", "英雄详情_标题背景品质橙", "英雄详情_标题背景品质红" );
     public static KHeroDetailCampSpriteName:string[] = new Array<string> ( "英雄详情_背景", "英雄详情_背景图4", "英雄详情_背景图5", "英雄详情_背景图1", "英雄详情_背景图2", "英雄详情_背景图3" );
@@ -111,8 +121,7 @@ export class XConsts{
     public static KHeroUpBgSpriteName:string[] = new Array<string> ( "战斗_头像灰上框", "战斗_头像绿上框", "战斗_头像蓝上框", "战斗_头像紫上框", "战斗_头像橙上框", "战斗_头像红上框", "战斗_头像金上框" );
     public static KHeroDownBgSpriteName:string[] = new Array<string> ( "战斗_头像灰下框", "战斗_头像绿下框", "战斗_头像蓝下框", "战斗_头像紫下框", "战斗_头像橙下框", "战斗_头像红下框", "战斗_头像金下框" );
     public static KMythicalgSpriteName:string[] = new Array<string> ( "秘闻副本_冰冷矿坑", "秘闻副本_灼热之地", "秘闻副本_幽暗森林", "秘闻副本_永恒圣地", "秘闻副本_灵魂熔炉", "秘闻副本_潮汐王座", "秘闻副本_燃烧峡谷", "秘闻副本_沉没沼泽", "秘闻副本_金色平原", "秘闻副本_暗影迷宫", "秘闻副本_岩石深渊", "秘闻副本_北风冻原", "秘闻副本_瘟疫之地", "秘闻副本_风暴旋涡", "秘闻副本_堕落神殿", "秘闻副本_时光回廊" );
-    public static GetHeroBgByStar(star:number)    
-    {
+    public static GetHeroBgByStar(star: number) {
         let idx:number = 0;
         if (star < 3)
             idx = star;
@@ -177,23 +186,23 @@ export class XConsts{
     public static KHeroClasses:string[] = new Array<string> ( "无", "无", "UI_Warrior", "UI_Assassin", "UI_Mage", "UI_Rogue", "UI_Pastor" );
     public static KCampColor:Color[] = new Array<Color>(
         Color.WHITE,
-        new Color(103.0 / 255.0, 195.0 / 255.0, 247.0 / 255.0),
-        new Color(244.0 / 255.0, 62.0 / 255.0, 5.0 / 255.0),
-        new Color(120.0 / 255.0, 247.0 / 255.0, 103.0 / 255.0),
-        new Color(249.0 / 255.0, 206.0 / 255.0, 120.0 / 255.0),
-        new Color(247.0 / 255.0, 103.0 / 255.0, 234.0 / 255.0));
+        new Color(103.0, 195.0, 247.0),
+        new Color(244.0, 62.0, 5.0),
+        new Color(120.0, 247.0, 103.0),
+        new Color(249.0, 206.0, 120.0),
+        new Color(247.0, 103.0, 234.0));
 
     public static KMapBgColor:Color[] = new  Array<Color>(
-        new Color(119.0 / 255.0, 231.0 / 255.0, 242.0 / 255.0),
-        new Color(112.0 / 255.0, 154.0 / 255.0, 248.0 / 255.0),
-        new Color(117.0 / 255.0, 48.0 / 255.0, 246.0 / 255.0),
-        new Color(236.0 / 255.0, 44.0 / 255.0, 49.0 / 255.0));
+        new Color(119.0, 231.0, 242.0),
+        new Color(112.0, 154.0, 248.0),
+        new Color(117.0, 48.0, 246.0),
+        new Color(236.0, 44.0, 49.0));
 
     public static KBuffQualityColor:Color[] = new Array<Color>(
         Color.WHITE,
-        new Color(0 / 255.0, 229.0 / 255.0, 255.0 / 255.0),
-        new Color(247.0 / 255.0, 155.0 / 255.0, 250.0 / 255.0),
-        new Color(254.0 / 255.0, 131.0 / 255.0,0));
+        new Color(0, 229.0, 255.0),
+        new Color(247.0, 155.0, 250.0),
+        new Color(254.0, 131.0, 0));
 
     //#region 技能通配符
     public static GetKeyStrSkill(key:string, idx:number = 0) {

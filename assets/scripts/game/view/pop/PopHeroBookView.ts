@@ -76,6 +76,7 @@ export class PopHeroBookView extends PopBase {
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_hero_book_upgrade,this._notifyBookChangeHandle,this);
         
         this._refreshData()
+        this._refreshHBTotalPanel()
     }
 
     private _refreshData()
@@ -96,7 +97,7 @@ export class PopHeroBookView extends PopBase {
             if(record.classes == 1 || record.nextId != 0) { continue; }
             if(record.camp == this._curCampType)
             {
-                let id1st = Number((record.id/1000000).toFixed())
+                let id1st = HeroData.getInitialStarByID(record.id);
                 if(id1st == 5)
                 {
                     if(countLegend >= this._heroStaticIdList.length)
@@ -239,16 +240,16 @@ export class PopHeroBookView extends PopBase {
         PopMgr.getInstance().popExplain(title.cn,desc.cn,()=>{ PopMgr.getInstance().deleteWindow();});
     }
 
-    //加成细节
+    //图鉴总等级
     private _openDetailInfoView()
     {
-        
+        PopMgr.getInstance().popOpenBookPropretyLevelUI()
     }
 
     //加成属性
     private _openPropertyView()
     {
-        
+        PopMgr.getInstance().popOpenBookAllPropretyUI()
     }
 
     //图鉴点击回调
@@ -285,6 +286,47 @@ export class PopHeroBookView extends PopBase {
             let script = bookNode.getComponent("HeroBookCell") as HeroBookCell;
             script.resetBookView(showType);
         }
+        this._refreshHBTotalPanel();
+    }
+
+    private _refreshHBTotalPanel()
+    {
+        let _curLvReqPoint:number = 0;
+		let _nextReqPoint:number = 0;
+		let _maxPoint:number = 0;
+
+        let btp = ValueMgr.getInstance().getTableByName(TableName.book_total_property) as Config.book_total_property;
+        let heroBookLevel = GameModel.getInstance().getHeroesModel().getCurHeroBookLevel()
+        let heroBookPoint = GameModel.getInstance().getHeroesModel().getCurHeroBookPoint()
+        for (let index = 0; index < btp.records.length; index++) {
+            const record = btp.records[index];
+            _maxPoint = Number(record.reqPoint);
+            if(record.id == heroBookLevel)
+				_curLvReqPoint = Number(record.reqPoint);
+			if (Number(record.reqPoint) > heroBookPoint && _nextReqPoint == 0) 
+				_nextReqPoint = Number(record.reqPoint);
+        }
+
+		// foreach (let record in CfgMgr.GetTable<Config.book_total_property> ().Records) {
+		// 	_maxPoint = record.ReqPoint;
+		// 	if(record.Id == PlayerData.instance.HeroBookLevel)
+		// 		_curLvReqPoint = record.ReqPoint;
+		// 	if (record.ReqPoint > PlayerData.instance.HeroBookPoint && _nextReqPoint == 0) 
+		// 		_nextReqPoint = record.ReqPoint;
+		// }
+		// HBTotalLvText.text = "Lv." + _curLvReqPoint;
+		// if(_nextReqPoint == 0)
+		// 	_nextReqPoint = _maxPoint;
+
+		// if (_nextReqPoint == _maxPoint) 
+		// 	HBTotalNextLvText.text = LanguageManager.instance.GetString("UI_LvMax");
+		// else 
+		// 	HBTotalNextLvText.text = "Lv." + _nextReqPoint;
+		
+		// if ((_nextReqPoint - _curLvReqPoint) != 0)
+		// 	HBTotalLvImg.fillAmount = (float) (PlayerData.instance.HeroBookPoint - _curLvReqPoint) / (float) (_nextReqPoint - _curLvReqPoint);
+		// else
+		// 	HBTotalLvImg.fillAmount = 1.0f;
     }
 
     onDestroy()

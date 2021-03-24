@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "ffbde3a8-c7e8-49a5-a92a-bf66e77bf77a",
+  "uuid": "c2977c03-bcf2-4d75-ad77-b83dcc93c929",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "ffbde3a8-c7e8-49a5-a92a-bf66e77bf77a@6c48a",
+      "uuid": "c2977c03-bcf2-4d75-ad77-b83dcc93c929@6c48a",
       "displayName": "公会币",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "ffbde3a8-c7e8-49a5-a92a-bf66e77bf77a"
+        "imageUuidOrDatabaseUri": "c2977c03-bcf2-4d75-ad77-b83dcc93c929"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "ffbde3a8-c7e8-49a5-a92a-bf66e77bf77a@f9941",
+      "uuid": "c2977c03-bcf2-4d75-ad77-b83dcc93c929@f9941",
       "displayName": "公会币",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "ffbde3a8-c7e8-49a5-a92a-bf66e77bf77a@6c48a",
+        "imageUuidOrDatabaseUri": "c2977c03-bcf2-4d75-ad77-b83dcc93c929@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "ffbde3a8-c7e8-49a5-a92a-bf66e77bf77a@f9941"
+    "redirect": "c2977c03-bcf2-4d75-ad77-b83dcc93c929@f9941"
   }
 }

@@ -74,7 +74,7 @@ export class PopEquipSaleView extends PopBase {
             let itemEquipCell = instantiate(res) as Node;
             this.iconNode.addChild(itemEquipCell);
             let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
-            script.setItemsInfo(this._equipId, 0, ItemEquipType.equip, null);
+            script.setItemType(this._equipId, 0, ItemEquipType.equip, null);
         })
     }
 

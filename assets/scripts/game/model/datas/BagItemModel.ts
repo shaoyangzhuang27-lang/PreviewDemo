@@ -21,8 +21,7 @@ export class BagItemModel extends BaseModel{
     //玩家所有碎片信息合集
     private _fragmentSynthesisInfoList : Array<XStruct.fragment_synthesis_info.IRecord> = []; //new Array<XStruct.fragment_synthesis_info.IRecord>();
     
-    public initBagItemList(msg:Msg.GetPlayerDataA)
-    {
+    public initBagItemList(msg: Msg.GetPlayerDataA) {
         this._bagItemList.clear();
         this._bagEquipList.clear();
         this._fragmentSynthesisInfoList = [];
@@ -53,8 +52,7 @@ export class BagItemModel extends BaseModel{
      * @param msg  Msg.GetPlayerDataA玩家信息
      */
 
-    public initFragmentSynthesisInfoList(msg : Msg.GetPlayerDataA)
-    {
+    public initFragmentSynthesisInfoList(msg: Msg.GetPlayerDataA) {
 
         for(let key in msg.fragmentList){
             let info : XStruct.fragment_synthesis_info.IRecord = {
@@ -135,43 +133,12 @@ export class BagItemModel extends BaseModel{
     }
     
     /**
-     * @description: 增加装备到背包
-     * @param {number} equipID 装备id
-     * @param {number} num 增加数量
-     */ 
-    public addEquipBag( equipID:number, num:number) {
-        let tmpNum = this._bagEquipList.get(equipID);
-        if (tmpNum)
-            this._bagEquipList.set(equipID, tmpNum+num);
-        else
-            this._bagEquipList.set(equipID, num);
-
-        // UINotificationCenter.Instance ().PostNotification ((int) NotificationMsg.RPCity);
-    }
-
-     /**
-     * @description: 从背包减少装备
-     * @param {number} equipID 装备id
-     * @param {number} num 减少数量
-     */ 
-    public subEquipBag( equipID:number, num:number) {
-        let tmpNum = this._bagEquipList.get(equipID);
-        if (tmpNum){            
-            if(num < tmpNum){
-                this._bagEquipList.set(equipID, tmpNum-num);
-            }else{
-                this._bagEquipList.delete(equipID);
-            }
-            // UINotificationCenter.Instance ().PostNotification ((int) NotificationMsg.RPCity);
-        }
-    }
-    /**
      * @description: 获得背包中某位置的最好装备ID
      * @param {Msg.TEquipLocationType} locType
      */
     getBestEquipInBag(locType: Msg.TEquipLocationType ): Config.equip.Record | null {
         let bestEquipRecord : Config.equip.Record | null  = null;
-        this._bagEquipList.forEach((num, equipID, m)=>{
+        for (let [equipID, num] of this._bagEquipList) {
             let recordTmp = ValueMgr.getInstance().getItemByField(TableName.equip, equipID); 
             if (recordTmp){
                 let record=  recordTmp as Config.equip.Record;
@@ -186,14 +153,12 @@ export class BagItemModel extends BaseModel{
                     }
                 }
             }
-        });
-        
+        }
         return bestEquipRecord;
     }
 
     //获取背包道具
-    public getBagItemList()
-    {
+    public getBagItemList() {
         return this._bagItemList;
     }    
 
@@ -201,8 +166,7 @@ export class BagItemModel extends BaseModel{
      * 
      * @returns 获取背包所有装备
      */
-    public getBagEquipList()
-    {
+    public getBagEquipList() {
         return this._bagEquipList;
     }
 
@@ -216,52 +180,42 @@ export class BagItemModel extends BaseModel{
     public getAllGoods(){
         let playerInfo = this._gameModel.getPlayerModel().getPlayerInfo()
         //英雄升级点
-        if(playerInfo.heroUpgradeExp> 0)
-        {
+        if (playerInfo.heroUpgradeExp > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_UpgradePoint,0, Number(playerInfo.heroUpgradeExp)]);
         }
 
         //英雄进阶点
-        if(playerInfo.heroAdvanceExp> 0)
-        {
+        if (playerInfo.heroAdvanceExp > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_AdvanceExp, 0, Number(playerInfo.heroAdvanceExp)]);
         }
         //魔法尘
-        if(playerInfo.magicDust> 0)
-        {
+        if (playerInfo.magicDust > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_MagicDust, 0, Number(playerInfo.magicDust)]);
         }
         //召唤卷轴
-        if(playerInfo.basicSummonScroll> 0)
-        {
+        if (playerInfo.basicSummonScroll > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_BaseSummonScroll, 0, Number(playerInfo.basicSummonScroll)]);
         }
-        if(playerInfo.heroicSummonScroll> 0)
-        {
+        if (playerInfo.heroicSummonScroll > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_HeroicSummonScroll, 0, Number(playerInfo.heroicSummonScroll)]);
         }
         //任务卷轴
-        if(playerInfo.basicHeroMissionScroll> 0)
-        {
+        if (playerInfo.basicHeroMissionScroll > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_BaseMissionScroll, 0, Number(playerInfo.basicHeroMissionScroll)]);
         }
-        if(playerInfo.heroicHeroMissionScroll> 0)
-        {
+        if (playerInfo.heroicHeroMissionScroll > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_HeroicMissionScroll, 0, Number(playerInfo.heroicHeroMissionScroll)]);
         }
         //灵魂石
-        if(playerInfo.soulStone> 0)
-        {
+        if (playerInfo.soulStone > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_SoulStone, 0, Number(playerInfo.soulStone)]);
         }
         //奇迹宝石
-        if(playerInfo.miracleGem> 0)
-        {
+        if (playerInfo.miracleGem > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_MiracleGem, 0, Number(playerInfo.miracleGem)]);
         }
         //奇迹碎片
-        if(playerInfo.miracleShard> 0)
-        {
+        if (playerInfo.miracleShard > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_MiracleShard, 0, Number(playerInfo.miracleShard)]);
         }
         //PVP战书
@@ -271,56 +225,45 @@ export class BagItemModel extends BaseModel{
         //     this._initPrefab(res,0,bagModel.getPVPTicket(),Msg.TObjectType.EObject_PVPTicket);
         // }
         //筹码
-        if(playerInfo.normalChip> 0)
-        {
+        if (playerInfo.normalChip > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_NormalChip, 0, Number(playerInfo.normalChip)]);
         }
-        if(playerInfo.advancedChip> 0)
-        {
+        if (playerInfo.advancedChip > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_AdvancedChip, 0, Number(playerInfo.advancedChip)]);
         }
         //声望
-        if(playerInfo.reputation> 0)
-        {
+        if (playerInfo.reputation > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_Reputation, 0, Number(playerInfo.reputation)]);
         }
         //幸运硬币
-        if(playerInfo.luckyCoin> 0)
-        {
+        if (playerInfo.luckyCoin > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_LuckyCoin, 0, Number(playerInfo.luckyCoin)]);
         }
         //试炼点
-        if(playerInfo.trailPoint> 0)
-        {
+        if (playerInfo.trailPoint > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_TrailPoint, 0, Number(playerInfo.trailPoint)]);
         }
         //公会币
-        if(playerInfo.guildGold> 0)
-        {
+        if (playerInfo.guildGold > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_GuildCoin, 0, Number(playerInfo.guildGold)]);
         }
         //宠物资源
-        if(playerInfo.PetExp> 0)
-        {
+        if (playerInfo.PetExp > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_PetExp, 0, Number(playerInfo.PetExp)]);
         }
-        if(playerInfo.PetStone> 0)
-        {
+        if (playerInfo.PetStone > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_PetStone, 0, Number(playerInfo.PetStone)]);
         }
         //心愿宝石
-        if(playerInfo.WonderGem> 0)
-        {
+        if (playerInfo.WonderGem > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_WonderGem, 0, Number(playerInfo.WonderGem)]);
         }
         //锻造石
-        if(playerInfo.forgeStone> 0)
-        {
+        if (playerInfo.forgeStone > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_ForgeStone, 0, Number(playerInfo.forgeStone)]);            
         }
         //符文水晶
-        if(playerInfo.CollegeMoney> 0)
-        {
+        if (playerInfo.CollegeMoney > 0) {
             this._allItemList.push([Msg.TObjectType.EObject_CollegeMoney, 0, Number(playerInfo.CollegeMoney)]);
         }
 
@@ -333,20 +276,15 @@ export class BagItemModel extends BaseModel{
      * @param itemType 类型  区分装备、道具
      * @returns 
      */
-    public getItemCountByKey(key:number,itemType:number):number
-    {
+    public getItemCountByKey(key: number, itemType: number): number {
         let count:number = 0;
-        if(itemType == ItemEquipType.goods)
-        {
-            if(this._bagItemList.has(key))
-            {
+        if (itemType == ItemEquipType.goods) {
+            if (this._bagItemList.has(key)) {
                 count = Number(this._bagItemList.get(key));
             }
         }
-        else if(itemType == ItemEquipType.equip)
-        {
-            if(this._bagEquipList.has(key))
-            {
+        else if (itemType == ItemEquipType.equip) {
+            if (this._bagEquipList.has(key)) {
                 count = Number(this._bagEquipList.get(key));
             }
         }
@@ -359,10 +297,8 @@ export class BagItemModel extends BaseModel{
      * @param objType  道具类型值
      * @returns 
      */
-    public getItemDescByType(objType:Msg.TObjectType)
-    {
-        if(this._notSellItemStingList.has(objType))
-        {
+    public getItemDescByType(objType: Msg.TObjectType) {
+        if (this._notSellItemStingList.has(objType)) {
             let strArr = this._notSellItemStingList.get(objType) as Array<string>
             return strArr
         }
@@ -376,15 +312,12 @@ export class BagItemModel extends BaseModel{
      * @param key 装备道具id
      * @param count 数量
      */
-    public changeBagItemNumber(key:number,count:number)
-    {
-        if(this._bagItemList.has(key))
-        {
+    public changeBagItemNumber(key: number, count: number) {
+        if (this._bagItemList.has(key)) {
             let oldCount = Number(this._bagItemList.get(key));      
             let newCount = oldCount - count;
             this._bagItemList.delete(key)  
-            if(newCount != 0)
-            {
+            if (newCount != 0) {
                 this._bagItemList.set(key,newCount)
             }
             NotifyMgr.getInstance().notify(NotifyMgr.event_equip_item_change,[ItemEquipType.goods,key]);
@@ -394,23 +327,29 @@ export class BagItemModel extends BaseModel{
     /**
      * //改变背包装备的数量
      * @param key 装备道具id
-     * @param count 数量
+     * @param count 数量负为补充数量，正为消耗数量
      */
-     public changeBagEquipNumber(key:number,count:number)
-     {
-         if(this._bagEquipList.has(key))
-         {
+    public changeBagEquipNumber(key: number, count: number) {
+        if (this._bagEquipList.has(key)) {
              let oldCount = Number(this._bagEquipList.get(key));      
              let newCount = oldCount - count;
-             this._bagEquipList.delete(key)  
-             if(newCount != 0)
-             {
+
+            if (newCount != 0) {
                  this._bagEquipList.set(key,newCount)
              }
+            else {
+                this._bagEquipList.delete(key)
+            }
              NotifyMgr.getInstance().notify(NotifyMgr.event_equip_item_change,[ItemEquipType.equip,key]);
             //  NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
          }        
+        else {
+            if (count < 0) { //当卸下装备的时候，背包里面没有该装备的时候，加一个出来 
+                this._bagEquipList.set(key, -count)
+                NotifyMgr.getInstance().notify(NotifyMgr.event_equip_item_change, [ItemEquipType.equip, key]);
      }
+        }
+    }
 
 
     ////////////////////////////////////////
@@ -418,14 +357,12 @@ export class BagItemModel extends BaseModel{
     ///////////////////////////////////////
     
      //战书数量
-    public _getPVPTicket():number
-    {
+    public _getPVPTicket(): number {
         return 0;
     }
 
 
-    private _setNotSellItemStringMap()
-    {
+    private _setNotSellItemStringMap() {
         this._notSellItemStingList.clear()
 
         let templist:string[] = new Array<string>();
@@ -521,8 +458,7 @@ export class BagItemModel extends BaseModel{
     }
 
     //获取碎片合成信息
-    public getFragmentSynthesisInfoList()
-    {
+    public getFragmentSynthesisInfoList() {
         return this._fragmentSynthesisInfoList;
     }
 

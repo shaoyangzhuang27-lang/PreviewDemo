@@ -3,6 +3,7 @@ import { PopSimple } from "../view/pop/PopSimple";
 import { PopRisingStarTower } from "../view/pop/PopRisingStarTower";
 import { PopStarUpResult } from "../view/pop/PopStarUpResult";
 import { PopOneKeyStarUp } from "../view/pop/PopOneKeyStarUp";
+import { PopDecompose } from "../view/pop/PopDecompose";
 import { PopCommonOne } from "../view/pop/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
@@ -27,8 +28,12 @@ import { PopBookUpGrade } from '../view/pop/PopBookUpgrade';
 import { PopMultiItemReward } from "../view/pop/PopMultiItemReward";
 import { PopBookHeroDetail } from '../view/pop/PopBookHeroDetail';
 import { PopHeroStoryUI } from '../view/pop/PopHeroStoryUI';
-export class PopMgr extends PopCore  {
+import { PopForge } from '../view/pop/PopForge';
+import { PopBookProUI } from '../view/pop/PopBookProUI';
+import { TipCampOrCareer } from '../view/TipCampOrCareer';
+import { PopHaloView } from '../view/pop/PopHaloView';
 
+export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
     public static getInstance() {
         return this._instance;
@@ -108,6 +113,22 @@ export class PopMgr extends PopCore  {
             script.setCurrentHeroId(heroId);
         } );
     }
+
+    /**
+     * @description: 弹出融魂祭坛界面 
+     * @param {boolean} isMaskClose
+     */
+    public popDecomposeView(isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_decompose', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopDecompose") as PopDecompose;
+            script.setIsMaskClose(isMaskClose);
+        } );
+    }
+
 
     /**
      * @description: 弹出升星塔界面界面 
@@ -245,6 +266,24 @@ export class PopMgr extends PopCore  {
         });
     }
 
+    /**
+     * @description: 英雄阵营克制或者职业说明弹窗tip
+     * @param {Vec3} pos
+     * @param {number} career
+     * @param {number} camp
+     */
+    public tipCampOrCareerWindow(pos:Vec3, career:number, camp:number =0){
+        resources.load('prefabs_ui/pop/tip_camp_or_career', (err:any,res:any)=>{
+            let p = instantiate( res ) as Node;
+            this.parent?.addChild(p);
+            p.setSiblingIndex(XConsts.OrderTip);
+
+            let script = p.getComponent("TipCampOrCareer") as TipCampOrCareer;
+            script.setWinPos(pos, 1);
+            script.setData(career, camp);
+            script.setIsWinClose(true);
+        });
+    }
 
     //弹出提示窗放这里-------------------------------------------------
 
@@ -257,6 +296,19 @@ export class PopMgr extends PopCore  {
 
             let script = p.getComponent("PopHeroBookView") as PopHeroBookView;
             script.setIsMaskClose(false);
+        } );
+    }
+
+    //弹出光环界面
+    public popHaloView(heroIds:[]=[], isHideSkill:boolean=false)
+    {
+        resources.load('prefabs_ui/pop/pop_halo', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopHaloView") as PopHaloView;
+            script.setIsMaskClose(false);
+            script.setHeroData(heroIds, isHideSkill)
         } );
     }
 
@@ -454,13 +506,13 @@ export class PopMgr extends PopCore  {
      * @param {number} equipId 装备Id
      * @param {Function} closeCallBack
      */    
-    public popHeroEquipReplaceWindow(heroId: number, equipId:number=0, closeCallBack:Function|null = null){
+    public popHeroEquipReplaceWindow(heroId: number, locationType:Msg.TEquipLocationType | 0, closeCallBack:Function|null = null){
 
         resources.load('prefabs_ui/pop/pop_replaceequip', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
             let script = p.getComponent("PopHeroEquipReplace") as PopHeroEquipReplace;
-            script.setEquipData(heroId, equipId);
+            script.setEquipData(heroId, locationType);
             script.setCloseCallBack(closeCallBack);
         } );
     }
@@ -512,8 +564,50 @@ export class PopMgr extends PopCore  {
             this.pushWindow(p);
 
             let script = p.getComponent("PopHeroStoryUI") as PopHeroStoryUI;
-            script.setBookData(sid);
+            script.setStoryData(sid);
 
         } );
     }
+
+    /**
+     * 锻造屋
+     * @param p1
+     */
+    public popForge() {
+        resources.load('prefabs_ui/pop/pop_forge', (err: any, res: any) => {
+            let p = instantiate(res);
+            this.pushWindow(p)
+            let script = p.getComponent("PopForge") as PopForge;
+            script.setIsMaskClose(true);
+            // script.setCloseCallBack(()=>{
+            //     console.log("关闭窗口回调")
+            // });
+        });
+    }
+
+    /**
+     * 打开图鉴总加成属性界面
+     */
+    public popOpenBookAllPropretyUI()
+    {
+        resources.load('prefabs_ui/pop/pop_bookallproperty', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            // let script = p.getComponent("PopBookProUI") as PopBookProUI;
+        } );
+    }
+
+    /**
+     * 打开图鉴属性总等级加成界面
+     */
+     public popOpenBookPropretyLevelUI()
+     {
+         resources.load('prefabs_ui/pop/pop_bookallpropretyview', (err:any,res:any)=>{
+             let p = instantiate( res );
+             this.pushWindow(p);
+ 
+             // let script = p.getComponent("PopBookProUI") as PopBookProUI;
+         } );
+     }
 }

@@ -127,7 +127,7 @@ export class HeroIcon extends Component {
         }
         
         firstid = firstid || Number(this._heroData?.getStaticID());
-        let id1st = Number((firstid/1000000).toFixed())
+        let id1st = HeroData.getInitialStarByID(firstid);
         let frameName:string = XConsts.GetQualityBgByStar(id1st);
         if(firstid == 5 || this._heroData?.isRoleHero())    //传奇英雄、主角才需要更换外框
         {

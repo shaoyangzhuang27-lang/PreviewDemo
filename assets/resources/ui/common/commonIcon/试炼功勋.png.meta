@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "9a3c6aba-f878-4edf-9476-b5ddd4f78c2f",
+  "uuid": "6e2bf05e-18f7-4018-a41e-05ef577eae36",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "9a3c6aba-f878-4edf-9476-b5ddd4f78c2f@6c48a",
+      "uuid": "6e2bf05e-18f7-4018-a41e-05ef577eae36@6c48a",
       "displayName": "试炼功勋",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "9a3c6aba-f878-4edf-9476-b5ddd4f78c2f"
+        "imageUuidOrDatabaseUri": "6e2bf05e-18f7-4018-a41e-05ef577eae36"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "9a3c6aba-f878-4edf-9476-b5ddd4f78c2f@f9941",
+      "uuid": "6e2bf05e-18f7-4018-a41e-05ef577eae36@f9941",
       "displayName": "试炼功勋",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "9a3c6aba-f878-4edf-9476-b5ddd4f78c2f@6c48a",
+        "imageUuidOrDatabaseUri": "6e2bf05e-18f7-4018-a41e-05ef577eae36@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "9a3c6aba-f878-4edf-9476-b5ddd4f78c2f@f9941"
+    "redirect": "6e2bf05e-18f7-4018-a41e-05ef577eae36@f9941"
   }
 }

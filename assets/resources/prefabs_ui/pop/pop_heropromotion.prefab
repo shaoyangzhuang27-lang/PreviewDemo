@@ -9513,7 +9513,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_equip_3",
+    "_name": "btn_equip_5",
     "_objFlags": 0,
     "_parent": {
       "__id__": 387
@@ -10234,7 +10234,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_equip_4",
+    "_name": "btn_equip_3",
     "_objFlags": 0,
     "_parent": {
       "__id__": 387
@@ -10689,7 +10689,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_equip_5",
+    "_name": "btn_equip_4",
     "_objFlags": 0,
     "_parent": {
       "__id__": 387
@@ -20786,13 +20786,13 @@
       "__id__": 408
     },
     "btn_equip_3": {
-      "__id__": 434
-    },
-    "btn_equip_4": {
       "__id__": 466
     },
-    "btn_equip_5": {
+    "btn_equip_4": {
       "__id__": 486
+    },
+    "btn_equip_5": {
+      "__id__": 434
     },
     "btn_all_unload": {
       "__id__": 540

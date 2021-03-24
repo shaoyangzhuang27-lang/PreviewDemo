@@ -21,8 +21,27 @@ export class HeroData extends BaseHeroData {
 
     private _talentSkillPropertyList = new Map<Msg.THeroPropertyType, number>();
     private _suitActiveList = new Map<number, number>();
-    private _gameModel: GameModel = null as unknown as GameModel;//待修改
+    private _gameModel: GameModel = null as unknown as GameModel;//待修改    
+    private _crystalLevel: number = 0;
 
+    
+    /**
+     * @description: 拷贝一个HeroData
+     * @param {HeroData} hd
+     */
+    public CopyHeroData( hd:HeroData) {
+        this._heroInfo = new Msg.HeroInfo(hd._heroInfo);
+        this._record = new Config.heroes.Record(hd._record);
+        this._recordSkill = new Config.skill.Record(hd._recordSkill);
+        this._equipOnList = new Map<Msg.TEquipLocationType, Config.equip.Record>(hd._equipOnList);
+        
+        this._crystalLevel = hd._crystalLevel;
+        this._crystalPropertyList = new Map<Msg.THeroPropertyType, number>(hd._crystalPropertyList);
+
+        this.calcTalentSkillProperty();
+        this.refreshEquipProperty();
+        return this;
+    }
 
     public initDataByKnight(pi: Msg.PlayerInfo, gameModel: GameModel) {
         this._heroInfo.id = 0;
@@ -50,7 +69,7 @@ export class HeroData extends BaseHeroData {
         for (let index = 0; index < this._heroInfo.equipOnList.length; index++) {
             let equipId = this._heroInfo.equipOnList[index];
             let equipRecord = ValueMgr.getInstance().getItemByField(TableName.equip, equipId) as Config.equip.Record;
-            this._equipOnList.set(equipId as number, equipRecord);
+            this._equipOnList.set(equipRecord.locationType, equipRecord);
         }
         this._crystalPropertyList = new Map<Msg.THeroPropertyType, number>();
         this.setCrystalInfo(this._heroInfo.crystal?.level as number, this._heroInfo.crystal?.propertyList as Msg.THeroPropertyType[])
@@ -58,8 +77,6 @@ export class HeroData extends BaseHeroData {
         this.refreshEquipProperty();
     }
 
-
-    private _crystalLevel: number = 0;
     public setCrystalInfo(level: number, proList: Array<Msg.THeroPropertyType>) {
         this._crystalLevel = level;
         this._crystalPropertyList.clear();
@@ -130,31 +147,39 @@ export class HeroData extends BaseHeroData {
 
     public get level() {
         if (!this.isRoleHero()) {
-            return 1//Mathf.Min(XLuaFunc.instance.KHeroMaxLevelForTier[_record.Star], PlayerData.instance.HeroCollegeLevel);
+            return Math.min(XShare.getInstance().KHeroMaxLevelForTier[this._record.star], 1);//学院等级待处理
+            //Mathf.Min(XLuaFunc.instance.KHeroMaxLevelForTier[_record.Star], PlayerData.instance.HeroCollegeLevel);
         } else
             return this._heroInfo.level;
     }
     public set level(_lv: number) {
-        if (this.isRoleHero()) {
-            this._heroInfo.level = _lv;
-        }
-        else {
-            //KHeroMaxLevelForTier
-        }
+        this._heroInfo.level = _lv;
     }
 
     public get tier() {
         if (!this.isRoleHero()) {
-            return 1;//this.GetMaxTier();// Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);            
+            return  Math.min(this.GetMaxTier(), 1); //学院品阶待处理
+            // Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);            
         } else
             return this._heroInfo.tier;
     }
     public set tier(_tier: number) {
         if (!this.isRoleHero()) {
-            this._record.star= _tier;
+            this._record.star= _tier;//todo
         } else {
             this._heroInfo.tier = _tier;
         }
+    }
+
+    public isMaxLevel() {
+        return this.level >= this.getMaxLevel();
+    }
+
+    public getMaxLevel() {
+        if (this.tier >= XShare.getInstance().KMaxHeroTier)
+            return XShare.getInstance().KHeroMaxLevelForTier[this._record.star];
+        else
+            return XShare.getInstance().KHeroMaxLevelForTier[this.tier];
     }
 
     public GetMaxTier() {
@@ -172,11 +197,7 @@ export class HeroData extends BaseHeroData {
     }
 
     public get equipOnList() {
-
-        if (!this.isRoleHero()) {
-            return new Map<Msg.TEquipLocationType, Config.equip.Record>();// Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);
-        } else
-            return this._equipOnList;
+        return this._equipOnList;
     }
     public get record() {
         return this._record
@@ -366,6 +387,14 @@ export class HeroData extends BaseHeroData {
         if (this._suitPropertyList.has(propertyType))
             return this._suitPropertyList.get(propertyType) as number;
         return 0;
+    }
+
+    public getEquipPropertyList() {
+        return this._equipPropertyList;
+    }
+    
+    public getSuitPropertyList() {
+        return this._suitPropertyList;
     }
 
     /*
@@ -830,6 +859,13 @@ export class HeroData extends BaseHeroData {
             heroStaticID += 10000;
         }
         return heroStaticID;
+    }
+
+    //根据英雄id获取起始星级
+    public static getInitialStarByID(heroid:number):number
+    {
+        let starNum:number = Number((heroid/1000000).toFixed())
+        return starNum
     }
 
     private getHeroBookPropertyByHero(proType: Msg.THeroPropertyType) {
