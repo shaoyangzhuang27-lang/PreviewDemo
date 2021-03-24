@@ -1,0 +1,124 @@
+{
+  "ver": "2.0.10",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "5bbb1a7b-60d9-442d-9009-a6418cc35387",
+  "files": [],
+  "subMetas": {
+    "33728": {
+      "importer": "gltf-embeded-image",
+      "uuid": "5bbb1a7b-60d9-442d-9009-a6418cc35387@33728",
+      "displayName": "",
+      "id": "33728",
+      "name": "Map #16.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "504af": {
+      "importer": "gltf-mesh",
+      "uuid": "5bbb1a7b-60d9-442d-9009-a6418cc35387@504af",
+      "displayName": "",
+      "id": "504af",
+      "name": "pingtai20_01.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d0482": {
+      "importer": "texture",
+      "uuid": "5bbb1a7b-60d9-442d-9009-a6418cc35387@d0482",
+      "displayName": "",
+      "id": "d0482",
+      "name": "Map #16.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/model/map/idle/dimian.tga"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "50a43": {
+      "importer": "gltf-material",
+      "uuid": "5bbb1a7b-60d9-442d-9009-a6418cc35387@50a43",
+      "displayName": "",
+      "id": "50a43",
+      "name": "Material #1129.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "aec4a": {
+      "importer": "gltf-scene",
+      "uuid": "5bbb1a7b-60d9-442d-9009-a6418cc35387@aec4a",
+      "displayName": "",
+      "id": "aec4a",
+      "name": "idle_ground_20_01.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #16",
+        "remap": "db://assets/resources/model/map/idle/dimian.tga",
+        "uri": "5bbb1a7b-60d9-442d-9009-a6418cc35387@33728"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "redirect": "5bbb1a7b-60d9-442d-9009-a6418cc35387@aec4a",
+    "assetFinder": {
+      "meshes": [
+        "5bbb1a7b-60d9-442d-9009-a6418cc35387@504af"
+      ],
+      "skeletons": [],
+      "textures": [
+        "5bbb1a7b-60d9-442d-9009-a6418cc35387@d0482"
+      ],
+      "materials": [
+        "5bbb1a7b-60d9-442d-9009-a6418cc35387@50a43"
+      ],
+      "scenes": [
+        "5bbb1a7b-60d9-442d-9009-a6418cc35387@aec4a"
+      ]
+    }
+  }
+}
