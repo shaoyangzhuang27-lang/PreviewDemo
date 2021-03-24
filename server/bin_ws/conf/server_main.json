@@ -1,4 +1,0 @@
-{"LogLevel":"debug","LogPath":"./log/","MaxMsgLen":65535,"PendingWriteNum":2000,
-"MaxConnNum":20000,"WSAddr":":17183","CertFile":"","KeyFile":"","TCPAddr":":17173","LenMsgLen":2,
-"LittleEndian":true,"TCPAddrTest":":17174","KCPAddr":""
-,"KCPMode":0,"ConsolePort":28283,"ProfilePath":"","MaxServerID":7,"RepeateLoginMode":0}

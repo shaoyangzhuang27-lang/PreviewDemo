@@ -1,0 +1,1321 @@
+2021/03/23 10:13:22 [release] Leaf 1.1.2 starting up
+2021/03/23 10:13:22 [release] db OnInit
+2021/03/23 10:13:22 [release] game OnInit
+2021/03/23 10:13:22 [debug  ] Lua load xshare.lua finished
+2021/03/23 10:13:22 [debug  ] KLuaCMD5: eceefc83ba7f4a64386128389388a25c
+2021/03/23 10:13:22 [debug  ] KChannelString bk
+2021/03/23 10:13:22 [debug  ] KIFixMD5: 
+2021/03/23 10:13:22 [debug  ] KRUZMD5: 
+2021/03/23 10:13:22 [debug  ] game init handler
+2021/03/23 10:13:22 [debug  ] 4 star total weight: 60
+2021/03/23 10:13:22 [debug  ] 5 star total weight: 271
+2021/03/23 10:13:22 [debug  ] 1 star total weight: 6
+2021/03/23 10:13:22 [debug  ] 2 star total weight: 6
+2021/03/23 10:13:22 [debug  ] 3 star total weight: 75
+2021/03/23 10:13:22 [debug  ] ActivityMgr LoadAllActivity
+2021/03/23 10:13:22 [debug  ] >>>>Start Loading DeviceUsers
+2021/03/23 10:13:22 [debug  ] Start Load DeviceUsers
+2021/03/23 10:13:22 [debug  ] End Load All DeviceUsers (Loaded:1)
+2021/03/23 10:13:22 [debug  ] >>>>Finish Loading DeviceUsers
+2021/03/23 10:13:22 [debug  ] >>>>Start Loading Accounts
+2021/03/23 10:13:22 [debug  ] Start Load Accounts
+2021/03/23 10:13:22 [debug  ] End Load All Accounts (Loaded:0)
+2021/03/23 10:13:22 [debug  ] >>>>Finish Loading Accounts
+2021/03/23 10:13:22 [debug  ] >>>>Start Loading InitPlayers
+2021/03/23 10:13:22 [debug  ] Start Preload Players
+2021/03/23 10:13:22 [debug  ] End Preload Player UseTime:0s
+2021/03/23 10:13:22 [debug  ] Start Load All Players 51
+2021/03/23 10:13:22 [debug  ] *****************************
+2021/03/23 10:13:23 [debug  ] End Load All Player (Loaded:51) UseTime:1s
+2021/03/23 10:13:23 [debug  ] >>>>Finish Loading InitPlayers
+2021/03/23 10:13:23 [debug  ] >>>>Start Loading BanPlayers
+2021/03/23 10:13:23 [debug  ] >>>>Finish Loading BanPlayers
+2021/03/23 10:13:23 [debug  ] >>>>Start Loading LoadOrderNear
+2021/03/23 10:13:23 [debug  ] Start Load Orders
+2021/03/23 10:13:23 [debug  ] End Preload Order UseTime:0s
+2021/03/23 10:13:23 [debug  ] >>>>Finish Loading LoadOrderNear
+2021/03/23 10:13:23 [debug  ] >>>>Start Loading LoadAllGlobalMail
+2021/03/23 10:13:23 [debug  ] >>>>Finish Loading LoadAllGlobalMail
+2021/03/23 10:13:23 [debug  ] >>>>Start Loading LoadAllGiftCode
+2021/03/23 10:13:23 [debug  ] >>>>Finish Loading LoadAllGiftCode
+2021/03/23 10:13:23 [debug  ] >>>>Start Check PlayerData
+2021/03/23 10:13:23 [debug  ] >>>>Finish Check PlayerData
+2021/03/23 10:13:23 [debug  ] >>>>Start Init Rank Data
+2021/03/23 10:13:23 [debug  ] >>>>Finish Init Rank Data
+2021/03/23 10:13:23 [debug  ] LoadGuildAll: begin
+2021/03/23 10:13:23 [debug  ] LoadGuildAll: end. num=0
+2021/03/23 10:13:23 [debug  ] LoadGuildNotice: begin
+2021/03/23 10:13:23 [debug  ] LoadGuildNotice: end. num=0
+2021/03/23 10:13:23 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13323680370000, string= rank num:, int32=0)
+2021/03/23 10:13:23 [release] BokePayControllerOnInit
+2021/03/23 10:13:23 [debug  ] Next Daily Update Time: 2021-03-24 00:00:00 +0800 CST
+2021/03/23 10:13:23 [debug  ] Next Weekly Update Time: 2021-03-29 00:00:00 +0800 CST
+2021/03/23 10:13:23 [debug  ] Next Monthly Update Time: 2021-04-01 00:00:00 +0800 CST
+2021/03/23 10:13:23 [debug  ] Next AdvArena Update Time: 2021-03-29 00:00:00 +0800 CST
+2021/03/23 10:13:23 [debug  ] ActivityMgr.InitRank: begin
+2021/03/23 10:13:23 [debug  ] ActivityMgr.InitRank: end
+2021/03/23 10:13:23 [release] gate OnInit
+2021/03/23 10:13:23 [release] login OnInit
+2021/03/23 10:13:23 [release] Create WSServer :17183
+2021/03/23 10:13:23 [release] Create TCPServer :17173
+2021/03/23 10:13:25 [debug  ] Load player :100%!(NOVERB)
+2021/03/23 10:54:24 [release] Leaf 1.1.2 starting up
+2021/03/23 10:54:24 [release] db OnInit
+2021/03/23 10:54:24 [release] game OnInit
+2021/03/23 10:54:25 [debug  ] Lua load xshare.lua finished
+2021/03/23 10:54:25 [debug  ] KLuaCMD5: eceefc83ba7f4a64386128389388a25c
+2021/03/23 10:54:25 [debug  ] KChannelString bk
+2021/03/23 10:54:25 [debug  ] KIFixMD5: 
+2021/03/23 10:54:25 [debug  ] KRUZMD5: 
+2021/03/23 10:54:25 [debug  ] game init handler
+2021/03/23 10:54:25 [debug  ] 2 star total weight: 6
+2021/03/23 10:54:25 [debug  ] 3 star total weight: 75
+2021/03/23 10:54:25 [debug  ] 4 star total weight: 60
+2021/03/23 10:54:25 [debug  ] 5 star total weight: 271
+2021/03/23 10:54:25 [debug  ] 1 star total weight: 6
+2021/03/23 10:54:25 [debug  ] ActivityMgr LoadAllActivity
+2021/03/23 10:54:25 [debug  ] >>>>Start Loading DeviceUsers
+2021/03/23 10:54:25 [debug  ] Start Load DeviceUsers
+2021/03/23 10:54:25 [debug  ] End Load All DeviceUsers (Loaded:2734)
+2021/03/23 10:54:25 [debug  ] >>>>Finish Loading DeviceUsers
+2021/03/23 10:54:25 [debug  ] >>>>Start Loading Accounts
+2021/03/23 10:54:25 [debug  ] Start Load Accounts
+2021/03/23 10:54:25 [debug  ] End Load All Accounts (Loaded:2798)
+2021/03/23 10:54:25 [debug  ] >>>>Finish Loading Accounts
+2021/03/23 10:54:25 [debug  ] >>>>Start Loading InitPlayers
+2021/03/23 10:54:25 [debug  ] Start Preload Players
+2021/03/23 10:54:25 [debug  ] End Preload Player UseTime:0s
+2021/03/23 10:54:26 [debug  ] Start Load All Players 2121
+2021/03/23 10:54:26 [debug  ] *****************************
+2021/03/23 10:54:29 [debug  ] Load player :14%!(NOVERB)
+2021/03/23 10:54:32 [debug  ] Load player :26%!(NOVERB)
+2021/03/23 10:54:35 [debug  ] Load player :41%!(NOVERB)
+2021/03/23 10:54:38 [debug  ] Load player :55%!(NOVERB)
+2021/03/23 10:54:41 [debug  ] Load player :70%!(NOVERB)
+2021/03/23 10:54:44 [debug  ] Load player :83%!(NOVERB)
+2021/03/23 10:54:47 [debug  ] Load player :96%!(NOVERB)
+2021/03/23 10:54:47 [debug  ] End Load All Player (Loaded:2121) UseTime:22s
+2021/03/23 10:54:47 [debug  ] >>>>Finish Loading InitPlayers
+2021/03/23 10:54:47 [debug  ] >>>>Start Loading BanPlayers
+2021/03/23 10:54:47 [debug  ] >>>>Finish Loading BanPlayers
+2021/03/23 10:54:47 [debug  ] >>>>Start Loading LoadOrderNear
+2021/03/23 10:54:47 [debug  ] Start Load Orders
+2021/03/23 10:54:48 [debug  ] End Preload Order UseTime:1s
+2021/03/23 10:54:48 [debug  ] >>>>Finish Loading LoadOrderNear
+2021/03/23 10:54:48 [debug  ] >>>>Start Loading LoadAllGlobalMail
+2021/03/23 10:54:48 [debug  ] >>>>Finish Loading LoadAllGlobalMail
+2021/03/23 10:54:48 [debug  ] >>>>Start Loading LoadAllGiftCode
+2021/03/23 10:54:48 [debug  ] >>>>Finish Loading LoadAllGiftCode
+2021/03/23 10:54:48 [debug  ] >>>>Start Check PlayerData
+2021/03/23 10:54:48 [debug  ] 1000 Players Data Checked:0s
+2021/03/23 10:54:48 [debug  ] 2000 Players Data Checked:0s
+2021/03/23 10:54:48 [debug  ] >>>>Finish Check PlayerData
+2021/03/23 10:54:48 [debug  ] >>>>Start Init Rank Data
+2021/03/23 10:54:48 [debug  ] >>>>Finish Init Rank Data
+2021/03/23 10:54:48 [debug  ] LoadGuildAll: begin
+2021/03/23 10:54:48 [debug  ] LoadGuildAll: end. num=21
+2021/03/23 10:54:48 [debug  ] LoadGuildNotice: begin
+2021/03/23 10:54:48 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:54:48 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:54:48 [debug  ] LoadGuildNotice: end. num=31
+2021/03/23 10:54:48 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13323928840000, string= rank num:, int32=21)
+2021/03/23 10:54:48 [release] BokePayControllerOnInit
+2021/03/23 10:54:48 [debug  ] Next Daily Update Time: 2021-03-24 00:00:00 +0800 CST
+2021/03/23 10:54:48 [debug  ] Next Weekly Update Time: 2021-03-29 00:00:00 +0800 CST
+2021/03/23 10:54:48 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:54:48 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:54:48 [debug  ] Next Monthly Update Time: 2021-04-01 00:00:00 +0800 CST
+2021/03/23 10:54:48 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:54:48 [debug  ] Next AdvArena Update Time: 2021-03-29 00:00:00 +0800 CST
+2021/03/23 10:54:48 [debug  ] ActivityMgr.InitRank: begin
+2021/03/23 10:54:48 [debug  ] ActivityMgr.InitRank: end
+2021/03/23 10:54:48 [release] gate OnInit
+2021/03/23 10:54:48 [release] login OnInit
+2021/03/23 10:54:48 [release] Create WSServer :17183
+2021/03/23 10:54:48 [release] Create TCPServer :17173
+2021/03/23 10:54:48 [fatal  ] listen tcp :17183: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+2021/03/23 10:55:03 [release] Leaf 1.1.2 starting up
+2021/03/23 10:55:03 [release] db OnInit
+2021/03/23 10:55:03 [release] game OnInit
+2021/03/23 10:55:03 [debug  ] Lua load xshare.lua finished
+2021/03/23 10:55:03 [debug  ] KLuaCMD5: eceefc83ba7f4a64386128389388a25c
+2021/03/23 10:55:03 [debug  ] KChannelString bk
+2021/03/23 10:55:03 [debug  ] KIFixMD5: 
+2021/03/23 10:55:03 [debug  ] KRUZMD5: 
+2021/03/23 10:55:03 [debug  ] game init handler
+2021/03/23 10:55:03 [debug  ] 3 star total weight: 75
+2021/03/23 10:55:03 [debug  ] 4 star total weight: 60
+2021/03/23 10:55:03 [debug  ] 5 star total weight: 271
+2021/03/23 10:55:03 [debug  ] 1 star total weight: 6
+2021/03/23 10:55:03 [debug  ] 2 star total weight: 6
+2021/03/23 10:55:03 [debug  ] ActivityMgr LoadAllActivity
+2021/03/23 10:55:03 [debug  ] >>>>Start Loading DeviceUsers
+2021/03/23 10:55:03 [debug  ] Start Load DeviceUsers
+2021/03/23 10:55:03 [debug  ] End Load All DeviceUsers (Loaded:2734)
+2021/03/23 10:55:03 [debug  ] >>>>Finish Loading DeviceUsers
+2021/03/23 10:55:03 [debug  ] >>>>Start Loading Accounts
+2021/03/23 10:55:03 [debug  ] Start Load Accounts
+2021/03/23 10:55:03 [debug  ] End Load All Accounts (Loaded:2798)
+2021/03/23 10:55:03 [debug  ] >>>>Finish Loading Accounts
+2021/03/23 10:55:03 [debug  ] >>>>Start Loading InitPlayers
+2021/03/23 10:55:03 [debug  ] Start Preload Players
+2021/03/23 10:55:03 [debug  ] End Preload Player UseTime:0s
+2021/03/23 10:55:04 [debug  ] Start Load All Players 2121
+2021/03/23 10:55:04 [debug  ] *****************************
+2021/03/23 10:55:07 [debug  ] Load player :50%!(NOVERB)
+2021/03/23 10:55:10 [debug  ] Load player :90%!(NOVERB)
+2021/03/23 10:55:11 [debug  ] End Load All Player (Loaded:2121) UseTime:8s
+2021/03/23 10:55:11 [debug  ] >>>>Finish Loading InitPlayers
+2021/03/23 10:55:11 [debug  ] >>>>Start Loading BanPlayers
+2021/03/23 10:55:11 [debug  ] >>>>Finish Loading BanPlayers
+2021/03/23 10:55:11 [debug  ] >>>>Start Loading LoadOrderNear
+2021/03/23 10:55:11 [debug  ] Start Load Orders
+2021/03/23 10:55:11 [debug  ] End Preload Order UseTime:0s
+2021/03/23 10:55:11 [debug  ] >>>>Finish Loading LoadOrderNear
+2021/03/23 10:55:11 [debug  ] >>>>Start Loading LoadAllGlobalMail
+2021/03/23 10:55:11 [debug  ] >>>>Finish Loading LoadAllGlobalMail
+2021/03/23 10:55:11 [debug  ] >>>>Start Loading LoadAllGiftCode
+2021/03/23 10:55:11 [debug  ] >>>>Finish Loading LoadAllGiftCode
+2021/03/23 10:55:11 [debug  ] >>>>Start Check PlayerData
+2021/03/23 10:55:11 [debug  ] 1000 Players Data Checked:0s
+2021/03/23 10:55:11 [debug  ] 2000 Players Data Checked:0s
+2021/03/23 10:55:11 [debug  ] >>>>Finish Check PlayerData
+2021/03/23 10:55:11 [debug  ] >>>>Start Init Rank Data
+2021/03/23 10:55:11 [debug  ] >>>>Finish Init Rank Data
+2021/03/23 10:55:11 [debug  ] LoadGuildAll: begin
+2021/03/23 10:55:11 [debug  ] LoadGuildAll: end. num=21
+2021/03/23 10:55:11 [debug  ] LoadGuildNotice: begin
+2021/03/23 10:55:11 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:55:11 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:55:11 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:55:11 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:55:11 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:55:11 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:55:11 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:55:11 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:55:11 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:55:11 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:55:11 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:55:11 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:55:11 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:55:11 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'zhao_mu_time' at row 1)
+2021/03/23 10:55:11 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'sign_time' at row 1)
+2021/03/23 10:55:11 [release] SQL ERROR:C:/Cavalry/server/src/db/db_def.go:948%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'sign_time' at row 1)
+2021/03/23 10:55:11 [debug  ] LoadGuildNotice: end. num=31
+2021/03/23 10:55:11 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13323931190000, string= rank num:, int32=21)
+2021/03/23 10:55:11 [release] BokePayControllerOnInit
+2021/03/23 10:55:11 [debug  ] Next Daily Update Time: 2021-03-24 00:00:00 +0800 CST
+2021/03/23 10:55:11 [debug  ] Next Weekly Update Time: 2021-03-29 00:00:00 +0800 CST
+2021/03/23 10:55:11 [debug  ] Next Monthly Update Time: 2021-04-01 00:00:00 +0800 CST
+2021/03/23 10:55:11 [debug  ] Next AdvArena Update Time: 2021-03-29 00:00:00 +0800 CST
+2021/03/23 10:55:11 [debug  ] ActivityMgr.InitRank: begin
+2021/03/23 10:55:11 [debug  ] ActivityMgr.InitRank: end
+2021/03/23 10:55:11 [release] gate OnInit
+2021/03/23 10:55:11 [release] login OnInit
+2021/03/23 10:55:11 [release] Create WSServer :17183
+2021/03/23 10:55:11 [release] Create TCPServer :17173
+2021/03/23 10:55:13 [debug  ] Load player :100%!(NOVERB)
+2021/03/23 11:00:11 [debug  ] Info, UpdateRank
+2021/03/23 11:00:11 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13323961190000, string= rank num:, int32=21)
+2021/03/23 11:05:11 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13323991190000, string= rank num:, int32=21)
+2021/03/23 11:05:11 [debug  ] Info, UpdateRank
+2021/03/23 11:06:18 [release] Leaf 1.1.2 starting up
+2021/03/23 11:06:18 [release] db OnInit
+2021/03/23 11:06:18 [release] game OnInit
+2021/03/23 11:06:18 [debug  ] Lua load xshare.lua finished
+2021/03/23 11:06:18 [debug  ] KLuaCMD5: eceefc83ba7f4a64386128389388a25c
+2021/03/23 11:06:18 [debug  ] KChannelString bk
+2021/03/23 11:06:18 [debug  ] KIFixMD5: 
+2021/03/23 11:06:18 [debug  ] KRUZMD5: 
+2021/03/23 11:06:18 [debug  ] game init handler
+2021/03/23 11:06:18 [debug  ] 4 star total weight: 60
+2021/03/23 11:06:18 [debug  ] 5 star total weight: 271
+2021/03/23 11:06:18 [debug  ] 1 star total weight: 6
+2021/03/23 11:06:18 [debug  ] 2 star total weight: 6
+2021/03/23 11:06:18 [debug  ] 3 star total weight: 75
+2021/03/23 11:06:18 [debug  ] ActivityMgr LoadAllActivity
+2021/03/23 11:06:18 [debug  ] >>>>Start Loading DeviceUsers
+2021/03/23 11:06:18 [debug  ] Start Load DeviceUsers
+2021/03/23 11:06:18 [debug  ] End Load All DeviceUsers (Loaded:0)
+2021/03/23 11:06:18 [debug  ] >>>>Finish Loading DeviceUsers
+2021/03/23 11:06:18 [debug  ] >>>>Start Loading Accounts
+2021/03/23 11:06:18 [debug  ] Start Load Accounts
+2021/03/23 11:06:18 [debug  ] End Load All Accounts (Loaded:0)
+2021/03/23 11:06:18 [debug  ] >>>>Finish Loading Accounts
+2021/03/23 11:06:18 [debug  ] >>>>Start Loading InitPlayers
+2021/03/23 11:06:18 [debug  ] Start Preload Players
+2021/03/23 11:06:18 [debug  ] End Preload Player UseTime:0s
+2021/03/23 11:06:19 [debug  ] Start Load All Players 0
+2021/03/23 11:06:19 [debug  ] End Load All Player (Loaded:0) UseTime:1s
+2021/03/23 11:06:19 [debug  ] *****************************
+2021/03/23 11:06:19 [debug  ] >>>>Finish Loading InitPlayers
+2021/03/23 11:06:19 [debug  ] >>>>Start Loading BanPlayers
+2021/03/23 11:06:19 [debug  ] >>>>Finish Loading BanPlayers
+2021/03/23 11:06:19 [debug  ] >>>>Start Loading LoadOrderNear
+2021/03/23 11:06:19 [debug  ] Start Load Orders
+2021/03/23 11:06:19 [debug  ] End Preload Order UseTime:0s
+2021/03/23 11:06:19 [debug  ] >>>>Finish Loading LoadOrderNear
+2021/03/23 11:06:19 [debug  ] >>>>Start Loading LoadAllGlobalMail
+2021/03/23 11:06:19 [debug  ] >>>>Finish Loading LoadAllGlobalMail
+2021/03/23 11:06:19 [debug  ] >>>>Start Loading LoadAllGiftCode
+2021/03/23 11:06:19 [debug  ] >>>>Finish Loading LoadAllGiftCode
+2021/03/23 11:06:19 [debug  ] >>>>Start Check PlayerData
+2021/03/23 11:06:19 [debug  ] >>>>Finish Check PlayerData
+2021/03/23 11:06:19 [release] SQL ERROR:C:/Cavalry/server/src/db/helper.go:509%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'last_daily_update_at' at row 1)
+2021/03/23 11:10:11 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324021190000, string= rank num:, int32=21)
+2021/03/23 11:10:11 [debug  ] Info, UpdateRank
+2021/03/23 11:13:57 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.27.164:45252)
+2021/03/23 11:15:12 [debug  ] Info, UpdateRank
+2021/03/23 11:15:12 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324051200000, string= rank num:, int32=21)
+2021/03/23 11:20:12 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324081200000, string= rank num:, int32=21)
+2021/03/23 11:20:12 [debug  ] Info, UpdateRank
+2021/03/23 11:20:51 [release] Leaf 1.1.2 starting up
+2021/03/23 11:20:51 [release] db OnInit
+2021/03/23 11:20:51 [release] game OnInit
+2021/03/23 11:20:51 [debug  ] Lua load xshare.lua finished
+2021/03/23 11:20:51 [debug  ] KLuaCMD5: eceefc83ba7f4a64386128389388a25c
+2021/03/23 11:20:51 [debug  ] KChannelString bk
+2021/03/23 11:20:51 [debug  ] KIFixMD5: 
+2021/03/23 11:20:51 [debug  ] KRUZMD5: 
+2021/03/23 11:20:51 [debug  ] game init handler
+2021/03/23 11:20:51 [debug  ] 2 star total weight: 6
+2021/03/23 11:20:51 [debug  ] 3 star total weight: 75
+2021/03/23 11:20:51 [debug  ] 4 star total weight: 60
+2021/03/23 11:20:51 [debug  ] 5 star total weight: 271
+2021/03/23 11:20:51 [debug  ] 1 star total weight: 6
+2021/03/23 11:20:51 [debug  ] ActivityMgr LoadAllActivity
+2021/03/23 11:20:51 [debug  ] >>>>Start Loading DeviceUsers
+2021/03/23 11:20:51 [debug  ] Start Load DeviceUsers
+2021/03/23 11:20:51 [debug  ] End Load All DeviceUsers (Loaded:0)
+2021/03/23 11:20:51 [debug  ] >>>>Finish Loading DeviceUsers
+2021/03/23 11:20:51 [debug  ] >>>>Start Loading Accounts
+2021/03/23 11:20:51 [debug  ] Start Load Accounts
+2021/03/23 11:20:51 [debug  ] End Load All Accounts (Loaded:0)
+2021/03/23 11:20:51 [debug  ] >>>>Finish Loading Accounts
+2021/03/23 11:20:51 [debug  ] >>>>Start Loading InitPlayers
+2021/03/23 11:20:51 [debug  ] Start Preload Players
+2021/03/23 11:20:51 [debug  ] End Preload Player UseTime:0s
+2021/03/23 11:20:51 [debug  ] Start Load All Players 0
+2021/03/23 11:20:51 [debug  ] End Load All Player (Loaded:0) UseTime:0s
+2021/03/23 11:20:51 [debug  ] *****************************
+2021/03/23 11:20:51 [debug  ] >>>>Finish Loading InitPlayers
+2021/03/23 11:20:51 [debug  ] >>>>Start Loading BanPlayers
+2021/03/23 11:20:51 [debug  ] >>>>Finish Loading BanPlayers
+2021/03/23 11:20:51 [debug  ] >>>>Start Loading LoadOrderNear
+2021/03/23 11:20:51 [debug  ] Start Load Orders
+2021/03/23 11:20:51 [debug  ] End Preload Order UseTime:0s
+2021/03/23 11:20:51 [debug  ] >>>>Finish Loading LoadOrderNear
+2021/03/23 11:20:51 [debug  ] >>>>Start Loading LoadAllGlobalMail
+2021/03/23 11:20:51 [debug  ] >>>>Finish Loading LoadAllGlobalMail
+2021/03/23 11:20:51 [debug  ] >>>>Start Loading LoadAllGiftCode
+2021/03/23 11:20:51 [debug  ] >>>>Finish Loading LoadAllGiftCode
+2021/03/23 11:20:51 [debug  ] >>>>Start Check PlayerData
+2021/03/23 11:20:51 [debug  ] >>>>Finish Check PlayerData
+2021/03/23 11:20:51 [release] SQL ERROR:C:/Cavalry/server/src/db/helper.go:509%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'last_daily_update_at' at row 1)
+2021/03/23 11:20:54 [release] Leaf 1.1.2 starting up
+2021/03/23 11:20:54 [release] db OnInit
+2021/03/23 11:20:54 [release] game OnInit
+2021/03/23 11:20:54 [debug  ] Lua load xshare.lua finished
+2021/03/23 11:20:54 [debug  ] KLuaCMD5: eceefc83ba7f4a64386128389388a25c
+2021/03/23 11:20:54 [debug  ] KChannelString bk
+2021/03/23 11:20:54 [debug  ] KIFixMD5: 
+2021/03/23 11:20:54 [debug  ] KRUZMD5: 
+2021/03/23 11:20:54 [debug  ] game init handler
+2021/03/23 11:20:54 [debug  ] 4 star total weight: 60
+2021/03/23 11:20:54 [debug  ] 5 star total weight: 271
+2021/03/23 11:20:54 [debug  ] 1 star total weight: 6
+2021/03/23 11:20:54 [debug  ] 2 star total weight: 6
+2021/03/23 11:20:54 [debug  ] 3 star total weight: 75
+2021/03/23 11:20:55 [debug  ] ActivityMgr LoadAllActivity
+2021/03/23 11:20:55 [debug  ] >>>>Start Loading DeviceUsers
+2021/03/23 11:20:55 [debug  ] Start Load DeviceUsers
+2021/03/23 11:20:55 [debug  ] End Load All DeviceUsers (Loaded:0)
+2021/03/23 11:20:55 [debug  ] >>>>Finish Loading DeviceUsers
+2021/03/23 11:20:55 [debug  ] >>>>Start Loading Accounts
+2021/03/23 11:20:55 [debug  ] Start Load Accounts
+2021/03/23 11:20:55 [debug  ] End Load All Accounts (Loaded:0)
+2021/03/23 11:20:55 [debug  ] >>>>Finish Loading Accounts
+2021/03/23 11:20:55 [debug  ] >>>>Start Loading InitPlayers
+2021/03/23 11:20:55 [debug  ] Start Preload Players
+2021/03/23 11:20:55 [debug  ] End Preload Player UseTime:0s
+2021/03/23 11:20:55 [debug  ] Start Load All Players 0
+2021/03/23 11:20:55 [debug  ] End Load All Player (Loaded:0) UseTime:0s
+2021/03/23 11:20:55 [debug  ] *****************************
+2021/03/23 11:20:55 [debug  ] >>>>Finish Loading InitPlayers
+2021/03/23 11:20:55 [debug  ] >>>>Start Loading BanPlayers
+2021/03/23 11:20:55 [debug  ] >>>>Finish Loading BanPlayers
+2021/03/23 11:20:55 [debug  ] >>>>Start Loading LoadOrderNear
+2021/03/23 11:20:55 [debug  ] Start Load Orders
+2021/03/23 11:20:55 [debug  ] End Preload Order UseTime:0s
+2021/03/23 11:20:55 [debug  ] >>>>Finish Loading LoadOrderNear
+2021/03/23 11:20:55 [debug  ] >>>>Start Loading LoadAllGlobalMail
+2021/03/23 11:20:55 [debug  ] >>>>Finish Loading LoadAllGlobalMail
+2021/03/23 11:20:55 [debug  ] >>>>Start Loading LoadAllGiftCode
+2021/03/23 11:20:55 [debug  ] >>>>Finish Loading LoadAllGiftCode
+2021/03/23 11:20:55 [debug  ] >>>>Start Check PlayerData
+2021/03/23 11:20:55 [debug  ] >>>>Finish Check PlayerData
+2021/03/23 11:20:55 [release] SQL ERROR:C:/Cavalry/server/src/db/helper.go:509%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'last_daily_update_at' at row 1)
+2021/03/23 11:23:19 [release] Leaf 1.1.2 starting up
+2021/03/23 11:23:19 [release] db OnInit
+2021/03/23 11:23:19 [release] game OnInit
+2021/03/23 11:23:19 [debug  ] Lua load xshare.lua finished
+2021/03/23 11:23:19 [debug  ] KLuaCMD5: eceefc83ba7f4a64386128389388a25c
+2021/03/23 11:23:19 [debug  ] KChannelString bk
+2021/03/23 11:23:19 [debug  ] KIFixMD5: 
+2021/03/23 11:23:19 [debug  ] KRUZMD5: 
+2021/03/23 11:23:19 [debug  ] game init handler
+2021/03/23 11:23:19 [debug  ] 3 star total weight: 75
+2021/03/23 11:23:19 [debug  ] 4 star total weight: 60
+2021/03/23 11:23:19 [debug  ] 5 star total weight: 271
+2021/03/23 11:23:19 [debug  ] 1 star total weight: 6
+2021/03/23 11:23:19 [debug  ] 2 star total weight: 6
+2021/03/23 11:23:19 [debug  ] ActivityMgr LoadAllActivity
+2021/03/23 11:23:19 [debug  ] >>>>Start Loading DeviceUsers
+2021/03/23 11:23:19 [debug  ] Start Load DeviceUsers
+2021/03/23 11:23:19 [debug  ] End Load All DeviceUsers (Loaded:0)
+2021/03/23 11:23:19 [debug  ] >>>>Finish Loading DeviceUsers
+2021/03/23 11:23:19 [debug  ] >>>>Start Loading Accounts
+2021/03/23 11:23:19 [debug  ] Start Load Accounts
+2021/03/23 11:23:19 [debug  ] End Load All Accounts (Loaded:0)
+2021/03/23 11:23:19 [debug  ] >>>>Finish Loading Accounts
+2021/03/23 11:23:19 [debug  ] >>>>Start Loading InitPlayers
+2021/03/23 11:23:19 [debug  ] Start Preload Players
+2021/03/23 11:23:19 [debug  ] End Preload Player UseTime:0s
+2021/03/23 11:23:19 [debug  ] Start Load All Players 0
+2021/03/23 11:23:19 [debug  ] End Load All Player (Loaded:0) UseTime:0s
+2021/03/23 11:23:19 [debug  ] *****************************
+2021/03/23 11:23:19 [debug  ] >>>>Finish Loading InitPlayers
+2021/03/23 11:23:19 [debug  ] >>>>Start Loading BanPlayers
+2021/03/23 11:23:19 [debug  ] >>>>Finish Loading BanPlayers
+2021/03/23 11:23:19 [debug  ] >>>>Start Loading LoadOrderNear
+2021/03/23 11:23:19 [debug  ] Start Load Orders
+2021/03/23 11:23:19 [debug  ] End Preload Order UseTime:0s
+2021/03/23 11:23:19 [debug  ] >>>>Finish Loading LoadOrderNear
+2021/03/23 11:23:19 [debug  ] >>>>Start Loading LoadAllGlobalMail
+2021/03/23 11:23:19 [debug  ] >>>>Finish Loading LoadAllGlobalMail
+2021/03/23 11:23:19 [debug  ] >>>>Start Loading LoadAllGiftCode
+2021/03/23 11:23:19 [debug  ] >>>>Finish Loading LoadAllGiftCode
+2021/03/23 11:23:19 [debug  ] >>>>Start Check PlayerData
+2021/03/23 11:23:19 [debug  ] >>>>Finish Check PlayerData
+2021/03/23 11:23:19 [release] SQL ERROR:C:/Cavalry/server/src/db/helper.go:509%!(EXTRA *mysql.MySQLError=Error 1292: Incorrect datetime value: '0000-00-00' for column 'last_daily_update_at' at row 1)
+2021/03/23 11:24:46 [release] Leaf 1.1.2 starting up
+2021/03/23 11:24:46 [release] db OnInit
+2021/03/23 11:24:46 [release] game OnInit
+2021/03/23 11:24:46 [debug  ] Lua load xshare.lua finished
+2021/03/23 11:24:46 [debug  ] KLuaCMD5: eceefc83ba7f4a64386128389388a25c
+2021/03/23 11:24:46 [debug  ] KChannelString bk
+2021/03/23 11:24:46 [debug  ] KIFixMD5: 
+2021/03/23 11:24:46 [debug  ] KRUZMD5: 
+2021/03/23 11:24:46 [debug  ] game init handler
+2021/03/23 11:24:46 [debug  ] 3 star total weight: 75
+2021/03/23 11:24:46 [debug  ] 4 star total weight: 60
+2021/03/23 11:24:46 [debug  ] 5 star total weight: 271
+2021/03/23 11:24:46 [debug  ] 1 star total weight: 6
+2021/03/23 11:24:46 [debug  ] 2 star total weight: 6
+2021/03/23 11:24:46 [debug  ] ActivityMgr LoadAllActivity
+2021/03/23 11:24:46 [debug  ] >>>>Start Loading DeviceUsers
+2021/03/23 11:24:46 [debug  ] Start Load DeviceUsers
+2021/03/23 11:24:46 [debug  ] End Load All DeviceUsers (Loaded:0)
+2021/03/23 11:24:46 [debug  ] >>>>Finish Loading DeviceUsers
+2021/03/23 11:24:46 [debug  ] >>>>Start Loading Accounts
+2021/03/23 11:24:46 [debug  ] Start Load Accounts
+2021/03/23 11:24:46 [debug  ] End Load All Accounts (Loaded:0)
+2021/03/23 11:24:46 [debug  ] >>>>Finish Loading Accounts
+2021/03/23 11:24:46 [debug  ] >>>>Start Loading InitPlayers
+2021/03/23 11:24:46 [debug  ] Start Preload Players
+2021/03/23 11:24:46 [debug  ] End Preload Player UseTime:0s
+2021/03/23 11:24:46 [debug  ] Start Load All Players 0
+2021/03/23 11:24:46 [debug  ] End Load All Player (Loaded:0) UseTime:0s
+2021/03/23 11:24:46 [debug  ] *****************************
+2021/03/23 11:24:46 [debug  ] >>>>Finish Loading InitPlayers
+2021/03/23 11:24:46 [debug  ] >>>>Start Loading BanPlayers
+2021/03/23 11:24:46 [debug  ] >>>>Finish Loading BanPlayers
+2021/03/23 11:24:46 [debug  ] >>>>Start Loading LoadOrderNear
+2021/03/23 11:24:46 [debug  ] Start Load Orders
+2021/03/23 11:24:46 [debug  ] End Preload Order UseTime:0s
+2021/03/23 11:24:46 [debug  ] >>>>Finish Loading LoadOrderNear
+2021/03/23 11:24:46 [debug  ] >>>>Start Loading LoadAllGlobalMail
+2021/03/23 11:24:46 [debug  ] >>>>Finish Loading LoadAllGlobalMail
+2021/03/23 11:24:46 [debug  ] >>>>Start Loading LoadAllGiftCode
+2021/03/23 11:24:46 [debug  ] >>>>Finish Loading LoadAllGiftCode
+2021/03/23 11:24:46 [debug  ] >>>>Start Check PlayerData
+2021/03/23 11:24:46 [debug  ] >>>>Finish Check PlayerData
+2021/03/23 11:24:46 [debug  ] Create robot player id: 100000000
+2021/03/23 11:24:47 [debug  ] Create robot player id: 100000001
+2021/03/23 11:24:48 [debug  ] Create robot player id: 100000002
+2021/03/23 11:24:48 [debug  ] Create robot player id: 100000003
+2021/03/23 11:24:49 [debug  ] Create robot player id: 100000004
+2021/03/23 11:24:49 [debug  ] Create robot player id: 100000005
+2021/03/23 11:24:49 [debug  ] Create robot player id: 100000006
+2021/03/23 11:24:50 [debug  ] Create robot player id: 100000007
+2021/03/23 11:24:50 [debug  ] Create robot player id: 100000008
+2021/03/23 11:24:51 [debug  ] Create robot player id: 100000009
+2021/03/23 11:24:51 [debug  ] Create robot player id: 100000010
+2021/03/23 11:24:52 [debug  ] Create robot player id: 100000011
+2021/03/23 11:24:52 [debug  ] Create robot player id: 100000012
+2021/03/23 11:24:53 [debug  ] Create robot player id: 100000013
+2021/03/23 11:24:53 [debug  ] Create robot player id: 100000014
+2021/03/23 11:24:53 [debug  ] Create robot player id: 100000015
+2021/03/23 11:24:54 [debug  ] Create robot player id: 100000016
+2021/03/23 11:24:55 [debug  ] Create robot player id: 100000017
+2021/03/23 11:24:55 [debug  ] Create robot player id: 100000018
+2021/03/23 11:24:55 [debug  ] Create robot player id: 100000019
+2021/03/23 11:24:56 [debug  ] Create robot player id: 100000020
+2021/03/23 11:24:56 [debug  ] Create robot player id: 100000021
+2021/03/23 11:24:57 [debug  ] Create robot player id: 100000022
+2021/03/23 11:24:57 [debug  ] Create robot player id: 100000023
+2021/03/23 11:24:58 [debug  ] Create robot player id: 100000024
+2021/03/23 11:24:58 [debug  ] Create robot player id: 100000025
+2021/03/23 11:24:58 [debug  ] Create robot player id: 100000026
+2021/03/23 11:24:59 [debug  ] Create robot player id: 100000027
+2021/03/23 11:24:59 [debug  ] Create robot player id: 100000028
+2021/03/23 11:25:00 [debug  ] Create robot player id: 100000029
+2021/03/23 11:25:00 [debug  ] Create robot player id: 100000030
+2021/03/23 11:25:01 [debug  ] Create robot player id: 100000031
+2021/03/23 11:25:01 [debug  ] Create robot player id: 100000032
+2021/03/23 11:25:02 [debug  ] Create robot player id: 100000033
+2021/03/23 11:25:02 [debug  ] Create robot player id: 100000034
+2021/03/23 11:25:02 [debug  ] Create robot player id: 100000035
+2021/03/23 11:25:03 [debug  ] Create robot player id: 100000036
+2021/03/23 11:25:03 [debug  ] Create robot player id: 100000037
+2021/03/23 11:25:04 [debug  ] Create robot player id: 100000038
+2021/03/23 11:25:04 [debug  ] Create robot player id: 100000039
+2021/03/23 11:25:05 [debug  ] Create robot player id: 100000040
+2021/03/23 11:25:05 [debug  ] Create robot player id: 100000041
+2021/03/23 11:25:05 [debug  ] Create robot player id: 100000042
+2021/03/23 11:25:06 [debug  ] Create robot player id: 100000043
+2021/03/23 11:25:06 [debug  ] Create robot player id: 100000044
+2021/03/23 11:25:07 [debug  ] Create robot player id: 100000045
+2021/03/23 11:25:07 [debug  ] Create robot player id: 100000046
+2021/03/23 11:25:08 [debug  ] Create robot player id: 100000047
+2021/03/23 11:25:08 [debug  ] Create robot player id: 100000048
+2021/03/23 11:25:08 [debug  ] Create robot player id: 100000049
+2021/03/23 11:25:08 [debug  ] >>>>Start Init Rank Data
+2021/03/23 11:25:08 [debug  ] >>>>Finish Init Rank Data
+2021/03/23 11:25:08 [debug  ] LoadGuildAll: begin
+2021/03/23 11:25:08 [debug  ] LoadGuildAll: end. num=0
+2021/03/23 11:25:08 [debug  ] LoadGuildNotice: begin
+2021/03/23 11:25:08 [debug  ] LoadGuildNotice: end. num=0
+2021/03/23 11:25:08 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324110870000, string= rank num:, int32=0)
+2021/03/23 11:25:08 [release] BokePayControllerOnInit
+2021/03/23 11:25:08 [debug  ] Next Daily Update Time: 2021-03-24 00:00:00 +0800 CST
+2021/03/23 11:25:08 [debug  ] Next Weekly Update Time: 2021-03-29 00:00:00 +0800 CST
+2021/03/23 11:25:08 [debug  ] Next Monthly Update Time: 2021-04-01 00:00:00 +0800 CST
+2021/03/23 11:25:08 [debug  ] Next AdvArena Update Time: 2021-03-29 00:00:00 +0800 CST
+2021/03/23 11:25:08 [debug  ] ActivityMgr.InitRank: begin
+2021/03/23 11:25:08 [debug  ] ActivityMgr.InitRank: end
+2021/03/23 11:25:08 [release] gate OnInit
+2021/03/23 11:25:08 [release] login OnInit
+2021/03/23 11:25:08 [release] Create WSServer :17183
+2021/03/23 11:25:08 [release] Create TCPServer :17173
+2021/03/23 11:25:08 [fatal  ] listen tcp :17183: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+2021/03/23 11:25:12 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324111200000, string= rank num:, int32=21)
+2021/03/23 11:25:12 [debug  ] Info, UpdateRank
+2021/03/23 11:25:32 [release] Leaf 1.1.2 starting up
+2021/03/23 11:25:32 [release] db OnInit
+2021/03/23 11:25:32 [release] game OnInit
+2021/03/23 11:25:32 [debug  ] Lua load xshare.lua finished
+2021/03/23 11:25:32 [debug  ] KLuaCMD5: eceefc83ba7f4a64386128389388a25c
+2021/03/23 11:25:32 [debug  ] KChannelString bk
+2021/03/23 11:25:32 [debug  ] KIFixMD5: 
+2021/03/23 11:25:32 [debug  ] KRUZMD5: 
+2021/03/23 11:25:32 [debug  ] game init handler
+2021/03/23 11:25:32 [debug  ] 4 star total weight: 60
+2021/03/23 11:25:32 [debug  ] 5 star total weight: 271
+2021/03/23 11:25:32 [debug  ] 1 star total weight: 6
+2021/03/23 11:25:32 [debug  ] 2 star total weight: 6
+2021/03/23 11:25:32 [debug  ] 3 star total weight: 75
+2021/03/23 11:25:32 [debug  ] ActivityMgr LoadAllActivity
+2021/03/23 11:25:32 [debug  ] >>>>Start Loading DeviceUsers
+2021/03/23 11:25:32 [debug  ] Start Load DeviceUsers
+2021/03/23 11:25:32 [debug  ] End Load All DeviceUsers (Loaded:0)
+2021/03/23 11:25:32 [debug  ] >>>>Finish Loading DeviceUsers
+2021/03/23 11:25:32 [debug  ] >>>>Start Loading Accounts
+2021/03/23 11:25:32 [debug  ] Start Load Accounts
+2021/03/23 11:25:32 [debug  ] End Load All Accounts (Loaded:0)
+2021/03/23 11:25:32 [debug  ] >>>>Finish Loading Accounts
+2021/03/23 11:25:32 [debug  ] >>>>Start Loading InitPlayers
+2021/03/23 11:25:32 [debug  ] Start Preload Players
+2021/03/23 11:25:32 [debug  ] End Preload Player UseTime:0s
+2021/03/23 11:25:32 [debug  ] Start Load All Players 50
+2021/03/23 11:25:32 [debug  ] *****************************
+2021/03/23 11:25:32 [debug  ] End Load All Player (Loaded:50) UseTime:0s
+2021/03/23 11:25:32 [debug  ] >>>>Finish Loading InitPlayers
+2021/03/23 11:25:32 [debug  ] >>>>Start Loading BanPlayers
+2021/03/23 11:25:32 [debug  ] >>>>Finish Loading BanPlayers
+2021/03/23 11:25:32 [debug  ] >>>>Start Loading LoadOrderNear
+2021/03/23 11:25:32 [debug  ] Start Load Orders
+2021/03/23 11:25:32 [debug  ] End Preload Order UseTime:0s
+2021/03/23 11:25:32 [debug  ] >>>>Finish Loading LoadOrderNear
+2021/03/23 11:25:32 [debug  ] >>>>Start Loading LoadAllGlobalMail
+2021/03/23 11:25:32 [debug  ] >>>>Finish Loading LoadAllGlobalMail
+2021/03/23 11:25:32 [debug  ] >>>>Start Loading LoadAllGiftCode
+2021/03/23 11:25:32 [debug  ] >>>>Finish Loading LoadAllGiftCode
+2021/03/23 11:25:32 [debug  ] >>>>Start Check PlayerData
+2021/03/23 11:25:32 [debug  ] >>>>Finish Check PlayerData
+2021/03/23 11:25:32 [debug  ] >>>>Start Init Rank Data
+2021/03/23 11:25:32 [debug  ] >>>>Finish Init Rank Data
+2021/03/23 11:25:32 [debug  ] LoadGuildAll: begin
+2021/03/23 11:25:32 [debug  ] LoadGuildAll: end. num=0
+2021/03/23 11:25:32 [debug  ] LoadGuildNotice: begin
+2021/03/23 11:25:33 [debug  ] LoadGuildNotice: end. num=0
+2021/03/23 11:25:33 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324113310000, string= rank num:, int32=0)
+2021/03/23 11:25:33 [release] BokePayControllerOnInit
+2021/03/23 11:25:33 [debug  ] Next Daily Update Time: 2021-03-24 00:00:00 +0800 CST
+2021/03/23 11:25:33 [debug  ] Next Weekly Update Time: 2021-03-29 00:00:00 +0800 CST
+2021/03/23 11:25:33 [debug  ] Next Monthly Update Time: 2021-04-01 00:00:00 +0800 CST
+2021/03/23 11:25:33 [debug  ] Next AdvArena Update Time: 2021-03-29 00:00:00 +0800 CST
+2021/03/23 11:25:33 [debug  ] ActivityMgr.InitRank: begin
+2021/03/23 11:25:33 [debug  ] ActivityMgr.InitRank: end
+2021/03/23 11:25:33 [release] gate OnInit
+2021/03/23 11:25:33 [release] login OnInit
+2021/03/23 11:25:33 [release] Create WSServer :17183
+2021/03/23 11:25:33 [release] Create TCPServer :17173
+2021/03/23 11:25:33 [fatal  ] listen tcp :17183: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+2021/03/23 11:27:28 [release] Leaf 1.1.2 starting up
+2021/03/23 11:27:28 [release] db OnInit
+2021/03/23 11:27:28 [release] game OnInit
+2021/03/23 11:27:28 [debug  ] Lua load xshare.lua finished
+2021/03/23 11:27:28 [debug  ] KLuaCMD5: eceefc83ba7f4a64386128389388a25c
+2021/03/23 11:27:28 [debug  ] KChannelString bk
+2021/03/23 11:27:28 [debug  ] KIFixMD5: 
+2021/03/23 11:27:28 [debug  ] KRUZMD5: 
+2021/03/23 11:27:28 [debug  ] game init handler
+2021/03/23 11:27:28 [debug  ] 5 star total weight: 271
+2021/03/23 11:27:28 [debug  ] 1 star total weight: 6
+2021/03/23 11:27:28 [debug  ] 2 star total weight: 6
+2021/03/23 11:27:28 [debug  ] 3 star total weight: 75
+2021/03/23 11:27:28 [debug  ] 4 star total weight: 60
+2021/03/23 11:27:28 [debug  ] ActivityMgr LoadAllActivity
+2021/03/23 11:27:28 [debug  ] >>>>Start Loading DeviceUsers
+2021/03/23 11:27:28 [debug  ] Start Load DeviceUsers
+2021/03/23 11:27:28 [debug  ] End Load All DeviceUsers (Loaded:0)
+2021/03/23 11:27:28 [debug  ] >>>>Finish Loading DeviceUsers
+2021/03/23 11:27:28 [debug  ] >>>>Start Loading Accounts
+2021/03/23 11:27:28 [debug  ] Start Load Accounts
+2021/03/23 11:27:28 [debug  ] End Load All Accounts (Loaded:0)
+2021/03/23 11:27:28 [debug  ] >>>>Finish Loading Accounts
+2021/03/23 11:27:28 [debug  ] >>>>Start Loading InitPlayers
+2021/03/23 11:27:28 [debug  ] Start Preload Players
+2021/03/23 11:27:28 [debug  ] End Preload Player UseTime:0s
+2021/03/23 11:27:28 [debug  ] Start Load All Players 50
+2021/03/23 11:27:28 [debug  ] *****************************
+2021/03/23 11:27:28 [debug  ] End Load All Player (Loaded:50) UseTime:0s
+2021/03/23 11:27:28 [debug  ] >>>>Finish Loading InitPlayers
+2021/03/23 11:27:28 [debug  ] >>>>Start Loading BanPlayers
+2021/03/23 11:27:28 [debug  ] >>>>Finish Loading BanPlayers
+2021/03/23 11:27:28 [debug  ] >>>>Start Loading LoadOrderNear
+2021/03/23 11:27:28 [debug  ] Start Load Orders
+2021/03/23 11:27:28 [debug  ] End Preload Order UseTime:0s
+2021/03/23 11:27:28 [debug  ] >>>>Finish Loading LoadOrderNear
+2021/03/23 11:27:28 [debug  ] >>>>Start Loading LoadAllGlobalMail
+2021/03/23 11:27:28 [debug  ] >>>>Finish Loading LoadAllGlobalMail
+2021/03/23 11:27:28 [debug  ] >>>>Start Loading LoadAllGiftCode
+2021/03/23 11:27:28 [debug  ] >>>>Finish Loading LoadAllGiftCode
+2021/03/23 11:27:28 [debug  ] >>>>Start Check PlayerData
+2021/03/23 11:27:28 [debug  ] >>>>Finish Check PlayerData
+2021/03/23 11:27:28 [debug  ] >>>>Start Init Rank Data
+2021/03/23 11:27:28 [debug  ] >>>>Finish Init Rank Data
+2021/03/23 11:27:28 [debug  ] LoadGuildAll: begin
+2021/03/23 11:27:28 [debug  ] LoadGuildAll: end. num=0
+2021/03/23 11:27:28 [debug  ] LoadGuildNotice: begin
+2021/03/23 11:27:28 [debug  ] LoadGuildNotice: end. num=0
+2021/03/23 11:27:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324124890000, string= rank num:, int32=0)
+2021/03/23 11:27:28 [release] BokePayControllerOnInit
+2021/03/23 11:27:28 [debug  ] Next Daily Update Time: 2021-03-24 00:00:00 +0800 CST
+2021/03/23 11:27:28 [debug  ] Next Weekly Update Time: 2021-03-29 00:00:00 +0800 CST
+2021/03/23 11:27:28 [debug  ] Next Monthly Update Time: 2021-04-01 00:00:00 +0800 CST
+2021/03/23 11:27:28 [debug  ] Next AdvArena Update Time: 2021-03-29 00:00:00 +0800 CST
+2021/03/23 11:27:28 [debug  ] ActivityMgr.InitRank: begin
+2021/03/23 11:27:28 [debug  ] ActivityMgr.InitRank: end
+2021/03/23 11:27:28 [release] gate OnInit
+2021/03/23 11:27:28 [release] login OnInit
+2021/03/23 11:27:28 [release] Create WSServer :17183
+2021/03/23 11:27:28 [release] Create TCPServer :17173
+2021/03/23 11:27:31 [debug  ] Load player :100%!(NOVERB)
+2021/03/23 11:28:00 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.132:55723)
+2021/03/23 11:30:37 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 11:30:37 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 11:30:38 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 11:30:38 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 11:30:38 [debug  ] PlayerIDAryByServer: server 1, count 51
+2021/03/23 11:30:38 [debug  ] player 13324143840000 login
+2021/03/23 11:30:38 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 11:30:38 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 11:30:38 [release] on player 13324143840000 login
+2021/03/23 11:30:38 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 11:30:38 [debug  ] GetDayFromCreate: 1
+2021/03/23 11:30:38 [debug  ] handlePlayerLoginR msg size: 11583
+2021/03/23 11:30:38 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 11:30:38 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 11:30:38 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 11:30:38 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 11:30:38 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 11:32:28 [debug  ] Info, UpdateRank
+2021/03/23 11:32:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324154890000, string= rank num:, int32=0)
+2021/03/23 11:37:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324184890000, string= rank num:, int32=0)
+2021/03/23 11:37:28 [debug  ] Info, UpdateRank
+2021/03/23 11:42:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324214890000, string= rank num:, int32=0)
+2021/03/23 11:42:28 [debug  ] Info, UpdateRank
+2021/03/23 11:47:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324244890000, string= rank num:, int32=0)
+2021/03/23 11:47:28 [debug  ] Info, UpdateRank
+2021/03/23 11:52:29 [debug  ] Info, UpdateRank
+2021/03/23 11:52:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324274900000, string= rank num:, int32=0)
+2021/03/23 11:57:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324304900000, string= rank num:, int32=0)
+2021/03/23 11:57:29 [debug  ] Info, UpdateRank
+2021/03/23 12:02:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324334900000, string= rank num:, int32=0)
+2021/03/23 12:02:29 [debug  ] Info, UpdateRank
+2021/03/23 12:07:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324364900000, string= rank num:, int32=0)
+2021/03/23 12:07:29 [debug  ] Info, UpdateRank
+2021/03/23 12:12:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324394900000, string= rank num:, int32=0)
+2021/03/23 12:12:29 [debug  ] Info, UpdateRank
+2021/03/23 12:17:29 [debug  ] Info, UpdateRank
+2021/03/23 12:17:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324424900000, string= rank num:, int32=0)
+2021/03/23 12:22:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324454900000, string= rank num:, int32=0)
+2021/03/23 12:22:29 [debug  ] Info, UpdateRank
+2021/03/23 12:27:29 [debug  ] Info, UpdateRank
+2021/03/23 12:27:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324484910000, string= rank num:, int32=0)
+2021/03/23 12:32:29 [debug  ] Info, UpdateRank
+2021/03/23 12:32:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324514910000, string= rank num:, int32=0)
+2021/03/23 12:37:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324544910000, string= rank num:, int32=0)
+2021/03/23 12:37:29 [debug  ] Info, UpdateRank
+2021/03/23 12:42:29 [debug  ] Info, UpdateRank
+2021/03/23 12:42:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324574910000, string= rank num:, int32=0)
+2021/03/23 12:47:29 [debug  ] Info, UpdateRank
+2021/03/23 12:47:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324604910000, string= rank num:, int32=0)
+2021/03/23 12:52:29 [debug  ] Info, UpdateRank
+2021/03/23 12:52:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324634910000, string= rank num:, int32=0)
+2021/03/23 12:57:29 [debug  ] Info, UpdateRank
+2021/03/23 12:57:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324664910000, string= rank num:, int32=0)
+2021/03/23 13:02:29 [debug  ] Info, UpdateRank
+2021/03/23 13:02:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324694910000, string= rank num:, int32=0)
+2021/03/23 13:07:29 [debug  ] Info, UpdateRank
+2021/03/23 13:07:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324724910000, string= rank num:, int32=0)
+2021/03/23 13:12:29 [debug  ] Info, UpdateRank
+2021/03/23 13:12:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324754920000, string= rank num:, int32=0)
+2021/03/23 13:17:29 [debug  ] Info, UpdateRank
+2021/03/23 13:17:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324784920000, string= rank num:, int32=0)
+2021/03/23 13:22:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324814920000, string= rank num:, int32=0)
+2021/03/23 13:22:29 [debug  ] Info, UpdateRank
+2021/03/23 13:27:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324844920000, string= rank num:, int32=0)
+2021/03/23 13:27:29 [debug  ] Info, UpdateRank
+2021/03/23 13:32:29 [debug  ] Info, UpdateRank
+2021/03/23 13:32:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324874920000, string= rank num:, int32=0)
+2021/03/23 13:37:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324904920000, string= rank num:, int32=0)
+2021/03/23 13:37:29 [debug  ] Info, UpdateRank
+2021/03/23 13:42:29 [debug  ] Info, UpdateRank
+2021/03/23 13:42:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324934920000, string= rank num:, int32=0)
+2021/03/23 13:47:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324964920000, string= rank num:, int32=0)
+2021/03/23 13:47:29 [debug  ] Info, UpdateRank
+2021/03/23 13:52:29 [debug  ] Info, UpdateRank
+2021/03/23 13:52:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13324994920000, string= rank num:, int32=0)
+2021/03/23 13:57:29 [debug  ] Info, UpdateRank
+2021/03/23 13:57:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325024930000, string= rank num:, int32=0)
+2021/03/23 14:02:29 [debug  ] Info, UpdateRank
+2021/03/23 14:02:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325054930000, string= rank num:, int32=0)
+2021/03/23 14:07:29 [debug  ] Info, UpdateRank
+2021/03/23 14:07:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325084930000, string= rank num:, int32=0)
+2021/03/23 14:09:39 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.132:55944)
+2021/03/23 14:09:39 [debug  ] player 13324143840000 disconnect
+2021/03/23 14:09:39 [release] on player 13324143840000 logout
+2021/03/23 14:09:47 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 14:09:47 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 14:09:48 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 14:09:48 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 14:09:48 [debug  ] player 13324143840000 login
+2021/03/23 14:09:48 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 14:09:48 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 14:09:48 [release] on player 13324143840000 login
+2021/03/23 14:09:48 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 14:09:48 [debug  ] GetDayFromCreate: 1
+2021/03/23 14:09:48 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 14:09:48 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 14:09:48 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 14:09:48 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 14:09:48 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 14:09:48 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 14:12:29 [debug  ] Info, UpdateRank
+2021/03/23 14:12:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325114930000, string= rank num:, int32=0)
+2021/03/23 14:17:29 [debug  ] Info, UpdateRank
+2021/03/23 14:17:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325144930000, string= rank num:, int32=0)
+2021/03/23 14:22:29 [debug  ] Info, UpdateRank
+2021/03/23 14:22:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325174930000, string= rank num:, int32=0)
+2021/03/23 14:27:29 [debug  ] Info, UpdateRank
+2021/03/23 14:27:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325204930000, string= rank num:, int32=0)
+2021/03/23 14:32:29 [debug  ] Info, UpdateRank
+2021/03/23 14:32:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325234930000, string= rank num:, int32=0)
+2021/03/23 14:37:29 [debug  ] Info, UpdateRank
+2021/03/23 14:37:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325264930000, string= rank num:, int32=0)
+2021/03/23 14:42:29 [debug  ] Info, UpdateRank
+2021/03/23 14:42:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325294940000, string= rank num:, int32=0)
+2021/03/23 14:47:29 [debug  ] Info, UpdateRank
+2021/03/23 14:47:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325324940000, string= rank num:, int32=0)
+2021/03/23 14:52:29 [debug  ] Info, UpdateRank
+2021/03/23 14:52:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325354940000, string= rank num:, int32=0)
+2021/03/23 14:57:29 [debug  ] Info, UpdateRank
+2021/03/23 14:57:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325384940000, string= rank num:, int32=0)
+2021/03/23 15:02:29 [debug  ] Info, UpdateRank
+2021/03/23 15:02:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325414940000, string= rank num:, int32=0)
+2021/03/23 15:07:29 [debug  ] Info, UpdateRank
+2021/03/23 15:07:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325444940000, string= rank num:, int32=0)
+2021/03/23 15:12:29 [debug  ] Info, UpdateRank
+2021/03/23 15:12:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325474940000, string= rank num:, int32=0)
+2021/03/23 15:17:29 [debug  ] Info, UpdateRank
+2021/03/23 15:17:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325504940000, string= rank num:, int32=0)
+2021/03/23 15:22:29 [debug  ] Info, UpdateRank
+2021/03/23 15:22:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325534950000, string= rank num:, int32=0)
+2021/03/23 15:23:10 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 15:23:10 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 15:23:11 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 15:23:11 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 15:23:11 [debug  ] PlayerIDAryByServer: server 1, count 52
+2021/03/23 15:23:11 [debug  ] player 13325539140000 login
+2021/03/23 15:23:11 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 15:23:11 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 15:23:11 [release] on player 13325539140000 login
+2021/03/23 15:23:11 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 15:23:11 [debug  ] GetDayFromCreate: 1
+2021/03/23 15:23:11 [debug  ] handlePlayerLoginR msg size: 11583
+2021/03/23 15:23:11 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 15:23:11 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 15:23:11 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 15:23:11 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 15:23:11 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 15:27:29 [debug  ] Info, UpdateRank
+2021/03/23 15:27:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325564950000, string= rank num:, int32=0)
+2021/03/23 15:27:47 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:34378)
+2021/03/23 15:27:47 [debug  ] player 13325539140000 disconnect
+2021/03/23 15:27:47 [release] on player 13325539140000 logout
+2021/03/23 15:27:54 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 15:27:54 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 15:27:55 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 15:27:55 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 15:27:55 [debug  ] player 13325539140000 login
+2021/03/23 15:27:55 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 15:27:55 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 15:27:55 [release] on player 13325539140000 login
+2021/03/23 15:27:55 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 15:27:55 [debug  ] GetDayFromCreate: 1
+2021/03/23 15:27:55 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 15:27:55 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 15:27:55 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 15:27:55 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 15:27:55 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 15:27:55 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 15:28:16 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:34608)
+2021/03/23 15:28:16 [debug  ] player 13325539140000 disconnect
+2021/03/23 15:28:16 [release] on player 13325539140000 logout
+2021/03/23 15:28:27 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 15:28:27 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 15:28:28 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 15:28:28 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 15:28:28 [debug  ] player 13325539140000 login
+2021/03/23 15:28:28 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 15:28:28 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 15:28:28 [release] on player 13325539140000 login
+2021/03/23 15:28:28 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 15:28:28 [debug  ] GetDayFromCreate: 1
+2021/03/23 15:28:28 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 15:28:28 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 15:28:29 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 15:28:29 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 15:28:29 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 15:28:29 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 15:28:53 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:34647)
+2021/03/23 15:28:53 [debug  ] player 13325539140000 disconnect
+2021/03/23 15:28:53 [release] on player 13325539140000 logout
+2021/03/23 15:29:37 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 15:29:37 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 15:29:38 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 15:29:38 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 15:29:38 [release] player 13324143840000 login repeat
+2021/03/23 15:29:38 [release] on player 13324143840000 logout
+2021/03/23 15:29:38 [debug  ] player 13324143840000 login
+2021/03/23 15:29:38 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 15:29:38 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.132:54339)
+2021/03/23 15:29:38 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 15:29:38 [release] on player 13324143840000 login
+2021/03/23 15:29:38 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 15:29:38 [debug  ] GetDayFromCreate: 1
+2021/03/23 15:29:38 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 15:29:38 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 15:29:38 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 15:29:38 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 15:29:38 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 15:29:38 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 15:30:48 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.30.192:64306)
+2021/03/23 15:30:48 [debug  ] player 13324143840000 disconnect
+2021/03/23 15:30:48 [release] on player 13324143840000 logout
+2021/03/23 15:31:02 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 15:31:02 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 15:31:02 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 15:31:02 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 15:31:02 [debug  ] player 13325539140000 login
+2021/03/23 15:31:02 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 15:31:02 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 15:31:02 [release] on player 13325539140000 login
+2021/03/23 15:31:02 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 15:31:02 [debug  ] GetDayFromCreate: 1
+2021/03/23 15:31:02 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 15:31:02 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 15:31:02 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 15:31:02 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 15:31:02 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 15:31:02 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 15:32:29 [debug  ] Info, UpdateRank
+2021/03/23 15:32:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325594950000, string= rank num:, int32=0)
+2021/03/23 15:37:29 [debug  ] Info, UpdateRank
+2021/03/23 15:37:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325624950000, string= rank num:, int32=0)
+2021/03/23 15:40:44 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:34813)
+2021/03/23 15:40:44 [debug  ] player 13325539140000 disconnect
+2021/03/23 15:40:44 [release] on player 13325539140000 logout
+2021/03/23 15:40:53 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 15:40:53 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 15:40:54 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 15:40:54 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 15:40:54 [debug  ] player 13325539140000 login
+2021/03/23 15:40:54 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 15:40:54 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 15:40:54 [release] on player 13325539140000 login
+2021/03/23 15:40:54 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 15:40:54 [debug  ] GetDayFromCreate: 1
+2021/03/23 15:40:54 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 15:40:54 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 15:40:54 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 15:40:54 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 15:40:54 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 15:40:54 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 15:41:17 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:35283)
+2021/03/23 15:41:17 [debug  ] player 13325539140000 disconnect
+2021/03/23 15:41:17 [release] on player 13325539140000 logout
+2021/03/23 15:41:23 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 15:41:23 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 15:41:24 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 15:41:24 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 15:41:24 [debug  ] player 13325539140000 login
+2021/03/23 15:41:24 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 15:41:24 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 15:41:24 [release] on player 13325539140000 login
+2021/03/23 15:41:24 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 15:41:24 [debug  ] GetDayFromCreate: 1
+2021/03/23 15:41:24 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 15:41:24 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 15:41:24 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 15:41:24 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 15:41:24 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 15:41:24 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 15:42:19 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:35321)
+2021/03/23 15:42:19 [debug  ] player 13325539140000 disconnect
+2021/03/23 15:42:19 [release] on player 13325539140000 logout
+2021/03/23 15:42:29 [debug  ] Info, UpdateRank
+2021/03/23 15:42:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325654950000, string= rank num:, int32=0)
+2021/03/23 15:42:29 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 15:42:29 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 15:42:30 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 15:42:30 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 15:42:30 [debug  ] player 13325539140000 login
+2021/03/23 15:42:30 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 15:42:30 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 15:42:30 [release] on player 13325539140000 login
+2021/03/23 15:42:30 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 15:42:30 [debug  ] GetDayFromCreate: 1
+2021/03/23 15:42:30 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 15:42:30 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 15:42:30 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 15:42:30 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 15:42:30 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 15:42:30 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 15:47:29 [debug  ] Info, UpdateRank
+2021/03/23 15:47:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325684950000, string= rank num:, int32=0)
+2021/03/23 15:52:29 [debug  ] Info, UpdateRank
+2021/03/23 15:52:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325714950000, string= rank num:, int32=0)
+2021/03/23 15:57:29 [debug  ] Info, UpdateRank
+2021/03/23 15:57:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325744950000, string= rank num:, int32=0)
+2021/03/23 16:02:29 [debug  ] Info, UpdateRank
+2021/03/23 16:02:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325774950000, string= rank num:, int32=0)
+2021/03/23 16:07:29 [debug  ] Info, UpdateRank
+2021/03/23 16:07:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325804950000, string= rank num:, int32=0)
+2021/03/23 16:12:29 [debug  ] Info, UpdateRank
+2021/03/23 16:12:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325834950000, string= rank num:, int32=0)
+2021/03/23 16:17:29 [debug  ] Info, UpdateRank
+2021/03/23 16:17:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325864960000, string= rank num:, int32=0)
+2021/03/23 16:22:29 [debug  ] Info, UpdateRank
+2021/03/23 16:22:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325894960000, string= rank num:, int32=0)
+2021/03/23 16:23:21 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:35395)
+2021/03/23 16:23:21 [debug  ] player 13325539140000 disconnect
+2021/03/23 16:23:21 [release] on player 13325539140000 logout
+2021/03/23 16:27:29 [debug  ] Info, UpdateRank
+2021/03/23 16:27:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325924960000, string= rank num:, int32=0)
+2021/03/23 16:28:29 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 16:28:29 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 16:28:30 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 16:28:30 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 16:28:30 [debug  ] player 13325539140000 login
+2021/03/23 16:28:30 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 16:28:30 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 16:28:30 [release] on player 13325539140000 login
+2021/03/23 16:28:30 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 16:28:30 [debug  ] GetDayFromCreate: 1
+2021/03/23 16:28:30 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 16:28:30 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 16:28:30 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 16:28:30 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 16:28:30 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 16:28:30 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 16:29:35 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:37558)
+2021/03/23 16:29:35 [debug  ] player 13325539140000 disconnect
+2021/03/23 16:29:35 [release] on player 13325539140000 logout
+2021/03/23 16:29:43 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 16:29:43 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 16:29:44 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 16:29:44 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 16:29:44 [debug  ] player 13325539140000 login
+2021/03/23 16:29:44 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 16:29:44 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 16:29:44 [release] on player 13325539140000 login
+2021/03/23 16:29:44 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 16:29:44 [debug  ] GetDayFromCreate: 1
+2021/03/23 16:29:44 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 16:29:44 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 16:29:44 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 16:29:44 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 16:29:44 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 16:29:44 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 16:32:29 [debug  ] Info, UpdateRank
+2021/03/23 16:32:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325954960000, string= rank num:, int32=0)
+2021/03/23 16:37:29 [debug  ] Info, UpdateRank
+2021/03/23 16:37:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13325984960000, string= rank num:, int32=0)
+2021/03/23 16:42:29 [debug  ] Info, UpdateRank
+2021/03/23 16:42:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326014960000, string= rank num:, int32=0)
+2021/03/23 16:47:29 [debug  ] Info, UpdateRank
+2021/03/23 16:47:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326044960000, string= rank num:, int32=0)
+2021/03/23 16:50:23 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:37620)
+2021/03/23 16:50:23 [debug  ] player 13325539140000 disconnect
+2021/03/23 16:50:23 [release] on player 13325539140000 logout
+2021/03/23 16:50:30 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 16:50:30 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 16:50:31 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 16:50:31 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 16:50:31 [debug  ] player 13325539140000 login
+2021/03/23 16:50:31 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 16:50:31 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 16:50:31 [release] on player 13325539140000 login
+2021/03/23 16:50:31 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 16:50:31 [debug  ] GetDayFromCreate: 1
+2021/03/23 16:50:31 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 16:50:31 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 16:50:31 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 16:50:31 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 16:50:31 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 16:50:31 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 16:52:07 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:38798)
+2021/03/23 16:52:07 [debug  ] player 13325539140000 disconnect
+2021/03/23 16:52:07 [release] on player 13325539140000 logout
+2021/03/23 16:52:17 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 16:52:17 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 16:52:18 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 16:52:18 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 16:52:18 [debug  ] player 13325539140000 login
+2021/03/23 16:52:18 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 16:52:18 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 16:52:18 [release] on player 13325539140000 login
+2021/03/23 16:52:18 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 16:52:18 [debug  ] GetDayFromCreate: 1
+2021/03/23 16:52:18 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 16:52:18 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 16:52:18 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 16:52:18 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 16:52:18 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 16:52:18 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 16:52:29 [debug  ] Info, UpdateRank
+2021/03/23 16:52:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326074960000, string= rank num:, int32=0)
+2021/03/23 16:52:43 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:38885)
+2021/03/23 16:52:43 [debug  ] player 13325539140000 disconnect
+2021/03/23 16:52:43 [release] on player 13325539140000 logout
+2021/03/23 16:53:16 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 16:53:16 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 16:53:40 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 16:53:40 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 16:53:40 [debug  ] player 13325539140000 login
+2021/03/23 16:53:40 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 16:53:40 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 16:53:40 [release] on player 13325539140000 login
+2021/03/23 16:53:40 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 16:53:40 [debug  ] GetDayFromCreate: 1
+2021/03/23 16:53:40 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 16:53:40 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 16:53:41 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 16:53:41 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 16:53:41 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 16:53:41 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 16:57:29 [debug  ] Info, UpdateRank
+2021/03/23 16:57:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326104960000, string= rank num:, int32=0)
+2021/03/23 17:02:29 [debug  ] Info, UpdateRank
+2021/03/23 17:02:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326134970000, string= rank num:, int32=0)
+2021/03/23 17:03:25 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:38941)
+2021/03/23 17:03:25 [debug  ] player 13325539140000 disconnect
+2021/03/23 17:03:25 [release] on player 13325539140000 logout
+2021/03/23 17:03:32 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 17:03:32 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 17:03:32 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 17:03:32 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 17:03:32 [debug  ] player 13325539140000 login
+2021/03/23 17:03:32 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 17:03:32 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 17:03:32 [release] on player 13325539140000 login
+2021/03/23 17:03:32 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 17:03:32 [debug  ] GetDayFromCreate: 1
+2021/03/23 17:03:32 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 17:03:32 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 17:03:32 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 17:03:32 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 17:03:32 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 17:03:32 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 17:07:29 [debug  ] Info, UpdateRank
+2021/03/23 17:07:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326164970000, string= rank num:, int32=0)
+2021/03/23 17:12:29 [debug  ] Info, UpdateRank
+2021/03/23 17:12:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326194970000, string= rank num:, int32=0)
+2021/03/23 17:17:29 [debug  ] Info, UpdateRank
+2021/03/23 17:17:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326224970000, string= rank num:, int32=0)
+2021/03/23 17:22:28 [debug  ] Info, UpdateRank
+2021/03/23 17:22:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326254870000, string= rank num:, int32=0)
+2021/03/23 17:27:28 [debug  ] Info, UpdateRank
+2021/03/23 17:27:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326284870000, string= rank num:, int32=0)
+2021/03/23 17:32:28 [debug  ] Info, UpdateRank
+2021/03/23 17:32:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326314870000, string= rank num:, int32=0)
+2021/03/23 17:37:28 [debug  ] Info, UpdateRank
+2021/03/23 17:37:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326344870000, string= rank num:, int32=0)
+2021/03/23 17:42:28 [debug  ] Info, UpdateRank
+2021/03/23 17:42:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326374870000, string= rank num:, int32=0)
+2021/03/23 17:47:28 [debug  ] Info, UpdateRank
+2021/03/23 17:47:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326404870000, string= rank num:, int32=0)
+2021/03/23 17:52:28 [debug  ] Info, UpdateRank
+2021/03/23 17:52:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326434870000, string= rank num:, int32=0)
+2021/03/23 17:57:22 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:39493)
+2021/03/23 17:57:22 [debug  ] player 13325539140000 disconnect
+2021/03/23 17:57:22 [release] on player 13325539140000 logout
+2021/03/23 17:57:28 [debug  ] Info, UpdateRank
+2021/03/23 17:57:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326464880000, string= rank num:, int32=0)
+2021/03/23 17:57:30 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 17:57:30 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 17:57:31 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 17:57:31 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 17:57:31 [debug  ] player 13325539140000 login
+2021/03/23 17:57:31 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 17:57:31 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 17:57:31 [release] on player 13325539140000 login
+2021/03/23 17:57:31 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 17:57:31 [debug  ] GetDayFromCreate: 1
+2021/03/23 17:57:31 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 17:57:31 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 17:57:31 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 17:57:31 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 17:57:31 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 17:57:31 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 17:59:42 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:2819)
+2021/03/23 17:59:42 [debug  ] player 13325539140000 disconnect
+2021/03/23 17:59:42 [release] on player 13325539140000 logout
+2021/03/23 17:59:49 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 17:59:49 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 17:59:51 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 17:59:51 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 17:59:51 [debug  ] player 13325539140000 login
+2021/03/23 17:59:51 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 17:59:51 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 17:59:51 [release] on player 13325539140000 login
+2021/03/23 17:59:51 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 17:59:51 [debug  ] GetDayFromCreate: 1
+2021/03/23 17:59:51 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 17:59:51 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 17:59:51 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 17:59:51 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 17:59:51 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 17:59:51 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 18:00:31 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:2933)
+2021/03/23 18:00:31 [debug  ] player 13325539140000 disconnect
+2021/03/23 18:00:31 [release] on player 13325539140000 logout
+2021/03/23 18:01:10 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 18:01:10 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 18:01:11 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 18:01:11 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 18:01:11 [debug  ] player 13325539140000 login
+2021/03/23 18:01:11 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 18:01:11 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 18:01:11 [release] on player 13325539140000 login
+2021/03/23 18:01:11 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 18:01:11 [debug  ] GetDayFromCreate: 1
+2021/03/23 18:01:11 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 18:01:11 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 18:01:11 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 18:01:11 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 18:01:11 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 18:01:11 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 18:02:28 [debug  ] Info, UpdateRank
+2021/03/23 18:02:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326494880000, string= rank num:, int32=0)
+2021/03/23 18:02:38 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:3036)
+2021/03/23 18:02:38 [debug  ] player 13325539140000 disconnect
+2021/03/23 18:02:38 [release] on player 13325539140000 logout
+2021/03/23 18:02:47 [debug  ] !!----<<<<---- Route::*msg.VersionCheckR 
+2021/03/23 18:02:47 [debug  ] !!!!!!---->>>>---- Marshal::*msg.VersionCheckA 
+2021/03/23 18:02:48 [debug  ] !!----<<<<---- Route::*msg.DeviceLoginNewR 
+2021/03/23 18:02:48 [debug  ] server_main/game/internal.handleDeviceLoginNewR
+2021/03/23 18:02:48 [debug  ] player 13325539140000 login
+2021/03/23 18:02:48 [debug  ] !!!!!!---->>>>---- Marshal::*msg.DeviceLoginNewA 
+2021/03/23 18:02:48 [debug  ] !!----<<<<---- Route::*msg.PlayerLoginR 
+2021/03/23 18:02:48 [release] on player 13325539140000 login
+2021/03/23 18:02:48 [debug  ] Player LastDailyUpdateAt: 2021-03-23 00:00:00 +0800 CST
+2021/03/23 18:02:48 [debug  ] GetDayFromCreate: 1
+2021/03/23 18:02:48 [debug  ] handlePlayerLoginR msg size: 11565
+2021/03/23 18:02:48 [debug  ] !!!!!!---->>>>---- Marshal::*msg.PlayerLoginA 
+2021/03/23 18:02:48 [debug  ] !!----<<<<---- Route::*msg.GetHeroListR 
+2021/03/23 18:02:48 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetHeroListA 
+2021/03/23 18:02:48 [debug  ] !!----<<<<---- Route::*msg.GetPlayerDataR 
+2021/03/23 18:02:48 [debug  ] !!!!!!---->>>>---- Marshal::*msg.GetPlayerDataA 
+2021/03/23 18:07:28 [debug  ] Info, UpdateRank
+2021/03/23 18:07:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326524880000, string= rank num:, int32=0)
+2021/03/23 18:11:05 [debug  ] --- rpcCloseAgent%!(EXTRA *net.TCPAddr=192.168.15.90:3136)
+2021/03/23 18:11:05 [debug  ] player 13325539140000 disconnect
+2021/03/23 18:11:05 [release] on player 13325539140000 logout
+2021/03/23 18:12:28 [debug  ] Info, UpdateRank
+2021/03/23 18:12:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326554880000, string= rank num:, int32=0)
+2021/03/23 18:17:28 [debug  ] Info, UpdateRank
+2021/03/23 18:17:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326584880000, string= rank num:, int32=0)
+2021/03/23 18:22:28 [debug  ] Info, UpdateRank
+2021/03/23 18:22:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326614880000, string= rank num:, int32=0)
+2021/03/23 18:27:28 [debug  ] Info, UpdateRank
+2021/03/23 18:27:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326644880000, string= rank num:, int32=0)
+2021/03/23 18:32:28 [debug  ] Info, UpdateRank
+2021/03/23 18:32:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326674880000, string= rank num:, int32=0)
+2021/03/23 18:37:28 [debug  ] Info, UpdateRank
+2021/03/23 18:37:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326704880000, string= rank num:, int32=0)
+2021/03/23 18:42:28 [debug  ] Info, UpdateRank
+2021/03/23 18:42:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326734880000, string= rank num:, int32=0)
+2021/03/23 18:47:28 [debug  ] Info, UpdateRank
+2021/03/23 18:47:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326764880000, string= rank num:, int32=0)
+2021/03/23 18:52:28 [debug  ] Info, UpdateRank
+2021/03/23 18:52:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326794880000, string= rank num:, int32=0)
+2021/03/23 18:57:28 [debug  ] Info, UpdateRank
+2021/03/23 18:57:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326824890000, string= rank num:, int32=0)
+2021/03/23 19:02:28 [debug  ] Info, UpdateRank
+2021/03/23 19:02:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326854890000, string= rank num:, int32=0)
+2021/03/23 19:07:28 [debug  ] Info, UpdateRank
+2021/03/23 19:07:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326884890000, string= rank num:, int32=0)
+2021/03/23 19:12:28 [debug  ] Info, UpdateRank
+2021/03/23 19:12:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326914890000, string= rank num:, int32=0)
+2021/03/23 19:17:28 [debug  ] Info, UpdateRank
+2021/03/23 19:17:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326944890000, string= rank num:, int32=0)
+2021/03/23 19:22:28 [debug  ] Info, UpdateRank
+2021/03/23 19:22:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13326974890000, string= rank num:, int32=0)
+2021/03/23 19:27:28 [debug  ] Info, UpdateRank
+2021/03/23 19:27:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327004890000, string= rank num:, int32=0)
+2021/03/23 19:32:28 [debug  ] Info, UpdateRank
+2021/03/23 19:32:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327034890000, string= rank num:, int32=0)
+2021/03/23 19:37:28 [debug  ] Info, UpdateRank
+2021/03/23 19:37:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327064890000, string= rank num:, int32=0)
+2021/03/23 19:42:28 [debug  ] Info, UpdateRank
+2021/03/23 19:42:28 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327094890000, string= rank num:, int32=0)
+2021/03/23 19:47:28 [debug  ] Info, UpdateRank
+2021/03/23 19:47:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327124900000, string= rank num:, int32=0)
+2021/03/23 19:52:28 [debug  ] Info, UpdateRank
+2021/03/23 19:52:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327154900000, string= rank num:, int32=0)
+2021/03/23 19:57:28 [debug  ] Info, UpdateRank
+2021/03/23 19:57:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327184900000, string= rank num:, int32=0)
+2021/03/23 20:02:28 [debug  ] Info, UpdateRank
+2021/03/23 20:02:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327214900000, string= rank num:, int32=0)
+2021/03/23 20:07:28 [debug  ] Info, UpdateRank
+2021/03/23 20:07:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327244900000, string= rank num:, int32=0)
+2021/03/23 20:12:28 [debug  ] Info, UpdateRank
+2021/03/23 20:12:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327274900000, string= rank num:, int32=0)
+2021/03/23 20:17:28 [debug  ] Info, UpdateRank
+2021/03/23 20:17:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327304900000, string= rank num:, int32=0)
+2021/03/23 20:22:28 [debug  ] Info, UpdateRank
+2021/03/23 20:22:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327334900000, string= rank num:, int32=0)
+2021/03/23 20:27:28 [debug  ] Info, UpdateRank
+2021/03/23 20:27:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327364900000, string= rank num:, int32=0)
+2021/03/23 20:32:28 [debug  ] Info, UpdateRank
+2021/03/23 20:32:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327394910000, string= rank num:, int32=0)
+2021/03/23 20:37:28 [debug  ] Info, UpdateRank
+2021/03/23 20:37:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327424910000, string= rank num:, int32=0)
+2021/03/23 20:42:28 [debug  ] Info, UpdateRank
+2021/03/23 20:42:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327454910000, string= rank num:, int32=0)
+2021/03/23 20:47:29 [debug  ] Info, UpdateRank
+2021/03/23 20:47:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327484910000, string= rank num:, int32=0)
+2021/03/23 20:52:29 [debug  ] Info, UpdateRank
+2021/03/23 20:52:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327514910000, string= rank num:, int32=0)
+2021/03/23 20:57:29 [debug  ] Info, UpdateRank
+2021/03/23 20:57:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327544910000, string= rank num:, int32=0)
+2021/03/23 21:02:29 [debug  ] Info, UpdateRank
+2021/03/23 21:02:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327574910000, string= rank num:, int32=0)
+2021/03/23 21:07:29 [debug  ] Info, UpdateRank
+2021/03/23 21:07:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327604910000, string= rank num:, int32=0)
+2021/03/23 21:12:29 [debug  ] Info, UpdateRank
+2021/03/23 21:12:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327634920000, string= rank num:, int32=0)
+2021/03/23 21:17:29 [debug  ] Info, UpdateRank
+2021/03/23 21:17:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327664920000, string= rank num:, int32=0)
+2021/03/23 21:22:29 [debug  ] Info, UpdateRank
+2021/03/23 21:22:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327694920000, string= rank num:, int32=0)
+2021/03/23 21:27:29 [debug  ] Info, UpdateRank
+2021/03/23 21:27:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327724920000, string= rank num:, int32=0)
+2021/03/23 21:32:29 [debug  ] Info, UpdateRank
+2021/03/23 21:32:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327754920000, string= rank num:, int32=0)
+2021/03/23 21:37:29 [debug  ] Info, UpdateRank
+2021/03/23 21:37:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327784920000, string= rank num:, int32=0)
+2021/03/23 21:42:29 [debug  ] Info, UpdateRank
+2021/03/23 21:42:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327814920000, string= rank num:, int32=0)
+2021/03/23 21:47:29 [debug  ] Info, UpdateRank
+2021/03/23 21:47:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327844920000, string= rank num:, int32=0)
+2021/03/23 21:52:29 [debug  ] Info, UpdateRank
+2021/03/23 21:52:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327874920000, string= rank num:, int32=0)
+2021/03/23 21:57:29 [debug  ] Info, UpdateRank
+2021/03/23 21:57:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327904930000, string= rank num:, int32=0)
+2021/03/23 22:02:29 [debug  ] Info, UpdateRank
+2021/03/23 22:02:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327934930000, string= rank num:, int32=0)
+2021/03/23 22:07:29 [debug  ] Info, UpdateRank
+2021/03/23 22:07:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327964930000, string= rank num:, int32=0)
+2021/03/23 22:12:29 [debug  ] Info, UpdateRank
+2021/03/23 22:12:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13327994930000, string= rank num:, int32=0)
+2021/03/23 22:17:29 [debug  ] Info, UpdateRank
+2021/03/23 22:17:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328024930000, string= rank num:, int32=0)
+2021/03/23 22:22:29 [debug  ] Info, UpdateRank
+2021/03/23 22:22:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328054930000, string= rank num:, int32=0)
+2021/03/23 22:27:29 [debug  ] Info, UpdateRank
+2021/03/23 22:27:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328084930000, string= rank num:, int32=0)
+2021/03/23 22:32:29 [debug  ] Info, UpdateRank
+2021/03/23 22:32:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328114930000, string= rank num:, int32=0)
+2021/03/23 22:37:29 [debug  ] Info, UpdateRank
+2021/03/23 22:37:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328144930000, string= rank num:, int32=0)
+2021/03/23 22:42:29 [debug  ] Info, UpdateRank
+2021/03/23 22:42:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328174930000, string= rank num:, int32=0)
+2021/03/23 22:47:29 [debug  ] Info, UpdateRank
+2021/03/23 22:47:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328204930000, string= rank num:, int32=0)
+2021/03/23 22:52:29 [debug  ] Info, UpdateRank
+2021/03/23 22:52:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328234940000, string= rank num:, int32=0)
+2021/03/23 22:57:29 [debug  ] Info, UpdateRank
+2021/03/23 22:57:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328264940000, string= rank num:, int32=0)
+2021/03/23 23:02:29 [debug  ] Info, UpdateRank
+2021/03/23 23:02:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328294940000, string= rank num:, int32=0)
+2021/03/23 23:07:29 [debug  ] Info, UpdateRank
+2021/03/23 23:07:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328324940000, string= rank num:, int32=0)
+2021/03/23 23:12:29 [debug  ] Info, UpdateRank
+2021/03/23 23:12:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328354940000, string= rank num:, int32=0)
+2021/03/23 23:17:29 [debug  ] Info, UpdateRank
+2021/03/23 23:17:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328384940000, string= rank num:, int32=0)
+2021/03/23 23:22:29 [debug  ] Info, UpdateRank
+2021/03/23 23:22:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328414940000, string= rank num:, int32=0)
+2021/03/23 23:27:29 [debug  ] Info, UpdateRank
+2021/03/23 23:27:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328444940000, string= rank num:, int32=0)
+2021/03/23 23:32:29 [debug  ] Info, UpdateRank
+2021/03/23 23:32:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328474940000, string= rank num:, int32=0)
+2021/03/23 23:37:29 [debug  ] Info, UpdateRank
+2021/03/23 23:37:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328504940000, string= rank num:, int32=0)
+2021/03/23 23:42:29 [debug  ] Info, UpdateRank
+2021/03/23 23:42:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328534940000, string= rank num:, int32=0)
+2021/03/23 23:47:29 [debug  ] Info, UpdateRank
+2021/03/23 23:47:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328564940000, string= rank num:, int32=0)
+2021/03/23 23:52:29 [debug  ] Info, UpdateRank
+2021/03/23 23:52:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328594950000, string= rank num:, int32=0)
+2021/03/23 23:57:29 [debug  ] Info, UpdateRank
+2021/03/23 23:57:29 [debug  ] Info, sort guild ,GuildRankTime:%!(EXTRA int64=13328624950000, string= rank num:, int32=0)
+2021/03/23 23:59:58 [debug  ] DoDailyUpdatePlayers
+2021/03/23 23:59:58 [debug  ] Next Daily Update Time: 2021-03-24 00:00:00 +0800 CST
+2021/03/23 23:59:59 [debug  ] ActivityUpdateCheck

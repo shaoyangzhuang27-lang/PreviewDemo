@@ -1,0 +1,5 @@
+{
+	"DbInfoString": "root:admin@tcp(192.168.15.29:3306)/idk_game?charset=utf8&parseTime=True&loc=Local",
+	"DbLogString": "root:admin@tcp(192.168.15.29:3306)/idk_log?charset=utf8&parseTime=True&loc=Local",
+	"DbGMString": "root:admin@tcp(192.168.15.29:3306)/idk_gm?charset=utf8&parseTime=True&loc=Local"
+}
