@@ -34,5 +34,7 @@ export class NotifyMgr extends NotifyCore {
     public static event_hero_book_active:string = "event_hero_book_active";         //英雄图鉴激活
     public static event_hero_book_upgrade:string = "event_hero_book_upgrade";         //英雄图鉴升级
 
+    public static event_net_pub_hero_decompose : string = "event_net_pub_hero_decompose"; //酒馆召唤英雄分解
+
     public static event_equip_compose_suc: string = "event_equip_compose_suc";         //装备合成
 }

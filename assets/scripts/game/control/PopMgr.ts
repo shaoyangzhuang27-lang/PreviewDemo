@@ -444,14 +444,13 @@ export class PopMgr extends PopCore  {
      * @param {number} nCounts 召唤个数
      * @param {Function} closeCallBack
      */ 
-    public popSummonSettleWindow(nType : number,nCounts : number ,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    public popSummonSettleWindow(msgData: Msg.SummonHeroA,nType : number,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
             let script = p.getComponent("PopSummonSettle") as PopSummonSettle;
-            script.popWindowType = nType ;
-            script.summonCounts = nCounts;
+            script.initDataFromMsgData(msgData,nType);
             script.setIsMaskClose(isMaskClose);
 
         } );

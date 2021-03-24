@@ -4362,7 +4362,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "lab",
+    "_name": "lab_summon_desc",
     "_objFlags": 0,
     "_parent": {
       "__id__": 191
@@ -5445,6 +5445,9 @@
     },
     "node_hero": {
       "__id__": 83
+    },
+    "lab_summon_desc": {
+      "__id__": 195
     },
     "scroll_heroicon_view": {
       "__id__": 150

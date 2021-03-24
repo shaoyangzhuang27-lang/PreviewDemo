@@ -421,4 +421,34 @@ export class HeroesModel extends BaseModel{
         info.icon = _hero.image;
         return info
     }
+
+
+    public updateHeroListFromSummon(msgData: Array<Msg.IHeroInfo>)
+    {
+        msgData.forEach((heroInfo)=>{
+                if(ValueMgr.getInstance().getItemByField(TableName.heroes,heroInfo.staticID as number)){
+                    let hero = new HeroData();
+                    hero.initDataByHero(heroInfo as Msg.HeroInfo, this._gameModel);
+                    this._heroList.set(heroInfo.id as number,hero);
+                }
+            })
+    }
+
+
+    
+    public getAutoDecomposeHeroDyncIDList(starCounts : number)
+    {
+        let dyncIDList:Array<number> = [];
+        this._heroList.forEach((heroInfo)=>{
+            if(ValueMgr.getInstance().getItemByField(TableName.heroes, heroInfo.getStaticID() as number) && heroInfo.getStar() < starCounts){
+                dyncIDList.push(heroInfo.getDyncID() as number);
+            }
+        });
+        return dyncIDList;
+    }
+
+    public removeHeroByHeroDyncID(dyncID : number)
+    {
+        this._heroList.delete(dyncID);
+    }
 }

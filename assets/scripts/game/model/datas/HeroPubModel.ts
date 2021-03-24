@@ -111,11 +111,17 @@ export class HeroPubModel extends BaseModel{
     // }
 
     //英雄普通召唤卷轴
-    public getHeroSummonScrollNum()
+    public getBaseSummonScrollNum()
     {
         return this._gameModel.getPlayerModel().getPlayerInfo().basicSummonScroll || 0;
     }
 
+
+    //英雄高级召唤卷轴
+    public getHeroicSummonScrollNum()
+    {
+        return this._gameModel.getPlayerModel().getPlayerInfo().heroicSummonScroll || 0;
+    }
     //友情英雄召唤卷轴
     public getFriendSummonScrollNum()
     {
@@ -128,6 +134,13 @@ export class HeroPubModel extends BaseModel{
         return this._gameModel.getPlayerModel().getPlayerInfo().vrmb || 0;
     }
     
+
+    //玩家1,2星英雄是否自动分解
+    public getIsAutoDecompose()
+    {
+        return  1 ;//this._gameModel.getPlayerModel().getPlayerInfo().isAutoDecompose || 0;
+    }
+
     public initRecLineUpInfos()
     {
         if(this._stuLineUpInfos.length > 0)
