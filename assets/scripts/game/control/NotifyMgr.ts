@@ -2,7 +2,7 @@
  * @Description: 事件通知管理器
  * @Author: xxxx
  * @Date: 2021-02-23 16:07:59
- * @LastEditTime: 2021-03-19 20:15:34
+ * @LastEditTime: 2021-03-23 15:30:22
  */
 import { NotifyCore } from "../../core/control/NotifyCore";
 
@@ -33,4 +33,8 @@ export class NotifyMgr extends NotifyCore {
     public static event_net_pub_summon_hero : string = "event_net_pub_summon_hero";     //酒馆召唤
     public static event_hero_book_active:string = "event_hero_book_active";         //英雄图鉴激活
     public static event_hero_book_upgrade:string = "event_hero_book_upgrade";         //英雄图鉴升级
+
+    public static event_net_pub_hero_decompose : string = "event_net_pub_hero_decompose"; //酒馆召唤英雄分解
+
+    public static event_equip_compose_suc: string = "event_equip_compose_suc";         //装备合成
 }

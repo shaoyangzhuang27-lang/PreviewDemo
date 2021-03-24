@@ -1,0 +1,8 @@
+{
+	"LogLevel": "debug",
+	"LogPath": "./log_battle/",
+	"MaxConnNum": 20000,
+	"KCPBattleAddr": "",
+	"GlobalAddr": "127.0.0.1:17173",
+	"IsPrintLog": false
+}

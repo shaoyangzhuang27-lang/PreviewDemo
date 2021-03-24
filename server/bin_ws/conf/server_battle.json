@@ -1,6 +1,0 @@
-{
-	"LogLevel": "debug",
-	"LogPath": "./log_battle/",
-	"MaxConnNum": 20000,
-	"KCPBattleAddr": ""
-}

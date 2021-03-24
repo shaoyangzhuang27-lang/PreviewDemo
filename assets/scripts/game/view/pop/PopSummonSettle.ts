@@ -1,8 +1,13 @@
-import { _decorator, Component, Node,Label,ScrollView,resources,instantiate, Vec3, Size,Sprite,UITransform, Button,SpriteFrame, Layout } from 'cc';
+import { _decorator, Component, Node,Label,ScrollView,resources,instantiate, Vec3, Size,Sprite,UITransform,Button,SpriteFrame, Layout, Color, Game } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { HeroIcon } from '../hero/HeroIcon';
+import { GameModel } from '../../model/GameModel';
+import { NotifyMgr } from '../../control/NotifyMgr';
+import { MsgMgr } from '../../control/MsgMgr';
+import { PopMgr } from '../../control/PopMgr';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('PopSummonSettle')
@@ -40,94 +45,211 @@ export class PopSummonSettle extends PopBase {
     public node_hero = null as unknown as Node;
     
 
+    @property({type: Label})
+    public lab_summon_desc = null as unknown as Label;
+
     @property({type :  ScrollView})
     public scroll_heroicon_view:ScrollView = null as unknown as ScrollView;
 
     
+    //弹窗来源类型
     private _popWindowType : number = XConsts.POP_SUMMON_TYPE.HeroPub;
 
-    private _nSummonCounts : number = 0;
+    //是否一次召唤
+    private _bIsOne : boolean = false;
+
+    //召唤类型
+    private _nSummonType : number = 0;
+    //消费类型
+    private _nSummonConsumeType : number = 0;
+
+    private _HeroList : Array<Msg.IHeroInfo> = [];
+
+    private _arrDecomposeHeroId : Array<number> = [];
+
+    private _arrStarPos : Array<Vec3> = [];
+
 
 
     start () {
         super.start();
-        this.btn_summon.node.on(Node.EventType.TOUCH_END, this._onSummonClick, this);
+        var settleTitle = ValueMgr.getInstance().getItemByField(TableName.language_data,XConsts.SUMMON_SETTLE_TITLE) as Config.language_data.Record;
+        this.lab_title.string = settleTitle.cn;
+        this.btn_summon.node.on(Node.EventType.TOUCH_END, this._onBtnSummonClick, this);
+        this.btn_sure.on(Node.EventType.TOUCH_END, this._onBtnSureClick, this);
+        this._initStarPos();
         this.initUI();
+
+        if(this._popWindowType ==XConsts.POP_SUMMON_TYPE.HeroPub)
+        {
+            NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+        }
+
+        this.addNotifyPubHeroDecomposeHandler();
+        console.log("zzzzzzzzzzzz diamond", GameModel.getInstance().getHeroPubModel().getIsAutoDecompose());
+        console.log("palyer heros", GameModel.getInstance().getHeroesModel().getHeroList());
         // this.initHeroModelInfo(3042500);
     }
 
-    public _onSummonClick(event : any)
+    
+    private _onBtnSureClick(event : any)
     {
-        //按钮点击再次召唤请请求，在服务器回调函数中添加 重置scrollview按钮
-        // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
-        //         let reclineup_item = instantiate( res );
-        //         let script = reclineup_item.getComponent(HeroIcon);
-        //         reclineup_item.scale = new Vec3(0.75,0.75,1);
-        //         let subWidget = reclineup_item.getComponent(UITransform) as UITransform;
-        //         subWidget.contentSize = new Size(113,113);
-        //         script.initUIHeroIconInfo(3031301,XConsts.HERO_ICON_TYPE.SummonSettle);
-        //         this.scroll_heroicon_view.content?.addChild(reclineup_item);
-        // });
+        if(GameModel.getInstance().getHeroPubModel().getIsAutoDecompose())
+        {
+            this._arrDecomposeHeroId = GameModel.getInstance().getHeroesModel().getAutoDecomposeHeroDyncIDList(XConsts.AUTODECOMPOSE_MAX_STARS);
+            if(this._arrDecomposeHeroId.length > 0)
+            {
+                console.log("decompose id",this._arrDecomposeHeroId);
+                let msg : Msg.HeroDecomposeR  = new Msg.HeroDecomposeR();
+                msg.heroIDList = Array.from(this._arrDecomposeHeroId);
+                // MainClient.instance.RequestMessage (Msg.MsgType.TheHeroDecomposeR, msg, Msg.MsgType.TheHeroDecomposeA, OnRecvHeroDecompose);
+                MsgMgr.getInstance().getMsgHeroPub().requestHeroDecomposeR(msg);
+            }
+            else
+            {
+                PopMgr.getInstance().deleteWindow();
+            }
+        }
+        else
+        {
+            PopMgr.getInstance().deleteWindow();
+        }
+    }
+
+    public notifyPubSummonHeroHandle ( msgData: Msg.SummonHeroA){
+        if (msgData.err == Msg.TErrorCode.ERR_OK) {
+            console.log("zzzzzzzzzzzzzz SummonSettleHeroSummon",msgData);
+            console.log("zzzzzzzzzzzz diamond", GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts());
+            this.initDataFromMsgData(msgData,this._popWindowType);
+            this.initUI();
+        }
+        else
+        {
+            //此处消息错误处理 
+        }
+    }
+
+    public _onBtnSummonClick(event : any)
+    {
+        let summonHeroR : Msg.SummonHeroR = {
+            summonType : this._nSummonType,
+           consumeType : this._nSummonConsumeType,
+           isOneOrTen : this._bIsOne,
+       }
+        MsgMgr.getInstance().getMsgHeroPub().requestSummonHeroR(summonHeroR);
     }
 
     public initUI()
     {
-        var settleTitle = ValueMgr.getInstance().getItemByField(TableName.language_data,XConsts.SUMMON_SETTLE_TITLE) as Config.language_data.Record;
-        this.lab_title.string = settleTitle.cn;
+        
 
         if(this.scroll_heroicon_view.content)
         {
             this.scroll_heroicon_view.content.removeAllChildren()
         }
 
-        // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
-        //     for (var i = 0 ; i < 2; i++) {
-        //         let reclineup_item = instantiate( res );
-        //         let script = reclineup_item.getComponent(HeroIcon);
-        //         reclineup_item.scale = new Vec3(0.5,0.5,1);
-        //         // script.initUIHeroIconInfo(id);
-        //         this.scroll_heroicon_view.content?.addChild(reclineup_item);
-        //     }
-        // });
+        console.log("hhhhhhhhhhh",this._HeroList);
+        console.log("ffffffffffff",this._HeroList.length);
+        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+                for(var i = 0; i < this._HeroList.length; i++)
+                {
+                    let reclineup_item = instantiate( res );
+                    let script = reclineup_item.getComponent(HeroIcon);
+                    reclineup_item.scale = new Vec3(0.75,0.75,1);
+                    let subWidget = reclineup_item.getComponent(UITransform) as UITransform;
+                    subWidget.contentSize = new Size(113,113);
+                    script.initUIHeroIconInfo(this._HeroList[i].staticID,this._popWindowType);
+                    this.scroll_heroicon_view.content?.addChild(reclineup_item);
+                    if(i ==0)
+                    {
+                        this.initHeroModelInfo(this._HeroList[0].staticID);
+                    }
+                }    
+        });
     }
     
 
-    public initBtnSummonUI(summmonType : Msg.TSummonType,consumeType : Msg.TSummonConsumeType)
+    public initBtnSummonUI(summmonType : Msg.TSummonType,consumeType : Msg.TSummonConsumeType, bIsOne : boolean)
     {
         var lab = this.btn_summon.node.getChildByName("lab")?.getComponent(Label);
         var lab_summon_num = this.btn_summon.node.getChildByName("lab_summon_num")?.getComponent(Label);
         var img_summon_icon = this.btn_summon.node.getChildByName("img_summon_icon")?.getComponent(Sprite);
 
-        if(summmonType == Msg.TSummonType.ESummonType_Friend)
-        {    
-            img_summon_icon && this.resetResourcesSpriFame("hero_pub/pub_prop_heart/spriteFrame",img_summon_icon);
+        var strBtnSummonDescOne  = "召唤 1";  
+        var strBtnSummonDescTen  = "召唤 10";  
+        var changeLabColor = (nCounts : number,curNum : number)=>{
+            if(nCounts < curNum)
+            {
+                lab_summon_num && (lab_summon_num.color = Color.RED);
+            }
+            else
+            {
+                lab_summon_num && (lab_summon_num.color = Color.WHITE);
+            }
         }
-        else if(summmonType == Msg.TSummonType.ESummonType_Basic && consumeType == Msg.TSummonConsumeType.ESummonConsumeType_Scroll)
+        //消耗卷轴
+        if (consumeType == Msg.TSummonConsumeType.ESummonConsumeType_Scroll) {
+            if (summmonType == Msg.TSummonType.ESummonType_Basic) {
+                img_summon_icon && this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",img_summon_icon);
+            } else if (summmonType == Msg.TSummonType.ESummonType_Heroic) {
+                img_summon_icon && this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",img_summon_icon);
+            }
+            var curNum = bIsOne ? XConsts.PUB_SUMMON_SCROLL_ONE_COSUME : XConsts.PUB_SUMMON_SCROLL_TEN_COSUME
+            lab_summon_num && (lab_summon_num.string = String(curNum));
+            this.lab_summon_desc.string = bIsOne ? strBtnSummonDescOne : strBtnSummonDescTen;
+            changeLabColor(GameModel.getInstance().getHeroPubModel().getBaseSummonScrollNum(),curNum);
+
+        } //消耗钻石  暂时只处理80级之前的显示
+        else if (consumeType == Msg.TSummonConsumeType.ESummonConsumeType_VRmb) {
+            var curNum = bIsOne ? XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME : XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME
+            lab_summon_num && (lab_summon_num.string = String(curNum));
+            this.lab_summon_desc.string = bIsOne ? strBtnSummonDescOne : strBtnSummonDescTen;
+            changeLabColor(GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts(),curNum);
+        }//消耗友情
+        else if (consumeType == Msg.TSummonConsumeType.ESummonConsumeType_FriendGift) 
         {
-            img_summon_icon && this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",img_summon_icon);
-        }
+            img_summon_icon && this.resetResourcesSpriFame("hero_pub/pub_prop_heart/spriteFrame",img_summon_icon);
+            
+            var curNum = bIsOne ? XConsts.PUB_SUMMON_FRIEND_ONE_COSUME : XConsts.PUB_SUMMON_FRIEND_TEN_COSUME
+            lab_summon_num && (lab_summon_num.string = String(curNum));
+            this.lab_summon_desc.string = bIsOne ? strBtnSummonDescOne : strBtnSummonDescTen;
+            changeLabColor(GameModel.getInstance().getHeroPubModel().getFriendSummonScrollNum(),curNum);
+        } 
 
     }
 
-    public initHeroModelInfo(heroId : number)
+    public initHeroModelInfo(heroId : number | null | undefined)
     {
 
-        //5051402
-        let heroInfo = ValueMgr.getInstance().getItemByField(TableName.heroes, heroId ) as Config.heroes.Record;
-        var camp = "ui/common/team/" + XConsts.KHeroCampIcon[heroInfo.camp] + "/spriteFrame";
-        var profession = "ui/book/" + XConsts.KClassesSpriteName[heroInfo.classes] + "/spriteFrame";
+        if(heroId)
+        {
+            //5051402
+            let heroInfo = ValueMgr.getInstance().getItemByField(TableName.heroes, heroId ) as Config.heroes.Record;
+            var camp = "ui/common/team/" + XConsts.KHeroCampIcon[heroInfo.camp] + "/spriteFrame";
+            var profession = "ui/book/" + XConsts.KClassesSpriteName[heroInfo.classes] + "/spriteFrame";
 
-        var heroName = ValueMgr.getInstance().getItemByField(TableName.language_data,heroInfo.name) as Config.language_data.Record;
-        this.lab_hero_name.string = heroName.cn
-        this.resetResourcesSpriFame(camp,this.img_camp);
-        this._setStar(heroInfo.star);
-        this.resetResourcesSpriFame(profession,this.img_profession);
+            var heroName = ValueMgr.getInstance().getItemByField(TableName.language_data,heroInfo.name) as Config.language_data.Record;
+            this.lab_hero_name.string = heroName.cn
+            this.resetResourcesSpriFame(camp,this.img_camp);
+            this._setStar(heroInfo.star);
+            this.resetResourcesSpriFame(profession,this.img_profession);
+        }
+       
 
+    }
+
+    private _initStarPos()
+    {
+        for (let index = 0; index < this.starlist.length; index++) {
+            var pos =  this.starlist[index].getPosition();
+            this._arrStarPos.push(instantiate(pos));
+        }
     }
 
     private _setStar(star:number)
     {
         for (let index = 0; index < this.starlist.length; index++) {
+            this.starlist[index].setPosition(this._arrStarPos[index]);
             if(index > star-1)
             {
                 this.starlist[index].active = false;
@@ -165,13 +287,105 @@ export class PopSummonSettle extends PopBase {
         this._popWindowType = nType;
     }
 
-    public set summonCounts(nCounts: number)
+    public setShowScrollViewType(nCounts: number)
     {
         var lay = this.scroll_heroicon_view.content?.getComponent(Layout);
-        if(nCounts < 5 && lay)
+        if(nCounts < XConsts.SUMMON_SETTLE_HORIZONTAL_COUNTS && lay)
         {
             lay.type = 1;
         }
-        this._nSummonCounts = nCounts;
+    }
+
+    public initDataFromMsgData(msgData: Msg.SummonHeroA,nType : number)
+    {
+        // GameModel.getInstance().getHeroPubModel().getBaseSummonScrollNum()
+        this._nSummonType = msgData.summonType;
+        this._nSummonConsumeType = msgData.consumeType;
+        this._bIsOne = msgData.heroList.length > 1 ? false : true;
+        this._HeroList = [];
+        this._HeroList = this._HeroList.concat(msgData.heroList);
+        this.initBtnSummonUI(this._nSummonType, this._nSummonConsumeType, this._bIsOne);
+        this.setShowScrollViewType(msgData.heroList.length);
+        this.popWindowType = nType;
+
+       
+        GameModel.getInstance().getHeroesModel().updateHeroListFromSummon(this._HeroList);
+
+
+        // this._HeroList.forEach((heroInfo)=>{
+        //     if(heroInfo.staticID && heroInfo.id)
+        //     {
+        //         let hero = ValueMgr.getInstance().getItemByField(TableName.heroes, heroInfo.staticID) as Config.heroes.Record;
+        //         if(hero.star < XConsts.AUTODECOMPOSE_MAX_STARS)
+        //         {
+        //             this._arrDecomposeHeroId.push(heroInfo.id);
+        //         }
+        //     }
+        // })
+      
+        
+    }
+
+    onDestroy(){
+        // this.node.emit("OpenPubNotify");
+        //NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this); 
+        this.removeNotifyPubHeroDecomposeHandler();
+    }
+
+    
+    public addNotifyPubHeroDecomposeHandler()
+    {
+        console.log("decompose开启");
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_hero_decompose,this.notifyPubHeroDecomposeHandle,this);
+    }
+
+    public removeNotifyPubHeroDecomposeHandler()
+    {
+        console.log("decompose关闭");
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this); 
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_hero_decompose,this.notifyPubHeroDecomposeHandle,this);
+    }
+
+
+    public notifyPubHeroDecomposeHandle(msgData: Msg.HeroDecomposeA)
+    {
+        console.log("dddddddddecompose 111",msgData);
+
+        if (msgData.err == Msg.TErrorCode.ERR_OK) {
+            msgData.heroIDList.forEach((id)=>{
+                GameModel.getInstance().getHeroesModel().removeHeroByHeroDyncID(id);
+            })
+            let arrProp: Array<XStruct.prop_info.Record> = [];
+            let stuProp : XStruct.prop_info.Record = {
+                nType : 0,
+                nPropId : 0,
+                nLevel : 0,
+                nPropQuality : 0,
+                num : 0,
+            }
+            if(msgData.advanceExp)
+            {
+                stuProp.nType = Msg.TObjectType.EObject_Exp;
+                stuProp.num = msgData.advanceExp;
+                arrProp.push(instantiate(stuProp));    
+            }
+
+            if(msgData.soulStone)
+            {
+                stuProp.nType = Msg.TObjectType.EObject_SoulStone;
+                stuProp.num = msgData.soulStone;
+                arrProp.push(instantiate(stuProp));    
+            }
+
+            if(msgData.money)
+            {
+                stuProp.nType = Msg.TObjectType.EObject_Money;
+                stuProp.num = msgData.money;
+                arrProp.push(instantiate(stuProp));    
+            }  
+            PopMgr.getInstance().deleteWindow();
+            PopMgr.getInstance().popMultiItemRewardWindow(arrProp);         
+        }
+       
     }
 }

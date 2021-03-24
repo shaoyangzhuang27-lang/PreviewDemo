@@ -1,6 +1,0 @@
-1.NetManager.getInstance().connect({ url: "ws://192.168.15.132:17183" },channelId);
-ip改成本地localhost连接到本地服务器
-2.cmd里执行telnet 127.0.0.1 28283,可修改游戏道具命令demo:
-addobj 11768786910000 4 0 0 0 99999 [addobj 加道具命令 11768786910000 账号id， 后边依次是 物品类型，参数1 2 3 数量]
-3.玩家id分配表格:
-https://doc.weiyun.com/c6c292a469258c7313b6e5ea092bff87

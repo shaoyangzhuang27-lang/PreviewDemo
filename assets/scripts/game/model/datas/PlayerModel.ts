@@ -2,8 +2,9 @@
  * @Description: 
  * @Author: xxxxxx
  * @Date: 2021-03-01 16:08:56
- * @LastEditTime: 2021-03-19 21:49:47
+ * @LastEditTime: 2021-03-23 15:33:28
  */
+import { NotifyMgr } from "../../control/NotifyMgr";
 import { GameModel } from "../GameModel";
 import { BaseModel } from "./BaseModel";
 import { HeroData } from "./HeroData";
@@ -42,6 +43,7 @@ export class PlayerModel extends BaseModel {
         }
 
         //通知金币减少
+        NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
         // UINotificationCenter.Instance ().PostNotification ((int) NotificationMsg.PlayerInfoChange);
         // if (BokeEvent.instance != null && GameConfigManager.instance.IsChannelBoke)
         //     BokeEvent.instance.SendEvent ("cost_coins", money, subType.ToString (), 0);

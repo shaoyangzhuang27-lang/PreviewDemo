@@ -3,6 +3,7 @@ import { PopSimple } from "../view/pop/PopSimple";
 import { PopRisingStarTower } from "../view/pop/PopRisingStarTower";
 import { PopStarUpResult } from "../view/pop/PopStarUpResult";
 import { PopOneKeyStarUp } from "../view/pop/PopOneKeyStarUp";
+import { PopDecompose } from "../view/pop/PopDecompose";
 import { PopCommonOne } from "../view/pop/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
@@ -29,8 +30,10 @@ import { PopBookHeroDetail } from '../view/pop/PopBookHeroDetail';
 import { PopHeroStoryUI } from '../view/pop/PopHeroStoryUI';
 import { PopForge } from '../view/pop/PopForge';
 import { PopBookProUI } from '../view/pop/PopBookProUI';
-export class PopMgr extends PopCore  {
+import { TipCampOrCareer } from '../view/TipCampOrCareer';
+import { PopHaloView } from '../view/pop/PopHaloView';
 
+export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
     public static getInstance() {
         return this._instance;
@@ -110,6 +113,22 @@ export class PopMgr extends PopCore  {
             script.setCurrentHeroId(heroId);
         } );
     }
+
+    /**
+     * @description: 弹出融魂祭坛界面 
+     * @param {boolean} isMaskClose
+     */
+    public popDecomposeView(isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_decompose', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopDecompose") as PopDecompose;
+            script.setIsMaskClose(isMaskClose);
+        } );
+    }
+
 
     /**
      * @description: 弹出升星塔界面界面 
@@ -247,6 +266,24 @@ export class PopMgr extends PopCore  {
         });
     }
 
+    /**
+     * @description: 英雄阵营克制或者职业说明弹窗tip
+     * @param {Vec3} pos
+     * @param {number} career
+     * @param {number} camp
+     */
+    public tipCampOrCareerWindow(pos:Vec3, career:number, camp:number =0){
+        resources.load('prefabs_ui/pop/tip_camp_or_career', (err:any,res:any)=>{
+            let p = instantiate( res ) as Node;
+            this.parent?.addChild(p);
+            p.setSiblingIndex(XConsts.OrderTip);
+
+            let script = p.getComponent("TipCampOrCareer") as TipCampOrCareer;
+            script.setWinPos(pos, 1);
+            script.setData(career, camp);
+            script.setIsWinClose(true);
+        });
+    }
 
     //弹出提示窗放这里-------------------------------------------------
 
@@ -259,6 +296,19 @@ export class PopMgr extends PopCore  {
 
             let script = p.getComponent("PopHeroBookView") as PopHeroBookView;
             script.setIsMaskClose(false);
+        } );
+    }
+
+    //弹出光环界面
+    public popHaloView(heroIds:[]=[], isHideSkill:boolean=false)
+    {
+        resources.load('prefabs_ui/pop/pop_halo', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopHaloView") as PopHaloView;
+            script.setIsMaskClose(false);
+            script.setHeroData(heroIds, isHideSkill)
         } );
     }
 
@@ -394,14 +444,13 @@ export class PopMgr extends PopCore  {
      * @param {number} nCounts 召唤个数
      * @param {Function} closeCallBack
      */ 
-    public popSummonSettleWindow(nType : number,nCounts : number ,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    public popSummonSettleWindow(msgData: Msg.SummonHeroA,nType : number,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
             let script = p.getComponent("PopSummonSettle") as PopSummonSettle;
-            script.popWindowType = nType ;
-            script.summonCounts = nCounts;
+            script.initDataFromMsgData(msgData,nType);
             script.setIsMaskClose(isMaskClose);
 
         } );

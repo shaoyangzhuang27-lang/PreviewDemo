@@ -96,11 +96,11 @@ export class PopFragmentSynthesis extends PopBase {
         });
 
 
-        let labtitle = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.UI_FRAGMENT) as Config.language_ui.Record;
-        this.lab_title.string = labtitle.cn;
+        //let labtitle = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.UI_FRAGMENT) as Config.language_ui.Record;
+        this.lab_title.string = ValueMgr.getInstance().getLanguageString(XConsts.UI_FRAGMENT);
 
-        let labbansell = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.UI_NOTFORSALE) as Config.language_ui.Record;
-        this.lab_ban_sell.string = labbansell.cn;
+        //let labbansell = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.UI_NOTFORSALE) as Config.language_ui.Record;
+        this.lab_ban_sell.string = ValueMgr.getInstance().getLanguageString(XConsts.UI_NOTFORSALE);
 
         this.initLabelFromBtn(this.btn_submit,XConsts.UI_FRAGMENTUSE);
         this.initLabelFromBtn(this.btn_info,XConsts.UI_INFO);
@@ -109,20 +109,20 @@ export class PopFragmentSynthesis extends PopBase {
         var content = ""
         if(this._fragmentSysthesisInfo.campName)
         {
-            var capName = ValueMgr.getInstance().getItemByField(TableName.language_ui,this._fragmentSysthesisInfo.campName) as Config.language_ui.Record;
-            content = capName.cn;
+            //var capName = ValueMgr.getInstance().getItemByField(TableName.language_ui,this._fragmentSysthesisInfo.campName) as Config.language_ui.Record;
+            content = ValueMgr.getInstance().getLanguageString(this._fragmentSysthesisInfo.campName);
         }
 
         if(this._fragmentSysthesisInfo.heroName)
         {
-            var heroName = ValueMgr.getInstance().getItemByField(TableName.language_data,this._fragmentSysthesisInfo.heroName) as Config.language_data.Record;
-            content = heroName.cn;
+            //var heroName = ValueMgr.getInstance().getItemByField(TableName.language_data,this._fragmentSysthesisInfo.heroName) as Config.language_data.Record;
+            content = ValueMgr.getInstance().getLanguageString(this._fragmentSysthesisInfo.heroName);
         }
 
         if(this._fragmentSysthesisInfo.classesName)
         {
-            var classesName = ValueMgr.getInstance().getItemByField(TableName.language_ui,this._fragmentSysthesisInfo.classesName) as Config.language_ui.Record;
-            content = classesName.cn;
+            //var classesName = ValueMgr.getInstance().getItemByField(TableName.language_ui,this._fragmentSysthesisInfo.classesName) as Config.language_ui.Record;
+            content = ValueMgr.getInstance().getLanguageString(this._fragmentSysthesisInfo.classesName);
         }
         this.initFragmentNameAndDesc(this._fragmentSysthesisInfo.type,this._fragmentSysthesisInfo.star,this._fragmentSysthesisInfo.maxNum,content);
 
@@ -138,9 +138,9 @@ export class PopFragmentSynthesis extends PopBase {
         var labComponet = lab && lab.getComponent(Label);
         if(labComponet)
         {
-            var labinfo = ValueMgr.getInstance().getItemByField(TableName.language_ui,content) as Config.language_ui.Record;
-            labComponet.string = labinfo.cn;
-            console.log("zzzzzz",labinfo.cn)
+            //var labinfo = ValueMgr.getInstance().getItemByField(TableName.language_ui,content) as Config.language_ui.Record;
+            labComponet.string = ValueMgr.getInstance().getLanguageString(content);
+            //console.log("zzzzzz",labinfo.cn)
         }
     }
 
@@ -152,7 +152,7 @@ export class PopFragmentSynthesis extends PopBase {
             if(this._fragmentSysthesisInfo.curNum < this._fragmentSysthesisInfo.maxNum)
             {
                 this.node_summon_counts.active = false;
-                if(this._fragmentSysthesisInfo.type == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentHero)
+                if(this._fragmentSysthesisInfo.type == Msg.TFragmentType.EFragmentType_Hero)
                 {
                     this.initLabelFromBtn(this.btn_submit,XConsts.UI_INFO);
                     this.btn_info.active = false;
@@ -169,7 +169,7 @@ export class PopFragmentSynthesis extends PopBase {
             else{
                 this.lab_fragment_tips.node.active = false;
                 this.lab_ban_sell.node.active =false;
-                if(this._fragmentSysthesisInfo.type == XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentHero)
+                if(this._fragmentSysthesisInfo.type == Msg.TFragmentType.EFragmentType_Hero)
                 {
                     this.btn_submit.active = false;
                 }
@@ -198,14 +198,14 @@ export class PopFragmentSynthesis extends PopBase {
         };
         switch(nType)
         {
-            case XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentRandom :
+            case Msg.TFragmentType.EFragmentType_Random :
                 strName = callFunc(XConsts.UI_FRAGMENTNAME);
                 strDesc = callFunc(XConsts.UI_FRAGMENTDESC);
                 strFragmentName = strName.replace("{0}",String(nStar));
                 strDesc = strDesc.replace("{0}",String(nCounts));
                 strFragmentDesc = strDesc.replace("{1}",String(nStar));
                 break;
-            case XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentCampRandom :
+            case Msg.TFragmentType.EFragmentType_CampRandom :
                 strName = callFunc(XConsts.UI_FRAGMENTCAMPNAME);
                 strDesc = callFunc(XConsts.UI_FRAGMENTCAMPDESC);
                 strName = strName.replace("{0}",String(nStar));
@@ -214,7 +214,7 @@ export class PopFragmentSynthesis extends PopBase {
                 strDesc = strDesc.replace("{1}",String(nStar));
                 strFragmentDesc = strDesc.replace("{2}",content);
                 break;
-            case XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentClassesRandom :
+            case Msg.TFragmentType.EFragmentType_ClassesRandom :
                 strName = callFunc(XConsts.UI_FRAGMENTCLASSESNAME);
                 strDesc = callFunc(XConsts.UI_FRAGMENTCLASSESDESC);
                 strName = strName.replace("{0}",String(nStar));
@@ -223,7 +223,7 @@ export class PopFragmentSynthesis extends PopBase {
                 strDesc = strDesc.replace("{1}",String(nStar));
                 strFragmentDesc = strDesc.replace("{2}",content);
                 break;
-            case XConsts.FRAGMENT_SYNTHESIS_TYPE.FragmentHero :
+            case Msg.TFragmentType.EFragmentType_Hero :
                 strName = callFunc(XConsts.UI_FRAGMENTHERONAME);
                 strDesc = callFunc(XConsts.UI_FRAGMENTHERODESC);
                 strName = strName.replace("{0}",String(nStar));
@@ -250,12 +250,14 @@ export class PopFragmentSynthesis extends PopBase {
 
     private _onBtnSummonClick(event : any)
     {
-        PopMgr.getInstance().popSummonSettleWindow(XConsts.POP_SUMMON_TYPE.FragmentSysthesis,1);
+        //20200322
+        //PopMgr.getInstance().popSummonSettleWindow(XConsts.POP_SUMMON_TYPE.FragmentSysthesis,1);
     }
 
     private _onBtnSubmitClick(event : any)
     {
-        PopMgr.getInstance().popSummonSettleWindow(XConsts.POP_SUMMON_TYPE.FragmentSysthesis,1);
+        //20210322
+        // PopMgr.getInstance().popSummonSettleWindow(XConsts.POP_SUMMON_TYPE.FragmentSysthesis,1);
     }
     private _onBtnAddClick(event : any)
     {

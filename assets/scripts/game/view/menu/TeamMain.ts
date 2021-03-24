@@ -292,7 +292,7 @@ export class TeamMain extends Component {
     //光环
     private _openAuraInfoView()
     {
-
+        PopMgr.getInstance().popHaloView()
     }
 
     //英雄升级界面
