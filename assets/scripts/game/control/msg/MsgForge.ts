@@ -1,7 +1,7 @@
 /*
  * @Author: zsy
  * @Date: 2021-03-22 10:20:03
- * @LastEditTime: 2021-03-23 16:30:19
+ * @LastEditTime: 2021-03-24 11:26:30
  * @LastEditors: Please set LastEditors
  * @Description: 锻造
  * @FilePath: \PreviewDemo\assets\scripts\game\control\msg\MsgForge.ts
@@ -48,11 +48,11 @@ export class MsgForge extends MsgBase{
         // 添加新装备(通过playerModel还是通过bagitemModel)
         let forgeModel = GameModel.getInstance().getForgeModel()
         let equipData = forgeModel.getConfigEquipDataById(msgData.equipID)
-        bagItemModel.addEquipBag(msgData.equipID, msgData.composeNum)
+        bagItemModel.changeBagEquipNumber(msgData.equipID, -msgData.composeNum)
 
         // 删除材料装备
         let costNum = msgData.composeNum * XConsts.KEquipComposeMaterialNum
-        bagItemModel.subEquipBag(equipData.forwardId, costNum)
+        bagItemModel.changeBagEquipNumber(equipData.forwardId, costNum)
         
         // 扣除消耗金币 msgData.consumeMoney
         let playerModel = GameModel.getInstance().getPlayerModel()
