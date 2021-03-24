@@ -418,14 +418,14 @@ export class PopHeroPub extends PopBase {
                 if(lab_one && img_one)
                 {
                     this.resetResourcesSpriFame("ui/hero_pub/pub_prop_scroll/spriteFrame",img_one);
-                    img_one.node.setScale(1,1,1);
+                    img_one.node.setScale(0.5,0.5,1);
                     lab_one.string = String(XConsts.PUB_SUMMON_SCROLL_ONE_COSUME);
                     this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_ONE_COSUME ? changeLabColor(lab_one,true) : changeLabColor(lab_one,false);
                 }
                 if(lab_ten && img_ten)
                 {
                     this.resetResourcesSpriFame("ui/hero_pub/pub_prop_scroll/spriteFrame",img_ten);
-                    img_ten.node.setScale(1,1,1);
+                    img_ten.node.setScale(0.5,0.5,1);
                     lab_ten.string = String(XConsts.PUB_SUMMON_SCROLL_TEN_COSUME);
                     this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_TEN_COSUME ? changeLabColor(lab_ten,true) : changeLabColor(lab_ten,false);
                 }
@@ -445,14 +445,14 @@ export class PopHeroPub extends PopBase {
             if(lab_one && img_one)
             {
                 this.resetResourcesSpriFame("ui/hero_pub/pub_prop_heart/spriteFrame",img_one);
-                img_one.node.setScale(1,1,1);
+                img_one.node.setScale(0.5,0.5,1);
                 lab_one.string = String(XConsts.PUB_SUMMON_FRIEND_ONE_COSUME);
                 this._nFriendHeartNum >= XConsts.PUB_SUMMON_FRIEND_ONE_COSUME ? changeLabColor(lab_one,true) : changeLabColor(lab_one,false);
             }
             if(lab_ten && img_ten)
             {
                 this.resetResourcesSpriFame("ui/hero_pub/pub_prop_heart/spriteFrame",img_ten);
-                img_ten.node.setScale(1,1,1);
+                img_ten.node.setScale(0.5,0.5,1);
                 lab_ten.string = String(XConsts.PUB_SUMMON_FRIEND_TEN_COSUME);
                 this._nFriendHeartNum >= XConsts.PUB_SUMMON_FRIEND_TEN_COSUME ? changeLabColor(lab_ten,true) : changeLabColor(lab_ten,false);
             }

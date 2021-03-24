@@ -194,7 +194,7 @@ export class PopSummonSettle extends PopBase {
             // } else if (summmonType == Msg.TSummonType.ESummonType_Heroic) {
             img_summon_icon && this.resetResourcesSpriFame("ui/hero_pub/pub_prop_scroll/spriteFrame",img_summon_icon);
             // }
-            img_summon_icon && img_summon_icon.node.setScale(1,1,1);
+            img_summon_icon && img_summon_icon.node.setScale(0.5,0.5,1);
             var curNum = bIsOne ? XConsts.PUB_SUMMON_SCROLL_ONE_COSUME : XConsts.PUB_SUMMON_SCROLL_TEN_COSUME
             lab_summon_num && (lab_summon_num.string = String(curNum));
 
@@ -212,7 +212,7 @@ export class PopSummonSettle extends PopBase {
         else if (consumeType == Msg.TSummonConsumeType.ESummonConsumeType_FriendGift) 
         {
             img_summon_icon && this.resetResourcesSpriFame("ui/hero_pub/pub_prop_heart/spriteFrame",img_summon_icon);
-            img_summon_icon && img_summon_icon.node.setScale(1,1,1);
+            img_summon_icon && img_summon_icon.node.setScale(0.5,0.5,1);
             var curNum = bIsOne ? XConsts.PUB_SUMMON_FRIEND_ONE_COSUME : XConsts.PUB_SUMMON_FRIEND_TEN_COSUME
             lab_summon_num && (lab_summon_num.string = String(curNum));
             this.lab_summon_desc.string = bIsOne ? strBtnSummonDescOne : strBtnSummonDescTen;
