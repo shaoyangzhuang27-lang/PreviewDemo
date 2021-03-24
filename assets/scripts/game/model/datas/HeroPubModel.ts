@@ -158,30 +158,17 @@ export class HeroPubModel extends BaseModel{
         this.nLineUpCounts = hero_rec_tab.length;
         console.log("hero_commend",hero_rec_tab.length);
         for (let index = 0; index < hero_rec_tab.length; index++) {
-            // console.log("hero_rec_tab", index,hero_rec_tab[index]); 
              //阵容分析
-            //var lineUpAnalysisTable = ValueMgr.getInstance().getItemByField(TableName.language_data,hero_rec_tab[index].desc) as Config.language_data.Record;
-            // console.log("lineUpAnalysisTable",lineUpAnalysisTable);
             info.analysisDetail = ValueMgr.getInstance().getLanguageString(hero_rec_tab[index].desc);
             //阵容标题
-           // var lineUpTitleTable = ValueMgr.getInstance().getItemByField(TableName.language_data,hero_rec_tab[index].title) as Config.language_data.Record;
-            // console.log("lineUpTitleTable",lineUpTitleTable);
             info.title = ValueMgr.getInstance().getLanguageString(hero_rec_tab[index].title);
             info.coreHeroName = ""
             //核心英雄
             for(var i=0; i < hero_rec_tab[index].coreHero.length; i++)
             {
                 var heroInfoTable = ValueMgr.getInstance().getItemByField(TableName.heroes,hero_rec_tab[index].coreHero[i]) as Config.heroes.Record;
-               // var heroNameTable = ValueMgr.getInstance().getItemByField(TableName.language_data,heroInfoTable.name) as Config.language_data.Record;
-                // console.log("heroNameTable",heroNameTable);
                 info.coreHeroName =  info.coreHeroName + ValueMgr.getInstance().getLanguageString(heroInfoTable.name) + " ";
             }
-            // for(var i =0; i < hero_rec_tab[index].otherHero.length;i++)
-            // {
-            //     var heroInfoTable = ValueMgr.getInstance().getItemByField(TableName.heroes,hero_rec_tab[index].otherHero[i]) as Config.heroes.Record;
-            //     var heroNameTable = ValueMgr.getInstance().getItemByField(TableName.language_data,heroInfoTable.name) as Config.language_data.Record;
-            //     // info.coreHeroName = info.coreHeroName + heroNameTable.cn + " ";
-            // }
             info.heorIdList = hero_rec_tab[index].coreHero.concat(hero_rec_tab[index].otherHero);
 
             this._stuLineUpInfos.push(instantiate(info));
