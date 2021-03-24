@@ -96,11 +96,11 @@ export class PopFragmentSynthesis extends PopBase {
         });
 
 
-        let labtitle = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.UI_FRAGMENT) as Config.language_ui.Record;
-        this.lab_title.string = labtitle.cn;
+        //let labtitle = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.UI_FRAGMENT) as Config.language_ui.Record;
+        this.lab_title.string = ValueMgr.getInstance().getLanguageString(XConsts.UI_FRAGMENT);
 
-        let labbansell = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.UI_NOTFORSALE) as Config.language_ui.Record;
-        this.lab_ban_sell.string = labbansell.cn;
+        //let labbansell = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.UI_NOTFORSALE) as Config.language_ui.Record;
+        this.lab_ban_sell.string = ValueMgr.getInstance().getLanguageString(XConsts.UI_NOTFORSALE);
 
         this.initLabelFromBtn(this.btn_submit,XConsts.UI_FRAGMENTUSE);
         this.initLabelFromBtn(this.btn_info,XConsts.UI_INFO);
@@ -109,20 +109,20 @@ export class PopFragmentSynthesis extends PopBase {
         var content = ""
         if(this._fragmentSysthesisInfo.campName)
         {
-            var capName = ValueMgr.getInstance().getItemByField(TableName.language_ui,this._fragmentSysthesisInfo.campName) as Config.language_ui.Record;
-            content = capName.cn;
+            //var capName = ValueMgr.getInstance().getItemByField(TableName.language_ui,this._fragmentSysthesisInfo.campName) as Config.language_ui.Record;
+            content = ValueMgr.getInstance().getLanguageString(this._fragmentSysthesisInfo.campName);
         }
 
         if(this._fragmentSysthesisInfo.heroName)
         {
-            var heroName = ValueMgr.getInstance().getItemByField(TableName.language_data,this._fragmentSysthesisInfo.heroName) as Config.language_data.Record;
-            content = heroName.cn;
+            //var heroName = ValueMgr.getInstance().getItemByField(TableName.language_data,this._fragmentSysthesisInfo.heroName) as Config.language_data.Record;
+            content = ValueMgr.getInstance().getLanguageString(this._fragmentSysthesisInfo.heroName);
         }
 
         if(this._fragmentSysthesisInfo.classesName)
         {
-            var classesName = ValueMgr.getInstance().getItemByField(TableName.language_ui,this._fragmentSysthesisInfo.classesName) as Config.language_ui.Record;
-            content = classesName.cn;
+            //var classesName = ValueMgr.getInstance().getItemByField(TableName.language_ui,this._fragmentSysthesisInfo.classesName) as Config.language_ui.Record;
+            content = ValueMgr.getInstance().getLanguageString(this._fragmentSysthesisInfo.classesName);
         }
         this.initFragmentNameAndDesc(this._fragmentSysthesisInfo.type,this._fragmentSysthesisInfo.star,this._fragmentSysthesisInfo.maxNum,content);
 
@@ -138,9 +138,9 @@ export class PopFragmentSynthesis extends PopBase {
         var labComponet = lab && lab.getComponent(Label);
         if(labComponet)
         {
-            var labinfo = ValueMgr.getInstance().getItemByField(TableName.language_ui,content) as Config.language_ui.Record;
-            labComponet.string = labinfo.cn;
-            console.log("zzzzzz",labinfo.cn)
+            //var labinfo = ValueMgr.getInstance().getItemByField(TableName.language_ui,content) as Config.language_ui.Record;
+            labComponet.string = ValueMgr.getInstance().getLanguageString(content);
+            //console.log("zzzzzz",labinfo.cn)
         }
     }
 
