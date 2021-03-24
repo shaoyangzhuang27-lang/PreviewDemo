@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "13518068-96dc-483c-9f17-97ba7cf507e7",
+  "uuid": "9895eacf-cdba-4d95-954f-30b461b8d6e1",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "13518068-96dc-483c-9f17-97ba7cf507e7@6c48a",
-      "displayName": "底部弹框_英雄列表标签页普通背景",
+      "uuid": "9895eacf-cdba-4d95-954f-30b461b8d6e1@6c48a",
+      "displayName": "英雄分解&重置_自动分解选中",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "13518068-96dc-483c-9f17-97ba7cf507e7"
+        "imageUuidOrDatabaseUri": "9895eacf-cdba-4d95-954f-30b461b8d6e1"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "13518068-96dc-483c-9f17-97ba7cf507e7@f9941",
-      "displayName": "底部弹框_英雄列表标签页普通背景",
+      "uuid": "9895eacf-cdba-4d95-954f-30b461b8d6e1@f9941",
+      "displayName": "英雄分解&重置_自动分解选中",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 117,
-        "height": 52,
-        "rawWidth": 117,
-        "rawHeight": 52,
-        "borderTop": 18,
-        "borderBottom": 14,
-        "borderLeft": 28,
-        "borderRight": 30,
+        "width": 24,
+        "height": 17,
+        "rawWidth": 24,
+        "rawHeight": 17,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "13518068-96dc-483c-9f17-97ba7cf507e7@6c48a",
+        "imageUuidOrDatabaseUri": "9895eacf-cdba-4d95-954f-30b461b8d6e1@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "13518068-96dc-483c-9f17-97ba7cf507e7@f9941"
+    "redirect": "9895eacf-cdba-4d95-954f-30b461b8d6e1@f9941"
   }
 }

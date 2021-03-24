@@ -3,6 +3,7 @@ import { PopSimple } from "../view/pop/PopSimple";
 import { PopRisingStarTower } from "../view/pop/PopRisingStarTower";
 import { PopStarUpResult } from "../view/pop/PopStarUpResult";
 import { PopOneKeyStarUp } from "../view/pop/PopOneKeyStarUp";
+import { PopDecompose } from "../view/pop/PopDecompose";
 import { PopCommonOne } from "../view/pop/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
@@ -112,6 +113,22 @@ export class PopMgr extends PopCore  {
             script.setCurrentHeroId(heroId);
         } );
     }
+
+    /**
+     * @description: 弹出融魂祭坛界面 
+     * @param {boolean} isMaskClose
+     */
+    public popDecomposeView(isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_decompose', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopDecompose") as PopDecompose;
+            script.setIsMaskClose(isMaskClose);
+        } );
+    }
+
 
     /**
      * @description: 弹出升星塔界面界面 
