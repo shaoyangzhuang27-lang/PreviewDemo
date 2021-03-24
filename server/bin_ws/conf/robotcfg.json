@@ -1,9 +1,0 @@
-{
-    "ver": "672",
-    "platform": "Android",
-    "gate_host": "127.0.0.1",
-    "main_host": "127.0.0.1",
-    "cnt_ps": 20,
-    "start_idx": 0,
-    "end_idx": 100
-}
