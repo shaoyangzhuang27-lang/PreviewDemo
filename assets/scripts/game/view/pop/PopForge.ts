@@ -1,7 +1,7 @@
 /*
  * @Author: zsy
  * @Date: 2021-03-18 17:51:30
- * @LastEditTime: 2021-03-22 14:55:11
+ * @LastEditTime: 2021-03-23 17:07:54
  * @LastEditors: Please set LastEditors
  * @Description: 锻造屋 弹窗
  * @FilePath: \PreviewDemo\assets\scripts\game\view\pop\PopForge.ts
@@ -10,11 +10,13 @@
 import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, ProgressBar, Label, Event, instantiate, resources, Vec3, Sprite, UITransform, size, SpriteFrame, Layers } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { MsgMgr } from '../../control/MsgMgr';
+import { NotifyMgr } from '../../control/NotifyMgr';
 import { PopMgr } from '../../control/PopMgr';
 import { XConsts } from '../../model/const/XConsts';
 import { XFuns } from '../../model/const/XFuns';
 import { GameModel } from '../../model/GameModel';
 import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
+import { PopQuickCompose } from './PopQuickCompose';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopForge')
@@ -106,6 +108,18 @@ export class PopForge extends PopBase {
 
         this.labComposeCount.string = "0"
         this._initConfigEquipView()
+
+        // 关注装备合成事件
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_equip_compose_suc, this._equipComposeSuc, this);
+    }
+
+    onDestroy() {
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_equip_compose_suc, this._equipComposeSuc, this)
+    }
+
+    _equipComposeSuc(data : any){
+        // 刷新一下界面
+        this._initConfigEquipView(this.curPage)
     }
 
     /**
@@ -125,7 +139,7 @@ export class PopForge extends PopBase {
         this.curPage = locationType
         // 获取装备数据
         let forgeModel = GameModel.getInstance().getForgeModel()
-        let list = forgeModel.getConfigEquipsByPos(locationType)
+        let list = forgeModel.getConfigEquipsByPos(locationType, false)
         this.curPageEquipData = forgeModel.sortEquipList(list)
         // 切换页签后默认第一个为选择
         this.selectEquipData = list[0]
@@ -226,20 +240,22 @@ export class PopForge extends PopBase {
         // 绘制选中图片
         let iconPath = "ui/common/team/阵型调整_出战英雄选中/spriteFrame"
         resources.load(iconPath, (err, spriteFrame: SpriteFrame) => {
-            let node = new Node("cellSelect")
-            node.parent = cell
-            node.layer = Layers.Enum.UI_2D
+            if (cell && cell.activeInHierarchy){
+                let node = new Node("cellSelect")
+                node.parent = cell
+                node.layer = Layers.Enum.UI_2D
 
-            let composeNode = cell?.getChildByName("cellCompose")
-            if(composeNode){
-                composeNode.setSiblingIndex(node.getSiblingIndex() + 1)
+                let composeNode = cell.getChildByName("cellCompose")
+                if (composeNode) {
+                    composeNode.setSiblingIndex(node.getSiblingIndex() + 1)
+                }
+                // 图片
+                let sprite = node.addComponent(Sprite);
+                sprite.spriteFrame = spriteFrame;
+                // 设置icon显示大小
+                let uitrans = sprite.addComponent(UITransform) as UITransform;
+                uitrans.contentSize = size(110, 110)
             }
-            // 图片
-            let sprite = node.addComponent(Sprite);
-            sprite.spriteFrame = spriteFrame;
-            // 设置icon显示大小
-            let uitrans = sprite.addComponent(UITransform) as UITransform;
-            uitrans.contentSize = size(110, 110)
         });     
     }
 
@@ -251,7 +267,7 @@ export class PopForge extends PopBase {
             this.curPageEquipData.forEach((element: Config.equip.Record) => {
                 let maxCount = GameModel.getInstance().getForgeModel().canCompose(element.id)
                 let cell = this.layoutEquip.getChildByName("equipCell" + element.id)
-                if (cell && maxCount > 0) {
+                if (cell && cell.activeInHierarchy && maxCount > 0) {
                     let node = new Node("cellCompose")
                     node.parent = cell
                     node.layer = Layers.Enum.UI_2D
@@ -286,6 +302,19 @@ export class PopForge extends PopBase {
 
     _clickQCompose(event :Event){
         console.log("_clickQCompose 点击事件")
+        let forgeModel = GameModel.getInstance().getForgeModel()
+        let ret: { composeMap: Map<number, number>, composeCost : number} = forgeModel.getQuickComposeEquips(this.curPage)
+        if (ret.composeMap.size == 0){
+            console.log("没有可以快捷合成的装备")
+            return
+        }
+        resources.load('prefabs_ui/pop/pop_quick_compose', (err: any, res: any) => {
+            let p = instantiate(res);
+            let script = p.getComponent("PopQuickCompose") as PopQuickCompose
+            script.popSelf()
+            script.setIsMaskClose(true);
+            script.initComposeEquipView(ret.composeMap, ret.composeCost, this.curPage)
+        });
     }
 
     _clickSubCount(event: Event){

@@ -67,7 +67,8 @@ let BuffIcon: {[key: string]: string} = {
 
 let HeroTestInfo: {[key: number]: any} = {
     0: { // 100
-        prefab: "leader_00",
+        // prefab: "leader_00",
+        prefab: "hero_lvbu",
         skillID: 1001,
         hp: 100,
         atk: 5,
@@ -106,7 +107,8 @@ let HeroTestInfo: {[key: number]: any} = {
         skillSpeed: 0.9,
     },
     11: { // 5084602 牧师2_55_4
-        prefab: "hero_011",
+        // prefab: "hero_011",
+        prefab: "hero_diaochan",
         normalAttack: "normal_attack_priest",
         skillID: 546022,
         hp: 100,

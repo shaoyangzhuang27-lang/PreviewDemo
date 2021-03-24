@@ -26,22 +26,22 @@ export class HeroPubModel extends BaseModel{
         {
             return ;
         }
-        var heroSummon = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_HEROSUMMON) as Config.language_ui.Record;
-        this._strPubUILabContents.set("lab_title",heroSummon.cn);
-        var campRecommend = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_CAMPRECOMMEND) as Config.language_ui.Record;
-        this._strPubUILabContents.set("lab_recteam",campRecommend.cn);
-        var summonHeroLotto = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONHEROLOTTO) as Config.language_ui.Record;
-        this._strPubUILabContents.set("lab_detail",summonHeroLotto.cn);
-        var newSummonJewelConsume = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONJEWELCONSUMEO) as Config.language_ui.Record;
-        this._strPubUILabContents.set("lab_detail_dimaond",newSummonJewelConsume.cn);
-        var newSummonResidue = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONRESIDUE) as Config.language_ui.Record;
-        this._strPubUILabContents.set("lab_bar_info",newSummonResidue.cn);
-        var newSummonFriendContent = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONFRIENDCONTENT) as Config.language_ui.Record;
-        this._strPubUILabContents.set("lab_friend_info",newSummonFriendContent.cn);
-        var friendSummon = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_FRIENDSUMMON) as Config.language_ui.Record;
-        this._strPubUILabContents.set("lab_summon_ad_friend",friendSummon.cn);
-        var heroicSummon = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_HEROICSUMMON) as Config.language_ui.Record;
-        this._strPubUILabContents.set("lab_summon_ad_hero",heroicSummon.cn);
+        // var heroSummon = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_HEROSUMMON) as Config.language_ui.Record;
+        this._strPubUILabContents.set("lab_title",ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_HEROSUMMON));
+       // var campRecommend = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_CAMPRECOMMEND) as Config.language_ui.Record;
+        this._strPubUILabContents.set("lab_recteam",ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_CAMPRECOMMEND));
+       // var summonHeroLotto = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONHEROLOTTO) as Config.language_ui.Record;
+        this._strPubUILabContents.set("lab_detail",ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_NEWSUMMONHEROLOTTO));
+        //var newSummonJewelConsume = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONJEWELCONSUMEO) as Config.language_ui.Record;
+        this._strPubUILabContents.set("lab_detail_dimaond",ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_NEWSUMMONJEWELCONSUMEO));
+        //var newSummonResidue = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONRESIDUE) as Config.language_ui.Record;
+        this._strPubUILabContents.set("lab_bar_info",ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_NEWSUMMONRESIDUE));
+        //var newSummonFriendContent = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONFRIENDCONTENT) as Config.language_ui.Record;
+        this._strPubUILabContents.set("lab_friend_info",ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_NEWSUMMONFRIENDCONTENT));
+       // var friendSummon = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_FRIENDSUMMON) as Config.language_ui.Record;
+        this._strPubUILabContents.set("lab_summon_ad_friend",ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_FRIENDSUMMON));
+        //var heroicSummon = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_HEROICSUMMON) as Config.language_ui.Record;
+        this._strPubUILabContents.set("lab_summon_ad_hero",ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_HEROICSUMMON));
     }
     
     public getPubUILabContentByUIName(name : string)
@@ -158,30 +158,17 @@ export class HeroPubModel extends BaseModel{
         this.nLineUpCounts = hero_rec_tab.length;
         console.log("hero_commend",hero_rec_tab.length);
         for (let index = 0; index < hero_rec_tab.length; index++) {
-            // console.log("hero_rec_tab", index,hero_rec_tab[index]); 
              //阵容分析
-            var lineUpAnalysisTable = ValueMgr.getInstance().getItemByField(TableName.language_data,hero_rec_tab[index].desc) as Config.language_data.Record;
-            // console.log("lineUpAnalysisTable",lineUpAnalysisTable);
-            info.analysisDetail = lineUpAnalysisTable.cn;
+            info.analysisDetail = ValueMgr.getInstance().getLanguageString(hero_rec_tab[index].desc);
             //阵容标题
-            var lineUpTitleTable = ValueMgr.getInstance().getItemByField(TableName.language_data,hero_rec_tab[index].title) as Config.language_data.Record;
-            // console.log("lineUpTitleTable",lineUpTitleTable);
-            info.title = lineUpTitleTable.cn;
+            info.title = ValueMgr.getInstance().getLanguageString(hero_rec_tab[index].title);
             info.coreHeroName = ""
             //核心英雄
             for(var i=0; i < hero_rec_tab[index].coreHero.length; i++)
             {
                 var heroInfoTable = ValueMgr.getInstance().getItemByField(TableName.heroes,hero_rec_tab[index].coreHero[i]) as Config.heroes.Record;
-                var heroNameTable = ValueMgr.getInstance().getItemByField(TableName.language_data,heroInfoTable.name) as Config.language_data.Record;
-                // console.log("heroNameTable",heroNameTable);
-                info.coreHeroName =  info.coreHeroName + heroNameTable.cn + " ";
+                info.coreHeroName =  info.coreHeroName + ValueMgr.getInstance().getLanguageString(heroInfoTable.name) + " ";
             }
-            // for(var i =0; i < hero_rec_tab[index].otherHero.length;i++)
-            // {
-            //     var heroInfoTable = ValueMgr.getInstance().getItemByField(TableName.heroes,hero_rec_tab[index].otherHero[i]) as Config.heroes.Record;
-            //     var heroNameTable = ValueMgr.getInstance().getItemByField(TableName.language_data,heroInfoTable.name) as Config.language_data.Record;
-            //     // info.coreHeroName = info.coreHeroName + heroNameTable.cn + " ";
-            // }
             info.heorIdList = hero_rec_tab[index].coreHero.concat(hero_rec_tab[index].otherHero);
 
             this._stuLineUpInfos.push(instantiate(info));
