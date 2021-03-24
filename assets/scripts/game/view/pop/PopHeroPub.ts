@@ -192,8 +192,8 @@ export class PopHeroPub extends PopBase {
                     else{
                         // MsgMgr.getInstance().getMsgLogin().requestDeviceLoginNew();
                         //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                         this.showSummonSettleWindow("SummonWindow");
-                        //this.onSubmit(Msg.TSummonType.ESummonType_Friend,Msg.TSummonConsumeType.ESummonConsumeType_FriendGift,true);
+                        //  this.showSummonSettleWindow("SummonWindow");
+                        this.onSubmit(Msg.TSummonType.ESummonType_Friend,Msg.TSummonConsumeType.ESummonConsumeType_FriendGift,true);
                     }
                 }
                 else
@@ -248,7 +248,11 @@ export class PopHeroPub extends PopBase {
                         if(GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts() >= XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME)
                         {
                             //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                            this.showSummonSettleWindow("SummonWindow");
+                            // this.showSummonSettleWindow("SummonWindow");
+
+                            console.log("pub 十次 钻石 ESummonType_Heroic");
+                            //普通召唤 中的钻石召唤
+                            this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,false);
                         }
                         else
                         {
@@ -340,7 +344,7 @@ export class PopHeroPub extends PopBase {
 
     public showPromptWindow(title : string, content : string, mode: number)
     {
-        PopMgr.getInstance().popCommonOneWindow(title,content,mode,()=>{console.log("召唤道具不足提示！")});
+        PopMgr.getInstance().popCommonOneWindow(title,content,mode,()=>{PopMgr.getInstance().deleteWindow();});
     } 
 
 

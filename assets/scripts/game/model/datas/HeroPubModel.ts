@@ -138,7 +138,7 @@ export class HeroPubModel extends BaseModel{
     //玩家1,2星英雄是否自动分解
     public getIsAutoDecompose()
     {
-        return this._gameModel.getPlayerModel().getPlayerInfo().isAutoDecompose || 0;
+        return  1 ;//this._gameModel.getPlayerModel().getPlayerInfo().isAutoDecompose || 0;
     }
 
     public initRecLineUpInfos()
