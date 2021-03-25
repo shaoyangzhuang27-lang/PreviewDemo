@@ -295,4 +295,45 @@ export class PlayerModel extends BaseModel {
                 break;
         }
     }
+
+
+      /**
+     * @description: 更新角色信息——次数属性
+     * @param {Xstruct.TimesType} timesType 次数类型
+     * @param {number} num     次数值
+     */
+       public updatePlayerInfoTimesAttribute(timesType:XStruct.TimesType, num:number) {
+        switch (timesType) {
+            case XStruct.TimesType.TRefreshHeroTalentTimes:
+                this._playerInfo.refreshHeroTalentTimes = num;
+                break;
+            case XStruct.TimesType.TChallengeFailedTimes:
+                this._playerInfo.challengeFailedTimes = num;
+                break;
+            case XStruct.TimesType.TBoughtBagTimes:
+                this._playerInfo.BoughtBagTimes = num;
+                break;
+            case XStruct.TimesType.TSummonScore:
+                this._playerInfo.summonScore = num;
+                break;
+            case XStruct.TimesType.TAdAwardTimes:
+                this._playerInfo.adAwardTimes = num;
+                break;
+            case XStruct.TimesType.THeroComposeTimes:
+                this._playerInfo.heroComposeTimes = num;
+                break;
+            case XStruct.TimesType.TFastBattleTimes:
+                this._playerInfo.fastBattleTimes = num;
+                break;
+            case XStruct.TimesType.THuntingBossTimes:
+                this._playerInfo.huntingBossTimes = num;
+                break;
+            case XStruct.TimesType.TWonderTimes:
+                this._playerInfo.WonderTimes = num;
+                break;
+            case XStruct.TimesType.TAccumulatedCheckInTimes:
+                this._playerInfo.AccumulatedCheckInTimes = num;
+                break;    
+        }
+    }
 }

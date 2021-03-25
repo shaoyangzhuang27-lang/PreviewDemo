@@ -110,27 +110,21 @@ export namespace XStruct {
            }
         }
 
+        //次数属性枚举-有可能不全，不全自己手动增加属性枚举值
+        enum TimesType{
+            TRefreshHeroTalentTimes = 1,    //免费随从刷新天赋次数
+            TChallengeFailedTimes = 2,      //挑战塔失败次数
+            TBoughtBagTimes = 3,            //购买背包容量次数
+            TSummonScore = 4,               //召唤积分
+            TAdAwardTimes = 5,              //广告奖励领取次数
+            THeroComposeTimes = 6,          //合成英雄次数
+            TFastBattleTimes = 7,           //今日已经快速战斗的次数
+            THuntingBossTimes = 8,          //记录每日挑战的次数,从零开始增加 每日重置
+            TWonderTimes = 9,               //奇迹召唤次数
+            TAccumulatedCheckInTimes = 10,   //累积签到次数
+        }
 
 
-
-       //自测数据
-       namespace test_info {
-           /** Properties of a Record. */
-           interface IRecord {
-               fragmentType?:(number|null);
-               param?: (number|null);
-               star :(number|null);
-               num : (number|null);
-           }
-           /** Represents a Record. */
-           class Record implements IRecord {
-               constructor(p?: XStruct.test_info.IRecord);
-               fragmentType :number;
-               param : number;
-               star : number;
-               num : number;
-           }
-       }
    }
 }
    export {}

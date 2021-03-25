@@ -136,6 +136,18 @@ export class HeroPubModel extends BaseModel{
     }
     
 
+     //玩家英雄召唤积分
+     public getPlayerSummonScore()
+     {
+         return this._gameModel.getPlayerModel().getPlayerInfo().summonScore || 0;
+     }
+
+     //玩家奇迹召唤次数
+     public getPlayerWonderTimes()
+     {
+        return this._gameModel.getPlayerModel().getPlayerInfo().WonderTimes || 0;
+     }
+
     //玩家1,2星英雄是否自动分解
     public getIsAutoDecompose()
     {

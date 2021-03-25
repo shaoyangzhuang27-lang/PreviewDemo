@@ -519,17 +519,18 @@ export class PopMgr extends PopCore  {
 
      /**
      * @description: 获得物品(多个)弹窗
-     * @param {Array<XStruct.prop_info.IRecord>} data 物品信息
+     * @param {Array<Msg.LootObject>} lootObjectData  Msg回包物品信息结构是LootObject类型的使用这个
+     * @param {Array<XStruct.prop_info.IRecord>} defineData  否则使用需要自己组数据
      * @param {boolean} bAutoDecompsePop 是否自动分解弹窗
      * @param {Function} closeCallBack
      */
-    public popMultiItemRewardWindow(data :Array<XStruct.prop_info.IRecord>,bAutoDecompsePop : boolean = false,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+    public popMultiItemRewardWindow(lootObjectData : Array<Msg.LootObject> | null,  defineData :Array<XStruct.prop_info.Record> | null,bAutoDecompsePop : boolean = false,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_multi_itemreward', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
             let script = p.getComponent("PopMultiItemReward") as PopMultiItemReward;
-            script.setPropsInfo(data);
+            script.setPropsInfo(lootObjectData,defineData);
             script.autoDecompsePop = bAutoDecompsePop;
             script.setSubmitCallBack(submitCallBack);
             script.setCloseCallBack(closeCallBack);

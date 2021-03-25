@@ -82,6 +82,7 @@ export class PopHeroPub extends PopBase {
         super.start();
         GameModel.getInstance().getHeroPubModel().initPubUILabContents();
         this.curSummonType = Msg.TSummonType.ESummonType_Heroic;
+        this._nHeroSummonProgress =  GameModel.getInstance().getHeroPubModel().getPlayerSummonScore();
         // var heroSummon = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_HEROSUMMON) as Config.language_ui.Record
         this.initUILabel()
         this.updateImgPropNum();
@@ -121,7 +122,7 @@ export class PopHeroPub extends PopBase {
         if(this.lab_bar_info)
         {
             var strInfo = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_bar_info");
-            var newStr = strInfo.replace("{0}",String(XConsts.PUB_SUMMON_COUNT_MAX - this._nHeroSummonProgress));
+            var newStr = strInfo.replace("{0}",String(XConsts.PUB_HERO_SUMMON_COUNT_MAX - this._nHeroSummonProgress));
             this.lab_bar_info.string = newStr
         }
         if(this.lab_friend_info)
@@ -196,9 +197,8 @@ export class PopHeroPub extends PopBase {
                         this.showPromptWindow("错误","爱心不足",1);
                     }
                     else{
-                        // MsgMgr.getInstance().getMsgLogin().requestDeviceLoginNew();
-                        //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                        //  this.showSummonSettleWindow("SummonWindow");
+                     
+                        console.log("pppppppp 单个爱心");
                         this.onSubmit(Msg.TSummonType.ESummonType_Friend,Msg.TSummonConsumeType.ESummonConsumeType_FriendGift,true);
                     }
                 }
@@ -206,19 +206,16 @@ export class PopHeroPub extends PopBase {
                 {
                     if(this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_ONE_COSUME)
                     {
-                        //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                        // this.showSummonSettleWindow("SummonWindow");
-                        console.log("pub 卷轴");
+                    
+                        console.log("pppppppp 单个卷轴");
                         this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll,true);
                     }
                     else 
                     {
                         if(nPlayerDiamondsCounts >= XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME)
                         {
-                            //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                             //this.showSummonSettleWindow("SummonWindow");
-                            console.log("pub 一次 钻石 ESummonType_Heroic");
                             //普通召唤 中的钻石召唤
+                            console.log("pppppppp 单个钻石");
                             this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,true);
                         }
                         else
@@ -238,8 +235,7 @@ export class PopHeroPub extends PopBase {
                     }
                     else
                     {
-                        //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                        // this.showSummonSettleWindow("SummonWindow");
+                       console.log("pppppppppp 爱心10连");
                         this.onSubmit(Msg.TSummonType.ESummonType_Friend,Msg.TSummonConsumeType.ESummonConsumeType_FriendGift,false);
                     }
                 }
@@ -248,17 +244,16 @@ export class PopHeroPub extends PopBase {
                     if(this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_TEN_COSUME)
                     {
                         //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                        this.showSummonSettleWindow("SummonWindow");
+                        console.log("pppppppppp 卷轴10连");
+                        this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll,false);
                     }
                     else 
                     {
                         if(nPlayerDiamondsCounts >= XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME)
                         {
-                            //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                            // this.showSummonSettleWindow("SummonWindow");
 
-                            console.log("pub 十次 钻石 ESummonType_Heroic");
                             //普通召唤 中的钻石召唤
+                            console.log("pppppppppp 钻石10连");
                             this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,false);
                         }
                         else
@@ -472,7 +467,7 @@ export class PopHeroPub extends PopBase {
         var labCompoent = labBarProgress?.getComponent(Label);
         if(barCompoent)
         {
-            barCompoent.progress = this._nHeroSummonProgress /XConsts.PUB_SUMMON_COUNT_MAX ;
+            barCompoent.progress = this._nHeroSummonProgress /XConsts.PUB_HERO_SUMMON_COUNT_MAX ;
         }
         if(labCompoent)
         {
@@ -494,6 +489,30 @@ export class PopHeroPub extends PopBase {
         if (msgData.err == Msg.TErrorCode.ERR_OK) {
             console.log("Notify PubHeroSummon",msgData);
             console.log("diamond", GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts());
+
+            let playerModel = GameModel.getInstance().getPlayerModel();
+            switch(msgData.consumeType)
+            {
+                case Msg.TSummonConsumeType.ESummonConsumeType_Scroll:
+                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_HeroicSummonScroll, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    //召唤次数暂时未考虑
+                    break;
+                case Msg.TSummonConsumeType.ESummonConsumeType_VRmb:
+                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_VRmb, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    break;
+                case Msg.TSummonConsumeType.ESummonConsumeType_Scroll_VRmb:
+                    break;
+                case Msg.TSummonConsumeType.ESummonConsumeType_FriendGift:
+                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_FriendGift, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    break;
+                case Msg.TSummonConsumeType.ESummonConsumeType_Wonder:
+                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_WonderGem, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    break;
+                case Msg.TSummonConsumeType.ESummonConsumeType_Wonder_VRmb:
+                    break;    
+            }
+
+            // NotifyMgr.getInstance().notify()
             // NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
             this.removePubNotifyHandler();
             PopMgr.getInstance().popSummonSettleWindow(msgData,XConsts.POP_SUMMON_TYPE.HeroPub);
