@@ -105,6 +105,14 @@ export class PopOffLineBonus extends PopBase {
         if (bonusInfo == null) {
             return
         }
+        // message LootObject{
+        //     TObjectType objType = 1;
+        //     int32 param1 = 2;
+        //     int32 param2 = 3;
+        //     int32 param3 = 4;
+        //     int32 num = 5;
+        //     HeroInfo extent = 6;
+        // }
 
         resources.load('prefabs_ui/offline/bonus_icon', (err:any,res:any)=>{
             // 通过预制体创建node
@@ -114,7 +122,7 @@ export class PopOffLineBonus extends PopBase {
                 let component = p.getComponent("BonusIcon") as BonusIcon
                 component.updateView(data)
             }
-        } );
+        });
     }
 
     private _onSubmit(){

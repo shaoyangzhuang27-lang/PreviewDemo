@@ -121,6 +121,7 @@ export class MainUI extends Component {
         UINodeMgr.regNodeWithKey(this.btn_coin, "mainCoin")
         UINodeMgr.regNodeWithKey(this.btn_diamond, "mainDiamond")
         UINodeMgr.regNodeWithKey(this.pro_level.node, "mainlevelPro")
+        UINodeMgr.regNodeWithKey(this.btn_bag, "mainBtnBag")
     }
 
     setClickBossFightFunc(func: Function) {
@@ -133,10 +134,8 @@ export class MainUI extends Component {
             let script = p.getComponent("PopOffLineBonus") as PopOffLineBonus
             script.popSelf()
             script.setCloseCallBack(() =>{ 
-                let ret = GameModel.getInstance().getOfflineModel().actionOfflineData()
-                if(ret && ret.length > 0){
-                    FlyItem.showActionFlyWihtObject(this.node.worldPosition, ret[1], ret[0], this.node);
-                }
+                let ret = GameModel.getInstance().getOfflineModel().getBnousInfo()
+                FlyItem.showActionFlyWihtObject(this.node.worldPosition, ret, this.node);
             })
             script.setIsMaskClose(true);
         });
