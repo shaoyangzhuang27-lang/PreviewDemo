@@ -2,12 +2,12 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-  "uuid": "8121c7e6-430d-48c3-bbb8-f4668e5d8026",
+  "uuid": "d700a89c-c674-476a-a907-3fe013106382",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "tip_camp_or_career"
+    "syncNodeName": "tip_share_chat"
   }
 }

@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-25 14:28:41
+ * @LastEditTime: 2021-03-25 20:47:06
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -275,7 +275,13 @@ export class HeroPromotion extends PopBase {
                 this._doLockHero(false);
                 break;
             case this.btn_share:
-                //todo
+                {
+                    let pos = this.btn_share.getWorldPosition();
+                    let nodeSize = this.btn_share.getComponent(UITransform)?.contentSize as math.Size;
+                    pos.x -= nodeSize.width / 2;
+                    pos.y += nodeSize.height / 2;
+                    PopMgr.getInstance().tipShareHeroToChatindow(pos, this._curHeroData);
+                }
                 break;
             case this.btn_camp:
                 {
@@ -300,12 +306,14 @@ export class HeroPromotion extends PopBase {
                 }
                 break;
             case this.btn_fight_params:
-                //todo
-                let pos = this.btn_fight_params.getWorldPosition();
-                let nodeSize = this.btn_fight_params.getComponent(UITransform)?.contentSize as math.Size;
-                pos.x -= nodeSize.width / 2;
-                pos.y += nodeSize.height / 2;
-                PopMgr.getInstance().tipHeroAttributeWindow(pos);
+                {
+                    //todo
+                    let pos = this.btn_fight_params.getWorldPosition();
+                    let nodeSize = this.btn_fight_params.getComponent(UITransform)?.contentSize as math.Size;
+                    pos.x -= nodeSize.width / 2;
+                    pos.y += nodeSize.height / 2;
+                    PopMgr.getInstance().tipHeroAttributeWindow(pos);
+                }
                 break;
             case this.btn_arrow_left:
                 console.log("HeroPromotion btn_arrow_left");
