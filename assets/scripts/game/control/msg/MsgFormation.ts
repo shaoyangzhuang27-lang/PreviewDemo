@@ -2,7 +2,7 @@
  * @Description: 协议收发处理
  * @Author: xxxxxx
  * @Date: 2021-03-02 13:53:04
- * @LastEditTime: 2021-03-25 10:15:38
+ * @LastEditTime: 2021-03-25 14:20:56
  */
 
 import { MsgCore} from "../../../core/network/MsgCore";
@@ -21,7 +21,7 @@ export class MsgFormation extends MsgBase{
             [Msg.MsgType.TheChangeFormationA,[Msg.ChangeFormationA,this.responeChangeBattleTeam,this]],
             [Msg.MsgType.TheHeroTierUpA,[Msg.HeroTierUpA,this.responeHeroTierUp,this]],
             // [Msg.MsgType.TheHeroUpgradeA,[Msg.HeroUpgradeA,this.responeHeroLvUp,this]],
-            [Msg.MsgType.TheSyncHeroLocked,[Msg.SyncHeroLocked,this.responeHeroLocked,this]],
+            // [Msg.MsgType.TheSyncHeroLocked,[Msg.SyncHeroLocked,this.responeHeroLocked,this]],
             [Msg.MsgType.ThePutOnEquipA,[Msg.PutOnEquipA,this.responeHeroPutOnEquip,this]],
             [Msg.MsgType.TheTakeOffEquipA,[Msg.TakeOffEquipA,this.responeHeroTakeOffEquip,this]],
             [Msg.MsgType.TheHeroBookActiveA,[Msg.HeroBookActiveA,this._responeHeroBookActiveRsp,this]],
@@ -72,7 +72,7 @@ export class MsgFormation extends MsgBase{
         const buffer_data = Msg.HeroUpgradeR.encode({heroID:heroID}).finish();
         this.msgMgr?.sendData(Msg.MsgType.TheSyncHeroUpgrade,buffer_data);     
     }
-    
+
     // public responeHeroLvUp(msgId: number, msgData: any){
     //     console.log("英雄升级-----返回",msgId);
     //     let newMsgData = msgData as Msg.HeroUpgradeA;
@@ -88,14 +88,14 @@ export class MsgFormation extends MsgBase{
         this.msgMgr?.sendData(Msg.MsgType.TheSyncHeroLocked, buffer_data);
     }
 
-    public responeHeroLocked(msgId: number, msgData: any){
-        console.log("英雄锁定-----响应",msgId);
-        let newMsgData = msgData as Msg.SyncHeroLocked;
-        if(newMsgData)
-        {
-            GameModel.getInstance().getHeroesModel().setHeroLocked(newMsgData);
-        }
-    }
+    // public responeHeroLocked(msgId: number, msgData: any){
+    //     console.log("英雄锁定-----响应",msgId);
+    //     let newMsgData = msgData as Msg.SyncHeroLocked;
+    //     if(newMsgData)
+    //     {
+    //         GameModel.getInstance().getHeroesModel().setHeroLocked(newMsgData);
+    //     }
+    // }
 
     // 英雄穿上装备
     public requestHeroPutOnEquip(heroID:number, putonEquipIDList:number[]){

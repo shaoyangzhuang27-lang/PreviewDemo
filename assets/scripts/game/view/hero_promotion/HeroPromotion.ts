@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-25 13:54:10
+ * @LastEditTime: 2021-03-25 14:28:41
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -269,14 +269,10 @@ export class HeroPromotion extends PopBase {
 
         switch (event.target) {
             case this.btn_lock:
-                this.btn_unlock.active = true;
-                this.btn_lock.active = false;
-                MsgMgr.getInstance().getMsgFormation().requestHeroLocked(this._curHeroId, true);
+                this._doLockHero(true);
                 break;
             case this.btn_unlock:
-                this.btn_unlock.active = false;
-                this.btn_lock.active = true;
-                MsgMgr.getInstance().getMsgFormation().requestHeroLocked(this._curHeroId, false);
+                this._doLockHero(false);
                 break;
             case this.btn_share:
                 //todo
@@ -412,6 +408,20 @@ export class HeroPromotion extends PopBase {
         }
     }
 
+    private _doLockHero(isLocked:boolean = true){        
+        if(this._curHeroId){
+            MsgMgr.getInstance().getMsgFormation().requestHeroLocked(this._curHeroId, isLocked);                
+    
+            console.log(" isLocked=",isLocked,"  this._curHeroData.isLocked 1= ", this._curHeroData.isLocked);
+            let heroData = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(this._curHeroId);
+            console.log("heroData?.isLocked ",heroData?.isLocked);
+            this._curHeroData.isLocked = isLocked;
+            console.log(" this._curHeroData.isLocked 2= ", this._curHeroData.isLocked);
+            
+            this._showLocked(isLocked);
+        }
+    }
+    
     private _onBtnLevelUp() {
         let record = ValueMgr.getInstance().getItemByField(TableName.upgrade_exp, this._curHeroData.level);
         if (!record) {
@@ -481,7 +491,7 @@ export class HeroPromotion extends PopBase {
         //this.cur_hero_model?.node.setSiblingIndex(100);
         // UIMeshRenderer
 
-        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_locked, this._notifyHeroLockedHandle, this);
+        // NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_locked, this._notifyHeroLockedHandle, this);
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_put_on_equip, this._notifyHeroAllLoadEquipHandle, this);
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_take_off_equip, this._notifyHeroAllUnLoadEquipHandle, this);
         // NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_lv_up, this._notifyHeroLvUpHandle, this);
@@ -490,7 +500,7 @@ export class HeroPromotion extends PopBase {
 
     onDestroy() {
         super.onDestroy();
-        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_locked, this._notifyHeroLockedHandle, this);
+        // NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_locked, this._notifyHeroLockedHandle, this);
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_put_on_equip, this._notifyHeroAllLoadEquipHandle, this);
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_take_off_equip, this._notifyHeroAllUnLoadEquipHandle, this);
         // NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_lv_up, this._notifyHeroLvUpHandle, this);
@@ -782,17 +792,17 @@ export class HeroPromotion extends PopBase {
 
     }
 
-    private _notifyHeroLockedHandle(data: any = null) {
+    // private _notifyHeroLockedHandle(data: any = null) {
 
-        if (data) {
-            let msg = data as Msg.SyncHeroLocked;
-            if (msg.heroID == this._curHeroId) {
-                this._curHeroData.isLocked = msg.isLocked;
-                this.btn_lock.active = !msg.isLocked;
-                this.btn_unlock.active = msg.isLocked;
-            }
-        }
-    }
+    //     if (data) {
+    //         let msg = data as Msg.SyncHeroLocked;
+    //         if (msg.heroID == this._curHeroId) {
+    //             this._curHeroData.isLocked = msg.isLocked;
+    //             this.btn_lock.active = !msg.isLocked;
+    //             this.btn_unlock.active = msg.isLocked;
+    //         }
+    //     }
+    // }
 
     _initView() {
     }
@@ -883,6 +893,8 @@ export class HeroPromotion extends PopBase {
         this.node_upgrade.active = !this._isLvUpView;    //升阶底部属性界面
         this.btn_up_tier.active = !this._isLvUpView;     //升阶按钮
 
+        //显示锁定
+        this._showLocked(this._curHeroData.isLocked);
         //显示技能
         this._showSkillItems();
         //显示星级
@@ -898,6 +910,13 @@ export class HeroPromotion extends PopBase {
         //显示升级消耗
         this._showUpLvCost();
 
+    }
+
+    private _showLocked(isLocked:boolean = true){
+        if(this._curHeroId){
+            this.btn_lock.active = !isLocked;
+            this.btn_unlock.active = isLocked;
+        }
     }
 
     private _showUpTierCost() {
@@ -1258,6 +1277,8 @@ export class HeroPromotion extends PopBase {
         this.node_upgrade.active = !this._isLvUpView;    //升阶底部属性界面
         this.btn_up_tier.active = !this._isLvUpView;     //升阶按钮
 
+         //显示锁定
+         this._showLocked(this._curHeroData.isLocked);
         //显示技能
         this._showSkillItems();
         //显示星级
@@ -1284,14 +1305,6 @@ export class HeroPromotion extends PopBase {
         this.btn_up_lv.active = false;        //升级按钮
         this.node_upgrade.active = !this._isLvUpView;    //升阶底部属性界面
         this.btn_up_tier.active = false;     //升阶按钮
-
-        //显示技能
-
-        //显示品阶
-
-        //显示等级
-
-        //显示升阶数据 ? 显示升级数据
 
         //显示装备列表
         this._showEquipCells();
