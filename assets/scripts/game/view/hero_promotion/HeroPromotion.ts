@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-24 20:21:58
+ * @LastEditTime: 2021-03-25 13:54:10
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -434,7 +434,15 @@ export class HeroPromotion extends PopBase {
         }
 
         MsgMgr.getInstance().getMsgFormation().requestHeroLvUp(this._curHeroId);
-        // HeroUpgradeLocal (recordExp);
+        
+        //由于升级协议走的是sync,服务器只接受不返回,也就是客户端自己处理,满足条件就能达成
+        let newMsgData = new Msg.HeroUpgradeA;
+        newMsgData.heroID = this._curHeroId;
+        newMsgData.moneyExpconsume= recordExp.heroMoney;
+        newMsgData.upgradeExpConsume= recordExp.heroExp;
+        newMsgData.err = Msg.TErrorCode.ERR_OK;
+        newMsgData.newLevel= this._curHeroData.level+1;
+        this._notifyHeroLvUpHandle(newMsgData);
     }
 
     private _onBtnTierUp() {
@@ -476,7 +484,7 @@ export class HeroPromotion extends PopBase {
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_locked, this._notifyHeroLockedHandle, this);
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_put_on_equip, this._notifyHeroAllLoadEquipHandle, this);
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_take_off_equip, this._notifyHeroAllUnLoadEquipHandle, this);
-        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_lv_up, this._notifyHeroLvUpHandle, this);
+        // NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_lv_up, this._notifyHeroLvUpHandle, this);
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_tier_up, this._notifyHeroTierUpHandle, this);
     }
 
@@ -485,7 +493,7 @@ export class HeroPromotion extends PopBase {
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_locked, this._notifyHeroLockedHandle, this);
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_put_on_equip, this._notifyHeroAllLoadEquipHandle, this);
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_take_off_equip, this._notifyHeroAllUnLoadEquipHandle, this);
-        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_lv_up, this._notifyHeroLvUpHandle, this);
+        // NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_lv_up, this._notifyHeroLvUpHandle, this);
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_hero_tier_up, this._notifyHeroTierUpHandle, this);
     }
 
@@ -508,7 +516,7 @@ export class HeroPromotion extends PopBase {
             let oldAtk: number = this._curHeroData.getATK(false);
             let oldDef: number = this._curHeroData.getDEF(false);
             let oldHp: number = this._curHeroData.getMaxHP(false);
-            let newLevel: number = this._curHeroData.level + 1;
+            let newLevel: number = msg.newLevel;///this._curHeroData.level + 1;
             heroData.level = newLevel;
 
             let proChangeMap = new Map<Msg.THeroPropertyType, number>(); // 改变后的属性
@@ -574,13 +582,21 @@ export class HeroPromotion extends PopBase {
         if (msg.err == Msg.TErrorCode.ERR_OK) {
             // 修改数据及显示
             let heroData = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(msg.heroID);
+            console.log("heroData?.tier =",heroData?.tier);
             if (!heroData) {
                 return;
             }
 
             let hdOld = new HeroData();
             hdOld = hdOld.CopyHeroData(heroData);
+            console.log("hdOld?.tier =", hdOld?.tier);
+            
+            let heroData2 = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(msg.heroID);
+            console.log("heroData2?.tier = ", heroData2?.tier);
             heroData.tier = msg.newTier;
+            console.log("hdOld?.tier 2 =",hdOld?.tier);
+            console.log("heroData2?.tier = ",heroData2?.tier);
+            
             //重新计算天赋属性
             heroData.calcTalentSkillProperty();
             //消耗
@@ -907,7 +923,7 @@ export class HeroPromotion extends PopBase {
         if (playerInfo.heroAdvanceExp < costExp) {
             color = Color.RED;
         }
-        this.lab_need_exp_1_tier.string = XFuns.FormatNumber(playerInfo.heroUpgradeExp);
+        this.lab_need_exp_1_tier.string = XFuns.FormatNumber(playerInfo.heroAdvanceExp);
         this.lab_need_exp_1_tier.color = color;
         this.lab_need_exp_2_tier.string = "/" + XFuns.FormatNumber(costExp);
     }
@@ -1054,7 +1070,7 @@ export class HeroPromotion extends PopBase {
             }
             
         }
-        else if (items.length > maxTier) {
+        else if (items.length >= maxTier) {
             // 1.品阶图标多的需要先释放
             let nSub1 = items.length - maxTier;
             let pos = this.layout_tier.node.getPosition();
