@@ -299,41 +299,52 @@ export class PlayerModel extends BaseModel {
 
       /**
      * @description: 更新角色信息——次数属性
-     * @param {Xstruct.TimesType} timesType 次数类型
+     * @param {XMsg.TimesType} timesType 次数类型
      * @param {number} num     次数值
      */
-       public updatePlayerInfoTimesAttribute(timesType:XStruct.TimesType, num:number) {
+       public updatePlayerInfoTimesAttribute(timesType:XMsg.TimesType, num:number) {
         switch (timesType) {
-            case XStruct.TimesType.TRefreshHeroTalentTimes:
+            case XMsg.TimesType.TRefreshHeroTalentTimes:
                 this._playerInfo.refreshHeroTalentTimes = num;
                 break;
-            case XStruct.TimesType.TChallengeFailedTimes:
+            case XMsg.TimesType.TChallengeFailedTimes:
                 this._playerInfo.challengeFailedTimes = num;
                 break;
-            case XStruct.TimesType.TBoughtBagTimes:
+            case XMsg.TimesType.TBoughtBagTimes:
                 this._playerInfo.BoughtBagTimes = num;
                 break;
-            case XStruct.TimesType.TSummonScore:
+            case XMsg.TimesType.TSummonScore:
                 this._playerInfo.summonScore = num;
                 break;
-            case XStruct.TimesType.TAdAwardTimes:
+            case XMsg.TimesType.TAdAwardTimes:
                 this._playerInfo.adAwardTimes = num;
                 break;
-            case XStruct.TimesType.THeroComposeTimes:
+            case XMsg.TimesType.THeroComposeTimes:
                 this._playerInfo.heroComposeTimes = num;
                 break;
-            case XStruct.TimesType.TFastBattleTimes:
+            case XMsg.TimesType.TFastBattleTimes:
                 this._playerInfo.fastBattleTimes = num;
                 break;
-            case XStruct.TimesType.THuntingBossTimes:
+            case XMsg.TimesType.THuntingBossTimes:
                 this._playerInfo.huntingBossTimes = num;
                 break;
-            case XStruct.TimesType.TWonderTimes:
+            case XMsg.TimesType.TWonderTimes:
                 this._playerInfo.WonderTimes = num;
                 break;
-            case XStruct.TimesType.TAccumulatedCheckInTimes:
+            case XMsg.TimesType.TAccumulatedCheckInTimes:
                 this._playerInfo.AccumulatedCheckInTimes = num;
                 break;    
         }
+    }
+
+    public updateSummonScore(value : number)
+    {
+        this._playerInfo.summonScore = value;
+    }
+
+
+    public updateWonderTimes(value :number)
+    {
+        this._playerInfo.WonderTimes = value;
     }
 }

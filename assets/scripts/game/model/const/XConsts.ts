@@ -266,6 +266,7 @@ export class XConsts{
     public static PUB_WONDER_SUMMON_COUNT_MAX:number = 70 ;  //奇迹召唤
     public static PUB_SUMMON_DIAMOND_ONE_COSUME:number = 300 ;
     public static PUB_SUMMON_DIAMOND_TEN_COSUME:number = 2700 ;
+    public static PUB_SUMMON_SCROLL_EXCHANGE_DIAMOND:number = 270 ;
     public static PUB_SUMMON_SCROLL_ONE_COSUME:number = 1 ;
     public static PUB_SUMMON_SCROLL_TEN_COSUME:number = 10 ;
     public static PUB_SUMMON_FRIEND_ONE_COSUME:number = 10 ;
@@ -279,6 +280,7 @@ export class XConsts{
     public static PUB_UI_NEWSUMMONFRIENDCONTENT: string = "UI_NewSummonFriendContent";  //添加好友，每日互送爱心，即可免费召唤英雄。
     public static PUB_UI_FRIENDSUMMON : string = "UI_FriendSummon";
     public static PUB_UI_HEROICSUMMON : string = "UI_HeroicSummon";
+    public static PUB_UI_BUYSUMMONSCROLL : string = "UI_BuySummonScroll";
 
    //英雄推荐阵容-
     public static PUB_RECOMMEND_LINEUP_UI_PACKUP : string = "UI_PackUp";

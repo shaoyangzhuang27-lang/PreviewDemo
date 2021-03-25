@@ -388,7 +388,7 @@ export class PopSummonSettle extends PopBase {
                 arrProp.push(instantiate(stuProp));    
             }  
             PopMgr.getInstance().deleteWindow();
-            PopMgr.getInstance().popMultiItemRewardWindow(null,arrProp);
+            PopMgr.getInstance().popMultiItemRewardWindow(null,arrProp);         
         }
        
     }
