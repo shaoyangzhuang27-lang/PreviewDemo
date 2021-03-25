@@ -1,3 +1,11 @@
+/*
+ * @Author: zsy
+ * @Date: 2021-03-15 12:04:23
+ * @LastEditTime: 2021-03-24 20:56:06
+ * @LastEditors: Please set LastEditors
+ * @Description: 挂机奖励数据
+ * @FilePath: \PreviewDemo\assets\scripts\game\model\datas\OfflineModel.ts
+ */
 import { TableName, ValueMgr } from "../ValueMgr";
 import { GameModel } from "../GameModel";
 import { BaseModel } from "./BaseModel";
@@ -23,7 +31,8 @@ export class OfflineModel extends BaseModel
         // 玩家数据
         let rate = this._getPlayerCopyID()
         if(rate){
-            return ValueMgr.getInstance().getItemByField(TableName.copy_loot, rate)
+            let ret = ValueMgr.getInstance().getItemByField(TableName.copy_loot, rate)
+            return ret
         }
     }
 
@@ -55,42 +64,12 @@ export class OfflineModel extends BaseModel
     // 服务器请求后设置数据
     public setBonusInfo(msg: Msg.GainOfflineAwardA) {
         let arrAwardlist: Msg.ILootObject[] = msg.awardList
+        this.m_bonusInfo = arrAwardlist
         console.log(arrAwardlist)
-
-        // 暂时先只显示金币，升级点，经验，钻石，其他装备和道具显示等背包功能做完后再显示 (灬ꈍ ꈍ灬)
-        // let arrTempShow: Msg.TObjectType[] = [
-        //     Msg.TObjectType.EObject_Money,
-        //     Msg.TObjectType.EObject_Exp,
-        //     Msg.TObjectType.EObject_UpgradePoint,
-        // ]
-
-        this.m_bonusInfo = []
-        arrAwardlist.forEach(element => {
-            // let ret = arrTempShow.find(obType => obType == element.objType)
-            // if (ret == undefined){
-            this.m_bonusInfo.push({ nCount: element.num, obtype: element.objType })
-            // }
-        });
-
         // 更新挂机时间
         this.m_idleTime = msg.offlineTime
     }
-
-    // 组装数据
-    public actionOfflineData(){
-        if(this.m_bonusInfo.length <= 0){
-            return
-        }
-        let countArr :number[] = []
-        let obTypeArr : Msg.TObjectType[] = []
-        for (let index = 0; index < this.m_bonusInfo.length; index++) {
-            const element = this.m_bonusInfo[index];
-            countArr.push(element.nCount)
-            obTypeArr.push(element.obtype)
-        }
-        return [countArr, obTypeArr]
-    }
-
+    
     /***************************************************************************************/
     private _getPlayerCopyID(){
         // 如果玩家有指定的副本则返回指定副本

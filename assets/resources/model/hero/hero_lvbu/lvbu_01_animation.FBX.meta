@@ -1,0 +1,302 @@
+{
+  "ver": "2.0.10",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "446b52d9-5fea-4940-afd4-77592a613d5a",
+  "files": [],
+  "subMetas": {
+    "78391": {
+      "importer": "gltf-animation",
+      "uuid": "446b52d9-5fea-4940-afd4-77592a613d5a@78391",
+      "displayName": "",
+      "id": "78391",
+      "name": "skill.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 6.966666666666667,
+          "to": 9.208333015441895
+        },
+        "events": [
+          {
+            "frame": 1.0333333333333334,
+            "functionName": "onSkill",
+            "parameters": []
+          }
+        ],
+        "speed": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "72dc7": {
+      "importer": "gltf-mesh",
+      "uuid": "446b52d9-5fea-4940-afd4-77592a613d5a@72dc7",
+      "displayName": "",
+      "id": "72dc7",
+      "name": "Box010.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1f586": {
+      "importer": "gltf-animation",
+      "uuid": "446b52d9-5fea-4940-afd4-77592a613d5a@1f586",
+      "displayName": "",
+      "id": "1f586",
+      "name": "idle.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 2.1666666666666665
+        },
+        "events": []
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "cf5ee": {
+      "importer": "gltf-animation",
+      "uuid": "446b52d9-5fea-4940-afd4-77592a613d5a@cf5ee",
+      "displayName": "",
+      "id": "cf5ee",
+      "name": "run.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 2.3333333333333335,
+          "to": 3.1333333333333333
+        },
+        "events": [],
+        "speed": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "b4251": {
+      "importer": "gltf-animation",
+      "uuid": "446b52d9-5fea-4940-afd4-77592a613d5a@b4251",
+      "displayName": "",
+      "id": "b4251",
+      "name": "die.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 1,
+        "sample": 30,
+        "span": {
+          "from": 3.3,
+          "to": 4.633333333333334
+        },
+        "events": []
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "989ed": {
+      "importer": "gltf-animation",
+      "uuid": "446b52d9-5fea-4940-afd4-77592a613d5a@989ed",
+      "displayName": "",
+      "id": "989ed",
+      "name": "attack.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 4.8,
+          "to": 6.8
+        },
+        "events": [
+          {
+            "frame": 0.8333333333333334,
+            "functionName": "onAttack",
+            "parameters": []
+          }
+        ],
+        "speed": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "438fe": {
+      "importer": "gltf-skeleton",
+      "uuid": "446b52d9-5fea-4940-afd4-77592a613d5a@438fe",
+      "displayName": "",
+      "id": "438fe",
+      "name": "UnnamedSkeleton.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 48
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "a2364": {
+      "importer": "gltf-embeded-image",
+      "uuid": "446b52d9-5fea-4940-afd4-77592a613d5a@a2364",
+      "displayName": "",
+      "id": "a2364",
+      "name": "Map #1.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "6e70c": {
+      "importer": "texture",
+      "uuid": "446b52d9-5fea-4940-afd4-77592a613d5a@6e70c",
+      "displayName": "",
+      "id": "6e70c",
+      "name": "Map #1.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "446b52d9-5fea-4940-afd4-77592a613d5a@a2364"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "4909b": {
+      "importer": "gltf-scene",
+      "uuid": "446b52d9-5fea-4940-afd4-77592a613d5a@4909b",
+      "displayName": "",
+      "id": "4909b",
+      "name": "lvbu_01_animation.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #1",
+        "uri": "446b52d9-5fea-4940-afd4-77592a613d5a@a2364"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 9.208333015441895,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "idle",
+            "from": 0,
+            "to": 2.1666666666666665,
+            "wrapMode": 2
+          },
+          {
+            "name": "run",
+            "from": 2.3333333333333335,
+            "to": 3.1333333333333333,
+            "wrapMode": 2
+          },
+          {
+            "name": "die",
+            "from": 3.3,
+            "to": 4.633333333333334,
+            "wrapMode": 1
+          },
+          {
+            "name": "attack",
+            "from": 4.8,
+            "to": 6.8,
+            "wrapMode": 2
+          },
+          {
+            "name": "skill",
+            "from": 6.966666666666667,
+            "to": 9.208333015441895,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "446b52d9-5fea-4940-afd4-77592a613d5a@4909b",
+    "assetFinder": {
+      "meshes": [
+        "446b52d9-5fea-4940-afd4-77592a613d5a@72dc7"
+      ],
+      "skeletons": [
+        "446b52d9-5fea-4940-afd4-77592a613d5a@438fe"
+      ],
+      "textures": [
+        "446b52d9-5fea-4940-afd4-77592a613d5a@6e70c"
+      ],
+      "materials": [
+        "18d60f38-c424-4062-b497-3e10ff91f81c"
+      ],
+      "scenes": [
+        "446b52d9-5fea-4940-afd4-77592a613d5a@4909b"
+      ]
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/resources/model/hero/hero_lvbu/mat"
+  }
+}

@@ -789,7 +789,7 @@
       "__id__": 14
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 34
@@ -804,7 +804,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -2,
+      "y": -10,
       "z": 0
     },
     "_lrot": {
@@ -879,7 +879,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "牧师:奶量十足是胜利的关键",
+    "_string": "",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 16,
@@ -934,7 +934,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": -50,
-      "y": -10,
+      "y": -12,
       "z": 0
     },
     "_lrot": {
@@ -1064,7 +1064,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 50,
-      "y": 10,
+      "y": 6,
       "z": 0
     },
     "_lrot": {
@@ -1194,7 +1194,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 50,
-      "y": -30,
+      "y": -34,
       "z": 0
     },
     "_lrot": {
@@ -1324,7 +1324,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": -2,
       "z": 0
     },
     "_lrot": {
@@ -1454,7 +1454,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -20,
+      "y": -22,
       "z": 0
     },
     "_lrot": {
@@ -1725,16 +1725,16 @@
     "sp_camp": {
       "__id__": 42
     },
-    "sp_icon1": {
+    "sp_camp_01": {
       "__id__": 48
     },
-    "sp_icon2": {
+    "sp_camp_02": {
       "__id__": 54
     },
-    "sp_arrow1": {
+    "sp_arrow_1": {
       "__id__": 60
     },
-    "sp_arrow2": {
+    "sp_arrow_2": {
       "__id__": 66
     },
     "bg_triangle": {
@@ -1744,7 +1744,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "a2LbRcVYJCC6eWew+O0CV8"
+    "fileId": "04BghhmFJMh4araQLppah0"
   },
   {
     "__type__": "cc.PrefabInfo",

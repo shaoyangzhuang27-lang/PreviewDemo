@@ -2,7 +2,7 @@
  * @Description: 协议收发处理
  * @Author: xxxxxx
  * @Date: 2021-03-02 13:53:04
- * @LastEditTime: 2021-03-19 20:20:21
+ * @LastEditTime: 2021-03-25 14:20:56
  */
 
 import { MsgCore} from "../../../core/network/MsgCore";
@@ -19,8 +19,9 @@ export class MsgFormation extends MsgBase{
     public initData(){
         this.responeMap = new Map<number,[any,NetCallFunc,any]>([
             [Msg.MsgType.TheChangeFormationA,[Msg.ChangeFormationA,this.responeChangeBattleTeam,this]],
-            [Msg.MsgType.TheHeroTierUpA,[Msg.HeroTierUpA,this.responeHeroLvUp,this]],
-            [Msg.MsgType.TheSyncHeroLocked,[Msg.SyncHeroLocked,this.responeHeroLocked,this]],
+            [Msg.MsgType.TheHeroTierUpA,[Msg.HeroTierUpA,this.responeHeroTierUp,this]],
+            // [Msg.MsgType.TheHeroUpgradeA,[Msg.HeroUpgradeA,this.responeHeroLvUp,this]],
+            // [Msg.MsgType.TheSyncHeroLocked,[Msg.SyncHeroLocked,this.responeHeroLocked,this]],
             [Msg.MsgType.ThePutOnEquipA,[Msg.PutOnEquipA,this.responeHeroPutOnEquip,this]],
             [Msg.MsgType.TheTakeOffEquipA,[Msg.TakeOffEquipA,this.responeHeroTakeOffEquip,this]],
             [Msg.MsgType.TheHeroBookActiveA,[Msg.HeroBookActiveA,this._responeHeroBookActiveRsp,this]],
@@ -69,16 +70,17 @@ export class MsgFormation extends MsgBase{
     {
         console.log("英雄升级-----请求");
         const buffer_data = Msg.HeroUpgradeR.encode({heroID:heroID}).finish();
-        this.msgMgr?.sendData(Msg.MsgType.TheSyncHeroUpgrade,buffer_data);
+        this.msgMgr?.sendData(Msg.MsgType.TheSyncHeroUpgrade,buffer_data);     
     }
-    public responeHeroLvUp(msgId: number, msgData: any){
-        console.log("英雄升级-----返回",msgId);
-        let newMsgData = msgData as Msg.HeroUpgradeA;
-        if(newMsgData)
-        {
-            GameModel.getInstance().getHeroesModel().setHeroLvUp(newMsgData)      
-        }        
-    }
+
+    // public responeHeroLvUp(msgId: number, msgData: any){
+    //     console.log("英雄升级-----返回",msgId);
+    //     let newMsgData = msgData as Msg.HeroUpgradeA;
+    //     if(newMsgData)
+    //     {
+    //         GameModel.getInstance().getHeroesModel().setHeroLvUp(newMsgData)      
+    //     }        
+    // }
 
     public requestHeroLocked(heroID:number, isLocked:boolean){
         console.log("英雄锁定-----请求");
@@ -86,14 +88,14 @@ export class MsgFormation extends MsgBase{
         this.msgMgr?.sendData(Msg.MsgType.TheSyncHeroLocked, buffer_data);
     }
 
-    public responeHeroLocked(msgId: number, msgData: any){
-        console.log("英雄锁定-----响应",msgId);
-        let newMsgData = msgData as Msg.SyncHeroLocked;
-        if(newMsgData)
-        {
-            GameModel.getInstance().getHeroesModel().setHeroLocked(newMsgData);
-        }
-    }
+    // public responeHeroLocked(msgId: number, msgData: any){
+    //     console.log("英雄锁定-----响应",msgId);
+    //     let newMsgData = msgData as Msg.SyncHeroLocked;
+    //     if(newMsgData)
+    //     {
+    //         GameModel.getInstance().getHeroesModel().setHeroLocked(newMsgData);
+    //     }
+    // }
 
     // 英雄穿上装备
     public requestHeroPutOnEquip(heroID:number, putonEquipIDList:number[]){
