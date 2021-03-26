@@ -160,19 +160,16 @@ export class PopSummonSettle extends PopBase {
                 {
                     nConsumeCounts =this._bIsOne ? XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME : XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME;
                 }
-                else if(this._nSummonType == Msg.TSummonType.ESummonType_Wonder)
-                {
-                    nConsumeCounts = this._bIsOne ? XConsts.PUB_SUMMON_WONDER_ONE_COSUME : XConsts.PUB_SUMMON_WONDER_TEN_COSUME;
-                }
+                // else if(this._nSummonType == Msg.TSummonType.ESummonType_Wonder)
+                // {
+                //     //奇迹召唤不弹召唤骑士界面
+                //     nConsumeCounts = this._bIsOne ? XConsts.PUB_SUMMON_WONDER_ONE_COSUME : XConsts.PUB_SUMMON_WONDER_TEN_COSUME;
+                // }
                 break;
             case Msg.TSummonConsumeType.ESummonConsumeType_Scroll :
                 nConsumeCounts = this._bIsOne ? XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME: XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME;
                 nCurCounts = heroPubModel.getBaseSummonScrollNum();
                 break;
-            // case Msg.TSummonConsumeType.ESummonConsumeType_Wonder :   //暂时没看到奇迹宝石召唤
-            //     nConsumeCounts = XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME;
-            //    break;
-
         }
        
         if(nCurCounts < nConsumeCounts)
@@ -252,10 +249,10 @@ export class PopSummonSettle extends PopBase {
                 this.lab_summon_desc.string = bIsOne ? strBtnSummonDescOne : strBtnSummonDescTen;
                 changeLabColor(GameModel.getInstance().getHeroPubModel().getBaseSummonScrollNum(),curNum);
             }
-            else if(summmonType == Msg.TSummonType.ESummonType_Wonder)
-            {
-                //奇迹召唤卷轴
-            }
+            // else if(summmonType == Msg.TSummonType.ESummonType_Wonder)
+            // {
+            //     //奇迹召唤卷轴不在这个界面弹窗
+            // }
 
         } //消耗钻石  暂时只处理80级之前的显示
         else if (consumeType == Msg.TSummonConsumeType.ESummonConsumeType_VRmb) {
@@ -268,10 +265,10 @@ export class PopSummonSettle extends PopBase {
                 this.lab_summon_desc.string = bIsOne ? strBtnSummonDescOne : strBtnSummonDescTen;
                 changeLabColor(GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts(),curNum);
             }
-            else if(summmonType == Msg.TSummonType.ESummonType_Wonder)
-            {
-                //奇迹召唤宝石
-            }
+            // else if(summmonType == Msg.TSummonType.ESummonType_Wonder)
+            // {
+            //     //奇迹召唤宝石不在这个界面弹窗
+            // }
             
         }//消耗友情
         else if (consumeType == Msg.TSummonConsumeType.ESummonConsumeType_FriendGift) 
