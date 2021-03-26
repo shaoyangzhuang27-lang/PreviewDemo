@@ -420,12 +420,11 @@ export class PopMgr extends PopCore  {
         } );
     }
     
-      /**
-     * 通用类型一弹窗
-     * @param title     窗口标题
-     * @param content   窗体描述内容
-     * @param mode      底部按钮显示样式
-     * @param isRichLabMode      内容样式
+    /**
+     * @description: 通用弹窗类型一
+     * @param {XStruct.common_one_info.Record} info 窗口信息结构
+     * @param {Function} submitCallBack 发送按钮回调
+     * @param {Function} closeCallBack 关闭按钮回调
      */
     public popCommonOneWindow(info : XStruct.common_one_info.Record,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
