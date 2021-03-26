@@ -472,6 +472,10 @@ export class PopHeroPub extends PopBase {
         }
         if(this._curSummonType == Msg.TSummonType.ESummonType_Heroic)
         {
+            if(imgdi_ten)
+            {
+                this.resetResourcesSpriFame("ui/hero_pub/pub_btn_violet/spriteFrame",imgdi_ten);
+            }
             if(this._nScorllNum == 0)
             {
                 if(img_one_remind && img_ten_remind)
