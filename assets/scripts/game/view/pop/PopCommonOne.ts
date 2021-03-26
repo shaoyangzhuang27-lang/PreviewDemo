@@ -3,17 +3,20 @@
 * @author 郭刚
 * @version 1.0.0,2021.3.13
 */
-import { _decorator, Component, Node,LabelComponent,Button,SpriteFrame, Sprite,resources, Label } from 'cc';
+import { _decorator, Component, Node,LabelComponent,Button,SpriteFrame, Sprite,resources, Label, RichText } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopCommonOne')
 export class PopCommonOne extends PopBase {
-    @property({type: LabelComponent})
-    public lab_title:LabelComponent | null = null;
+    @property({type: Label})
+    public lab_title:Label= null as unknown as Label;
 
-    @property({type: LabelComponent})
-    public lab_content:LabelComponent | null = null;
+    @property({type: Label})
+    public lab_content:Label= null as unknown as Label;
+
+    @property({type: RichText})
+    public lab_rich:RichText  = null as unknown as RichText;;
 
     @property({type: Button})
     public btn_submit = null as unknown as Button;
@@ -47,8 +50,8 @@ export class PopCommonOne extends PopBase {
     }
     public setContent(content:string){
         console.log(content)
-        if(this.lab_content)
-            this.lab_content.string = content
+       this.lab_content.node.activeInHierarchy ?  this.lab_content.string = content : this.lab_rich.string = content;
+           
     }
       /**
     * 设置弹窗按钮mode = 2情况下取消发送回调
@@ -174,6 +177,19 @@ export class PopCommonOne extends PopBase {
             this.btn_go.node.active = false;
         }
     } 
+
+
+    public setRichLabMode(isRichLabelMode : boolean)
+    {
+        if(isRichLabelMode)
+        {
+            this.lab_content.node.active = false;
+        }
+        else
+        {
+            this.lab_rich.node.active = false;
+        }
+    }
     // update (deltaTime: number) {
     //     // Your update function goes here.
     // }

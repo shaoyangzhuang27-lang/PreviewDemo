@@ -406,14 +406,16 @@ export class PopMgr extends PopCore  {
      * @param title     窗口标题
      * @param content   窗体描述内容
      * @param mode      底部按钮显示样式
+     * @param isRichLabMode      内容样式
      */
-    public popCommonOneWindow(title:string,content:string,mode : number ,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+    public popCommonOneWindow(title:string,content:string,mode : number ,submitCallBack:Function,isRichLabMode : boolean = false,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_common_one', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
             let script = p.getComponent("PopCommonOne") as PopCommonOne;
             script.setTitle(title);
+            script.setRichLabMode(isRichLabMode);
             script.setContent(content);
             script.setShowMode(mode);
             script.setSubmitCallBack(submitCallBack)
