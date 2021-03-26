@@ -31,6 +31,23 @@ export class PlayerModel extends BaseModel {
     }
 
     /**
+     * 
+     * @param money 金币数量
+     * @param addType 获得金币方式
+     * @param isRefresh 是否刷新
+     * @param price 礼包价格？
+     */
+    public addMoney(money:number, addType:Msg.TMoneyAddType, isRefresh = true, price:number=0)
+    {
+        this._playerInfo.money += money;
+        if(isRefresh)
+        {
+            //抛通知  玩家信息变化
+        }
+        //sdk埋点记录   金币数量变化 类型
+    }
+
+    /**
      * @description: 金币减少
      * @param {number} money
      * @param {Msg} subType
