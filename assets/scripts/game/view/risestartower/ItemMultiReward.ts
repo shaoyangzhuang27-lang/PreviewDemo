@@ -179,10 +179,27 @@ export class ItemMultiReward extends Component {
      * @description: 设置物品信息
      * @param data 物品信息结构
      */    
-    public setPropInfo(data : XStruct.prop_info.IRecord)
+    public setPropInfo(lootObjectData : Msg.LootObject | null,  defineData : XStruct.prop_info.Record | null)
     {
-           this._propInfo = instantiate(data);
+
+        if(lootObjectData)
+        {
+            if(lootObjectData.objType == Msg.TObjectType.EObject_Hero)
+            {
+                this._propInfo.nType = Msg.TObjectType.EObject_Hero;
+                this._propInfo.nPropId = lootObjectData.param1;
+                this._propInfo.nLevel = lootObjectData.param2;
+                this._propInfo.nPropQuality = lootObjectData.param3;
+            }
+            else
+            {
+                this._propInfo.nType = lootObjectData.objType; 
+            }
+            this._propInfo.num = lootObjectData.num;
+        }
+        else if(defineData)
+        {
+            this._propInfo = instantiate(defineData);
+        }
     }
-
-
 }

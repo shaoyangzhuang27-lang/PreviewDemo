@@ -171,7 +171,7 @@ export class PopSummonSettle extends PopBase {
 
     public initBtnSummonUI(summmonType : Msg.TSummonType,consumeType : Msg.TSummonConsumeType, bIsOne : boolean)
     {
-        var lab = this.btn_summon.node.getChildByName("lab")?.getComponent(Label);
+        // var lab = this.btn_summon.node.getChildByName("lab")?.getComponent(Label);
         var lab_summon_num = this.btn_summon.node.getChildByName("lab_summon_num")?.getComponent(Label);
         var img_summon_icon = this.btn_summon.node.getChildByName("img_summon_icon")?.getComponent(Sprite);
 
@@ -189,27 +189,30 @@ export class PopSummonSettle extends PopBase {
         }
         //消耗卷轴
         if (consumeType == Msg.TSummonConsumeType.ESummonConsumeType_Scroll) {
-            if (summmonType == Msg.TSummonType.ESummonType_Basic) {
-                img_summon_icon && this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",img_summon_icon);
-            } else if (summmonType == Msg.TSummonType.ESummonType_Heroic) {
-                img_summon_icon && this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",img_summon_icon);
-            }
+            // if (summmonType == Msg.TSummonType.ESummonType_Basic) {
+            //     img_summon_icon && this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",img_summon_icon);
+            // } else if (summmonType == Msg.TSummonType.ESummonType_Heroic) {
+            img_summon_icon && this.resetResourcesSpriFame("ui/hero_pub/pub_prop_scroll/spriteFrame",img_summon_icon);
+            // }
+            img_summon_icon && img_summon_icon.node.setScale(0.5,0.5,1);
             var curNum = bIsOne ? XConsts.PUB_SUMMON_SCROLL_ONE_COSUME : XConsts.PUB_SUMMON_SCROLL_TEN_COSUME
             lab_summon_num && (lab_summon_num.string = String(curNum));
+
             this.lab_summon_desc.string = bIsOne ? strBtnSummonDescOne : strBtnSummonDescTen;
             changeLabColor(GameModel.getInstance().getHeroPubModel().getBaseSummonScrollNum(),curNum);
 
         } //消耗钻石  暂时只处理80级之前的显示
         else if (consumeType == Msg.TSummonConsumeType.ESummonConsumeType_VRmb) {
             var curNum = bIsOne ? XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME : XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME
+            img_summon_icon && img_summon_icon.node.setScale(0.25,0.25,1);
             lab_summon_num && (lab_summon_num.string = String(curNum));
             this.lab_summon_desc.string = bIsOne ? strBtnSummonDescOne : strBtnSummonDescTen;
             changeLabColor(GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts(),curNum);
         }//消耗友情
         else if (consumeType == Msg.TSummonConsumeType.ESummonConsumeType_FriendGift) 
         {
-            img_summon_icon && this.resetResourcesSpriFame("hero_pub/pub_prop_heart/spriteFrame",img_summon_icon);
-            
+            img_summon_icon && this.resetResourcesSpriFame("ui/hero_pub/pub_prop_heart/spriteFrame",img_summon_icon);
+            img_summon_icon && img_summon_icon.node.setScale(0.5,0.5,1);
             var curNum = bIsOne ? XConsts.PUB_SUMMON_FRIEND_ONE_COSUME : XConsts.PUB_SUMMON_FRIEND_TEN_COSUME
             lab_summon_num && (lab_summon_num.string = String(curNum));
             this.lab_summon_desc.string = bIsOne ? strBtnSummonDescOne : strBtnSummonDescTen;
@@ -268,6 +271,7 @@ export class PopSummonSettle extends PopBase {
     public resetResourcesSpriFame(path:string,objSprite : Sprite)
     {
         resources.load(path, SpriteFrame ,(err: any, spriteFrame: SpriteFrame) => {
+            console.log("zzzzzzzzzzzzz",path);
             objSprite.spriteFrame = spriteFrame;
         });
     }
@@ -384,7 +388,7 @@ export class PopSummonSettle extends PopBase {
                 arrProp.push(instantiate(stuProp));    
             }  
             PopMgr.getInstance().deleteWindow();
-            PopMgr.getInstance().popMultiItemRewardWindow(arrProp);         
+            PopMgr.getInstance().popMultiItemRewardWindow(null,arrProp);
         }
        
     }

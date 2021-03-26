@@ -36,7 +36,9 @@ export class PopMultiItemReward extends PopBase {
     private _isAutoDecomposePop : boolean = false;
 
     //所有道具信息
-    private _propInfoArray : Array<XStruct.prop_info.IRecord> = [];
+    private _lootObjectArray : Array<Msg.LootObject> = [];
+
+    private _propInfoArray : Array<XStruct.prop_info.Record> = [];
 
     start () {
         super.start();
@@ -71,13 +73,16 @@ export class PopMultiItemReward extends PopBase {
         var title = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.KStarUpGainObjectTitle) as Config.language_ui.Record;
         this.lab_title.string = title.cn;
           resources.load('prefabs_ui/main/item_multi_reward', (err:any,res:any)=>{
-            for (var i = 0 ; i < this._propInfoArray.length; i++) {
+
+            var isPropInfo = this._propInfoArray.length > 0 ? true : false;
+            var nCounts = isPropInfo ? this._propInfoArray.length : this._lootObjectArray.length;
+            for (var i = 0 ; i < nCounts; i++) {
                 let prop_item = instantiate( res );
                 prop_item.scale = new Vec3(0.7,0.7,1);
                 let subWidget = prop_item.getComponent(UITransform) as UITransform;
                 subWidget.contentSize = new Size(105,126);
                 let script = prop_item.getComponent(ItemMultiReward);
-                script.setPropInfo(this._propInfoArray[i]);
+                script.setPropInfo(isPropInfo ? null : this._lootObjectArray[i] ,isPropInfo ? this._propInfoArray[i] : null);
                 this.scroll_item_view.content?.addChild(prop_item);
             }
         });
@@ -88,9 +93,10 @@ export class PopMultiItemReward extends PopBase {
      * @description: 设置物品信息
      * @param data 物品信息数组
      */  
-    public setPropsInfo(data :Array<XStruct.prop_info.IRecord>)
+    public setPropsInfo(lootObjectData : Array<Msg.LootObject> | null, defineData : Array<XStruct.prop_info.Record> | null)
     {
-        this._propInfoArray = data;
+        this._lootObjectArray = lootObjectData ? lootObjectData : [];
+        this._propInfoArray = defineData ? defineData : [];
     }
 
     public set autoDecompsePop(bState : boolean)
