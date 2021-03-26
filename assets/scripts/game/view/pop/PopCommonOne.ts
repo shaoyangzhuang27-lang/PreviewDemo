@@ -54,7 +54,7 @@ export class PopCommonOne extends PopBase {
            
     }
       /**
-    * 设置弹窗按钮mode = 2情况下取消发送回调
+    * 设置弹窗按钮mode = 1情况下取消发送回调
     * @param func      回调函数
     */
     public setSubmitCallBack(func:Function){
@@ -63,7 +63,7 @@ export class PopCommonOne extends PopBase {
     }
 
     /**
-    * 设置弹窗按钮mode = 1情况下按钮回调
+    * 设置弹窗按钮mode = 0情况下按钮回调
     * @param func      回调函数
     */
     public setGoCallBack(func:Function){
@@ -72,7 +72,7 @@ export class PopCommonOne extends PopBase {
     }
 
     /**
-    * 设置弹窗按钮mode = 2情况下取消按钮回调
+    * 设置弹窗按钮mode = 1情况下取消按钮回调
     * @param func      回调函数
     */
     public setCloseCallBack(func:Function | null){
@@ -81,7 +81,7 @@ export class PopCommonOne extends PopBase {
     }
 
     /**
-     * 设置弹窗按钮mode = 2情况下发送按钮
+     * 设置弹窗按钮mode = 1情况下发送按钮
      * @param spriteFramePath      图片路径
      * @param content      文本内容
     */
@@ -108,7 +108,7 @@ export class PopCommonOne extends PopBase {
     }
 
     /**
-     * 设置弹窗按钮mode = 2情况下取消按钮
+     * 设置弹窗按钮mode = 1情况下取消按钮
      * @param spriteFramePath      图片路径
      * @param content      文本内容
      */
@@ -135,7 +135,7 @@ export class PopCommonOne extends PopBase {
     }
 
     /**
-     * 设置弹窗按钮mode = 1情况下按钮
+     * 设置弹窗按钮mode = 0情况下按钮
      * @param spriteFramePath      图片路径
      * @param content      文本内容
      */
@@ -167,14 +167,15 @@ export class PopCommonOne extends PopBase {
      */
     public setShowMode(mode : number)
     {
-        if(mode == 1)
+        if(mode)
         {
-            this.btn_submit.node.active = false;
-            this.btn_cancel.active = false;
+            this.btn_go.node.active = false;
         }
         else
         {
-            this.btn_go.node.active = false;
+
+            this.btn_submit.node.active = false;
+            this.btn_cancel.active = false;
         }
     } 
 
@@ -190,6 +191,31 @@ export class PopCommonOne extends PopBase {
             this.lab_rich.node.active = false;
         }
     }
+
+    public setBtnContent(mode:number, submitContent : string, cancelConent : string)
+    {
+        if(mode)
+        {
+            var lab_submit  = this.btn_submit.node.getChildByName("lab")?.getComponent(Label);
+            var lab_cancel  = this.btn_cancel.getChildByName("lab")?.getComponent(Label);
+            submitContent && lab_submit && (lab_submit.string = submitContent);
+            cancelConent && lab_cancel && (lab_cancel.string = cancelConent);
+        }
+        else
+        {
+            var lab  = this.btn_go.node.getChildByName("lab")?.getComponent(Label);
+            submitContent && lab &&(lab.string = submitContent);
+        }
+    }
+    public initUI(info : XStruct.common_one_info.Record)
+    {
+        this.setRichLabMode(info.isRichLabMode);
+        this.setTitle(info.title);
+        this.setContent(info.content);
+        this.setShowMode(info.mode);
+        this.setBtnContent(info.mode,info.submitContent,info.cancelContent);    
+    }
+
     // update (deltaTime: number) {
     //     // Your update function goes here.
     // }

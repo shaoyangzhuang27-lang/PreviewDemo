@@ -109,6 +109,43 @@ export namespace XStruct {
                num :number;
            }
         }
+
+        //通用类型一弹窗信息
+        //   {
+        //     /*属性值必填   
+        //     *没有用到的属性值默认手动填写 string设置"" number设置 0 boolean设置为false
+        //     */  
+        //     title 标题
+        //     content 文本内容
+        //     mode 底部按钮样式0,1
+        //     isRichLabeMode 文本内容是否是富文本
+        //     isChangeBtnSpriteFrame 是否修改按钮SpriteFrame
+        //     submitContent   submit按钮文本内容
+        //     cancelContent   mode为1 按钮文本内容
+        //   }
+        namespace common_one_info {
+            /** Properties of a Record. */
+            interface IRecord {
+                title?:(string | null);
+                content?:(string | null);
+                mode?:(number | null);
+                isRichLabMode?:(boolean | null);
+                isChangeBtnSpriteFrame?:(boolean | null);
+                submitContent?:(string | null);
+                cancelContent?:(string | null);
+           }
+           /** Represents a Record. */
+           class Record implements IRecord {
+               constructor(p?: XStruct.common_one_info.IRecord);
+               title : string;
+               content : string;
+               mode : number ;
+               isRichLabMode : boolean;
+               isChangeBtnSpriteFrame : boolean;
+               submitContent:string ;
+               cancelContent:string ;
+           }
+        }
    }
 export namespace XMsg {
     //次数属性枚举-有可能不全，不全自己手动增加属性枚举值

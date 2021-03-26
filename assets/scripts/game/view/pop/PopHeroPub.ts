@@ -96,16 +96,8 @@ export class PopHeroPub extends PopBase {
         this.btn_introduce?.on(Node.EventType.TOUCH_END, this._onIntroduceClick, this);
         this.btn_recteam?.on(Node.EventType.TOUCH_END, this._onRecommendTeamClick, this);
 
-
-        // let diamond =  GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts();
         this.addPubNotifyHandler();
-        // NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
-        // this.node.on('OpenPubNotify', this.addPubNotifyHandler, this);   //自定义事件监听事件
-
-        // console.log("zzzzzzzzzzzzzzzzzzzzzz",XMsg.TimesType.TRefreshHeroTalentTimes);
-        // console.log("zzzzzzzzzzzzdi",GameModel.getInstance().getHeroPubModel().getBaseSummonScrollNum())
-        // console.log("zzzzzzzzzzzzgao",GameModel.getInstance().getHeroPubModel().getHeroicSummonScrollNum())
-        // var strTest =  String.Format(ValueMgr.getInstance().getLanguageString("UI_BuySummonScroll"),10,20);
+        
     }
 
 
@@ -161,6 +153,15 @@ export class PopHeroPub extends PopBase {
 
     private _onButtonClick(event:any){
         let nPlayerDiamondsCounts = GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts();
+        let info : XStruct.common_one_info.Record = {
+            title : "",
+            content : "",
+            mode : 0,
+            isRichLabMode : false,
+            isChangeBtnSpriteFrame : false,
+            submitContent:"" ,
+            cancelContent:"" 
+        }
         switch (event.target.getComponent(Button)) {
             case this.btn_hero_summon:
                 console.log("hero_summon");
@@ -188,7 +189,9 @@ export class PopHeroPub extends PopBase {
                 {
                     if(this._nFriendHeartNum < XConsts.PUB_SUMMON_FRIEND_ONE_COSUME)
                     {
-                        this.showPromptWindow("错误","爱心不足",1);
+                        info.title = "错误";
+                        info.content = "爱心不足";
+                        this.showPromptWindow(info);
                     }
                     else{
                      
@@ -214,7 +217,10 @@ export class PopHeroPub extends PopBase {
                         }
                         else
                         {
-                            this.showPromptWindow("错误","钻石不足",1);
+                            info.title = "错误";
+                            info.content = "钻石不足";
+                            this.showPromptWindow(info);
+                            // this.showPromptWindow("错误","钻石不足",1);
                         }
                     }
                 }
@@ -225,7 +231,10 @@ export class PopHeroPub extends PopBase {
                 {
                     if(this._nFriendHeartNum < XConsts.PUB_SUMMON_FRIEND_TEN_COSUME)
                     {
-                        this.showPromptWindow("错误","爱心不足",1);
+                        // this.showPromptWindow("错误","爱心不足",1);
+                        info.title = "错误";
+                        info.content = "爱心不足";
+                        this.showPromptWindow(info);
                     }
                     else
                     {
@@ -245,12 +254,55 @@ export class PopHeroPub extends PopBase {
                             }
                             var str = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_BUYSUMMONSCROLL);
                             
-                            this.showPromptWindow("注意","爱心不足",2,callFunc);
+                            str = str.replace("{0}",String(nShortageDiamonds));
+                            str = str.replace("{1}",String(XConsts.PUB_SUMMON_SCROLL_TEN_COSUME - this._nScorllNum));
+                            str = str.replace("{2}",String(XConsts.PUB_SUMMON_SCROLL_EXCHANGE_DIAMOND));
+
+                            info.title = "注意";
+                            info.content = str;
+                            info.mode = 1;
+                            info.isRichLabMode = true;
+                            this.showPromptWindow(info,callFunc);
+                            // this.showPromptWindow("注意",str,2,callFunc,true);
                             // this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll_VRmb,false);
                         }
                         else
                         {
+                            let callFunc = ()=>{
+                                PopMgr.getInstance().deleteWindow();
+                                let tempInfo : XStruct.common_one_info.Record = {
+                                    title : "",
+                                    content : "",
+                                    mode : 0,
+                                    isRichLabMode : false,
+                                    isChangeBtnSpriteFrame : false,
+                                    submitContent:"" ,
+                                    cancelContent:"" 
+                                }
+                                // this.showPromptWindow("错误","钻石不足",1);
+                                tempInfo.title = "错误";
+                                tempInfo.content = "钻石不足";
+                                tempInfo.submitContent = "商城";
+                                let sumbitCallFunc = ()=>{
+                                    PopMgr.getInstance().deleteWindow();
+                                    console.log("弹出商城窗口");
+                                }
+                                // this.showPromptWindow(tempInfo,sumbitCallFunc);
+                                PopMgr.getInstance().popCommonOneWindow(tempInfo,sumbitCallFunc);
+                                
+                            }
+                            var str = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_BUYSUMMONSCROLL);
+                            
+                            str = str.replace("{0}",String(nShortageDiamonds));
+                            str = str.replace("{1}",String(XConsts.PUB_SUMMON_SCROLL_TEN_COSUME - this._nScorllNum));
+                            str = str.replace("{2}",String(XConsts.PUB_SUMMON_SCROLL_EXCHANGE_DIAMOND));
 
+                            info.title = "注意";
+                            info.content = str;
+                            info.mode = 1;
+                            info.isRichLabMode = true;
+                            this.showPromptWindow(info,callFunc);
+                            
                         }
                     }
                     else if(this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_TEN_COSUME)
@@ -270,7 +322,11 @@ export class PopHeroPub extends PopBase {
                         }
                         else
                         {
-                            this.showPromptWindow("错误","钻石不足",1);
+                            // this.showPromptWindow("错误","钻石不足",1);
+
+                            info.title = "错误";
+                            info.content = "钻石不足";
+                            this.showPromptWindow(info);
                         }
                     }
                 }
@@ -354,7 +410,7 @@ export class PopHeroPub extends PopBase {
         });
     }
 
-    public showPromptWindow(title : string, content : string, mode: number,submitFunc :Function | null = null)
+    public showPromptWindow(info : XStruct.common_one_info.Record, submitFunc :Function | null = null)
     {
         let callCloseFunc = ()=>{PopMgr.getInstance().deleteWindow();}
         let callSummonTenFunc = ()=>{
@@ -368,7 +424,7 @@ export class PopHeroPub extends PopBase {
         // {
         //     PopMgr.getInstance().popCommonOneWindow(title,content,mode, mode ==callCloseFunc);
         // }
-        PopMgr.getInstance().popCommonOneWindow(title,content,mode,mode == 1 ? callCloseFunc : callSummonTenFunc);
+        PopMgr.getInstance().popCommonOneWindow(info,info.mode == 0 ? callCloseFunc : callSummonTenFunc);
     } 
 
 
@@ -580,11 +636,6 @@ export class PopHeroPub extends PopBase {
             consumeType : nConsumeType,
             isOneOrTen : bIsOneOrTen
         }
-    //     let summonHeroR : Msg.SummonHeroR = {
-    //         summonType : 2,
-    //        consumeType : 2,
-    //        isOneOrTen : false
-    //    }
         console.log("pub submit",summonHeroR);
         MsgMgr.getInstance().getMsgHeroPub().requestSummonHeroR(summonHeroR);
     }
@@ -607,6 +658,7 @@ export class PopHeroPub extends PopBase {
         this.addPubNotifyHandler();
         this.updateImgPropNum();
         this.updateProgressProcess();
+        this.updateBtnSummonState();
     }
 }
 
