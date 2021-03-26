@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-26 14:09:01
+ * @LastEditTime: 2021-03-26 15:06:36
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -1124,7 +1124,12 @@ export class HeroPromotion extends PopBase {
         }
 
         // 满级显示
-        this.node_max_lv.active= isCurStarMaxLv;
+        this.node_max_lv.active= isCurStarMaxLv;        
+        if(isCurStarMaxLv){
+            this._touchFlag = false;
+            this._touchStartTime = 0;
+            this._isLongPressLvUpBtn= false;
+        }
     }
 
     private _showTier(tier: number = 0) {
