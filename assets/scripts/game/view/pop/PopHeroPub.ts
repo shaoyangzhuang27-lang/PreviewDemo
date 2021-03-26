@@ -21,6 +21,9 @@ export class PopHeroPub extends PopBase {
     @property({type: Label})
     public lab_recteam:Label | null = null;
 
+    @property({type: Node})
+    public node_ordinary:Node | null = null;
+
     @property({type: Label})
     public lab_friend_info:Label | null = null;
 
@@ -354,7 +357,8 @@ export class PopHeroPub extends PopBase {
         resources.load('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
             let p = instantiate( res );
             var nodWindow = this.node.getChildByName("window");
-            var nodeDiamond = nodWindow?.getChildByName("node_diamond");
+            var node_ordinary = nodWindow?.getChildByName("node_ordinary");
+            var nodeDiamond = node_ordinary?.getChildByName("node_diamond");
             var imgFiveStarBg = nodeDiamond?.getChildByName("img_fivestar_bg");
             var nodeFiveStar = imgFiveStarBg?.getChildByName("node_fivestar");
             var lab_detail =  nodeDiamond?.getChildByName("lab_detail")?.getComponent(Label);
@@ -566,7 +570,8 @@ export class PopHeroPub extends PopBase {
             this.lab_bar_info.string = newStr
         }
         var nodWindow = this.node.getChildByName("window");
-        var nodeDiamond = nodWindow?.getChildByName("node_diamond");
+        var node_ordinary = nodWindow?.getChildByName("node_ordinary");
+        var nodeDiamond = node_ordinary?.getChildByName("node_diamond");
         var barProgress = nodeDiamond?.getChildByName("bar_progress");
         var barCompoent = barProgress?.getComponent(ProgressBar);
         var labBarProgress = nodeDiamond?.getChildByName("lab_bar_progress");
