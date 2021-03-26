@@ -120,6 +120,7 @@ export class PopSummonSettle extends PopBase {
         if (msgData.err == Msg.TErrorCode.ERR_OK) {
             console.log("zzzzzzzzzzzzzz SummonSettleHeroSummon",msgData);
             console.log("zzzzzzzzzzzz diamond", GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts());
+
             this.initDataFromMsgData(msgData,this._popWindowType);
             this.initUI();
         }
@@ -133,10 +134,62 @@ export class PopSummonSettle extends PopBase {
     {
         let summonHeroR : Msg.SummonHeroR = {
             summonType : this._nSummonType,
-           consumeType : this._nSummonConsumeType,
-           isOneOrTen : this._bIsOne,
+            consumeType : this._nSummonConsumeType,
+            isOneOrTen : this._bIsOne,
        }
-        MsgMgr.getInstance().getMsgHeroPub().requestSummonHeroR(summonHeroR);
+
+       if(this._nSummonConsumeType == Msg.TSummonConsumeType.ESummonConsumeType_Scroll_VRmb)
+       {
+            this._nSummonConsumeType = Msg.TSummonConsumeType.ESummonConsumeType_VRmb;
+       }
+       else if(this._nSummonConsumeType == Msg.TSummonConsumeType.ESummonConsumeType_Wonder_VRmb)
+       {
+           this._nSummonConsumeType = Msg.TSummonConsumeType.ESummonConsumeType_Wonder;
+       }
+
+       let heroPubModel = GameModel.getInstance().getHeroPubModel();
+       let nConsumeCounts = 0;
+       let nCurCounts = 0;
+       
+
+        switch(this._nSummonConsumeType)
+        {
+            case Msg.TSummonConsumeType.ESummonConsumeType_VRmb :
+                nCurCounts = heroPubModel.getPlayerDiamondCounts();
+                if(this._nSummonType == Msg.TSummonType.ESummonType_Heroic)
+                {
+                    nConsumeCounts =this._bIsOne ? XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME : XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME;
+                }
+                else if(this._nSummonType == Msg.TSummonType.ESummonType_Wonder)
+                {
+                    nConsumeCounts = this._bIsOne ? XConsts.PUB_SUMMON_WONDER_ONE_COSUME : XConsts.PUB_SUMMON_WONDER_TEN_COSUME;
+                }
+                break;
+            case Msg.TSummonConsumeType.ESummonConsumeType_Scroll :
+                nConsumeCounts = this._bIsOne ? XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME: XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME;
+                nCurCounts = heroPubModel.getBaseSummonScrollNum();
+                break;
+            // case Msg.TSummonConsumeType.ESummonConsumeType_Wonder :   //暂时没看到奇迹宝石召唤
+            //     nConsumeCounts = XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME;
+            //    break;
+
+        }
+       
+        if(nCurCounts < nConsumeCounts)
+        {
+            if(this._nSummonConsumeType == Msg.TSummonConsumeType.ESummonConsumeType_VRmb)
+            {
+                console.log("钻石不足！！！");
+            }
+            else if(this._nSummonConsumeType == Msg.TSummonConsumeType.ESummonConsumeType_Scroll)
+            {
+                console.log("英雄契约不足");
+            }
+        }
+        else
+        {
+            MsgMgr.getInstance().getMsgHeroPub().requestSummonHeroR(summonHeroR);
+        }
     }
 
     public initUI()
@@ -148,8 +201,8 @@ export class PopSummonSettle extends PopBase {
             this.scroll_heroicon_view.content.removeAllChildren()
         }
 
-        console.log("hhhhhhhhhhh",this._HeroList);
-        console.log("ffffffffffff",this._HeroList.length);
+        // console.log("hhhhhhhhhhh",this._HeroList);
+        // console.log("ffffffffffff",this._HeroList.length);
         resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
                 for(var i = 0; i < this._HeroList.length; i++)
                 {
@@ -189,25 +242,37 @@ export class PopSummonSettle extends PopBase {
         }
         //消耗卷轴
         if (consumeType == Msg.TSummonConsumeType.ESummonConsumeType_Scroll) {
-            // if (summmonType == Msg.TSummonType.ESummonType_Basic) {
-            //     img_summon_icon && this.resetResourcesSpriFame("hero_pub/pub_prop_scroll/spriteFrame",img_summon_icon);
-            // } else if (summmonType == Msg.TSummonType.ESummonType_Heroic) {
-            img_summon_icon && this.resetResourcesSpriFame("ui/hero_pub/pub_prop_scroll/spriteFrame",img_summon_icon);
-            // }
-            img_summon_icon && img_summon_icon.node.setScale(0.5,0.5,1);
-            var curNum = bIsOne ? XConsts.PUB_SUMMON_SCROLL_ONE_COSUME : XConsts.PUB_SUMMON_SCROLL_TEN_COSUME
-            lab_summon_num && (lab_summon_num.string = String(curNum));
+            if(summmonType == Msg.TSummonType.ESummonType_Heroic)
+            {
+                img_summon_icon && this.resetResourcesSpriFame("ui/hero_pub/pub_prop_scroll/spriteFrame",img_summon_icon);
+                img_summon_icon && img_summon_icon.node.setScale(0.5,0.5,1);
+                var curNum = bIsOne ? XConsts.PUB_SUMMON_SCROLL_ONE_COSUME : XConsts.PUB_SUMMON_SCROLL_TEN_COSUME
+                lab_summon_num && (lab_summon_num.string = String(curNum));
 
-            this.lab_summon_desc.string = bIsOne ? strBtnSummonDescOne : strBtnSummonDescTen;
-            changeLabColor(GameModel.getInstance().getHeroPubModel().getBaseSummonScrollNum(),curNum);
+                this.lab_summon_desc.string = bIsOne ? strBtnSummonDescOne : strBtnSummonDescTen;
+                changeLabColor(GameModel.getInstance().getHeroPubModel().getBaseSummonScrollNum(),curNum);
+            }
+            else if(summmonType == Msg.TSummonType.ESummonType_Wonder)
+            {
+                //奇迹召唤卷轴
+            }
 
         } //消耗钻石  暂时只处理80级之前的显示
         else if (consumeType == Msg.TSummonConsumeType.ESummonConsumeType_VRmb) {
-            var curNum = bIsOne ? XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME : XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME
-            img_summon_icon && img_summon_icon.node.setScale(0.25,0.25,1);
-            lab_summon_num && (lab_summon_num.string = String(curNum));
-            this.lab_summon_desc.string = bIsOne ? strBtnSummonDescOne : strBtnSummonDescTen;
-            changeLabColor(GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts(),curNum);
+
+            if(summmonType == Msg.TSummonType.ESummonType_Heroic)
+            {
+                var curNum = bIsOne ? XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME : XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME
+                img_summon_icon && img_summon_icon.node.setScale(0.25,0.25,1);
+                lab_summon_num && (lab_summon_num.string = String(curNum));
+                this.lab_summon_desc.string = bIsOne ? strBtnSummonDescOne : strBtnSummonDescTen;
+                changeLabColor(GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts(),curNum);
+            }
+            else if(summmonType == Msg.TSummonType.ESummonType_Wonder)
+            {
+                //奇迹召唤宝石
+            }
+            
         }//消耗友情
         else if (consumeType == Msg.TSummonConsumeType.ESummonConsumeType_FriendGift) 
         {
@@ -316,16 +381,36 @@ export class PopSummonSettle extends PopBase {
         GameModel.getInstance().getHeroesModel().updateHeroListFromSummon(this._HeroList);
 
 
-        // this._HeroList.forEach((heroInfo)=>{
-        //     if(heroInfo.staticID && heroInfo.id)
-        //     {
-        //         let hero = ValueMgr.getInstance().getItemByField(TableName.heroes, heroInfo.staticID) as Config.heroes.Record;
-        //         if(hero.star < XConsts.AUTODECOMPOSE_MAX_STARS)
-        //         {
-        //             this._arrDecomposeHeroId.push(heroInfo.id);
-        //         }
-        //     }
-        // })
+           let playerModel = GameModel.getInstance().getPlayerModel();
+            switch(msgData.consumeType)
+            {
+                case Msg.TSummonConsumeType.ESummonConsumeType_Scroll:
+                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_HeroicSummonScroll, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    playerModel.updateSummonScore(msgData.summonScore);
+                    //召唤次数暂时未考虑
+                    break;
+                case Msg.TSummonConsumeType.ESummonConsumeType_VRmb:
+                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_VRmb, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    playerModel.updateSummonScore(msgData.summonScore);
+                    break;
+                // case Msg.TSummonConsumeType.ESummonConsumeType_Scroll_VRmb:
+                //     playerModel.consumeObjectEx(Msg.TObjectType.EObject_VRmb, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                //     playerModel.consumeObjectEx(Msg.TObjectType.EObject_HeroicSummonScroll,this._nScorllNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                //     playerModel.updateSummonScore(msgData.summonScore);
+                //     break;
+                case Msg.TSummonConsumeType.ESummonConsumeType_FriendGift:
+                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_FriendGift, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    break;
+                case Msg.TSummonConsumeType.ESummonConsumeType_Wonder:
+                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_WonderGem, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    playerModel.updateWonderTimes(msgData.summonScore); 
+                    break;
+                // case Msg.TSummonConsumeType.ESummonConsumeType_Wonder_VRmb:
+ 
+                //     playerModel.updateWonderTimes(msgData.summonScore);   
+                //     break;    
+            }
+
       
         
     }

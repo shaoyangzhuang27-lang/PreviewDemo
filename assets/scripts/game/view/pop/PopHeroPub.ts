@@ -219,14 +219,19 @@ export class PopHeroPub extends PopBase {
                         {
                             info.title = "错误";
                             info.content = "钻石不足";
-                            this.showPromptWindow(info);
+                            info.submitContent = "商城";
+                            let sumbitCallFunc = ()=>{
+                                PopMgr.getInstance().deleteWindow();
+                                console.log("弹出商城窗口");
+                            }
+                            this.showPromptWindow(info,sumbitCallFunc);
                             // this.showPromptWindow("错误","钻石不足",1);
                         }
                     }
                 }
                 break; 
             case this.btn_summon_ten:
-                console.log("summon_ten");
+                // console.log("summon_ten");
                 if(this._curSummonType == Msg.TSummonType.ESummonType_Friend)
                 {
                     if(this._nFriendHeartNum < XConsts.PUB_SUMMON_FRIEND_TEN_COSUME)
@@ -326,7 +331,12 @@ export class PopHeroPub extends PopBase {
 
                             info.title = "错误";
                             info.content = "钻石不足";
-                            this.showPromptWindow(info);
+                            info.submitContent = "商城";
+                            let sumbitCallFunc = ()=>{
+                                PopMgr.getInstance().deleteWindow();
+                                console.log("弹出商城窗口");
+                            }
+                            this.showPromptWindow(info,sumbitCallFunc);
                         }
                     }
                 }
@@ -412,7 +422,15 @@ export class PopHeroPub extends PopBase {
 
     public showPromptWindow(info : XStruct.common_one_info.Record, submitFunc :Function | null = null)
     {
-        let callCloseFunc = ()=>{PopMgr.getInstance().deleteWindow();}
+        let callCloseFunc = ()=>{
+            if(submitFunc)
+            {
+                submitFunc();
+            }
+            else{
+                PopMgr.getInstance().deleteWindow();
+            }
+        }
         let callSummonTenFunc = ()=>{
             if(submitFunc)
             {
@@ -575,8 +593,8 @@ export class PopHeroPub extends PopBase {
 
         console.log("palyer heros", GameModel.getInstance().getHeroesModel().getHeroList());
         if (msgData.err == Msg.TErrorCode.ERR_OK) {
-            console.log("Notify PubHeroSummon",msgData);
-            console.log("diamond", GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts());
+            // console.log("Notify PubHeroSummon",msgData);
+            // console.log("diamond", GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts());
 
             let playerModel = GameModel.getInstance().getPlayerModel();
             switch(msgData.consumeType)

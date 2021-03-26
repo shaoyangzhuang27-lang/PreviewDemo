@@ -271,6 +271,8 @@ export class XConsts{
     public static PUB_SUMMON_SCROLL_TEN_COSUME:number = 10 ;
     public static PUB_SUMMON_FRIEND_ONE_COSUME:number = 10 ;
     public static PUB_SUMMON_FRIEND_TEN_COSUME:number = 100 ;
+    public static PUB_SUMMON_WONDER_ONE_COSUME:number = 500 ;
+    public static PUB_SUMMON_WONDER_TEN_COSUME:number = 5000 ;
 
     public static PUB_UI_HEROSUMMON : string = "UI_HeroSummon";  //英雄酒馆
     public static PUB_UI_CAMPRECOMMEND : string = "UI_CampRecommend";  //推荐阵容
