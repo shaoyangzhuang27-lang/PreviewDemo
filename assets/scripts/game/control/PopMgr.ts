@@ -32,6 +32,7 @@ import { PopForge } from '../view/pop/PopForge';
 import { PopBookProUI } from '../view/pop/PopBookProUI';
 import { TipCampOrCareer } from '../view/TipCampOrCareer';
 import { PopHaloView } from '../view/pop/PopHaloView';
+import { TipShareHeroToChat } from '../view/TipShareHeroToChat';
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
@@ -285,6 +286,24 @@ export class PopMgr extends PopCore  {
         });
     }
 
+    
+    /**
+     * @description: 英雄升级界面分享到聊天频道Tip
+     * @param {Vec3} pos
+     * @param {HeroData} _heroData
+     */
+     public tipShareHeroToChatindow(pos: Vec3, _heroData: HeroData) {
+        resources.load('prefabs_ui/pop/tip_share_chat', (err: any, res: any) => {
+            let p = instantiate(res) as Node;
+            this.parent?.addChild(p);
+            p.setSiblingIndex(XConsts.OrderTip);
+
+            let script = p.getComponent("TipShareHeroToChat") as TipShareHeroToChat;
+            script.setWinPos(pos, 1);
+            script.setHeroData(_heroData);
+            script.setIsWinClose(true);
+        });
+    }
     //弹出提示窗放这里-------------------------------------------------
 
     //弹出图鉴界面
@@ -520,7 +539,7 @@ export class PopMgr extends PopCore  {
      * @param {boolean} bAutoDecompsePop 是否自动分解弹窗
      * @param {Function} closeCallBack
      */
-    public popMultiItemRewardWindow(lootObjectData : Array<Msg.LootObject> | null,  defineData :Array<XStruct.prop_info.Record> | null,bAutoDecompsePop : boolean = false,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+      public popMultiItemRewardWindow(lootObjectData : Array<Msg.LootObject> | null,  defineData :Array<XStruct.prop_info.Record> | null,bAutoDecompsePop : boolean = false,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_multi_itemreward', (err:any,res:any)=>{
             let p = instantiate( res );

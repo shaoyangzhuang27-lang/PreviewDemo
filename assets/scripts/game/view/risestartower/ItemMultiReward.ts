@@ -165,6 +165,26 @@ export class ItemMultiReward extends Component {
                     this._resourceLoad(icon, this.img_icon);
                     this._resourceLoad(bg, this.img_bg);
                     break;
+                case Msg.TObjectType.EObject_UpgradePoint :
+                    this.img_camp.active = false;
+                    this.lab_level.node.active = false;
+                    this.node_satr.active = false;
+                    icon = "ui/common/commonIcon/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
+                    bg = "ui/common/icon/" +  XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ?this._propInfo.nPropQuality : 2] + "/spriteFrame"
+                    this.img_icon.setScale(0.5,0.5,1);
+                    this._resourceLoad(icon,this.img_icon);
+                    this._resourceLoad(bg,this.img_bg);
+                    break;
+                case Msg.TObjectType.EObject_AdvanceExp :
+                    this.img_camp.active = false;
+                    this.lab_level.node.active = false;
+                    this.node_satr.active = false;
+                    icon = "ui/common/commonIcon/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
+                    bg = "ui/common/icon/" +  XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ?this._propInfo.nPropQuality : 2] + "/spriteFrame"
+                    this.img_icon.setScale(0.5,0.5,1);
+                    this._resourceLoad(icon,this.img_icon);
+                    this._resourceLoad(bg,this.img_bg);
+                    break;
                 default:
                     console.log("传入相应Msg.TObjectType, 自己写")
                     break;

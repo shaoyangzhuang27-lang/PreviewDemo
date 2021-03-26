@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-25 14:28:41
+ * @LastEditTime: 2021-03-26 14:09:01
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -203,7 +203,11 @@ export class HeroPromotion extends PopBase {
     private _equipCellsMap: Map<Msg.TEquipLocationType, ItemEquipCell> = new Map<Msg.TEquipLocationType, ItemEquipCell>();  //装备宝石列表
     private _equipBtnsMap: Map<Msg.TEquipLocationType, Node> = new Map<Msg.TEquipLocationType, Node>();  //装备宝石按钮列表
 
-    static readonly _longPressTime = 0.5;//
+    // 按钮长按功能实现
+    static readonly _longPressTime:number = 0.5;//秒s
+    private _touchStartTime:number = 0;
+    private _touchFlag: boolean = false;
+    private _isLongPressLvUpBtn: boolean = false;
 
     onLoad() {
         super.onLoad();
@@ -214,6 +218,10 @@ export class HeroPromotion extends PopBase {
         this._equipBtnsMap.set(3, this.btn_equip_3);
         this._equipBtnsMap.set(4, this.btn_equip_4);
         this._equipBtnsMap.set(5, this.btn_equip_5);
+
+         //添加按钮触摸监听 长按弹托管弹窗列表
+         this.btn_up_lv?.on(Node.EventType.TOUCH_START, this._touchStart, this);
+         this.btn_up_lv?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
 
         this.btn_lock?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_unlock?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
@@ -231,7 +239,6 @@ export class HeroPromotion extends PopBase {
         this.btn_equip_3?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_equip_4?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_equip_5?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
-        this.btn_up_lv?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_up_tier?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
 
         // tabGroup
@@ -243,6 +250,34 @@ export class HeroPromotion extends PopBase {
         this.tabGroup?.checkEvents.push(containerEventHandler);
     }
 
+    private _touchStart(event: any) {
+        if(event.target == this.btn_up_lv){
+            //触摸开始 
+            this._touchFlag = true;
+            //记录下触摸开始时间
+            this._touchStartTime = new Date().getTime();            
+        }
+    }   
+
+    update(deltatime: number) {        
+        // console.log("HeroPromotion update() number= ", deltatime);
+        //判断是否检测按钮长按状态        
+        if(this._touchFlag && this._touchStartTime != 0){
+            this._touchHold();
+        }
+    }
+    
+     //长按检测函数
+     private _touchHold(){
+        //判断按钮的按压时长
+        let milliseconds = new Date().getTime() - this._touchStartTime;
+        if(milliseconds > HeroPromotion._longPressTime*1000 ){
+            this._isLongPressLvUpBtn= true;
+            //触发托管事务逻辑 
+            this._onBtnLvUp(); 
+        }    
+    }
+    
     private _onTabClick(event: Event, customEventData: string) {
         //let tog = event.target as unknown as Toggle;
         let tog: Toggle = (event as any);
@@ -275,7 +310,13 @@ export class HeroPromotion extends PopBase {
                 this._doLockHero(false);
                 break;
             case this.btn_share:
-                //todo
+                {
+                    let pos = this.btn_share.getWorldPosition();
+                    let nodeSize = this.btn_share.getComponent(UITransform)?.contentSize as math.Size;
+                    pos.x -= nodeSize.width / 2;
+                    pos.y += nodeSize.height / 2;
+                    PopMgr.getInstance().tipShareHeroToChatindow(pos, this._curHeroData);
+                }
                 break;
             case this.btn_camp:
                 {
@@ -300,12 +341,14 @@ export class HeroPromotion extends PopBase {
                 }
                 break;
             case this.btn_fight_params:
-                //todo
-                let pos = this.btn_fight_params.getWorldPosition();
-                let nodeSize = this.btn_fight_params.getComponent(UITransform)?.contentSize as math.Size;
-                pos.x -= nodeSize.width / 2;
-                pos.y += nodeSize.height / 2;
-                PopMgr.getInstance().tipHeroAttributeWindow(pos);
+                {
+                    //todo
+                    let pos = this.btn_fight_params.getWorldPosition();
+                    let nodeSize = this.btn_fight_params.getComponent(UITransform)?.contentSize as math.Size;
+                    pos.x -= nodeSize.width / 2;
+                    pos.y += nodeSize.height / 2;
+                    PopMgr.getInstance().tipHeroAttributeWindow(pos);
+                }
                 break;
             case this.btn_arrow_left:
                 console.log("HeroPromotion btn_arrow_left");
@@ -392,8 +435,12 @@ export class HeroPromotion extends PopBase {
                 break;
             case this.btn_up_lv:
                 {
-                    console.log("HeroPromotion btn_up_lv");
-                    this._onBtnLevelUp();
+                    console.log("HeroPromotion btn_up_lv touchEnd ");                                   
+                    if(this._touchFlag && this._touchStartTime){
+                        //单击升级逻辑
+                        this._onBtnLvUp();     
+                    }
+                    this._isLongPressLvUpBtn= false;
                 }
                 break;
             case this.btn_up_tier:
@@ -422,7 +469,7 @@ export class HeroPromotion extends PopBase {
         }
     }
     
-    private _onBtnLevelUp() {
+    private _onBtnLvUp() {
         let record = ValueMgr.getInstance().getItemByField(TableName.upgrade_exp, this._curHeroData.level);
         if (!record) {
             return;
@@ -433,13 +480,26 @@ export class HeroPromotion extends PopBase {
         if (playerInfo.money < recordExp.heroMoney) {
             // TipsMgr.instance.ShowErrTips (TErrorCode.ErrMoneyNotEnough);
             console.log("  TErrorCode.ErrMoneyNotEnough");
-            // OnPointerUp ();
+            let title="";
+            let content="金币不足";
+            let mode =1;
+            PopMgr.getInstance().popCommonOneWindow(title,content,mode,()=>{PopMgr.getInstance().deleteWindow();});
+            this._touchFlag = false;
+            this._touchStartTime = 0;
+            this._isLongPressLvUpBtn= false;
             return;
         }
         if (playerInfo.heroUpgradeExp < recordExp.heroExp) {
             // OnPointerUp ();
             // TipsMgr.instance.ShowErrTips (TErrorCode.ErrUpgradeExpNotEnough);            
             console.log("  TErrorCode.ErrUpgradeExpNotEnough");
+            let title="";
+            let content="灵魂碎片不足";
+            let mode =1;
+            PopMgr.getInstance().popCommonOneWindow(title,content,mode,()=>{PopMgr.getInstance().deleteWindow();});
+            this._touchFlag = false;
+            this._touchStartTime = 0;
+            this._isLongPressLvUpBtn= false;
             return;
         }
 
@@ -807,10 +867,7 @@ export class HeroPromotion extends PopBase {
     _initView() {
     }
 
-    update(deltatime: number) {
-        // [4] 
-        // console.log("HeroPromotion update() number= ", deltatime)
-    }
+   
 
     /**
      * @description: 设置当前英雄id
@@ -847,12 +904,16 @@ export class HeroPromotion extends PopBase {
         else {
             this._isLvUpView = false;// 当前应该显示升阶界面
         }
-
+        
         if (this._isHeroUpView) {
             if (this._isLvUpView) {
                 this._showHeroLvUpView();
             }
             else {
+                
+                this._touchFlag = false;
+                this._touchStartTime = 0;
+                this._isLongPressLvUpBtn= false;
                 this._showHeroTierUpView();
             }
         }
@@ -952,9 +1013,12 @@ export class HeroPromotion extends PopBase {
         let record = ValueMgr.getInstance().getItemByField(TableName.upgrade_exp, lv) as Config.upgrade_exp.Record;
         let playerInfo = GameModel.getInstance().getPlayerModel().getPlayerInfo();
         let color = Color.WHITE;
+
+        let isCanContinueLvUp= true;
         // 升级消耗金币
-        if (playerInfo.money < record.heroMoney) {
+        if (playerInfo.money < record.heroMoney) {            
             color = Color.RED;
+            isCanContinueLvUp= false;
         }
         this.lab_need_gold_1.string = XFuns.FormatNumber(playerInfo.money);
         this.lab_need_gold_1.color = color;
@@ -964,10 +1028,18 @@ export class HeroPromotion extends PopBase {
         color = Color.WHITE;
         if (playerInfo.heroUpgradeExp < record.heroExp) {
             color = Color.RED;
+            isCanContinueLvUp= false;
         }
         this.lab_need_exp_1.string = XFuns.FormatNumber(playerInfo.heroUpgradeExp);
         this.lab_need_exp_1.color = color;
         this.lab_need_exp_2.string = "/" + XFuns.FormatNumber(record.heroExp);
+
+        if(this._isLongPressLvUpBtn){
+            //触摸开始 
+            this._touchFlag = isCanContinueLvUp;
+            //记录下触摸开始时间
+            this._touchStartTime = isCanContinueLvUp ? new Date().getTime(): 0;  
+        }
     }
 
     private _showFightValues() {
