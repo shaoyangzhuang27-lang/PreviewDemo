@@ -196,7 +196,8 @@ export class BattleHero extends Component {
 
         if (this._curActFunc) {
             this._curActFunc.call(this, dt);
-        }  
+        }
+
     }
 
     initHero(battleCtrl: BattleCtrl, heroData: any, heroType: EHeroType): void {
@@ -768,9 +769,9 @@ export class BattleHero extends Component {
                         continue;
                     }
 
-                    if (recordSkill.effectChance[i] != 0 && Math.random() > recordSkill.effectChance[i]/100) {
-                        continue;
-                    }
+                    // if (recordSkill.effectChance[i] != 0 && Math.random() > recordSkill.effectChance[i]/100) {
+                    //     continue;
+                    // }
                     
                     if (!this.checkEffectCondtion(this, targetList[j], recordSkill.effectCondType[i], recordSkill.effectCondParam[i])) {
                         continue;
