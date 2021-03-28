@@ -24,6 +24,9 @@ export class PopHeroPub extends PopBase {
     @property({type: Node})
     public node_ordinary:Node | null = null;
 
+    @property({type: Node})
+    public node_wonder:Node | null = null;
+    
     @property({type: Label})
     public lab_friend_info:Label | null = null;
 
@@ -384,7 +387,7 @@ export class PopHeroPub extends PopBase {
 
         resources.load('prefabs_ui/pub/pub_wonder_summon', (err:any,res:any)=>{
             let p = instantiate( res );
-            this.node_ordinary?.addChild(p);
+            this.node_wonder?.addChild(p);
         } );
     }
 
