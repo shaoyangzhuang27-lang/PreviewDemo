@@ -23,13 +23,14 @@ export class BaseScene extends Component {
         console.log("---------------------------------------------------- "+this.name+" start ----------------------------------------------------");
     }
     start () {
-
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_player_levelup,this._notifyPlayerLevelUp,this);
     }
     onDestroy(){
         // console.log("BaseScene onDestory")
         console.log("---------------------------------------------------- "+this.name+" end ----------------------------------------------------");
         PopMgr.getInstance().clearPop();
         // NotifyMgr.getInstance().removeNotifyHandler("test",this.notifyTest,this);
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_player_levelup,this._notifyPlayerLevelUp,this);
     }
 
     protected initUI(callback?: (node: Node)=>void) {
@@ -48,4 +49,12 @@ export class BaseScene extends Component {
         // console.log(data);
     }
     
+
+
+    //玩家升级通知
+    private _notifyPlayerLevelUp(data:any)
+    {
+        PopMgr.getInstance().popPlayerLevelUpWindow(data as Msg.NotifyLevelUpAward)
+    }
+
 }

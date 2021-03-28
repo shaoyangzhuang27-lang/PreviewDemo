@@ -38,4 +38,6 @@ export class NotifyMgr extends NotifyCore {
     public static event_net_pub_hero_decompose : string = "event_net_pub_hero_decompose"; //酒馆召唤英雄分解
 
     public static event_equip_compose_suc: string = "event_equip_compose_suc";         //装备合成
+
+    public static event_player_levelup:string = "event_player_levelup";         //玩家升级
 }
