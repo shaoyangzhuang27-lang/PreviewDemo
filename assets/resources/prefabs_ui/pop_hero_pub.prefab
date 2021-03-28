@@ -1022,7 +1022,7 @@
   {
     "__type__": "cc.Node",
     "_name": "lab_title",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 12
     },
@@ -1152,7 +1152,7 @@
   {
     "__type__": "cc.Node",
     "_name": "node_ordinary",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 12
     },
