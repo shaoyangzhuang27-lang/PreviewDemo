@@ -609,28 +609,28 @@ export class PopHeroPub extends PopBase {
             switch(msgData.consumeType)
             {
                 case Msg.TSummonConsumeType.ESummonConsumeType_Scroll:
-                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_HeroicSummonScroll, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    playerModel.consumeObjectByNum(Msg.TObjectType.EObject_HeroicSummonScroll, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
                     // playerModel.updatePlayerInfoTimesAttribute(XMsg.TimesType.TSummonScore,msgData.summonScore);
                     playerModel.updateSummonScore(msgData.summonScore);
                     //召唤次数暂时未考虑
                     break;
                 case Msg.TSummonConsumeType.ESummonConsumeType_VRmb:
-                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_VRmb, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    playerModel.consumeObjectByNum(Msg.TObjectType.EObject_VRmb, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
                     // playerModel.updatePlayerInfoTimesAttribute(XMsg.TimesType.TSummonScore,msgData.summonScore); 
                     playerModel.updateSummonScore(msgData.summonScore);
                     NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
                     break;
                 case Msg.TSummonConsumeType.ESummonConsumeType_Scroll_VRmb:
-                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_VRmb, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
-                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_HeroicSummonScroll,this._nScorllNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    playerModel.consumeObjectByNum(Msg.TObjectType.EObject_VRmb, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    playerModel.consumeObjectByNum(Msg.TObjectType.EObject_HeroicSummonScroll,this._nScorllNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
                     playerModel.updateSummonScore(msgData.summonScore);
                     NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
                     break;
                 case Msg.TSummonConsumeType.ESummonConsumeType_FriendGift:
-                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_FriendGift, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    playerModel.consumeObjectByNum(Msg.TObjectType.EObject_FriendGift, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
                     break;
                 case Msg.TSummonConsumeType.ESummonConsumeType_Wonder:
-                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_WonderGem, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    playerModel.consumeObjectByNum(Msg.TObjectType.EObject_WonderGem, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
                   
                     // playerModel.updatePlayerInfoTimesAttribute(XMsg.TimesType.TWonderTimes,msgData.summonScore); 
                     playerModel.updateWonderTimes(msgData.summonScore); 
