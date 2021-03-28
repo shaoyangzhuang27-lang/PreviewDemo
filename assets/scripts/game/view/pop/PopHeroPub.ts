@@ -380,6 +380,12 @@ export class PopHeroPub extends PopBase {
                 nodeFiveStar.addChild(p)
             }
         } );
+
+
+        resources.load('prefabs_ui/pub/pub_wonder_summon', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.node_ordinary?.addChild(p);
+        } );
     }
 
 
