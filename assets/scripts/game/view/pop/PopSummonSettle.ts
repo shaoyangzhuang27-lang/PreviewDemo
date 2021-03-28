@@ -82,12 +82,13 @@ export class PopSummonSettle extends PopBase {
 
         if(this._popWindowType ==XConsts.POP_SUMMON_TYPE.HeroPub)
         {
-            NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+            console.log("notifySummonSetleHeroHandl")
+            NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifySummonSetleHeroHandle,this);
         }
 
         this.addNotifyPubHeroDecomposeHandler();
         console.log("zzzzzzzzzzzz diamond", GameModel.getInstance().getHeroPubModel().getIsAutoDecompose());
-        console.log("palyer heros", GameModel.getInstance().getHeroesModel().getHeroList());
+        // console.log("palyer heros", GameModel.getInstance().getHeroesModel().getHeroList());
         // this.initHeroModelInfo(3042500);
     }
 
@@ -116,10 +117,10 @@ export class PopSummonSettle extends PopBase {
         }
     }
 
-    public notifyPubSummonHeroHandle ( msgData: Msg.SummonHeroA){
+    public notifySummonSetleHeroHandle ( msgData: Msg.SummonHeroA){
         if (msgData.err == Msg.TErrorCode.ERR_OK) {
-            console.log("zzzzzzzzzzzzzz SummonSettleHeroSummon",msgData);
-            console.log("zzzzzzzzzzzz diamond", GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts());
+            console.log(" SummonSettleHeroSummon",msgData);
+            console.log("summonsettle diamond", GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts());
 
             this.initDataFromMsgData(msgData,this._popWindowType);
             this.initUI();
@@ -167,9 +168,13 @@ export class PopSummonSettle extends PopBase {
                 // }
                 break;
             case Msg.TSummonConsumeType.ESummonConsumeType_Scroll :
-                nConsumeCounts = this._bIsOne ? XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME: XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME;
+                nConsumeCounts = this._bIsOne ? XConsts.PUB_SUMMON_SCROLL_ONE_COSUME: XConsts.PUB_SUMMON_SCROLL_TEN_COSUME;
                 nCurCounts = heroPubModel.getBaseSummonScrollNum();
                 break;
+            case Msg.TSummonConsumeType.ESummonConsumeType_FriendGift :
+                nConsumeCounts = this._bIsOne ? XConsts.PUB_SUMMON_FRIEND_ONE_COSUME: XConsts.PUB_SUMMON_FRIEND_TEN_COSUME;
+                nCurCounts = heroPubModel.getFriendSummonScrollNum();
+                break;    
         }
        
         if(nCurCounts < nConsumeCounts)
@@ -181,6 +186,10 @@ export class PopSummonSettle extends PopBase {
             else if(this._nSummonConsumeType == Msg.TSummonConsumeType.ESummonConsumeType_Scroll)
             {
                 console.log("英雄契约不足");
+            }
+            else if(this._nSummonConsumeType == Msg.TSummonConsumeType.ESummonConsumeType_FriendGift)
+            {
+                console.log("爱心不足");
             }
         }
         else
@@ -333,7 +342,7 @@ export class PopSummonSettle extends PopBase {
     public resetResourcesSpriFame(path:string,objSprite : Sprite)
     {
         resources.load(path, SpriteFrame ,(err: any, spriteFrame: SpriteFrame) => {
-            console.log("zzzzzzzzzzzzz",path);
+            // console.log("zzzzzzzzzzzzz",path);
             objSprite.spriteFrame = spriteFrame;
         });
     }
@@ -384,6 +393,7 @@ export class PopSummonSettle extends PopBase {
                 case Msg.TSummonConsumeType.ESummonConsumeType_Scroll:
                     playerModel.consumeObjectByNum(Msg.TObjectType.EObject_HeroicSummonScroll, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
                     playerModel.updateSummonScore(msgData.summonScore);
+                    console.log("消费卷轴  抽考结算 ",msgData.consumeNum);
                     //召唤次数暂时未考虑
                     break;
                 case Msg.TSummonConsumeType.ESummonConsumeType_VRmb:
@@ -408,8 +418,7 @@ export class PopSummonSettle extends PopBase {
     }
 
     onDestroy(){
-        // this.node.emit("OpenPubNotify");
-        //NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this); 
+       
         this.removeNotifyPubHeroDecomposeHandler();
     }
 
@@ -423,7 +432,7 @@ export class PopSummonSettle extends PopBase {
     public removeNotifyPubHeroDecomposeHandler()
     {
         console.log("decompose关闭");
-        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this); 
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifySummonSetleHeroHandle,this); 
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_hero_decompose,this.notifyPubHeroDecomposeHandle,this);
     }
 
