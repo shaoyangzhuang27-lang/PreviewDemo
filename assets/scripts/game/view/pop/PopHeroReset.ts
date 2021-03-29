@@ -1,5 +1,5 @@
 /**
- * 游戏组件:融魂祭坛 分解
+ * 游戏组件:融魂祭坛 重置
  * @author 施敏昭
  * @version 1.0.0,2021.3.26
  */
@@ -17,8 +17,8 @@ import { MsgMgr } from '../../control/MsgMgr';
 import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
 const { ccclass, property } = _decorator;
 
-@ccclass('PopDecompose')
-export class PopDecompose extends PopBase {
+@ccclass('PopHeroReset')
+export class PopHeroReset extends PopBase {
 
     @property({type: ToggleContainer , displayName: "底部选择按钮"})
     public selectGroup:ToggleContainer | null = null;
@@ -29,15 +29,6 @@ export class PopDecompose extends PopBase {
     @property({type: Button, displayName: "重置按钮"})
     public btn_reset:Button | null = null;
 
-    @property({type: Button, displayName: "市场按钮"})
-    public btn_shop:Button | null = null;
-
-    @property({type: Button, displayName: "分解一键放入按钮"})
-    public btn_oneKeyPut:Button | null = null;
-
-    @property({type: Button, displayName: "分解按钮"})
-    public btn_decomposet:Button | null = null;
-
     @property({type: Node, displayName: "重置按钮lable"})
     public btn_reset_lable:Node  = null as unknown as Node;
 
@@ -46,12 +37,6 @@ export class PopDecompose extends PopBase {
 
     @property({type: Node, displayName: "重置节点"})
     public top_reset:Node | null = null as unknown as Node;
-
-    @property({type: Node, displayName: "分解节点"})
-    public top_decompose:Node | null = null as unknown as Node;
-
-    @property({type: Node, displayName: "回退节点"})
-    public top_rollback:Node | null = null as unknown as Node;
 
     @property({type: Node, displayName: "重置人"})
     public btn_reset_icon:Node = null as unknown as Node;
@@ -70,15 +55,6 @@ export class PopDecompose extends PopBase {
 
     @property({type: Label, displayName: "重置进阶点"})
     public lab_Advanced:Label = null as unknown as Label;
-
-    @property({type: Label, displayName: "分解灵魂石"})
-    public lab_decompose_soul:Label = null as unknown as Label;
-
-    @property({type: Label, displayName: "分解升级点"})
-    public lab_decompose_upgrade:Label = null as unknown as Label;
-
-    @property({type: Label, displayName: "分解进阶点"})
-    public lab_decompose_Advanced:Label = null as unknown as Label;
 
     @property({type: ToggleContainer , displayName: "阵营" })
     public campGroup:ToggleContainer | null = null as unknown as ToggleContainer;
@@ -102,14 +78,14 @@ export class PopDecompose extends PopBase {
 
         const containerEventHandler = new EventHandler();
         containerEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
-        containerEventHandler.component = 'PopDecompose';// 这个是代码文件名
+        containerEventHandler.component = 'PopHeroReset';// 这个是代码文件名
         containerEventHandler.handler = 'tabClick';
         containerEventHandler.customEventData = '';
         this.selectGroup?.checkEvents.push(containerEventHandler);
 
         const containerCampEventHandler = new EventHandler();
         containerCampEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
-        containerCampEventHandler.component = 'PopDecompose';// 这个是代码文件名
+        containerCampEventHandler.component = 'PopHeroReset';// 这个是代码文件名
         containerCampEventHandler.handler = '_onCampClick';
         containerCampEventHandler.customEventData = '';
         if(this.campGroup){
@@ -125,14 +101,13 @@ export class PopDecompose extends PopBase {
         this._resetBtnStateChange()
         var clickEventHandler = new EventHandler();
         clickEventHandler.target = this.node; //这个 node 节点是你的事件处理代码组件所属的节点
-        clickEventHandler.component = "PopDecompose";//这个是代码文件名
+        clickEventHandler.component = "PopHeroReset";//这个是代码文件名
         clickEventHandler.handler = "_onResetClick";
         clickEventHandler.customEventData = "";
         this.btn_reset?.clickEvents.push(clickEventHandler);
 
         this.btn_reset_icon?.on(Node.EventType.TOUCH_END, this._platformViceHeadHandle, this);
         this.btn_explain?.on(Node.EventType.TOUCH_END, this._explainHandle, this);
-        this.btn_shop?.on(Node.EventType.TOUCH_END, this._shopHandle, this);
     }
     start () {
         super.start();
@@ -532,19 +507,13 @@ export class PopDecompose extends PopBase {
         let tog:Toggle = (event as any);
         console.log(tog.node.name)
 
-        if(!(this.top_reset && this.top_decompose && this.top_rollback) )return;
+        if(!(this.top_reset) )return;
         if(tog.node.name == "Toggle1"){
             this.top_reset.active = true;
-            this.top_decompose.active = false;
-            this.top_rollback.active = false;
         } else if (tog.node.name == "Toggle2"){
             this.top_reset.active = false;
-            this.top_decompose.active = true;
-            this.top_rollback.active = false;
         }else if (tog.node.name == "Toggle3"){
             this.top_reset.active = false;
-            this.top_decompose.active = false;
-            this.top_rollback.active = true;
         }
     }
 
@@ -595,13 +564,8 @@ export class PopDecompose extends PopBase {
         this._platformViceHeadHandle()
     }
 
-    //市场按钮
-    private _shopHandle(){
-
-    }
-
     //////////////////////////////////////////////////////
-    //一键升星后 阵容变化 弹出获得物品窗口
+    //重置后 阵容变化 弹出获得物品窗口
     private _notifyResetChangeHandle(data:any){
         this._getAllHeroList();
         this._initBottomHeros();
