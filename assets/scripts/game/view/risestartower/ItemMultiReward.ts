@@ -129,7 +129,7 @@ export class ItemMultiReward extends Component {
                     this.img_camp.active = false;
                     this.lab_level.node.active = false;
                     this.node_satr.active = false;
-                    icon = "ui/common/commonicon/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
+                    icon = "ui/common/commonIcon/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
                     bg = "ui/common/icon/" +  XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ?this._propInfo.nPropQuality : 2] + "/spriteFrame"
                     this.img_icon.setScale(0.5,0.5,1);
                     this._resourceLoad(icon,this.img_icon);
@@ -150,7 +150,7 @@ export class ItemMultiReward extends Component {
                     this.img_camp.active = false;
                     this.lab_level.node.active = false;
                     this.node_satr.active = false;
-                    icon = "ui/common/commonicon/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
+                    icon = "ui/common/commonIcon/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
                     bg = "ui/common/icon/" +  XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ?this._propInfo.nPropQuality : 2] + "/spriteFrame"
                     this.img_icon.setScale(0.5,0.5,1);
                     this._resourceLoad(icon,this.img_icon);
@@ -164,6 +164,26 @@ export class ItemMultiReward extends Component {
                     bg = "ui/common/icon/" + XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ? this._propInfo.nPropQuality : 2] + "/spriteFrame"
                     this._resourceLoad(icon, this.img_icon);
                     this._resourceLoad(bg, this.img_bg);
+                    break;
+                case Msg.TObjectType.EObject_UpgradePoint :
+                    this.img_camp.active = false;
+                    this.lab_level.node.active = false;
+                    this.node_satr.active = false;
+                    icon = "ui/common/commonIcon/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
+                    bg = "ui/common/icon/" +  XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ?this._propInfo.nPropQuality : 2] + "/spriteFrame"
+                    this.img_icon.setScale(0.5,0.5,1);
+                    this._resourceLoad(icon,this.img_icon);
+                    this._resourceLoad(bg,this.img_bg);
+                    break;
+                case Msg.TObjectType.EObject_AdvanceExp :
+                    this.img_camp.active = false;
+                    this.lab_level.node.active = false;
+                    this.node_satr.active = false;
+                    icon = "ui/common/commonIcon/" +  XConsts.KObjectIconSpriteName[this._propInfo.nType] + "/spriteFrame"
+                    bg = "ui/common/icon/" +  XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ?this._propInfo.nPropQuality : 2] + "/spriteFrame"
+                    this.img_icon.setScale(0.5,0.5,1);
+                    this._resourceLoad(icon,this.img_icon);
+                    this._resourceLoad(bg,this.img_bg);
                     break;
                 default:
                     console.log("传入相应Msg.TObjectType, 自己写")
@@ -179,10 +199,27 @@ export class ItemMultiReward extends Component {
      * @description: 设置物品信息
      * @param data 物品信息结构
      */    
-    public setPropInfo(data : XStruct.prop_info.IRecord)
+    public setPropInfo(lootObjectData : Msg.LootObject | null,  defineData : XStruct.prop_info.Record | null)
     {
-           this._propInfo = instantiate(data);
+
+        if(lootObjectData)
+        {
+            if(lootObjectData.objType == Msg.TObjectType.EObject_Hero)
+            {
+                this._propInfo.nType = Msg.TObjectType.EObject_Hero;
+                this._propInfo.nPropId = lootObjectData.param1;
+                this._propInfo.nLevel = lootObjectData.param2;
+                this._propInfo.nPropQuality = lootObjectData.param3;
+            }
+            else
+            {
+                this._propInfo.nType = lootObjectData.objType; 
+            }
+            this._propInfo.num = lootObjectData.num;
+        }
+        else if(defineData)
+        {
+            this._propInfo = instantiate(defineData);
+        }
     }
-
-
 }

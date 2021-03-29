@@ -112,7 +112,7 @@ export class MsgForge extends MsgBase{
             }
             showEquipArr.push(record)
         }
-        PopMgr.getInstance().popMultiItemRewardWindow(showEquipArr)
+        PopMgr.getInstance().popMultiItemRewardWindow(null,showEquipArr)
 
         // 广播刷新金币和装备(金币通过playerModel)
         NotifyMgr.getInstance().notify(NotifyMgr.event_equip_compose_suc, msgData);

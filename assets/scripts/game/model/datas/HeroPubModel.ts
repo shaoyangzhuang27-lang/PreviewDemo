@@ -26,21 +26,13 @@ export class HeroPubModel extends BaseModel{
         {
             return ;
         }
-        // var heroSummon = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_HEROSUMMON) as Config.language_ui.Record;
         this._strPubUILabContents.set("lab_title",ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_HEROSUMMON));
-       // var campRecommend = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_CAMPRECOMMEND) as Config.language_ui.Record;
         this._strPubUILabContents.set("lab_recteam",ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_CAMPRECOMMEND));
-       // var summonHeroLotto = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONHEROLOTTO) as Config.language_ui.Record;
         this._strPubUILabContents.set("lab_detail",ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_NEWSUMMONHEROLOTTO));
-        //var newSummonJewelConsume = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONJEWELCONSUMEO) as Config.language_ui.Record;
         this._strPubUILabContents.set("lab_detail_dimaond",ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_NEWSUMMONJEWELCONSUMEO));
-        //var newSummonResidue = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONRESIDUE) as Config.language_ui.Record;
         this._strPubUILabContents.set("lab_bar_info",ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_NEWSUMMONRESIDUE));
-        //var newSummonFriendContent = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_NEWSUMMONFRIENDCONTENT) as Config.language_ui.Record;
         this._strPubUILabContents.set("lab_friend_info",ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_NEWSUMMONFRIENDCONTENT));
-       // var friendSummon = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_FRIENDSUMMON) as Config.language_ui.Record;
         this._strPubUILabContents.set("lab_summon_ad_friend",ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_FRIENDSUMMON));
-        //var heroicSummon = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_HEROICSUMMON) as Config.language_ui.Record;
         this._strPubUILabContents.set("lab_summon_ad_hero",ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_HEROICSUMMON));
     }
     
@@ -110,17 +102,18 @@ export class HeroPubModel extends BaseModel{
     //     return formation;
     // }
 
-    //英雄普通召唤卷轴
+    //普通-英雄召唤卷轴
     public getBaseSummonScrollNum()
     {
-        return this._gameModel.getPlayerModel().getPlayerInfo().basicSummonScroll || 0;
+        return this._gameModel.getPlayerModel().getPlayerInfo().heroicSummonScroll || 0;
     }
 
 
-    //英雄高级召唤卷轴
+    //高级 -英雄高级召唤卷轴 80 级以上的高级酒馆
     public getHeroicSummonScrollNum()
     {
-        return this._gameModel.getPlayerModel().getPlayerInfo().heroicSummonScroll || 0;
+        // console.log("zzzzzzzzzzz",this._gameModel.getPlayerModel().getPlayerInfo());
+        return this._gameModel.getPlayerModel().getPlayerInfo().WonderGem || 0;
     }
     //友情英雄召唤卷轴
     public getFriendSummonScrollNum()
@@ -134,6 +127,27 @@ export class HeroPubModel extends BaseModel{
         return this._gameModel.getPlayerModel().getPlayerInfo().vrmb || 0;
     }
     
+
+    //玩家英雄召唤积分
+    public getPlayerSummonScore()
+    {
+        return this._gameModel.getPlayerModel().getPlayerInfo().summonScore || 0;
+    }
+
+    //玩家奇迹召唤次数
+    public getPlayerWonderTimes()
+    {
+        return 80;
+        return this._gameModel.getPlayerModel().getPlayerInfo().WonderTimes || 0;
+    }
+
+
+
+    //玩家等级
+    public getPlayerLevel()
+    {
+        return this._gameModel.getPlayerModel().getPlayerInfo().level || 0;
+    } 
 
     //玩家1,2星英雄是否自动分解
     public getIsAutoDecompose()

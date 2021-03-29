@@ -32,6 +32,7 @@ import { PopForge } from '../view/pop/PopForge';
 import { PopBookProUI } from '../view/pop/PopBookProUI';
 import { TipCampOrCareer } from '../view/TipCampOrCareer';
 import { PopHaloView } from '../view/pop/PopHaloView';
+import { TipShareHeroToChat } from '../view/TipShareHeroToChat';
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
@@ -285,6 +286,24 @@ export class PopMgr extends PopCore  {
         });
     }
 
+    
+    /**
+     * @description: 英雄升级界面分享到聊天频道Tip
+     * @param {Vec3} pos
+     * @param {HeroData} _heroData
+     */
+     public tipShareHeroToChatindow(pos: Vec3, _heroData: HeroData) {
+        resources.load('prefabs_ui/pop/tip_share_chat', (err: any, res: any) => {
+            let p = instantiate(res) as Node;
+            this.parent?.addChild(p);
+            p.setSiblingIndex(XConsts.OrderTip);
+
+            let script = p.getComponent("TipShareHeroToChat") as TipShareHeroToChat;
+            script.setWinPos(pos, 1);
+            script.setHeroData(_heroData);
+            script.setIsWinClose(true);
+        });
+    }
     //弹出提示窗放这里-------------------------------------------------
 
     //弹出图鉴界面
@@ -401,27 +420,22 @@ export class PopMgr extends PopCore  {
         } );
     }
     
-      /**
-     * 通用类型一弹窗
-     * @param title     窗口标题
-     * @param content   窗体描述内容
-     * @param mode      底部按钮显示样式
+    /**
+     * @description: 通用弹窗类型一
+     * @param {XStruct.common_one_info.Record} info 窗口信息结构
+     * @param {Function} submitCallBack 发送按钮回调
+     * @param {Function} closeCallBack 关闭按钮回调
      */
-    public popCommonOneWindow(title:string,content:string,mode : number ,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+    public popCommonOneWindow(info : XStruct.common_one_info.Record,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_common_one', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
             let script = p.getComponent("PopCommonOne") as PopCommonOne;
-            script.setTitle(title);
-            script.setContent(content);
-            script.setShowMode(mode);
+            script.initUI(info);
             script.setSubmitCallBack(submitCallBack)
             script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
-            // script.popSelf();
-            // script.setIsNeedHide(false);
-
         } );
     }
 
@@ -519,17 +533,18 @@ export class PopMgr extends PopCore  {
 
      /**
      * @description: 获得物品(多个)弹窗
-     * @param {Array<XStruct.prop_info.IRecord>} data 物品信息
+     * @param {Array<Msg.LootObject>} lootObjectData  Msg回包物品信息结构是LootObject类型的使用这个
+     * @param {Array<XStruct.prop_info.IRecord>} defineData  否则使用需要自己组数据
      * @param {boolean} bAutoDecompsePop 是否自动分解弹窗
      * @param {Function} closeCallBack
      */
-    public popMultiItemRewardWindow(data :Array<XStruct.prop_info.IRecord>,bAutoDecompsePop : boolean = false,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+      public popMultiItemRewardWindow(lootObjectData : Array<Msg.LootObject> | null,  defineData :Array<XStruct.prop_info.Record> | null,bAutoDecompsePop : boolean = false,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_multi_itemreward', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
             let script = p.getComponent("PopMultiItemReward") as PopMultiItemReward;
-            script.setPropsInfo(data);
+            script.setPropsInfo(lootObjectData,defineData);
             script.autoDecompsePop = bAutoDecompsePop;
             script.setSubmitCallBack(submitCallBack);
             script.setCloseCallBack(closeCallBack);

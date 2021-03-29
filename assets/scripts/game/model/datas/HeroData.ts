@@ -147,30 +147,50 @@ export class HeroData extends BaseHeroData {
 
     public get level() {
         if (!this.isRoleHero()) {
-            return Math.min(XShare.getInstance().KHeroMaxLevelForTier[this._record.star], 1);//学院等级待处理
-            //Mathf.Min(XLuaFunc.instance.KHeroMaxLevelForTier[_record.Star], PlayerData.instance.HeroCollegeLevel);
+            return Math.min(this._heroInfo.level, XShare.getInstance().KHeroMaxLevelForTier[this._record.star]);//假如英雄在学院中需要处理成学院等级
         } else
             return this._heroInfo.level;
     }
+
     public set level(_lv: number) {
+        if(_lv<=0 || _lv > XShare.getInstance().KHeroMaxLevelForTier[XShare.getInstance().KHeroMaxLevelForTier.length-1]){
+            return ;
+        }
+
         this._heroInfo.level = _lv;
     }
 
     public get tier() {
         if (!this.isRoleHero()) {
-            return  Math.min(this.GetMaxTier(), 1); //学院品阶待处理
-            // Mathf.Min(GetMaxTier(), PlayerData.instance.HeroCollegeTier);            
+            return Math.min(this._heroInfo.tier, this.GetMaxTier()); //假如英雄在学院中需要处理成学院品阶   
         } else
             return this._heroInfo.tier;
     }
+
     public set tier(_tier: number) {
+        if(_tier<=0 || _tier> XShare.getInstance().KMaxHeroTier){
+            return ;
+        }
         if (!this.isRoleHero()) {
-            this._record.star= _tier;//todo
+            let newStar= _tier; 
+            let tmp= (this._heroInfo.staticID /  1000000).toFixed(2);
+            let oldStar = Number(tmp.substr(tmp.indexOf(".")+1, 2)); 
+            if( (newStar != oldStar) && (newStar<= XShare.getInstance().KMaxHeroTier) )
+            {
+                let newStaticID= this._heroInfo.staticID + (newStar-oldStar)*10000;            
+                let _record= ValueMgr.getInstance().getItemByField(TableName.heroes, newStaticID);
+                if(_record){
+                    this._record= _record as Config.heroes.Record;            
+                    this._heroInfo.staticID = newStaticID;
+                }
+            }           
+            this._heroInfo.tier = _tier;
+
         } else {
             this._heroInfo.tier = _tier;
         }
     }
-
+    
     public isMaxLevel() {
         return this.level >= this.getMaxLevel();
     }
@@ -714,6 +734,9 @@ export class HeroData extends BaseHeroData {
     //等级
     public getLevel() {
         return this._heroInfo.level;
+    }
+    public setLevel(lv:number ) {
+        this._heroInfo.level = lv;
     }
     //静态ID对应英雄表内id
     public getStaticID() {
