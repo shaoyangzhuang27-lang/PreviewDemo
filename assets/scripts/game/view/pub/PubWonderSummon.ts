@@ -6,6 +6,7 @@ import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { HeroIcon } from '../hero/HeroIcon';
 import { ItemEquipType,ItemEquipCell } from '../menu/ItemEquipCell';
 import { PopMgr } from '../../control/PopMgr';
+import { PubHeroIcon } from '../pub/PubHeroIcon';
 const { ccclass, property } = _decorator;
 
 @ccclass('PubWonderSummon')
@@ -123,6 +124,91 @@ export class PubWonderSummon extends Component {
 
             this.node_dimond?.addChild(itemEquipCell);   
         });
+
+        for(let i = 0; i < 3; i++)
+        {
+            resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+                let itemEquipCell = instantiate(res); 
+                itemEquipCell.setScale(0.4,0.4,1)
+                let id = 45 + i; 
+                let num = 1;
+                // 设置装备点击回调
+                let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
+                script.setItemType(id, num, ItemEquipType.equip, 
+                    ()=>{
+                        console.log("装备")
+                        PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.equip,false);
+                });  
+    
+                switch(i)
+                {
+                    case 0 :
+                        this.node_equip_0?.addChild(itemEquipCell);  
+                        break;
+                    case 1 :
+                        this.node_equip_1?.addChild(itemEquipCell);  
+                        break;
+                    case 2 :
+                        this.node_equip_2?.addChild(itemEquipCell);  
+                        break;
+                }
+            });
+        }
+
+        for(let i = 0; i < 2; i++)
+        {
+            resources.load('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
+                let itemEquipCell = instantiate(res); 
+                itemEquipCell.setScale(0.4,0.4,1)
+                // let id = 45 + i; 
+                // let num = 1;
+                var info : XStruct.fragment_synthesis_info.IRecord = {
+                    frame :"",
+                    camp : "",
+                    star : 0,
+                    quality : "",
+                    icon : "",
+                    type : 0,
+                    maxNum : 0,
+                    curNum : 0,
+                    heroName : "",
+                    campName : "",
+                    classesName : "",
+                    bg : ""
+                }  
+                info.type = Msg.TFragmentType.EFragmentType_Random;
+                info.star = 4;
+                if(i == 1)
+                {
+                    info.type = Msg.TFragmentType.EFragmentType_CampRandom;
+                    info.camp = "ui/common/team/" + XConsts.KHeroCampIcon[1] + "/spriteFrame";
+                    info.campName = XConsts.KCampName[1];
+                }
+                info.quality = "ui/common/icon/" + XConsts.KFragmentQualitySpriteName[0] + "/spriteFrame";
+                info.frame = "ui/common/icon/" + XConsts.KFragmentFrameSpriteName[0] + "/spriteFrame";
+               
+                info.maxNum = 30;
+                // 设置装备点击回调
+                let script = itemEquipCell.getComponent(PubHeroIcon);
+                script.setWonderSummonShow(true,info);
+                script.setBtnCallBack( 
+                    ()=>{
+                        console.log("碎片");
+                        PopMgr.getInstance().popFragmentSynthesisWindow(info,()=>{console.log("碎片合成")},true);
+                });  
+    
+                switch(i)
+                {
+                    case 0 :
+                        this.node_fragment_0?.addChild(itemEquipCell);  
+                         break;
+                    case 1 :
+                        this.node_fragment_1?.addChild(itemEquipCell);  
+                        break;
+                }
+            });
+        }
+       
     }
   
 }

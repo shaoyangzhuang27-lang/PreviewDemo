@@ -11,6 +11,8 @@ import { NotifyMgr } from '../../control/NotifyMgr';
 import { MsgMgr } from '../../control/MsgMgr';
 import { XFuns } from '../../model/const/XFuns';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { PubHeroIcon } from '../pub/PubHeroIcon';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('PopHeroPub')
@@ -378,6 +380,7 @@ export class PopHeroPub extends PopBase {
         this.node_wonder && (this.node_wonder.active = false);
         resources.load('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
             let p = instantiate( res );
+            let script = p.getComponent(PubHeroIcon);
             var nodWindow = this.node.getChildByName("window");
             var node_ordinary = nodWindow?.getChildByName("node_ordinary");
             var nodeDiamond = node_ordinary?.getChildByName("node_diamond");
@@ -396,6 +399,7 @@ export class PopHeroPub extends PopBase {
                 lab_detail_dimaond.string = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_detail_dimaond");
             }
 
+            script.setWonderSummonShow(false);
             if(nodeFiveStar)
             {
                 p.setScale(0.4,0.4)

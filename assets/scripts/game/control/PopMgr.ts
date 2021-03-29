@@ -471,13 +471,14 @@ export class PopMgr extends PopCore  {
     }
 
 
-    public popFragmentSynthesisWindow(data : XStruct.fragment_synthesis_info.IRecord,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+    public popFragmentSynthesisWindow(data : XStruct.fragment_synthesis_info.IRecord,submitCallBack:Function,isWonderSummonShow : boolean = false,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_fragment_synthesis', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 
             let script = p.getComponent("PopFragmentSynthesis") as PopFragmentSynthesis;
+            script.setIsWonderSummonShow(isWonderSummonShow);
             script.FragmentSysthesisInfo = data;
             script.setIsMaskClose(isMaskClose);
         } );
