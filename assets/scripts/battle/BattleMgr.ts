@@ -94,7 +94,7 @@ export class BattleMgr {
     public doTest(onProgress: (c: number, t: number)=>void, onLoaded: ()=>void) {
         BattleTest.buildTestBattle();
         this.buildPreloadRes();
-        this.uiPreloadRes();
+        // this.uiPreloadRes();
         BattleResMgr.getInstance().startLoad(BattleMgr.getInstance().getPreloadRes(), onProgress, onLoaded);
     }
 

@@ -46,7 +46,7 @@ export class HeroesModel extends BaseModel{
         this._sortedHeroList.Clear();  
 
         //优先加入当前阵容英雄
-        let curFormationList:Map<number,HeroData> = GameModel.getInstance().getFormationModel().getCurrentFormation();   
+        let curFormationList:Map<number,HeroData> = this._gameModel.getFormationModel().getCurrentFormation();   
         curFormationList.forEach((heroData,key, m)=>{
             console.log(" heroData=",heroData)
             console.log(" key=",key)

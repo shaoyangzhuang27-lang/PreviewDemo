@@ -21,7 +21,8 @@
     "paddingBleed": true,
     "filterUnused": false,
     "compressSettings": {
-      "useCompressTexture": true
+      "useCompressTexture": true,
+      "presetId": "default"
     },
     "textureSetting": {
       "wrapModeS": "clamp-to-edge",
