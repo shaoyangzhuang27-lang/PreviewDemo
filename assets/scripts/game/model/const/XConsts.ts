@@ -298,6 +298,8 @@ export class XConsts{
     public static PUB_UI_WONDERSUMMONMUST : string = "UI_WonderSummonMust";  //下次召唤必得心愿英雄
     public static PUB_OPEN_WONDER_SUMMON_LEVEL : number = 80; //奇迹召唤开启等级 
 
+    public static PUB_UI_WONDERSUMMONEXPLAIN : string = "UI_WonderSummonExplain";  //奇迹召唤说明
+    public static PUB_UI_WONDERSUMMONCONTENT : string = "UI_WonderSummonContent";  //奇迹召唤说明内容
 
    //英雄推荐阵容-
     public static PUB_RECOMMEND_LINEUP_UI_PACKUP : string = "UI_PackUp";

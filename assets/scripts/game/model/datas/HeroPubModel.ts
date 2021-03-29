@@ -146,7 +146,8 @@ export class HeroPubModel extends BaseModel{
     //玩家等级
     public getPlayerLevel()
     {
-        return this._gameModel.getPlayerModel().getPlayerInfo().level || 0;
+         
+        return  80 ;//this._gameModel.getPlayerModel().getPlayerInfo().level || 0;
     } 
 
     //玩家1,2星英雄是否自动分解
