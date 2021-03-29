@@ -3,6 +3,7 @@ import { NetCallFunc } from "../../../core/network/NetInterface";
 import { NetManager } from "../../../core/network/NetManager";
 import { NotifyMgr } from "../NotifyMgr";
 import { MsgBase } from "./MsgBase";
+import { GameModel } from '../../model/GameModel';
 
 export class MsgGame extends MsgBase{
 
@@ -40,7 +41,10 @@ export class MsgGame extends MsgBase{
     private _responeNotifyLevelUpAward(msgId: number, msgData: any){
         let newMsgData = msgData as Msg.NotifyLevelUpAward;
         // newMsgData.unlockedFunctionList
-
+        let playerData = GameModel.getInstance().getPlayerModel()
+        playerData.addVrmb(newMsgData.vrmb,Msg.TVRmbAddType.EVRmbAddType_LevelUp);
+        let roleHero = playerData.getRoleHero();
+        roleHero.level = newMsgData.newLevel;
         NotifyMgr.getInstance().notify(NotifyMgr.event_player_levelup,newMsgData);
     }
 
