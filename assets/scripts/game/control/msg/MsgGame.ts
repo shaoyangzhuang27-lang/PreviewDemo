@@ -42,9 +42,9 @@ export class MsgGame extends MsgBase{
         let newMsgData = msgData as Msg.NotifyLevelUpAward;
         // newMsgData.unlockedFunctionList
         let playerData = GameModel.getInstance().getPlayerModel()
-        playerData.addVrmb(newMsgData.vrmb,Msg.TVRmbAddType.EVRmbAddType_LevelUp);
         let roleHero = playerData.getRoleHero();
         roleHero.level = newMsgData.newLevel;
+        playerData.addVrmb(newMsgData.vrmb,Msg.TVRmbAddType.EVRmbAddType_LevelUp);
         NotifyMgr.getInstance().notify(NotifyMgr.event_player_levelup,newMsgData);
     }
 
