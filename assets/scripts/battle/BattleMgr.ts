@@ -94,6 +94,7 @@ export class BattleMgr {
     public doTest(onProgress: (c: number, t: number)=>void, onLoaded: ()=>void) {
         BattleTest.buildTestBattle();
         this.buildPreloadRes();
+        // this.uiPreloadRes();
         BattleResMgr.getInstance().startLoad(BattleMgr.getInstance().getPreloadRes(), onProgress, onLoaded);
     }
 
@@ -112,6 +113,11 @@ export class BattleMgr {
 
         let bossFormation: Map<number, HeroData> = this.getIdleBossInfo();
         bossFormation.forEach(preloadFunc);
+    }
+
+    // ui相关资源
+    public uiPreloadRes(){
+        preloadResList.push("battle/ui")
     }
 
     public getIdleArmyInfo() {
