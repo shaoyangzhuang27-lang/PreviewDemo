@@ -668,7 +668,7 @@ export class PopRisingStarTower extends PopBase {
                     heroIcon.addComponent(Widget);
         
                     let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
-                    script.setMaskHeroData((HeroInfo as HeroData).getCamp(),this._curStarupParam); 
+                    script.setMaskHeroData((HeroInfo as HeroData).getCamp(),this._curStarupParam,0); 
                     script.setLvIconVisib(false);
                     this.btn_head2.addChild(heroIcon);
                     this.maskNode2.active = true
@@ -686,7 +686,7 @@ export class PopRisingStarTower extends PopBase {
                         heroIcon.addComponent(Widget);
             
                         let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
-                        script.setMaskHeroData((HeroInfo as HeroData).getCamp(),this._curStarupParam); 
+                        script.setMaskHeroData((HeroInfo as HeroData).getCamp(),this._curStarupParam,0); 
                         script.setLvIconVisib(false);
                         this.btn_head3.addChild(heroIcon);
                         this.maskNode3.active = true
@@ -821,7 +821,7 @@ export class PopRisingStarTower extends PopBase {
         // if(data instanceof Array){
         //     let heroNewStar:Msg.HeroStarUpMultiA = data[0];
         // }
-        // PopMgr.getInstance().popMultiItemRewardWindow(data);
+        // PopMgr.getInstance().popMultiItemRewardWindow(null,data);
 
         let ItemData:Msg.HeroStarUpMultiA = data[0];
 
@@ -879,7 +879,7 @@ export class PopRisingStarTower extends PopBase {
             arrProp.push(instantiate(stuProp)); 
         }
 
-        PopMgr.getInstance().popMultiItemRewardWindow(arrProp);  
+        PopMgr.getInstance().popMultiItemRewardWindow(null,arrProp);  
     }
 
     //////////////////////////////////////////////////////

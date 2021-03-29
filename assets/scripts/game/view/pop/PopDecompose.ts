@@ -1,5 +1,5 @@
 /**
- * 游戏组件:融魂祭坛
+ * 游戏组件:融魂祭坛 分解
  * @author 施敏昭
  * @version 1.0.0,2021.3.26
  */
@@ -29,6 +29,15 @@ export class PopDecompose extends PopBase {
     @property({type: Button, displayName: "重置按钮"})
     public btn_reset:Button | null = null;
 
+    @property({type: Button, displayName: "市场按钮"})
+    public btn_shop:Button | null = null;
+
+    @property({type: Button, displayName: "分解一键放入按钮"})
+    public btn_oneKeyPut:Button | null = null;
+
+    @property({type: Button, displayName: "分解按钮"})
+    public btn_decomposet:Button | null = null;
+
     @property({type: Node, displayName: "重置按钮lable"})
     public btn_reset_lable:Node  = null as unknown as Node;
 
@@ -40,6 +49,9 @@ export class PopDecompose extends PopBase {
 
     @property({type: Node, displayName: "分解节点"})
     public top_decompose:Node | null = null as unknown as Node;
+
+    @property({type: Node, displayName: "回退节点"})
+    public top_rollback:Node | null = null as unknown as Node;
 
     @property({type: Node, displayName: "重置人"})
     public btn_reset_icon:Node = null as unknown as Node;
@@ -58,6 +70,15 @@ export class PopDecompose extends PopBase {
 
     @property({type: Label, displayName: "重置进阶点"})
     public lab_Advanced:Label = null as unknown as Label;
+
+    @property({type: Label, displayName: "分解灵魂石"})
+    public lab_decompose_soul:Label = null as unknown as Label;
+
+    @property({type: Label, displayName: "分解升级点"})
+    public lab_decompose_upgrade:Label = null as unknown as Label;
+
+    @property({type: Label, displayName: "分解进阶点"})
+    public lab_decompose_Advanced:Label = null as unknown as Label;
 
     @property({type: ToggleContainer , displayName: "阵营" })
     public campGroup:ToggleContainer | null = null as unknown as ToggleContainer;
@@ -111,6 +132,7 @@ export class PopDecompose extends PopBase {
 
         this.btn_reset_icon?.on(Node.EventType.TOUCH_END, this._platformViceHeadHandle, this);
         this.btn_explain?.on(Node.EventType.TOUCH_END, this._explainHandle, this);
+        this.btn_shop?.on(Node.EventType.TOUCH_END, this._shopHandle, this);
     }
     start () {
         super.start();
@@ -142,11 +164,11 @@ export class PopDecompose extends PopBase {
         //重置
         if(this.top_reset?.active){
             //排除等级1的
-            // for (let heroData of this._allHeroList.values()) {
-            //     if(heroData.getLevel() == 1){
-            //         this._allHeroList.delete(heroData.getDyncID());
-            //     }
-            // }
+            for (let heroData of this._allHeroList.values()) {
+                if(heroData.getLevel() == 1){
+                    this._allHeroList.delete(heroData.getDyncID());
+                }
+            }
         }
     }
 
@@ -510,13 +532,19 @@ export class PopDecompose extends PopBase {
         let tog:Toggle = (event as any);
         console.log(tog.node.name)
 
-        if(!(this.top_reset && this.top_decompose) )return;
+        if(!(this.top_reset && this.top_decompose && this.top_rollback) )return;
         if(tog.node.name == "Toggle1"){
             this.top_reset.active = true;
             this.top_decompose.active = false;
+            this.top_rollback.active = false;
         } else if (tog.node.name == "Toggle2"){
             this.top_reset.active = false;
             this.top_decompose.active = true;
+            this.top_rollback.active = false;
+        }else if (tog.node.name == "Toggle3"){
+            this.top_reset.active = false;
+            this.top_decompose.active = false;
+            this.top_rollback.active = true;
         }
     }
 
@@ -565,6 +593,11 @@ export class PopDecompose extends PopBase {
             MsgMgr.getInstance().getMsgDecompose().requestHeroReset(this._curResetHero);
         }
         this._platformViceHeadHandle()
+    }
+
+    //市场按钮
+    private _shopHandle(){
+
     }
 
     //////////////////////////////////////////////////////
@@ -626,7 +659,7 @@ export class PopDecompose extends PopBase {
             arrProp.push(instantiate(stuProp)); 
         }
 
-        PopMgr.getInstance().popMultiItemRewardWindow(arrProp);  
+        PopMgr.getInstance().popMultiItemRewardWindow(null,arrProp);  
     }
 
     //////////////////////////////////////////////////////

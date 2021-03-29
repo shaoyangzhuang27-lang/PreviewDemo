@@ -15,11 +15,11 @@ export class BattleDelayDamage {
         this._battleEffect = battleEffect;
         this._battleEffectNode = battleEffect.node;
         this._target = target;
-        // TODO 只有Fly类型
         
         if (battleEffect.isImmediately()) {
             console.error("BattleDelayDamage battleEffect.isImmediately() 类型错误！！");
         } else {
+            // TODO 只有Fly类型
             this._damageFunc = damageFunc;
             this._battleEffect.initFly(attack.getHeroBase(), target.getHeroBase(), ()=>{
                 this.onEnd();

@@ -53,7 +53,10 @@ let BuffPrefabPath: {[key: string]: string} = {
 let AttackPrefabPath: {[key: string]: string} = {
     "新普攻粒子/占星师普通攻击": "normal_attack_priest",
     "新普攻粒子/魔导师普通攻击": "normal_attack_mage", //  33 5093401 法师1_55_3
-    "新普攻粒子/火枪手普通攻击": "normal_attack_gun"
+    "新普攻粒子/火枪手普通攻击": "normal_attack_gun",
+
+
+    "normal_attack_dark_knight": "normal_attack_dark_knight" // 测试
     
 }
 
@@ -69,6 +72,7 @@ let HeroTestInfo: {[key: number]: any} = {
     0: { // 100
         // prefab: "leader_00",
         prefab: "hero_lvbu",
+        normalAttack: "normal_attack_dark_knight",
         skillID: 1001,
         hp: 100,
         atk: 5,
