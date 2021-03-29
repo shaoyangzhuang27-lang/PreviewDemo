@@ -3,6 +3,7 @@ import { NetCallFunc } from "../../../core/network/NetInterface";
 import { NetManager } from "../../../core/network/NetManager";
 import { NotifyMgr } from "../NotifyMgr";
 import { MsgBase } from "./MsgBase";
+import { GameModel } from '../../model/GameModel';
 
 export class MsgGame extends MsgBase{
 
@@ -10,6 +11,7 @@ export class MsgGame extends MsgBase{
         this.responeMap = new Map<number,[any,NetCallFunc,any]>([
             [Msg.MsgType.TheGetCacheChatListA,[Msg.GetCacheChatListA,this.responeGetCacheChatListA,this]],
             [Msg.MsgType.ThePong,[Msg.Pong,this.responePong,this]],
+            [Msg.MsgType.TheNotifyLevelUpAward,[Msg.NotifyLevelUpAward,this._responeNotifyLevelUpAward,this]],
         ]);
     }
     
@@ -34,6 +36,18 @@ export class MsgGame extends MsgBase{
     }
     public responePong(msgId: number, msgData: Msg.Pong){
     }
+
+    //广播通知玩家等级升级消息
+    private _responeNotifyLevelUpAward(msgId: number, msgData: any){
+        let newMsgData = msgData as Msg.NotifyLevelUpAward;
+        // newMsgData.unlockedFunctionList
+        let playerData = GameModel.getInstance().getPlayerModel()
+        let roleHero = playerData.getRoleHero();
+        roleHero.level = newMsgData.newLevel;
+        playerData.addVrmb(newMsgData.vrmb,Msg.TVRmbAddType.EVRmbAddType_LevelUp);
+        NotifyMgr.getInstance().notify(NotifyMgr.event_player_levelup,newMsgData);
+    }
+
 }
 /**
  * 消息类只处理两个事件

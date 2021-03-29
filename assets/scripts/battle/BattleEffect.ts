@@ -120,6 +120,10 @@ export class BattleEffect extends Component {
             this.node.setWorldPosition(attack.getPlayPot(this.playPot).getWorldPosition());
             this.refreshFlyData();
 
+            if (this.endEffectPrefab) {
+                this.addEndTarget(target);
+            }
+
             this._actFun = this.updateFly;
         }
     }

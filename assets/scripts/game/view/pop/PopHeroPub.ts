@@ -21,6 +21,9 @@ export class PopHeroPub extends PopBase {
     @property({type: Label})
     public lab_recteam:Label | null = null;
 
+    @property({type: Node})
+    public node_ordinary:Node | null = null;
+
     @property({type: Label})
     public lab_friend_info:Label | null = null;
 
@@ -82,7 +85,7 @@ export class PopHeroPub extends PopBase {
         super.start();
         GameModel.getInstance().getHeroPubModel().initPubUILabContents();
         this.curSummonType = Msg.TSummonType.ESummonType_Heroic;
-        this._nHeroSummonProgress =  GameModel.getInstance().getHeroPubModel().getPlayerSummonScore();
+        // this._nHeroSummonProgress =  GameModel.getInstance().getHeroPubModel().getPlayerSummonScore();
         // var heroSummon = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_HEROSUMMON) as Config.language_ui.Record
         this.initUILabel()
         this.updateImgPropNum();
@@ -96,15 +99,8 @@ export class PopHeroPub extends PopBase {
         this.btn_introduce?.on(Node.EventType.TOUCH_END, this._onIntroduceClick, this);
         this.btn_recteam?.on(Node.EventType.TOUCH_END, this._onRecommendTeamClick, this);
 
-
-        let diamond =  GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts();
         this.addPubNotifyHandler();
-        // NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
-        // this.node.on('OpenPubNotify', this.addPubNotifyHandler, this);   //自定义事件监听事件
-
-        // console.log("zzzzzzzzzzzzdi",GameModel.getInstance().getHeroPubModel().getBaseSummonScrollNum())
-        // console.log("zzzzzzzzzzzzgao",GameModel.getInstance().getHeroPubModel().getHeroicSummonScrollNum())
-        // var strTest =  String.Format(ValueMgr.getInstance().getLanguageString("UI_BuySummonScroll"),10,20);
+        
     }
 
 
@@ -117,13 +113,6 @@ export class PopHeroPub extends PopBase {
         if(this.lab_recteam)
         {
             this.lab_recteam.string = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_recteam");
-        }
-       
-        if(this.lab_bar_info)
-        {
-            var strInfo = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_bar_info");
-            var newStr = strInfo.replace("{0}",String(XConsts.PUB_HERO_SUMMON_COUNT_MAX - this._nHeroSummonProgress));
-            this.lab_bar_info.string = newStr
         }
         if(this.lab_friend_info)
         {
@@ -167,6 +156,15 @@ export class PopHeroPub extends PopBase {
 
     private _onButtonClick(event:any){
         let nPlayerDiamondsCounts = GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts();
+        let info : XStruct.common_one_info.Record = {
+            title : "",
+            content : "",
+            mode : 0,
+            isRichLabMode : false,
+            isChangeBtnSpriteFrame : false,
+            submitContent:"" ,
+            cancelContent:"" 
+        }
         switch (event.target.getComponent(Button)) {
             case this.btn_hero_summon:
                 console.log("hero_summon");
@@ -194,7 +192,9 @@ export class PopHeroPub extends PopBase {
                 {
                     if(this._nFriendHeartNum < XConsts.PUB_SUMMON_FRIEND_ONE_COSUME)
                     {
-                        this.showPromptWindow("错误","爱心不足",1);
+                        info.title = "错误";
+                        info.content = "爱心不足";
+                        this.showPromptWindow(info);
                     }
                     else{
                      
@@ -220,18 +220,29 @@ export class PopHeroPub extends PopBase {
                         }
                         else
                         {
-                            this.showPromptWindow("错误","钻石不足",1);
+                            info.title = "错误";
+                            info.content = "钻石不足";
+                            info.submitContent = "商城";
+                            let sumbitCallFunc = ()=>{
+                                PopMgr.getInstance().deleteWindow();
+                                console.log("弹出商城窗口");
+                            }
+                            this.showPromptWindow(info,sumbitCallFunc);
+                            // this.showPromptWindow("错误","钻石不足",1);
                         }
                     }
                 }
                 break; 
             case this.btn_summon_ten:
-                console.log("summon_ten");
+                // console.log("summon_ten");
                 if(this._curSummonType == Msg.TSummonType.ESummonType_Friend)
                 {
                     if(this._nFriendHeartNum < XConsts.PUB_SUMMON_FRIEND_TEN_COSUME)
                     {
-                        this.showPromptWindow("错误","爱心不足",1);
+                        // this.showPromptWindow("错误","爱心不足",1);
+                        info.title = "错误";
+                        info.content = "爱心不足";
+                        this.showPromptWindow(info);
                     }
                     else
                     {
@@ -241,7 +252,68 @@ export class PopHeroPub extends PopBase {
                 }
                 else
                 {
-                    if(this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_TEN_COSUME)
+                    if(this._nScorllNum > 0 && this._nScorllNum < XConsts.PUB_SUMMON_SCROLL_TEN_COSUME)
+                    {
+                        let nShortageDiamonds = XConsts.PUB_SUMMON_SCROLL_EXCHANGE_DIAMOND *  (XConsts.PUB_SUMMON_SCROLL_TEN_COSUME - this._nScorllNum);
+                        if(nPlayerDiamondsCounts >= nShortageDiamonds)
+                        {
+                            let callFunc = ()=>{
+                                this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll_VRmb,false);
+                            }
+                            var str = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_BUYSUMMONSCROLL);
+                            
+                            str = str.replace("{0}",String(nShortageDiamonds));
+                            str = str.replace("{1}",String(XConsts.PUB_SUMMON_SCROLL_TEN_COSUME - this._nScorllNum));
+                            str = str.replace("{2}",String(XConsts.PUB_SUMMON_SCROLL_EXCHANGE_DIAMOND));
+
+                            info.title = "注意";
+                            info.content = str;
+                            info.mode = 1;
+                            info.isRichLabMode = true;
+                            this.showPromptWindow(info,callFunc);
+                            // this.showPromptWindow("注意",str,2,callFunc,true);
+                            // this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll_VRmb,false);
+                        }
+                        else
+                        {
+                            let callFunc = ()=>{
+                                PopMgr.getInstance().deleteWindow();
+                                let tempInfo : XStruct.common_one_info.Record = {
+                                    title : "",
+                                    content : "",
+                                    mode : 0,
+                                    isRichLabMode : false,
+                                    isChangeBtnSpriteFrame : false,
+                                    submitContent:"" ,
+                                    cancelContent:"" 
+                                }
+                                // this.showPromptWindow("错误","钻石不足",1);
+                                tempInfo.title = "错误";
+                                tempInfo.content = "钻石不足";
+                                tempInfo.submitContent = "商城";
+                                let sumbitCallFunc = ()=>{
+                                    PopMgr.getInstance().deleteWindow();
+                                    console.log("弹出商城窗口");
+                                }
+                                // this.showPromptWindow(tempInfo,sumbitCallFunc);
+                                PopMgr.getInstance().popCommonOneWindow(tempInfo,sumbitCallFunc);
+                                
+                            }
+                            var str = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_BUYSUMMONSCROLL);
+                            
+                            str = str.replace("{0}",String(nShortageDiamonds));
+                            str = str.replace("{1}",String(XConsts.PUB_SUMMON_SCROLL_TEN_COSUME - this._nScorllNum));
+                            str = str.replace("{2}",String(XConsts.PUB_SUMMON_SCROLL_EXCHANGE_DIAMOND));
+
+                            info.title = "注意";
+                            info.content = str;
+                            info.mode = 1;
+                            info.isRichLabMode = true;
+                            this.showPromptWindow(info,callFunc);
+                            
+                        }
+                    }
+                    else if(this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_TEN_COSUME)
                     {
                         //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
                         console.log("pppppppppp 卷轴10连");
@@ -258,7 +330,16 @@ export class PopHeroPub extends PopBase {
                         }
                         else
                         {
-                            this.showPromptWindow("错误","钻石不足",1);
+                            // this.showPromptWindow("错误","钻石不足",1);
+
+                            info.title = "错误";
+                            info.content = "钻石不足";
+                            info.submitContent = "商城";
+                            let sumbitCallFunc = ()=>{
+                                PopMgr.getInstance().deleteWindow();
+                                console.log("弹出商城窗口");
+                            }
+                            this.showPromptWindow(info,sumbitCallFunc);
                         }
                     }
                 }
@@ -276,7 +357,8 @@ export class PopHeroPub extends PopBase {
         resources.load('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
             let p = instantiate( res );
             var nodWindow = this.node.getChildByName("window");
-            var nodeDiamond = nodWindow?.getChildByName("node_diamond");
+            var node_ordinary = nodWindow?.getChildByName("node_ordinary");
+            var nodeDiamond = node_ordinary?.getChildByName("node_diamond");
             var imgFiveStarBg = nodeDiamond?.getChildByName("img_fivestar_bg");
             var nodeFiveStar = imgFiveStarBg?.getChildByName("node_fivestar");
             var lab_detail =  nodeDiamond?.getChildByName("lab_detail")?.getComponent(Label);
@@ -297,6 +379,12 @@ export class PopHeroPub extends PopBase {
                 p.setScale(0.4,0.4)
                 nodeFiveStar.addChild(p)
             }
+        } );
+
+
+        resources.load('prefabs_ui/pub/pub_wonder_summon', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.node_ordinary?.addChild(p);
         } );
     }
 
@@ -342,9 +430,29 @@ export class PopHeroPub extends PopBase {
         });
     }
 
-    public showPromptWindow(title : string, content : string, mode: number)
+    public showPromptWindow(info : XStruct.common_one_info.Record, submitFunc :Function | null = null)
     {
-        PopMgr.getInstance().popCommonOneWindow(title,content,mode,()=>{PopMgr.getInstance().deleteWindow();});
+        let callCloseFunc = ()=>{
+            if(submitFunc)
+            {
+                submitFunc();
+            }
+            else{
+                PopMgr.getInstance().deleteWindow();
+            }
+        }
+        let callSummonTenFunc = ()=>{
+            if(submitFunc)
+            {
+                submitFunc();
+            }
+            PopMgr.getInstance().deleteWindow();
+        }
+        // if(mode == 1)
+        // {
+        //     PopMgr.getInstance().popCommonOneWindow(title,content,mode, mode ==callCloseFunc);
+        // }
+        PopMgr.getInstance().popCommonOneWindow(info,info.mode == 0 ? callCloseFunc : callSummonTenFunc);
     } 
 
 
@@ -370,6 +478,10 @@ export class PopHeroPub extends PopBase {
         }
         if(this._curSummonType == Msg.TSummonType.ESummonType_Heroic)
         {
+            if(imgdi_ten)
+            {
+                this.resetResourcesSpriFame("ui/hero_pub/pub_btn_violet/spriteFrame",imgdi_ten);
+            }
             if(this._nScorllNum == 0)
             {
                 if(img_one_remind && img_ten_remind)
@@ -459,8 +571,17 @@ export class PopHeroPub extends PopBase {
 
     public updateProgressProcess()
     {
+        this._nHeroSummonProgress = GameModel.getInstance().getHeroPubModel().getPlayerSummonScore();
+
+        if(this.lab_bar_info)
+        {
+            var strInfo = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_bar_info");
+            var newStr = strInfo.replace("{0}",String(XConsts.PUB_HERO_SUMMON_COUNT_MAX - this._nHeroSummonProgress));
+            this.lab_bar_info.string = newStr
+        }
         var nodWindow = this.node.getChildByName("window");
-        var nodeDiamond = nodWindow?.getChildByName("node_diamond");
+        var node_ordinary = nodWindow?.getChildByName("node_ordinary");
+        var nodeDiamond = node_ordinary?.getChildByName("node_diamond");
         var barProgress = nodeDiamond?.getChildByName("bar_progress");
         var barCompoent = barProgress?.getComponent(ProgressBar);
         var labBarProgress = nodeDiamond?.getChildByName("lab_bar_progress");
@@ -485,32 +606,49 @@ export class PopHeroPub extends PopBase {
 
     public notifyPubSummonHeroHandle ( msgData: Msg.SummonHeroA){
 
-        console.log("palyer heros", GameModel.getInstance().getHeroesModel().getHeroList());
+        // console.log("palyer heros", GameModel.getInstance().getHeroesModel().getHeroList());
         if (msgData.err == Msg.TErrorCode.ERR_OK) {
-            console.log("Notify PubHeroSummon",msgData);
-            console.log("diamond", GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts());
+            // console.log("Notify PubHeroSummon",msgData);
+            // console.log("diamond", GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts());
 
-            let playerModel = GameModel.getInstance().getPlayerModel();
-            switch(msgData.consumeType)
-            {
-                case Msg.TSummonConsumeType.ESummonConsumeType_Scroll:
-                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_HeroicSummonScroll, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
-                    //召唤次数暂时未考虑
-                    break;
-                case Msg.TSummonConsumeType.ESummonConsumeType_VRmb:
-                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_VRmb, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
-                    break;
-                case Msg.TSummonConsumeType.ESummonConsumeType_Scroll_VRmb:
-                    break;
-                case Msg.TSummonConsumeType.ESummonConsumeType_FriendGift:
-                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_FriendGift, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
-                    break;
-                case Msg.TSummonConsumeType.ESummonConsumeType_Wonder:
-                    playerModel.consumeObjectEx(Msg.TObjectType.EObject_WonderGem, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
-                    break;
-                case Msg.TSummonConsumeType.ESummonConsumeType_Wonder_VRmb:
-                    break;    
-            }
+            // let playerModel = GameModel.getInstance().getPlayerModel();
+            // switch(msgData.consumeType)
+            // {
+            //     case Msg.TSummonConsumeType.ESummonConsumeType_Scroll:
+            //         playerModel.consumeObjectByNum(Msg.TObjectType.EObject_HeroicSummonScroll, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+            //         // playerModel.updatePlayerInfoTimesAttribute(XMsg.TimesType.TSummonScore,msgData.summonScore);
+            //         playerModel.updateSummonScore(msgData.summonScore);
+            //         console.log("消费卷轴 ",msgData.consumeNum);
+            //         //召唤次数暂时未考虑
+            //         break;
+            //     case Msg.TSummonConsumeType.ESummonConsumeType_VRmb:
+            //         playerModel.consumeObjectByNum(Msg.TObjectType.EObject_VRmb, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+            //         // playerModel.updatePlayerInfoTimesAttribute(XMsg.TimesType.TSummonScore,msgData.summonScore); 
+            //         playerModel.updateSummonScore(msgData.summonScore);
+            //         NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
+            //         break;
+            //     case Msg.TSummonConsumeType.ESummonConsumeType_Scroll_VRmb:
+            //         playerModel.consumeObjectByNum(Msg.TObjectType.EObject_VRmb, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+            //         playerModel.consumeObjectByNum(Msg.TObjectType.EObject_HeroicSummonScroll,this._nScorllNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+            //         playerModel.updateSummonScore(msgData.summonScore);
+            //         NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
+            //         break;
+            //     case Msg.TSummonConsumeType.ESummonConsumeType_FriendGift:
+            //         playerModel.consumeObjectByNum(Msg.TObjectType.EObject_FriendGift, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+            //         break;
+            //     case Msg.TSummonConsumeType.ESummonConsumeType_Wonder:
+            //         playerModel.consumeObjectByNum(Msg.TObjectType.EObject_WonderGem, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                  
+            //         // playerModel.updatePlayerInfoTimesAttribute(XMsg.TimesType.TWonderTimes,msgData.summonScore); 
+            //         playerModel.updateWonderTimes(msgData.summonScore); 
+            //         break;
+            //     case Msg.TSummonConsumeType.ESummonConsumeType_Wonder_VRmb:
+            //         // playerModel.updatePlayerInfoTimesAttribute(XMsg.TimesType.TWonderTimes,msgData.summonScore);  
+            //         playerModel.updateWonderTimes(msgData.summonScore); 
+            //         NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);  
+            //         break;    
+            // }
+
 
             // NotifyMgr.getInstance().notify()
             // NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
@@ -523,7 +661,7 @@ export class PopHeroPub extends PopBase {
         }
     }
     onDestroy(){
-        // NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
+        console.log("hero pub destory");
         this.removePubNotifyHandler();
         // this.node.off("OpenPubNotify");
     }
@@ -535,11 +673,6 @@ export class PopHeroPub extends PopBase {
             consumeType : nConsumeType,
             isOneOrTen : bIsOneOrTen
         }
-    //     let summonHeroR : Msg.SummonHeroR = {
-    //         summonType : 2,
-    //        consumeType : 2,
-    //        isOneOrTen : false
-    //    }
         console.log("pub submit",summonHeroR);
         MsgMgr.getInstance().getMsgHeroPub().requestSummonHeroR(summonHeroR);
     }
@@ -560,6 +693,9 @@ export class PopHeroPub extends PopBase {
     {
         super.show();
         this.addPubNotifyHandler();
+        this.updateImgPropNum();
+        this.updateProgressProcess();
+        this.updateBtnSummonState();
     }
 }
 

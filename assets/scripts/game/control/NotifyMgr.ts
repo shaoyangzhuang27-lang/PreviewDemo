@@ -29,6 +29,7 @@ export class NotifyMgr extends NotifyCore {
     public static event_net_hero_take_off_equip:string = "event_net_hero_take_off_equip";//英雄卸下装备事件
     public static event_net_starUp_change:string = "event_net_starUp_change";    //升星变化
     public static event_net_OneKeyStarUp_change:string = "event_net_OneKeyStarUp_change";     //一键升星变化
+    public static event_net_hero_reset_change:string = "event_net_hero_reset_change";    //英雄重置变化
 
     public static event_net_pub_summon_hero : string = "event_net_pub_summon_hero";     //酒馆召唤
     public static event_hero_book_active:string = "event_hero_book_active";         //英雄图鉴激活
@@ -37,4 +38,6 @@ export class NotifyMgr extends NotifyCore {
     public static event_net_pub_hero_decompose : string = "event_net_pub_hero_decompose"; //酒馆召唤英雄分解
 
     public static event_equip_compose_suc: string = "event_equip_compose_suc";         //装备合成
+
+    public static event_player_levelup:string = "event_player_levelup";         //玩家升级
 }

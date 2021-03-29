@@ -668,7 +668,7 @@ export class PopRisingStarTower extends PopBase {
                     heroIcon.addComponent(Widget);
         
                     let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
-                    script.setMaskHeroData((HeroInfo as HeroData).getCamp(),this._curStarupParam); 
+                    script.setMaskHeroData((HeroInfo as HeroData).getCamp(),this._curStarupParam,0); 
                     script.setLvIconVisib(false);
                     this.btn_head2.addChild(heroIcon);
                     this.maskNode2.active = true
@@ -686,7 +686,7 @@ export class PopRisingStarTower extends PopBase {
                         heroIcon.addComponent(Widget);
             
                         let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
-                        script.setMaskHeroData((HeroInfo as HeroData).getCamp(),this._curStarupParam); 
+                        script.setMaskHeroData((HeroInfo as HeroData).getCamp(),this._curStarupParam,0); 
                         script.setLvIconVisib(false);
                         this.btn_head3.addChild(heroIcon);
                         this.maskNode3.active = true
@@ -818,10 +818,68 @@ export class PopRisingStarTower extends PopBase {
     private _notifyOneKeyStarUpChangeHandle(data:any){
         this._getAllHeroList();
         this._initBottomHeros();
-        if(data instanceof Array){
-            let heroNewStar:Msg.HeroStarUpMultiA = data[0];
+        // if(data instanceof Array){
+        //     let heroNewStar:Msg.HeroStarUpMultiA = data[0];
+        // }
+        // PopMgr.getInstance().popMultiItemRewardWindow(null,data);
+
+        let ItemData:Msg.HeroStarUpMultiA = data[0];
+
+        let arrProp: Array<XStruct.prop_info.Record> = [];
+        let stuProp : XStruct.prop_info.Record = {
+            nType : 0,
+            nPropId : 0,
+            nLevel : 0,
+            nPropQuality : 0,
+            num : 0,
         }
-        PopMgr.getInstance().popMultiItemRewardWindow(data);
+        //英雄
+        for (let key in ItemData.heroNewStar){
+            let HeroInfo = this._getHeroData(Number(key))as HeroData
+            stuProp.nType = Msg.TObjectType.EObject_Hero;
+            stuProp.nPropId = HeroInfo.getStaticID();
+            stuProp.nLevel = HeroInfo.getLevel();
+            stuProp.nPropQuality = 1;
+            stuProp.num = 1;
+            arrProp.push(instantiate(stuProp)); 
+        }
+         
+        //金币
+        stuProp.nType = Msg.TObjectType.EObject_Money;
+        stuProp.nPropId = 0;
+        stuProp.nLevel = 0;
+        stuProp.nPropQuality = 0;
+        stuProp.num = ItemData.money;
+        arrProp.push(instantiate(stuProp));  
+        //升级点
+        if(ItemData.upgradePoint > 0){
+            stuProp.nType = Msg.TObjectType.EObject_UpgradePoint;
+            stuProp.nPropId = 0;
+            stuProp.nLevel = 0;
+            stuProp.nPropQuality = 0;
+            stuProp.num = ItemData.upgradePoint;
+            arrProp.push(instantiate(stuProp));  
+        }
+        //进阶石
+        if(ItemData.advanceExp > 0){
+            stuProp.nType = Msg.TObjectType.EObject_AdvanceExp;
+            stuProp.nPropId = 0;
+            stuProp.nLevel = 0;
+            stuProp.nPropQuality = 0;
+            stuProp.num = ItemData.advanceExp;
+            arrProp.push(instantiate(stuProp)); 
+        }  
+        //装备
+        for (let key in ItemData.equipList) {
+            stuProp.nType = Msg.TObjectType.EObject_Equip;
+            stuProp.nPropId = Number(key)
+            stuProp.nLevel = 1;
+            stuProp.nPropQuality = 1;
+            stuProp.num = 1;
+            arrProp.push(instantiate(stuProp)); 
+        }
+
+        PopMgr.getInstance().popMultiItemRewardWindow(null,arrProp);  
     }
 
     //////////////////////////////////////////////////////

@@ -1,10 +1,20 @@
-
-import { _decorator, Button,instantiate,Widget,Vec3, Node,resources,ToggleContainer,EventHandler,Toggle,ScrollView } from 'cc';
+/**
+ * 游戏组件:融魂祭坛 分解
+ * @author 施敏昭
+ * @version 1.0.0,2021.3.26
+ */
+import { _decorator,Label,Size,UITransform, Button,instantiate,Widget,Vec3, Node,resources,ToggleContainer,EventHandler,Toggle,ScrollView } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { HeroSelectIcon } from '../hero/HeroSelectIcon';
 import { GameModel } from '../../model/GameModel';
 import { HeroData } from '../../model/datas/HeroData';
 import { HeroIcon } from '../hero/HeroIcon';
+import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { XShare } from '../../model/const/XShare';
+import { PopMgr } from '../../control/PopMgr';
+import { NotifyMgr } from '../../control/NotifyMgr';
+import { MsgMgr } from '../../control/MsgMgr';
+import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopDecompose')
@@ -13,14 +23,35 @@ export class PopDecompose extends PopBase {
     @property({type: ToggleContainer , displayName: "底部选择按钮"})
     public selectGroup:ToggleContainer | null = null;
 
+    @property({type: Node, displayName: "说明按钮"})
+    public btn_explain:Node | null = null;
+
     @property({type: Button, displayName: "重置按钮"})
     public btn_reset:Button | null = null;
 
+    @property({type: Button, displayName: "市场按钮"})
+    public btn_shop:Button | null = null;
+
+    @property({type: Button, displayName: "分解一键放入按钮"})
+    public btn_oneKeyPut:Button | null = null;
+
+    @property({type: Button, displayName: "分解按钮"})
+    public btn_decomposet:Button | null = null;
+
+    @property({type: Node, displayName: "重置按钮lable"})
+    public btn_reset_lable:Node  = null as unknown as Node;
+
+    @property({type: Node, displayName: "重置按钮砖石消耗节点"})
+    public btn_reset_moneyNode:Node = null as unknown as Node;
+
     @property({type: Node, displayName: "重置节点"})
-    public top_reset:Node | null = null;
+    public top_reset:Node | null = null as unknown as Node;
 
     @property({type: Node, displayName: "分解节点"})
-    public top_decompose:Node | null = null;
+    public top_decompose:Node | null = null as unknown as Node;
+
+    @property({type: Node, displayName: "回退节点"})
+    public top_rollback:Node | null = null as unknown as Node;
 
     @property({type: Node, displayName: "重置人"})
     public btn_reset_icon:Node = null as unknown as Node;
@@ -30,6 +61,24 @@ export class PopDecompose extends PopBase {
 
     @property({type: Node, displayName: "重置label"})
     public lab_head_ts:Node = null as unknown as Node;
+
+    @property({type: Label, displayName: "重置金币"})
+    public lab_Goid:Label = null as unknown as Label;
+
+    @property({type: Label, displayName: "重置升级点"})
+    public lab_upgrade:Label = null as unknown as Label;
+
+    @property({type: Label, displayName: "重置进阶点"})
+    public lab_Advanced:Label = null as unknown as Label;
+
+    @property({type: Label, displayName: "分解灵魂石"})
+    public lab_decompose_soul:Label = null as unknown as Label;
+
+    @property({type: Label, displayName: "分解升级点"})
+    public lab_decompose_upgrade:Label = null as unknown as Label;
+
+    @property({type: Label, displayName: "分解进阶点"})
+    public lab_decompose_Advanced:Label = null as unknown as Label;
 
     @property({type: ToggleContainer , displayName: "阵营" })
     public campGroup:ToggleContainer | null = null as unknown as ToggleContainer;
@@ -73,10 +122,21 @@ export class PopDecompose extends PopBase {
         this.head_Node.active = false;
         this.lab_head_ts.active = true;
 
+        this._resetBtnStateChange()
+        var clickEventHandler = new EventHandler();
+        clickEventHandler.target = this.node; //这个 node 节点是你的事件处理代码组件所属的节点
+        clickEventHandler.component = "PopDecompose";//这个是代码文件名
+        clickEventHandler.handler = "_onResetClick";
+        clickEventHandler.customEventData = "";
+        this.btn_reset?.clickEvents.push(clickEventHandler);
+
         this.btn_reset_icon?.on(Node.EventType.TOUCH_END, this._platformViceHeadHandle, this);
+        this.btn_explain?.on(Node.EventType.TOUCH_END, this._explainHandle, this);
+        this.btn_shop?.on(Node.EventType.TOUCH_END, this._shopHandle, this);
     }
     start () {
         super.start();
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_reset_change,this._notifyResetChangeHandle,this);
         this._getAllHeroList();  
 
         if(this._selectBattleList == null)
@@ -85,34 +145,42 @@ export class PopDecompose extends PopBase {
         }
         this._selectBattleList.clear();
 
+        this._updataMoney();
+
         this._initBottomHeros();
+    }
+
+    //刷新金币 进化点 进阶点
+    private _updataMoney(){
+        let playerInfo = GameModel.getInstance().getPlayerModel().getPlayerInfo();
+        this.lab_Goid.string = playerInfo.money.toString();
+        this.lab_upgrade.string = playerInfo.heroUpgradeExp.toString();
+        this.lab_Advanced.string = playerInfo.heroAdvanceExp.toString();
     }
 
     //获取升星列表英雄
     private _getAllHeroList(){
         this._allHeroList = GameModel.getInstance().getHeroList();
-    }
-
-    //底部选择事件
-    tabClick(event: Event, customEventData: string){
-        let tog:Toggle = (event as any);
-        console.log(tog.node.name)
-
-        if(!(this.top_reset && this.top_decompose) )return;
-        if(tog.node.name == "Toggle1"){
-            this.top_reset.active = true;
-            this.top_decompose.active = false;
-        } else if (tog.node.name == "Toggle2"){
-            this.top_reset.active = false;
-            this.top_decompose.active = true;
+        //重置
+        if(this.top_reset?.active){
+            //排除等级1的
+            for (let heroData of this._allHeroList.values()) {
+                if(heroData.getLevel() == 1){
+                    this._allHeroList.delete(heroData.getDyncID());
+                }
+            }
         }
     }
 
     private _initBottomHeros()
     {
-        if(this.scroll_HeroView.content)
+        let scroll:ScrollView = null as unknown as ScrollView;
+        if(this.top_reset?.active){
+            scroll = this.scroll_HeroView
+        }
+        if(scroll.content)
         {
-            this.scroll_HeroView.content.removeAllChildren()
+            scroll.content.removeAllChildren()
         }
 
         resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
@@ -121,7 +189,7 @@ export class PopDecompose extends PopBase {
             let isShowOneKey = 0;       //是否显示一键升星按钮
             for (let heroData of this._allHeroList.values()) {
                 let heroIcon = instantiate(res) as Node;
-                this.scroll_HeroView.content?.addChild(heroIcon);
+                scroll.content?.addChild(heroIcon);
                 let heroSelectScript = heroIcon.getComponent("HeroSelectIcon") as HeroSelectIcon;  
                 let itemType =  this._getItemType(heroData);
 
@@ -201,12 +269,44 @@ export class PopDecompose extends PopBase {
                 this._platformViceHeadHandle();
             }
         }
-        if(this._curResetHero == 0){
-            this.head_Node.active = false;
-            this.lab_head_ts.active = true;
-        }else{
-            this.head_Node.active = true;
-            this.lab_head_ts.active = false;
+        //重置界面
+        if( this.top_reset?.active){
+            if(this._curResetHero == 0){
+                this.head_Node.active = false;
+                this.lab_head_ts.active = true;
+            }else{
+                this.head_Node.active = true;
+                this.lab_head_ts.active = false;
+            }
+            this._resetBtnStateChange()
+        }  
+    }
+
+    //重置按钮状态变化
+    private _resetBtnStateChange(){
+        if(this._curResetHero != 0){
+            let HeroInfo = this._getHeroData(this._curResetHero)as HeroData
+            let costGold = XShare.getInstance().KHeroResetVrmbConsume[HeroInfo.getStar()];
+            if(this.btn_reset && costGold != 0){
+                this.btn_reset_lable.setPosition(new Vec3(0, 20 , 0))
+                this.btn_reset_moneyNode.active = true;
+                let monet = this.btn_reset_moneyNode.getChildByName("money")?.getComponent(Label) as Label;
+                monet.string = costGold.toString();
+                this.btn_reset.interactable = true;  
+            }
+            else{
+                if(this.btn_reset){
+                    this.btn_reset_lable.setPosition(new Vec3(0, 5 , 0))
+                    this.btn_reset_moneyNode.active = false;
+                    this.btn_reset.interactable = true;
+                }
+            }
+            return
+        }
+        if(this.btn_reset){
+            this.btn_reset_lable.setPosition(new Vec3(0, 5 , 0))
+            this.btn_reset_moneyNode.active = false;
+            this.btn_reset.interactable = false;            //重置按钮禁用
         }
     }
 
@@ -224,6 +324,115 @@ export class PopDecompose extends PopBase {
             this.btn_reset_icon.addChild(heroIcon);
             heroIcon.name = "heroIcon";
         });
+
+        //物品栏展示
+        let index = 1;
+        //1级英雄
+        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+            let Info = ValueMgr.getInstance().getItemByField(TableName.heroes,HeroInfo.getStaticID()) as Config.heroes.Record;
+            let heroIcon = instantiate(res) as Node;
+            heroIcon.scale = new Vec3(0.5,0.5,1);
+            heroIcon.addComponent(Widget);
+
+            let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+            script.setHeroData(HeroInfo as HeroData);
+            script.setHeroInfo(Info,1);//设置等级1
+            this.goodsNodes[0].addChild(heroIcon);
+            heroIcon.name = "heroIcon";
+        });
+        //其他物品
+        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+            let index = 1;
+            //金币
+            let ID = Msg.TObjectType.EObject_Money;
+            let num = this._getHeroUpgradeMoney(HeroInfo.getLevel(),HeroInfo.tier);  //数量   
+            let equipCell = instantiate(res) as Node;
+            equipCell.setScale(new Vec3(0.8, 0.8, 0.8))
+            equipCell.name = "heroIcon";
+            this.goodsNodes[index]?.addChild(equipCell);
+            this._initPrefab(equipCell, Number(ID), Number(num), ItemEquipType.goods,
+             Number(Msg.TObjectType.EObject_Money)); 
+             index++;
+             //升级点
+            ID = Msg.TObjectType.EObject_UpgradePoint;
+            num = 0;
+            for(let index = 0;index < HeroInfo.tier-1;index++){
+                let costGold = XShare.getInstance().KHeroTierUpAdvanceExp[index];
+                num += costGold;
+            }
+            equipCell = instantiate(res) as Node;
+            equipCell.setScale(new Vec3(0.8, 0.8, 0.8))
+            equipCell.name = "heroIcon";
+            this.goodsNodes[index]?.addChild(equipCell);
+            this._initPrefab(equipCell, Number(ID), Number(num), ItemEquipType.goods,
+             Number(Msg.TObjectType.EObject_UpgradePoint)); 
+             index++;
+             //进阶点
+            ID = Msg.TObjectType.EObject_AdvanceExp;
+            num = 0;
+            for(let index = 0;index < HeroInfo.tier-1;index++){
+                let costGold = XShare.getInstance().KHeroTierUpAdvanceExp[index];
+                num += costGold;
+            }
+            equipCell = instantiate(res) as Node;
+            equipCell.setScale(new Vec3(0.8, 0.8, 0.8))
+            equipCell.name = "heroIcon";
+            this.goodsNodes[index]?.addChild(equipCell);
+            this._initPrefab(equipCell, Number(ID), Number(num), ItemEquipType.goods,
+             Number(Msg.TObjectType.EObject_AdvanceExp)); 
+             index++;
+             //装备
+             if(HeroInfo.getEquipPropertyList().size > 0){
+                for (let key of HeroInfo.getEquipPropertyList().keys()) {
+                    let value = HeroInfo.getEquipPropertyList().get(key);  //数量   
+                    let equipCell = instantiate(res) as Node;
+                    equipCell.setScale(new Vec3(0.8, 0.8, 0.8))
+                    this.goodsNodes[index]?.addChild(equipCell);
+                    equipCell.name = "heroIcon";
+                    this._initPrefab(equipCell, Number(key), Number(value), ItemEquipType.equip, Number(Msg.TObjectType.EObject_Equip)); 
+                    index++;
+                }
+             }
+        })  
+    }
+
+    //返回1级升到当前级别需要的金币 进阶需要的金币
+    private _getHeroUpgradeMoney(Level:number,tier:number){
+        let money = 0;
+        //升级的
+        for(let index = 1;index < Level;index++){
+            let record = ValueMgr.getInstance().getItemByField(TableName.upgrade_exp, index) as Config.upgrade_exp.Record;
+            money += record.heroMoney;
+        }
+
+        //进阶的
+        for(let index = 0;index < tier-1;index++){
+            let costGold = XShare.getInstance().KHeroTierUpMoney[index];
+            money += costGold;
+        }
+
+        return money; 
+    }
+
+    private _initPrefab(iconNode:Node,key:number,value:number,itemType:ItemEquipType, objType:number)
+    {        
+        let script = iconNode.getComponent("ItemEquipCell") as ItemEquipCell;
+        script.setItemUseType(objType)
+      
+        script.setItemType(Number(key),Number(value),itemType,(id:number,itemClickType:number,objClickType:number)=>{
+            this._itemEqipCallBack(id,itemClickType,objClickType)
+        })
+    }
+
+    private _itemEqipCallBack(itemID:number,itemType:number,objType:number)
+    {
+        if(itemType == ItemEquipType.goods)
+        {
+            PopMgr.getInstance().popItemUseSellView(itemID,objType);
+        }
+        else{
+            PopMgr.getInstance().popEquipInfoView(itemID);            
+        }   
     }
 
     //根据动态ID获取HeroData
@@ -298,7 +507,7 @@ export class PopDecompose extends PopBase {
         }
     }
 
-    //平台副英雄事件
+    //重置点击英雄事件
     private _platformViceHeadHandle(){
         if(this._curResetHero == 0){
             return;
@@ -307,6 +516,151 @@ export class PopDecompose extends PopBase {
         this._heroSelect(heroData as HeroData,false); 
 
         this._curResetHero = 0;
-        this.btn_reset_icon.getChildByName("heroIcon")?.removeFromParent();
+        this.btn_reset_icon.getChildByName("heroIcon")?.destroy();
+
+        //清空物品栏
+        for (let index = 0; index < this.goodsNodes.length; index++) {
+            if(this.goodsNodes[index].getChildByName("heroIcon")){
+                this.goodsNodes[index].getChildByName("heroIcon")?.destroy();
+            }
+        }
     }
+
+    //---------------按钮事件---------------------------
+    //底部选择事件
+    tabClick(event: Event, customEventData: string){
+        let tog:Toggle = (event as any);
+        console.log(tog.node.name)
+
+        if(!(this.top_reset && this.top_decompose && this.top_rollback) )return;
+        if(tog.node.name == "Toggle1"){
+            this.top_reset.active = true;
+            this.top_decompose.active = false;
+            this.top_rollback.active = false;
+        } else if (tog.node.name == "Toggle2"){
+            this.top_reset.active = false;
+            this.top_decompose.active = true;
+            this.top_rollback.active = false;
+        }else if (tog.node.name == "Toggle3"){
+            this.top_reset.active = false;
+            this.top_decompose.active = false;
+            this.top_rollback.active = true;
+        }
+    }
+
+    //说明界面
+    private _explainHandle(){
+        let heroDataes = ValueMgr.getInstance().getTableByName(TableName.language_ui).records ;
+        let strExplain= ""
+        for (let herodata of heroDataes) {
+            let record = herodata as Config.language_ui.Record;
+            //重置
+            if(this.top_reset?.active){
+                if(record.id == "UI_HeroResetExplain") { 
+                    strExplain = record.cn;
+                    break;
+                }
+            }else{
+                if(record.id == "UI_AltarExplain") { 
+                    strExplain = record.cn;
+                    break;
+                }
+            }
+        }
+
+        PopMgr.getInstance().popExplain("",strExplain,()=>{
+            PopMgr.getInstance().deleteWindow();
+        },()=>{
+            PopMgr.getInstance().deleteWindow();
+        },false);
+    }
+
+    //重置按钮
+    private _onResetClick(){
+        let HeroInfo = this._getHeroData(this._curResetHero)as HeroData
+        let costGold = XShare.getInstance().KHeroResetVrmbConsume[HeroInfo.getStar()];
+        let playerInfo = GameModel.getInstance().getPlayerModel().getPlayerInfo();
+        //砖石不足
+        if(playerInfo.vrmb < costGold){
+            PopMgr.getInstance().popupSimpleWindow("","砖石不足,无法重置",()=>{
+                PopMgr.getInstance().deleteWindow();
+            },()=>{
+                PopMgr.getInstance().deleteWindow();
+            },false);
+        }else{
+            console.log("发送重置");
+
+            MsgMgr.getInstance().getMsgDecompose().requestHeroReset(this._curResetHero);
+        }
+        this._platformViceHeadHandle()
+    }
+
+    //市场按钮
+    private _shopHandle(){
+
+    }
+
+    //////////////////////////////////////////////////////
+    //一键升星后 阵容变化 弹出获得物品窗口
+    private _notifyResetChangeHandle(data:any){
+        this._getAllHeroList();
+        this._initBottomHeros();
+        let ItemData:Msg.HeroResetA = data[0];
+
+        let HeroInfo = this._getHeroData(ItemData.heroID)as HeroData
+
+        let arrProp: Array<XStruct.prop_info.Record> = [];
+        let stuProp : XStruct.prop_info.Record = {
+            nType : 0,
+            nPropId : 0,
+            nLevel : 0,
+            nPropQuality : 0,
+            num : 0,
+        }
+        //英雄
+        stuProp.nType = Msg.TObjectType.EObject_Hero;
+        stuProp.nPropId = HeroInfo.getStaticID();
+        stuProp.nLevel = 1;
+        stuProp.nPropQuality = 1;
+        stuProp.num = 1;
+        arrProp.push(instantiate(stuProp));  
+        //金币
+        stuProp.nType = Msg.TObjectType.EObject_Money;
+        stuProp.nPropId = 0;
+        stuProp.nLevel = 0;
+        stuProp.nPropQuality = 0;
+        stuProp.num = ItemData.money;
+        arrProp.push(instantiate(stuProp));  
+        //升级点
+        if(ItemData.upgradePoint > 0){
+            stuProp.nType = Msg.TObjectType.EObject_UpgradePoint;
+            stuProp.nPropId = 0;
+            stuProp.nLevel = 0;
+            stuProp.nPropQuality = 0;
+            stuProp.num = ItemData.upgradePoint;
+            arrProp.push(instantiate(stuProp));  
+        }
+        //进阶石
+        if(ItemData.advanceExp > 0){
+            stuProp.nType = Msg.TObjectType.EObject_AdvanceExp;
+            stuProp.nPropId = 0;
+            stuProp.nLevel = 0;
+            stuProp.nPropQuality = 0;
+            stuProp.num = ItemData.advanceExp;
+            arrProp.push(instantiate(stuProp)); 
+        }  
+        //装备
+        for (let key in ItemData.equipList) {
+            stuProp.nType = Msg.TObjectType.EObject_Equip;
+            stuProp.nPropId = Number(key)
+            stuProp.nLevel = 1;
+            stuProp.nPropQuality = 1;
+            stuProp.num = 1;
+            arrProp.push(instantiate(stuProp)); 
+        }
+
+        PopMgr.getInstance().popMultiItemRewardWindow(null,arrProp);  
+    }
+
+    //////////////////////////////////////////////////////
 }

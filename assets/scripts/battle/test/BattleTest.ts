@@ -35,7 +35,7 @@ let HeroModelPrefabPath: {[key: string]: string} = {
 let SkillPrefabPath: {[key: number]: string} = {
     1001: "skill_0001",
     512011: "skill_warrior_shield",
-    552022: "skill_0001",// TODO 骷髅王技能
+    552022: "skill_dark_knight",// TODO 骷髅王技能
     546022: "skill_priest_aoe_heal", 
     534012: "skill_mage_lightning",
     523011: "skill_dark_knight"
@@ -53,7 +53,10 @@ let BuffPrefabPath: {[key: string]: string} = {
 let AttackPrefabPath: {[key: string]: string} = {
     "新普攻粒子/占星师普通攻击": "normal_attack_priest",
     "新普攻粒子/魔导师普通攻击": "normal_attack_mage", //  33 5093401 法师1_55_3
-    "新普攻粒子/火枪手普通攻击": "normal_attack_gun"
+    "新普攻粒子/火枪手普通攻击": "normal_attack_gun",
+
+
+    "normal_attack_dark_knight": "normal_attack_dark_knight" // 测试
     
 }
 
@@ -69,6 +72,7 @@ let HeroTestInfo: {[key: number]: any} = {
     0: { // 100
         // prefab: "leader_00",
         prefab: "hero_lvbu",
+        normalAttack: "normal_attack_dark_knight",
         skillID: 1001,
         hp: 100,
         atk: 5,
@@ -78,7 +82,8 @@ let HeroTestInfo: {[key: number]: any} = {
         skillSpeed: 0.9,
     },
     5: { // 5051201  
-        prefab: "hero_005",
+        // prefab: "hero_005",
+        prefab: "hero_lvbu",
         skillID: 512011,
         hp: 100,
         atk: 4,
@@ -88,7 +93,8 @@ let HeroTestInfo: {[key: number]: any} = {
         skillSpeed: 0.9,
     },
     44: { // 5065202  骷髅王 战士2_55_5
-        prefab: "hero_044",
+        // prefab: "hero_044",
+        prefab: "hero_lvbu",
         skillID: 552022,
         hp: 100,
         atk: 4,
@@ -108,7 +114,7 @@ let HeroTestInfo: {[key: number]: any} = {
     },
     11: { // 5084602 牧师2_55_4
         // prefab: "hero_011",
-        prefab: "hero_diaochan",
+        prefab: "hero_zhugeliang",
         normalAttack: "normal_attack_priest",
         skillID: 546022,
         hp: 100,
@@ -119,7 +125,8 @@ let HeroTestInfo: {[key: number]: any} = {
         skillSpeed: 1,
     },
     13: { // 5072502 游侠2_55_2
-        prefab: "hero_013",
+        // prefab: "hero_013",
+        prefab: "hero_zhugeliang",
         normalAttack: "normal_attack_gun",
         hp: 100,
         atk: 6,
@@ -156,7 +163,8 @@ let HeroTestInfo: {[key: number]: any} = {
         skillSpeed: 0.9,
     },
     36: { // 5093401 法师1_55_3
-        prefab: "hero_036",
+        // prefab: "hero_036",
+        prefab: "hero_zhugeliang",
         normalAttack: "normal_attack_mage", // TODO
         skillID: 534012,
         hp: 100,
@@ -171,7 +179,8 @@ let HeroTestInfo: {[key: number]: any} = {
 
 let MonsterTestInfo: {[key: number]: any}= {
     4: { // 1203011
-        prefab: "monster_004",
+        // prefab: "monster_004",
+        prefab: "hero_lvbu",
         hp: 200,
         atk: 2,
         def: 2,
@@ -180,7 +189,8 @@ let MonsterTestInfo: {[key: number]: any}= {
         skillSpeed: 0.9,
     },
     6: { // 1102071
-        prefab: "monster_006",
+        // prefab: "monster_006",
+        prefab: "hero_lvbu",
         hp: 300,
         atk: 8,
         def: 2,
@@ -189,7 +199,8 @@ let MonsterTestInfo: {[key: number]: any}= {
         skillSpeed: 0.9,
     },
     9: { // 1204044
-        prefab: "monster_009",
+        // prefab: "monster_009",
+        prefab: "hero_lvbu",
         hp: 300,
         atk: 8,
         def: 2,
@@ -198,7 +209,8 @@ let MonsterTestInfo: {[key: number]: any}= {
         skillSpeed: 0.9,
     },
     12: { // 1101011
-        prefab: "monster_012",
+        // prefab: "monster_012",
+        prefab: "hero_lvbu",
         skillID: 523011,
         hp: 400,
         atk: 10,
@@ -208,7 +220,8 @@ let MonsterTestInfo: {[key: number]: any}= {
         skillSpeed: 0.9,
     },
     13: { // 1303011
-        prefab: "monster_013",
+        // prefab: "monster_013",
+        prefab: "hero_lvbu",
         hp: 200,
         atk: 2,
         def: 2,
@@ -217,7 +230,8 @@ let MonsterTestInfo: {[key: number]: any}= {
         skillSpeed: 0.9,
     },
     14: { // 1503011
-        prefab: "monster_014",
+        // prefab: "monster_014",
+        prefab: "hero_lvbu",
         hp: 200,
         atk: 2,
         def: 2,
@@ -253,7 +267,8 @@ let MonsterTestInfo: {[key: number]: any}= {
         skillSpeed: 0.9,
     },
     5: { // 1403011
-        prefab: "monster_005",
+        // prefab: "monster_005",
+        prefab: "hero_diaochan",
         normalAttack: "normal_attack_mage", // TODO   
         hp: 150,
         atk: 3,
@@ -263,7 +278,8 @@ let MonsterTestInfo: {[key: number]: any}= {
         skillSpeed: 0.9,
     },
     8: { // 1406011
-        prefab: "monster_008",
+        // prefab: "monster_008",
+        prefab: "hero_diaochan",
         normalAttack: "normal_attack_priest", // TODO
         hp: 150,
         atk: 3,

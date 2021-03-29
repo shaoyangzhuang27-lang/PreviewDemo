@@ -887,7 +887,9 @@
     "playPot": 1,
     "playTime": 0,
     "flySpeed": 16,
-    "endEffectPrefab": null,
+    "endEffectPrefab": {
+      "__uuid__": "0550e081-4260-4c25-977d-fbc17e70978e"
+    },
     "_id": ""
   },
   {

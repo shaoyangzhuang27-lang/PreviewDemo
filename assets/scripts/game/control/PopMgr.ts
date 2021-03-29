@@ -3,7 +3,7 @@ import { PopSimple } from "../view/pop/PopSimple";
 import { PopRisingStarTower } from "../view/pop/PopRisingStarTower";
 import { PopStarUpResult } from "../view/pop/PopStarUpResult";
 import { PopOneKeyStarUp } from "../view/pop/PopOneKeyStarUp";
-import { PopDecompose } from "../view/pop/PopDecompose";
+import { PopHeroReset } from "../view/pop/PopHeroReset";
 import { PopCommonOne } from "../view/pop/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
@@ -33,6 +33,8 @@ import { PopBookProUI } from '../view/pop/PopBookProUI';
 import { TipCampOrCareer } from '../view/TipCampOrCareer';
 import { PopHaloView } from '../view/pop/PopHaloView';
 import { TipShareHeroToChat } from '../view/TipShareHeroToChat';
+import { PopPlayerLevelUpAward } from '../view/pop/PopPlayerLevelUpAward';
+
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
@@ -119,13 +121,13 @@ export class PopMgr extends PopCore  {
      * @description: 弹出融魂祭坛界面 
      * @param {boolean} isMaskClose
      */
-    public popDecomposeView(isMaskClose:boolean = true)
+    public popHeroResetView(isMaskClose:boolean = true)
     {
-        resources.load('prefabs_ui/pop/pop_decompose', (err:any,res:any)=>{
+        resources.load('prefabs_ui/pop/pop_heroreset', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
-            let script = p.getComponent("PopDecompose") as PopDecompose;
+            let script = p.getComponent("PopHeroReset") as PopHeroReset;
             script.setIsMaskClose(isMaskClose);
         } );
     }
@@ -420,27 +422,22 @@ export class PopMgr extends PopCore  {
         } );
     }
     
-      /**
-     * 通用类型一弹窗
-     * @param title     窗口标题
-     * @param content   窗体描述内容
-     * @param mode      底部按钮显示样式
+    /**
+     * @description: 通用弹窗类型一
+     * @param {XStruct.common_one_info.Record} info 窗口信息结构
+     * @param {Function} submitCallBack 发送按钮回调
+     * @param {Function} closeCallBack 关闭按钮回调
      */
-    public popCommonOneWindow(title:string,content:string,mode : number ,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+    public popCommonOneWindow(info : XStruct.common_one_info.Record,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_common_one', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
             let script = p.getComponent("PopCommonOne") as PopCommonOne;
-            script.setTitle(title);
-            script.setContent(content);
-            script.setShowMode(mode);
+            script.initUI(info);
             script.setSubmitCallBack(submitCallBack)
             script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
-            // script.popSelf();
-            // script.setIsNeedHide(false);
-
         } );
     }
 
@@ -630,4 +627,23 @@ export class PopMgr extends PopCore  {
              // let script = p.getComponent("PopBookProUI") as PopBookProUI;
          } );
      }
+
+
+    /**
+     * 弹出玩家升级奖励界面
+     */
+    
+    public popPlayerLevelUpWindow(msgData :Msg.NotifyLevelUpAward){
+
+        resources.load('prefabs_ui/pop/pop_player_levelup_award', (err: any, res: any) => {
+            let p = instantiate(res);
+            this.pushWindow(p);
+            let script = p.getComponent("PopPlayerLevelUpAward") as PopPlayerLevelUpAward;
+            script.setInitData(msgData);
+            // script.setIsMaskClose(true);
+
+        });
+
+    }
+
 }

@@ -46,7 +46,7 @@ export class HeroesModel extends BaseModel{
         this._sortedHeroList.Clear();  
 
         //优先加入当前阵容英雄
-        let curFormationList:Map<number,HeroData> = GameModel.getInstance().getFormationModel().getCurrentFormation();   
+        let curFormationList:Map<number,HeroData> = this._gameModel.getFormationModel().getCurrentFormation();   
         curFormationList.forEach((heroData,key, m)=>{
             console.log(" heroData=",heroData)
             console.log(" key=",key)
@@ -145,6 +145,10 @@ export class HeroesModel extends BaseModel{
         let magicDust = msg.magicDust;
         let money = msg.money;
 
+        let playerModel = GameModel.getInstance().getPlayerModel();
+        //金币增加
+        playerModel.addMoney(msg.money, Msg.TMoneyAddType.EMoneyAddType_HeroStarupReturn);
+
         if(this._heroList.has(dyncHeroID))
     {
             let oldHeroData = this._heroList.get(dyncHeroID) as HeroData;
@@ -189,6 +193,10 @@ export class HeroesModel extends BaseModel{
         let magicDust = msg.magicDust;
         let money = msg.money;
 
+        let playerModel = GameModel.getInstance().getPlayerModel();
+        //金币增加
+        playerModel.addMoney(msg.money, Msg.TMoneyAddType.EMoneyAddType_HeroStarupReturn);
+
         for (let key in heroNewStar){
             if(this._heroList.has(Number(key)))
         {
@@ -219,6 +227,54 @@ export class HeroesModel extends BaseModel{
         }
         //抛出通知  一键升星升星发生变化
         NotifyMgr.getInstance().notify(NotifyMgr.event_net_OneKeyStarUp_change,[msg]);
+    }
+
+    /**
+     * 重置之后 改变英雄数据
+     * @param id 
+     */
+    public resetHeroResetInfo(msg:Msg.HeroResetA) {
+        let dyncHeroID = msg.heroID;
+        let money = msg.money;
+        let upgradePoint = msg.upgradePoint;
+        let advanceExp = msg.advanceExp;
+        let magicDust = msg.magicDust;
+        let equipList = msg.equipList;
+        let vrmbConsume = msg.vrmbConsume;
+
+        //扣除消耗
+        let playerModel = GameModel.getInstance().getPlayerModel();
+        if(vrmbConsume > 0){
+            playerModel.subVrmb(msg.vrmbConsume, Msg.TVRmbSubType.EVRmbSubType_HeroReset);
+        }
+        //金币增加
+        playerModel.addMoney(msg.money, Msg.TMoneyAddType.EMoneyAddType_HeroReset);
+        //升级点 进阶点增加
+
+        if(this._heroList.has(dyncHeroID))
+        {
+            let oldHeroData = this._heroList.get(dyncHeroID) as HeroData;
+            let heroInfo  = new Msg.HeroInfo();
+            heroInfo.id = dyncHeroID;
+            heroInfo.staticID = oldHeroData.getStaticID();
+            heroInfo.level = 1;
+            heroInfo.isLocked = oldHeroData.isLocked;
+            let newEquipOnList: number[]= [];
+            for(let key in equipList){
+                newEquipOnList.push(Number(key));
+            }
+            heroInfo.equipOnList = newEquipOnList;
+            //heroInfo.crystal = 
+            heroInfo.tier = 1;
+
+            let hero = new HeroData();
+            hero.initDataByHero(heroInfo as Msg.HeroInfo, this._gameModel);
+            this._heroList.delete(dyncHeroID);
+            this._heroList.set(heroInfo.id as number,hero);
+
+            //抛出通知  重置发生变化
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_reset_change,[msg]);
+        }
     }
     
     /////////////////////////////////////////////////////
