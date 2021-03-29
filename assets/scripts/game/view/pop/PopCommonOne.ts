@@ -16,7 +16,7 @@ export class PopCommonOne extends PopBase {
     public lab_content:Label= null as unknown as Label;
 
     @property({type: RichText})
-    public lab_rich:RichText  = null as unknown as RichText;;
+    public lab_rich:RichText  = null as unknown as RichText;
 
     @property({type: Button})
     public btn_submit = null as unknown as Button;

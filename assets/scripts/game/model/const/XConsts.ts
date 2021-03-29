@@ -301,6 +301,14 @@ export class XConsts{
     public static PUB_UI_WONDERSUMMONEXPLAIN : string = "UI_WonderSummonExplain";  //奇迹召唤说明
     public static PUB_UI_WONDERSUMMONCONTENT : string = "UI_WonderSummonContent";  //奇迹召唤说明内容
 
+    public static PUB_UI_WONDER_DEFAULT_HEARTHERO : number = 5051401;  //奇迹召唤默认心愿英雄
+
+    public static PUB_UI_WONDER_DEFAULT_DIAMOND_REWARD : number = 10000; //10.0k钻石
+
+    public static PUB_UI_WONDER_DEFAULT_EQUIP_REWARD : number = 1; // 1   装备奖励个数
+
+    public static PUB_UI_WONDER_DEFAULT_FRAGMENT_REWARD : number = 30; //碎片奖励个数
+
    //英雄推荐阵容-
     public static PUB_RECOMMEND_LINEUP_UI_PACKUP : string = "UI_PackUp";
     public static PUB_RECOMMEND_LINEUP_UI_VIEWDETAIL : string = "UI_Detail";
@@ -320,7 +328,8 @@ export class XConsts{
 
     public static HERO_ICON_TYPE  = {
         RecLineUp : 1,
-        SummonSettle : 2
+        SummonSettle : 2,
+        WonderSummon :3
     }
 
     //碎片
