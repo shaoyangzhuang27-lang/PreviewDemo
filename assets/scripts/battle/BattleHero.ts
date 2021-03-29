@@ -360,7 +360,7 @@ export class BattleHero extends Component {
 
     initTitleBar(): void {
            
-        this._battleTitleBar.createTitleBar(this._battleCtrl.camera, this._battleCtrl.battleUiNode, !this.isEnemy());
+        this._battleTitleBar.createTitleBar(this._battleCtrl.camera, this._battleCtrl.battleUiNode, !this.isEnemy(), this._heroData.getCamp());
         
         this._battleTitleBar.setHpPercent(1);
         this._battleTitleBar.setPowPercent(0);
@@ -1110,6 +1110,7 @@ export class BattleHero extends Component {
         value += (bUp ? record.effectParam2 : -record.effectParam2);
         this._buffPropertyMap.set(record.effectParam1, value);
         this._battleTitleBar.addStatusString(BattleTest.getBuffIcon(record.icon));
+        this._battleTitleBar.addStatusIco(record.icon)
     }
 
     removeBuffProperty(record: Config.buff_new.Record, bUp: boolean): void {
@@ -1125,6 +1126,7 @@ export class BattleHero extends Component {
         }
 
         this._battleTitleBar.removeStatusString(BattleTest.getBuffIcon(record.icon));
+        this._battleTitleBar.removeStatusIco(record.icon)
     }
 
     refreshBuffStatus(): void {
