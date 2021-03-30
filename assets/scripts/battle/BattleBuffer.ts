@@ -81,6 +81,12 @@ export class BattleBuffer {
             if (path) {
                 let buffPrefab = BattleResMgr.getInstance().getRes(path);
                 if (buffPrefab) {
+
+                    if (this._buffEffectNode) {
+                        (this._buffEffectNode.getComponent("BattleEffect") as BattleEffect).destroySelf();
+                        this._buffEffectNode = null;
+                    }
+
                     this._buffEffectNode = instantiate(buffPrefab);
                     if (this._buffEffectNode) {
                         this._target.playEffect(this._buffEffectNode);

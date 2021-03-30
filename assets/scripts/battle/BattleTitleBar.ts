@@ -36,9 +36,9 @@ export class DTShowInfo{
         // 未命中 图片资源暂缺
         this.DTConfig.set(DamageType.Miss, {icoPaths:[""]})
         // 被普攻没暴击掉血_还没阵营克制,
-        this.DTConfig.set(DamageType.Hit, {labColor : Color.WHITE})
+        this.DTConfig.set(DamageType.Hit, {labColor : Color.RED})
         // 被普攻暴击掉血_还没阵营克制
-        this.DTConfig.set(DamageType.HitByCrt, { labColor: Color.WHITE, icoPaths: ["battle/ui/暴击图标/spriteFrame"] })
+        this.DTConfig.set(DamageType.HitByCrt, { labColor: Color.RED, icoPaths: ["battle/ui/暴击图标/spriteFrame"] })
         // 被普攻没暴击掉血_有阵营克制,
         this.DTConfig.set(DamageType.HitByCamp, { labColor: Color.WHITE, icoPaths: ["battle/ui/战斗-箭头/spriteFrame"] })
         // 被普攻暴击掉血_有阵营克制,
@@ -154,7 +154,7 @@ export class BattleTitleBar extends Component {
     }
 
     _replaceCampIco(camp: number){
-        if(!this._battleUiTitleNode){
+        if(!this._battleUiTitleNode || camp == Msg.TCampType.ECampType_NULL){
             return
         }
         // 阵营
@@ -201,7 +201,8 @@ export class BattleTitleBar extends Component {
     removeStatusIco(str : string){
         if(this._layStatus && this._layStatus.getChildByName(str)){
             let node = this._layStatus.getChildByName(str) as Node
-            node.active = false
+            node.removeFromParent()
+            // node.active = false
             node.destroy()
         }
     }
