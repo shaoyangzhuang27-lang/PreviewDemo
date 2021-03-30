@@ -154,7 +154,7 @@ export class BattleTitleBar extends Component {
     }
 
     _replaceCampIco(camp: number){
-        if(!this._battleUiTitleNode){
+        if(!this._battleUiTitleNode || camp == Msg.TCampType.ECampType_NULL){
             return
         }
         // 阵营
@@ -201,7 +201,8 @@ export class BattleTitleBar extends Component {
     removeStatusIco(str : string){
         if(this._layStatus && this._layStatus.getChildByName(str)){
             let node = this._layStatus.getChildByName(str) as Node
-            node.active = false
+            node.removeFromParent()
+            // node.active = false
             node.destroy()
         }
     }
