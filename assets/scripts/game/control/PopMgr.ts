@@ -33,6 +33,8 @@ import { PopBookProUI } from '../view/pop/PopBookProUI';
 import { TipCampOrCareer } from '../view/TipCampOrCareer';
 import { PopHaloView } from '../view/pop/PopHaloView';
 import { TipShareHeroToChat } from '../view/TipShareHeroToChat';
+import {PubWonderRewardList} from "../view/pub/PubWonderRewardList";
+
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
@@ -553,6 +555,19 @@ export class PopMgr extends PopCore  {
         } );
     }
 
+       //奇迹召唤奖池详情
+    public popPubWonderRewardListWindow(closeCallBack:Function|null = null,isMaskClose:boolean = true){
+        resources.load('prefabs_ui/pub/pub_wonder_rewardlist', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            let script = p.getComponent("PubWonderRewardList") as PubWonderRewardList;
+            script.setCloseCallBack(closeCallBack);
+            script.setIsMaskClose(isMaskClose);
+            
+        } );
+    }
+
     /**
      * 打开图鉴详情
      * @param sid 英雄静态id
@@ -560,9 +575,11 @@ export class PopMgr extends PopCore  {
     public popOpenBookHeroDetail(sid:number)
     {
         resources.load('prefabs_ui/pop/pop_bookherodetail', (err:any,res:any)=>{
+            console.log("sssssssssss",sid);
             let p = instantiate( res );
             this.pushWindow(p);
 
+          
             let script = p.getComponent("PopBookHeroDetail") as PopBookHeroDetail;
             script.setBookData(sid);
 
@@ -626,4 +643,7 @@ export class PopMgr extends PopCore  {
              // let script = p.getComponent("PopBookProUI") as PopBookProUI;
          } );
      }
+
+
+  
 }

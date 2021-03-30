@@ -31,10 +31,10 @@ export class PubWonderSummon extends Component {
     public lab_bar_rich = null as unknown as RichText;
 
     @property({type: Label})
-    public lab_summon_ad:Label | null = null;
+    public lab_summon_ad= null as unknown as Label;
 
     @property({type: Label})
-    public lab_summon_detail:Label | null = null;
+    public lab_summon_detail= null as unknown as Label;
 
 
     @property({type: Button})
@@ -49,12 +49,21 @@ export class PubWonderSummon extends Component {
     //奇迹召唤召唤进度
     private _nWonderSummonProgress : number = 0;
     start () {
+
+        this.lab_summon_ad.string = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERSUMMON);
+        this.lab_summon_detail.string = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERSUMMONAWARD);
+
+        this.btn_detail.node.on(Node.EventType.TOUCH_END, this._onBtnDetailClick, this)
         // [3]
         this.updateProgressProcess();
         this.updateBtnSummonState();
         this.initHeroIconPrefab();
     }
 
+    private _onBtnDetailClick(event:any)
+    {
+        PopMgr.getInstance().popPubWonderRewardListWindow();
+    }
 
     public updateBtnSummonState()
     {
@@ -95,6 +104,7 @@ export class PubWonderSummon extends Component {
     }
 
 
+    //显示界面上7个预制体信息
     public initHeroIconPrefab()
     {
         resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
