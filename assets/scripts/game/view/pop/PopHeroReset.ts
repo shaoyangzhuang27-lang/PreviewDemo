@@ -14,6 +14,7 @@ import { XShare } from '../../model/const/XShare';
 import { PopMgr } from '../../control/PopMgr';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { MsgMgr } from '../../control/MsgMgr';
+import { PopDecompose } from "../../view/pop/PopDecompose";
 import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
 const { ccclass, property } = _decorator;
 
@@ -112,15 +113,12 @@ export class PopHeroReset extends PopBase {
     start () {
         super.start();
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_reset_change,this._notifyResetChangeHandle,this);
-        this._getAllHeroList();  
-
+        
         if(this._selectBattleList == null)
         {
             this._selectBattleList = new Map<number, number>();
         }
-        this._selectBattleList.clear();
-
-        this._updataMoney();
+        this._selectBattleList.clear();   
 
         this._initBottomHeros();
     }
@@ -136,19 +134,21 @@ export class PopHeroReset extends PopBase {
     //获取升星列表英雄
     private _getAllHeroList(){
         this._allHeroList = GameModel.getInstance().getHeroList();
-        //重置
-        if(this.top_reset?.active){
-            //排除等级1的
-            for (let heroData of this._allHeroList.values()) {
-                if(heroData.getLevel() == 1){
-                    this._allHeroList.delete(heroData.getDyncID());
-                }
-            }
-        }
     }
+    //是否排除这个英雄
+    private _isDeleteHero(Data : HeroData){
+        //排除一级
+        if(1 == Data.getLevel()){
+            return true
+        }
+        return false
+    }
+
 
     private _initBottomHeros()
     {
+        this._getAllHeroList();  
+        this._updataMoney();
         let scroll:ScrollView = null as unknown as ScrollView;
         if(this.top_reset?.active){
             scroll = this.scroll_HeroView
@@ -163,6 +163,8 @@ export class PopHeroReset extends PopBase {
             let k = new Array<[number,Node]>();     //排序存储对象
             let isShowOneKey = 0;       //是否显示一键升星按钮
             for (let heroData of this._allHeroList.values()) {
+                let isDeleteHero = this._isDeleteHero(heroData)
+                if(isDeleteHero){continue}
                 let heroIcon = instantiate(res) as Node;
                 scroll.content?.addChild(heroIcon);
                 let heroSelectScript = heroIcon.getComponent("HeroSelectIcon") as HeroSelectIcon;  
@@ -506,12 +508,23 @@ export class PopHeroReset extends PopBase {
     tabClick(event: Event, customEventData: string){
         let tog:Toggle = (event as any);
         console.log(tog.node.name)
+        if(this.window.getChildByName("pop_decompose")){
+            this.window.getChildByName("pop_decompose")?.destroy();
+        }
 
         if(!(this.top_reset) )return;
         if(tog.node.name == "Toggle1"){
             this.top_reset.active = true;
+            this._initBottomHeros();
         } else if (tog.node.name == "Toggle2"){
             this.top_reset.active = false;
+            resources.load('prefabs_ui/pop/pop_decompose', (err:any,res:any)=>{
+                let p = instantiate( res );
+                p.name = "pop_decompose"
+                let script = p.getComponent("PopDecompose") as PopDecompose;
+                //script.setIsMaskClose(false);
+                this.window.addChild(p);
+            } );
         }else if (tog.node.name == "Toggle3"){
             this.top_reset.active = false;
         }
@@ -567,7 +580,12 @@ export class PopHeroReset extends PopBase {
     //////////////////////////////////////////////////////
     //重置后 阵容变化 弹出获得物品窗口
     private _notifyResetChangeHandle(data:any){
-        this._getAllHeroList();
+        //清空物品栏
+        for (let index = 0; index < this.goodsNodes.length; index++) {
+            if(this.goodsNodes[index].getChildByName("heroIcon")){
+                this.goodsNodes[index].getChildByName("heroIcon")?.destroy();
+            }
+        }
         this._initBottomHeros();
         let ItemData:Msg.HeroResetA = data[0];
 
