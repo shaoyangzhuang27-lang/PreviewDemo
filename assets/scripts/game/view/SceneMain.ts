@@ -5,10 +5,12 @@ const { ccclass, property } = _decorator;
 
 @ccclass('SceneMain')
 export class SceneMain extends BaseScene {
-    start () {
-        // Your initialization goes here.
+    onLoad(){
+        super.onLoad();
         this.initUI();
         this.initCity();
+    }
+    start () {
     }
     initCity(){
         
