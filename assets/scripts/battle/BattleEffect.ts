@@ -20,7 +20,7 @@ export class BattleEffect extends Component {
     @property({type: HeroPot, displayName: "特效播放点", tooltip: "Base:原点, MainWeapon:主武器, Chest:胸骨, SubWeapon:副武器, Center:中心点, Hp:中心点"})
     public playPot: HeroPot = HeroPot.Center;
 
-    @property({type: CCFloat, displayName: "自动销毁时间", tooltip: "配置0不会自动销毁，如果是buff根据配置表duration销毁，飞行类型撞击时销毁"})
+    @property({type: CCFloat, min: 0.1, displayName: "自动销毁时间", tooltip: "如果是buff根据配置表duration销毁，飞行类型撞击时销毁"})
     public playTime: number = 5;
 
     @property({type: CCFloat, displayName: "飞行速度", tooltip: "当类型为Fly时的飞行速度"})

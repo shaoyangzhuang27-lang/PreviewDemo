@@ -76,7 +76,7 @@ let HeroTestInfo: {[key: number]: any} = {
         prefab: "hero_zhangfei",
         normalAttack: "normal_attack_dark_knight",
         skillID: 1001,
-        hp: 1000000,
+        hp: 100,
         atk: 5,
         def: 2,
         range: 3,
