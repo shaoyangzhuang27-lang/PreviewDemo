@@ -21,7 +21,7 @@ export class PopBase extends Component {
 
     @property({type: Node, displayName: "遮罩层[必填项]"})
     public mask:Node = null as unknown as Node;
-
+    
     private _isShow:boolean = false;
     private _isLive:boolean = false;
     private _isMaskClose:boolean = true;
@@ -128,6 +128,9 @@ export class PopBase extends Component {
 
     public setIsNeedHide(bo:boolean){
         this._isNeedHide = bo;
+    }
+    public isActive(){
+        return this._isShow;
     }
 
     public show(isAnim:boolean = true){
