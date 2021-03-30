@@ -38,9 +38,14 @@ export class BattleBuffer {
         this._record = record;
 
         
-        this.lastTime = Date.now() + record.duration * 1000;
+        this.refreshBuff(attack);
+        
+    }
+
+    refreshBuff(attack: BattleHero): void {
+        this.lastTime = Date.now() + this._record.duration * 1000;
         this.time = this.lastTime;
-        switch (record.effectType) {
+        switch (this._record.effectType) {
             case EBuffType.Dot:            // 伤害 = 1
                 this.time = Date.now() + 1000;
                 this._atk = -attack.atk;
@@ -50,16 +55,16 @@ export class BattleBuffer {
                 this._atk = attack.atk;
                 break;
             case EBuffType.Control:        // 控制 = 3
-                target.stopAnim();
+                this._target.stopAnim();
                 break;
             case EBuffType.ValueUp:        // 属性增加 = 4
             case EBuffType.ValueDown:      // 属性减少 = 5
-                target.addBuffProperty(record, record.effectType == EBuffType.ValueUp);
+                this._target.addBuffProperty(this._record, this._record.effectType == EBuffType.ValueUp);
                 break;
             case EBuffType.Silence:        // 沉默 = 6
                 break;
             case EBuffType.Shield:         // 护盾 = 7
-                this._shieldValue = record.effectParam1 * target.atk / 100;
+                this._shieldValue = this._record.effectParam1 * this._target.atk / 100;
                 break;
             case EBuffType.Rebound:        // 反弹伤害 = 8
                 break;
@@ -71,14 +76,20 @@ export class BattleBuffer {
                 break;
         }
 
-        if (record.particle != "0") {
-            let path: string = BattleTest.getBuffPrefabPath(record.particle);
+        if (this._record.particle != "0") {
+            let path: string = BattleTest.getBuffPrefabPath(this._record.particle);
             if (path) {
                 let buffPrefab = BattleResMgr.getInstance().getRes(path);
                 if (buffPrefab) {
+
+                    if (this._buffEffectNode) {
+                        (this._buffEffectNode.getComponent("BattleEffect") as BattleEffect).destroySelf();
+                        this._buffEffectNode = null;
+                    }
+
                     this._buffEffectNode = instantiate(buffPrefab);
                     if (this._buffEffectNode) {
-                        target.playEffect(this._buffEffectNode);
+                        this._target.playEffect(this._buffEffectNode);
                         // 所有buff的粒子都由BattleBuffer清理
                         if ((this._buffEffectNode.getComponent("BattleEffect") as BattleEffect).playTime > 0) {
                             (this._buffEffectNode.getComponent("BattleEffect") as BattleEffect).playTime = 0;
@@ -88,7 +99,10 @@ export class BattleBuffer {
             } 
         
         }
-        
+    }
+
+    getBuffID(): number {
+        return this._record.id;
     }
 
     doBuff(buffList: BattleBuffer[], idx: number): boolean {

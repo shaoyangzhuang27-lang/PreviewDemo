@@ -111,7 +111,6 @@ export class PopRisingStarTower extends PopBase {
     onLoad () {
         super.onLoad();
         // [3]
-        this._getAllHeroList();
 
         const containerCampEventHandler = new EventHandler();
         containerCampEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
@@ -165,26 +164,26 @@ export class PopRisingStarTower extends PopBase {
 
     //获取升星列表英雄
     private _getAllHeroList(){
-        this._allHeroList = GameModel.getInstance().getHeroList();
+        this._allHeroList = instantiate(GameModel.getInstance().getHeroList());   
+    }
+    //是否排除这个英雄
+    private _isDeleteHero(Data : HeroData){
         //剔除满星级英雄
-        for (let heroData of this._allHeroList.values()) {
-            if(heroData.getStar() >= 13){
-                this._allHeroList.delete(heroData.getDyncID());
-            }
+        if(Data.getStar() >= 13){
+            return true
         }
         //剔除2星怪 不能升星的
-        for (let heroData of this._allHeroList.values()) {
-            let heroDataes = ValueMgr.getInstance().getTableByName(TableName.heroes).records ;
-            for (let herodata of heroDataes) {
-                let record = herodata as Config.heroes.Record;
-                if(record.id == heroData.getStaticID()) { 
-                    if(record.starupType == 0){
-                        this._allHeroList.delete(heroData.getDyncID());
-                    }
-                    break;
+        let heroDataes = ValueMgr.getInstance().getTableByName(TableName.heroes).records ;
+        for (let Data of heroDataes) {
+            let record = Data as Config.heroes.Record;
+            if(record.id == Data.getStaticID()) { 
+                if(record.starupType == 0){
+                    return true
                 }
+                break;
             }
         }
+        return false
     }
 
     //说明界面
@@ -208,6 +207,7 @@ export class PopRisingStarTower extends PopBase {
 
     private _initBottomHeros()
     {
+        this._getAllHeroList();
         if(this.scroll_HeroView.content)
         {
             this.scroll_HeroView.content.removeAllChildren()
@@ -218,6 +218,8 @@ export class PopRisingStarTower extends PopBase {
             let k = new Array<[number,Node]>();     //排序存储对象
             let isShowOneKey = 0;       //是否显示一键升星按钮
             for (let heroData of this._allHeroList.values()) {
+                let isDeleteHero = this._isDeleteHero(heroData)
+                if(isDeleteHero){continue}
                 let heroIcon = instantiate(res) as Node;
                 this.scroll_HeroView.content?.addChild(heroIcon);
                 let heroSelectScript = heroIcon.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp;  
@@ -300,6 +302,8 @@ export class PopRisingStarTower extends PopBase {
             }
         }
         for (let heroData of this._allHeroList.values()){
+            let isDeleteHero = this._isDeleteHero(heroData)
+            if(isDeleteHero){continue}
             if(curStarupType == 1){
                 if(curHeroData.getStaticID()  == heroData.getStaticID() 
                 && curHeroData.getDyncID() != heroData.getDyncID() ){
@@ -668,7 +672,7 @@ export class PopRisingStarTower extends PopBase {
                     heroIcon.addComponent(Widget);
         
                     let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
-                    script.setMaskHeroData((HeroInfo as HeroData).getCamp(),this._curStarupParam); 
+                    script.setMaskHeroData((HeroInfo as HeroData).getCamp(),this._curStarupParam,0); 
                     script.setLvIconVisib(false);
                     this.btn_head2.addChild(heroIcon);
                     this.maskNode2.active = true
@@ -686,7 +690,7 @@ export class PopRisingStarTower extends PopBase {
                         heroIcon.addComponent(Widget);
             
                         let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
-                        script.setMaskHeroData((HeroInfo as HeroData).getCamp(),this._curStarupParam); 
+                        script.setMaskHeroData((HeroInfo as HeroData).getCamp(),this._curStarupParam,0); 
                         script.setLvIconVisib(false);
                         this.btn_head3.addChild(heroIcon);
                         this.maskNode3.active = true
@@ -800,7 +804,6 @@ export class PopRisingStarTower extends PopBase {
     //////////////////////////////////////////////////////
     //升星后 阵容变化 弹出升星结果界面
     private _notifyStarUpChangeHandle(){
-        this._getAllHeroList();
         this._initBottomHeros();
 
         //弹出升星结果界面
@@ -816,12 +819,11 @@ export class PopRisingStarTower extends PopBase {
 
     //一键升星后 阵容变化 弹出获得物品窗口
     private _notifyOneKeyStarUpChangeHandle(data:any){
-        this._getAllHeroList();
         this._initBottomHeros();
         // if(data instanceof Array){
         //     let heroNewStar:Msg.HeroStarUpMultiA = data[0];
         // }
-        // PopMgr.getInstance().popMultiItemRewardWindow(data);
+        // PopMgr.getInstance().popMultiItemRewardWindow(null,data);
 
         let ItemData:Msg.HeroStarUpMultiA = data[0];
 
@@ -879,7 +881,7 @@ export class PopRisingStarTower extends PopBase {
             arrProp.push(instantiate(stuProp)); 
         }
 
-        PopMgr.getInstance().popMultiItemRewardWindow(arrProp);  
+        PopMgr.getInstance().popMultiItemRewardWindow(null,arrProp);  
     }
 
     //////////////////////////////////////////////////////

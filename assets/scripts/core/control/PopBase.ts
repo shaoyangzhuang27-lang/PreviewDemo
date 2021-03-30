@@ -1,7 +1,9 @@
 import { _decorator, Component, Node,Vec3,tween,Scene, EventTouch, UITransform, math, view, UIOpacity,Button} from 'cc';
 import { PopMgr } from '../../game/control/PopMgr';
 const { ccclass, property } = _decorator;
-
+export enum PopType {
+    window,fullscreen,
+}
 @ccclass('PopBase')
 export class PopBase extends Component {
 
@@ -19,7 +21,7 @@ export class PopBase extends Component {
 
     @property({type: Node, displayName: "遮罩层[必填项]"})
     public mask:Node = null as unknown as Node;
-
+    
     private _isShow:boolean = false;
     private _isLive:boolean = false;
     private _isMaskClose:boolean = true;
@@ -30,6 +32,13 @@ export class PopBase extends Component {
 
     protected _closeFunc:Function | null = null;
 
+    private _popType:PopType = PopType.window;
+    public setPopType(popType:PopType){
+        this._popType = popType
+    }
+    public getPopType(){
+        return this._popType;
+    }
     //弹窗初始化-----
     onLoad(){
         this.window.addComponent(UIOpacity);
@@ -112,6 +121,7 @@ export class PopBase extends Component {
             this.node.destroy();
         }
     }
+
     public setIsMaskClose(bo:boolean){
         this._isMaskClose = bo;
     }
@@ -119,14 +129,28 @@ export class PopBase extends Component {
     public setIsNeedHide(bo:boolean){
         this._isNeedHide = bo;
     }
+    public isActive(){
+        return this._isShow;
+    }
 
-    public show(){
+    public show(isAnim:boolean = true){
+        this.node.active = true;
         if(this._isShow){
             return;
         }
         // this.mask.active = true
         this._setMaskVisible(true);
         this._isShow = true
+
+        //无显示动画
+        if(this._popType == PopType.fullscreen){
+            this._showEnd();
+            return;
+        }
+        if(!isAnim){
+            this._showEnd();
+            return;
+        }
 
         tween(this.window)
         .to(this._showTime,{scale:new Vec3(1,1,1)},{easing: 'backOut'})
@@ -142,7 +166,7 @@ export class PopBase extends Component {
         .start()
 
     }
-    public hide(){
+    public hide(isAnim:boolean = true){
         if(!this._isShow){
             return;
         }
@@ -151,6 +175,16 @@ export class PopBase extends Component {
         this._isShow = false
 
         if(!this._isNeedHide && this._isLive)return;
+        
+        //无隐藏动画
+        if(this._popType == PopType.fullscreen){
+            this._hideEnd();
+            return;
+        }
+        if(!isAnim){
+            this._hideEnd();
+            return;
+        }
 
         tween(this.window)
         .to(this._hideTime,{scale:new Vec3(0,0,1)},{easing: 'backIn'}) 
@@ -167,10 +201,12 @@ export class PopBase extends Component {
     }
 
     private _showEnd(){
+        this.node.active = true;
         console.log('showEnd');
     }
     private _hideEnd(){
         console.log('hideEnd');
+        this.node.active = false;
         if(!this._isLive){
             this.node.destroy();
         }

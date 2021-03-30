@@ -1,7 +1,9 @@
-import { _decorator, Component, Node, instantiate, Prefab, Vec3, Camera, ProgressBar, Color, math, Label } from 'cc';
+import { _decorator, Component, Node, instantiate, Prefab, Vec3, Camera, ProgressBar, Color, math, Label, Sprite } from 'cc';
+import { XConsts } from '../game/model/const/XConsts';
+import { XFuns } from '../game/model/const/XFuns';
 const { ccclass, property } = _decorator;
 
-import { FlyWords } from "./FlyWords";
+import { DamageTypeShowConfig, FlyWords } from "./FlyWords";
 
 export enum DamageType {
     None, // None,
@@ -22,6 +24,57 @@ export enum DamageType {
     Immunity, // 免疫,
 }
 
+// 伤害DamageType显示配置
+// 伤害类型对应的图标和颜色
+export class DTShowInfo{
+    public static DTConfig: Map<DamageType, DamageTypeShowConfig> = new Map<DamageType, DamageTypeShowConfig>();
+    // 伤害显示对应信息
+    public static getDamageShowInfo(damageType: DamageType): DamageTypeShowConfig {
+        if(this.DTConfig.size > 0){
+            return this.DTConfig.get(damageType) as DamageTypeShowConfig
+        }
+        // 未命中 图片资源暂缺
+        this.DTConfig.set(DamageType.Miss, {icoPaths:[""]})
+        // 被普攻没暴击掉血_还没阵营克制,
+        this.DTConfig.set(DamageType.Hit, {labColor : Color.RED})
+        // 被普攻暴击掉血_还没阵营克制
+        this.DTConfig.set(DamageType.HitByCrt, { labColor: Color.RED, icoPaths: ["battle/ui/暴击图标/spriteFrame"] })
+        // 被普攻没暴击掉血_有阵营克制,
+        this.DTConfig.set(DamageType.HitByCamp, { labColor: Color.WHITE, icoPaths: ["battle/ui/战斗-箭头/spriteFrame"] })
+        // 被普攻暴击掉血_有阵营克制,
+        this.DTConfig.set(DamageType.HitByCrtAndCamp, { labColor: Color.WHITE, icoPaths: ["battle/ui/战斗-箭头/spriteFrame", "battle/ui/暴击图标/spriteFrame"] })
+        // 被技能没暴击掉血_还没阵营克制,
+        this.DTConfig.set(DamageType.Skill, { labColor: Color.CYAN })
+        // 被技能暴击掉血_还没阵营克制,
+        this.DTConfig.set(DamageType.SkillByCrt, { labColor: Color.CYAN, icoPaths: ["battle/ui/暴击图标/spriteFrame"] })
+        // 被技能没暴击掉血_有阵营克制,
+        this.DTConfig.set(DamageType.SkillByCamp, { labColor: Color.CYAN, icoPaths: ["battle/ui/战斗-箭头/spriteFrame"] })
+        // 被技能暴击掉血_有阵营克制,
+        this.DTConfig.set(DamageType.SkillByCrtAndCamp, { labColor: Color.CYAN, icoPaths: ["battle/ui/战斗-箭头/spriteFrame", "battle/ui/暴击图标/spriteFrame"] })
+        // 没暴击奶,
+        this.DTConfig.set(DamageType.Heal, { labColor: Color.GREEN, icoPaths: ["battle/ui/加血/spriteFrame"] })
+        // 暴击奶
+        this.DTConfig.set(DamageType.HealByCrt, { labColor: Color.GREEN, icoPaths: ["battle/ui/加血暴击/spriteFrame"] })
+        // 能量加
+        this.DTConfig.set(DamageType.AddPow, { labColor: Color.YELLOW })
+        // 能量减
+        this.DTConfig.set(DamageType.SubPow, { labColor: Color.YELLOW })
+        // 盾吸收伤害
+        this.DTConfig.set(DamageType.ShieldAbsorption, { labColor: Color.BLUE })
+        // 免疫
+        this.DTConfig.set(DamageType.Immunity, { labColor: Color.BLUE })
+        
+        return this.DTConfig.get(damageType) as DamageTypeShowConfig
+    }
+}
+
+// 显示伤害信息
+export interface DamageTypeShowInfo {
+    damage: number,
+    damageType: number,
+    eHeroType?: number,     // 类型相关
+    heroCamp?: number       // 阵营相关 
+}
 
 @ccclass('BattleTitleBar')
 export class BattleTitleBar extends Component {
@@ -37,6 +90,7 @@ export class BattleTitleBar extends Component {
     private _battleUiTitleNode: Node | null = null;
     private _fly_words_node: Node | null = null;
     private _statusLabel: Node | null = null;
+    private _layStatus : Node | null = null;
 
     private _targetPos = new Vec3();
 
@@ -50,26 +104,10 @@ export class BattleTitleBar extends Component {
     //     // Your initialization goes here.
     // }
 
-    //slow-update. fps = 10 TODO 需要优化
-    // update(dt: number) {
-    //     if (!this._battleUiTitleNode && !this._battleUiTitleNode.active) {
-    //         return;
-    //     }
-
-    //     // let now = Date.now();
-    //     // if (now - this._lastUpdateTime < 100) {
-    //     //     return;
-    //     // }
-
-    //     this.node.getWorldPosition(this._targetPos);
-    //     //this._targetPos.y += this._offsetY;
-    //     this._camera.convertToUINode(this._targetPos, this._battleUiTitleNode.parent, this._targetPos);
-    //     this._battleUiTitleNode.setPosition(this._targetPos);
-
-    // }
-
     lateUpdate(): void {
-        if (!this._battleUiTitleNode || !this._battleUiTitleNode.active) {
+        if (!this._battleUiTitleNode ||
+            !this._battleUiTitleNode.active ||
+            !this._battleUiTitleNode.activeInHierarchy) {
             return;
         }
 
@@ -84,7 +122,7 @@ export class BattleTitleBar extends Component {
         this._battleUiTitleNode.setPosition(this._targetPos);
     }
 
-    createTitleBar(camera: Camera, parentNode: Node, isGreen: boolean): void {
+    createTitleBar(camera: Camera, parentNode: Node, isGreen: boolean, camp : number): void {
         this._camera = camera.getComponent(Camera);
         this._battleUiTitleNode = instantiate(this.BattleUiTitlePrefab);
 
@@ -100,14 +138,30 @@ export class BattleTitleBar extends Component {
                 spNode.destroy();
             }
         }
-
+        // 能量条
         this._powBarComponent = this._battleUiTitleNode.getChildByName("pow")?.getComponent(ProgressBar) as ProgressBar;
+        // 飘字
         this._fly_words_node = this._battleUiTitleNode.getChildByName("fly_words_node");
+        // buf状态描述
         this._statusLabel = this._battleUiTitleNode.getChildByName("status") as Node;
-
         this._statusLabel.active = false;
+        // 阵营图标
+        this._replaceCampIco(camp)
+        // buf-layout
+        this._layStatus = this._battleUiTitleNode.getChildByName("lay_status") as Node;
 
         parentNode.addChild(this._battleUiTitleNode);
+    }
+
+    _replaceCampIco(camp: number){
+        if(!this._battleUiTitleNode || camp == Msg.TCampType.ECampType_NULL){
+            return
+        }
+        // 阵营
+        let campNode = this._battleUiTitleNode.getChildByName("node_camp")
+        let spt = campNode?.getComponent(Sprite) as Sprite
+        let campRes = "battle/ui/" + XConsts.KHeroCampIcon[camp] + "/spriteFrame"
+        // XFuns.ReplaceSpriteFrame(campRes, spt, () => {})
     }
 
     removeTitleBar(): void {
@@ -127,6 +181,29 @@ export class BattleTitleBar extends Component {
     setPowPercent(percent: number): void {
         if (this._powBarComponent) {
             this._powBarComponent.progress = percent;
+        }
+    }
+
+    // buff状态图标
+    addStatusIco(str: string){
+        if (!this._layStatus){
+            return
+        }
+        // 该状态已经存在，是否要重复创建,如果要重复创建需要创建缓存map管理
+        if(this._layStatus.getChildByName(str)){
+            return
+        }
+        let path = "/battle/ui/" + str + "/spriteFrame"
+        // XFuns.CreateSprite(path, this._layStatus, str, ()=>{})
+    }
+
+    // 回收状态图标
+    removeStatusIco(str : string){
+        if(this._layStatus && this._layStatus.getChildByName(str)){
+            let node = this._layStatus.getChildByName(str) as Node
+            node.removeFromParent()
+            // node.active = false
+            node.destroy()
         }
     }
 
@@ -181,62 +258,23 @@ export class BattleTitleBar extends Component {
         } 
     }
 
+    // 等具体表现出来再修改接口，暂时传value和type
     flyWords(v: number, damageType: DamageType): void {
         if(!this.FlyWordsPrefab) {
             return;
         }
         let wordsLabel = instantiate(this.FlyWordsPrefab);
 
-        let color = Color.RED;
-        let str = v.toString();
+        //先程序写
+        let showConfig = DTShowInfo.getDamageShowInfo(damageType)
+        // 根据eHeroType的类型修改飘血颜色
+        // heroCamp阵营克制类型 火-木（红），木-水（绿），水-火（蓝） 修改阵营图标显示颜色
+        v = Math.abs(v)
 
-        switch (damageType) {
-            case DamageType.Miss: // 未命中
-                break;
-            case DamageType.Hit: // 被普攻没暴击掉血_还没阵营克制
-                color = Color.RED;
-                str = "普" + str;
-                break;
-            case DamageType.HitByCrt: // 被普攻暴击掉血_还没阵营克制
-                break;
-            case DamageType.HitByCamp: // 被普攻没暴击掉血_有阵营克制
-                break;
-            case DamageType.HitByCrtAndCamp: // 被普攻暴击掉血_有阵营克制
-                break;
-            case DamageType.Skill: // 被技能没暴击掉血_还没阵营克制
-                color = Color.CYAN;
-                str = "技" + str;
-                break;
-            case DamageType.SkillByCrt: // 被技能暴击掉血_还没阵营克制
-                break;
-            case DamageType.SkillByCamp: // 被技能没暴击掉血_有阵营克制
-                break;
-            case DamageType.SkillByCrtAndCamp: // 被技能暴击掉血_有阵营克制
-                break;
-            case DamageType.Heal: // 没暴击奶
-                color = Color.GREEN;
-                str = "血+" + str;
-                break;
-            case DamageType.HealByCrt: // 暴击奶
-                break;
-            case DamageType.AddPow: // 能量加
-                break;
-            case DamageType.SubPow: // 能量减
-                break;
-            case DamageType.ShieldAbsorption: // 盾吸收伤害
-                color = Color.BLUE;
-                str = "盾" + str;
-                break;
-            case DamageType.Immunity: // 免疫
-            default:
-                break;
-        }   
- 
         this._fly_words_node?.addChild(wordsLabel);
-        (wordsLabel.getComponent("FlyWords") as FlyWords).startFly(str, color, this._flayWordStartX);
+        (wordsLabel.getComponent("FlyWords") as FlyWords).startFly(v, showConfig, this._flayWordStartX);
         this._flayWordStartX = -this._flayWordStartX;
     }
-
 
     setVisible(bVisible: boolean): void {
         if (this._battleUiTitleNode) {

@@ -3,7 +3,7 @@ import { PopSimple } from "../view/pop/PopSimple";
 import { PopRisingStarTower } from "../view/pop/PopRisingStarTower";
 import { PopStarUpResult } from "../view/pop/PopStarUpResult";
 import { PopOneKeyStarUp } from "../view/pop/PopOneKeyStarUp";
-import { PopDecompose } from "../view/pop/PopDecompose";
+import { PopHeroReset } from "../view/pop/PopHeroReset";
 import { PopCommonOne } from "../view/pop/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
@@ -33,6 +33,7 @@ import { PopBookProUI } from '../view/pop/PopBookProUI';
 import { TipCampOrCareer } from '../view/TipCampOrCareer';
 import { PopHaloView } from '../view/pop/PopHaloView';
 import { TipShareHeroToChat } from '../view/TipShareHeroToChat';
+import { PopPlayerLevelUpAward } from '../view/pop/PopPlayerLevelUpAward';
 import {PubWonderRewardList} from "../view/pub/PubWonderRewardList";
 
 
@@ -42,19 +43,19 @@ export class PopMgr extends PopCore  {
         return this._instance;
     }
     
-    public clearPop(){
+    // public clearPop(){
 
-    }
+    // }
 
     public setNetLoading(bo:boolean,content:string){
         resources.load('prefabs_ui/net_loading', (err:Error | null,res:any)=>{
             // this.netLoading = instantiate( res );
 
-            let net_loading = this.parent?.getChildByName("net_loading")
+            let net_loading = this._parent?.getChildByName("net_loading")
             if(!net_loading){
                 net_loading = instantiate( res );
                 if(net_loading)
-                    this.parent?.addChild(net_loading);
+                    this._parent?.addChild(net_loading);
             }
             if(net_loading){
                 let script = net_loading.getComponent("NetLoading") as NetLoading;
@@ -121,13 +122,13 @@ export class PopMgr extends PopCore  {
      * @description: 弹出融魂祭坛界面 
      * @param {boolean} isMaskClose
      */
-    public popDecomposeView(isMaskClose:boolean = true)
+    public popHeroResetView(isMaskClose:boolean = true)
     {
-        resources.load('prefabs_ui/pop/pop_decompose', (err:any,res:any)=>{
+        resources.load('prefabs_ui/pop/pop_heroreset', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
-            let script = p.getComponent("PopDecompose") as PopDecompose;
+            let script = p.getComponent("PopHeroReset") as PopHeroReset;
             script.setIsMaskClose(isMaskClose);
         } );
     }
@@ -219,7 +220,7 @@ export class PopMgr extends PopCore  {
         
         resources.load('prefabs_ui/pop/tip_demo', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
-            this.parent?.addChild(p);
+            this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipDemo") as TipDemo;
@@ -236,7 +237,7 @@ export class PopMgr extends PopCore  {
 
         resources.load('prefabs_ui/pop/tip_hero_attribute', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
-            this.parent?.addChild(p);
+            this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipHeroAttribute") as TipHeroAttribute;
@@ -259,7 +260,7 @@ export class PopMgr extends PopCore  {
         // }
         resources.load('prefabs_ui/pop/tip_skill', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
-            this.parent?.addChild(p);
+            this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipSkill") as TipSkill;
@@ -278,7 +279,7 @@ export class PopMgr extends PopCore  {
     public tipCampOrCareerWindow(pos:Vec3, career:number, camp:number =0){
         resources.load('prefabs_ui/pop/tip_camp_or_career', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
-            this.parent?.addChild(p);
+            this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipCampOrCareer") as TipCampOrCareer;
@@ -297,7 +298,7 @@ export class PopMgr extends PopCore  {
      public tipShareHeroToChatindow(pos: Vec3, _heroData: HeroData) {
         resources.load('prefabs_ui/pop/tip_share_chat', (err: any, res: any) => {
             let p = instantiate(res) as Node;
-            this.parent?.addChild(p);
+            this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipShareHeroToChat") as TipShareHeroToChat;
@@ -643,6 +644,25 @@ export class PopMgr extends PopCore  {
              // let script = p.getComponent("PopBookProUI") as PopBookProUI;
          } );
      }
+
+
+    /**
+     * 弹出玩家升级奖励界面
+     */
+    
+    public popPlayerLevelUpWindow(msgData :Msg.NotifyLevelUpAward){
+
+        resources.load('prefabs_ui/pop/pop_player_levelup_award', (err: any, res: any) => {
+            let p = instantiate(res);
+            this.pushWindow(p);
+            let script = p.getComponent("PopPlayerLevelUpAward") as PopPlayerLevelUpAward;
+            script.setInitData(msgData);
+            // script.setIsMaskClose(true);
+
+        });
+
+    }
+
 
 
   
