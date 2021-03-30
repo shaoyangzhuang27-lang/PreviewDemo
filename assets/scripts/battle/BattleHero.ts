@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, SkeletalAnimation, AnimationState, Vec3, BoxCollider, RigidBody, Enum, instantiate, Prefab } from 'cc';
+import { _decorator, Component, Node, SkeletalAnimation, AnimationState, Vec3, BoxCollider, RigidBody, Enum, instantiate, Prefab, BASELINE_RATIO } from 'cc';
 const { ccclass, property } = _decorator;
 
 
@@ -679,24 +679,29 @@ export class BattleHero extends Component {
                 case ESkillTargetType.LowerHpEnemy: // 每个血少敌方
                     break;
                 case ESkillTargetType.BackEnemy: // 优先后排每个敌方
-                    let tmpList: Array<BattleHero> = []
-
+                case ESkillTargetType.FrontEnemy: // 优先前排每个敌方
+                    let backupList: Array<BattleHero> = [];
                     for (let i = 0; i < this._targetList.length; i++) {
-                        if (!this._targetList[i].isFontSite()) {
-                            targetList.push(this._targetList[i]);
+                        if (this._targetList[i].isFrontSite()) {
+                            backupList.push(this._targetList[i]);               
                         } else {
-                            tmpList.push(this._targetList[i]);
+                            targetList.push(this._targetList[i]);
                         }
                     }
 
+                    if (this._recordSkill.targetType == ESkillTargetType.FrontEnemy) {
+                        let tmpList = targetList;
+                        targetList = backupList;
+                        backupList = tmpList;
+                    }
+
                     if (targetList.length < this._recordSkill.targetNumber) {
-                        this.buildRandomList(tmpList, this._recordSkill.targetNumber - targetList.length);
-                        targetList.splice(targetList.length, 0, ...tmpList);
+                        this.buildRandomList(backupList, this._recordSkill.targetNumber - targetList.length);
+                        targetList.splice(targetList.length, 0, ...backupList);
                     } else {
                         this.buildRandomList(targetList, this._recordSkill.targetNumber);
                     }
                     break;
-                case ESkillTargetType.FrontEnemy: // 优先前排每个敌方
                 case ESkillTargetType.RandomEnemyByTarget: // 目标范围内的敌方单位
                 case ESkillTargetType.BackTeammate: // 优先后排每个己方
                 case ESkillTargetType.FrontTeammate: // 优先前排每个己方
@@ -710,44 +715,39 @@ export class BattleHero extends Component {
                     break;
             }
 
-
-            let skillEffectNode = instantiate(this._skillPrefab)
-            let battleEffect = skillEffectNode.getComponent("BattleEffect") as BattleEffect;
+            let skillEffectNode = instantiate(this._skillPrefab);
+            let battleEffect: BattleEffect = skillEffectNode.getComponent("BattleEffect") as BattleEffect;
 
             if (battleEffect.isImmediately()) {
-                this._heroBase.playEffect(skillEffectNode);
+                this.playEffect(skillEffectNode);
                 
+                if (targetList.length == 0) {
+                    return;
+                }
+
                 for (let i = 0; i < targetList.length; i++) {
                     if (battleEffect.endEffectPrefab) {
                         targetList[i].playEffect(instantiate(battleEffect.endEffectPrefab));
                     }
-                    this.doSkillEffect(this._recordSkill, targetList[i]);
+                    
                 }
-            } else {
-                // let delayDamage = new BattleDelayDamage(battleEffect, this, this._target, (target: BattleHero)=> {
-                //     this.doHitDamager(target);
-                //     target.removeFlyDamagePool(delayDamage);
-                // });
 
-                // this._target.addFlyDamagePool(delayDamage);
+                this.doSkillEffect(this._recordSkill, targetList);
+            } else {
+                for (let i = 0; i < targetList.length; i++) {
+                    if (i > 0) {
+                        battleEffect = instantiate(this._skillPrefab).getComponent("BattleEffect") as BattleEffect;
+                    }
+
+                    let delayDamage = new BattleDelayDamage(battleEffect, this, targetList[i], (target: BattleHero)=> {
+                        target.removeFlyDamagePool(delayDamage);
+                        this.doSkillEffect(this._recordSkill as Config.skill.Record, [target]);
+                    });
+    
+                    targetList[i].addFlyDamagePool(delayDamage);
+                }        
             }
 
-            // if ((skillEffectNode.getComponent("BattleEffect") as BattleEffect).endEffectPrefab) {
-            //     (skillEffectNode.getComponent("BattleEffect") as BattleEffect).setEndFunc(()=> {
-            //         if (this._recordSkill) {
-            //             this.doSkillEffect(this._recordSkill, targetList);
-            //         }
-            //     })
-            //     for (let i = 0; i < targetList.length; i++) {
-            //         (skillEffectNode.getComponent("BattleEffect") as BattleEffect).addEndTarget(targetList[i].getHeroBase());
-            //     }
-            //     this._heroBase.playEffect(skillEffectNode);
-            // } else {
-            //     this._heroBase.playEffect(skillEffectNode);
-            //     this.doSkillEffect(this._recordSkill, targetList);
-            // }
-
-            
         } else {
             console.error("BattleHero 技能效果或技能特效为空");
         }
@@ -781,32 +781,60 @@ export class BattleHero extends Component {
         targetList.splice(count, targetList.length - count);
     }
 
-    doSkillEffect(recordSkill: Config.skill.Record, target: BattleHero): void {
-        if (target.isDie()) {
-            return;
-        }
-        for (let i = 0; i < recordSkill.effectType.length; i++) {
-            if (recordSkill.effectTargetType[i] == EEffectTargetType.SameToSkill) {
-                    if (recordSkill.effectChance[i] != 0 && Math.random() > recordSkill.effectChance[i]/100) {
-                        continue;
-                    }
-                    
-                    if (!this.checkEffectCondtion(this, target, recordSkill.effectCondType[i], recordSkill.effectCondParam[i])) {
-                        continue;
-                    }
+    doSkillEffect(recordSkill: Config.skill.Record, targetList: Array<BattleHero>): void {
 
+        for (let i = 0; i < recordSkill.effectType.length; i++) {
+            for (let j = 0; j < targetList.length; j++) {
+
+                if (targetList[j].isDie() || recordSkill.effectChance[i] != 0 && Math.random() > recordSkill.effectChance[i]/100) {
+                    continue;
+                }
+                
+                if (recordSkill.effectTargetType[i] == EEffectTargetType.SameToSkill) {
+                    if (!this.checkEffectCondtion(this, targetList[j], recordSkill.effectCondType[i], recordSkill.effectCondParam[i])) {
+                        continue;
+                    }
+    
                     //执行效果
                     // 执行技能天赋效果(hero_攻击者, target, (TEffectType) record.EffectType[i], record.EffectParam1[i], record.EffectParam2[i], 0, false, is_delay_show);
-                    this.doSkillTalentEffect(target, recordSkill.effectType[i], recordSkill.effectParam1[i], recordSkill.effectParam2[i], 0, false, false);
+                    this.doSkillTalentEffect(targetList[j], recordSkill.effectType[i], recordSkill.effectParam1[i], recordSkill.effectParam2[i], 0, false, false);
                     
                     // //如果有粒子，在目标身上创建粒子
                     // if (record.EffectParticle[i] != "0")
                     //     CreateParticle(record.EffectParticle[i], hero_攻击者, target, TParticleType.其他);
                     // //天赋：自身施放技能命中触发
                     // hero_攻击者.TryTriggerTalentEffect(TTalentTriggerType.自身施放技能命中时, 0, hero_攻击者, target);
-            } else {
-                console.warn("BattleHero.doSkillEffect 功能未实现"); 
+                } else {
+                    let targetTmpList: Array<BattleHero> = [];
+                    if (recordSkill.effectTargetType[i] == EEffectTargetType.Self) {
+                        targetTmpList.push(this);
+                    } else if (recordSkill.effectTargetType[i] == EEffectTargetType.TeammateHPLowest) {
+                        targetTmpList = this._armyList.slice(0, this._armyList.length)
+                        this.buildLowerHpList(targetTmpList, recordSkill.effectTargetNum[i]);
+                    } else {
+                        console.error("BattleHero.doSkillEffect 功能未实现:" + recordSkill.effectTargetType[i]); 
+                    }
+                    
+                    for (let k = 0; k < targetTmpList.length; k++) {
+                        if (!this.checkEffectCondtion(this, targetTmpList[k], recordSkill.effectCondType[i], recordSkill.effectCondParam[i])) {
+                            continue;
+                        }
+        
+                        //执行效果
+                        // 执行技能天赋效果(hero_攻击者, target, (TEffectType) record.EffectType[i], record.EffectParam1[i], record.EffectParam2[i], 0, false, is_delay_show);
+                        this.doSkillTalentEffect(targetTmpList[k], recordSkill.effectType[i], recordSkill.effectParam1[i], recordSkill.effectParam2[i], 0, false, false);
+                        
+                        // //如果有粒子，在目标身上创建粒子
+                        // if (record.EffectParticle[i] != "0")
+                        //     CreateParticle(record.EffectParticle[i], hero_攻击者, targetList[j], TParticleType.其他);
+                        // //天赋：自身施放技能命中触发
+                        // hero_攻击者.TryTriggerTalentEffect(TTalentTriggerType.自身施放技能命中时, 0, hero_攻击者, targetList[j]);
+                    }
+                }
+
             }
+
+            
         }
     }
 
@@ -818,7 +846,7 @@ export class BattleHero extends Component {
             case EEffectType.Damage: // 伤害
                 // if (hero != null)
                     // Hero技能伤害(attack, target, effectParam1, isGodSkill, isDelayShow);
-                    this.doSkillDamage(target, effectParam1);
+                this.doSkillDamage(target, effectParam1);
                 // else if (fs != null)
                 //     Pet技能伤害(fs, target, effectParam1, effect_levelup);
                 break;
@@ -914,23 +942,27 @@ export class BattleHero extends Component {
             case EEffectCondType.TargetClasses:
                 if (target.getClasses() == condParam) {
                     return true;
-                }  
+                }
+                return false;
             case EEffectCondType.TargetStatus:
                 // if (target.getBuffStatus((TBuffStatus) condParam)) {
                     return true;
                 // } 
+                return false;
             case EEffectCondType.TargetHPMoreThanSelf:
                 if (target.hp > attack.hp) {
                     return true;
                 }
+                return false;
             case EEffectCondType.TargetDead:
                 if (target.isDie()) {
                     return true;
                 }
+                return false;
             case EEffectCondType.EveryHPLostX:
-                if (condParam == 1 && attack.isFontSite()) {
+                if (condParam == 1 && attack.isFrontSite()) {
                     return true;
-                } else if (condParam == 2 && !attack.isFontSite()) {
+                } else if (condParam == 2 && !attack.isFrontSite()) {
                     return true;
                 } 
                 // console.error("BattleHero.checkEffectCondtion EEffectCondType.EveryHPLostX condParam 配置了未实现的功能：" + condParam);
@@ -939,6 +971,7 @@ export class BattleHero extends Component {
                 if (target.hp < attack.hp) {
                     return true;
                 }
+                return false;
                     
         }
 
@@ -1025,13 +1058,25 @@ export class BattleHero extends Component {
         //         }
         //     }
         // }
+
+        let buff: BattleBuffer = null as unknown as BattleBuffer;
+
+        for (let i = 0; i < this._buffList.length; i++) {
+            if (this._buffList[i].getBuffID() == record.id) {
+                buff = this._buffList[i];
+                this._buffList.splice(i, 1);
+                buff.refreshBuff(attack);
+                break;
+            }
+        }
         
-        let buff: BattleBuffer = new BattleBuffer(this, attack, record);
+        if (!buff) {
+            buff = new BattleBuffer(this, attack, record);
+        }
 
         if (this._buffList.length == 0) {
             this._buffList.push(buff);
         } else {
-
             if (this._buffList[this._buffList.length -1].time <= buff.time) {
                 this._buffList.push(buff);
             } else {
@@ -1193,7 +1238,7 @@ export class BattleHero extends Component {
         return this.hp == this.maxHp;
     }
 
-    isFontSite(): boolean {
+    isFrontSite(): boolean {
         return this.embattleedSite < 3;
     }
 
