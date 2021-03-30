@@ -1,3 +1,8 @@
+/**
+ * 弹窗管理器基类
+ * @author 陈委津
+ * @version 1.0.0,2021.3.1
+ */
 import {  Node,resources,instantiate,LabelComponent,Vec3,tween, Component } from 'cc';
 import { XConsts } from '../../game/model/const/XConsts';
 import { BasisScene } from './BasisScene';
@@ -25,7 +30,8 @@ export class PopCore {
             // w.destroy();
             let curPopScript = this.getScript(w);
             if(!curPopScript)continue;
-            curPopScript.deleteMe();
+            curPopScript.systemDeleteMe();
+            curPopScript?.systemHide(false);
         }
     }
     //节点
@@ -52,47 +58,6 @@ export class PopCore {
         //显示一级窗口
         this.pushPop(w,parent,true,PopType.fullscreen);
     }
-    private clearWindows(){
-        
-        while(this._popArray.length > 0){
-            let node = this._popArray[this._popArray.length - 1];
-
-            let script = this.getScript(node);
-            let type = script.getPopType();
-            if(type == PopType.fullscreen)break;
-
-            let w = this._popArray.pop() as Node;
-            if(!w)continue;
-            // w.destroy();
-            let curPopScript = this.getScript(w);
-            if(!curPopScript)continue;
-            curPopScript.deleteMe();
-        }
-    }
-
-    private pushPop(w:Node,parent:Node|null = null,isAnim:boolean = true,popType:PopType = PopType.window){
-        
-        this._popArray.push(w);
-
-        let curPop = w;
-        let prePop = this._popArray[this._popArray.length - 2];
-
-        let curPopScript = this.getScript(curPop);
-        let prePopScript = this.getScript(prePop);
-
-
-        curPopScript?.createMe(()=>{this.deleteWindow()});
-        this._parent?.addChild(curPop);
-        curPopScript.setPopType(popType);
-        curPopScript?.show(isAnim);
-        curPop.setSiblingIndex(XConsts.OrderPopShow);
-
-        if(prePopScript){
-            prePop.setSiblingIndex(XConsts.OrderPopHide);
-            prePopScript.hide()
-        }
-    }
-
     public deleteWindow(){
         if(this._popArray.length == 0) return;
 
@@ -113,20 +78,16 @@ export class PopCore {
         let curPopScript = this.getScript(curPop)
         let prePopScript = this.getScript(prePop)
 
-        curPopScript?.deleteMe();
-        curPopScript?.hide();
+        curPopScript?.systemDeleteMe();
+        curPopScript?.systemHide();
         curPop.setSiblingIndex(XConsts.OrderPopHide);
 
         // curPop.zIndex = -1
         if(prePopScript){
             // prePop.zIndex = -1
             prePop.setSiblingIndex(XConsts.OrderPopShow);
-            prePopScript.show()
+            prePopScript.systemShow()
         }
-    }
-    protected getScript(node:Node | null){
-        let kk = node?.getComponent("PopBase") as PopBase;
-        return kk;
     }
 
     public popupPrompt(content:string){
@@ -151,6 +112,54 @@ export class PopCore {
             .start()
         })
     }
+
+    private clearWindows(){
+        
+        while(this._popArray.length > 0){
+            let node = this._popArray[this._popArray.length - 1];
+
+            let script = this.getScript(node);
+            let type = script.getPopType();
+            if(type == PopType.fullscreen)break;
+
+            let w = this._popArray.pop() as Node;
+            if(!w)continue;
+            // w.destroy();
+            let curPopScript = this.getScript(w);
+            if(!curPopScript)continue;
+            curPopScript.systemDeleteMe();
+            curPopScript.systemHide(false);
+        }
+    }
+
+    private pushPop(w:Node,parent:Node|null = null,isAnim:boolean = true,popType:PopType = PopType.window){
+        
+        this._popArray.push(w);
+
+        let curPop = w;
+        let prePop = this._popArray[this._popArray.length - 2];
+
+        let curPopScript = this.getScript(curPop);
+        let prePopScript = this.getScript(prePop);
+
+
+        curPopScript?.systemCreateMe(()=>{this.deleteWindow()});
+        this._parent?.addChild(curPop);
+        curPopScript.setPopType(popType);
+        curPopScript?.systemShow(isAnim);
+        curPop.setSiblingIndex(XConsts.OrderPopShow);
+
+        if(prePopScript){
+            prePop.setSiblingIndex(XConsts.OrderPopHide);
+            prePopScript.systemHide()
+        }
+    }
+
+    protected getScript(node:Node | null){
+        let kk = node?.getComponent("PopBase") as PopBase;
+        return kk;
+    }
+
     
     
 }
