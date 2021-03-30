@@ -24,11 +24,13 @@ export class BaseScene extends BasisScene {
         // this._initSecondaryUINode();
         PopMgr.getInstance().initPop(this);
         // NotifyMgr.getInstance().addNotifyHandler("test",this.notifyTest,this);
+		NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_player_levelup,this._notifyPlayerLevelUp,this);
     }
     onDestroy(){
         super.onDestroy();
         PopMgr.getInstance().clearPop();
         // NotifyMgr.getInstance().removeNotifyHandler("test",this.notifyTest,this);
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_player_levelup,this._notifyPlayerLevelUp,this);
     }
     start () {}
     public getCanvas(){
@@ -66,6 +68,14 @@ export class BaseScene extends BasisScene {
     notifyTest(data:any){
         // console.log("BaseScene notifyTest!!");
         // console.log(data);
+    }
+
+
+
+    //玩家升级通知
+    private _notifyPlayerLevelUp(data:any)
+    {
+        PopMgr.getInstance().popPlayerLevelUpWindow(data as Msg.NotifyLevelUpAward)
     }
 
 }

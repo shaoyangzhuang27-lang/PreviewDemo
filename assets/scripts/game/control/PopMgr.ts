@@ -33,6 +33,8 @@ import { PopBookProUI } from '../view/pop/PopBookProUI';
 import { TipCampOrCareer } from '../view/TipCampOrCareer';
 import { PopHaloView } from '../view/pop/PopHaloView';
 import { TipShareHeroToChat } from '../view/TipShareHeroToChat';
+import { PopPlayerLevelUpAward } from '../view/pop/PopPlayerLevelUpAward';
+
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
@@ -625,4 +627,23 @@ export class PopMgr extends PopCore  {
              // let script = p.getComponent("PopBookProUI") as PopBookProUI;
          } );
      }
+
+
+    /**
+     * 弹出玩家升级奖励界面
+     */
+    
+    public popPlayerLevelUpWindow(msgData :Msg.NotifyLevelUpAward){
+
+        resources.load('prefabs_ui/pop/pop_player_levelup_award', (err: any, res: any) => {
+            let p = instantiate(res);
+            this.pushWindow(p);
+            let script = p.getComponent("PopPlayerLevelUpAward") as PopPlayerLevelUpAward;
+            script.setInitData(msgData);
+            // script.setIsMaskClose(true);
+
+        });
+
+    }
+
 }
