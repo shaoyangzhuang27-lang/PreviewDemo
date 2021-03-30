@@ -1,0 +1,332 @@
+{
+  "ver": "2.0.10",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "4a939056-70ce-4646-b0b7-42e09958bf1b",
+  "files": [],
+  "subMetas": {
+    "78391": {
+      "importer": "gltf-animation",
+      "uuid": "4a939056-70ce-4646-b0b7-42e09958bf1b@78391",
+      "displayName": "",
+      "id": "78391",
+      "name": "skill.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 4.166666666666667,
+          "to": 6.166666666666667
+        },
+        "events": [
+          {
+            "frame": 1.0666666666666667,
+            "functionName": "onSkill",
+            "parameters": []
+          }
+        ],
+        "speed": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "fb329": {
+      "importer": "gltf-mesh",
+      "uuid": "4a939056-70ce-4646-b0b7-42e09958bf1b@fb329",
+      "displayName": "",
+      "id": "fb329",
+      "name": "Sphere001.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1f586": {
+      "importer": "gltf-animation",
+      "uuid": "4a939056-70ce-4646-b0b7-42e09958bf1b@1f586",
+      "displayName": "",
+      "id": "1f586",
+      "name": "idle.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 2.1666666666666665
+        },
+        "events": []
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "989ed": {
+      "importer": "gltf-animation",
+      "uuid": "4a939056-70ce-4646-b0b7-42e09958bf1b@989ed",
+      "displayName": "",
+      "id": "989ed",
+      "name": "attack.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 2.3333333333333335,
+          "to": 4
+        },
+        "events": [
+          {
+            "frame": 0.7,
+            "functionName": "onAttack",
+            "parameters": []
+          }
+        ],
+        "speed": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "b4251": {
+      "importer": "gltf-animation",
+      "uuid": "4a939056-70ce-4646-b0b7-42e09958bf1b@b4251",
+      "displayName": "",
+      "id": "b4251",
+      "name": "die.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 1,
+        "sample": 30,
+        "span": {
+          "from": 6.333333333333333,
+          "to": 8.433333333333334
+        },
+        "events": []
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f39c0": {
+      "importer": "gltf-animation",
+      "uuid": "4a939056-70ce-4646-b0b7-42e09958bf1b@f39c0",
+      "displayName": "",
+      "id": "f39c0",
+      "name": "victory.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 8.6,
+          "to": 10.1
+        },
+        "events": []
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "cf5ee": {
+      "importer": "gltf-animation",
+      "uuid": "4a939056-70ce-4646-b0b7-42e09958bf1b@cf5ee",
+      "displayName": "",
+      "id": "cf5ee",
+      "name": "run.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 10.266666666666667,
+          "to": 11.041666984558105
+        },
+        "events": [],
+        "speed": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "438fe": {
+      "importer": "gltf-skeleton",
+      "uuid": "4a939056-70ce-4646-b0b7-42e09958bf1b@438fe",
+      "displayName": "",
+      "id": "438fe",
+      "name": "UnnamedSkeleton.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 37
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d4f45": {
+      "importer": "gltf-embeded-image",
+      "uuid": "4a939056-70ce-4646-b0b7-42e09958bf1b@d4f45",
+      "displayName": "",
+      "id": "d4f45",
+      "name": "Map #2.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1da29": {
+      "importer": "texture",
+      "uuid": "4a939056-70ce-4646-b0b7-42e09958bf1b@1da29",
+      "displayName": "",
+      "id": "1da29",
+      "name": "Map #2.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "4a939056-70ce-4646-b0b7-42e09958bf1b@d4f45"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "a041f": {
+      "importer": "gltf-scene",
+      "uuid": "4a939056-70ce-4646-b0b7-42e09958bf1b@a041f",
+      "displayName": "",
+      "id": "a041f",
+      "name": "zhangfei_01_animation.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #2",
+        "uri": "4a939056-70ce-4646-b0b7-42e09958bf1b@d4f45"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 11.041666984558105,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "idle",
+            "from": 0,
+            "to": 2.1666666666666665,
+            "wrapMode": 2
+          },
+          {
+            "name": "attack",
+            "from": 2.3333333333333335,
+            "to": 4,
+            "wrapMode": 2
+          },
+          {
+            "name": "skill",
+            "from": 4.166666666666667,
+            "to": 6.166666666666667,
+            "wrapMode": 2
+          },
+          {
+            "name": "die",
+            "from": 6.333333333333333,
+            "to": 8.433333333333334,
+            "wrapMode": 1
+          },
+          {
+            "name": "victory",
+            "from": 8.6,
+            "to": 10.1,
+            "wrapMode": 2
+          },
+          {
+            "name": "run",
+            "from": 10.266666666666667,
+            "to": 11.041666984558105,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "4a939056-70ce-4646-b0b7-42e09958bf1b@a041f",
+    "assetFinder": {
+      "meshes": [
+        "4a939056-70ce-4646-b0b7-42e09958bf1b@fb329"
+      ],
+      "skeletons": [
+        "4a939056-70ce-4646-b0b7-42e09958bf1b@438fe"
+      ],
+      "textures": [
+        "4a939056-70ce-4646-b0b7-42e09958bf1b@1da29"
+      ],
+      "materials": [
+        "0ecc0351-b91a-46fc-b561-9a75b937af10"
+      ],
+      "scenes": [
+        "4a939056-70ce-4646-b0b7-42e09958bf1b@a041f"
+      ]
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/resources/model/hero/hero_zhangfei/mat"
+  }
+}

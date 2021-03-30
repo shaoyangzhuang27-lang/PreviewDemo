@@ -42,19 +42,19 @@ export class PopMgr extends PopCore  {
         return this._instance;
     }
     
-    public clearPop(){
+    // public clearPop(){
 
-    }
+    // }
 
     public setNetLoading(bo:boolean,content:string){
         resources.load('prefabs_ui/net_loading', (err:Error | null,res:any)=>{
             // this.netLoading = instantiate( res );
 
-            let net_loading = this.parent?.getChildByName("net_loading")
+            let net_loading = this._parent?.getChildByName("net_loading")
             if(!net_loading){
                 net_loading = instantiate( res );
                 if(net_loading)
-                    this.parent?.addChild(net_loading);
+                    this._parent?.addChild(net_loading);
             }
             if(net_loading){
                 let script = net_loading.getComponent("NetLoading") as NetLoading;
@@ -219,7 +219,7 @@ export class PopMgr extends PopCore  {
         
         resources.load('prefabs_ui/pop/tip_demo', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
-            this.parent?.addChild(p);
+            this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipDemo") as TipDemo;
@@ -236,7 +236,7 @@ export class PopMgr extends PopCore  {
 
         resources.load('prefabs_ui/pop/tip_hero_attribute', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
-            this.parent?.addChild(p);
+            this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipHeroAttribute") as TipHeroAttribute;
@@ -259,7 +259,7 @@ export class PopMgr extends PopCore  {
         // }
         resources.load('prefabs_ui/pop/tip_skill', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
-            this.parent?.addChild(p);
+            this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipSkill") as TipSkill;
@@ -278,7 +278,7 @@ export class PopMgr extends PopCore  {
     public tipCampOrCareerWindow(pos:Vec3, career:number, camp:number =0){
         resources.load('prefabs_ui/pop/tip_camp_or_career', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
-            this.parent?.addChild(p);
+            this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipCampOrCareer") as TipCampOrCareer;
@@ -297,7 +297,7 @@ export class PopMgr extends PopCore  {
      public tipShareHeroToChatindow(pos: Vec3, _heroData: HeroData) {
         resources.load('prefabs_ui/pop/tip_share_chat', (err: any, res: any) => {
             let p = instantiate(res) as Node;
-            this.parent?.addChild(p);
+            this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipShareHeroToChat") as TipShareHeroToChat;
