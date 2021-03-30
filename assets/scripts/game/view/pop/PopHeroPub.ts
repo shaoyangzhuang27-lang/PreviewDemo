@@ -681,8 +681,15 @@ export class PopHeroPub extends PopBase {
             
             if(msgData.summonType != Msg.TSummonType.ESummonType_Wonder)
             {
-                this.removePubNotifyHandler();
-                PopMgr.getInstance().popSummonSettleWindow(msgData,XConsts.POP_SUMMON_TYPE.HeroPub);
+                if(this.isActive())
+                {
+                    PopMgr.getInstance().popSummonSettleWindow(msgData,XConsts.POP_SUMMON_TYPE.HeroPub);
+                }   
+                this.addPubNotifyHandler();
+                this.updateImgPropNum();
+                this.updateProgressProcess();
+                this.updateBtnSummonState();
+                this.updateShowNodeToggle();
             }
            
         }
@@ -720,15 +727,15 @@ export class PopHeroPub extends PopBase {
     }
 
 
-    public show()
-    {
-        super.show();
-        this.addPubNotifyHandler();
-        this.updateImgPropNum();
-        this.updateProgressProcess();
-        this.updateBtnSummonState();
-        this.updateShowNodeToggle();
-    }
+    // public show()
+    // {
+    //     super.show();
+    //     this.addPubNotifyHandler();
+    //     this.updateImgPropNum();
+    //     this.updateProgressProcess();
+    //     this.updateBtnSummonState();
+    //     this.updateShowNodeToggle();
+    // }
 
 
     private _onToggleContainerClick(event: Event, customEventData: string){
