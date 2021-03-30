@@ -161,7 +161,7 @@ export class BattleTitleBar extends Component {
         let campNode = this._battleUiTitleNode.getChildByName("node_camp")
         let spt = campNode?.getComponent(Sprite) as Sprite
         let campRes = "battle/ui/" + XConsts.KHeroCampIcon[camp] + "/spriteFrame"
-        XFuns.ReplaceSpriteFrame(campRes, spt, () => {})
+        // XFuns.ReplaceSpriteFrame(campRes, spt, () => {})
     }
 
     removeTitleBar(): void {
@@ -194,7 +194,7 @@ export class BattleTitleBar extends Component {
             return
         }
         let path = "/battle/ui/" + str + "/spriteFrame"
-        XFuns.CreateSprite(path, this._layStatus, str, ()=>{})
+        // XFuns.CreateSprite(path, this._layStatus, str, ()=>{})
     }
 
     // 回收状态图标

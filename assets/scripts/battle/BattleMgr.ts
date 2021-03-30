@@ -5,6 +5,7 @@ import { HeroData } from "../game/model/datas/HeroData";
 import { TableName, ValueMgr } from "../game/model/ValueMgr";
 import { EEffectType } from "./BattleHero";
 import { BattleResMgr } from "./BattleResMgr";
+import { resources, SpriteFrame } from "cc";
 
 let preloadResList: string[] = [];
 
@@ -94,7 +95,7 @@ export class BattleMgr {
     public doTest(onProgress: (c: number, t: number)=>void, onLoaded: ()=>void) {
         BattleTest.buildTestBattle();
         this.buildPreloadRes();
-        // this.uiPreloadRes();
+        this.uiPreloadRes();
         BattleResMgr.getInstance().startLoad(BattleMgr.getInstance().getPreloadRes(), onProgress, onLoaded);
     }
 
@@ -117,7 +118,13 @@ export class BattleMgr {
 
     // ui相关资源
     public uiPreloadRes(){
-        preloadResList.push("battle/ui")
+        preloadResList.push("battle/ui/加血/spriteFrame")
+        // resources.loadDir("battle/ui", SpriteFrame, (err : any, asset : any)=>{
+        //     if(!err){
+        //         console.log(asset)
+        //         // resources.release("battle/ui", SpriteFrame);
+        //     }
+        // })
     }
 
     public getIdleArmyInfo() {
