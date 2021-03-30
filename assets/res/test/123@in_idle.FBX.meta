@@ -1,0 +1,78 @@
+{
+  "ver": "2.0.10",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "708bedba-aafc-4eae-8c57-e14bf03f9b1f",
+  "files": [],
+  "subMetas": {
+    "79928": {
+      "importer": "gltf-scene",
+      "uuid": "708bedba-aafc-4eae-8c57-e14bf03f9b1f@79928",
+      "displayName": "",
+      "id": "79928",
+      "name": "123@in_idle.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "51a51": {
+      "importer": "gltf-animation",
+      "uuid": "708bedba-aafc-4eae-8c57-e14bf03f9b1f@51a51",
+      "displayName": "",
+      "id": "51a51",
+      "name": "in_idle.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 3.2916667461395264
+        },
+        "events": []
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "legacyFbxImporter": false,
+    "animationImportSettings": [
+      {
+        "name": "铁扇公主_skin01 - 副本",
+        "duration": 3.2916667461395264,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "in_idle",
+            "from": 0,
+            "to": 3.2916667461395264,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "708bedba-aafc-4eae-8c57-e14bf03f9b1f@79928",
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "708bedba-aafc-4eae-8c57-e14bf03f9b1f@79928"
+      ]
+    }
+  }
+}

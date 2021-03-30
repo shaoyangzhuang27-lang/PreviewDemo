@@ -1,0 +1,109 @@
+{
+  "ver": "2.0.10",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "842b8918-7fee-49ed-b0b7-102cfd44d393",
+  "files": [],
+  "subMetas": {
+    "c244a": {
+      "importer": "gltf-mesh",
+      "uuid": "842b8918-7fee-49ed-b0b7-102cfd44d393@c244a",
+      "displayName": "",
+      "id": "c244a",
+      "name": "Cylinder.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "a2364": {
+      "importer": "gltf-embeded-image",
+      "uuid": "842b8918-7fee-49ed-b0b7-102cfd44d393@a2364",
+      "displayName": "",
+      "id": "a2364",
+      "name": "Map #1.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "6e70c": {
+      "importer": "texture",
+      "uuid": "842b8918-7fee-49ed-b0b7-102cfd44d393@6e70c",
+      "displayName": "",
+      "id": "6e70c",
+      "name": "Map #1.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "842b8918-7fee-49ed-b0b7-102cfd44d393@a2364"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "b9d6f": {
+      "importer": "gltf-scene",
+      "uuid": "842b8918-7fee-49ed-b0b7-102cfd44d393@b9d6f",
+      "displayName": "",
+      "id": "b9d6f",
+      "name": "2uv_Cylinder.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #1",
+        "uri": "842b8918-7fee-49ed-b0b7-102cfd44d393@a2364"
+      }
+    ],
+    "legacyFbxImporter": false,
+    "redirect": "842b8918-7fee-49ed-b0b7-102cfd44d393@b9d6f",
+    "assetFinder": {
+      "meshes": [
+        "842b8918-7fee-49ed-b0b7-102cfd44d393@c244a"
+      ],
+      "skeletons": [],
+      "textures": [
+        "842b8918-7fee-49ed-b0b7-102cfd44d393@6e70c"
+      ],
+      "materials": [
+        "37f885d6-e452-434a-8d74-0306a34a22b4"
+      ],
+      "scenes": [
+        "842b8918-7fee-49ed-b0b7-102cfd44d393@b9d6f"
+      ]
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/res/test/Materials_2uv_Cylinder"
+  }
+}
