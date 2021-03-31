@@ -248,6 +248,9 @@ export class HeroIcon extends Component {
             case XConsts.HERO_ICON_TYPE.SummonSettle:
                 this.lab_level.string = "1"
                 break;
+            case XConsts.HERO_ICON_TYPE.WonderSummon :
+                this.lab_level.node.active = false;
+                break;   
         }
     }
 

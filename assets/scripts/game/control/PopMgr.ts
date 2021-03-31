@@ -34,6 +34,7 @@ import { TipCampOrCareer } from '../view/TipCampOrCareer';
 import { PopHaloView } from '../view/pop/PopHaloView';
 import { TipShareHeroToChat } from '../view/TipShareHeroToChat';
 import { PopPlayerLevelUpAward } from '../view/pop/PopPlayerLevelUpAward';
+import {PubWonderRewardList} from "../view/pub/PubWonderRewardList";
 
 
 export class PopMgr extends PopCore  {
@@ -514,13 +515,14 @@ export class PopMgr extends PopCore  {
     }
 
 
-    public popFragmentSynthesisWindow(data : XStruct.fragment_synthesis_info.IRecord,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+    public popFragmentSynthesisWindow(data : XStruct.fragment_synthesis_info.IRecord,submitCallBack:Function,isWonderSummonShow : boolean = false,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_fragment_synthesis', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 
             let script = p.getComponent("PopFragmentSynthesis") as PopFragmentSynthesis;
+            script.setIsWonderSummonShow(isWonderSummonShow);
             script.FragmentSysthesisInfo = data;
             script.setIsMaskClose(isMaskClose);
         } );
@@ -595,6 +597,19 @@ export class PopMgr extends PopCore  {
         } );
     }
 
+       //奇迹召唤奖池详情
+    public popPubWonderRewardListWindow(closeCallBack:Function|null = null,isMaskClose:boolean = true){
+        resources.load('prefabs_ui/pub/pub_wonder_rewardlist', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            let script = p.getComponent("PubWonderRewardList") as PubWonderRewardList;
+            script.setCloseCallBack(closeCallBack);
+            script.setIsMaskClose(isMaskClose);
+            
+        } );
+    }
+
     /**
      * 打开图鉴详情
      * @param sid 英雄静态id
@@ -602,9 +617,11 @@ export class PopMgr extends PopCore  {
     public popOpenBookHeroDetail(sid:number)
     {
         resources.load('prefabs_ui/pop/pop_bookherodetail', (err:any,res:any)=>{
+            console.log("sssssssssss",sid);
             let p = instantiate( res );
             this.pushWindow(p);
 
+          
             let script = p.getComponent("PopBookHeroDetail") as PopBookHeroDetail;
             script.setBookData(sid);
 
@@ -687,4 +704,7 @@ export class PopMgr extends PopCore  {
 
     }
 
+
+
+  
 }

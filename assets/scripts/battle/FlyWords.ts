@@ -1,13 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2021-03-01 13:54:59
- * @LastEditTime: 2021-03-27 18:08:43
+ * @LastEditTime: 2021-03-30 15:25:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \PreviewDemo\assets\scripts\battle\FlyWords.ts
  */
 
-import { _decorator, Component, Label, math, Node, Sprite, Color, resources, SpriteFrame, Layout, Layers } from 'cc';
+import { _decorator, Component, Label, math, Node, Sprite, Color, resources, SpriteFrame, Layout, Layers, Asset, instantiate } from 'cc';
+import { BattleResMgr } from './BattleResMgr';
 const { ccclass, property } = _decorator;
 
 // 伤害显示对应图片
@@ -50,12 +51,11 @@ export class FlyWords extends Component {
         if(!showConfig.icoPaths || showConfig.icoPaths.length < 0){
             return
         }
+       
         for (let index = 0; index < showConfig.icoPaths.length; index++) {
             const icoPath = showConfig.icoPaths[index];
-            resources.load(icoPath, (err, spriteFrame: SpriteFrame) => {
-                if (err || !this.node.activeInHierarchy) {
-                    return
-                }
+            let spriteFrame = resources.get(icoPath, SpriteFrame)
+            if (spriteFrame && this.node && this.node.activeInHierarchy){
                 let node = new Node("flyWordsIco" + index)
                 node.parent = this.layDamage
                 node.layer = Layers.Enum.UI_2D
@@ -65,7 +65,7 @@ export class FlyWords extends Component {
                 if (showConfig.icoColor && showConfig.icoColor[index]) {
                     sptComponent.color = showConfig.icoColor[index]
                 }
-            });
+            }
         }
     }
     

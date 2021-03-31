@@ -103,7 +103,7 @@ export class HeroFragment extends Component {
     }
 
 
-    public set fragmentInfo(info : XStruct.fragment_synthesis_info.IRecord)
+    public setFragmentInfo(info : XStruct.fragment_synthesis_info.IRecord,isWonderSummon : boolean = false)
     {
         this._fragmentInfo = instantiate(info);
         this.img_camp.active = false;
@@ -149,6 +149,14 @@ export class HeroFragment extends Component {
 
         }
 
+        if(isWonderSummon)
+        {
+
+            this._setStar(info.star ? info.star : 0);
+            this.probar_fragment.node.active = false;
+            this.lab_process_num.node.active = false;
+            this.img_point.active = false;
+        }
     }
 
     public setBtnClick()
@@ -156,6 +164,8 @@ export class HeroFragment extends Component {
         this.btn_frame.on(Node.EventType.TOUCH_END, this._onClickIcon, this);        
     }
 
+
+    
     // set FragmentInfo(info : XStruct.fragment_synthesis_info.IRecord)
     // {
 

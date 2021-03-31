@@ -1,22 +1,225 @@
 
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node,Label,ProgressBar,Button,Sprite,Color,resources,RichText,instantiate } from 'cc';
+import { GameModel } from '../../model/GameModel';
+import { XConsts } from '../../model/const/XConsts';
+import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { HeroIcon } from '../hero/HeroIcon';
+import { ItemEquipType,ItemEquipCell } from '../menu/ItemEquipCell';
+import { PopMgr } from '../../control/PopMgr';
+import { PubHeroIcon } from '../pub/PubHeroIcon';
 const { ccclass, property } = _decorator;
 
 @ccclass('PubWonderSummon')
 export class PubWonderSummon extends Component {
-    // [1]
-    // dummy = '';
+    @property({type: Node})
+    public node_hero:Node | null = null;
+    @property({type: Node})
+    public node_dimond:Node | null = null;
+    @property({type: Node})
+    public node_equip_0:Node | null = null;
+    @property({type: Node})
+    public node_equip_1:Node | null = null;
+    @property({type: Node})
+    public node_equip_2:Node | null = null;
+    @property({type: Node})
+    public node_fragment_0:Node | null = null;
+    @property({type: Node})
+    public node_fragment_1:Node | null = null;
+    @property({type: Label})
+    public lab_prop_num = null as unknown as Label;
+    @property({type: RichText})
+    public lab_bar_rich = null as unknown as RichText;
 
-    // [2]
-    // @property
-    // serializableDummy = 0;
+    @property({type: Label})
+    public lab_summon_ad= null as unknown as Label;
 
+    @property({type: Label})
+    public lab_summon_detail= null as unknown as Label;
+
+
+    @property({type: Button})
+    public btn_detail = null as unknown as Button;
+
+    @property({type: Button})
+    public btn_summon_one = null as unknown as Button;
+
+    @property({type: Button})
+    public btn_summon_ten = null as unknown as Button;
+
+    //奇迹召唤召唤进度
+    private _nWonderSummonProgress : number = 0;
     start () {
+
+        this.lab_summon_ad.string = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERSUMMON);
+        this.lab_summon_detail.string = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERSUMMONAWARD);
+
+        this.btn_detail.node.on(Node.EventType.TOUCH_END, this._onBtnDetailClick, this)
         // [3]
+        this.updateProgressProcess();
+        this.updateBtnSummonState();
+        this.initHeroIconPrefab();
     }
 
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
+    private _onBtnDetailClick(event:any)
+    {
+        PopMgr.getInstance().popPubWonderRewardListWindow();
+    }
+
+    public updateBtnSummonState()
+    {
+        var lab_one = this.btn_summon_one.node.getChildByName("lab_summon_num")?.getComponent(Label);
+        var img_one_remind = this.btn_summon_one.node.getChildByName("img_summon_remind")?.getComponent(Sprite);
+        var lab_ten = this.btn_summon_ten.node.getChildByName("lab_summon_num")?.getComponent(Label);
+        var img_ten_remind = this.btn_summon_ten.node.getChildByName("img_summon_remind")?.getComponent(Sprite);
+        let changeLabColor = (obj : Label,bWhite : boolean)=>{
+            obj.color = bWhite ? Color.WHITE :  Color.RED ;
+        }
+
+        var nCurDiamonds =  GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts();
+        lab_one && (lab_one.string = "x" + String(XConsts.PUB_SUMMON_WONDER_ONE_COSUME)) && changeLabColor(lab_one,nCurDiamonds >= XConsts.PUB_SUMMON_WONDER_ONE_COSUME);
+        lab_ten && (lab_ten.string = String(XConsts.PUB_SUMMON_WONDER_TEN_COSUME)) && changeLabColor(lab_ten,nCurDiamonds >= XConsts.PUB_SUMMON_WONDER_TEN_COSUME);
+        img_one_remind && (img_one_remind.node.active = nCurDiamonds >= XConsts.PUB_SUMMON_WONDER_ONE_COSUME);
+        img_ten_remind && (img_ten_remind.node.active = nCurDiamonds >= XConsts.PUB_SUMMON_WONDER_TEN_COSUME);
+
+    }
+    public updateProgressProcess()
+    {
+        this._nWonderSummonProgress = GameModel.getInstance().getHeroPubModel().getPlayerWonderTimes();
+
+        if(this.lab_bar_rich)
+        {
+            var strInfo = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERSUMMONRESIDUE);
+            var newStr = strInfo.replace("{0}",String(XConsts.PUB_WONDER_SUMMON_COUNT_MAX - this._nWonderSummonProgress));
+            this.lab_bar_rich.string = newStr
+        }
+        var nodWindow = this.node.getChildByName("window");
+        var node_wonder_progress = nodWindow?.getChildByName("node_wonder_progress");
+        var barProgress = node_wonder_progress?.getChildByName("bar_progress");
+        var barCompoent = barProgress?.getComponent(ProgressBar);
+        if(barCompoent)
+        {
+            barCompoent.progress = this._nWonderSummonProgress /XConsts.PUB_WONDER_SUMMON_COUNT_MAX ;
+        }
+
+    }
+
+
+    //显示界面上7个预制体信息
+    public initHeroIconPrefab()
+    {
+        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+            let _heroIcon = instantiate(res);
+            _heroIcon.setScale(0.4,0.4,1)
+            let script = _heroIcon.getComponent(HeroIcon); 
+            script.initUIHeroIconInfo(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero(),XConsts.HERO_ICON_TYPE.WonderSummon);    
+            script.setBtnCallBack(()=>{
+                PopMgr.getInstance().popOpenBookHeroDetail(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero());
+            })
+            this.node_hero?.addChild(_heroIcon);   
+        });
+
+        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+            let itemEquipCell = instantiate(res);
+            //钻石 
+            itemEquipCell.setScale(0.6,0.6,1)
+            let id = Msg.TObjectType.EObject_VRmb; 
+            let num = XConsts.PUB_UI_WONDER_DEFAULT_DIAMOND_REWARD;
+            // 设置装备点击回调
+            let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
+            script.setItemType(id, num, ItemEquipType.goods, 
+                ()=>{
+                    console.log("点击钻石显示道具信息")
+                    PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,true);
+            });  
+
+            this.node_dimond?.addChild(itemEquipCell);   
+        });
+
+        for(let i = 0; i < 3; i++)
+        {
+            resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+                let itemEquipCell = instantiate(res); 
+                itemEquipCell.setScale(0.4,0.4,1)
+                let id = 45 + i; 
+                let num = 1;
+                // 设置装备点击回调
+                let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
+                script.setItemType(id, num, ItemEquipType.equip, 
+                    ()=>{
+                        console.log("装备")
+                        PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.equip,false);
+                });  
+    
+                switch(i)
+                {
+                    case 0 :
+                        this.node_equip_0?.addChild(itemEquipCell);  
+                        break;
+                    case 1 :
+                        this.node_equip_1?.addChild(itemEquipCell);  
+                        break;
+                    case 2 :
+                        this.node_equip_2?.addChild(itemEquipCell);  
+                        break;
+                }
+            });
+        }
+
+        for(let i = 0; i < 2; i++)
+        {
+            resources.load('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
+                let itemEquipCell = instantiate(res); 
+                itemEquipCell.setScale(0.4,0.4,1)
+                // let id = 45 + i; 
+                // let num = 1;
+                var info : XStruct.fragment_synthesis_info.IRecord = {
+                    frame :"",
+                    camp : "",
+                    star : 0,
+                    quality : "",
+                    icon : "",
+                    type : 0,
+                    maxNum : 0,
+                    curNum : 0,
+                    heroName : "",
+                    campName : "",
+                    classesName : "",
+                    bg : ""
+                }  
+                info.type = Msg.TFragmentType.EFragmentType_Random;
+                info.star = 4;
+                if(i == 1)
+                {
+                    info.type = Msg.TFragmentType.EFragmentType_CampRandom;
+                    info.camp = "ui/common/team/" + XConsts.KHeroCampIcon[1] + "/spriteFrame";
+                    info.campName = XConsts.KCampName[1];
+                }
+                info.quality = "ui/common/icon/" + XConsts.KFragmentQualitySpriteName[0] + "/spriteFrame";
+                info.frame = "ui/common/icon/" + XConsts.KFragmentFrameSpriteName[0] + "/spriteFrame";
+               
+                info.maxNum = 30;
+                // 设置装备点击回调
+                let script = itemEquipCell.getComponent(PubHeroIcon);
+                script.setWonderSummonShow(true,info);
+                script.setBtnCallBack( 
+                    ()=>{
+                        console.log("碎片");
+                        PopMgr.getInstance().popFragmentSynthesisWindow(info,()=>{console.log("碎片合成")},true);
+                });  
+    
+                switch(i)
+                {
+                    case 0 :
+                        this.node_fragment_0?.addChild(itemEquipCell);  
+                         break;
+                    case 1 :
+                        this.node_fragment_1?.addChild(itemEquipCell);  
+                        break;
+                }
+            });
+        }
+       
+    }
+  
 }
 

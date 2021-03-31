@@ -137,16 +137,22 @@ export class HeroPubModel extends BaseModel{
     //玩家奇迹召唤次数
     public getPlayerWonderTimes()
     {
-        return 80;
+        
         return this._gameModel.getPlayerModel().getPlayerInfo().WonderTimes || 0;
     }
 
 
+    //玩家心愿奇迹英雄
+    public getPlayerWonderHero()
+    {
+        return this._gameModel.getPlayerModel().getPlayerInfo().WonderHero || XConsts.PUB_UI_WONDER_DEFAULT_HEARTHERO;
+    }
 
     //玩家等级
     public getPlayerLevel()
     {
-        return this._gameModel.getPlayerModel().getPlayerInfo().level || 0;
+         
+        return  80 ;//this._gameModel.getPlayerModel().getPlayerInfo().level || 0;
     } 
 
     //玩家1,2星英雄是否自动分解
