@@ -164,7 +164,7 @@ export class PubWonderHeartHero extends PopBase {
                         let _heroIcon = instantiate(res) ;
                         let script = _heroIcon.getComponent(HeroIcon); 
                         // script.setHeroID(this._heroInfo as HeroData);
-                        script.initUIHeroIconInfo(id,XConsts.HERO_ICON_TYPE.RecLineUp);
+                        script.initUIHeroIconInfo(id,XConsts.HERO_ICON_TYPE.WonderSummon);
                         _heroIcon.scale = new Vec3(0.6,0.6,1);    
                         script.setBtnCallBack(callFunc); 
                         this.img_hero?.addChild(_heroIcon);
