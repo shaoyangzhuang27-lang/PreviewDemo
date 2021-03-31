@@ -170,6 +170,14 @@ enum TErrorCode{
 	ERR_HeroBookNotActive = 340; //图鉴英雄未激活
 	ERR_HeroBookMaxLevel = 341; //图鉴英雄已满级
 	ERR_TechnologyMaxLevel = 342; //科技等级已达上限
+	ERR_ArtifactData = 343; //神器数据错误
+	ERR_ArtifactLevelUpMaterial = 344; //神器升级材料错误
+	ERR_PetData = 345; //宠物数据错误
+	ERR_HeroData = 346; //英雄数据错误
+	ERR_HeroSameInFormation = 347; //同一英雄不能上阵多个
+	ERR_RoleNotInForamtion = 348; //主角不在阵容中
+	ERR_ArenaOpponentData = 349; //对手数据错误
+	ERR_AdvArenaOpponentNotFound = 350; //未能匹配到对手
 	
 	ERR_Mythical_AwardReceived = 487;//宝箱已领取 
 	ERR_Mythical_Passed = 488;//当前关已完成 
@@ -225,6 +233,7 @@ enum TErrorCode{
 	ERR_GuildMonsterTimesNotEnought 		= 537;		//公会副本挑战次数不足
 	ERR_GuildMonsterKilled			 		= 538;		//公会副本Boss已经死了
 	ERR_GuildPositionNumMax			 		= 539;		//目标公会职位已经达到上限
+	ERR_CampCopyTimesNotEnought 			= 540;		//阵营副本挑战次数不足
 }
 
 //------------------------------------------------------------------------------
@@ -244,7 +253,8 @@ enum TQualityType{
 	EQuality_Blue = 3;
 	EQuality_Purple = 4;
 	EQuality_Orange = 5;
-	EQuality_Golden = 6;
+	EQuality_Red = 6;
+	EQuality_Golden = 7;
 }
 
 //阵营类型
@@ -311,6 +321,9 @@ enum TObjectType{
 	EObject_PortraitSpecial = 38; //特殊头像
 	EObject_PortraitFrame = 39; //头像框
 	EObject_Title = 40; //称号
+	EObject_Skin = 41; //皮肤
+	EObject_Artifact = 42; //神器
+	EObject_ArtifactFragment = 43; //神器碎片
 }
 
 //碎片类型
@@ -409,6 +422,9 @@ enum TObjectSourceType
 	EObjectSourceType_DailyRechargeRookie = 58;
 	EObjectSourceType_DailyRechargeActivity = 59;
 	EObjectSourceType_GuildMonster = 60;
+	EObjectSourceType_CampCopy = 61;
+	EObjectSourceType_AdvArenaDailyAward = 62;
+	EObjectSourceType_AdvArenaRankAward = 63;
 }
 
 //物品消耗类型
@@ -475,6 +491,8 @@ enum TVRmbAddType {
 	EVRmbAddType_BattlePass2 = 37;
 	EVRmbAddType_DailyRechargeRookie = 38;
 	EVRmbAddType_DailyRechargeActivity = 39;
+	EVRmbAddType_AdvArenaDailyAward = 40;
+	EVRmbAddType_AdvArenaRankAward = 41;
 }
 
 //钻石消耗类型
@@ -511,6 +529,7 @@ enum TVRmbSubType {
 	EVRmbSubType_TechnologyReset = 29;
 	EVRmbSubType_GuildMonster = 30;
 	EVRmbSubType_GuildMonsterBattle = 31;
+	EVRmbSubType_HeroReturnBack = 32;
 }
 
 //金币来源类型
@@ -555,6 +574,9 @@ enum TMoneyAddType {
 	EMoneyAddType_DailyRechargeRookie = 37;
 	EMoneyAddType_DailyRechargeActivity = 38;
 	EMoneyAddType_TechnologyReset = 39;
+	EMoneyAddType_AdvArenaDailyAward = 40;
+	EMoneyAddType_AdvArenaRankAward = 41;
+	EMoneyAddType_AdvArenaPraise = 42;
 }
 
 //金币消耗类型
@@ -573,6 +595,7 @@ enum TMoneySubType {
 	EMoneySubType_IapChargeback = 11;
 	EMoneySubType_TechnologyLevelUp = 12;
 	EMoneySubType_GuildMonster = 13;
+	EMoneySubType_ArtifactQualityUp = 14;
 }
 
 //角色属性类型
@@ -686,6 +709,8 @@ enum TBattleType {
 	EBattleType_Mythical = 8;
 	EBattleType_Ladder = 9;
 	EBattleType_GuildMonster = 10;
+	EBattleType_CampCopy = 11;
+	EBattleType_AdvanceArena = 12;
 }
 
 enum TShopPriceType {
@@ -846,6 +871,8 @@ enum TGameFunction {
 	EGameFunction_Technology = 39;
 	EGameFunction_GuildMonster = 40;
 	EGameFunction_HeroBook = 41;
+	EGameFunction_CampCopy = 42;
+	EGameFunction_AdvanceArena = 43;
 }
 
 //充值渠道类型
@@ -936,6 +963,7 @@ enum TGuideStep {
 	EGuideStep_HeroLevelUpLocal = 34;
 	EGuideStep_HeroEquipLocal = 35;
 	EGuideStep_ChangeFormationLocal2 = 36;
+	EGuideStep_AdvArenaFormationDef = 37;
 }
 
 enum TNewGuideStep {
@@ -1170,6 +1198,8 @@ enum TDailyRedPointType {
 	EDailyRedPointType_PackLevel = 16; //等级基金
 	EDailyRedPointType_TrailPass = 17; //试练战令
 	EDailyRedPointType_DailyRecharge = 18; //天天充值
+	EDailyRedPointType_LifeLong = 19; //终身卡
+	EDailyRedPointType_RoleSkin = 20; //主角皮肤
 }
 
 enum TTalentType {
@@ -1193,6 +1223,7 @@ enum TTalentTriggerType {
 	ETalentTriggerType_BattleStart = 11; //战斗开始时
 	ETalentTriggerType_TargetDodge = 12; //目标触发闪避
 	ETalentTriggerType_AnyEnemyDead = 13; //任意敌方死亡时
+	ETalentTriggerType_DealDamage = 14; //造成伤害时
 }
 
 enum TTalentEffectTargetType {
@@ -1231,6 +1262,9 @@ enum TEffectType {
 	EEffectType_HealHPPct = 20; //百分比加血
 	EEffectType_CampSkillExtraTarget = 21; //阵营技能额外目标
 	EEffectType_CampUltimateExtraTarget = 22; //阵营技能大招额外目标
+	EEffectType_DamageReduceUpToClasses = 23; // 对特定职业免伤提高 职业类型，免伤提高
+	EEffectType_Reflect = 24; //反弹伤害
+	EEffectType_Vampiric = 25; //吸血
 }
 
 enum TEffectCondType {
@@ -1436,6 +1470,8 @@ message HeroInfo{
 	repeated int32 equipOnList = 11;
 	CrystalInfo crystal = 12;
 	int32 tier = 13;
+	int32 artifactOn = 14;
+	int32 skin = 15;
 	//repeated TalentSkillInfo talentSkillList = 14;
 	//int32 imageID = 15; //形象ID
 }
@@ -1527,6 +1563,7 @@ message PVPOpponentPlayer {
 	int32 showPortrait = 10;
 	int32 showFrame = 11;
 	int32 showTitle = 12;
+	int32 serverID = 14;
 }
 
 message LoginAwardInfo {
@@ -1668,6 +1705,11 @@ message PlayerInfo{
 	int32 showTitle = 115;
 	string uniqueID = 116;
 	bool isJumpBattle = 117;
+	int32 campCopyTimes = 118; //阵营副本通关次数
+	int32 showSkin = 119;
+	int32 GuildBossMaxKillNum = 120;
+	int64 HuntingBossHurtMax = 121;
+	int32 nextAdvArenaUpdateTime = 122;
 }
 
 //怪信息
@@ -1753,6 +1795,8 @@ message GameConfig
 	map<int32, LootObjectList> rookieQuestScoreAward = 50; //新手积分奖励 积分和奖励
 	int32 activityRankClose = 51; //活动排行榜开关
 	repeated TGameFunction gameFunctionUnlockShow = 52; //需要显示的解锁系统
+	map<int32, LootObject> advArenaDailyAward = 53; //高级竞技场每日奖励
+	int32 giftCodeReqLevel = 54; //礼品码需求等级
 }
 
 //PVP对手信息
@@ -1781,6 +1825,8 @@ message PVPOpponentInfo {
 	map<int32, float> heroBookPropertyByBook = 20;
 	map<int32, float> titleProperty = 21;
 	map<int32, PropertyMap> technologyProperty = 22;
+	map<int32, PropertyMap> skinProperty = 23;
+	int32 showSkin = 24;
 }
 
 message ClassesExchangeInfo {
@@ -2038,8 +2084,8 @@ message GetPlayerDataA{
 	map<int32, int32> mythicalCopyPassed = 49; //已通关的秘境副本，key副本ID，value通关星级
 	repeated int32 mythicalAwardReceived = 50; //已领取的秘境宝箱奖励
 	repeated ShopGoods ladderShopGoodsList = 51; //天梯商店列表
-	float IapDayNum = 52; //记录玩家每日充值金额总和
-	map<int32, int32> IapDayGets = 53; //记录玩家每日充值礼包领取状态
+	//float IapDayNum = 52; //记录玩家每日充值金额总和
+	//map<int32, int32> IapDayGets = 53; //记录玩家每日充值礼包领取状态
 	map<int64, int32> heroIDInCollege = 54; //在英雄学院中的英雄
 	map<int32, int32> CollegeBlockTimestamps = 55; //英雄学院格的CD时间
 	int32 starterPackBoughtAt1 = 56; //新手礼包购买时间戳1
@@ -2056,7 +2102,11 @@ message GetPlayerDataA{
 	DailyRechargeInfo dailyRechargeRookie = 67; //新手天天充值
 	map<int32, int32> technologyInfo = 68; //公会科技信息
 	map<int32, bool> rookieQuestScoreStatus = 69;//积分奖励领取状态
-	GuildMonsterPInfo guildMonsterPInfo = 70;//公会副本相关数据 
+	GuildMonsterPInfo guildMonsterPInfo = 70;//公会副本相关数据
+	map<int32, int32> campCopyInfo = 71; //阵营副本当前关卡，key为阵营，value为关卡
+	map<int32, SkinUnit> skinList = 72; //皮肤列表
+	map<int32, int32> artifactList = 73; //神器列表，key为ID，value为数量
+	map<int32, int32> artifactFragmentList = 74; //神器碎片列表，key为品质，value为数量
 }
 
 //召唤
@@ -2171,12 +2221,14 @@ message PutOnEquipA{
 message TakeOffEquipR{
 	int64 heroID = 1;
 	repeated TEquipLocationType takeoffEquipLocList = 2;
+	int32 artifactID = 3;
 }
 message TakeOffEquipA{
 	TErrorCode err = 1;
 	string errStr = 2;
 	int64 heroID = 3;
 	repeated TEquipLocationType takeoffEquipLocList = 4;
+	int32 artifactID = 5;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 //战斗相关
@@ -2347,6 +2399,7 @@ message HeroDecomposeA {
 	int32 soulStone = 9;
 	int32 money = 10;
 	int32 magicDust = 11;
+	map<int32, int32> artifactList = 12; //返回的神器
 }
 
 message HeroIDs {
@@ -2372,6 +2425,7 @@ message HeroStarUpA {
 	int32 advanceExp = 9;
 	int32 magicDust = 10;
 	int64 money = 11; 
+	map<int32, int32> artifactList = 12; //返回的神器
 }
 
 //随从升品阶
@@ -2489,6 +2543,7 @@ message PassEventCopyA {
 	int32 passedTimes = 4;
 	repeated LootObject lootObjList = 5;
 	int32 multiple = 6;
+	int32 vrmbConsume = 7;
 }
 
 //购买活动副本额外次数
@@ -2617,6 +2672,8 @@ message GetPVPBattleInfoA {
 	int32 pvpTimes = 7;
 	int32 refreshTimes = 8;
 	int32 seasonEndTimeStamp = 9;
+	GetLadderInfoA ladderInfo = 10;
+	AdvArenaInfo aai = 11;
 }
 
 //同步PVP战斗记录
@@ -3114,7 +3171,7 @@ message TableCheckR {
 }
 
 message TableCheckA {
-	repeated string needUpdateTableList = 1;
+	map<string, string> needUpdateTableList = 1;
 	string updateDataUrl = 2;
 	bool isLuaNeedUpdate = 3;
 	bool isIFixNeedUpdate = 4;
@@ -3677,6 +3734,7 @@ message DeviceLoginNewR {
 	string deviceId = 1; 		// 设备ID
 	string region = 2; 			// 区域
 	string mac = 3;
+	string CurIp = 4;     //分布式服务器专用字段
 }
 
 message DeviceLoginNewA {
@@ -3694,6 +3752,7 @@ message AccountLoginNewR {
 	string region = 3;
 	string accountName = 4;
 	string mac = 5;
+	string CurIp = 6;     //分布式服务器专用字段
 }
 
 message AccountLoginNewA {
@@ -3799,7 +3858,7 @@ message HeroResetA {
 	int32 magicDust = 7;
 	repeated int32 equipList = 8;
 	int32 vrmbConsume = 9;
-
+	int32 artifactID = 10; //返回的神器
 }
 
 //排行榜
@@ -4522,6 +4581,7 @@ message GuildBossEndR {
 	int32 killNum = 1; //消灭怪的数量
 	int64 playerId = 2;//服务器用
 	int32 guildLevel = 3;//服务器用
+	CheckBattlePVEInfo checkInfo = 4;
 }
 
 message GuildBossEndA {
@@ -4531,6 +4591,7 @@ message GuildBossEndA {
 	int32 guildGold = 4;
 	repeated LootObject awardList = 5; //奖励列表
 	int32 times = 6; //次数
+	int32 killNum = 7;
 }
 //////公会
 
@@ -4798,6 +4859,7 @@ message EndHuntingBossBattleR {
 	TPVPBattleResult battleResult = 2;
 	int64 hurt = 3;
 	int32 bossId = 4;
+	CheckBattlePVEInfo checkInfo = 5;
 }
 message EndHuntingBossBattleA {
 	TErrorCode err = 1;
@@ -5010,6 +5072,7 @@ message AwardDirectlyEventCopyA {
 	int32 passedTimes = 4;
 	repeated LootObject lootObjList = 5;
 	int32 multiple = 6;
+	int32 vrmbConsume = 7;
 }
 
 message DyncLanguageR {
@@ -5059,6 +5122,7 @@ message HeroStarUpMultiA {
 	int32 advanceExp = 8;
 	int32 magicDust = 9;
 	int64 money = 10; 
+	map<int32, int32> artifactList = 12; //返回的神器
 }
 
 message GetLoginPlayerR {
@@ -5115,7 +5179,6 @@ message GiftCodeAwardA {
 	repeated LootObject awardList = 3;
 }
 
-//领取图鉴奖励
 message GetHeroBookAwardR {
 	int32 heroStaticID = 1;
 }
@@ -5127,7 +5190,6 @@ message GetHeroBookAwardA {
 	int32 vrmb = 4;
 }
 
-//使用道具
 message UseUsableItemR {
 	int32 itemID = 1;
 	int32 itemNum = 2;
@@ -5278,6 +5340,7 @@ message MythicalCopyBattleEndR{
 	int32 id = 1;
 	TPVPBattleResult battleResult = 2;
 	map<int64, int32> heroHp = 3;
+	CheckBattlePVEInfo checkInfo = 4;
 }
 message MythicalCopyBattleEndA{
 	TErrorCode err = 1;
@@ -5594,6 +5657,7 @@ message ResourceUpdateZipCheckA {
 	string updateDataUrl = 1;
 	bool isRUZNeedUpdate = 2;
 	bool isRUZNeedDelete = 3;
+	string RUZMD5 = 4;
 }
 //同步是否英雄分解提示
 message SyncIsHeroDecomposePrompt {
@@ -5823,6 +5887,7 @@ message GuildMonsterBattleR{
 	int32 bossID = 1;
 	TPVPBattleResult battleResult = 2;
 	int64 hurt = 3;
+	CheckBattlePVEInfo checkInfo = 4;
 }
 message GuildMonsterBattleA{
 	TErrorCode err = 1;
@@ -5921,69 +5986,127 @@ message AcceptFriendRequestAllA{
 	string errStr = 2;
 	repeated FriendDetailInfo fdiList = 3;
 }
-//以下消息备用占位
-message GmTempR1{
-	string account = 1;//帐号
-	string password = 2;//密码
-	int64 ServerTime = 3;//服务器时间戳
+//阵营副本
+message CampCopyBattleBeginR{
+	int32 id = 1;
+	int32 camp = 2;
+	FormationInfo formation = 3;
+	int32 petID = 4;
 }
-message GmTempA1{
+message CampCopyBattleBeginA{
+	TErrorCode err = 1;
+	string errStr = 2;
+	int32 id = 3;
+	int32 camp = 4;
+	FormationInfo formation = 5;
+	int32 petID = 6;
 }
-message GmTempR2{
-	string account = 1;//帐号
-	string password = 2;//密码
-	int64 ServerTime = 3;//服务器时间戳
+message CampCopyBattleEndR{
+	int32 id = 1;
+	int32 camp = 2;
+	TPVPBattleResult battleResult = 3;
+	CheckBattlePVEInfo checkInfo = 4;
 }
-message GmTempA2{
+message CampCopyBattleEndA{
+	TErrorCode err = 1;
+	string errStr = 2;
+	int32 id = 3;
+	int32 camp = 4;
+	TPVPBattleResult battleResult = 5;
+	repeated LootObject lootList = 6;
 }
-message GmTempR3{
-	string account = 1;//帐号
-	string password = 2;//密码
-	int64 ServerTime = 3;//服务器时间戳
+message GuildMonsterBattleDirectlyR {
+	int32 bossID = 1;
+	FormationInfo formation = 2;
+	int32 petID = 3;
 }
-message GmTempA3{
+message GuildMonsterBattleDirectlyA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	int32 bossID = 3;
+	FormationInfo formation = 4;
+	int32 petID = 5;
+	TPVPBattleResult battleResult = 6;
+	int64 hurt = 7;
+	repeated LootObject lootList = 8;
+	int32 BattleTimes = 9;
+	int32 consumeVrmb = 10;
+	repeated BattleStatisticUnit playerStatistics = 11;
+	repeated BattleStatisticUnit monsterStatistics = 12;
 }
-message GmTempR4{
-	string account = 1;//帐号
-	string password = 2;//密码
-	int64 ServerTime = 3;//服务器时间戳
+
+message SyncChangeShowSkin {
+	int32 skinID = 1;
 }
-message GmTempA4{
+message SyncKnowNewSkin {
+	int32 skinID = 1;
 }
-message GmTempR5{
-	string account = 1;//帐号
-	string password = 2;//密码
-	int64 ServerTime = 3;//服务器时间戳
+message SkinUnit {
+	int32 id = 1;
+	bool isNew = 2;
+	int32 timestamp = 3; //获得时间戳
 }
-message GmTempA5{
+
+message FormationInfoNew {
+	map<int64, int32> formation = 1;
+	int32 petID = 2;
 }
-message GmTempR6{
-	string account = 1;//帐号
-	string password = 2;//密码
-	int64 ServerTime = 3;//服务器时间戳
+message GuildBossBattleDirectlyR {
+	FormationInfo formation = 1;
+	int32 petID = 2;
+	int64 PlayerId = 3;//服务器用
 }
-message GmTempA6{
+message GuildBossBattleDirectlyA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	int32 money = 3;
+	int32 guildGold = 4;
+	repeated LootObject awardList = 5; //奖励列表
+	int32 times = 6; //次数
+	FormationInfo formation = 7;
+	int32 petID = 8;
+	int32 maxKillNum = 9;
 }
-message GmTempR7{
-	string account = 1;//帐号
-	string password = 2;//密码
-	int64 ServerTime = 3;//服务器时间戳
+message HuntingBossBattleDirectlyR {
+	int32 times = 1;
+	map<int64, int32> heroesLocation = 2; //<英雄ID, 上阵位置>
+	map<int64, int32> heroesLocationAdd = 3; //<英雄ID, 助战位置>
+	PetInfo pet = 4;
+	int32 bossId = 5;
 }
-message GmTempA7{
+message HuntingBossBattleDirectlyA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	int32 stage = 3;
+	TPVPBattleResult battleResult = 4;
+	int64 hurt = 5;
+	repeated LootObject lootList = 6;
+	int32 times = 7;
+	map<int64, int32> heroesLocation = 8; //<英雄ID, 上阵位置>
+	map<int64, int32> heroesLocationAdd = 9; //<英雄ID, 助战位置>
+	PetInfo pet = 10;
+	int64 maxHurt = 11;
 }
-message GmTempR8{
-	string account = 1;//帐号
-	string password = 2;//密码
-	int64 ServerTime = 3;//服务器时间戳
+message HeroReturnBackR {
+	int64 heroID = 1;
 }
-message GmTempA8{
+message HeroReturnBackA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	repeated HeroInfo heroList = 3;
+	int32 vrmbConsume = 4;
+	int64 heroID = 5;
 }
-message GmTempR9{
-	string account = 1;//帐号
-	string password = 2;//密码
-	int64 ServerTime = 3;//服务器时间戳
+message UseArtifactFragmentR {
+	int32 quality = 1;
+	int32 num = 2;
 }
-message GmTempA9{
+message UseArtifactFragmentA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	int32 quality = 3;
+	int32 fragmentNum = 4;
+	map<int32, int32> artifactList = 5;
 }
 
 //---------------------------------- 战斗服务器相关 --------------------------------------------
@@ -5991,7 +6114,8 @@ message CreatePVPBattleR{
 	BattlePlayerInfo playerLeft = 1;	
 	BattlePlayerInfo playerRight = 4;
 	int64 battleId = 7;
-	
+	TBattleType battleType = 8;
+	int32 round = 9;
 }
 
 message CreatePVPBattleA{
@@ -6004,6 +6128,12 @@ message CreatePVPBattleA{
 	TPVPBattleResult battleResult = 7;
 	repeated BattleStatisticUnit statisticsLeft = 8;
 	repeated BattleStatisticUnit statisticsRight = 9;
+	TBattleType battleType = 10;
+	PetInfo petLeft = 11;
+	PetInfo petRight = 12;
+	int32 fightingLeft = 13;
+	int32 fightingRight = 14;
+	int32 round = 15;
 }
 
 message RegisterBattleServerR{
@@ -6047,12 +6177,14 @@ message BattlePlayerInfo{
 	map<int32, float> auraPro = 20;
 	int32 fighting = 21;
 	string name = 22;
+	map<int32, PropertyMap> skinPro = 23;
 }
 enum TBattleUnitType {
 	EBattleHeroType_Null = 0;
 	EBattleHeroType_Hero = 1;
 	EBattleHeroType_Role = 2;
 	EBattleHeroType_Monster = 3;
+	EBattleHeroType_GuildMonster = 4;
 }
 message BattleStatisticUnit {
 	TBattleUnitType heroType = 1;
@@ -6061,12 +6193,17 @@ message BattleStatisticUnit {
 	int32 heal = 4;
 	int32 suffer = 5;
 	bool isDead = 6;
+	int64 leftHP = 7;
+	int32 leftPower = 8;
+	int32 level = 9;
+	int32 location = 10;
 }
 message CreatePVEBattleR{
 	BattlePlayerInfo player = 1;
 	TBattleType battleType = 2;
 	int32 battleParam = 3;
 	int64 battleID = 4;
+	repeated int64 extParam = 5;
 }
 message CreatePVEBattleA{
 	TErrorCode err = 1;
@@ -6079,84 +6216,281 @@ message CreatePVEBattleA{
 	repeated BattleStatisticUnit playerStatistics = 8;
 	repeated BattleStatisticUnit monsterStatistics = 9;
 }
-message battleTempR05{
+message PutOnArtifactR {
+	int64 heroID = 1;
+	int32 artifactID = 2;
+	int64 exchangeHeroID = 3; //0表示从背包里装备，非0则表示从目标英雄身上抢过来穿
 }
-message battleTempA05{
+message PutOnArtifactA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	int64 heroID = 3;
+	int32 artifactID = 4;
+	int64 exchangeHeroID = 5;
+	int32 exchangeArtifactID = 6;
 }
-message battleTempR06{
+message TakeOffArtifactR {
+	int64 heroID = 1;
 }
-message battleTempA06{
+message TakeOffArtifactA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	int64 heroID = 3;
+	int32 artifactID = 4;
 }
-message battleTempR07{
+message PutOnAutoR {
+	int64 heroID = 1;
+	repeated int32 putonEquipIDList = 2;
+	int32 artifactID = 3;
 }
-message battleTempA07{
+message PutOnAutoA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	int64 heroID = 3;
+	repeated int32 putonEquipIDList = 4;
+	repeated int32 takeoffEquipIDList = 5;
+	int32 putonArtifactID = 6;
+	int32 takeoffArtifactID = 7;
 }
-message battleTempR08{
+
+message ArtifactQualtiyUpR {
+	int64 heroID = 1; //0表示升级背包里的
+	int32 artifactID = 2; 
+	map<int32, int32> materialArtifacts = 3;//消耗的材料ID
 }
-message battleTempA08{
+message ArtifactQualtiyUpA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	int64 heroID = 3; 
+	int32 artifactID = 4;
+	int32 newArtifactID = 5;
+	map<int32, int32> materialArtifacts = 6;
+	int32 consumeMoney = 7;
 }
-message battleTempR09{
+//活动副本增加一键领取所有奖励功能
+message AwardDirectlyEventCopyAllR {
 }
-message battleTempA09{
+message AwardDirectlyEventCopyAllA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	repeated LootObject lootObjList = 3;
+	map<int32, int32> passedTimes = 4;
+	//repeated int32 multiple = 5;
 }
-//预留消息343个
-message ReserveMessage343 {
+
+//预留消息
+//高级竞技场信息
+message AdvArenaInfo {
+	float score = 1; //当前积分
+	float maxScore = 2; //最高积分
+	repeated int64 praisePlayerList = 3; //点赞玩家列表
+	int32 bePraisedNum = 4; //被点赞数量
+	map<int32, FormationInfoNew> formationDef = 5; //防守阵容
+	map<int32, FormationInfoNew> formationAtk = 6; //进攻阵容
+	map<int32, bool> dailyAwardReceived = 7; //每日奖励领取
+	map<int32, bool> rankAwardReceived = 8; //段位奖励领取
+	repeated AdvArenaBattleRecord battleRecordList = 9; //战报列表
+	int32 dailyBattleTimes = 10; //每日发起战斗次数
+	int32 rank = 11; //缓存排行
+	bool isJoin = 12; //是否加入竞技匹配队列
+	int32 fightingDef = 13; //缓存防守阵容的战力
+	int32 highestRank = 14; //最高排名
 }
-message ReserveMessage342 {
+message GetAdvArenaInfoR {
+	bool isRefresh = 1;
 }
-message ReserveMessage341 {
+message GetAdvArenaInfoA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	repeated AdvArenaOpponentPlayer topRankPlayers = 3;
+	float score = 4;
+	float maxScore = 5;
+	int32 bePraisedNum = 6;
+	int32 rank = 7;
+	AdvArenaInfo aai = 8;
 }
-message ReserveMessage340 {
+message GetAdvArenaRankingR {
 }
-message ReserveMessage339 {
+message GetAdvArenaRankingA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	repeated AdvArenaOpponentPlayer topRankPlayers = 3;
 }
-message ReserveMessage338 {
+message RefreshAdvArenaOpponentR {
+
 }
-message ReserveMessage337 {
+message RefreshAdvArenaOpponentA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	AdvArenaPlayerInfo opponentInfo = 3;
 }
-message ReserveMessage336 {
+message RecieveAdvArenaDailyAwardR {
+	int32 times = 1;
 }
-message ReserveMessage335 {
+message RecieveAdvArenaDailyAwardA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	int32 times = 3;
+	repeated LootObject awardList = 4;
 }
-message ReserveMessage334 {
+message RecieveAdvArenaRankAwardR {
+	int32 awardID = 1;
 }
-message ReserveMessage333 {
+message RecieveAdvArenaRankAwardA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	int32 awardID = 3;
+	repeated LootObject awardList = 4;
 }
-message ReserveMessage332 {
+message AdvArenaBattleDirectlyR {
+	int64 opponentPlayerID = 1;
+	map<int32, FormationInfoNew> formation = 2;
 }
-message ReserveMessage331 {
+message AdvArenaBattleDirectlyA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	int64 opponentPlayerID = 3;
+	map<int32, FormationInfoNew> formation = 4;
+	int64 battleID = 5;
+	float score = 6;
+	float maxScore = 7;
+	int32 rank = 8;
+	int32 pvpTicket = 9;
+	int32 dailyBattleTimes = 10;
+	AdvArenaBattleRecord abr = 11;
+	repeated AdvArenaOpponentPlayer topRankPlayers = 12;
+	int32 highestRank = 13;
 }
-message ReserveMessage330 {
+message AdvArenaBattleRecordUnit {
+	int32 leftFighting = 1;
+	int32 rightFighting = 2;
+	PetInfo leftPet = 3;
+	PetInfo rightPet = 4;
+	TPVPBattleResult result = 5;
+	int64 battleID = 6;
+	repeated BattleStatisticUnit leftStatistics = 8;
+	repeated BattleStatisticUnit rightStatistics = 9;
+	int32 round = 7;
 }
-message ReserveMessage329 {
+message AdvArenaBattleRecord {
+	AdvArenaOpponentPlayer leftPlayer  = 1;
+	AdvArenaOpponentPlayer rightPlayer = 2;
+	TPVPBattleResult battleResult = 3;
+	int32 timestamp = 4;
+	float scoreChange = 5;
+	repeated AdvArenaBattleRecordUnit battleRecordList = 9;
 }
-message ReserveMessage328 {
+//PVP对手信息
+message AdvArenaPlayerInfo {
+	int64 id = 1;
+	string name = 2;
+	int32 level = 3;
+	int32 star = 4;
+	int32 armorID = 5;
+	int32 armorLevel = 6;
+	map<int32, FormationInfoNew> formationList = 7;
+	map<int32, PetInfo> petList = 8;
+	map<int32, int32> fightingList  = 9;
+	repeated HeroInfo heroList = 10;
+	int32 portrait = 11;
+	int32 rank = 12;
+	int32 showPortrait = 13;
+	int32 showTitle = 14;
+	int32 showFrame = 15;
+	map<int32, int32> heroBookPropertyByHero = 16;
+	map<int32, float> heroBookPropertyByBook = 17;
+	map<int32, float> titleProperty = 18;
+	map<int32, PropertyMap> technologyProperty = 19;
+	map<int32, PropertyMap> skinProperty = 20;
+	int32 showSkin = 21;
+	int32 serverID = 22;
+	float score = 23;
+	float maxScore = 24;
 }
-message ReserveMessage327 {
+message AdvArenaChangeDefFormationR {
+	map<int32, FormationInfoNew> formationList = 1;
 }
-message ReserveMessage326 {
+message AdvArenaChangeDefFormationA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	map<int32, FormationInfoNew> formationList = 3;
 }
-message ReserveMessage325 {
+message AdvArenaPraiseR {
+	int64 praisePlayerID = 1;
 }
-message ReserveMessage324 {
+message AdvArenaPraiseA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	int64 praisePlayerID = 3;
+	int32 bePraisedNum = 4;
+	int32 money = 5;
 }
-message ReserveMessage323 {
+message StartAdvArenaBattleR {
+	int64 opponentPlayerID = 1;
+	map<int32, FormationInfoNew> formationList = 2;
 }
-message ReserveMessage322 {
+message StartAdvArenaBattleA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	map<int32, FormationInfoNew> formationList = 3;
+	int64 battleID = 4;
+	AdvArenaPlayerInfo oppoPlayerInfo = 5;
 }
-message ReserveMessage321 {
+message EndAdvArenaBattleR {
+	int64 battleID = 1;
+	int64 opponentPlayerID = 2;
+	repeated AdvArenaBattleRecordUnit battleRecordList = 3;
+	CheckBattlePVEInfo checkInfo = 4;
 }
-message ReserveMessage320 {
+message EndAdvArenaBattleA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	float score = 3;
+	float maxScore = 4;
+	int32 rank = 5;
+	int32 pvpTicket = 6;
+	int32 dailyBattleTimes = 7;
+	AdvArenaBattleRecord abr = 8;
+	repeated AdvArenaOpponentPlayer topRankPlayers = 9;
+	int32 highestRank = 10;
 }
-message ReserveMessage319 {
+message NotifyAdvArenaBattleRecord {
+	AdvArenaBattleRecord abr = 1;
+	float score = 2;
+	int32 rank = 3;
+	float maxScore = 4;
+	int32 highestRank = 5;
 }
-message ReserveMessage318 {
+message AdvArenaOpponentPlayer {
+	int64 playerID = 1;
+	string name = 2;
+	int32 level = 3;
+	int32 portrait = 4;
+	int32 score = 5;
+	int32 rank = 6;
+	int32 fighting = 7;
+	int32 star = 8;
+	string region = 9;
+	int32 showPortrait = 10;
+	int32 showFrame = 11;
+	int32 showTitle = 12;
+	int32 bePraisedNum = 13;
+	int32 serverID = 14;
 }
-message ReserveMessage317 {
+message GetAdvArenaOtherPlayerInfoR {
+	int64 FindPlayerID = 1;
+	int64 SendPlayerId = 2;
 }
-message ReserveMessage316 {
+message GetAdvArenaOtherPlayerInfoA {
+	TErrorCode err = 1;
+	string errStr = 2;
+	AdvArenaPlayerInfo playerInfo = 3;
 }
-message ReserveMessage315 {
+message NotifyAdvArenaSeasonSettlement {
+	float score = 1;
+	float maxScore = 2;
+	int32 rank = 3;
+	int32 highestRank = 4;
 }
 message ReserveMessage314 {
 }
@@ -6774,17 +7108,31 @@ message ReserveMessage8 {
 }
 message ReserveMessage7 {
 }
-message ReserveMessage6 {
+message SvWmVerifyAccountR {
+	string account = 1;//帐号
+	string password = 2;//密码
+	int64 ServerTime = 3;//服务器时间戳
 }
-message ReserveMessage5 {
+message SvWmVerifyAccountA {
+	TErrorCode err = 1;
 }
-message ReserveMessage4 {
+message GmNotifyToReloadDataR {
+	string account = 1;//帐号
+	string password = 2;//密码
+	int64 ServerTime = 3;//服务器时间戳
 }
-message ReserveMessage3 {
+message GmNotifyToReloadDataA {
+	TErrorCode err = 1;
 }
-message ReserveMessage2 {
+message GmNotifyToMaintenanceR {
+	string account = 1;//帐号
+	string password = 2;//密码
+	int64 ServerTime = 3;//服务器时间戳
+	bool IsMaintenance = 4;
+	int32 hour = 5;
 }
-message ReserveMessage1 {
+message GmNotifyToMaintenanceA {	
+	TErrorCode err = 1;
 }
 
 //----------------------------------服务器分布式结构相关 下面是预留的 ---------------------------------------------------
@@ -6863,7 +7211,9 @@ message SvMsgRegisterToOtherServerR {
 message SvMsgRegisterToOtherServerA {
 	TErrorCode err = 1;
 	string strErr = 2;
+	int32 maxServerId = 3;
 	TServerType type = 4;
+	int32 serverId = 5;
 }
 
 //服务器信息
@@ -6893,6 +7243,7 @@ message SvMsgGlobalLoginA {
 	int64 loginPlayerID = 3;
 	int32 serverID = 4;
 	repeated PlayerBriefInfo allPlayerList = 5;
+	bool isPrivate = 6;
 }
 
 
@@ -6916,8 +7267,7 @@ message SvWmGetPlayerInfoA {
 	TErrorCode err = 1;
 	SvPlayerInfo playerInfo = 2;
 }
-message SvPlayerInfo {
-
+message SvPlayerInfo {	
 	int64 id = 101;
 	string name = 102;
 	int32 level = 103;
@@ -6931,19 +7281,32 @@ message SvPlayerInfo {
 	int32 MaxFighting = 111;
 	int32 CopyId = 112;
 	string Channel = 113;
-	int32 LastLogoutTimestamp = 114;
+	int32 LastLoginTimestamp = 114;
+	int32 LastLogoutTimestamp = 115;
+	int32 showPortrait = 116;
+	int32 showFrame = 117;
+	int32 showTitle = 118;
+	int32 PVPTicket = 119;
+	int32 Language = 120;
+	
 
 	repeated HeroInfo heroList = 201;
 	map<int64, int32> pvpFormation = 202;
 	PetInfo pet = 203;//!#pet
 	int32 fighting = 204;
 
-	int32 guildLv = 301;
-	int32 afkTime = 302;
-	int64 GuildMillNum = 303;
-	int32 GuildApplyCount = 304;
-	int32 Vrmb = 305;
-	int32 GuildSign = 306;
+	int32 guildLv = 401;
+	int32 afkTime = 402;
+	int64 GuildMillNum = 403;
+	int32 GuildApplyCount = 404;
+	int32 Vrmb = 405;
+	int32 GuildSign = 406;
+	GuildMonsterPInfo guildMonsterPInfo = 407;
+	
+	AdvArenaInfo aai = 801;	//单独传输
+	int64 timestampAA = 802;	//不用来传输
+	map<int64, int32> AdvArenaOpponentCD = 803;//临时数据，不进行传输用
+	int64 AdvArenaCurOpponentID = 804;//临时数据，不进行传输用
 }
 
 //logic从登录信息里获取数据，通知给global//这里还得检查公会会长信息是否正确
@@ -7000,6 +7363,7 @@ message SvNtsPlayerGuildInfo {
 	int32 guildId = 2;
 	int32 guildLv = 3;
 	TGuildType type = 4;
+	bool isSendSelf = 5;
 }
 
 //通知global公会经验增加
@@ -7007,7 +7371,8 @@ message SvNtsAddGuildExp {
 	int32 guildId = 1;
 	int32 addExp = 2;
 }
-message SvFriendInfo {
+//作废暂时不用
+message SvFriendInfoXX {
 	int64 playerId = 1;
 	string name = 2;
 	int32 level = 3;
@@ -7022,8 +7387,8 @@ message SvWmGetFriendInfoR {
 	repeated int64 playerIds = 2;
 }
 message SvWmGetFriendInfoA {
-	repeated SvFriendInfo infos = 1;
-	repeated SvFriendInfo RecommandInfos = 2;
+	repeated FriendRequest infos = 1;
+	repeated FriendRequest RecommandInfos = 2;
 }
 
 //通知好友送礼
@@ -7065,46 +7430,230 @@ message SvWmGetGMPlayerDataA {
 	GMPlayerData data = 2;
 }
 
-message GetTemp18R {
+message SvPayOrderR {
+	int64 playerId = 1;
+	int32 serverId = 2;
+	string TransactionId = 3;
 }
-message GetTemp18A {
-}
-
-message GetTemp19R {
-}
-message GetTemp19A {
-}
-
-message GetTemp20R {
-}
-message GetTemp20A {
+message SvPayOrderA {
+	TErrorCode err = 1;
 }
 
-message GetTemp21R {
+message SvPayReceiptLtR {
+	string params = 1;
 }
-message GetTemp21A {
-}
-
-
-message GetTemp22R {
-}
-message GetTemp22A {
+message SvPayReceiptLtA {
+	TErrorCode err = 1;
 }
 
-
-message GetTemp23R {
+message SvPayReceiptBokeR {
+	string nt_data = 1;
+	string sign = 2;
+	string md5Sign = 3;
 }
-message GetTemp23A {
+message SvPayReceiptBokeA {
+	TErrorCode err = 1;
 }
 
-
-message GetTemp24R {
+message SvWmBattlePlayerInfoR {
+	int64 playerId = 1;
+	int32 formationId = 2;
 }
-message GetTemp24A {
+message SvWmBattlePlayerInfoA {
+	TErrorCode err = 1;
+	BattlePlayerInfo info = 2;
 }
 
 
-message GetTemp25R {
+message SvWmGetAdvArenaPlayerInfoR {
+	int64 Id = 1;
+	AdvArenaInfo aai = 2;
 }
-message GetTemp25A {
+message SvWmGetAdvArenaPlayerInfoA {
+	AdvArenaPlayerInfo aapi = 1;
+	int32 fightingDef = 2;
+}
+
+
+message SvNtsAdvArenaInfo {
+	int64 Id = 1;
+	AdvArenaInfo aai = 2;
+}
+
+message SvNtsAdvArenaFighting {
+	int64 Id = 1;
+	int32 fightingDef = 2;
+}
+
+
+message SvNtsPraisePlayer {
+	int64 SendId = 1;
+	int64 ReciveId = 2;
+	int32 PraiseCount = 3;
+}
+message SvWmGetAdvArenaBattleInfoR {
+	int64 Id = 1;
+	bool isLeft = 2;
+	map<int32, FormationInfoNew> formation = 3;
+}
+
+message SvWmGetAdvArenaBattleInfoA {	
+	TErrorCode err = 1;
+	map<int32,int32> roundFightings = 2;
+	map<int32,BattlePlayerInfo> bpis = 3;
+	AdvArenaInfo aai = 4;
+	int32 PvpTicket = 5;
+	int64 playerId = 6;
+	
+}
+message SvNtsAdvArenaResult {
+	int64 id = 1;
+	float changeScore = 2;
+	AdvArenaBattleRecord addRecord = 3;	
+}
+
+message SvWmCheckPvpTicketR{
+	int64 id = 1;
+}
+message SvWmCheckPvpTicketA{
+	TErrorCode err = 1;
+	int32 pvpTikcet = 2;
+}
+
+message SvNtsJoinAdvArena {
+	int64 id = 1;
+}
+
+message SvWmGetAdvArenaBattleSettleR{
+	int64 idAtk = 1;
+	int64 idDef = 2;
+	TPVPBattleResult br = 3;
+	repeated AdvArenaBattleRecordUnit recordList = 4;
+	int64 battleId = 5;
+	bool isDirectly = 6;
+}
+message SvWmGetAdvArenaBattleSettleA{
+	AdvArenaBattleRecord abr = 1;
+	repeated AdvArenaOpponentPlayer topRanks = 2;
+}
+
+message SvGuildMonsterContributionR {
+	int32 num = 1;
+	int32 guildID = 2;
+	int64 playerID = 3;
+}
+message SvGuildMonsterContributionA {
+	TErrorCode err = 1;
+}
+message SvGuildMonsterBattleR {
+	TPVPBattleResult battleResult = 1;
+	int32 guildID = 2;
+	int32 bossID = 3;
+	int64 hurt = 4;
+	int64 playerID = 5;
+}
+message SvGuildMonsterBattleA {
+	TErrorCode err = 1;
+}
+message SvGuildMonsterAwardR {
+	int32 bossID = 1;
+	int32 guildID = 2;
+	int64 playerID = 3;
+}
+message SvGuildMonsterAwardA {
+	TErrorCode err = 1;
+	int32 awardIndex = 2;
+}
+message SvGuildMonsterBattleDirectlyR {
+	int32 bossID = 1;
+	int32 guildID = 2;
+	int64 playerID = 3;
+}
+message SvGuildMonsterBattleDirectlyA {
+	TErrorCode err = 1;
+	int64 bossHp = 2;
+}
+
+message SvNtsGmSendMail{
+	GMMail mail = 1;
+	int64 playerId = 2;
+	bool isServerMail = 3;
+}
+message SvNtsGlobalSetOrder{
+	GMOrderData order = 1;
+}
+
+message SvNtsSetLanguageData{
+	string id = 1;
+	string en = 2;
+	string cn = 3;
+	string tw = 4;
+	string ja = 5;
+	string kr = 6;
+}
+
+//通知所有分服，更新每个player的通知的状态
+message SvNtsResetNoticeStatus{
+	NotifyNewNotice nnn = 1;
+}
+
+message SvNtsAddBanPlayer{
+	int64 id = 1;
+	int32 banType = 2;
+}
+
+message SvNtBanPlayer{
+	repeated int64 ids = 1;
+}
+
+message SvGetGuildMonsterGInfoR{
+	int32 guildID = 1;
+	int64 playerID = 2;
+}
+message SvGetGuildMonsterGInfoA{
+	TErrorCode err = 1;
+	GuildMonsterGInfo GInfo = 2;
+}
+
+//通知所有分服，更新活动
+message SvNtsActivityUpdate{
+}
+
+message SvNtsUpdateMaxServerId{
+	int32 MaxServerId = 1;
+}
+
+message SvNtsLogicOnilnePlayers{
+	repeated int64 playerIds = 1;
+}
+
+message SvWmGetGiftIdR{
+	string code = 1;
+}
+message SvWmGetGiftIdA{
+	TErrorCode err = 1;
+	repeated LootObject objs = 2;
+}
+
+//global通知logic，GuildMonsterPInfo信息变了
+message SvNtsGuildMonsterPInfo {
+	GuildMonsterPInfo guildMonsterPInfo = 1;//公会副本相关数据
+	int64 playerID = 2;
+}
+
+message SvNtsRegisterSubServerIds{
+	int32 serverId = 1;
+	repeated int32 SubServerIds = 2;
+}
+
+message SvNtsLogicToRunSubLogic{
+	int32 serverId = 1;
+}
+
+message SvNtsSaveBattleRecord{
+	int64 battleId = 1;
+	bytes Data = 2;
+}
+message SvNtsAdvArenaRankAward{
+	map<int32, int64> RankPlayerId = 1;
 }

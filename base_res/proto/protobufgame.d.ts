@@ -10808,6 +10808,14 @@ export namespace Msg {
         ERR_HeroBookNotActive = 340,
         ERR_HeroBookMaxLevel = 341,
         ERR_TechnologyMaxLevel = 342,
+        ERR_ArtifactData = 343,
+        ERR_ArtifactLevelUpMaterial = 344,
+        ERR_PetData = 345,
+        ERR_HeroData = 346,
+        ERR_HeroSameInFormation = 347,
+        ERR_RoleNotInForamtion = 348,
+        ERR_ArenaOpponentData = 349,
+        ERR_AdvArenaOpponentNotFound = 350,
         ERR_Mythical_AwardReceived = 487,
         ERR_Mythical_Passed = 488,
         ERR_Mythical_Forbidden = 489,
@@ -10860,7 +10868,8 @@ export namespace Msg {
         ERR_GuildMonsterContribution = 536,
         ERR_GuildMonsterTimesNotEnought = 537,
         ERR_GuildMonsterKilled = 538,
-        ERR_GuildPositionNumMax = 539
+        ERR_GuildPositionNumMax = 539,
+        ERR_CampCopyTimesNotEnought = 540
     }
 
     /** TChannelType enum. */
@@ -10877,7 +10886,8 @@ export namespace Msg {
         EQuality_Blue = 3,
         EQuality_Purple = 4,
         EQuality_Orange = 5,
-        EQuality_Golden = 6
+        EQuality_Red = 6,
+        EQuality_Golden = 7
     }
 
     /** TCampType enum. */
@@ -10943,7 +10953,10 @@ export namespace Msg {
         EObject_LoopQuest2Money = 37,
         EObject_PortraitSpecial = 38,
         EObject_PortraitFrame = 39,
-        EObject_Title = 40
+        EObject_Title = 40,
+        EObject_Skin = 41,
+        EObject_Artifact = 42,
+        EObject_ArtifactFragment = 43
     }
 
     /** TFragmentType enum. */
@@ -11039,7 +11052,10 @@ export namespace Msg {
         EObjectSourceType_BattlePass2 = 57,
         EObjectSourceType_DailyRechargeRookie = 58,
         EObjectSourceType_DailyRechargeActivity = 59,
-        EObjectSourceType_GuildMonster = 60
+        EObjectSourceType_GuildMonster = 60,
+        EObjectSourceType_CampCopy = 61,
+        EObjectSourceType_AdvArenaDailyAward = 62,
+        EObjectSourceType_AdvArenaRankAward = 63
     }
 
     /** TObjectConsumeType enum. */
@@ -11105,7 +11121,9 @@ export namespace Msg {
         EVRmbAddType_CheckInAccumulation = 36,
         EVRmbAddType_BattlePass2 = 37,
         EVRmbAddType_DailyRechargeRookie = 38,
-        EVRmbAddType_DailyRechargeActivity = 39
+        EVRmbAddType_DailyRechargeActivity = 39,
+        EVRmbAddType_AdvArenaDailyAward = 40,
+        EVRmbAddType_AdvArenaRankAward = 41
     }
 
     /** TVRmbSubType enum. */
@@ -11141,7 +11159,8 @@ export namespace Msg {
         EVRmbSubType_CollegeUnlockBlock = 28,
         EVRmbSubType_TechnologyReset = 29,
         EVRmbSubType_GuildMonster = 30,
-        EVRmbSubType_GuildMonsterBattle = 31
+        EVRmbSubType_GuildMonsterBattle = 31,
+        EVRmbSubType_HeroReturnBack = 32
     }
 
     /** TMoneyAddType enum. */
@@ -11185,7 +11204,10 @@ export namespace Msg {
         EMoneyAddType_BattlePass2 = 36,
         EMoneyAddType_DailyRechargeRookie = 37,
         EMoneyAddType_DailyRechargeActivity = 38,
-        EMoneyAddType_TechnologyReset = 39
+        EMoneyAddType_TechnologyReset = 39,
+        EMoneyAddType_AdvArenaDailyAward = 40,
+        EMoneyAddType_AdvArenaRankAward = 41,
+        EMoneyAddType_AdvArenaPraise = 42
     }
 
     /** TMoneySubType enum. */
@@ -11203,7 +11225,8 @@ export namespace Msg {
         EMoneySubType_RoleHeroStarUp = 10,
         EMoneySubType_IapChargeback = 11,
         EMoneySubType_TechnologyLevelUp = 12,
-        EMoneySubType_GuildMonster = 13
+        EMoneySubType_GuildMonster = 13,
+        EMoneySubType_ArtifactQualityUp = 14
     }
 
     /** THeroPropertyType enum. */
@@ -11315,7 +11338,9 @@ export namespace Msg {
         EBattleType_HuntingBoss = 7,
         EBattleType_Mythical = 8,
         EBattleType_Ladder = 9,
-        EBattleType_GuildMonster = 10
+        EBattleType_GuildMonster = 10,
+        EBattleType_CampCopy = 11,
+        EBattleType_AdvanceArena = 12
     }
 
     /** TShopPriceType enum. */
@@ -11483,7 +11508,9 @@ export namespace Msg {
         EGameFunction_IdleBuff = 38,
         EGameFunction_Technology = 39,
         EGameFunction_GuildMonster = 40,
-        EGameFunction_HeroBook = 41
+        EGameFunction_HeroBook = 41,
+        EGameFunction_CampCopy = 42,
+        EGameFunction_AdvanceArena = 43
     }
 
     /** TIapChannel enum. */
@@ -11543,7 +11570,8 @@ export namespace Msg {
         EGuideStep_SummonLocal = 33,
         EGuideStep_HeroLevelUpLocal = 34,
         EGuideStep_HeroEquipLocal = 35,
-        EGuideStep_ChangeFormationLocal2 = 36
+        EGuideStep_ChangeFormationLocal2 = 36,
+        EGuideStep_AdvArenaFormationDef = 37
     }
 
     /** TNewGuideStep enum. */
@@ -11765,7 +11793,9 @@ export namespace Msg {
         EDailyRedPointType_ChallengePack2 = 15,
         EDailyRedPointType_PackLevel = 16,
         EDailyRedPointType_TrailPass = 17,
-        EDailyRedPointType_DailyRecharge = 18
+        EDailyRedPointType_DailyRecharge = 18,
+        EDailyRedPointType_LifeLong = 19,
+        EDailyRedPointType_RoleSkin = 20
     }
 
     /** TTalentType enum. */
@@ -11790,7 +11820,8 @@ export namespace Msg {
         ETalentTriggerType_TeammateDead = 10,
         ETalentTriggerType_BattleStart = 11,
         ETalentTriggerType_TargetDodge = 12,
-        ETalentTriggerType_AnyEnemyDead = 13
+        ETalentTriggerType_AnyEnemyDead = 13,
+        ETalentTriggerType_DealDamage = 14
     }
 
     /** TTalentEffectTargetType enum. */
@@ -11830,7 +11861,10 @@ export namespace Msg {
         EEffectType_Reborn = 19,
         EEffectType_HealHPPct = 20,
         EEffectType_CampSkillExtraTarget = 21,
-        EEffectType_CampUltimateExtraTarget = 22
+        EEffectType_CampUltimateExtraTarget = 22,
+        EEffectType_DamageReduceUpToClasses = 23,
+        EEffectType_Reflect = 24,
+        EEffectType_Vampiric = 25
     }
 
     /** TEffectCondType enum. */
@@ -12537,6 +12571,12 @@ export namespace Msg {
 
         /** HeroInfo tier */
         tier?: (number|null);
+
+        /** HeroInfo artifactOn */
+        artifactOn?: (number|null);
+
+        /** HeroInfo skin */
+        skin?: (number|null);
     }
 
     /** Represents a HeroInfo. */
@@ -12568,6 +12608,12 @@ export namespace Msg {
 
         /** HeroInfo tier. */
         public tier: number;
+
+        /** HeroInfo artifactOn. */
+        public artifactOn: number;
+
+        /** HeroInfo skin. */
+        public skin: number;
 
         /**
          * Encodes the specified HeroInfo message. Does not implicitly {@link Msg.HeroInfo.verify|verify} messages.
@@ -13138,6 +13184,9 @@ export namespace Msg {
 
         /** PVPOpponentPlayer showTitle */
         showTitle?: (number|null);
+
+        /** PVPOpponentPlayer serverID */
+        serverID?: (number|null);
     }
 
     /** Represents a PVPOpponentPlayer. */
@@ -13184,6 +13233,9 @@ export namespace Msg {
 
         /** PVPOpponentPlayer showTitle. */
         public showTitle: number;
+
+        /** PVPOpponentPlayer serverID. */
+        public serverID: number;
 
         /**
          * Encodes the specified PVPOpponentPlayer message. Does not implicitly {@link Msg.PVPOpponentPlayer.verify|verify} messages.
@@ -13695,6 +13747,21 @@ export namespace Msg {
 
         /** PlayerInfo isJumpBattle */
         isJumpBattle?: (boolean|null);
+
+        /** PlayerInfo campCopyTimes */
+        campCopyTimes?: (number|null);
+
+        /** PlayerInfo showSkin */
+        showSkin?: (number|null);
+
+        /** PlayerInfo GuildBossMaxKillNum */
+        GuildBossMaxKillNum?: (number|null);
+
+        /** PlayerInfo HuntingBossHurtMax */
+        HuntingBossHurtMax?: (number|null);
+
+        /** PlayerInfo nextAdvArenaUpdateTime */
+        nextAdvArenaUpdateTime?: (number|null);
     }
 
     /** Represents a PlayerInfo. */
@@ -14056,6 +14123,21 @@ export namespace Msg {
 
         /** PlayerInfo isJumpBattle. */
         public isJumpBattle: boolean;
+
+        /** PlayerInfo campCopyTimes. */
+        public campCopyTimes: number;
+
+        /** PlayerInfo showSkin. */
+        public showSkin: number;
+
+        /** PlayerInfo GuildBossMaxKillNum. */
+        public GuildBossMaxKillNum: number;
+
+        /** PlayerInfo HuntingBossHurtMax. */
+        public HuntingBossHurtMax: number;
+
+        /** PlayerInfo nextAdvArenaUpdateTime. */
+        public nextAdvArenaUpdateTime: number;
 
         /**
          * Encodes the specified PlayerInfo message. Does not implicitly {@link Msg.PlayerInfo.verify|verify} messages.
@@ -14446,6 +14528,12 @@ export namespace Msg {
 
         /** GameConfig gameFunctionUnlockShow */
         gameFunctionUnlockShow?: (Msg.TGameFunction[]|null);
+
+        /** GameConfig advArenaDailyAward */
+        advArenaDailyAward?: ({ [k: string]: Msg.ILootObject }|null);
+
+        /** GameConfig giftCodeReqLevel */
+        giftCodeReqLevel?: (number|null);
     }
 
     /** Represents a GameConfig. */
@@ -14613,6 +14701,12 @@ export namespace Msg {
         /** GameConfig gameFunctionUnlockShow. */
         public gameFunctionUnlockShow: Msg.TGameFunction[];
 
+        /** GameConfig advArenaDailyAward. */
+        public advArenaDailyAward: { [k: string]: Msg.ILootObject };
+
+        /** GameConfig giftCodeReqLevel. */
+        public giftCodeReqLevel: number;
+
         /**
          * Encodes the specified GameConfig message. Does not implicitly {@link Msg.GameConfig.verify|verify} messages.
          * @param m GameConfig message or plain object to encode
@@ -14694,6 +14788,12 @@ export namespace Msg {
 
         /** PVPOpponentInfo technologyProperty */
         technologyProperty?: ({ [k: string]: Msg.IPropertyMap }|null);
+
+        /** PVPOpponentInfo skinProperty */
+        skinProperty?: ({ [k: string]: Msg.IPropertyMap }|null);
+
+        /** PVPOpponentInfo showSkin */
+        showSkin?: (number|null);
     }
 
     /** Represents a PVPOpponentInfo. */
@@ -14764,6 +14864,12 @@ export namespace Msg {
 
         /** PVPOpponentInfo technologyProperty. */
         public technologyProperty: { [k: string]: Msg.IPropertyMap };
+
+        /** PVPOpponentInfo skinProperty. */
+        public skinProperty: { [k: string]: Msg.IPropertyMap };
+
+        /** PVPOpponentInfo showSkin. */
+        public showSkin: number;
 
         /**
          * Encodes the specified PVPOpponentInfo message. Does not implicitly {@link Msg.PVPOpponentInfo.verify|verify} messages.
@@ -16295,12 +16401,6 @@ export namespace Msg {
         /** GetPlayerDataA ladderShopGoodsList */
         ladderShopGoodsList?: (Msg.IShopGoods[]|null);
 
-        /** GetPlayerDataA IapDayNum */
-        IapDayNum?: (number|null);
-
-        /** GetPlayerDataA IapDayGets */
-        IapDayGets?: ({ [k: string]: number }|null);
-
         /** GetPlayerDataA heroIDInCollege */
         heroIDInCollege?: ({ [k: string]: number }|null);
 
@@ -16351,6 +16451,18 @@ export namespace Msg {
 
         /** GetPlayerDataA guildMonsterPInfo */
         guildMonsterPInfo?: (Msg.IGuildMonsterPInfo|null);
+
+        /** GetPlayerDataA campCopyInfo */
+        campCopyInfo?: ({ [k: string]: number }|null);
+
+        /** GetPlayerDataA skinList */
+        skinList?: ({ [k: string]: Msg.ISkinUnit }|null);
+
+        /** GetPlayerDataA artifactList */
+        artifactList?: ({ [k: string]: number }|null);
+
+        /** GetPlayerDataA artifactFragmentList */
+        artifactFragmentList?: ({ [k: string]: number }|null);
     }
 
     /** Represents a GetPlayerDataA. */
@@ -16506,12 +16618,6 @@ export namespace Msg {
         /** GetPlayerDataA ladderShopGoodsList. */
         public ladderShopGoodsList: Msg.IShopGoods[];
 
-        /** GetPlayerDataA IapDayNum. */
-        public IapDayNum: number;
-
-        /** GetPlayerDataA IapDayGets. */
-        public IapDayGets: { [k: string]: number };
-
         /** GetPlayerDataA heroIDInCollege. */
         public heroIDInCollege: { [k: string]: number };
 
@@ -16562,6 +16668,18 @@ export namespace Msg {
 
         /** GetPlayerDataA guildMonsterPInfo. */
         public guildMonsterPInfo?: (Msg.IGuildMonsterPInfo|null);
+
+        /** GetPlayerDataA campCopyInfo. */
+        public campCopyInfo: { [k: string]: number };
+
+        /** GetPlayerDataA skinList. */
+        public skinList: { [k: string]: Msg.ISkinUnit };
+
+        /** GetPlayerDataA artifactList. */
+        public artifactList: { [k: string]: number };
+
+        /** GetPlayerDataA artifactFragmentList. */
+        public artifactFragmentList: { [k: string]: number };
 
         /**
          * Encodes the specified GetPlayerDataA message. Does not implicitly {@link Msg.GetPlayerDataA.verify|verify} messages.
@@ -17410,6 +17528,9 @@ export namespace Msg {
 
         /** TakeOffEquipR takeoffEquipLocList */
         takeoffEquipLocList?: (Msg.TEquipLocationType[]|null);
+
+        /** TakeOffEquipR artifactID */
+        artifactID?: (number|null);
     }
 
     /** Represents a TakeOffEquipR. */
@@ -17426,6 +17547,9 @@ export namespace Msg {
 
         /** TakeOffEquipR takeoffEquipLocList. */
         public takeoffEquipLocList: Msg.TEquipLocationType[];
+
+        /** TakeOffEquipR artifactID. */
+        public artifactID: number;
 
         /**
          * Encodes the specified TakeOffEquipR message. Does not implicitly {@link Msg.TakeOffEquipR.verify|verify} messages.
@@ -17460,6 +17584,9 @@ export namespace Msg {
 
         /** TakeOffEquipA takeoffEquipLocList */
         takeoffEquipLocList?: (Msg.TEquipLocationType[]|null);
+
+        /** TakeOffEquipA artifactID */
+        artifactID?: (number|null);
     }
 
     /** Represents a TakeOffEquipA. */
@@ -17482,6 +17609,9 @@ export namespace Msg {
 
         /** TakeOffEquipA takeoffEquipLocList. */
         public takeoffEquipLocList: Msg.TEquipLocationType[];
+
+        /** TakeOffEquipA artifactID. */
+        public artifactID: number;
 
         /**
          * Encodes the specified TakeOffEquipA message. Does not implicitly {@link Msg.TakeOffEquipA.verify|verify} messages.
@@ -18725,6 +18855,9 @@ export namespace Msg {
 
         /** HeroDecomposeA magicDust */
         magicDust?: (number|null);
+
+        /** HeroDecomposeA artifactList */
+        artifactList?: ({ [k: string]: number }|null);
     }
 
     /** Represents a HeroDecomposeA. */
@@ -18762,6 +18895,9 @@ export namespace Msg {
 
         /** HeroDecomposeA magicDust. */
         public magicDust: number;
+
+        /** HeroDecomposeA artifactList. */
+        public artifactList: { [k: string]: number };
 
         /**
          * Encodes the specified HeroDecomposeA message. Does not implicitly {@link Msg.HeroDecomposeA.verify|verify} messages.
@@ -18899,6 +19035,9 @@ export namespace Msg {
 
         /** HeroStarUpA money */
         money?: (number|null);
+
+        /** HeroStarUpA artifactList */
+        artifactList?: ({ [k: string]: number }|null);
     }
 
     /** Represents a HeroStarUpA. */
@@ -18942,6 +19081,9 @@ export namespace Msg {
 
         /** HeroStarUpA money. */
         public money: number;
+
+        /** HeroStarUpA artifactList. */
+        public artifactList: { [k: string]: number };
 
         /**
          * Encodes the specified HeroStarUpA message. Does not implicitly {@link Msg.HeroStarUpA.verify|verify} messages.
@@ -19652,6 +19794,9 @@ export namespace Msg {
 
         /** PassEventCopyA multiple */
         multiple?: (number|null);
+
+        /** PassEventCopyA vrmbConsume */
+        vrmbConsume?: (number|null);
     }
 
     /** Represents a PassEventCopyA. */
@@ -19680,6 +19825,9 @@ export namespace Msg {
 
         /** PassEventCopyA multiple. */
         public multiple: number;
+
+        /** PassEventCopyA vrmbConsume. */
+        public vrmbConsume: number;
 
         /**
          * Encodes the specified PassEventCopyA message. Does not implicitly {@link Msg.PassEventCopyA.verify|verify} messages.
@@ -20563,6 +20711,12 @@ export namespace Msg {
 
         /** GetPVPBattleInfoA seasonEndTimeStamp */
         seasonEndTimeStamp?: (number|null);
+
+        /** GetPVPBattleInfoA ladderInfo */
+        ladderInfo?: (Msg.IGetLadderInfoA|null);
+
+        /** GetPVPBattleInfoA aai */
+        aai?: (Msg.IAdvArenaInfo|null);
     }
 
     /** Represents a GetPVPBattleInfoA. */
@@ -20600,6 +20754,12 @@ export namespace Msg {
 
         /** GetPVPBattleInfoA seasonEndTimeStamp. */
         public seasonEndTimeStamp: number;
+
+        /** GetPVPBattleInfoA ladderInfo. */
+        public ladderInfo?: (Msg.IGetLadderInfoA|null);
+
+        /** GetPVPBattleInfoA aai. */
+        public aai?: (Msg.IAdvArenaInfo|null);
 
         /**
          * Encodes the specified GetPVPBattleInfoA message. Does not implicitly {@link Msg.GetPVPBattleInfoA.verify|verify} messages.
@@ -24494,7 +24654,7 @@ export namespace Msg {
     interface ITableCheckA {
 
         /** TableCheckA needUpdateTableList */
-        needUpdateTableList?: (string[]|null);
+        needUpdateTableList?: ({ [k: string]: string }|null);
 
         /** TableCheckA updateDataUrl */
         updateDataUrl?: (string|null);
@@ -24519,7 +24679,7 @@ export namespace Msg {
         constructor(p?: Msg.ITableCheckA);
 
         /** TableCheckA needUpdateTableList. */
-        public needUpdateTableList: string[];
+        public needUpdateTableList: { [k: string]: string };
 
         /** TableCheckA updateDataUrl. */
         public updateDataUrl: string;
@@ -28382,6 +28542,9 @@ export namespace Msg {
 
         /** DeviceLoginNewR mac */
         mac?: (string|null);
+
+        /** DeviceLoginNewR CurIp */
+        CurIp?: (string|null);
     }
 
     /** Represents a DeviceLoginNewR. */
@@ -28401,6 +28564,9 @@ export namespace Msg {
 
         /** DeviceLoginNewR mac. */
         public mac: string;
+
+        /** DeviceLoginNewR CurIp. */
+        public CurIp: string;
 
         /**
          * Encodes the specified DeviceLoginNewR message. Does not implicitly {@link Msg.DeviceLoginNewR.verify|verify} messages.
@@ -28500,6 +28666,9 @@ export namespace Msg {
 
         /** AccountLoginNewR mac */
         mac?: (string|null);
+
+        /** AccountLoginNewR CurIp */
+        CurIp?: (string|null);
     }
 
     /** Represents an AccountLoginNewR. */
@@ -28525,6 +28694,9 @@ export namespace Msg {
 
         /** AccountLoginNewR mac. */
         public mac: string;
+
+        /** AccountLoginNewR CurIp. */
+        public CurIp: string;
 
         /**
          * Encodes the specified AccountLoginNewR message. Does not implicitly {@link Msg.AccountLoginNewR.verify|verify} messages.
@@ -29312,6 +29484,9 @@ export namespace Msg {
 
         /** HeroResetA vrmbConsume */
         vrmbConsume?: (number|null);
+
+        /** HeroResetA artifactID */
+        artifactID?: (number|null);
     }
 
     /** Represents a HeroResetA. */
@@ -29349,6 +29524,9 @@ export namespace Msg {
 
         /** HeroResetA vrmbConsume. */
         public vrmbConsume: number;
+
+        /** HeroResetA artifactID. */
+        public artifactID: number;
 
         /**
          * Encodes the specified HeroResetA message. Does not implicitly {@link Msg.HeroResetA.verify|verify} messages.
@@ -34149,6 +34327,9 @@ export namespace Msg {
 
         /** GuildBossEndR guildLevel */
         guildLevel?: (number|null);
+
+        /** GuildBossEndR checkInfo */
+        checkInfo?: (Msg.ICheckBattlePVEInfo|null);
     }
 
     /** Represents a GuildBossEndR. */
@@ -34168,6 +34349,9 @@ export namespace Msg {
 
         /** GuildBossEndR guildLevel. */
         public guildLevel: number;
+
+        /** GuildBossEndR checkInfo. */
+        public checkInfo?: (Msg.ICheckBattlePVEInfo|null);
 
         /**
          * Encodes the specified GuildBossEndR message. Does not implicitly {@link Msg.GuildBossEndR.verify|verify} messages.
@@ -34208,6 +34392,9 @@ export namespace Msg {
 
         /** GuildBossEndA times */
         times?: (number|null);
+
+        /** GuildBossEndA killNum */
+        killNum?: (number|null);
     }
 
     /** Represents a GuildBossEndA. */
@@ -34236,6 +34423,9 @@ export namespace Msg {
 
         /** GuildBossEndA times. */
         public times: number;
+
+        /** GuildBossEndA killNum. */
+        public killNum: number;
 
         /**
          * Encodes the specified GuildBossEndA message. Does not implicitly {@link Msg.GuildBossEndA.verify|verify} messages.
@@ -36408,6 +36598,9 @@ export namespace Msg {
 
         /** EndHuntingBossBattleR bossId */
         bossId?: (number|null);
+
+        /** EndHuntingBossBattleR checkInfo */
+        checkInfo?: (Msg.ICheckBattlePVEInfo|null);
     }
 
     /** Represents an EndHuntingBossBattleR. */
@@ -36430,6 +36623,9 @@ export namespace Msg {
 
         /** EndHuntingBossBattleR bossId. */
         public bossId: number;
+
+        /** EndHuntingBossBattleR checkInfo. */
+        public checkInfo?: (Msg.ICheckBattlePVEInfo|null);
 
         /**
          * Encodes the specified EndHuntingBossBattleR message. Does not implicitly {@link Msg.EndHuntingBossBattleR.verify|verify} messages.
@@ -37950,6 +38146,9 @@ export namespace Msg {
 
         /** AwardDirectlyEventCopyA multiple */
         multiple?: (number|null);
+
+        /** AwardDirectlyEventCopyA vrmbConsume */
+        vrmbConsume?: (number|null);
     }
 
     /** Represents an AwardDirectlyEventCopyA. */
@@ -37978,6 +38177,9 @@ export namespace Msg {
 
         /** AwardDirectlyEventCopyA multiple. */
         public multiple: number;
+
+        /** AwardDirectlyEventCopyA vrmbConsume. */
+        public vrmbConsume: number;
 
         /**
          * Encodes the specified AwardDirectlyEventCopyA message. Does not implicitly {@link Msg.AwardDirectlyEventCopyA.verify|verify} messages.
@@ -38350,6 +38552,9 @@ export namespace Msg {
 
         /** HeroStarUpMultiA money */
         money?: (number|null);
+
+        /** HeroStarUpMultiA artifactList */
+        artifactList?: ({ [k: string]: number }|null);
     }
 
     /** Represents a HeroStarUpMultiA. */
@@ -38390,6 +38595,9 @@ export namespace Msg {
 
         /** HeroStarUpMultiA money. */
         public money: number;
+
+        /** HeroStarUpMultiA artifactList. */
+        public artifactList: { [k: string]: number };
 
         /**
          * Encodes the specified HeroStarUpMultiA message. Does not implicitly {@link Msg.HeroStarUpMultiA.verify|verify} messages.
@@ -40165,6 +40373,9 @@ export namespace Msg {
 
         /** MythicalCopyBattleEndR heroHp */
         heroHp?: ({ [k: string]: number }|null);
+
+        /** MythicalCopyBattleEndR checkInfo */
+        checkInfo?: (Msg.ICheckBattlePVEInfo|null);
     }
 
     /** Represents a MythicalCopyBattleEndR. */
@@ -40184,6 +40395,9 @@ export namespace Msg {
 
         /** MythicalCopyBattleEndR heroHp. */
         public heroHp: { [k: string]: number };
+
+        /** MythicalCopyBattleEndR checkInfo. */
+        public checkInfo?: (Msg.ICheckBattlePVEInfo|null);
 
         /**
          * Encodes the specified MythicalCopyBattleEndR message. Does not implicitly {@link Msg.MythicalCopyBattleEndR.verify|verify} messages.
@@ -42739,6 +42953,9 @@ export namespace Msg {
 
         /** ResourceUpdateZipCheckA isRUZNeedDelete */
         isRUZNeedDelete?: (boolean|null);
+
+        /** ResourceUpdateZipCheckA RUZMD5 */
+        RUZMD5?: (string|null);
     }
 
     /** Represents a ResourceUpdateZipCheckA. */
@@ -42758,6 +42975,9 @@ export namespace Msg {
 
         /** ResourceUpdateZipCheckA isRUZNeedDelete. */
         public isRUZNeedDelete: boolean;
+
+        /** ResourceUpdateZipCheckA RUZMD5. */
+        public RUZMD5: string;
 
         /**
          * Encodes the specified ResourceUpdateZipCheckA message. Does not implicitly {@link Msg.ResourceUpdateZipCheckA.verify|verify} messages.
@@ -44668,6 +44888,9 @@ export namespace Msg {
 
         /** GuildMonsterBattleR hurt */
         hurt?: (number|null);
+
+        /** GuildMonsterBattleR checkInfo */
+        checkInfo?: (Msg.ICheckBattlePVEInfo|null);
     }
 
     /** Represents a GuildMonsterBattleR. */
@@ -44687,6 +44910,9 @@ export namespace Msg {
 
         /** GuildMonsterBattleR hurt. */
         public hurt: number;
+
+        /** GuildMonsterBattleR checkInfo. */
+        public checkInfo?: (Msg.ICheckBattlePVEInfo|null);
 
         /**
          * Encodes the specified GuildMonsterBattleR message. Does not implicitly {@link Msg.GuildMonsterBattleR.verify|verify} messages.
@@ -45559,742 +45785,1078 @@ export namespace Msg {
         public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.AcceptFriendRequestAllA;
     }
 
-    /** Properties of a GmTempR1. */
-    interface IGmTempR1 {
+    /** Properties of a CampCopyBattleBeginR. */
+    interface ICampCopyBattleBeginR {
 
-        /** GmTempR1 account */
-        account?: (string|null);
+        /** CampCopyBattleBeginR id */
+        id?: (number|null);
 
-        /** GmTempR1 password */
-        password?: (string|null);
+        /** CampCopyBattleBeginR camp */
+        camp?: (number|null);
 
-        /** GmTempR1 ServerTime */
-        ServerTime?: (number|null);
+        /** CampCopyBattleBeginR formation */
+        formation?: (Msg.IFormationInfo|null);
+
+        /** CampCopyBattleBeginR petID */
+        petID?: (number|null);
     }
 
-    /** Represents a GmTempR1. */
-    class GmTempR1 implements IGmTempR1 {
+    /** Represents a CampCopyBattleBeginR. */
+    class CampCopyBattleBeginR implements ICampCopyBattleBeginR {
 
         /**
-         * Constructs a new GmTempR1.
+         * Constructs a new CampCopyBattleBeginR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempR1);
+        constructor(p?: Msg.ICampCopyBattleBeginR);
 
-        /** GmTempR1 account. */
-        public account: string;
+        /** CampCopyBattleBeginR id. */
+        public id: number;
 
-        /** GmTempR1 password. */
-        public password: string;
+        /** CampCopyBattleBeginR camp. */
+        public camp: number;
 
-        /** GmTempR1 ServerTime. */
-        public ServerTime: number;
+        /** CampCopyBattleBeginR formation. */
+        public formation?: (Msg.IFormationInfo|null);
+
+        /** CampCopyBattleBeginR petID. */
+        public petID: number;
 
         /**
-         * Encodes the specified GmTempR1 message. Does not implicitly {@link Msg.GmTempR1.verify|verify} messages.
-         * @param m GmTempR1 message or plain object to encode
+         * Encodes the specified CampCopyBattleBeginR message. Does not implicitly {@link Msg.CampCopyBattleBeginR.verify|verify} messages.
+         * @param m CampCopyBattleBeginR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempR1, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ICampCopyBattleBeginR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempR1 message from the specified reader or buffer.
+         * Decodes a CampCopyBattleBeginR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempR1
+         * @returns CampCopyBattleBeginR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempR1;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.CampCopyBattleBeginR;
     }
 
-    /** Properties of a GmTempA1. */
-    interface IGmTempA1 {
+    /** Properties of a CampCopyBattleBeginA. */
+    interface ICampCopyBattleBeginA {
+
+        /** CampCopyBattleBeginA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** CampCopyBattleBeginA errStr */
+        errStr?: (string|null);
+
+        /** CampCopyBattleBeginA id */
+        id?: (number|null);
+
+        /** CampCopyBattleBeginA camp */
+        camp?: (number|null);
+
+        /** CampCopyBattleBeginA formation */
+        formation?: (Msg.IFormationInfo|null);
+
+        /** CampCopyBattleBeginA petID */
+        petID?: (number|null);
     }
 
-    /** Represents a GmTempA1. */
-    class GmTempA1 implements IGmTempA1 {
+    /** Represents a CampCopyBattleBeginA. */
+    class CampCopyBattleBeginA implements ICampCopyBattleBeginA {
 
         /**
-         * Constructs a new GmTempA1.
+         * Constructs a new CampCopyBattleBeginA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempA1);
+        constructor(p?: Msg.ICampCopyBattleBeginA);
+
+        /** CampCopyBattleBeginA err. */
+        public err: Msg.TErrorCode;
+
+        /** CampCopyBattleBeginA errStr. */
+        public errStr: string;
+
+        /** CampCopyBattleBeginA id. */
+        public id: number;
+
+        /** CampCopyBattleBeginA camp. */
+        public camp: number;
+
+        /** CampCopyBattleBeginA formation. */
+        public formation?: (Msg.IFormationInfo|null);
+
+        /** CampCopyBattleBeginA petID. */
+        public petID: number;
 
         /**
-         * Encodes the specified GmTempA1 message. Does not implicitly {@link Msg.GmTempA1.verify|verify} messages.
-         * @param m GmTempA1 message or plain object to encode
+         * Encodes the specified CampCopyBattleBeginA message. Does not implicitly {@link Msg.CampCopyBattleBeginA.verify|verify} messages.
+         * @param m CampCopyBattleBeginA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempA1, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ICampCopyBattleBeginA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempA1 message from the specified reader or buffer.
+         * Decodes a CampCopyBattleBeginA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempA1
+         * @returns CampCopyBattleBeginA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempA1;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.CampCopyBattleBeginA;
     }
 
-    /** Properties of a GmTempR2. */
-    interface IGmTempR2 {
+    /** Properties of a CampCopyBattleEndR. */
+    interface ICampCopyBattleEndR {
 
-        /** GmTempR2 account */
-        account?: (string|null);
+        /** CampCopyBattleEndR id */
+        id?: (number|null);
 
-        /** GmTempR2 password */
-        password?: (string|null);
+        /** CampCopyBattleEndR camp */
+        camp?: (number|null);
 
-        /** GmTempR2 ServerTime */
-        ServerTime?: (number|null);
+        /** CampCopyBattleEndR battleResult */
+        battleResult?: (Msg.TPVPBattleResult|null);
+
+        /** CampCopyBattleEndR checkInfo */
+        checkInfo?: (Msg.ICheckBattlePVEInfo|null);
     }
 
-    /** Represents a GmTempR2. */
-    class GmTempR2 implements IGmTempR2 {
+    /** Represents a CampCopyBattleEndR. */
+    class CampCopyBattleEndR implements ICampCopyBattleEndR {
 
         /**
-         * Constructs a new GmTempR2.
+         * Constructs a new CampCopyBattleEndR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempR2);
+        constructor(p?: Msg.ICampCopyBattleEndR);
 
-        /** GmTempR2 account. */
-        public account: string;
+        /** CampCopyBattleEndR id. */
+        public id: number;
 
-        /** GmTempR2 password. */
-        public password: string;
+        /** CampCopyBattleEndR camp. */
+        public camp: number;
 
-        /** GmTempR2 ServerTime. */
-        public ServerTime: number;
+        /** CampCopyBattleEndR battleResult. */
+        public battleResult: Msg.TPVPBattleResult;
+
+        /** CampCopyBattleEndR checkInfo. */
+        public checkInfo?: (Msg.ICheckBattlePVEInfo|null);
 
         /**
-         * Encodes the specified GmTempR2 message. Does not implicitly {@link Msg.GmTempR2.verify|verify} messages.
-         * @param m GmTempR2 message or plain object to encode
+         * Encodes the specified CampCopyBattleEndR message. Does not implicitly {@link Msg.CampCopyBattleEndR.verify|verify} messages.
+         * @param m CampCopyBattleEndR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempR2, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ICampCopyBattleEndR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempR2 message from the specified reader or buffer.
+         * Decodes a CampCopyBattleEndR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempR2
+         * @returns CampCopyBattleEndR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempR2;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.CampCopyBattleEndR;
     }
 
-    /** Properties of a GmTempA2. */
-    interface IGmTempA2 {
+    /** Properties of a CampCopyBattleEndA. */
+    interface ICampCopyBattleEndA {
+
+        /** CampCopyBattleEndA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** CampCopyBattleEndA errStr */
+        errStr?: (string|null);
+
+        /** CampCopyBattleEndA id */
+        id?: (number|null);
+
+        /** CampCopyBattleEndA camp */
+        camp?: (number|null);
+
+        /** CampCopyBattleEndA battleResult */
+        battleResult?: (Msg.TPVPBattleResult|null);
+
+        /** CampCopyBattleEndA lootList */
+        lootList?: (Msg.ILootObject[]|null);
     }
 
-    /** Represents a GmTempA2. */
-    class GmTempA2 implements IGmTempA2 {
+    /** Represents a CampCopyBattleEndA. */
+    class CampCopyBattleEndA implements ICampCopyBattleEndA {
 
         /**
-         * Constructs a new GmTempA2.
+         * Constructs a new CampCopyBattleEndA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempA2);
+        constructor(p?: Msg.ICampCopyBattleEndA);
+
+        /** CampCopyBattleEndA err. */
+        public err: Msg.TErrorCode;
+
+        /** CampCopyBattleEndA errStr. */
+        public errStr: string;
+
+        /** CampCopyBattleEndA id. */
+        public id: number;
+
+        /** CampCopyBattleEndA camp. */
+        public camp: number;
+
+        /** CampCopyBattleEndA battleResult. */
+        public battleResult: Msg.TPVPBattleResult;
+
+        /** CampCopyBattleEndA lootList. */
+        public lootList: Msg.ILootObject[];
 
         /**
-         * Encodes the specified GmTempA2 message. Does not implicitly {@link Msg.GmTempA2.verify|verify} messages.
-         * @param m GmTempA2 message or plain object to encode
+         * Encodes the specified CampCopyBattleEndA message. Does not implicitly {@link Msg.CampCopyBattleEndA.verify|verify} messages.
+         * @param m CampCopyBattleEndA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempA2, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ICampCopyBattleEndA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempA2 message from the specified reader or buffer.
+         * Decodes a CampCopyBattleEndA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempA2
+         * @returns CampCopyBattleEndA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempA2;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.CampCopyBattleEndA;
     }
 
-    /** Properties of a GmTempR3. */
-    interface IGmTempR3 {
+    /** Properties of a GuildMonsterBattleDirectlyR. */
+    interface IGuildMonsterBattleDirectlyR {
 
-        /** GmTempR3 account */
-        account?: (string|null);
+        /** GuildMonsterBattleDirectlyR bossID */
+        bossID?: (number|null);
 
-        /** GmTempR3 password */
-        password?: (string|null);
+        /** GuildMonsterBattleDirectlyR formation */
+        formation?: (Msg.IFormationInfo|null);
 
-        /** GmTempR3 ServerTime */
-        ServerTime?: (number|null);
+        /** GuildMonsterBattleDirectlyR petID */
+        petID?: (number|null);
     }
 
-    /** Represents a GmTempR3. */
-    class GmTempR3 implements IGmTempR3 {
+    /** Represents a GuildMonsterBattleDirectlyR. */
+    class GuildMonsterBattleDirectlyR implements IGuildMonsterBattleDirectlyR {
 
         /**
-         * Constructs a new GmTempR3.
+         * Constructs a new GuildMonsterBattleDirectlyR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempR3);
+        constructor(p?: Msg.IGuildMonsterBattleDirectlyR);
 
-        /** GmTempR3 account. */
-        public account: string;
+        /** GuildMonsterBattleDirectlyR bossID. */
+        public bossID: number;
 
-        /** GmTempR3 password. */
-        public password: string;
+        /** GuildMonsterBattleDirectlyR formation. */
+        public formation?: (Msg.IFormationInfo|null);
 
-        /** GmTempR3 ServerTime. */
-        public ServerTime: number;
+        /** GuildMonsterBattleDirectlyR petID. */
+        public petID: number;
 
         /**
-         * Encodes the specified GmTempR3 message. Does not implicitly {@link Msg.GmTempR3.verify|verify} messages.
-         * @param m GmTempR3 message or plain object to encode
+         * Encodes the specified GuildMonsterBattleDirectlyR message. Does not implicitly {@link Msg.GuildMonsterBattleDirectlyR.verify|verify} messages.
+         * @param m GuildMonsterBattleDirectlyR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempR3, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IGuildMonsterBattleDirectlyR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempR3 message from the specified reader or buffer.
+         * Decodes a GuildMonsterBattleDirectlyR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempR3
+         * @returns GuildMonsterBattleDirectlyR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempR3;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GuildMonsterBattleDirectlyR;
     }
 
-    /** Properties of a GmTempA3. */
-    interface IGmTempA3 {
+    /** Properties of a GuildMonsterBattleDirectlyA. */
+    interface IGuildMonsterBattleDirectlyA {
+
+        /** GuildMonsterBattleDirectlyA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** GuildMonsterBattleDirectlyA errStr */
+        errStr?: (string|null);
+
+        /** GuildMonsterBattleDirectlyA bossID */
+        bossID?: (number|null);
+
+        /** GuildMonsterBattleDirectlyA formation */
+        formation?: (Msg.IFormationInfo|null);
+
+        /** GuildMonsterBattleDirectlyA petID */
+        petID?: (number|null);
+
+        /** GuildMonsterBattleDirectlyA battleResult */
+        battleResult?: (Msg.TPVPBattleResult|null);
+
+        /** GuildMonsterBattleDirectlyA hurt */
+        hurt?: (number|null);
+
+        /** GuildMonsterBattleDirectlyA lootList */
+        lootList?: (Msg.ILootObject[]|null);
+
+        /** GuildMonsterBattleDirectlyA BattleTimes */
+        BattleTimes?: (number|null);
+
+        /** GuildMonsterBattleDirectlyA consumeVrmb */
+        consumeVrmb?: (number|null);
+
+        /** GuildMonsterBattleDirectlyA playerStatistics */
+        playerStatistics?: (Msg.IBattleStatisticUnit[]|null);
+
+        /** GuildMonsterBattleDirectlyA monsterStatistics */
+        monsterStatistics?: (Msg.IBattleStatisticUnit[]|null);
     }
 
-    /** Represents a GmTempA3. */
-    class GmTempA3 implements IGmTempA3 {
+    /** Represents a GuildMonsterBattleDirectlyA. */
+    class GuildMonsterBattleDirectlyA implements IGuildMonsterBattleDirectlyA {
 
         /**
-         * Constructs a new GmTempA3.
+         * Constructs a new GuildMonsterBattleDirectlyA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempA3);
+        constructor(p?: Msg.IGuildMonsterBattleDirectlyA);
+
+        /** GuildMonsterBattleDirectlyA err. */
+        public err: Msg.TErrorCode;
+
+        /** GuildMonsterBattleDirectlyA errStr. */
+        public errStr: string;
+
+        /** GuildMonsterBattleDirectlyA bossID. */
+        public bossID: number;
+
+        /** GuildMonsterBattleDirectlyA formation. */
+        public formation?: (Msg.IFormationInfo|null);
+
+        /** GuildMonsterBattleDirectlyA petID. */
+        public petID: number;
+
+        /** GuildMonsterBattleDirectlyA battleResult. */
+        public battleResult: Msg.TPVPBattleResult;
+
+        /** GuildMonsterBattleDirectlyA hurt. */
+        public hurt: number;
+
+        /** GuildMonsterBattleDirectlyA lootList. */
+        public lootList: Msg.ILootObject[];
+
+        /** GuildMonsterBattleDirectlyA BattleTimes. */
+        public BattleTimes: number;
+
+        /** GuildMonsterBattleDirectlyA consumeVrmb. */
+        public consumeVrmb: number;
+
+        /** GuildMonsterBattleDirectlyA playerStatistics. */
+        public playerStatistics: Msg.IBattleStatisticUnit[];
+
+        /** GuildMonsterBattleDirectlyA monsterStatistics. */
+        public monsterStatistics: Msg.IBattleStatisticUnit[];
 
         /**
-         * Encodes the specified GmTempA3 message. Does not implicitly {@link Msg.GmTempA3.verify|verify} messages.
-         * @param m GmTempA3 message or plain object to encode
+         * Encodes the specified GuildMonsterBattleDirectlyA message. Does not implicitly {@link Msg.GuildMonsterBattleDirectlyA.verify|verify} messages.
+         * @param m GuildMonsterBattleDirectlyA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempA3, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IGuildMonsterBattleDirectlyA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempA3 message from the specified reader or buffer.
+         * Decodes a GuildMonsterBattleDirectlyA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempA3
+         * @returns GuildMonsterBattleDirectlyA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempA3;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GuildMonsterBattleDirectlyA;
     }
 
-    /** Properties of a GmTempR4. */
-    interface IGmTempR4 {
+    /** Properties of a SyncChangeShowSkin. */
+    interface ISyncChangeShowSkin {
 
-        /** GmTempR4 account */
-        account?: (string|null);
-
-        /** GmTempR4 password */
-        password?: (string|null);
-
-        /** GmTempR4 ServerTime */
-        ServerTime?: (number|null);
+        /** SyncChangeShowSkin skinID */
+        skinID?: (number|null);
     }
 
-    /** Represents a GmTempR4. */
-    class GmTempR4 implements IGmTempR4 {
+    /** Represents a SyncChangeShowSkin. */
+    class SyncChangeShowSkin implements ISyncChangeShowSkin {
 
         /**
-         * Constructs a new GmTempR4.
+         * Constructs a new SyncChangeShowSkin.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempR4);
+        constructor(p?: Msg.ISyncChangeShowSkin);
 
-        /** GmTempR4 account. */
-        public account: string;
-
-        /** GmTempR4 password. */
-        public password: string;
-
-        /** GmTempR4 ServerTime. */
-        public ServerTime: number;
+        /** SyncChangeShowSkin skinID. */
+        public skinID: number;
 
         /**
-         * Encodes the specified GmTempR4 message. Does not implicitly {@link Msg.GmTempR4.verify|verify} messages.
-         * @param m GmTempR4 message or plain object to encode
+         * Encodes the specified SyncChangeShowSkin message. Does not implicitly {@link Msg.SyncChangeShowSkin.verify|verify} messages.
+         * @param m SyncChangeShowSkin message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempR4, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISyncChangeShowSkin, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempR4 message from the specified reader or buffer.
+         * Decodes a SyncChangeShowSkin message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempR4
+         * @returns SyncChangeShowSkin
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempR4;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SyncChangeShowSkin;
     }
 
-    /** Properties of a GmTempA4. */
-    interface IGmTempA4 {
+    /** Properties of a SyncKnowNewSkin. */
+    interface ISyncKnowNewSkin {
+
+        /** SyncKnowNewSkin skinID */
+        skinID?: (number|null);
     }
 
-    /** Represents a GmTempA4. */
-    class GmTempA4 implements IGmTempA4 {
+    /** Represents a SyncKnowNewSkin. */
+    class SyncKnowNewSkin implements ISyncKnowNewSkin {
 
         /**
-         * Constructs a new GmTempA4.
+         * Constructs a new SyncKnowNewSkin.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempA4);
+        constructor(p?: Msg.ISyncKnowNewSkin);
+
+        /** SyncKnowNewSkin skinID. */
+        public skinID: number;
 
         /**
-         * Encodes the specified GmTempA4 message. Does not implicitly {@link Msg.GmTempA4.verify|verify} messages.
-         * @param m GmTempA4 message or plain object to encode
+         * Encodes the specified SyncKnowNewSkin message. Does not implicitly {@link Msg.SyncKnowNewSkin.verify|verify} messages.
+         * @param m SyncKnowNewSkin message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempA4, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISyncKnowNewSkin, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempA4 message from the specified reader or buffer.
+         * Decodes a SyncKnowNewSkin message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempA4
+         * @returns SyncKnowNewSkin
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempA4;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SyncKnowNewSkin;
     }
 
-    /** Properties of a GmTempR5. */
-    interface IGmTempR5 {
+    /** Properties of a SkinUnit. */
+    interface ISkinUnit {
 
-        /** GmTempR5 account */
-        account?: (string|null);
+        /** SkinUnit id */
+        id?: (number|null);
 
-        /** GmTempR5 password */
-        password?: (string|null);
+        /** SkinUnit isNew */
+        isNew?: (boolean|null);
 
-        /** GmTempR5 ServerTime */
-        ServerTime?: (number|null);
+        /** SkinUnit timestamp */
+        timestamp?: (number|null);
     }
 
-    /** Represents a GmTempR5. */
-    class GmTempR5 implements IGmTempR5 {
+    /** Represents a SkinUnit. */
+    class SkinUnit implements ISkinUnit {
 
         /**
-         * Constructs a new GmTempR5.
+         * Constructs a new SkinUnit.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempR5);
+        constructor(p?: Msg.ISkinUnit);
 
-        /** GmTempR5 account. */
-        public account: string;
+        /** SkinUnit id. */
+        public id: number;
 
-        /** GmTempR5 password. */
-        public password: string;
+        /** SkinUnit isNew. */
+        public isNew: boolean;
 
-        /** GmTempR5 ServerTime. */
-        public ServerTime: number;
+        /** SkinUnit timestamp. */
+        public timestamp: number;
 
         /**
-         * Encodes the specified GmTempR5 message. Does not implicitly {@link Msg.GmTempR5.verify|verify} messages.
-         * @param m GmTempR5 message or plain object to encode
+         * Encodes the specified SkinUnit message. Does not implicitly {@link Msg.SkinUnit.verify|verify} messages.
+         * @param m SkinUnit message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempR5, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISkinUnit, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempR5 message from the specified reader or buffer.
+         * Decodes a SkinUnit message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempR5
+         * @returns SkinUnit
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempR5;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SkinUnit;
     }
 
-    /** Properties of a GmTempA5. */
-    interface IGmTempA5 {
+    /** Properties of a FormationInfoNew. */
+    interface IFormationInfoNew {
+
+        /** FormationInfoNew formation */
+        formation?: ({ [k: string]: number }|null);
+
+        /** FormationInfoNew petID */
+        petID?: (number|null);
     }
 
-    /** Represents a GmTempA5. */
-    class GmTempA5 implements IGmTempA5 {
+    /** Represents a FormationInfoNew. */
+    class FormationInfoNew implements IFormationInfoNew {
 
         /**
-         * Constructs a new GmTempA5.
+         * Constructs a new FormationInfoNew.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempA5);
+        constructor(p?: Msg.IFormationInfoNew);
+
+        /** FormationInfoNew formation. */
+        public formation: { [k: string]: number };
+
+        /** FormationInfoNew petID. */
+        public petID: number;
 
         /**
-         * Encodes the specified GmTempA5 message. Does not implicitly {@link Msg.GmTempA5.verify|verify} messages.
-         * @param m GmTempA5 message or plain object to encode
+         * Encodes the specified FormationInfoNew message. Does not implicitly {@link Msg.FormationInfoNew.verify|verify} messages.
+         * @param m FormationInfoNew message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempA5, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IFormationInfoNew, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempA5 message from the specified reader or buffer.
+         * Decodes a FormationInfoNew message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempA5
+         * @returns FormationInfoNew
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempA5;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.FormationInfoNew;
     }
 
-    /** Properties of a GmTempR6. */
-    interface IGmTempR6 {
+    /** Properties of a GuildBossBattleDirectlyR. */
+    interface IGuildBossBattleDirectlyR {
 
-        /** GmTempR6 account */
-        account?: (string|null);
+        /** GuildBossBattleDirectlyR formation */
+        formation?: (Msg.IFormationInfo|null);
 
-        /** GmTempR6 password */
-        password?: (string|null);
+        /** GuildBossBattleDirectlyR petID */
+        petID?: (number|null);
 
-        /** GmTempR6 ServerTime */
-        ServerTime?: (number|null);
+        /** GuildBossBattleDirectlyR PlayerId */
+        PlayerId?: (number|null);
     }
 
-    /** Represents a GmTempR6. */
-    class GmTempR6 implements IGmTempR6 {
+    /** Represents a GuildBossBattleDirectlyR. */
+    class GuildBossBattleDirectlyR implements IGuildBossBattleDirectlyR {
 
         /**
-         * Constructs a new GmTempR6.
+         * Constructs a new GuildBossBattleDirectlyR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempR6);
+        constructor(p?: Msg.IGuildBossBattleDirectlyR);
 
-        /** GmTempR6 account. */
-        public account: string;
+        /** GuildBossBattleDirectlyR formation. */
+        public formation?: (Msg.IFormationInfo|null);
 
-        /** GmTempR6 password. */
-        public password: string;
+        /** GuildBossBattleDirectlyR petID. */
+        public petID: number;
 
-        /** GmTempR6 ServerTime. */
-        public ServerTime: number;
+        /** GuildBossBattleDirectlyR PlayerId. */
+        public PlayerId: number;
 
         /**
-         * Encodes the specified GmTempR6 message. Does not implicitly {@link Msg.GmTempR6.verify|verify} messages.
-         * @param m GmTempR6 message or plain object to encode
+         * Encodes the specified GuildBossBattleDirectlyR message. Does not implicitly {@link Msg.GuildBossBattleDirectlyR.verify|verify} messages.
+         * @param m GuildBossBattleDirectlyR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempR6, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IGuildBossBattleDirectlyR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempR6 message from the specified reader or buffer.
+         * Decodes a GuildBossBattleDirectlyR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempR6
+         * @returns GuildBossBattleDirectlyR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempR6;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GuildBossBattleDirectlyR;
     }
 
-    /** Properties of a GmTempA6. */
-    interface IGmTempA6 {
+    /** Properties of a GuildBossBattleDirectlyA. */
+    interface IGuildBossBattleDirectlyA {
+
+        /** GuildBossBattleDirectlyA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** GuildBossBattleDirectlyA errStr */
+        errStr?: (string|null);
+
+        /** GuildBossBattleDirectlyA money */
+        money?: (number|null);
+
+        /** GuildBossBattleDirectlyA guildGold */
+        guildGold?: (number|null);
+
+        /** GuildBossBattleDirectlyA awardList */
+        awardList?: (Msg.ILootObject[]|null);
+
+        /** GuildBossBattleDirectlyA times */
+        times?: (number|null);
+
+        /** GuildBossBattleDirectlyA formation */
+        formation?: (Msg.IFormationInfo|null);
+
+        /** GuildBossBattleDirectlyA petID */
+        petID?: (number|null);
+
+        /** GuildBossBattleDirectlyA maxKillNum */
+        maxKillNum?: (number|null);
     }
 
-    /** Represents a GmTempA6. */
-    class GmTempA6 implements IGmTempA6 {
+    /** Represents a GuildBossBattleDirectlyA. */
+    class GuildBossBattleDirectlyA implements IGuildBossBattleDirectlyA {
 
         /**
-         * Constructs a new GmTempA6.
+         * Constructs a new GuildBossBattleDirectlyA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempA6);
+        constructor(p?: Msg.IGuildBossBattleDirectlyA);
+
+        /** GuildBossBattleDirectlyA err. */
+        public err: Msg.TErrorCode;
+
+        /** GuildBossBattleDirectlyA errStr. */
+        public errStr: string;
+
+        /** GuildBossBattleDirectlyA money. */
+        public money: number;
+
+        /** GuildBossBattleDirectlyA guildGold. */
+        public guildGold: number;
+
+        /** GuildBossBattleDirectlyA awardList. */
+        public awardList: Msg.ILootObject[];
+
+        /** GuildBossBattleDirectlyA times. */
+        public times: number;
+
+        /** GuildBossBattleDirectlyA formation. */
+        public formation?: (Msg.IFormationInfo|null);
+
+        /** GuildBossBattleDirectlyA petID. */
+        public petID: number;
+
+        /** GuildBossBattleDirectlyA maxKillNum. */
+        public maxKillNum: number;
 
         /**
-         * Encodes the specified GmTempA6 message. Does not implicitly {@link Msg.GmTempA6.verify|verify} messages.
-         * @param m GmTempA6 message or plain object to encode
+         * Encodes the specified GuildBossBattleDirectlyA message. Does not implicitly {@link Msg.GuildBossBattleDirectlyA.verify|verify} messages.
+         * @param m GuildBossBattleDirectlyA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempA6, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IGuildBossBattleDirectlyA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempA6 message from the specified reader or buffer.
+         * Decodes a GuildBossBattleDirectlyA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempA6
+         * @returns GuildBossBattleDirectlyA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempA6;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GuildBossBattleDirectlyA;
     }
 
-    /** Properties of a GmTempR7. */
-    interface IGmTempR7 {
+    /** Properties of a HuntingBossBattleDirectlyR. */
+    interface IHuntingBossBattleDirectlyR {
 
-        /** GmTempR7 account */
-        account?: (string|null);
+        /** HuntingBossBattleDirectlyR times */
+        times?: (number|null);
 
-        /** GmTempR7 password */
-        password?: (string|null);
+        /** HuntingBossBattleDirectlyR heroesLocation */
+        heroesLocation?: ({ [k: string]: number }|null);
 
-        /** GmTempR7 ServerTime */
-        ServerTime?: (number|null);
+        /** HuntingBossBattleDirectlyR heroesLocationAdd */
+        heroesLocationAdd?: ({ [k: string]: number }|null);
+
+        /** HuntingBossBattleDirectlyR pet */
+        pet?: (Msg.IPetInfo|null);
+
+        /** HuntingBossBattleDirectlyR bossId */
+        bossId?: (number|null);
     }
 
-    /** Represents a GmTempR7. */
-    class GmTempR7 implements IGmTempR7 {
+    /** Represents a HuntingBossBattleDirectlyR. */
+    class HuntingBossBattleDirectlyR implements IHuntingBossBattleDirectlyR {
 
         /**
-         * Constructs a new GmTempR7.
+         * Constructs a new HuntingBossBattleDirectlyR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempR7);
+        constructor(p?: Msg.IHuntingBossBattleDirectlyR);
 
-        /** GmTempR7 account. */
-        public account: string;
+        /** HuntingBossBattleDirectlyR times. */
+        public times: number;
 
-        /** GmTempR7 password. */
-        public password: string;
+        /** HuntingBossBattleDirectlyR heroesLocation. */
+        public heroesLocation: { [k: string]: number };
 
-        /** GmTempR7 ServerTime. */
-        public ServerTime: number;
+        /** HuntingBossBattleDirectlyR heroesLocationAdd. */
+        public heroesLocationAdd: { [k: string]: number };
+
+        /** HuntingBossBattleDirectlyR pet. */
+        public pet?: (Msg.IPetInfo|null);
+
+        /** HuntingBossBattleDirectlyR bossId. */
+        public bossId: number;
 
         /**
-         * Encodes the specified GmTempR7 message. Does not implicitly {@link Msg.GmTempR7.verify|verify} messages.
-         * @param m GmTempR7 message or plain object to encode
+         * Encodes the specified HuntingBossBattleDirectlyR message. Does not implicitly {@link Msg.HuntingBossBattleDirectlyR.verify|verify} messages.
+         * @param m HuntingBossBattleDirectlyR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempR7, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IHuntingBossBattleDirectlyR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempR7 message from the specified reader or buffer.
+         * Decodes a HuntingBossBattleDirectlyR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempR7
+         * @returns HuntingBossBattleDirectlyR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempR7;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.HuntingBossBattleDirectlyR;
     }
 
-    /** Properties of a GmTempA7. */
-    interface IGmTempA7 {
+    /** Properties of a HuntingBossBattleDirectlyA. */
+    interface IHuntingBossBattleDirectlyA {
+
+        /** HuntingBossBattleDirectlyA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** HuntingBossBattleDirectlyA errStr */
+        errStr?: (string|null);
+
+        /** HuntingBossBattleDirectlyA stage */
+        stage?: (number|null);
+
+        /** HuntingBossBattleDirectlyA battleResult */
+        battleResult?: (Msg.TPVPBattleResult|null);
+
+        /** HuntingBossBattleDirectlyA hurt */
+        hurt?: (number|null);
+
+        /** HuntingBossBattleDirectlyA lootList */
+        lootList?: (Msg.ILootObject[]|null);
+
+        /** HuntingBossBattleDirectlyA times */
+        times?: (number|null);
+
+        /** HuntingBossBattleDirectlyA heroesLocation */
+        heroesLocation?: ({ [k: string]: number }|null);
+
+        /** HuntingBossBattleDirectlyA heroesLocationAdd */
+        heroesLocationAdd?: ({ [k: string]: number }|null);
+
+        /** HuntingBossBattleDirectlyA pet */
+        pet?: (Msg.IPetInfo|null);
+
+        /** HuntingBossBattleDirectlyA maxHurt */
+        maxHurt?: (number|null);
     }
 
-    /** Represents a GmTempA7. */
-    class GmTempA7 implements IGmTempA7 {
+    /** Represents a HuntingBossBattleDirectlyA. */
+    class HuntingBossBattleDirectlyA implements IHuntingBossBattleDirectlyA {
 
         /**
-         * Constructs a new GmTempA7.
+         * Constructs a new HuntingBossBattleDirectlyA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempA7);
+        constructor(p?: Msg.IHuntingBossBattleDirectlyA);
+
+        /** HuntingBossBattleDirectlyA err. */
+        public err: Msg.TErrorCode;
+
+        /** HuntingBossBattleDirectlyA errStr. */
+        public errStr: string;
+
+        /** HuntingBossBattleDirectlyA stage. */
+        public stage: number;
+
+        /** HuntingBossBattleDirectlyA battleResult. */
+        public battleResult: Msg.TPVPBattleResult;
+
+        /** HuntingBossBattleDirectlyA hurt. */
+        public hurt: number;
+
+        /** HuntingBossBattleDirectlyA lootList. */
+        public lootList: Msg.ILootObject[];
+
+        /** HuntingBossBattleDirectlyA times. */
+        public times: number;
+
+        /** HuntingBossBattleDirectlyA heroesLocation. */
+        public heroesLocation: { [k: string]: number };
+
+        /** HuntingBossBattleDirectlyA heroesLocationAdd. */
+        public heroesLocationAdd: { [k: string]: number };
+
+        /** HuntingBossBattleDirectlyA pet. */
+        public pet?: (Msg.IPetInfo|null);
+
+        /** HuntingBossBattleDirectlyA maxHurt. */
+        public maxHurt: number;
 
         /**
-         * Encodes the specified GmTempA7 message. Does not implicitly {@link Msg.GmTempA7.verify|verify} messages.
-         * @param m GmTempA7 message or plain object to encode
+         * Encodes the specified HuntingBossBattleDirectlyA message. Does not implicitly {@link Msg.HuntingBossBattleDirectlyA.verify|verify} messages.
+         * @param m HuntingBossBattleDirectlyA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempA7, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IHuntingBossBattleDirectlyA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempA7 message from the specified reader or buffer.
+         * Decodes a HuntingBossBattleDirectlyA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempA7
+         * @returns HuntingBossBattleDirectlyA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempA7;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.HuntingBossBattleDirectlyA;
     }
 
-    /** Properties of a GmTempR8. */
-    interface IGmTempR8 {
+    /** Properties of a HeroReturnBackR. */
+    interface IHeroReturnBackR {
 
-        /** GmTempR8 account */
-        account?: (string|null);
-
-        /** GmTempR8 password */
-        password?: (string|null);
-
-        /** GmTempR8 ServerTime */
-        ServerTime?: (number|null);
+        /** HeroReturnBackR heroID */
+        heroID?: (number|null);
     }
 
-    /** Represents a GmTempR8. */
-    class GmTempR8 implements IGmTempR8 {
+    /** Represents a HeroReturnBackR. */
+    class HeroReturnBackR implements IHeroReturnBackR {
 
         /**
-         * Constructs a new GmTempR8.
+         * Constructs a new HeroReturnBackR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempR8);
+        constructor(p?: Msg.IHeroReturnBackR);
 
-        /** GmTempR8 account. */
-        public account: string;
-
-        /** GmTempR8 password. */
-        public password: string;
-
-        /** GmTempR8 ServerTime. */
-        public ServerTime: number;
+        /** HeroReturnBackR heroID. */
+        public heroID: number;
 
         /**
-         * Encodes the specified GmTempR8 message. Does not implicitly {@link Msg.GmTempR8.verify|verify} messages.
-         * @param m GmTempR8 message or plain object to encode
+         * Encodes the specified HeroReturnBackR message. Does not implicitly {@link Msg.HeroReturnBackR.verify|verify} messages.
+         * @param m HeroReturnBackR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempR8, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IHeroReturnBackR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempR8 message from the specified reader or buffer.
+         * Decodes a HeroReturnBackR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempR8
+         * @returns HeroReturnBackR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempR8;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.HeroReturnBackR;
     }
 
-    /** Properties of a GmTempA8. */
-    interface IGmTempA8 {
+    /** Properties of a HeroReturnBackA. */
+    interface IHeroReturnBackA {
+
+        /** HeroReturnBackA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** HeroReturnBackA errStr */
+        errStr?: (string|null);
+
+        /** HeroReturnBackA heroList */
+        heroList?: (Msg.IHeroInfo[]|null);
+
+        /** HeroReturnBackA vrmbConsume */
+        vrmbConsume?: (number|null);
+
+        /** HeroReturnBackA heroID */
+        heroID?: (number|null);
     }
 
-    /** Represents a GmTempA8. */
-    class GmTempA8 implements IGmTempA8 {
+    /** Represents a HeroReturnBackA. */
+    class HeroReturnBackA implements IHeroReturnBackA {
 
         /**
-         * Constructs a new GmTempA8.
+         * Constructs a new HeroReturnBackA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempA8);
+        constructor(p?: Msg.IHeroReturnBackA);
+
+        /** HeroReturnBackA err. */
+        public err: Msg.TErrorCode;
+
+        /** HeroReturnBackA errStr. */
+        public errStr: string;
+
+        /** HeroReturnBackA heroList. */
+        public heroList: Msg.IHeroInfo[];
+
+        /** HeroReturnBackA vrmbConsume. */
+        public vrmbConsume: number;
+
+        /** HeroReturnBackA heroID. */
+        public heroID: number;
 
         /**
-         * Encodes the specified GmTempA8 message. Does not implicitly {@link Msg.GmTempA8.verify|verify} messages.
-         * @param m GmTempA8 message or plain object to encode
+         * Encodes the specified HeroReturnBackA message. Does not implicitly {@link Msg.HeroReturnBackA.verify|verify} messages.
+         * @param m HeroReturnBackA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempA8, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IHeroReturnBackA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempA8 message from the specified reader or buffer.
+         * Decodes a HeroReturnBackA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempA8
+         * @returns HeroReturnBackA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempA8;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.HeroReturnBackA;
     }
 
-    /** Properties of a GmTempR9. */
-    interface IGmTempR9 {
+    /** Properties of a UseArtifactFragmentR. */
+    interface IUseArtifactFragmentR {
 
-        /** GmTempR9 account */
-        account?: (string|null);
+        /** UseArtifactFragmentR quality */
+        quality?: (number|null);
 
-        /** GmTempR9 password */
-        password?: (string|null);
-
-        /** GmTempR9 ServerTime */
-        ServerTime?: (number|null);
+        /** UseArtifactFragmentR num */
+        num?: (number|null);
     }
 
-    /** Represents a GmTempR9. */
-    class GmTempR9 implements IGmTempR9 {
+    /** Represents a UseArtifactFragmentR. */
+    class UseArtifactFragmentR implements IUseArtifactFragmentR {
 
         /**
-         * Constructs a new GmTempR9.
+         * Constructs a new UseArtifactFragmentR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempR9);
+        constructor(p?: Msg.IUseArtifactFragmentR);
 
-        /** GmTempR9 account. */
-        public account: string;
+        /** UseArtifactFragmentR quality. */
+        public quality: number;
 
-        /** GmTempR9 password. */
-        public password: string;
-
-        /** GmTempR9 ServerTime. */
-        public ServerTime: number;
+        /** UseArtifactFragmentR num. */
+        public num: number;
 
         /**
-         * Encodes the specified GmTempR9 message. Does not implicitly {@link Msg.GmTempR9.verify|verify} messages.
-         * @param m GmTempR9 message or plain object to encode
+         * Encodes the specified UseArtifactFragmentR message. Does not implicitly {@link Msg.UseArtifactFragmentR.verify|verify} messages.
+         * @param m UseArtifactFragmentR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempR9, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IUseArtifactFragmentR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempR9 message from the specified reader or buffer.
+         * Decodes a UseArtifactFragmentR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempR9
+         * @returns UseArtifactFragmentR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempR9;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.UseArtifactFragmentR;
     }
 
-    /** Properties of a GmTempA9. */
-    interface IGmTempA9 {
+    /** Properties of a UseArtifactFragmentA. */
+    interface IUseArtifactFragmentA {
+
+        /** UseArtifactFragmentA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** UseArtifactFragmentA errStr */
+        errStr?: (string|null);
+
+        /** UseArtifactFragmentA quality */
+        quality?: (number|null);
+
+        /** UseArtifactFragmentA fragmentNum */
+        fragmentNum?: (number|null);
+
+        /** UseArtifactFragmentA artifactList */
+        artifactList?: ({ [k: string]: number }|null);
     }
 
-    /** Represents a GmTempA9. */
-    class GmTempA9 implements IGmTempA9 {
+    /** Represents a UseArtifactFragmentA. */
+    class UseArtifactFragmentA implements IUseArtifactFragmentA {
 
         /**
-         * Constructs a new GmTempA9.
+         * Constructs a new UseArtifactFragmentA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGmTempA9);
+        constructor(p?: Msg.IUseArtifactFragmentA);
+
+        /** UseArtifactFragmentA err. */
+        public err: Msg.TErrorCode;
+
+        /** UseArtifactFragmentA errStr. */
+        public errStr: string;
+
+        /** UseArtifactFragmentA quality. */
+        public quality: number;
+
+        /** UseArtifactFragmentA fragmentNum. */
+        public fragmentNum: number;
+
+        /** UseArtifactFragmentA artifactList. */
+        public artifactList: { [k: string]: number };
 
         /**
-         * Encodes the specified GmTempA9 message. Does not implicitly {@link Msg.GmTempA9.verify|verify} messages.
-         * @param m GmTempA9 message or plain object to encode
+         * Encodes the specified UseArtifactFragmentA message. Does not implicitly {@link Msg.UseArtifactFragmentA.verify|verify} messages.
+         * @param m UseArtifactFragmentA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGmTempA9, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IUseArtifactFragmentA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GmTempA9 message from the specified reader or buffer.
+         * Decodes a UseArtifactFragmentA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GmTempA9
+         * @returns UseArtifactFragmentA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmTempA9;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.UseArtifactFragmentA;
     }
 
     /** Properties of a CreatePVPBattleR. */
@@ -46308,6 +46870,12 @@ export namespace Msg {
 
         /** CreatePVPBattleR battleId */
         battleId?: (number|null);
+
+        /** CreatePVPBattleR battleType */
+        battleType?: (Msg.TBattleType|null);
+
+        /** CreatePVPBattleR round */
+        round?: (number|null);
     }
 
     /** Represents a CreatePVPBattleR. */
@@ -46327,6 +46895,12 @@ export namespace Msg {
 
         /** CreatePVPBattleR battleId. */
         public battleId: number;
+
+        /** CreatePVPBattleR battleType. */
+        public battleType: Msg.TBattleType;
+
+        /** CreatePVPBattleR round. */
+        public round: number;
 
         /**
          * Encodes the specified CreatePVPBattleR message. Does not implicitly {@link Msg.CreatePVPBattleR.verify|verify} messages.
@@ -46376,6 +46950,24 @@ export namespace Msg {
 
         /** CreatePVPBattleA statisticsRight */
         statisticsRight?: (Msg.IBattleStatisticUnit[]|null);
+
+        /** CreatePVPBattleA battleType */
+        battleType?: (Msg.TBattleType|null);
+
+        /** CreatePVPBattleA petLeft */
+        petLeft?: (Msg.IPetInfo|null);
+
+        /** CreatePVPBattleA petRight */
+        petRight?: (Msg.IPetInfo|null);
+
+        /** CreatePVPBattleA fightingLeft */
+        fightingLeft?: (number|null);
+
+        /** CreatePVPBattleA fightingRight */
+        fightingRight?: (number|null);
+
+        /** CreatePVPBattleA round */
+        round?: (number|null);
     }
 
     /** Represents a CreatePVPBattleA. */
@@ -46413,6 +47005,24 @@ export namespace Msg {
 
         /** CreatePVPBattleA statisticsRight. */
         public statisticsRight: Msg.IBattleStatisticUnit[];
+
+        /** CreatePVPBattleA battleType. */
+        public battleType: Msg.TBattleType;
+
+        /** CreatePVPBattleA petLeft. */
+        public petLeft?: (Msg.IPetInfo|null);
+
+        /** CreatePVPBattleA petRight. */
+        public petRight?: (Msg.IPetInfo|null);
+
+        /** CreatePVPBattleA fightingLeft. */
+        public fightingLeft: number;
+
+        /** CreatePVPBattleA fightingRight. */
+        public fightingRight: number;
+
+        /** CreatePVPBattleA round. */
+        public round: number;
 
         /**
          * Encodes the specified CreatePVPBattleA message. Does not implicitly {@link Msg.CreatePVPBattleA.verify|verify} messages.
@@ -46692,6 +47302,9 @@ export namespace Msg {
 
         /** BattlePlayerInfo name */
         name?: (string|null);
+
+        /** BattlePlayerInfo skinPro */
+        skinPro?: ({ [k: string]: Msg.IPropertyMap }|null);
     }
 
     /** Represents a BattlePlayerInfo. */
@@ -46754,6 +47367,9 @@ export namespace Msg {
         /** BattlePlayerInfo name. */
         public name: string;
 
+        /** BattlePlayerInfo skinPro. */
+        public skinPro: { [k: string]: Msg.IPropertyMap };
+
         /**
          * Encodes the specified BattlePlayerInfo message. Does not implicitly {@link Msg.BattlePlayerInfo.verify|verify} messages.
          * @param m BattlePlayerInfo message or plain object to encode
@@ -46778,7 +47394,8 @@ export namespace Msg {
         EBattleHeroType_Null = 0,
         EBattleHeroType_Hero = 1,
         EBattleHeroType_Role = 2,
-        EBattleHeroType_Monster = 3
+        EBattleHeroType_Monster = 3,
+        EBattleHeroType_GuildMonster = 4
     }
 
     /** Properties of a BattleStatisticUnit. */
@@ -46801,6 +47418,18 @@ export namespace Msg {
 
         /** BattleStatisticUnit isDead */
         isDead?: (boolean|null);
+
+        /** BattleStatisticUnit leftHP */
+        leftHP?: (number|null);
+
+        /** BattleStatisticUnit leftPower */
+        leftPower?: (number|null);
+
+        /** BattleStatisticUnit level */
+        level?: (number|null);
+
+        /** BattleStatisticUnit location */
+        location?: (number|null);
     }
 
     /** Represents a BattleStatisticUnit. */
@@ -46829,6 +47458,18 @@ export namespace Msg {
 
         /** BattleStatisticUnit isDead. */
         public isDead: boolean;
+
+        /** BattleStatisticUnit leftHP. */
+        public leftHP: number;
+
+        /** BattleStatisticUnit leftPower. */
+        public leftPower: number;
+
+        /** BattleStatisticUnit level. */
+        public level: number;
+
+        /** BattleStatisticUnit location. */
+        public location: number;
 
         /**
          * Encodes the specified BattleStatisticUnit message. Does not implicitly {@link Msg.BattleStatisticUnit.verify|verify} messages.
@@ -46863,6 +47504,9 @@ export namespace Msg {
 
         /** CreatePVEBattleR battleID */
         battleID?: (number|null);
+
+        /** CreatePVEBattleR extParam */
+        extParam?: (number[]|null);
     }
 
     /** Represents a CreatePVEBattleR. */
@@ -46885,6 +47529,9 @@ export namespace Msg {
 
         /** CreatePVEBattleR battleID. */
         public battleID: number;
+
+        /** CreatePVEBattleR extParam. */
+        public extParam: number[];
 
         /**
          * Encodes the specified CreatePVEBattleR message. Does not implicitly {@link Msg.CreatePVEBattleR.verify|verify} messages.
@@ -46991,1252 +47638,2392 @@ export namespace Msg {
         public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.CreatePVEBattleA;
     }
 
-    /** Properties of a battleTempR05. */
-    interface IbattleTempR05 {
+    /** Properties of a PutOnArtifactR. */
+    interface IPutOnArtifactR {
+
+        /** PutOnArtifactR heroID */
+        heroID?: (number|null);
+
+        /** PutOnArtifactR artifactID */
+        artifactID?: (number|null);
+
+        /** PutOnArtifactR exchangeHeroID */
+        exchangeHeroID?: (number|null);
     }
 
-    /** Represents a battleTempR05. */
-    class battleTempR05 implements IbattleTempR05 {
+    /** Represents a PutOnArtifactR. */
+    class PutOnArtifactR implements IPutOnArtifactR {
 
         /**
-         * Constructs a new battleTempR05.
+         * Constructs a new PutOnArtifactR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IbattleTempR05);
+        constructor(p?: Msg.IPutOnArtifactR);
+
+        /** PutOnArtifactR heroID. */
+        public heroID: number;
+
+        /** PutOnArtifactR artifactID. */
+        public artifactID: number;
+
+        /** PutOnArtifactR exchangeHeroID. */
+        public exchangeHeroID: number;
 
         /**
-         * Encodes the specified battleTempR05 message. Does not implicitly {@link Msg.battleTempR05.verify|verify} messages.
-         * @param m battleTempR05 message or plain object to encode
+         * Encodes the specified PutOnArtifactR message. Does not implicitly {@link Msg.PutOnArtifactR.verify|verify} messages.
+         * @param m PutOnArtifactR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IbattleTempR05, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IPutOnArtifactR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a battleTempR05 message from the specified reader or buffer.
+         * Decodes a PutOnArtifactR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns battleTempR05
+         * @returns PutOnArtifactR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.battleTempR05;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.PutOnArtifactR;
     }
 
-    /** Properties of a battleTempA05. */
-    interface IbattleTempA05 {
+    /** Properties of a PutOnArtifactA. */
+    interface IPutOnArtifactA {
+
+        /** PutOnArtifactA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** PutOnArtifactA errStr */
+        errStr?: (string|null);
+
+        /** PutOnArtifactA heroID */
+        heroID?: (number|null);
+
+        /** PutOnArtifactA artifactID */
+        artifactID?: (number|null);
+
+        /** PutOnArtifactA exchangeHeroID */
+        exchangeHeroID?: (number|null);
+
+        /** PutOnArtifactA exchangeArtifactID */
+        exchangeArtifactID?: (number|null);
     }
 
-    /** Represents a battleTempA05. */
-    class battleTempA05 implements IbattleTempA05 {
+    /** Represents a PutOnArtifactA. */
+    class PutOnArtifactA implements IPutOnArtifactA {
 
         /**
-         * Constructs a new battleTempA05.
+         * Constructs a new PutOnArtifactA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IbattleTempA05);
+        constructor(p?: Msg.IPutOnArtifactA);
+
+        /** PutOnArtifactA err. */
+        public err: Msg.TErrorCode;
+
+        /** PutOnArtifactA errStr. */
+        public errStr: string;
+
+        /** PutOnArtifactA heroID. */
+        public heroID: number;
+
+        /** PutOnArtifactA artifactID. */
+        public artifactID: number;
+
+        /** PutOnArtifactA exchangeHeroID. */
+        public exchangeHeroID: number;
+
+        /** PutOnArtifactA exchangeArtifactID. */
+        public exchangeArtifactID: number;
 
         /**
-         * Encodes the specified battleTempA05 message. Does not implicitly {@link Msg.battleTempA05.verify|verify} messages.
-         * @param m battleTempA05 message or plain object to encode
+         * Encodes the specified PutOnArtifactA message. Does not implicitly {@link Msg.PutOnArtifactA.verify|verify} messages.
+         * @param m PutOnArtifactA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IbattleTempA05, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IPutOnArtifactA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a battleTempA05 message from the specified reader or buffer.
+         * Decodes a PutOnArtifactA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns battleTempA05
+         * @returns PutOnArtifactA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.battleTempA05;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.PutOnArtifactA;
     }
 
-    /** Properties of a battleTempR06. */
-    interface IbattleTempR06 {
+    /** Properties of a TakeOffArtifactR. */
+    interface ITakeOffArtifactR {
+
+        /** TakeOffArtifactR heroID */
+        heroID?: (number|null);
     }
 
-    /** Represents a battleTempR06. */
-    class battleTempR06 implements IbattleTempR06 {
+    /** Represents a TakeOffArtifactR. */
+    class TakeOffArtifactR implements ITakeOffArtifactR {
 
         /**
-         * Constructs a new battleTempR06.
+         * Constructs a new TakeOffArtifactR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IbattleTempR06);
+        constructor(p?: Msg.ITakeOffArtifactR);
+
+        /** TakeOffArtifactR heroID. */
+        public heroID: number;
 
         /**
-         * Encodes the specified battleTempR06 message. Does not implicitly {@link Msg.battleTempR06.verify|verify} messages.
-         * @param m battleTempR06 message or plain object to encode
+         * Encodes the specified TakeOffArtifactR message. Does not implicitly {@link Msg.TakeOffArtifactR.verify|verify} messages.
+         * @param m TakeOffArtifactR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IbattleTempR06, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ITakeOffArtifactR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a battleTempR06 message from the specified reader or buffer.
+         * Decodes a TakeOffArtifactR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns battleTempR06
+         * @returns TakeOffArtifactR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.battleTempR06;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.TakeOffArtifactR;
     }
 
-    /** Properties of a battleTempA06. */
-    interface IbattleTempA06 {
+    /** Properties of a TakeOffArtifactA. */
+    interface ITakeOffArtifactA {
+
+        /** TakeOffArtifactA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** TakeOffArtifactA errStr */
+        errStr?: (string|null);
+
+        /** TakeOffArtifactA heroID */
+        heroID?: (number|null);
+
+        /** TakeOffArtifactA artifactID */
+        artifactID?: (number|null);
     }
 
-    /** Represents a battleTempA06. */
-    class battleTempA06 implements IbattleTempA06 {
+    /** Represents a TakeOffArtifactA. */
+    class TakeOffArtifactA implements ITakeOffArtifactA {
 
         /**
-         * Constructs a new battleTempA06.
+         * Constructs a new TakeOffArtifactA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IbattleTempA06);
+        constructor(p?: Msg.ITakeOffArtifactA);
+
+        /** TakeOffArtifactA err. */
+        public err: Msg.TErrorCode;
+
+        /** TakeOffArtifactA errStr. */
+        public errStr: string;
+
+        /** TakeOffArtifactA heroID. */
+        public heroID: number;
+
+        /** TakeOffArtifactA artifactID. */
+        public artifactID: number;
 
         /**
-         * Encodes the specified battleTempA06 message. Does not implicitly {@link Msg.battleTempA06.verify|verify} messages.
-         * @param m battleTempA06 message or plain object to encode
+         * Encodes the specified TakeOffArtifactA message. Does not implicitly {@link Msg.TakeOffArtifactA.verify|verify} messages.
+         * @param m TakeOffArtifactA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IbattleTempA06, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ITakeOffArtifactA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a battleTempA06 message from the specified reader or buffer.
+         * Decodes a TakeOffArtifactA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns battleTempA06
+         * @returns TakeOffArtifactA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.battleTempA06;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.TakeOffArtifactA;
     }
 
-    /** Properties of a battleTempR07. */
-    interface IbattleTempR07 {
+    /** Properties of a PutOnAutoR. */
+    interface IPutOnAutoR {
+
+        /** PutOnAutoR heroID */
+        heroID?: (number|null);
+
+        /** PutOnAutoR putonEquipIDList */
+        putonEquipIDList?: (number[]|null);
+
+        /** PutOnAutoR artifactID */
+        artifactID?: (number|null);
     }
 
-    /** Represents a battleTempR07. */
-    class battleTempR07 implements IbattleTempR07 {
+    /** Represents a PutOnAutoR. */
+    class PutOnAutoR implements IPutOnAutoR {
 
         /**
-         * Constructs a new battleTempR07.
+         * Constructs a new PutOnAutoR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IbattleTempR07);
+        constructor(p?: Msg.IPutOnAutoR);
+
+        /** PutOnAutoR heroID. */
+        public heroID: number;
+
+        /** PutOnAutoR putonEquipIDList. */
+        public putonEquipIDList: number[];
+
+        /** PutOnAutoR artifactID. */
+        public artifactID: number;
 
         /**
-         * Encodes the specified battleTempR07 message. Does not implicitly {@link Msg.battleTempR07.verify|verify} messages.
-         * @param m battleTempR07 message or plain object to encode
+         * Encodes the specified PutOnAutoR message. Does not implicitly {@link Msg.PutOnAutoR.verify|verify} messages.
+         * @param m PutOnAutoR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IbattleTempR07, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IPutOnAutoR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a battleTempR07 message from the specified reader or buffer.
+         * Decodes a PutOnAutoR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns battleTempR07
+         * @returns PutOnAutoR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.battleTempR07;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.PutOnAutoR;
     }
 
-    /** Properties of a battleTempA07. */
-    interface IbattleTempA07 {
+    /** Properties of a PutOnAutoA. */
+    interface IPutOnAutoA {
+
+        /** PutOnAutoA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** PutOnAutoA errStr */
+        errStr?: (string|null);
+
+        /** PutOnAutoA heroID */
+        heroID?: (number|null);
+
+        /** PutOnAutoA putonEquipIDList */
+        putonEquipIDList?: (number[]|null);
+
+        /** PutOnAutoA takeoffEquipIDList */
+        takeoffEquipIDList?: (number[]|null);
+
+        /** PutOnAutoA putonArtifactID */
+        putonArtifactID?: (number|null);
+
+        /** PutOnAutoA takeoffArtifactID */
+        takeoffArtifactID?: (number|null);
     }
 
-    /** Represents a battleTempA07. */
-    class battleTempA07 implements IbattleTempA07 {
+    /** Represents a PutOnAutoA. */
+    class PutOnAutoA implements IPutOnAutoA {
 
         /**
-         * Constructs a new battleTempA07.
+         * Constructs a new PutOnAutoA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IbattleTempA07);
+        constructor(p?: Msg.IPutOnAutoA);
+
+        /** PutOnAutoA err. */
+        public err: Msg.TErrorCode;
+
+        /** PutOnAutoA errStr. */
+        public errStr: string;
+
+        /** PutOnAutoA heroID. */
+        public heroID: number;
+
+        /** PutOnAutoA putonEquipIDList. */
+        public putonEquipIDList: number[];
+
+        /** PutOnAutoA takeoffEquipIDList. */
+        public takeoffEquipIDList: number[];
+
+        /** PutOnAutoA putonArtifactID. */
+        public putonArtifactID: number;
+
+        /** PutOnAutoA takeoffArtifactID. */
+        public takeoffArtifactID: number;
 
         /**
-         * Encodes the specified battleTempA07 message. Does not implicitly {@link Msg.battleTempA07.verify|verify} messages.
-         * @param m battleTempA07 message or plain object to encode
+         * Encodes the specified PutOnAutoA message. Does not implicitly {@link Msg.PutOnAutoA.verify|verify} messages.
+         * @param m PutOnAutoA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IbattleTempA07, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IPutOnAutoA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a battleTempA07 message from the specified reader or buffer.
+         * Decodes a PutOnAutoA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns battleTempA07
+         * @returns PutOnAutoA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.battleTempA07;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.PutOnAutoA;
     }
 
-    /** Properties of a battleTempR08. */
-    interface IbattleTempR08 {
+    /** Properties of an ArtifactQualtiyUpR. */
+    interface IArtifactQualtiyUpR {
+
+        /** ArtifactQualtiyUpR heroID */
+        heroID?: (number|null);
+
+        /** ArtifactQualtiyUpR artifactID */
+        artifactID?: (number|null);
+
+        /** ArtifactQualtiyUpR materialArtifacts */
+        materialArtifacts?: ({ [k: string]: number }|null);
     }
 
-    /** Represents a battleTempR08. */
-    class battleTempR08 implements IbattleTempR08 {
+    /** Represents an ArtifactQualtiyUpR. */
+    class ArtifactQualtiyUpR implements IArtifactQualtiyUpR {
 
         /**
-         * Constructs a new battleTempR08.
+         * Constructs a new ArtifactQualtiyUpR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IbattleTempR08);
+        constructor(p?: Msg.IArtifactQualtiyUpR);
+
+        /** ArtifactQualtiyUpR heroID. */
+        public heroID: number;
+
+        /** ArtifactQualtiyUpR artifactID. */
+        public artifactID: number;
+
+        /** ArtifactQualtiyUpR materialArtifacts. */
+        public materialArtifacts: { [k: string]: number };
 
         /**
-         * Encodes the specified battleTempR08 message. Does not implicitly {@link Msg.battleTempR08.verify|verify} messages.
-         * @param m battleTempR08 message or plain object to encode
+         * Encodes the specified ArtifactQualtiyUpR message. Does not implicitly {@link Msg.ArtifactQualtiyUpR.verify|verify} messages.
+         * @param m ArtifactQualtiyUpR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IbattleTempR08, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IArtifactQualtiyUpR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a battleTempR08 message from the specified reader or buffer.
+         * Decodes an ArtifactQualtiyUpR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns battleTempR08
+         * @returns ArtifactQualtiyUpR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.battleTempR08;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ArtifactQualtiyUpR;
     }
 
-    /** Properties of a battleTempA08. */
-    interface IbattleTempA08 {
+    /** Properties of an ArtifactQualtiyUpA. */
+    interface IArtifactQualtiyUpA {
+
+        /** ArtifactQualtiyUpA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** ArtifactQualtiyUpA errStr */
+        errStr?: (string|null);
+
+        /** ArtifactQualtiyUpA heroID */
+        heroID?: (number|null);
+
+        /** ArtifactQualtiyUpA artifactID */
+        artifactID?: (number|null);
+
+        /** ArtifactQualtiyUpA newArtifactID */
+        newArtifactID?: (number|null);
+
+        /** ArtifactQualtiyUpA materialArtifacts */
+        materialArtifacts?: ({ [k: string]: number }|null);
+
+        /** ArtifactQualtiyUpA consumeMoney */
+        consumeMoney?: (number|null);
     }
 
-    /** Represents a battleTempA08. */
-    class battleTempA08 implements IbattleTempA08 {
+    /** Represents an ArtifactQualtiyUpA. */
+    class ArtifactQualtiyUpA implements IArtifactQualtiyUpA {
 
         /**
-         * Constructs a new battleTempA08.
+         * Constructs a new ArtifactQualtiyUpA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IbattleTempA08);
+        constructor(p?: Msg.IArtifactQualtiyUpA);
+
+        /** ArtifactQualtiyUpA err. */
+        public err: Msg.TErrorCode;
+
+        /** ArtifactQualtiyUpA errStr. */
+        public errStr: string;
+
+        /** ArtifactQualtiyUpA heroID. */
+        public heroID: number;
+
+        /** ArtifactQualtiyUpA artifactID. */
+        public artifactID: number;
+
+        /** ArtifactQualtiyUpA newArtifactID. */
+        public newArtifactID: number;
+
+        /** ArtifactQualtiyUpA materialArtifacts. */
+        public materialArtifacts: { [k: string]: number };
+
+        /** ArtifactQualtiyUpA consumeMoney. */
+        public consumeMoney: number;
 
         /**
-         * Encodes the specified battleTempA08 message. Does not implicitly {@link Msg.battleTempA08.verify|verify} messages.
-         * @param m battleTempA08 message or plain object to encode
+         * Encodes the specified ArtifactQualtiyUpA message. Does not implicitly {@link Msg.ArtifactQualtiyUpA.verify|verify} messages.
+         * @param m ArtifactQualtiyUpA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IbattleTempA08, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IArtifactQualtiyUpA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a battleTempA08 message from the specified reader or buffer.
+         * Decodes an ArtifactQualtiyUpA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns battleTempA08
+         * @returns ArtifactQualtiyUpA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.battleTempA08;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ArtifactQualtiyUpA;
     }
 
-    /** Properties of a battleTempR09. */
-    interface IbattleTempR09 {
+    /** Properties of an AwardDirectlyEventCopyAllR. */
+    interface IAwardDirectlyEventCopyAllR {
     }
 
-    /** Represents a battleTempR09. */
-    class battleTempR09 implements IbattleTempR09 {
+    /** Represents an AwardDirectlyEventCopyAllR. */
+    class AwardDirectlyEventCopyAllR implements IAwardDirectlyEventCopyAllR {
 
         /**
-         * Constructs a new battleTempR09.
+         * Constructs a new AwardDirectlyEventCopyAllR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IbattleTempR09);
+        constructor(p?: Msg.IAwardDirectlyEventCopyAllR);
 
         /**
-         * Encodes the specified battleTempR09 message. Does not implicitly {@link Msg.battleTempR09.verify|verify} messages.
-         * @param m battleTempR09 message or plain object to encode
+         * Encodes the specified AwardDirectlyEventCopyAllR message. Does not implicitly {@link Msg.AwardDirectlyEventCopyAllR.verify|verify} messages.
+         * @param m AwardDirectlyEventCopyAllR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IbattleTempR09, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IAwardDirectlyEventCopyAllR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a battleTempR09 message from the specified reader or buffer.
+         * Decodes an AwardDirectlyEventCopyAllR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns battleTempR09
+         * @returns AwardDirectlyEventCopyAllR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.battleTempR09;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.AwardDirectlyEventCopyAllR;
     }
 
-    /** Properties of a battleTempA09. */
-    interface IbattleTempA09 {
+    /** Properties of an AwardDirectlyEventCopyAllA. */
+    interface IAwardDirectlyEventCopyAllA {
+
+        /** AwardDirectlyEventCopyAllA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** AwardDirectlyEventCopyAllA errStr */
+        errStr?: (string|null);
+
+        /** AwardDirectlyEventCopyAllA lootObjList */
+        lootObjList?: (Msg.ILootObject[]|null);
+
+        /** AwardDirectlyEventCopyAllA passedTimes */
+        passedTimes?: ({ [k: string]: number }|null);
     }
 
-    /** Represents a battleTempA09. */
-    class battleTempA09 implements IbattleTempA09 {
+    /** Represents an AwardDirectlyEventCopyAllA. */
+    class AwardDirectlyEventCopyAllA implements IAwardDirectlyEventCopyAllA {
 
         /**
-         * Constructs a new battleTempA09.
+         * Constructs a new AwardDirectlyEventCopyAllA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IbattleTempA09);
+        constructor(p?: Msg.IAwardDirectlyEventCopyAllA);
+
+        /** AwardDirectlyEventCopyAllA err. */
+        public err: Msg.TErrorCode;
+
+        /** AwardDirectlyEventCopyAllA errStr. */
+        public errStr: string;
+
+        /** AwardDirectlyEventCopyAllA lootObjList. */
+        public lootObjList: Msg.ILootObject[];
+
+        /** AwardDirectlyEventCopyAllA passedTimes. */
+        public passedTimes: { [k: string]: number };
 
         /**
-         * Encodes the specified battleTempA09 message. Does not implicitly {@link Msg.battleTempA09.verify|verify} messages.
-         * @param m battleTempA09 message or plain object to encode
+         * Encodes the specified AwardDirectlyEventCopyAllA message. Does not implicitly {@link Msg.AwardDirectlyEventCopyAllA.verify|verify} messages.
+         * @param m AwardDirectlyEventCopyAllA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IbattleTempA09, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IAwardDirectlyEventCopyAllA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a battleTempA09 message from the specified reader or buffer.
+         * Decodes an AwardDirectlyEventCopyAllA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns battleTempA09
+         * @returns AwardDirectlyEventCopyAllA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.battleTempA09;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.AwardDirectlyEventCopyAllA;
     }
 
-    /** Properties of a ReserveMessage343. */
-    interface IReserveMessage343 {
+    /** Properties of an AdvArenaInfo. */
+    interface IAdvArenaInfo {
+
+        /** AdvArenaInfo score */
+        score?: (number|null);
+
+        /** AdvArenaInfo maxScore */
+        maxScore?: (number|null);
+
+        /** AdvArenaInfo praisePlayerList */
+        praisePlayerList?: (number[]|null);
+
+        /** AdvArenaInfo bePraisedNum */
+        bePraisedNum?: (number|null);
+
+        /** AdvArenaInfo formationDef */
+        formationDef?: ({ [k: string]: Msg.IFormationInfoNew }|null);
+
+        /** AdvArenaInfo formationAtk */
+        formationAtk?: ({ [k: string]: Msg.IFormationInfoNew }|null);
+
+        /** AdvArenaInfo dailyAwardReceived */
+        dailyAwardReceived?: ({ [k: string]: boolean }|null);
+
+        /** AdvArenaInfo rankAwardReceived */
+        rankAwardReceived?: ({ [k: string]: boolean }|null);
+
+        /** AdvArenaInfo battleRecordList */
+        battleRecordList?: (Msg.IAdvArenaBattleRecord[]|null);
+
+        /** AdvArenaInfo dailyBattleTimes */
+        dailyBattleTimes?: (number|null);
+
+        /** AdvArenaInfo rank */
+        rank?: (number|null);
+
+        /** AdvArenaInfo isJoin */
+        isJoin?: (boolean|null);
+
+        /** AdvArenaInfo fightingDef */
+        fightingDef?: (number|null);
+
+        /** AdvArenaInfo highestRank */
+        highestRank?: (number|null);
     }
 
-    /** Represents a ReserveMessage343. */
-    class ReserveMessage343 implements IReserveMessage343 {
+    /** Represents an AdvArenaInfo. */
+    class AdvArenaInfo implements IAdvArenaInfo {
 
         /**
-         * Constructs a new ReserveMessage343.
+         * Constructs a new AdvArenaInfo.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage343);
+        constructor(p?: Msg.IAdvArenaInfo);
+
+        /** AdvArenaInfo score. */
+        public score: number;
+
+        /** AdvArenaInfo maxScore. */
+        public maxScore: number;
+
+        /** AdvArenaInfo praisePlayerList. */
+        public praisePlayerList: number[];
+
+        /** AdvArenaInfo bePraisedNum. */
+        public bePraisedNum: number;
+
+        /** AdvArenaInfo formationDef. */
+        public formationDef: { [k: string]: Msg.IFormationInfoNew };
+
+        /** AdvArenaInfo formationAtk. */
+        public formationAtk: { [k: string]: Msg.IFormationInfoNew };
+
+        /** AdvArenaInfo dailyAwardReceived. */
+        public dailyAwardReceived: { [k: string]: boolean };
+
+        /** AdvArenaInfo rankAwardReceived. */
+        public rankAwardReceived: { [k: string]: boolean };
+
+        /** AdvArenaInfo battleRecordList. */
+        public battleRecordList: Msg.IAdvArenaBattleRecord[];
+
+        /** AdvArenaInfo dailyBattleTimes. */
+        public dailyBattleTimes: number;
+
+        /** AdvArenaInfo rank. */
+        public rank: number;
+
+        /** AdvArenaInfo isJoin. */
+        public isJoin: boolean;
+
+        /** AdvArenaInfo fightingDef. */
+        public fightingDef: number;
+
+        /** AdvArenaInfo highestRank. */
+        public highestRank: number;
 
         /**
-         * Encodes the specified ReserveMessage343 message. Does not implicitly {@link Msg.ReserveMessage343.verify|verify} messages.
-         * @param m ReserveMessage343 message or plain object to encode
+         * Encodes the specified AdvArenaInfo message. Does not implicitly {@link Msg.AdvArenaInfo.verify|verify} messages.
+         * @param m AdvArenaInfo message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage343, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IAdvArenaInfo, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage343 message from the specified reader or buffer.
+         * Decodes an AdvArenaInfo message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage343
+         * @returns AdvArenaInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage343;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.AdvArenaInfo;
     }
 
-    /** Properties of a ReserveMessage342. */
-    interface IReserveMessage342 {
+    /** Properties of a GetAdvArenaInfoR. */
+    interface IGetAdvArenaInfoR {
+
+        /** GetAdvArenaInfoR isRefresh */
+        isRefresh?: (boolean|null);
     }
 
-    /** Represents a ReserveMessage342. */
-    class ReserveMessage342 implements IReserveMessage342 {
+    /** Represents a GetAdvArenaInfoR. */
+    class GetAdvArenaInfoR implements IGetAdvArenaInfoR {
 
         /**
-         * Constructs a new ReserveMessage342.
+         * Constructs a new GetAdvArenaInfoR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage342);
+        constructor(p?: Msg.IGetAdvArenaInfoR);
+
+        /** GetAdvArenaInfoR isRefresh. */
+        public isRefresh: boolean;
 
         /**
-         * Encodes the specified ReserveMessage342 message. Does not implicitly {@link Msg.ReserveMessage342.verify|verify} messages.
-         * @param m ReserveMessage342 message or plain object to encode
+         * Encodes the specified GetAdvArenaInfoR message. Does not implicitly {@link Msg.GetAdvArenaInfoR.verify|verify} messages.
+         * @param m GetAdvArenaInfoR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage342, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IGetAdvArenaInfoR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage342 message from the specified reader or buffer.
+         * Decodes a GetAdvArenaInfoR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage342
+         * @returns GetAdvArenaInfoR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage342;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetAdvArenaInfoR;
     }
 
-    /** Properties of a ReserveMessage341. */
-    interface IReserveMessage341 {
+    /** Properties of a GetAdvArenaInfoA. */
+    interface IGetAdvArenaInfoA {
+
+        /** GetAdvArenaInfoA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** GetAdvArenaInfoA errStr */
+        errStr?: (string|null);
+
+        /** GetAdvArenaInfoA topRankPlayers */
+        topRankPlayers?: (Msg.IAdvArenaOpponentPlayer[]|null);
+
+        /** GetAdvArenaInfoA score */
+        score?: (number|null);
+
+        /** GetAdvArenaInfoA maxScore */
+        maxScore?: (number|null);
+
+        /** GetAdvArenaInfoA bePraisedNum */
+        bePraisedNum?: (number|null);
+
+        /** GetAdvArenaInfoA rank */
+        rank?: (number|null);
+
+        /** GetAdvArenaInfoA aai */
+        aai?: (Msg.IAdvArenaInfo|null);
     }
 
-    /** Represents a ReserveMessage341. */
-    class ReserveMessage341 implements IReserveMessage341 {
+    /** Represents a GetAdvArenaInfoA. */
+    class GetAdvArenaInfoA implements IGetAdvArenaInfoA {
 
         /**
-         * Constructs a new ReserveMessage341.
+         * Constructs a new GetAdvArenaInfoA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage341);
+        constructor(p?: Msg.IGetAdvArenaInfoA);
+
+        /** GetAdvArenaInfoA err. */
+        public err: Msg.TErrorCode;
+
+        /** GetAdvArenaInfoA errStr. */
+        public errStr: string;
+
+        /** GetAdvArenaInfoA topRankPlayers. */
+        public topRankPlayers: Msg.IAdvArenaOpponentPlayer[];
+
+        /** GetAdvArenaInfoA score. */
+        public score: number;
+
+        /** GetAdvArenaInfoA maxScore. */
+        public maxScore: number;
+
+        /** GetAdvArenaInfoA bePraisedNum. */
+        public bePraisedNum: number;
+
+        /** GetAdvArenaInfoA rank. */
+        public rank: number;
+
+        /** GetAdvArenaInfoA aai. */
+        public aai?: (Msg.IAdvArenaInfo|null);
 
         /**
-         * Encodes the specified ReserveMessage341 message. Does not implicitly {@link Msg.ReserveMessage341.verify|verify} messages.
-         * @param m ReserveMessage341 message or plain object to encode
+         * Encodes the specified GetAdvArenaInfoA message. Does not implicitly {@link Msg.GetAdvArenaInfoA.verify|verify} messages.
+         * @param m GetAdvArenaInfoA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage341, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IGetAdvArenaInfoA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage341 message from the specified reader or buffer.
+         * Decodes a GetAdvArenaInfoA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage341
+         * @returns GetAdvArenaInfoA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage341;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetAdvArenaInfoA;
     }
 
-    /** Properties of a ReserveMessage340. */
-    interface IReserveMessage340 {
+    /** Properties of a GetAdvArenaRankingR. */
+    interface IGetAdvArenaRankingR {
     }
 
-    /** Represents a ReserveMessage340. */
-    class ReserveMessage340 implements IReserveMessage340 {
+    /** Represents a GetAdvArenaRankingR. */
+    class GetAdvArenaRankingR implements IGetAdvArenaRankingR {
 
         /**
-         * Constructs a new ReserveMessage340.
+         * Constructs a new GetAdvArenaRankingR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage340);
+        constructor(p?: Msg.IGetAdvArenaRankingR);
 
         /**
-         * Encodes the specified ReserveMessage340 message. Does not implicitly {@link Msg.ReserveMessage340.verify|verify} messages.
-         * @param m ReserveMessage340 message or plain object to encode
+         * Encodes the specified GetAdvArenaRankingR message. Does not implicitly {@link Msg.GetAdvArenaRankingR.verify|verify} messages.
+         * @param m GetAdvArenaRankingR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage340, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IGetAdvArenaRankingR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage340 message from the specified reader or buffer.
+         * Decodes a GetAdvArenaRankingR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage340
+         * @returns GetAdvArenaRankingR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage340;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetAdvArenaRankingR;
     }
 
-    /** Properties of a ReserveMessage339. */
-    interface IReserveMessage339 {
+    /** Properties of a GetAdvArenaRankingA. */
+    interface IGetAdvArenaRankingA {
+
+        /** GetAdvArenaRankingA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** GetAdvArenaRankingA errStr */
+        errStr?: (string|null);
+
+        /** GetAdvArenaRankingA topRankPlayers */
+        topRankPlayers?: (Msg.IAdvArenaOpponentPlayer[]|null);
     }
 
-    /** Represents a ReserveMessage339. */
-    class ReserveMessage339 implements IReserveMessage339 {
+    /** Represents a GetAdvArenaRankingA. */
+    class GetAdvArenaRankingA implements IGetAdvArenaRankingA {
 
         /**
-         * Constructs a new ReserveMessage339.
+         * Constructs a new GetAdvArenaRankingA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage339);
+        constructor(p?: Msg.IGetAdvArenaRankingA);
+
+        /** GetAdvArenaRankingA err. */
+        public err: Msg.TErrorCode;
+
+        /** GetAdvArenaRankingA errStr. */
+        public errStr: string;
+
+        /** GetAdvArenaRankingA topRankPlayers. */
+        public topRankPlayers: Msg.IAdvArenaOpponentPlayer[];
 
         /**
-         * Encodes the specified ReserveMessage339 message. Does not implicitly {@link Msg.ReserveMessage339.verify|verify} messages.
-         * @param m ReserveMessage339 message or plain object to encode
+         * Encodes the specified GetAdvArenaRankingA message. Does not implicitly {@link Msg.GetAdvArenaRankingA.verify|verify} messages.
+         * @param m GetAdvArenaRankingA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage339, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IGetAdvArenaRankingA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage339 message from the specified reader or buffer.
+         * Decodes a GetAdvArenaRankingA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage339
+         * @returns GetAdvArenaRankingA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage339;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetAdvArenaRankingA;
     }
 
-    /** Properties of a ReserveMessage338. */
-    interface IReserveMessage338 {
+    /** Properties of a RefreshAdvArenaOpponentR. */
+    interface IRefreshAdvArenaOpponentR {
     }
 
-    /** Represents a ReserveMessage338. */
-    class ReserveMessage338 implements IReserveMessage338 {
+    /** Represents a RefreshAdvArenaOpponentR. */
+    class RefreshAdvArenaOpponentR implements IRefreshAdvArenaOpponentR {
 
         /**
-         * Constructs a new ReserveMessage338.
+         * Constructs a new RefreshAdvArenaOpponentR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage338);
+        constructor(p?: Msg.IRefreshAdvArenaOpponentR);
 
         /**
-         * Encodes the specified ReserveMessage338 message. Does not implicitly {@link Msg.ReserveMessage338.verify|verify} messages.
-         * @param m ReserveMessage338 message or plain object to encode
+         * Encodes the specified RefreshAdvArenaOpponentR message. Does not implicitly {@link Msg.RefreshAdvArenaOpponentR.verify|verify} messages.
+         * @param m RefreshAdvArenaOpponentR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage338, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IRefreshAdvArenaOpponentR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage338 message from the specified reader or buffer.
+         * Decodes a RefreshAdvArenaOpponentR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage338
+         * @returns RefreshAdvArenaOpponentR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage338;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.RefreshAdvArenaOpponentR;
     }
 
-    /** Properties of a ReserveMessage337. */
-    interface IReserveMessage337 {
+    /** Properties of a RefreshAdvArenaOpponentA. */
+    interface IRefreshAdvArenaOpponentA {
+
+        /** RefreshAdvArenaOpponentA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** RefreshAdvArenaOpponentA errStr */
+        errStr?: (string|null);
+
+        /** RefreshAdvArenaOpponentA opponentInfo */
+        opponentInfo?: (Msg.IAdvArenaPlayerInfo|null);
     }
 
-    /** Represents a ReserveMessage337. */
-    class ReserveMessage337 implements IReserveMessage337 {
+    /** Represents a RefreshAdvArenaOpponentA. */
+    class RefreshAdvArenaOpponentA implements IRefreshAdvArenaOpponentA {
 
         /**
-         * Constructs a new ReserveMessage337.
+         * Constructs a new RefreshAdvArenaOpponentA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage337);
+        constructor(p?: Msg.IRefreshAdvArenaOpponentA);
+
+        /** RefreshAdvArenaOpponentA err. */
+        public err: Msg.TErrorCode;
+
+        /** RefreshAdvArenaOpponentA errStr. */
+        public errStr: string;
+
+        /** RefreshAdvArenaOpponentA opponentInfo. */
+        public opponentInfo?: (Msg.IAdvArenaPlayerInfo|null);
 
         /**
-         * Encodes the specified ReserveMessage337 message. Does not implicitly {@link Msg.ReserveMessage337.verify|verify} messages.
-         * @param m ReserveMessage337 message or plain object to encode
+         * Encodes the specified RefreshAdvArenaOpponentA message. Does not implicitly {@link Msg.RefreshAdvArenaOpponentA.verify|verify} messages.
+         * @param m RefreshAdvArenaOpponentA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage337, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IRefreshAdvArenaOpponentA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage337 message from the specified reader or buffer.
+         * Decodes a RefreshAdvArenaOpponentA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage337
+         * @returns RefreshAdvArenaOpponentA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage337;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.RefreshAdvArenaOpponentA;
     }
 
-    /** Properties of a ReserveMessage336. */
-    interface IReserveMessage336 {
+    /** Properties of a RecieveAdvArenaDailyAwardR. */
+    interface IRecieveAdvArenaDailyAwardR {
+
+        /** RecieveAdvArenaDailyAwardR times */
+        times?: (number|null);
     }
 
-    /** Represents a ReserveMessage336. */
-    class ReserveMessage336 implements IReserveMessage336 {
+    /** Represents a RecieveAdvArenaDailyAwardR. */
+    class RecieveAdvArenaDailyAwardR implements IRecieveAdvArenaDailyAwardR {
 
         /**
-         * Constructs a new ReserveMessage336.
+         * Constructs a new RecieveAdvArenaDailyAwardR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage336);
+        constructor(p?: Msg.IRecieveAdvArenaDailyAwardR);
+
+        /** RecieveAdvArenaDailyAwardR times. */
+        public times: number;
 
         /**
-         * Encodes the specified ReserveMessage336 message. Does not implicitly {@link Msg.ReserveMessage336.verify|verify} messages.
-         * @param m ReserveMessage336 message or plain object to encode
+         * Encodes the specified RecieveAdvArenaDailyAwardR message. Does not implicitly {@link Msg.RecieveAdvArenaDailyAwardR.verify|verify} messages.
+         * @param m RecieveAdvArenaDailyAwardR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage336, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IRecieveAdvArenaDailyAwardR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage336 message from the specified reader or buffer.
+         * Decodes a RecieveAdvArenaDailyAwardR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage336
+         * @returns RecieveAdvArenaDailyAwardR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage336;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.RecieveAdvArenaDailyAwardR;
     }
 
-    /** Properties of a ReserveMessage335. */
-    interface IReserveMessage335 {
+    /** Properties of a RecieveAdvArenaDailyAwardA. */
+    interface IRecieveAdvArenaDailyAwardA {
+
+        /** RecieveAdvArenaDailyAwardA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** RecieveAdvArenaDailyAwardA errStr */
+        errStr?: (string|null);
+
+        /** RecieveAdvArenaDailyAwardA times */
+        times?: (number|null);
+
+        /** RecieveAdvArenaDailyAwardA awardList */
+        awardList?: (Msg.ILootObject[]|null);
     }
 
-    /** Represents a ReserveMessage335. */
-    class ReserveMessage335 implements IReserveMessage335 {
+    /** Represents a RecieveAdvArenaDailyAwardA. */
+    class RecieveAdvArenaDailyAwardA implements IRecieveAdvArenaDailyAwardA {
 
         /**
-         * Constructs a new ReserveMessage335.
+         * Constructs a new RecieveAdvArenaDailyAwardA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage335);
+        constructor(p?: Msg.IRecieveAdvArenaDailyAwardA);
+
+        /** RecieveAdvArenaDailyAwardA err. */
+        public err: Msg.TErrorCode;
+
+        /** RecieveAdvArenaDailyAwardA errStr. */
+        public errStr: string;
+
+        /** RecieveAdvArenaDailyAwardA times. */
+        public times: number;
+
+        /** RecieveAdvArenaDailyAwardA awardList. */
+        public awardList: Msg.ILootObject[];
 
         /**
-         * Encodes the specified ReserveMessage335 message. Does not implicitly {@link Msg.ReserveMessage335.verify|verify} messages.
-         * @param m ReserveMessage335 message or plain object to encode
+         * Encodes the specified RecieveAdvArenaDailyAwardA message. Does not implicitly {@link Msg.RecieveAdvArenaDailyAwardA.verify|verify} messages.
+         * @param m RecieveAdvArenaDailyAwardA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage335, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IRecieveAdvArenaDailyAwardA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage335 message from the specified reader or buffer.
+         * Decodes a RecieveAdvArenaDailyAwardA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage335
+         * @returns RecieveAdvArenaDailyAwardA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage335;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.RecieveAdvArenaDailyAwardA;
     }
 
-    /** Properties of a ReserveMessage334. */
-    interface IReserveMessage334 {
+    /** Properties of a RecieveAdvArenaRankAwardR. */
+    interface IRecieveAdvArenaRankAwardR {
+
+        /** RecieveAdvArenaRankAwardR awardID */
+        awardID?: (number|null);
     }
 
-    /** Represents a ReserveMessage334. */
-    class ReserveMessage334 implements IReserveMessage334 {
+    /** Represents a RecieveAdvArenaRankAwardR. */
+    class RecieveAdvArenaRankAwardR implements IRecieveAdvArenaRankAwardR {
 
         /**
-         * Constructs a new ReserveMessage334.
+         * Constructs a new RecieveAdvArenaRankAwardR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage334);
+        constructor(p?: Msg.IRecieveAdvArenaRankAwardR);
+
+        /** RecieveAdvArenaRankAwardR awardID. */
+        public awardID: number;
 
         /**
-         * Encodes the specified ReserveMessage334 message. Does not implicitly {@link Msg.ReserveMessage334.verify|verify} messages.
-         * @param m ReserveMessage334 message or plain object to encode
+         * Encodes the specified RecieveAdvArenaRankAwardR message. Does not implicitly {@link Msg.RecieveAdvArenaRankAwardR.verify|verify} messages.
+         * @param m RecieveAdvArenaRankAwardR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage334, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IRecieveAdvArenaRankAwardR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage334 message from the specified reader or buffer.
+         * Decodes a RecieveAdvArenaRankAwardR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage334
+         * @returns RecieveAdvArenaRankAwardR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage334;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.RecieveAdvArenaRankAwardR;
     }
 
-    /** Properties of a ReserveMessage333. */
-    interface IReserveMessage333 {
+    /** Properties of a RecieveAdvArenaRankAwardA. */
+    interface IRecieveAdvArenaRankAwardA {
+
+        /** RecieveAdvArenaRankAwardA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** RecieveAdvArenaRankAwardA errStr */
+        errStr?: (string|null);
+
+        /** RecieveAdvArenaRankAwardA awardID */
+        awardID?: (number|null);
+
+        /** RecieveAdvArenaRankAwardA awardList */
+        awardList?: (Msg.ILootObject[]|null);
     }
 
-    /** Represents a ReserveMessage333. */
-    class ReserveMessage333 implements IReserveMessage333 {
+    /** Represents a RecieveAdvArenaRankAwardA. */
+    class RecieveAdvArenaRankAwardA implements IRecieveAdvArenaRankAwardA {
 
         /**
-         * Constructs a new ReserveMessage333.
+         * Constructs a new RecieveAdvArenaRankAwardA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage333);
+        constructor(p?: Msg.IRecieveAdvArenaRankAwardA);
+
+        /** RecieveAdvArenaRankAwardA err. */
+        public err: Msg.TErrorCode;
+
+        /** RecieveAdvArenaRankAwardA errStr. */
+        public errStr: string;
+
+        /** RecieveAdvArenaRankAwardA awardID. */
+        public awardID: number;
+
+        /** RecieveAdvArenaRankAwardA awardList. */
+        public awardList: Msg.ILootObject[];
 
         /**
-         * Encodes the specified ReserveMessage333 message. Does not implicitly {@link Msg.ReserveMessage333.verify|verify} messages.
-         * @param m ReserveMessage333 message or plain object to encode
+         * Encodes the specified RecieveAdvArenaRankAwardA message. Does not implicitly {@link Msg.RecieveAdvArenaRankAwardA.verify|verify} messages.
+         * @param m RecieveAdvArenaRankAwardA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage333, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IRecieveAdvArenaRankAwardA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage333 message from the specified reader or buffer.
+         * Decodes a RecieveAdvArenaRankAwardA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage333
+         * @returns RecieveAdvArenaRankAwardA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage333;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.RecieveAdvArenaRankAwardA;
     }
 
-    /** Properties of a ReserveMessage332. */
-    interface IReserveMessage332 {
+    /** Properties of an AdvArenaBattleDirectlyR. */
+    interface IAdvArenaBattleDirectlyR {
+
+        /** AdvArenaBattleDirectlyR opponentPlayerID */
+        opponentPlayerID?: (number|null);
+
+        /** AdvArenaBattleDirectlyR formation */
+        formation?: ({ [k: string]: Msg.IFormationInfoNew }|null);
     }
 
-    /** Represents a ReserveMessage332. */
-    class ReserveMessage332 implements IReserveMessage332 {
+    /** Represents an AdvArenaBattleDirectlyR. */
+    class AdvArenaBattleDirectlyR implements IAdvArenaBattleDirectlyR {
 
         /**
-         * Constructs a new ReserveMessage332.
+         * Constructs a new AdvArenaBattleDirectlyR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage332);
+        constructor(p?: Msg.IAdvArenaBattleDirectlyR);
+
+        /** AdvArenaBattleDirectlyR opponentPlayerID. */
+        public opponentPlayerID: number;
+
+        /** AdvArenaBattleDirectlyR formation. */
+        public formation: { [k: string]: Msg.IFormationInfoNew };
 
         /**
-         * Encodes the specified ReserveMessage332 message. Does not implicitly {@link Msg.ReserveMessage332.verify|verify} messages.
-         * @param m ReserveMessage332 message or plain object to encode
+         * Encodes the specified AdvArenaBattleDirectlyR message. Does not implicitly {@link Msg.AdvArenaBattleDirectlyR.verify|verify} messages.
+         * @param m AdvArenaBattleDirectlyR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage332, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IAdvArenaBattleDirectlyR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage332 message from the specified reader or buffer.
+         * Decodes an AdvArenaBattleDirectlyR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage332
+         * @returns AdvArenaBattleDirectlyR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage332;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.AdvArenaBattleDirectlyR;
     }
 
-    /** Properties of a ReserveMessage331. */
-    interface IReserveMessage331 {
+    /** Properties of an AdvArenaBattleDirectlyA. */
+    interface IAdvArenaBattleDirectlyA {
+
+        /** AdvArenaBattleDirectlyA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** AdvArenaBattleDirectlyA errStr */
+        errStr?: (string|null);
+
+        /** AdvArenaBattleDirectlyA opponentPlayerID */
+        opponentPlayerID?: (number|null);
+
+        /** AdvArenaBattleDirectlyA formation */
+        formation?: ({ [k: string]: Msg.IFormationInfoNew }|null);
+
+        /** AdvArenaBattleDirectlyA battleID */
+        battleID?: (number|null);
+
+        /** AdvArenaBattleDirectlyA score */
+        score?: (number|null);
+
+        /** AdvArenaBattleDirectlyA maxScore */
+        maxScore?: (number|null);
+
+        /** AdvArenaBattleDirectlyA rank */
+        rank?: (number|null);
+
+        /** AdvArenaBattleDirectlyA pvpTicket */
+        pvpTicket?: (number|null);
+
+        /** AdvArenaBattleDirectlyA dailyBattleTimes */
+        dailyBattleTimes?: (number|null);
+
+        /** AdvArenaBattleDirectlyA abr */
+        abr?: (Msg.IAdvArenaBattleRecord|null);
+
+        /** AdvArenaBattleDirectlyA topRankPlayers */
+        topRankPlayers?: (Msg.IAdvArenaOpponentPlayer[]|null);
+
+        /** AdvArenaBattleDirectlyA highestRank */
+        highestRank?: (number|null);
     }
 
-    /** Represents a ReserveMessage331. */
-    class ReserveMessage331 implements IReserveMessage331 {
+    /** Represents an AdvArenaBattleDirectlyA. */
+    class AdvArenaBattleDirectlyA implements IAdvArenaBattleDirectlyA {
 
         /**
-         * Constructs a new ReserveMessage331.
+         * Constructs a new AdvArenaBattleDirectlyA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage331);
+        constructor(p?: Msg.IAdvArenaBattleDirectlyA);
+
+        /** AdvArenaBattleDirectlyA err. */
+        public err: Msg.TErrorCode;
+
+        /** AdvArenaBattleDirectlyA errStr. */
+        public errStr: string;
+
+        /** AdvArenaBattleDirectlyA opponentPlayerID. */
+        public opponentPlayerID: number;
+
+        /** AdvArenaBattleDirectlyA formation. */
+        public formation: { [k: string]: Msg.IFormationInfoNew };
+
+        /** AdvArenaBattleDirectlyA battleID. */
+        public battleID: number;
+
+        /** AdvArenaBattleDirectlyA score. */
+        public score: number;
+
+        /** AdvArenaBattleDirectlyA maxScore. */
+        public maxScore: number;
+
+        /** AdvArenaBattleDirectlyA rank. */
+        public rank: number;
+
+        /** AdvArenaBattleDirectlyA pvpTicket. */
+        public pvpTicket: number;
+
+        /** AdvArenaBattleDirectlyA dailyBattleTimes. */
+        public dailyBattleTimes: number;
+
+        /** AdvArenaBattleDirectlyA abr. */
+        public abr?: (Msg.IAdvArenaBattleRecord|null);
+
+        /** AdvArenaBattleDirectlyA topRankPlayers. */
+        public topRankPlayers: Msg.IAdvArenaOpponentPlayer[];
+
+        /** AdvArenaBattleDirectlyA highestRank. */
+        public highestRank: number;
 
         /**
-         * Encodes the specified ReserveMessage331 message. Does not implicitly {@link Msg.ReserveMessage331.verify|verify} messages.
-         * @param m ReserveMessage331 message or plain object to encode
+         * Encodes the specified AdvArenaBattleDirectlyA message. Does not implicitly {@link Msg.AdvArenaBattleDirectlyA.verify|verify} messages.
+         * @param m AdvArenaBattleDirectlyA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage331, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IAdvArenaBattleDirectlyA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage331 message from the specified reader or buffer.
+         * Decodes an AdvArenaBattleDirectlyA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage331
+         * @returns AdvArenaBattleDirectlyA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage331;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.AdvArenaBattleDirectlyA;
     }
 
-    /** Properties of a ReserveMessage330. */
-    interface IReserveMessage330 {
+    /** Properties of an AdvArenaBattleRecordUnit. */
+    interface IAdvArenaBattleRecordUnit {
+
+        /** AdvArenaBattleRecordUnit leftFighting */
+        leftFighting?: (number|null);
+
+        /** AdvArenaBattleRecordUnit rightFighting */
+        rightFighting?: (number|null);
+
+        /** AdvArenaBattleRecordUnit leftPet */
+        leftPet?: (Msg.IPetInfo|null);
+
+        /** AdvArenaBattleRecordUnit rightPet */
+        rightPet?: (Msg.IPetInfo|null);
+
+        /** AdvArenaBattleRecordUnit result */
+        result?: (Msg.TPVPBattleResult|null);
+
+        /** AdvArenaBattleRecordUnit battleID */
+        battleID?: (number|null);
+
+        /** AdvArenaBattleRecordUnit leftStatistics */
+        leftStatistics?: (Msg.IBattleStatisticUnit[]|null);
+
+        /** AdvArenaBattleRecordUnit rightStatistics */
+        rightStatistics?: (Msg.IBattleStatisticUnit[]|null);
+
+        /** AdvArenaBattleRecordUnit round */
+        round?: (number|null);
     }
 
-    /** Represents a ReserveMessage330. */
-    class ReserveMessage330 implements IReserveMessage330 {
+    /** Represents an AdvArenaBattleRecordUnit. */
+    class AdvArenaBattleRecordUnit implements IAdvArenaBattleRecordUnit {
 
         /**
-         * Constructs a new ReserveMessage330.
+         * Constructs a new AdvArenaBattleRecordUnit.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage330);
+        constructor(p?: Msg.IAdvArenaBattleRecordUnit);
+
+        /** AdvArenaBattleRecordUnit leftFighting. */
+        public leftFighting: number;
+
+        /** AdvArenaBattleRecordUnit rightFighting. */
+        public rightFighting: number;
+
+        /** AdvArenaBattleRecordUnit leftPet. */
+        public leftPet?: (Msg.IPetInfo|null);
+
+        /** AdvArenaBattleRecordUnit rightPet. */
+        public rightPet?: (Msg.IPetInfo|null);
+
+        /** AdvArenaBattleRecordUnit result. */
+        public result: Msg.TPVPBattleResult;
+
+        /** AdvArenaBattleRecordUnit battleID. */
+        public battleID: number;
+
+        /** AdvArenaBattleRecordUnit leftStatistics. */
+        public leftStatistics: Msg.IBattleStatisticUnit[];
+
+        /** AdvArenaBattleRecordUnit rightStatistics. */
+        public rightStatistics: Msg.IBattleStatisticUnit[];
+
+        /** AdvArenaBattleRecordUnit round. */
+        public round: number;
 
         /**
-         * Encodes the specified ReserveMessage330 message. Does not implicitly {@link Msg.ReserveMessage330.verify|verify} messages.
-         * @param m ReserveMessage330 message or plain object to encode
+         * Encodes the specified AdvArenaBattleRecordUnit message. Does not implicitly {@link Msg.AdvArenaBattleRecordUnit.verify|verify} messages.
+         * @param m AdvArenaBattleRecordUnit message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage330, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IAdvArenaBattleRecordUnit, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage330 message from the specified reader or buffer.
+         * Decodes an AdvArenaBattleRecordUnit message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage330
+         * @returns AdvArenaBattleRecordUnit
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage330;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.AdvArenaBattleRecordUnit;
     }
 
-    /** Properties of a ReserveMessage329. */
-    interface IReserveMessage329 {
+    /** Properties of an AdvArenaBattleRecord. */
+    interface IAdvArenaBattleRecord {
+
+        /** AdvArenaBattleRecord leftPlayer */
+        leftPlayer?: (Msg.IAdvArenaOpponentPlayer|null);
+
+        /** AdvArenaBattleRecord rightPlayer */
+        rightPlayer?: (Msg.IAdvArenaOpponentPlayer|null);
+
+        /** AdvArenaBattleRecord battleResult */
+        battleResult?: (Msg.TPVPBattleResult|null);
+
+        /** AdvArenaBattleRecord timestamp */
+        timestamp?: (number|null);
+
+        /** AdvArenaBattleRecord scoreChange */
+        scoreChange?: (number|null);
+
+        /** AdvArenaBattleRecord battleRecordList */
+        battleRecordList?: (Msg.IAdvArenaBattleRecordUnit[]|null);
     }
 
-    /** Represents a ReserveMessage329. */
-    class ReserveMessage329 implements IReserveMessage329 {
+    /** Represents an AdvArenaBattleRecord. */
+    class AdvArenaBattleRecord implements IAdvArenaBattleRecord {
 
         /**
-         * Constructs a new ReserveMessage329.
+         * Constructs a new AdvArenaBattleRecord.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage329);
+        constructor(p?: Msg.IAdvArenaBattleRecord);
+
+        /** AdvArenaBattleRecord leftPlayer. */
+        public leftPlayer?: (Msg.IAdvArenaOpponentPlayer|null);
+
+        /** AdvArenaBattleRecord rightPlayer. */
+        public rightPlayer?: (Msg.IAdvArenaOpponentPlayer|null);
+
+        /** AdvArenaBattleRecord battleResult. */
+        public battleResult: Msg.TPVPBattleResult;
+
+        /** AdvArenaBattleRecord timestamp. */
+        public timestamp: number;
+
+        /** AdvArenaBattleRecord scoreChange. */
+        public scoreChange: number;
+
+        /** AdvArenaBattleRecord battleRecordList. */
+        public battleRecordList: Msg.IAdvArenaBattleRecordUnit[];
 
         /**
-         * Encodes the specified ReserveMessage329 message. Does not implicitly {@link Msg.ReserveMessage329.verify|verify} messages.
-         * @param m ReserveMessage329 message or plain object to encode
+         * Encodes the specified AdvArenaBattleRecord message. Does not implicitly {@link Msg.AdvArenaBattleRecord.verify|verify} messages.
+         * @param m AdvArenaBattleRecord message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage329, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IAdvArenaBattleRecord, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage329 message from the specified reader or buffer.
+         * Decodes an AdvArenaBattleRecord message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage329
+         * @returns AdvArenaBattleRecord
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage329;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.AdvArenaBattleRecord;
     }
 
-    /** Properties of a ReserveMessage328. */
-    interface IReserveMessage328 {
+    /** Properties of an AdvArenaPlayerInfo. */
+    interface IAdvArenaPlayerInfo {
+
+        /** AdvArenaPlayerInfo id */
+        id?: (number|null);
+
+        /** AdvArenaPlayerInfo name */
+        name?: (string|null);
+
+        /** AdvArenaPlayerInfo level */
+        level?: (number|null);
+
+        /** AdvArenaPlayerInfo star */
+        star?: (number|null);
+
+        /** AdvArenaPlayerInfo armorID */
+        armorID?: (number|null);
+
+        /** AdvArenaPlayerInfo armorLevel */
+        armorLevel?: (number|null);
+
+        /** AdvArenaPlayerInfo formationList */
+        formationList?: ({ [k: string]: Msg.IFormationInfoNew }|null);
+
+        /** AdvArenaPlayerInfo petList */
+        petList?: ({ [k: string]: Msg.IPetInfo }|null);
+
+        /** AdvArenaPlayerInfo fightingList */
+        fightingList?: ({ [k: string]: number }|null);
+
+        /** AdvArenaPlayerInfo heroList */
+        heroList?: (Msg.IHeroInfo[]|null);
+
+        /** AdvArenaPlayerInfo portrait */
+        portrait?: (number|null);
+
+        /** AdvArenaPlayerInfo rank */
+        rank?: (number|null);
+
+        /** AdvArenaPlayerInfo showPortrait */
+        showPortrait?: (number|null);
+
+        /** AdvArenaPlayerInfo showTitle */
+        showTitle?: (number|null);
+
+        /** AdvArenaPlayerInfo showFrame */
+        showFrame?: (number|null);
+
+        /** AdvArenaPlayerInfo heroBookPropertyByHero */
+        heroBookPropertyByHero?: ({ [k: string]: number }|null);
+
+        /** AdvArenaPlayerInfo heroBookPropertyByBook */
+        heroBookPropertyByBook?: ({ [k: string]: number }|null);
+
+        /** AdvArenaPlayerInfo titleProperty */
+        titleProperty?: ({ [k: string]: number }|null);
+
+        /** AdvArenaPlayerInfo technologyProperty */
+        technologyProperty?: ({ [k: string]: Msg.IPropertyMap }|null);
+
+        /** AdvArenaPlayerInfo skinProperty */
+        skinProperty?: ({ [k: string]: Msg.IPropertyMap }|null);
+
+        /** AdvArenaPlayerInfo showSkin */
+        showSkin?: (number|null);
+
+        /** AdvArenaPlayerInfo serverID */
+        serverID?: (number|null);
+
+        /** AdvArenaPlayerInfo score */
+        score?: (number|null);
+
+        /** AdvArenaPlayerInfo maxScore */
+        maxScore?: (number|null);
     }
 
-    /** Represents a ReserveMessage328. */
-    class ReserveMessage328 implements IReserveMessage328 {
+    /** Represents an AdvArenaPlayerInfo. */
+    class AdvArenaPlayerInfo implements IAdvArenaPlayerInfo {
 
         /**
-         * Constructs a new ReserveMessage328.
+         * Constructs a new AdvArenaPlayerInfo.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage328);
+        constructor(p?: Msg.IAdvArenaPlayerInfo);
+
+        /** AdvArenaPlayerInfo id. */
+        public id: number;
+
+        /** AdvArenaPlayerInfo name. */
+        public name: string;
+
+        /** AdvArenaPlayerInfo level. */
+        public level: number;
+
+        /** AdvArenaPlayerInfo star. */
+        public star: number;
+
+        /** AdvArenaPlayerInfo armorID. */
+        public armorID: number;
+
+        /** AdvArenaPlayerInfo armorLevel. */
+        public armorLevel: number;
+
+        /** AdvArenaPlayerInfo formationList. */
+        public formationList: { [k: string]: Msg.IFormationInfoNew };
+
+        /** AdvArenaPlayerInfo petList. */
+        public petList: { [k: string]: Msg.IPetInfo };
+
+        /** AdvArenaPlayerInfo fightingList. */
+        public fightingList: { [k: string]: number };
+
+        /** AdvArenaPlayerInfo heroList. */
+        public heroList: Msg.IHeroInfo[];
+
+        /** AdvArenaPlayerInfo portrait. */
+        public portrait: number;
+
+        /** AdvArenaPlayerInfo rank. */
+        public rank: number;
+
+        /** AdvArenaPlayerInfo showPortrait. */
+        public showPortrait: number;
+
+        /** AdvArenaPlayerInfo showTitle. */
+        public showTitle: number;
+
+        /** AdvArenaPlayerInfo showFrame. */
+        public showFrame: number;
+
+        /** AdvArenaPlayerInfo heroBookPropertyByHero. */
+        public heroBookPropertyByHero: { [k: string]: number };
+
+        /** AdvArenaPlayerInfo heroBookPropertyByBook. */
+        public heroBookPropertyByBook: { [k: string]: number };
+
+        /** AdvArenaPlayerInfo titleProperty. */
+        public titleProperty: { [k: string]: number };
+
+        /** AdvArenaPlayerInfo technologyProperty. */
+        public technologyProperty: { [k: string]: Msg.IPropertyMap };
+
+        /** AdvArenaPlayerInfo skinProperty. */
+        public skinProperty: { [k: string]: Msg.IPropertyMap };
+
+        /** AdvArenaPlayerInfo showSkin. */
+        public showSkin: number;
+
+        /** AdvArenaPlayerInfo serverID. */
+        public serverID: number;
+
+        /** AdvArenaPlayerInfo score. */
+        public score: number;
+
+        /** AdvArenaPlayerInfo maxScore. */
+        public maxScore: number;
 
         /**
-         * Encodes the specified ReserveMessage328 message. Does not implicitly {@link Msg.ReserveMessage328.verify|verify} messages.
-         * @param m ReserveMessage328 message or plain object to encode
+         * Encodes the specified AdvArenaPlayerInfo message. Does not implicitly {@link Msg.AdvArenaPlayerInfo.verify|verify} messages.
+         * @param m AdvArenaPlayerInfo message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage328, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IAdvArenaPlayerInfo, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage328 message from the specified reader or buffer.
+         * Decodes an AdvArenaPlayerInfo message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage328
+         * @returns AdvArenaPlayerInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage328;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.AdvArenaPlayerInfo;
     }
 
-    /** Properties of a ReserveMessage327. */
-    interface IReserveMessage327 {
+    /** Properties of an AdvArenaChangeDefFormationR. */
+    interface IAdvArenaChangeDefFormationR {
+
+        /** AdvArenaChangeDefFormationR formationList */
+        formationList?: ({ [k: string]: Msg.IFormationInfoNew }|null);
     }
 
-    /** Represents a ReserveMessage327. */
-    class ReserveMessage327 implements IReserveMessage327 {
+    /** Represents an AdvArenaChangeDefFormationR. */
+    class AdvArenaChangeDefFormationR implements IAdvArenaChangeDefFormationR {
 
         /**
-         * Constructs a new ReserveMessage327.
+         * Constructs a new AdvArenaChangeDefFormationR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage327);
+        constructor(p?: Msg.IAdvArenaChangeDefFormationR);
+
+        /** AdvArenaChangeDefFormationR formationList. */
+        public formationList: { [k: string]: Msg.IFormationInfoNew };
 
         /**
-         * Encodes the specified ReserveMessage327 message. Does not implicitly {@link Msg.ReserveMessage327.verify|verify} messages.
-         * @param m ReserveMessage327 message or plain object to encode
+         * Encodes the specified AdvArenaChangeDefFormationR message. Does not implicitly {@link Msg.AdvArenaChangeDefFormationR.verify|verify} messages.
+         * @param m AdvArenaChangeDefFormationR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage327, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IAdvArenaChangeDefFormationR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage327 message from the specified reader or buffer.
+         * Decodes an AdvArenaChangeDefFormationR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage327
+         * @returns AdvArenaChangeDefFormationR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage327;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.AdvArenaChangeDefFormationR;
     }
 
-    /** Properties of a ReserveMessage326. */
-    interface IReserveMessage326 {
+    /** Properties of an AdvArenaChangeDefFormationA. */
+    interface IAdvArenaChangeDefFormationA {
+
+        /** AdvArenaChangeDefFormationA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** AdvArenaChangeDefFormationA errStr */
+        errStr?: (string|null);
+
+        /** AdvArenaChangeDefFormationA formationList */
+        formationList?: ({ [k: string]: Msg.IFormationInfoNew }|null);
     }
 
-    /** Represents a ReserveMessage326. */
-    class ReserveMessage326 implements IReserveMessage326 {
+    /** Represents an AdvArenaChangeDefFormationA. */
+    class AdvArenaChangeDefFormationA implements IAdvArenaChangeDefFormationA {
 
         /**
-         * Constructs a new ReserveMessage326.
+         * Constructs a new AdvArenaChangeDefFormationA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage326);
+        constructor(p?: Msg.IAdvArenaChangeDefFormationA);
+
+        /** AdvArenaChangeDefFormationA err. */
+        public err: Msg.TErrorCode;
+
+        /** AdvArenaChangeDefFormationA errStr. */
+        public errStr: string;
+
+        /** AdvArenaChangeDefFormationA formationList. */
+        public formationList: { [k: string]: Msg.IFormationInfoNew };
 
         /**
-         * Encodes the specified ReserveMessage326 message. Does not implicitly {@link Msg.ReserveMessage326.verify|verify} messages.
-         * @param m ReserveMessage326 message or plain object to encode
+         * Encodes the specified AdvArenaChangeDefFormationA message. Does not implicitly {@link Msg.AdvArenaChangeDefFormationA.verify|verify} messages.
+         * @param m AdvArenaChangeDefFormationA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage326, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IAdvArenaChangeDefFormationA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage326 message from the specified reader or buffer.
+         * Decodes an AdvArenaChangeDefFormationA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage326
+         * @returns AdvArenaChangeDefFormationA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage326;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.AdvArenaChangeDefFormationA;
     }
 
-    /** Properties of a ReserveMessage325. */
-    interface IReserveMessage325 {
+    /** Properties of an AdvArenaPraiseR. */
+    interface IAdvArenaPraiseR {
+
+        /** AdvArenaPraiseR praisePlayerID */
+        praisePlayerID?: (number|null);
     }
 
-    /** Represents a ReserveMessage325. */
-    class ReserveMessage325 implements IReserveMessage325 {
+    /** Represents an AdvArenaPraiseR. */
+    class AdvArenaPraiseR implements IAdvArenaPraiseR {
 
         /**
-         * Constructs a new ReserveMessage325.
+         * Constructs a new AdvArenaPraiseR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage325);
+        constructor(p?: Msg.IAdvArenaPraiseR);
+
+        /** AdvArenaPraiseR praisePlayerID. */
+        public praisePlayerID: number;
 
         /**
-         * Encodes the specified ReserveMessage325 message. Does not implicitly {@link Msg.ReserveMessage325.verify|verify} messages.
-         * @param m ReserveMessage325 message or plain object to encode
+         * Encodes the specified AdvArenaPraiseR message. Does not implicitly {@link Msg.AdvArenaPraiseR.verify|verify} messages.
+         * @param m AdvArenaPraiseR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage325, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IAdvArenaPraiseR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage325 message from the specified reader or buffer.
+         * Decodes an AdvArenaPraiseR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage325
+         * @returns AdvArenaPraiseR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage325;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.AdvArenaPraiseR;
     }
 
-    /** Properties of a ReserveMessage324. */
-    interface IReserveMessage324 {
+    /** Properties of an AdvArenaPraiseA. */
+    interface IAdvArenaPraiseA {
+
+        /** AdvArenaPraiseA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** AdvArenaPraiseA errStr */
+        errStr?: (string|null);
+
+        /** AdvArenaPraiseA praisePlayerID */
+        praisePlayerID?: (number|null);
+
+        /** AdvArenaPraiseA bePraisedNum */
+        bePraisedNum?: (number|null);
+
+        /** AdvArenaPraiseA money */
+        money?: (number|null);
     }
 
-    /** Represents a ReserveMessage324. */
-    class ReserveMessage324 implements IReserveMessage324 {
+    /** Represents an AdvArenaPraiseA. */
+    class AdvArenaPraiseA implements IAdvArenaPraiseA {
 
         /**
-         * Constructs a new ReserveMessage324.
+         * Constructs a new AdvArenaPraiseA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage324);
+        constructor(p?: Msg.IAdvArenaPraiseA);
+
+        /** AdvArenaPraiseA err. */
+        public err: Msg.TErrorCode;
+
+        /** AdvArenaPraiseA errStr. */
+        public errStr: string;
+
+        /** AdvArenaPraiseA praisePlayerID. */
+        public praisePlayerID: number;
+
+        /** AdvArenaPraiseA bePraisedNum. */
+        public bePraisedNum: number;
+
+        /** AdvArenaPraiseA money. */
+        public money: number;
 
         /**
-         * Encodes the specified ReserveMessage324 message. Does not implicitly {@link Msg.ReserveMessage324.verify|verify} messages.
-         * @param m ReserveMessage324 message or plain object to encode
+         * Encodes the specified AdvArenaPraiseA message. Does not implicitly {@link Msg.AdvArenaPraiseA.verify|verify} messages.
+         * @param m AdvArenaPraiseA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage324, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IAdvArenaPraiseA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage324 message from the specified reader or buffer.
+         * Decodes an AdvArenaPraiseA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage324
+         * @returns AdvArenaPraiseA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage324;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.AdvArenaPraiseA;
     }
 
-    /** Properties of a ReserveMessage323. */
-    interface IReserveMessage323 {
+    /** Properties of a StartAdvArenaBattleR. */
+    interface IStartAdvArenaBattleR {
+
+        /** StartAdvArenaBattleR opponentPlayerID */
+        opponentPlayerID?: (number|null);
+
+        /** StartAdvArenaBattleR formationList */
+        formationList?: ({ [k: string]: Msg.IFormationInfoNew }|null);
     }
 
-    /** Represents a ReserveMessage323. */
-    class ReserveMessage323 implements IReserveMessage323 {
+    /** Represents a StartAdvArenaBattleR. */
+    class StartAdvArenaBattleR implements IStartAdvArenaBattleR {
 
         /**
-         * Constructs a new ReserveMessage323.
+         * Constructs a new StartAdvArenaBattleR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage323);
+        constructor(p?: Msg.IStartAdvArenaBattleR);
+
+        /** StartAdvArenaBattleR opponentPlayerID. */
+        public opponentPlayerID: number;
+
+        /** StartAdvArenaBattleR formationList. */
+        public formationList: { [k: string]: Msg.IFormationInfoNew };
 
         /**
-         * Encodes the specified ReserveMessage323 message. Does not implicitly {@link Msg.ReserveMessage323.verify|verify} messages.
-         * @param m ReserveMessage323 message or plain object to encode
+         * Encodes the specified StartAdvArenaBattleR message. Does not implicitly {@link Msg.StartAdvArenaBattleR.verify|verify} messages.
+         * @param m StartAdvArenaBattleR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage323, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IStartAdvArenaBattleR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage323 message from the specified reader or buffer.
+         * Decodes a StartAdvArenaBattleR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage323
+         * @returns StartAdvArenaBattleR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage323;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.StartAdvArenaBattleR;
     }
 
-    /** Properties of a ReserveMessage322. */
-    interface IReserveMessage322 {
+    /** Properties of a StartAdvArenaBattleA. */
+    interface IStartAdvArenaBattleA {
+
+        /** StartAdvArenaBattleA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** StartAdvArenaBattleA errStr */
+        errStr?: (string|null);
+
+        /** StartAdvArenaBattleA formationList */
+        formationList?: ({ [k: string]: Msg.IFormationInfoNew }|null);
+
+        /** StartAdvArenaBattleA battleID */
+        battleID?: (number|null);
+
+        /** StartAdvArenaBattleA oppoPlayerInfo */
+        oppoPlayerInfo?: (Msg.IAdvArenaPlayerInfo|null);
     }
 
-    /** Represents a ReserveMessage322. */
-    class ReserveMessage322 implements IReserveMessage322 {
+    /** Represents a StartAdvArenaBattleA. */
+    class StartAdvArenaBattleA implements IStartAdvArenaBattleA {
 
         /**
-         * Constructs a new ReserveMessage322.
+         * Constructs a new StartAdvArenaBattleA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage322);
+        constructor(p?: Msg.IStartAdvArenaBattleA);
+
+        /** StartAdvArenaBattleA err. */
+        public err: Msg.TErrorCode;
+
+        /** StartAdvArenaBattleA errStr. */
+        public errStr: string;
+
+        /** StartAdvArenaBattleA formationList. */
+        public formationList: { [k: string]: Msg.IFormationInfoNew };
+
+        /** StartAdvArenaBattleA battleID. */
+        public battleID: number;
+
+        /** StartAdvArenaBattleA oppoPlayerInfo. */
+        public oppoPlayerInfo?: (Msg.IAdvArenaPlayerInfo|null);
 
         /**
-         * Encodes the specified ReserveMessage322 message. Does not implicitly {@link Msg.ReserveMessage322.verify|verify} messages.
-         * @param m ReserveMessage322 message or plain object to encode
+         * Encodes the specified StartAdvArenaBattleA message. Does not implicitly {@link Msg.StartAdvArenaBattleA.verify|verify} messages.
+         * @param m StartAdvArenaBattleA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage322, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IStartAdvArenaBattleA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage322 message from the specified reader or buffer.
+         * Decodes a StartAdvArenaBattleA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage322
+         * @returns StartAdvArenaBattleA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage322;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.StartAdvArenaBattleA;
     }
 
-    /** Properties of a ReserveMessage321. */
-    interface IReserveMessage321 {
+    /** Properties of an EndAdvArenaBattleR. */
+    interface IEndAdvArenaBattleR {
+
+        /** EndAdvArenaBattleR battleID */
+        battleID?: (number|null);
+
+        /** EndAdvArenaBattleR opponentPlayerID */
+        opponentPlayerID?: (number|null);
+
+        /** EndAdvArenaBattleR battleRecordList */
+        battleRecordList?: (Msg.IAdvArenaBattleRecordUnit[]|null);
+
+        /** EndAdvArenaBattleR checkInfo */
+        checkInfo?: (Msg.ICheckBattlePVEInfo|null);
     }
 
-    /** Represents a ReserveMessage321. */
-    class ReserveMessage321 implements IReserveMessage321 {
+    /** Represents an EndAdvArenaBattleR. */
+    class EndAdvArenaBattleR implements IEndAdvArenaBattleR {
 
         /**
-         * Constructs a new ReserveMessage321.
+         * Constructs a new EndAdvArenaBattleR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage321);
+        constructor(p?: Msg.IEndAdvArenaBattleR);
+
+        /** EndAdvArenaBattleR battleID. */
+        public battleID: number;
+
+        /** EndAdvArenaBattleR opponentPlayerID. */
+        public opponentPlayerID: number;
+
+        /** EndAdvArenaBattleR battleRecordList. */
+        public battleRecordList: Msg.IAdvArenaBattleRecordUnit[];
+
+        /** EndAdvArenaBattleR checkInfo. */
+        public checkInfo?: (Msg.ICheckBattlePVEInfo|null);
 
         /**
-         * Encodes the specified ReserveMessage321 message. Does not implicitly {@link Msg.ReserveMessage321.verify|verify} messages.
-         * @param m ReserveMessage321 message or plain object to encode
+         * Encodes the specified EndAdvArenaBattleR message. Does not implicitly {@link Msg.EndAdvArenaBattleR.verify|verify} messages.
+         * @param m EndAdvArenaBattleR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage321, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IEndAdvArenaBattleR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage321 message from the specified reader or buffer.
+         * Decodes an EndAdvArenaBattleR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage321
+         * @returns EndAdvArenaBattleR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage321;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.EndAdvArenaBattleR;
     }
 
-    /** Properties of a ReserveMessage320. */
-    interface IReserveMessage320 {
+    /** Properties of an EndAdvArenaBattleA. */
+    interface IEndAdvArenaBattleA {
+
+        /** EndAdvArenaBattleA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** EndAdvArenaBattleA errStr */
+        errStr?: (string|null);
+
+        /** EndAdvArenaBattleA score */
+        score?: (number|null);
+
+        /** EndAdvArenaBattleA maxScore */
+        maxScore?: (number|null);
+
+        /** EndAdvArenaBattleA rank */
+        rank?: (number|null);
+
+        /** EndAdvArenaBattleA pvpTicket */
+        pvpTicket?: (number|null);
+
+        /** EndAdvArenaBattleA dailyBattleTimes */
+        dailyBattleTimes?: (number|null);
+
+        /** EndAdvArenaBattleA abr */
+        abr?: (Msg.IAdvArenaBattleRecord|null);
+
+        /** EndAdvArenaBattleA topRankPlayers */
+        topRankPlayers?: (Msg.IAdvArenaOpponentPlayer[]|null);
+
+        /** EndAdvArenaBattleA highestRank */
+        highestRank?: (number|null);
     }
 
-    /** Represents a ReserveMessage320. */
-    class ReserveMessage320 implements IReserveMessage320 {
+    /** Represents an EndAdvArenaBattleA. */
+    class EndAdvArenaBattleA implements IEndAdvArenaBattleA {
 
         /**
-         * Constructs a new ReserveMessage320.
+         * Constructs a new EndAdvArenaBattleA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage320);
+        constructor(p?: Msg.IEndAdvArenaBattleA);
+
+        /** EndAdvArenaBattleA err. */
+        public err: Msg.TErrorCode;
+
+        /** EndAdvArenaBattleA errStr. */
+        public errStr: string;
+
+        /** EndAdvArenaBattleA score. */
+        public score: number;
+
+        /** EndAdvArenaBattleA maxScore. */
+        public maxScore: number;
+
+        /** EndAdvArenaBattleA rank. */
+        public rank: number;
+
+        /** EndAdvArenaBattleA pvpTicket. */
+        public pvpTicket: number;
+
+        /** EndAdvArenaBattleA dailyBattleTimes. */
+        public dailyBattleTimes: number;
+
+        /** EndAdvArenaBattleA abr. */
+        public abr?: (Msg.IAdvArenaBattleRecord|null);
+
+        /** EndAdvArenaBattleA topRankPlayers. */
+        public topRankPlayers: Msg.IAdvArenaOpponentPlayer[];
+
+        /** EndAdvArenaBattleA highestRank. */
+        public highestRank: number;
 
         /**
-         * Encodes the specified ReserveMessage320 message. Does not implicitly {@link Msg.ReserveMessage320.verify|verify} messages.
-         * @param m ReserveMessage320 message or plain object to encode
+         * Encodes the specified EndAdvArenaBattleA message. Does not implicitly {@link Msg.EndAdvArenaBattleA.verify|verify} messages.
+         * @param m EndAdvArenaBattleA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage320, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IEndAdvArenaBattleA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage320 message from the specified reader or buffer.
+         * Decodes an EndAdvArenaBattleA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage320
+         * @returns EndAdvArenaBattleA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage320;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.EndAdvArenaBattleA;
     }
 
-    /** Properties of a ReserveMessage319. */
-    interface IReserveMessage319 {
+    /** Properties of a NotifyAdvArenaBattleRecord. */
+    interface INotifyAdvArenaBattleRecord {
+
+        /** NotifyAdvArenaBattleRecord abr */
+        abr?: (Msg.IAdvArenaBattleRecord|null);
+
+        /** NotifyAdvArenaBattleRecord score */
+        score?: (number|null);
+
+        /** NotifyAdvArenaBattleRecord rank */
+        rank?: (number|null);
+
+        /** NotifyAdvArenaBattleRecord maxScore */
+        maxScore?: (number|null);
+
+        /** NotifyAdvArenaBattleRecord highestRank */
+        highestRank?: (number|null);
     }
 
-    /** Represents a ReserveMessage319. */
-    class ReserveMessage319 implements IReserveMessage319 {
+    /** Represents a NotifyAdvArenaBattleRecord. */
+    class NotifyAdvArenaBattleRecord implements INotifyAdvArenaBattleRecord {
 
         /**
-         * Constructs a new ReserveMessage319.
+         * Constructs a new NotifyAdvArenaBattleRecord.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage319);
+        constructor(p?: Msg.INotifyAdvArenaBattleRecord);
+
+        /** NotifyAdvArenaBattleRecord abr. */
+        public abr?: (Msg.IAdvArenaBattleRecord|null);
+
+        /** NotifyAdvArenaBattleRecord score. */
+        public score: number;
+
+        /** NotifyAdvArenaBattleRecord rank. */
+        public rank: number;
+
+        /** NotifyAdvArenaBattleRecord maxScore. */
+        public maxScore: number;
+
+        /** NotifyAdvArenaBattleRecord highestRank. */
+        public highestRank: number;
 
         /**
-         * Encodes the specified ReserveMessage319 message. Does not implicitly {@link Msg.ReserveMessage319.verify|verify} messages.
-         * @param m ReserveMessage319 message or plain object to encode
+         * Encodes the specified NotifyAdvArenaBattleRecord message. Does not implicitly {@link Msg.NotifyAdvArenaBattleRecord.verify|verify} messages.
+         * @param m NotifyAdvArenaBattleRecord message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage319, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.INotifyAdvArenaBattleRecord, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage319 message from the specified reader or buffer.
+         * Decodes a NotifyAdvArenaBattleRecord message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage319
+         * @returns NotifyAdvArenaBattleRecord
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage319;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.NotifyAdvArenaBattleRecord;
     }
 
-    /** Properties of a ReserveMessage318. */
-    interface IReserveMessage318 {
+    /** Properties of an AdvArenaOpponentPlayer. */
+    interface IAdvArenaOpponentPlayer {
+
+        /** AdvArenaOpponentPlayer playerID */
+        playerID?: (number|null);
+
+        /** AdvArenaOpponentPlayer name */
+        name?: (string|null);
+
+        /** AdvArenaOpponentPlayer level */
+        level?: (number|null);
+
+        /** AdvArenaOpponentPlayer portrait */
+        portrait?: (number|null);
+
+        /** AdvArenaOpponentPlayer score */
+        score?: (number|null);
+
+        /** AdvArenaOpponentPlayer rank */
+        rank?: (number|null);
+
+        /** AdvArenaOpponentPlayer fighting */
+        fighting?: (number|null);
+
+        /** AdvArenaOpponentPlayer star */
+        star?: (number|null);
+
+        /** AdvArenaOpponentPlayer region */
+        region?: (string|null);
+
+        /** AdvArenaOpponentPlayer showPortrait */
+        showPortrait?: (number|null);
+
+        /** AdvArenaOpponentPlayer showFrame */
+        showFrame?: (number|null);
+
+        /** AdvArenaOpponentPlayer showTitle */
+        showTitle?: (number|null);
+
+        /** AdvArenaOpponentPlayer bePraisedNum */
+        bePraisedNum?: (number|null);
+
+        /** AdvArenaOpponentPlayer serverID */
+        serverID?: (number|null);
     }
 
-    /** Represents a ReserveMessage318. */
-    class ReserveMessage318 implements IReserveMessage318 {
+    /** Represents an AdvArenaOpponentPlayer. */
+    class AdvArenaOpponentPlayer implements IAdvArenaOpponentPlayer {
 
         /**
-         * Constructs a new ReserveMessage318.
+         * Constructs a new AdvArenaOpponentPlayer.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage318);
+        constructor(p?: Msg.IAdvArenaOpponentPlayer);
+
+        /** AdvArenaOpponentPlayer playerID. */
+        public playerID: number;
+
+        /** AdvArenaOpponentPlayer name. */
+        public name: string;
+
+        /** AdvArenaOpponentPlayer level. */
+        public level: number;
+
+        /** AdvArenaOpponentPlayer portrait. */
+        public portrait: number;
+
+        /** AdvArenaOpponentPlayer score. */
+        public score: number;
+
+        /** AdvArenaOpponentPlayer rank. */
+        public rank: number;
+
+        /** AdvArenaOpponentPlayer fighting. */
+        public fighting: number;
+
+        /** AdvArenaOpponentPlayer star. */
+        public star: number;
+
+        /** AdvArenaOpponentPlayer region. */
+        public region: string;
+
+        /** AdvArenaOpponentPlayer showPortrait. */
+        public showPortrait: number;
+
+        /** AdvArenaOpponentPlayer showFrame. */
+        public showFrame: number;
+
+        /** AdvArenaOpponentPlayer showTitle. */
+        public showTitle: number;
+
+        /** AdvArenaOpponentPlayer bePraisedNum. */
+        public bePraisedNum: number;
+
+        /** AdvArenaOpponentPlayer serverID. */
+        public serverID: number;
 
         /**
-         * Encodes the specified ReserveMessage318 message. Does not implicitly {@link Msg.ReserveMessage318.verify|verify} messages.
-         * @param m ReserveMessage318 message or plain object to encode
+         * Encodes the specified AdvArenaOpponentPlayer message. Does not implicitly {@link Msg.AdvArenaOpponentPlayer.verify|verify} messages.
+         * @param m AdvArenaOpponentPlayer message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage318, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IAdvArenaOpponentPlayer, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage318 message from the specified reader or buffer.
+         * Decodes an AdvArenaOpponentPlayer message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage318
+         * @returns AdvArenaOpponentPlayer
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage318;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.AdvArenaOpponentPlayer;
     }
 
-    /** Properties of a ReserveMessage317. */
-    interface IReserveMessage317 {
+    /** Properties of a GetAdvArenaOtherPlayerInfoR. */
+    interface IGetAdvArenaOtherPlayerInfoR {
+
+        /** GetAdvArenaOtherPlayerInfoR FindPlayerID */
+        FindPlayerID?: (number|null);
+
+        /** GetAdvArenaOtherPlayerInfoR SendPlayerId */
+        SendPlayerId?: (number|null);
     }
 
-    /** Represents a ReserveMessage317. */
-    class ReserveMessage317 implements IReserveMessage317 {
+    /** Represents a GetAdvArenaOtherPlayerInfoR. */
+    class GetAdvArenaOtherPlayerInfoR implements IGetAdvArenaOtherPlayerInfoR {
 
         /**
-         * Constructs a new ReserveMessage317.
+         * Constructs a new GetAdvArenaOtherPlayerInfoR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage317);
+        constructor(p?: Msg.IGetAdvArenaOtherPlayerInfoR);
+
+        /** GetAdvArenaOtherPlayerInfoR FindPlayerID. */
+        public FindPlayerID: number;
+
+        /** GetAdvArenaOtherPlayerInfoR SendPlayerId. */
+        public SendPlayerId: number;
 
         /**
-         * Encodes the specified ReserveMessage317 message. Does not implicitly {@link Msg.ReserveMessage317.verify|verify} messages.
-         * @param m ReserveMessage317 message or plain object to encode
+         * Encodes the specified GetAdvArenaOtherPlayerInfoR message. Does not implicitly {@link Msg.GetAdvArenaOtherPlayerInfoR.verify|verify} messages.
+         * @param m GetAdvArenaOtherPlayerInfoR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage317, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IGetAdvArenaOtherPlayerInfoR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage317 message from the specified reader or buffer.
+         * Decodes a GetAdvArenaOtherPlayerInfoR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage317
+         * @returns GetAdvArenaOtherPlayerInfoR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage317;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetAdvArenaOtherPlayerInfoR;
     }
 
-    /** Properties of a ReserveMessage316. */
-    interface IReserveMessage316 {
+    /** Properties of a GetAdvArenaOtherPlayerInfoA. */
+    interface IGetAdvArenaOtherPlayerInfoA {
+
+        /** GetAdvArenaOtherPlayerInfoA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** GetAdvArenaOtherPlayerInfoA errStr */
+        errStr?: (string|null);
+
+        /** GetAdvArenaOtherPlayerInfoA playerInfo */
+        playerInfo?: (Msg.IAdvArenaPlayerInfo|null);
     }
 
-    /** Represents a ReserveMessage316. */
-    class ReserveMessage316 implements IReserveMessage316 {
+    /** Represents a GetAdvArenaOtherPlayerInfoA. */
+    class GetAdvArenaOtherPlayerInfoA implements IGetAdvArenaOtherPlayerInfoA {
 
         /**
-         * Constructs a new ReserveMessage316.
+         * Constructs a new GetAdvArenaOtherPlayerInfoA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage316);
+        constructor(p?: Msg.IGetAdvArenaOtherPlayerInfoA);
+
+        /** GetAdvArenaOtherPlayerInfoA err. */
+        public err: Msg.TErrorCode;
+
+        /** GetAdvArenaOtherPlayerInfoA errStr. */
+        public errStr: string;
+
+        /** GetAdvArenaOtherPlayerInfoA playerInfo. */
+        public playerInfo?: (Msg.IAdvArenaPlayerInfo|null);
 
         /**
-         * Encodes the specified ReserveMessage316 message. Does not implicitly {@link Msg.ReserveMessage316.verify|verify} messages.
-         * @param m ReserveMessage316 message or plain object to encode
+         * Encodes the specified GetAdvArenaOtherPlayerInfoA message. Does not implicitly {@link Msg.GetAdvArenaOtherPlayerInfoA.verify|verify} messages.
+         * @param m GetAdvArenaOtherPlayerInfoA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage316, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IGetAdvArenaOtherPlayerInfoA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage316 message from the specified reader or buffer.
+         * Decodes a GetAdvArenaOtherPlayerInfoA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage316
+         * @returns GetAdvArenaOtherPlayerInfoA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage316;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetAdvArenaOtherPlayerInfoA;
     }
 
-    /** Properties of a ReserveMessage315. */
-    interface IReserveMessage315 {
+    /** Properties of a NotifyAdvArenaSeasonSettlement. */
+    interface INotifyAdvArenaSeasonSettlement {
+
+        /** NotifyAdvArenaSeasonSettlement score */
+        score?: (number|null);
+
+        /** NotifyAdvArenaSeasonSettlement maxScore */
+        maxScore?: (number|null);
+
+        /** NotifyAdvArenaSeasonSettlement rank */
+        rank?: (number|null);
+
+        /** NotifyAdvArenaSeasonSettlement highestRank */
+        highestRank?: (number|null);
     }
 
-    /** Represents a ReserveMessage315. */
-    class ReserveMessage315 implements IReserveMessage315 {
+    /** Represents a NotifyAdvArenaSeasonSettlement. */
+    class NotifyAdvArenaSeasonSettlement implements INotifyAdvArenaSeasonSettlement {
 
         /**
-         * Constructs a new ReserveMessage315.
+         * Constructs a new NotifyAdvArenaSeasonSettlement.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage315);
+        constructor(p?: Msg.INotifyAdvArenaSeasonSettlement);
+
+        /** NotifyAdvArenaSeasonSettlement score. */
+        public score: number;
+
+        /** NotifyAdvArenaSeasonSettlement maxScore. */
+        public maxScore: number;
+
+        /** NotifyAdvArenaSeasonSettlement rank. */
+        public rank: number;
+
+        /** NotifyAdvArenaSeasonSettlement highestRank. */
+        public highestRank: number;
 
         /**
-         * Encodes the specified ReserveMessage315 message. Does not implicitly {@link Msg.ReserveMessage315.verify|verify} messages.
-         * @param m ReserveMessage315 message or plain object to encode
+         * Encodes the specified NotifyAdvArenaSeasonSettlement message. Does not implicitly {@link Msg.NotifyAdvArenaSeasonSettlement.verify|verify} messages.
+         * @param m NotifyAdvArenaSeasonSettlement message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage315, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.INotifyAdvArenaSeasonSettlement, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage315 message from the specified reader or buffer.
+         * Decodes a NotifyAdvArenaSeasonSettlement message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage315
+         * @returns NotifyAdvArenaSeasonSettlement
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage315;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.NotifyAdvArenaSeasonSettlement;
     }
 
     /** Properties of a ReserveMessage314. */
@@ -58095,196 +59882,280 @@ export namespace Msg {
         public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage7;
     }
 
-    /** Properties of a ReserveMessage6. */
-    interface IReserveMessage6 {
+    /** Properties of a SvWmVerifyAccountR. */
+    interface ISvWmVerifyAccountR {
+
+        /** SvWmVerifyAccountR account */
+        account?: (string|null);
+
+        /** SvWmVerifyAccountR password */
+        password?: (string|null);
+
+        /** SvWmVerifyAccountR ServerTime */
+        ServerTime?: (number|null);
     }
 
-    /** Represents a ReserveMessage6. */
-    class ReserveMessage6 implements IReserveMessage6 {
+    /** Represents a SvWmVerifyAccountR. */
+    class SvWmVerifyAccountR implements ISvWmVerifyAccountR {
 
         /**
-         * Constructs a new ReserveMessage6.
+         * Constructs a new SvWmVerifyAccountR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage6);
+        constructor(p?: Msg.ISvWmVerifyAccountR);
+
+        /** SvWmVerifyAccountR account. */
+        public account: string;
+
+        /** SvWmVerifyAccountR password. */
+        public password: string;
+
+        /** SvWmVerifyAccountR ServerTime. */
+        public ServerTime: number;
 
         /**
-         * Encodes the specified ReserveMessage6 message. Does not implicitly {@link Msg.ReserveMessage6.verify|verify} messages.
-         * @param m ReserveMessage6 message or plain object to encode
+         * Encodes the specified SvWmVerifyAccountR message. Does not implicitly {@link Msg.SvWmVerifyAccountR.verify|verify} messages.
+         * @param m SvWmVerifyAccountR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage6, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvWmVerifyAccountR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage6 message from the specified reader or buffer.
+         * Decodes a SvWmVerifyAccountR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage6
+         * @returns SvWmVerifyAccountR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage6;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvWmVerifyAccountR;
     }
 
-    /** Properties of a ReserveMessage5. */
-    interface IReserveMessage5 {
+    /** Properties of a SvWmVerifyAccountA. */
+    interface ISvWmVerifyAccountA {
+
+        /** SvWmVerifyAccountA err */
+        err?: (Msg.TErrorCode|null);
     }
 
-    /** Represents a ReserveMessage5. */
-    class ReserveMessage5 implements IReserveMessage5 {
+    /** Represents a SvWmVerifyAccountA. */
+    class SvWmVerifyAccountA implements ISvWmVerifyAccountA {
 
         /**
-         * Constructs a new ReserveMessage5.
+         * Constructs a new SvWmVerifyAccountA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage5);
+        constructor(p?: Msg.ISvWmVerifyAccountA);
+
+        /** SvWmVerifyAccountA err. */
+        public err: Msg.TErrorCode;
 
         /**
-         * Encodes the specified ReserveMessage5 message. Does not implicitly {@link Msg.ReserveMessage5.verify|verify} messages.
-         * @param m ReserveMessage5 message or plain object to encode
+         * Encodes the specified SvWmVerifyAccountA message. Does not implicitly {@link Msg.SvWmVerifyAccountA.verify|verify} messages.
+         * @param m SvWmVerifyAccountA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage5, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvWmVerifyAccountA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage5 message from the specified reader or buffer.
+         * Decodes a SvWmVerifyAccountA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage5
+         * @returns SvWmVerifyAccountA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage5;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvWmVerifyAccountA;
     }
 
-    /** Properties of a ReserveMessage4. */
-    interface IReserveMessage4 {
+    /** Properties of a GmNotifyToReloadDataR. */
+    interface IGmNotifyToReloadDataR {
+
+        /** GmNotifyToReloadDataR account */
+        account?: (string|null);
+
+        /** GmNotifyToReloadDataR password */
+        password?: (string|null);
+
+        /** GmNotifyToReloadDataR ServerTime */
+        ServerTime?: (number|null);
     }
 
-    /** Represents a ReserveMessage4. */
-    class ReserveMessage4 implements IReserveMessage4 {
+    /** Represents a GmNotifyToReloadDataR. */
+    class GmNotifyToReloadDataR implements IGmNotifyToReloadDataR {
 
         /**
-         * Constructs a new ReserveMessage4.
+         * Constructs a new GmNotifyToReloadDataR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage4);
+        constructor(p?: Msg.IGmNotifyToReloadDataR);
+
+        /** GmNotifyToReloadDataR account. */
+        public account: string;
+
+        /** GmNotifyToReloadDataR password. */
+        public password: string;
+
+        /** GmNotifyToReloadDataR ServerTime. */
+        public ServerTime: number;
 
         /**
-         * Encodes the specified ReserveMessage4 message. Does not implicitly {@link Msg.ReserveMessage4.verify|verify} messages.
-         * @param m ReserveMessage4 message or plain object to encode
+         * Encodes the specified GmNotifyToReloadDataR message. Does not implicitly {@link Msg.GmNotifyToReloadDataR.verify|verify} messages.
+         * @param m GmNotifyToReloadDataR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage4, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IGmNotifyToReloadDataR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage4 message from the specified reader or buffer.
+         * Decodes a GmNotifyToReloadDataR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage4
+         * @returns GmNotifyToReloadDataR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage4;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmNotifyToReloadDataR;
     }
 
-    /** Properties of a ReserveMessage3. */
-    interface IReserveMessage3 {
+    /** Properties of a GmNotifyToReloadDataA. */
+    interface IGmNotifyToReloadDataA {
+
+        /** GmNotifyToReloadDataA err */
+        err?: (Msg.TErrorCode|null);
     }
 
-    /** Represents a ReserveMessage3. */
-    class ReserveMessage3 implements IReserveMessage3 {
+    /** Represents a GmNotifyToReloadDataA. */
+    class GmNotifyToReloadDataA implements IGmNotifyToReloadDataA {
 
         /**
-         * Constructs a new ReserveMessage3.
+         * Constructs a new GmNotifyToReloadDataA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage3);
+        constructor(p?: Msg.IGmNotifyToReloadDataA);
+
+        /** GmNotifyToReloadDataA err. */
+        public err: Msg.TErrorCode;
 
         /**
-         * Encodes the specified ReserveMessage3 message. Does not implicitly {@link Msg.ReserveMessage3.verify|verify} messages.
-         * @param m ReserveMessage3 message or plain object to encode
+         * Encodes the specified GmNotifyToReloadDataA message. Does not implicitly {@link Msg.GmNotifyToReloadDataA.verify|verify} messages.
+         * @param m GmNotifyToReloadDataA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage3, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IGmNotifyToReloadDataA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage3 message from the specified reader or buffer.
+         * Decodes a GmNotifyToReloadDataA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage3
+         * @returns GmNotifyToReloadDataA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage3;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmNotifyToReloadDataA;
     }
 
-    /** Properties of a ReserveMessage2. */
-    interface IReserveMessage2 {
+    /** Properties of a GmNotifyToMaintenanceR. */
+    interface IGmNotifyToMaintenanceR {
+
+        /** GmNotifyToMaintenanceR account */
+        account?: (string|null);
+
+        /** GmNotifyToMaintenanceR password */
+        password?: (string|null);
+
+        /** GmNotifyToMaintenanceR ServerTime */
+        ServerTime?: (number|null);
+
+        /** GmNotifyToMaintenanceR IsMaintenance */
+        IsMaintenance?: (boolean|null);
+
+        /** GmNotifyToMaintenanceR hour */
+        hour?: (number|null);
     }
 
-    /** Represents a ReserveMessage2. */
-    class ReserveMessage2 implements IReserveMessage2 {
+    /** Represents a GmNotifyToMaintenanceR. */
+    class GmNotifyToMaintenanceR implements IGmNotifyToMaintenanceR {
 
         /**
-         * Constructs a new ReserveMessage2.
+         * Constructs a new GmNotifyToMaintenanceR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage2);
+        constructor(p?: Msg.IGmNotifyToMaintenanceR);
+
+        /** GmNotifyToMaintenanceR account. */
+        public account: string;
+
+        /** GmNotifyToMaintenanceR password. */
+        public password: string;
+
+        /** GmNotifyToMaintenanceR ServerTime. */
+        public ServerTime: number;
+
+        /** GmNotifyToMaintenanceR IsMaintenance. */
+        public IsMaintenance: boolean;
+
+        /** GmNotifyToMaintenanceR hour. */
+        public hour: number;
 
         /**
-         * Encodes the specified ReserveMessage2 message. Does not implicitly {@link Msg.ReserveMessage2.verify|verify} messages.
-         * @param m ReserveMessage2 message or plain object to encode
+         * Encodes the specified GmNotifyToMaintenanceR message. Does not implicitly {@link Msg.GmNotifyToMaintenanceR.verify|verify} messages.
+         * @param m GmNotifyToMaintenanceR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage2, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IGmNotifyToMaintenanceR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage2 message from the specified reader or buffer.
+         * Decodes a GmNotifyToMaintenanceR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage2
+         * @returns GmNotifyToMaintenanceR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage2;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmNotifyToMaintenanceR;
     }
 
-    /** Properties of a ReserveMessage1. */
-    interface IReserveMessage1 {
+    /** Properties of a GmNotifyToMaintenanceA. */
+    interface IGmNotifyToMaintenanceA {
+
+        /** GmNotifyToMaintenanceA err */
+        err?: (Msg.TErrorCode|null);
     }
 
-    /** Represents a ReserveMessage1. */
-    class ReserveMessage1 implements IReserveMessage1 {
+    /** Represents a GmNotifyToMaintenanceA. */
+    class GmNotifyToMaintenanceA implements IGmNotifyToMaintenanceA {
 
         /**
-         * Constructs a new ReserveMessage1.
+         * Constructs a new GmNotifyToMaintenanceA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IReserveMessage1);
+        constructor(p?: Msg.IGmNotifyToMaintenanceA);
+
+        /** GmNotifyToMaintenanceA err. */
+        public err: Msg.TErrorCode;
 
         /**
-         * Encodes the specified ReserveMessage1 message. Does not implicitly {@link Msg.ReserveMessage1.verify|verify} messages.
-         * @param m ReserveMessage1 message or plain object to encode
+         * Encodes the specified GmNotifyToMaintenanceA message. Does not implicitly {@link Msg.GmNotifyToMaintenanceA.verify|verify} messages.
+         * @param m GmNotifyToMaintenanceA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IReserveMessage1, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.IGmNotifyToMaintenanceA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a ReserveMessage1 message from the specified reader or buffer.
+         * Decodes a GmNotifyToMaintenanceA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns ReserveMessage1
+         * @returns GmNotifyToMaintenanceA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.ReserveMessage1;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GmNotifyToMaintenanceA;
     }
 
     /** TServerType enum. */
@@ -58594,8 +60465,14 @@ export namespace Msg {
         /** SvMsgRegisterToOtherServerA strErr */
         strErr?: (string|null);
 
+        /** SvMsgRegisterToOtherServerA maxServerId */
+        maxServerId?: (number|null);
+
         /** SvMsgRegisterToOtherServerA type */
         type?: (Msg.TServerType|null);
+
+        /** SvMsgRegisterToOtherServerA serverId */
+        serverId?: (number|null);
     }
 
     /** Represents a SvMsgRegisterToOtherServerA. */
@@ -58613,8 +60490,14 @@ export namespace Msg {
         /** SvMsgRegisterToOtherServerA strErr. */
         public strErr: string;
 
+        /** SvMsgRegisterToOtherServerA maxServerId. */
+        public maxServerId: number;
+
         /** SvMsgRegisterToOtherServerA type. */
         public type: Msg.TServerType;
+
+        /** SvMsgRegisterToOtherServerA serverId. */
+        public serverId: number;
 
         /**
          * Encodes the specified SvMsgRegisterToOtherServerA message. Does not implicitly {@link Msg.SvMsgRegisterToOtherServerA.verify|verify} messages.
@@ -58816,6 +60699,9 @@ export namespace Msg {
 
         /** SvMsgGlobalLoginA allPlayerList */
         allPlayerList?: (Msg.IPlayerBriefInfo[]|null);
+
+        /** SvMsgGlobalLoginA isPrivate */
+        isPrivate?: (boolean|null);
     }
 
     /** Represents a SvMsgGlobalLoginA. */
@@ -58841,6 +60727,9 @@ export namespace Msg {
 
         /** SvMsgGlobalLoginA allPlayerList. */
         public allPlayerList: Msg.IPlayerBriefInfo[];
+
+        /** SvMsgGlobalLoginA isPrivate. */
+        public isPrivate: boolean;
 
         /**
          * Encodes the specified SvMsgGlobalLoginA message. Does not implicitly {@link Msg.SvMsgGlobalLoginA.verify|verify} messages.
@@ -59079,8 +60968,26 @@ export namespace Msg {
         /** SvPlayerInfo Channel */
         Channel?: (string|null);
 
+        /** SvPlayerInfo LastLoginTimestamp */
+        LastLoginTimestamp?: (number|null);
+
         /** SvPlayerInfo LastLogoutTimestamp */
         LastLogoutTimestamp?: (number|null);
+
+        /** SvPlayerInfo showPortrait */
+        showPortrait?: (number|null);
+
+        /** SvPlayerInfo showFrame */
+        showFrame?: (number|null);
+
+        /** SvPlayerInfo showTitle */
+        showTitle?: (number|null);
+
+        /** SvPlayerInfo PVPTicket */
+        PVPTicket?: (number|null);
+
+        /** SvPlayerInfo Language */
+        Language?: (number|null);
 
         /** SvPlayerInfo heroList */
         heroList?: (Msg.IHeroInfo[]|null);
@@ -59111,6 +61018,21 @@ export namespace Msg {
 
         /** SvPlayerInfo GuildSign */
         GuildSign?: (number|null);
+
+        /** SvPlayerInfo guildMonsterPInfo */
+        guildMonsterPInfo?: (Msg.IGuildMonsterPInfo|null);
+
+        /** SvPlayerInfo aai */
+        aai?: (Msg.IAdvArenaInfo|null);
+
+        /** SvPlayerInfo timestampAA */
+        timestampAA?: (number|null);
+
+        /** SvPlayerInfo AdvArenaOpponentCD */
+        AdvArenaOpponentCD?: ({ [k: string]: number }|null);
+
+        /** SvPlayerInfo AdvArenaCurOpponentID */
+        AdvArenaCurOpponentID?: (number|null);
     }
 
     /** Represents a SvPlayerInfo. */
@@ -59161,8 +61083,26 @@ export namespace Msg {
         /** SvPlayerInfo Channel. */
         public Channel: string;
 
+        /** SvPlayerInfo LastLoginTimestamp. */
+        public LastLoginTimestamp: number;
+
         /** SvPlayerInfo LastLogoutTimestamp. */
         public LastLogoutTimestamp: number;
+
+        /** SvPlayerInfo showPortrait. */
+        public showPortrait: number;
+
+        /** SvPlayerInfo showFrame. */
+        public showFrame: number;
+
+        /** SvPlayerInfo showTitle. */
+        public showTitle: number;
+
+        /** SvPlayerInfo PVPTicket. */
+        public PVPTicket: number;
+
+        /** SvPlayerInfo Language. */
+        public Language: number;
 
         /** SvPlayerInfo heroList. */
         public heroList: Msg.IHeroInfo[];
@@ -59193,6 +61133,21 @@ export namespace Msg {
 
         /** SvPlayerInfo GuildSign. */
         public GuildSign: number;
+
+        /** SvPlayerInfo guildMonsterPInfo. */
+        public guildMonsterPInfo?: (Msg.IGuildMonsterPInfo|null);
+
+        /** SvPlayerInfo aai. */
+        public aai?: (Msg.IAdvArenaInfo|null);
+
+        /** SvPlayerInfo timestampAA. */
+        public timestampAA: number;
+
+        /** SvPlayerInfo AdvArenaOpponentCD. */
+        public AdvArenaOpponentCD: { [k: string]: number };
+
+        /** SvPlayerInfo AdvArenaCurOpponentID. */
+        public AdvArenaCurOpponentID: number;
 
         /**
          * Encodes the specified SvPlayerInfo message. Does not implicitly {@link Msg.SvPlayerInfo.verify|verify} messages.
@@ -59585,6 +61540,9 @@ export namespace Msg {
 
         /** SvNtsPlayerGuildInfo type */
         type?: (Msg.TGuildType|null);
+
+        /** SvNtsPlayerGuildInfo isSendSelf */
+        isSendSelf?: (boolean|null);
     }
 
     /** Represents a SvNtsPlayerGuildInfo. */
@@ -59607,6 +61565,9 @@ export namespace Msg {
 
         /** SvNtsPlayerGuildInfo type. */
         public type: Msg.TGuildType;
+
+        /** SvNtsPlayerGuildInfo isSendSelf. */
+        public isSendSelf: boolean;
 
         /**
          * Encodes the specified SvNtsPlayerGuildInfo message. Does not implicitly {@link Msg.SvNtsPlayerGuildInfo.verify|verify} messages.
@@ -59671,72 +61632,72 @@ export namespace Msg {
         public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsAddGuildExp;
     }
 
-    /** Properties of a SvFriendInfo. */
-    interface ISvFriendInfo {
+    /** Properties of a SvFriendInfoXX. */
+    interface ISvFriendInfoXX {
 
-        /** SvFriendInfo playerId */
+        /** SvFriendInfoXX playerId */
         playerId?: (number|null);
 
-        /** SvFriendInfo name */
+        /** SvFriendInfoXX name */
         name?: (string|null);
 
-        /** SvFriendInfo level */
+        /** SvFriendInfoXX level */
         level?: (number|null);
 
-        /** SvFriendInfo Portrait */
+        /** SvFriendInfoXX Portrait */
         Portrait?: (number|null);
 
-        /** SvFriendInfo LastLogoutTimestamp */
+        /** SvFriendInfoXX LastLogoutTimestamp */
         LastLogoutTimestamp?: (number|null);
 
-        /** SvFriendInfo star */
+        /** SvFriendInfoXX star */
         star?: (number|null);
     }
 
-    /** Represents a SvFriendInfo. */
-    class SvFriendInfo implements ISvFriendInfo {
+    /** Represents a SvFriendInfoXX. */
+    class SvFriendInfoXX implements ISvFriendInfoXX {
 
         /**
-         * Constructs a new SvFriendInfo.
+         * Constructs a new SvFriendInfoXX.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.ISvFriendInfo);
+        constructor(p?: Msg.ISvFriendInfoXX);
 
-        /** SvFriendInfo playerId. */
+        /** SvFriendInfoXX playerId. */
         public playerId: number;
 
-        /** SvFriendInfo name. */
+        /** SvFriendInfoXX name. */
         public name: string;
 
-        /** SvFriendInfo level. */
+        /** SvFriendInfoXX level. */
         public level: number;
 
-        /** SvFriendInfo Portrait. */
+        /** SvFriendInfoXX Portrait. */
         public Portrait: number;
 
-        /** SvFriendInfo LastLogoutTimestamp. */
+        /** SvFriendInfoXX LastLogoutTimestamp. */
         public LastLogoutTimestamp: number;
 
-        /** SvFriendInfo star. */
+        /** SvFriendInfoXX star. */
         public star: number;
 
         /**
-         * Encodes the specified SvFriendInfo message. Does not implicitly {@link Msg.SvFriendInfo.verify|verify} messages.
-         * @param m SvFriendInfo message or plain object to encode
+         * Encodes the specified SvFriendInfoXX message. Does not implicitly {@link Msg.SvFriendInfoXX.verify|verify} messages.
+         * @param m SvFriendInfoXX message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.ISvFriendInfo, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvFriendInfoXX, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a SvFriendInfo message from the specified reader or buffer.
+         * Decodes a SvFriendInfoXX message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns SvFriendInfo
+         * @returns SvFriendInfoXX
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvFriendInfo;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvFriendInfoXX;
     }
 
     /** Properties of a SvWmGetFriendInfoR. */
@@ -59787,10 +61748,10 @@ export namespace Msg {
     interface ISvWmGetFriendInfoA {
 
         /** SvWmGetFriendInfoA infos */
-        infos?: (Msg.ISvFriendInfo[]|null);
+        infos?: (Msg.IFriendRequest[]|null);
 
         /** SvWmGetFriendInfoA RecommandInfos */
-        RecommandInfos?: (Msg.ISvFriendInfo[]|null);
+        RecommandInfos?: (Msg.IFriendRequest[]|null);
     }
 
     /** Represents a SvWmGetFriendInfoA. */
@@ -59803,10 +61764,10 @@ export namespace Msg {
         constructor(p?: Msg.ISvWmGetFriendInfoA);
 
         /** SvWmGetFriendInfoA infos. */
-        public infos: Msg.ISvFriendInfo[];
+        public infos: Msg.IFriendRequest[];
 
         /** SvWmGetFriendInfoA RecommandInfos. */
-        public RecommandInfos: Msg.ISvFriendInfo[];
+        public RecommandInfos: Msg.IFriendRequest[];
 
         /**
          * Encodes the specified SvWmGetFriendInfoA message. Does not implicitly {@link Msg.SvWmGetFriendInfoA.verify|verify} messages.
@@ -60141,516 +62102,2108 @@ export namespace Msg {
         public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvWmGetGMPlayerDataA;
     }
 
-    /** Properties of a GetTemp18R. */
-    interface IGetTemp18R {
+    /** Properties of a SvPayOrderR. */
+    interface ISvPayOrderR {
+
+        /** SvPayOrderR playerId */
+        playerId?: (number|null);
+
+        /** SvPayOrderR serverId */
+        serverId?: (number|null);
+
+        /** SvPayOrderR TransactionId */
+        TransactionId?: (string|null);
     }
 
-    /** Represents a GetTemp18R. */
-    class GetTemp18R implements IGetTemp18R {
+    /** Represents a SvPayOrderR. */
+    class SvPayOrderR implements ISvPayOrderR {
 
         /**
-         * Constructs a new GetTemp18R.
+         * Constructs a new SvPayOrderR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGetTemp18R);
+        constructor(p?: Msg.ISvPayOrderR);
+
+        /** SvPayOrderR playerId. */
+        public playerId: number;
+
+        /** SvPayOrderR serverId. */
+        public serverId: number;
+
+        /** SvPayOrderR TransactionId. */
+        public TransactionId: string;
 
         /**
-         * Encodes the specified GetTemp18R message. Does not implicitly {@link Msg.GetTemp18R.verify|verify} messages.
-         * @param m GetTemp18R message or plain object to encode
+         * Encodes the specified SvPayOrderR message. Does not implicitly {@link Msg.SvPayOrderR.verify|verify} messages.
+         * @param m SvPayOrderR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGetTemp18R, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvPayOrderR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GetTemp18R message from the specified reader or buffer.
+         * Decodes a SvPayOrderR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GetTemp18R
+         * @returns SvPayOrderR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetTemp18R;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvPayOrderR;
     }
 
-    /** Properties of a GetTemp18A. */
-    interface IGetTemp18A {
+    /** Properties of a SvPayOrderA. */
+    interface ISvPayOrderA {
+
+        /** SvPayOrderA err */
+        err?: (Msg.TErrorCode|null);
     }
 
-    /** Represents a GetTemp18A. */
-    class GetTemp18A implements IGetTemp18A {
+    /** Represents a SvPayOrderA. */
+    class SvPayOrderA implements ISvPayOrderA {
 
         /**
-         * Constructs a new GetTemp18A.
+         * Constructs a new SvPayOrderA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGetTemp18A);
+        constructor(p?: Msg.ISvPayOrderA);
+
+        /** SvPayOrderA err. */
+        public err: Msg.TErrorCode;
 
         /**
-         * Encodes the specified GetTemp18A message. Does not implicitly {@link Msg.GetTemp18A.verify|verify} messages.
-         * @param m GetTemp18A message or plain object to encode
+         * Encodes the specified SvPayOrderA message. Does not implicitly {@link Msg.SvPayOrderA.verify|verify} messages.
+         * @param m SvPayOrderA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGetTemp18A, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvPayOrderA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GetTemp18A message from the specified reader or buffer.
+         * Decodes a SvPayOrderA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GetTemp18A
+         * @returns SvPayOrderA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetTemp18A;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvPayOrderA;
     }
 
-    /** Properties of a GetTemp19R. */
-    interface IGetTemp19R {
+    /** Properties of a SvPayReceiptLtR. */
+    interface ISvPayReceiptLtR {
+
+        /** SvPayReceiptLtR params */
+        params?: (string|null);
     }
 
-    /** Represents a GetTemp19R. */
-    class GetTemp19R implements IGetTemp19R {
+    /** Represents a SvPayReceiptLtR. */
+    class SvPayReceiptLtR implements ISvPayReceiptLtR {
 
         /**
-         * Constructs a new GetTemp19R.
+         * Constructs a new SvPayReceiptLtR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGetTemp19R);
+        constructor(p?: Msg.ISvPayReceiptLtR);
+
+        /** SvPayReceiptLtR params. */
+        public params: string;
 
         /**
-         * Encodes the specified GetTemp19R message. Does not implicitly {@link Msg.GetTemp19R.verify|verify} messages.
-         * @param m GetTemp19R message or plain object to encode
+         * Encodes the specified SvPayReceiptLtR message. Does not implicitly {@link Msg.SvPayReceiptLtR.verify|verify} messages.
+         * @param m SvPayReceiptLtR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGetTemp19R, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvPayReceiptLtR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GetTemp19R message from the specified reader or buffer.
+         * Decodes a SvPayReceiptLtR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GetTemp19R
+         * @returns SvPayReceiptLtR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetTemp19R;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvPayReceiptLtR;
     }
 
-    /** Properties of a GetTemp19A. */
-    interface IGetTemp19A {
+    /** Properties of a SvPayReceiptLtA. */
+    interface ISvPayReceiptLtA {
+
+        /** SvPayReceiptLtA err */
+        err?: (Msg.TErrorCode|null);
     }
 
-    /** Represents a GetTemp19A. */
-    class GetTemp19A implements IGetTemp19A {
+    /** Represents a SvPayReceiptLtA. */
+    class SvPayReceiptLtA implements ISvPayReceiptLtA {
 
         /**
-         * Constructs a new GetTemp19A.
+         * Constructs a new SvPayReceiptLtA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGetTemp19A);
+        constructor(p?: Msg.ISvPayReceiptLtA);
+
+        /** SvPayReceiptLtA err. */
+        public err: Msg.TErrorCode;
 
         /**
-         * Encodes the specified GetTemp19A message. Does not implicitly {@link Msg.GetTemp19A.verify|verify} messages.
-         * @param m GetTemp19A message or plain object to encode
+         * Encodes the specified SvPayReceiptLtA message. Does not implicitly {@link Msg.SvPayReceiptLtA.verify|verify} messages.
+         * @param m SvPayReceiptLtA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGetTemp19A, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvPayReceiptLtA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GetTemp19A message from the specified reader or buffer.
+         * Decodes a SvPayReceiptLtA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GetTemp19A
+         * @returns SvPayReceiptLtA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetTemp19A;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvPayReceiptLtA;
     }
 
-    /** Properties of a GetTemp20R. */
-    interface IGetTemp20R {
+    /** Properties of a SvPayReceiptBokeR. */
+    interface ISvPayReceiptBokeR {
+
+        /** SvPayReceiptBokeR ntData */
+        ntData?: (string|null);
+
+        /** SvPayReceiptBokeR sign */
+        sign?: (string|null);
+
+        /** SvPayReceiptBokeR md5Sign */
+        md5Sign?: (string|null);
     }
 
-    /** Represents a GetTemp20R. */
-    class GetTemp20R implements IGetTemp20R {
+    /** Represents a SvPayReceiptBokeR. */
+    class SvPayReceiptBokeR implements ISvPayReceiptBokeR {
 
         /**
-         * Constructs a new GetTemp20R.
+         * Constructs a new SvPayReceiptBokeR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGetTemp20R);
+        constructor(p?: Msg.ISvPayReceiptBokeR);
+
+        /** SvPayReceiptBokeR ntData. */
+        public ntData: string;
+
+        /** SvPayReceiptBokeR sign. */
+        public sign: string;
+
+        /** SvPayReceiptBokeR md5Sign. */
+        public md5Sign: string;
 
         /**
-         * Encodes the specified GetTemp20R message. Does not implicitly {@link Msg.GetTemp20R.verify|verify} messages.
-         * @param m GetTemp20R message or plain object to encode
+         * Encodes the specified SvPayReceiptBokeR message. Does not implicitly {@link Msg.SvPayReceiptBokeR.verify|verify} messages.
+         * @param m SvPayReceiptBokeR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGetTemp20R, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvPayReceiptBokeR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GetTemp20R message from the specified reader or buffer.
+         * Decodes a SvPayReceiptBokeR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GetTemp20R
+         * @returns SvPayReceiptBokeR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetTemp20R;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvPayReceiptBokeR;
     }
 
-    /** Properties of a GetTemp20A. */
-    interface IGetTemp20A {
+    /** Properties of a SvPayReceiptBokeA. */
+    interface ISvPayReceiptBokeA {
+
+        /** SvPayReceiptBokeA err */
+        err?: (Msg.TErrorCode|null);
     }
 
-    /** Represents a GetTemp20A. */
-    class GetTemp20A implements IGetTemp20A {
+    /** Represents a SvPayReceiptBokeA. */
+    class SvPayReceiptBokeA implements ISvPayReceiptBokeA {
 
         /**
-         * Constructs a new GetTemp20A.
+         * Constructs a new SvPayReceiptBokeA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGetTemp20A);
+        constructor(p?: Msg.ISvPayReceiptBokeA);
+
+        /** SvPayReceiptBokeA err. */
+        public err: Msg.TErrorCode;
 
         /**
-         * Encodes the specified GetTemp20A message. Does not implicitly {@link Msg.GetTemp20A.verify|verify} messages.
-         * @param m GetTemp20A message or plain object to encode
+         * Encodes the specified SvPayReceiptBokeA message. Does not implicitly {@link Msg.SvPayReceiptBokeA.verify|verify} messages.
+         * @param m SvPayReceiptBokeA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGetTemp20A, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvPayReceiptBokeA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GetTemp20A message from the specified reader or buffer.
+         * Decodes a SvPayReceiptBokeA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GetTemp20A
+         * @returns SvPayReceiptBokeA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetTemp20A;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvPayReceiptBokeA;
     }
 
-    /** Properties of a GetTemp21R. */
-    interface IGetTemp21R {
+    /** Properties of a SvWmBattlePlayerInfoR. */
+    interface ISvWmBattlePlayerInfoR {
+
+        /** SvWmBattlePlayerInfoR playerId */
+        playerId?: (number|null);
+
+        /** SvWmBattlePlayerInfoR formationId */
+        formationId?: (number|null);
     }
 
-    /** Represents a GetTemp21R. */
-    class GetTemp21R implements IGetTemp21R {
+    /** Represents a SvWmBattlePlayerInfoR. */
+    class SvWmBattlePlayerInfoR implements ISvWmBattlePlayerInfoR {
 
         /**
-         * Constructs a new GetTemp21R.
+         * Constructs a new SvWmBattlePlayerInfoR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGetTemp21R);
+        constructor(p?: Msg.ISvWmBattlePlayerInfoR);
+
+        /** SvWmBattlePlayerInfoR playerId. */
+        public playerId: number;
+
+        /** SvWmBattlePlayerInfoR formationId. */
+        public formationId: number;
 
         /**
-         * Encodes the specified GetTemp21R message. Does not implicitly {@link Msg.GetTemp21R.verify|verify} messages.
-         * @param m GetTemp21R message or plain object to encode
+         * Encodes the specified SvWmBattlePlayerInfoR message. Does not implicitly {@link Msg.SvWmBattlePlayerInfoR.verify|verify} messages.
+         * @param m SvWmBattlePlayerInfoR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGetTemp21R, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvWmBattlePlayerInfoR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GetTemp21R message from the specified reader or buffer.
+         * Decodes a SvWmBattlePlayerInfoR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GetTemp21R
+         * @returns SvWmBattlePlayerInfoR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetTemp21R;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvWmBattlePlayerInfoR;
     }
 
-    /** Properties of a GetTemp21A. */
-    interface IGetTemp21A {
+    /** Properties of a SvWmBattlePlayerInfoA. */
+    interface ISvWmBattlePlayerInfoA {
+
+        /** SvWmBattlePlayerInfoA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** SvWmBattlePlayerInfoA info */
+        info?: (Msg.IBattlePlayerInfo|null);
     }
 
-    /** Represents a GetTemp21A. */
-    class GetTemp21A implements IGetTemp21A {
+    /** Represents a SvWmBattlePlayerInfoA. */
+    class SvWmBattlePlayerInfoA implements ISvWmBattlePlayerInfoA {
 
         /**
-         * Constructs a new GetTemp21A.
+         * Constructs a new SvWmBattlePlayerInfoA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGetTemp21A);
+        constructor(p?: Msg.ISvWmBattlePlayerInfoA);
+
+        /** SvWmBattlePlayerInfoA err. */
+        public err: Msg.TErrorCode;
+
+        /** SvWmBattlePlayerInfoA info. */
+        public info?: (Msg.IBattlePlayerInfo|null);
 
         /**
-         * Encodes the specified GetTemp21A message. Does not implicitly {@link Msg.GetTemp21A.verify|verify} messages.
-         * @param m GetTemp21A message or plain object to encode
+         * Encodes the specified SvWmBattlePlayerInfoA message. Does not implicitly {@link Msg.SvWmBattlePlayerInfoA.verify|verify} messages.
+         * @param m SvWmBattlePlayerInfoA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGetTemp21A, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvWmBattlePlayerInfoA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GetTemp21A message from the specified reader or buffer.
+         * Decodes a SvWmBattlePlayerInfoA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GetTemp21A
+         * @returns SvWmBattlePlayerInfoA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetTemp21A;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvWmBattlePlayerInfoA;
     }
 
-    /** Properties of a GetTemp22R. */
-    interface IGetTemp22R {
+    /** Properties of a SvWmGetAdvArenaPlayerInfoR. */
+    interface ISvWmGetAdvArenaPlayerInfoR {
+
+        /** SvWmGetAdvArenaPlayerInfoR Id */
+        Id?: (number|null);
+
+        /** SvWmGetAdvArenaPlayerInfoR aai */
+        aai?: (Msg.IAdvArenaInfo|null);
     }
 
-    /** Represents a GetTemp22R. */
-    class GetTemp22R implements IGetTemp22R {
+    /** Represents a SvWmGetAdvArenaPlayerInfoR. */
+    class SvWmGetAdvArenaPlayerInfoR implements ISvWmGetAdvArenaPlayerInfoR {
 
         /**
-         * Constructs a new GetTemp22R.
+         * Constructs a new SvWmGetAdvArenaPlayerInfoR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGetTemp22R);
+        constructor(p?: Msg.ISvWmGetAdvArenaPlayerInfoR);
+
+        /** SvWmGetAdvArenaPlayerInfoR Id. */
+        public Id: number;
+
+        /** SvWmGetAdvArenaPlayerInfoR aai. */
+        public aai?: (Msg.IAdvArenaInfo|null);
 
         /**
-         * Encodes the specified GetTemp22R message. Does not implicitly {@link Msg.GetTemp22R.verify|verify} messages.
-         * @param m GetTemp22R message or plain object to encode
+         * Encodes the specified SvWmGetAdvArenaPlayerInfoR message. Does not implicitly {@link Msg.SvWmGetAdvArenaPlayerInfoR.verify|verify} messages.
+         * @param m SvWmGetAdvArenaPlayerInfoR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGetTemp22R, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvWmGetAdvArenaPlayerInfoR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GetTemp22R message from the specified reader or buffer.
+         * Decodes a SvWmGetAdvArenaPlayerInfoR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GetTemp22R
+         * @returns SvWmGetAdvArenaPlayerInfoR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetTemp22R;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvWmGetAdvArenaPlayerInfoR;
     }
 
-    /** Properties of a GetTemp22A. */
-    interface IGetTemp22A {
+    /** Properties of a SvWmGetAdvArenaPlayerInfoA. */
+    interface ISvWmGetAdvArenaPlayerInfoA {
+
+        /** SvWmGetAdvArenaPlayerInfoA aapi */
+        aapi?: (Msg.IAdvArenaPlayerInfo|null);
+
+        /** SvWmGetAdvArenaPlayerInfoA fightingDef */
+        fightingDef?: (number|null);
     }
 
-    /** Represents a GetTemp22A. */
-    class GetTemp22A implements IGetTemp22A {
+    /** Represents a SvWmGetAdvArenaPlayerInfoA. */
+    class SvWmGetAdvArenaPlayerInfoA implements ISvWmGetAdvArenaPlayerInfoA {
 
         /**
-         * Constructs a new GetTemp22A.
+         * Constructs a new SvWmGetAdvArenaPlayerInfoA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGetTemp22A);
+        constructor(p?: Msg.ISvWmGetAdvArenaPlayerInfoA);
+
+        /** SvWmGetAdvArenaPlayerInfoA aapi. */
+        public aapi?: (Msg.IAdvArenaPlayerInfo|null);
+
+        /** SvWmGetAdvArenaPlayerInfoA fightingDef. */
+        public fightingDef: number;
 
         /**
-         * Encodes the specified GetTemp22A message. Does not implicitly {@link Msg.GetTemp22A.verify|verify} messages.
-         * @param m GetTemp22A message or plain object to encode
+         * Encodes the specified SvWmGetAdvArenaPlayerInfoA message. Does not implicitly {@link Msg.SvWmGetAdvArenaPlayerInfoA.verify|verify} messages.
+         * @param m SvWmGetAdvArenaPlayerInfoA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGetTemp22A, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvWmGetAdvArenaPlayerInfoA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GetTemp22A message from the specified reader or buffer.
+         * Decodes a SvWmGetAdvArenaPlayerInfoA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GetTemp22A
+         * @returns SvWmGetAdvArenaPlayerInfoA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetTemp22A;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvWmGetAdvArenaPlayerInfoA;
     }
 
-    /** Properties of a GetTemp23R. */
-    interface IGetTemp23R {
+    /** Properties of a SvNtsAdvArenaInfo. */
+    interface ISvNtsAdvArenaInfo {
+
+        /** SvNtsAdvArenaInfo Id */
+        Id?: (number|null);
+
+        /** SvNtsAdvArenaInfo aai */
+        aai?: (Msg.IAdvArenaInfo|null);
     }
 
-    /** Represents a GetTemp23R. */
-    class GetTemp23R implements IGetTemp23R {
+    /** Represents a SvNtsAdvArenaInfo. */
+    class SvNtsAdvArenaInfo implements ISvNtsAdvArenaInfo {
 
         /**
-         * Constructs a new GetTemp23R.
+         * Constructs a new SvNtsAdvArenaInfo.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGetTemp23R);
+        constructor(p?: Msg.ISvNtsAdvArenaInfo);
+
+        /** SvNtsAdvArenaInfo Id. */
+        public Id: number;
+
+        /** SvNtsAdvArenaInfo aai. */
+        public aai?: (Msg.IAdvArenaInfo|null);
 
         /**
-         * Encodes the specified GetTemp23R message. Does not implicitly {@link Msg.GetTemp23R.verify|verify} messages.
-         * @param m GetTemp23R message or plain object to encode
+         * Encodes the specified SvNtsAdvArenaInfo message. Does not implicitly {@link Msg.SvNtsAdvArenaInfo.verify|verify} messages.
+         * @param m SvNtsAdvArenaInfo message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGetTemp23R, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvNtsAdvArenaInfo, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GetTemp23R message from the specified reader or buffer.
+         * Decodes a SvNtsAdvArenaInfo message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GetTemp23R
+         * @returns SvNtsAdvArenaInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetTemp23R;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsAdvArenaInfo;
     }
 
-    /** Properties of a GetTemp23A. */
-    interface IGetTemp23A {
+    /** Properties of a SvNtsAdvArenaFighting. */
+    interface ISvNtsAdvArenaFighting {
+
+        /** SvNtsAdvArenaFighting Id */
+        Id?: (number|null);
+
+        /** SvNtsAdvArenaFighting fightingDef */
+        fightingDef?: (number|null);
     }
 
-    /** Represents a GetTemp23A. */
-    class GetTemp23A implements IGetTemp23A {
+    /** Represents a SvNtsAdvArenaFighting. */
+    class SvNtsAdvArenaFighting implements ISvNtsAdvArenaFighting {
 
         /**
-         * Constructs a new GetTemp23A.
+         * Constructs a new SvNtsAdvArenaFighting.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGetTemp23A);
+        constructor(p?: Msg.ISvNtsAdvArenaFighting);
+
+        /** SvNtsAdvArenaFighting Id. */
+        public Id: number;
+
+        /** SvNtsAdvArenaFighting fightingDef. */
+        public fightingDef: number;
 
         /**
-         * Encodes the specified GetTemp23A message. Does not implicitly {@link Msg.GetTemp23A.verify|verify} messages.
-         * @param m GetTemp23A message or plain object to encode
+         * Encodes the specified SvNtsAdvArenaFighting message. Does not implicitly {@link Msg.SvNtsAdvArenaFighting.verify|verify} messages.
+         * @param m SvNtsAdvArenaFighting message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGetTemp23A, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvNtsAdvArenaFighting, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GetTemp23A message from the specified reader or buffer.
+         * Decodes a SvNtsAdvArenaFighting message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GetTemp23A
+         * @returns SvNtsAdvArenaFighting
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetTemp23A;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsAdvArenaFighting;
     }
 
-    /** Properties of a GetTemp24R. */
-    interface IGetTemp24R {
+    /** Properties of a SvNtsPraisePlayer. */
+    interface ISvNtsPraisePlayer {
+
+        /** SvNtsPraisePlayer SendId */
+        SendId?: (number|null);
+
+        /** SvNtsPraisePlayer ReciveId */
+        ReciveId?: (number|null);
+
+        /** SvNtsPraisePlayer PraiseCount */
+        PraiseCount?: (number|null);
     }
 
-    /** Represents a GetTemp24R. */
-    class GetTemp24R implements IGetTemp24R {
+    /** Represents a SvNtsPraisePlayer. */
+    class SvNtsPraisePlayer implements ISvNtsPraisePlayer {
 
         /**
-         * Constructs a new GetTemp24R.
+         * Constructs a new SvNtsPraisePlayer.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGetTemp24R);
+        constructor(p?: Msg.ISvNtsPraisePlayer);
+
+        /** SvNtsPraisePlayer SendId. */
+        public SendId: number;
+
+        /** SvNtsPraisePlayer ReciveId. */
+        public ReciveId: number;
+
+        /** SvNtsPraisePlayer PraiseCount. */
+        public PraiseCount: number;
 
         /**
-         * Encodes the specified GetTemp24R message. Does not implicitly {@link Msg.GetTemp24R.verify|verify} messages.
-         * @param m GetTemp24R message or plain object to encode
+         * Encodes the specified SvNtsPraisePlayer message. Does not implicitly {@link Msg.SvNtsPraisePlayer.verify|verify} messages.
+         * @param m SvNtsPraisePlayer message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGetTemp24R, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvNtsPraisePlayer, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GetTemp24R message from the specified reader or buffer.
+         * Decodes a SvNtsPraisePlayer message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GetTemp24R
+         * @returns SvNtsPraisePlayer
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetTemp24R;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsPraisePlayer;
     }
 
-    /** Properties of a GetTemp24A. */
-    interface IGetTemp24A {
+    /** Properties of a SvWmGetAdvArenaBattleInfoR. */
+    interface ISvWmGetAdvArenaBattleInfoR {
+
+        /** SvWmGetAdvArenaBattleInfoR Id */
+        Id?: (number|null);
+
+        /** SvWmGetAdvArenaBattleInfoR isLeft */
+        isLeft?: (boolean|null);
+
+        /** SvWmGetAdvArenaBattleInfoR formation */
+        formation?: ({ [k: string]: Msg.IFormationInfoNew }|null);
     }
 
-    /** Represents a GetTemp24A. */
-    class GetTemp24A implements IGetTemp24A {
+    /** Represents a SvWmGetAdvArenaBattleInfoR. */
+    class SvWmGetAdvArenaBattleInfoR implements ISvWmGetAdvArenaBattleInfoR {
 
         /**
-         * Constructs a new GetTemp24A.
+         * Constructs a new SvWmGetAdvArenaBattleInfoR.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGetTemp24A);
+        constructor(p?: Msg.ISvWmGetAdvArenaBattleInfoR);
+
+        /** SvWmGetAdvArenaBattleInfoR Id. */
+        public Id: number;
+
+        /** SvWmGetAdvArenaBattleInfoR isLeft. */
+        public isLeft: boolean;
+
+        /** SvWmGetAdvArenaBattleInfoR formation. */
+        public formation: { [k: string]: Msg.IFormationInfoNew };
 
         /**
-         * Encodes the specified GetTemp24A message. Does not implicitly {@link Msg.GetTemp24A.verify|verify} messages.
-         * @param m GetTemp24A message or plain object to encode
+         * Encodes the specified SvWmGetAdvArenaBattleInfoR message. Does not implicitly {@link Msg.SvWmGetAdvArenaBattleInfoR.verify|verify} messages.
+         * @param m SvWmGetAdvArenaBattleInfoR message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGetTemp24A, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvWmGetAdvArenaBattleInfoR, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GetTemp24A message from the specified reader or buffer.
+         * Decodes a SvWmGetAdvArenaBattleInfoR message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GetTemp24A
+         * @returns SvWmGetAdvArenaBattleInfoR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetTemp24A;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvWmGetAdvArenaBattleInfoR;
     }
 
-    /** Properties of a GetTemp25R. */
-    interface IGetTemp25R {
+    /** Properties of a SvWmGetAdvArenaBattleInfoA. */
+    interface ISvWmGetAdvArenaBattleInfoA {
+
+        /** SvWmGetAdvArenaBattleInfoA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** SvWmGetAdvArenaBattleInfoA roundFightings */
+        roundFightings?: ({ [k: string]: number }|null);
+
+        /** SvWmGetAdvArenaBattleInfoA bpis */
+        bpis?: ({ [k: string]: Msg.IBattlePlayerInfo }|null);
+
+        /** SvWmGetAdvArenaBattleInfoA aai */
+        aai?: (Msg.IAdvArenaInfo|null);
+
+        /** SvWmGetAdvArenaBattleInfoA PvpTicket */
+        PvpTicket?: (number|null);
+
+        /** SvWmGetAdvArenaBattleInfoA playerId */
+        playerId?: (number|null);
     }
 
-    /** Represents a GetTemp25R. */
-    class GetTemp25R implements IGetTemp25R {
+    /** Represents a SvWmGetAdvArenaBattleInfoA. */
+    class SvWmGetAdvArenaBattleInfoA implements ISvWmGetAdvArenaBattleInfoA {
 
         /**
-         * Constructs a new GetTemp25R.
+         * Constructs a new SvWmGetAdvArenaBattleInfoA.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGetTemp25R);
+        constructor(p?: Msg.ISvWmGetAdvArenaBattleInfoA);
+
+        /** SvWmGetAdvArenaBattleInfoA err. */
+        public err: Msg.TErrorCode;
+
+        /** SvWmGetAdvArenaBattleInfoA roundFightings. */
+        public roundFightings: { [k: string]: number };
+
+        /** SvWmGetAdvArenaBattleInfoA bpis. */
+        public bpis: { [k: string]: Msg.IBattlePlayerInfo };
+
+        /** SvWmGetAdvArenaBattleInfoA aai. */
+        public aai?: (Msg.IAdvArenaInfo|null);
+
+        /** SvWmGetAdvArenaBattleInfoA PvpTicket. */
+        public PvpTicket: number;
+
+        /** SvWmGetAdvArenaBattleInfoA playerId. */
+        public playerId: number;
 
         /**
-         * Encodes the specified GetTemp25R message. Does not implicitly {@link Msg.GetTemp25R.verify|verify} messages.
-         * @param m GetTemp25R message or plain object to encode
+         * Encodes the specified SvWmGetAdvArenaBattleInfoA message. Does not implicitly {@link Msg.SvWmGetAdvArenaBattleInfoA.verify|verify} messages.
+         * @param m SvWmGetAdvArenaBattleInfoA message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGetTemp25R, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvWmGetAdvArenaBattleInfoA, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GetTemp25R message from the specified reader or buffer.
+         * Decodes a SvWmGetAdvArenaBattleInfoA message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GetTemp25R
+         * @returns SvWmGetAdvArenaBattleInfoA
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetTemp25R;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvWmGetAdvArenaBattleInfoA;
     }
 
-    /** Properties of a GetTemp25A. */
-    interface IGetTemp25A {
+    /** Properties of a SvNtsAdvArenaResult. */
+    interface ISvNtsAdvArenaResult {
+
+        /** SvNtsAdvArenaResult id */
+        id?: (number|null);
+
+        /** SvNtsAdvArenaResult changeScore */
+        changeScore?: (number|null);
+
+        /** SvNtsAdvArenaResult addRecord */
+        addRecord?: (Msg.IAdvArenaBattleRecord|null);
     }
 
-    /** Represents a GetTemp25A. */
-    class GetTemp25A implements IGetTemp25A {
+    /** Represents a SvNtsAdvArenaResult. */
+    class SvNtsAdvArenaResult implements ISvNtsAdvArenaResult {
 
         /**
-         * Constructs a new GetTemp25A.
+         * Constructs a new SvNtsAdvArenaResult.
          * @param [p] Properties to set
          */
-        constructor(p?: Msg.IGetTemp25A);
+        constructor(p?: Msg.ISvNtsAdvArenaResult);
+
+        /** SvNtsAdvArenaResult id. */
+        public id: number;
+
+        /** SvNtsAdvArenaResult changeScore. */
+        public changeScore: number;
+
+        /** SvNtsAdvArenaResult addRecord. */
+        public addRecord?: (Msg.IAdvArenaBattleRecord|null);
 
         /**
-         * Encodes the specified GetTemp25A message. Does not implicitly {@link Msg.GetTemp25A.verify|verify} messages.
-         * @param m GetTemp25A message or plain object to encode
+         * Encodes the specified SvNtsAdvArenaResult message. Does not implicitly {@link Msg.SvNtsAdvArenaResult.verify|verify} messages.
+         * @param m SvNtsAdvArenaResult message or plain object to encode
          * @param [w] Writer to encode to
          * @returns Writer
          */
-        public static encode(m: Msg.IGetTemp25A, w?: protobuf.Writer): protobuf.Writer;
+        public static encode(m: Msg.ISvNtsAdvArenaResult, w?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a GetTemp25A message from the specified reader or buffer.
+         * Decodes a SvNtsAdvArenaResult message from the specified reader or buffer.
          * @param r Reader or buffer to decode from
          * @param [l] Message length if known beforehand
-         * @returns GetTemp25A
+         * @returns SvNtsAdvArenaResult
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.GetTemp25A;
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsAdvArenaResult;
+    }
+
+    /** Properties of a SvWmCheckPvpTicketR. */
+    interface ISvWmCheckPvpTicketR {
+
+        /** SvWmCheckPvpTicketR id */
+        id?: (number|null);
+    }
+
+    /** Represents a SvWmCheckPvpTicketR. */
+    class SvWmCheckPvpTicketR implements ISvWmCheckPvpTicketR {
+
+        /**
+         * Constructs a new SvWmCheckPvpTicketR.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvWmCheckPvpTicketR);
+
+        /** SvWmCheckPvpTicketR id. */
+        public id: number;
+
+        /**
+         * Encodes the specified SvWmCheckPvpTicketR message. Does not implicitly {@link Msg.SvWmCheckPvpTicketR.verify|verify} messages.
+         * @param m SvWmCheckPvpTicketR message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvWmCheckPvpTicketR, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvWmCheckPvpTicketR message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvWmCheckPvpTicketR
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvWmCheckPvpTicketR;
+    }
+
+    /** Properties of a SvWmCheckPvpTicketA. */
+    interface ISvWmCheckPvpTicketA {
+
+        /** SvWmCheckPvpTicketA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** SvWmCheckPvpTicketA pvpTikcet */
+        pvpTikcet?: (number|null);
+    }
+
+    /** Represents a SvWmCheckPvpTicketA. */
+    class SvWmCheckPvpTicketA implements ISvWmCheckPvpTicketA {
+
+        /**
+         * Constructs a new SvWmCheckPvpTicketA.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvWmCheckPvpTicketA);
+
+        /** SvWmCheckPvpTicketA err. */
+        public err: Msg.TErrorCode;
+
+        /** SvWmCheckPvpTicketA pvpTikcet. */
+        public pvpTikcet: number;
+
+        /**
+         * Encodes the specified SvWmCheckPvpTicketA message. Does not implicitly {@link Msg.SvWmCheckPvpTicketA.verify|verify} messages.
+         * @param m SvWmCheckPvpTicketA message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvWmCheckPvpTicketA, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvWmCheckPvpTicketA message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvWmCheckPvpTicketA
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvWmCheckPvpTicketA;
+    }
+
+    /** Properties of a SvNtsJoinAdvArena. */
+    interface ISvNtsJoinAdvArena {
+
+        /** SvNtsJoinAdvArena id */
+        id?: (number|null);
+    }
+
+    /** Represents a SvNtsJoinAdvArena. */
+    class SvNtsJoinAdvArena implements ISvNtsJoinAdvArena {
+
+        /**
+         * Constructs a new SvNtsJoinAdvArena.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvNtsJoinAdvArena);
+
+        /** SvNtsJoinAdvArena id. */
+        public id: number;
+
+        /**
+         * Encodes the specified SvNtsJoinAdvArena message. Does not implicitly {@link Msg.SvNtsJoinAdvArena.verify|verify} messages.
+         * @param m SvNtsJoinAdvArena message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvNtsJoinAdvArena, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvNtsJoinAdvArena message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvNtsJoinAdvArena
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsJoinAdvArena;
+    }
+
+    /** Properties of a SvWmGetAdvArenaBattleSettleR. */
+    interface ISvWmGetAdvArenaBattleSettleR {
+
+        /** SvWmGetAdvArenaBattleSettleR idAtk */
+        idAtk?: (number|null);
+
+        /** SvWmGetAdvArenaBattleSettleR idDef */
+        idDef?: (number|null);
+
+        /** SvWmGetAdvArenaBattleSettleR br */
+        br?: (Msg.TPVPBattleResult|null);
+
+        /** SvWmGetAdvArenaBattleSettleR recordList */
+        recordList?: (Msg.IAdvArenaBattleRecordUnit[]|null);
+
+        /** SvWmGetAdvArenaBattleSettleR battleId */
+        battleId?: (number|null);
+
+        /** SvWmGetAdvArenaBattleSettleR isDirectly */
+        isDirectly?: (boolean|null);
+    }
+
+    /** Represents a SvWmGetAdvArenaBattleSettleR. */
+    class SvWmGetAdvArenaBattleSettleR implements ISvWmGetAdvArenaBattleSettleR {
+
+        /**
+         * Constructs a new SvWmGetAdvArenaBattleSettleR.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvWmGetAdvArenaBattleSettleR);
+
+        /** SvWmGetAdvArenaBattleSettleR idAtk. */
+        public idAtk: number;
+
+        /** SvWmGetAdvArenaBattleSettleR idDef. */
+        public idDef: number;
+
+        /** SvWmGetAdvArenaBattleSettleR br. */
+        public br: Msg.TPVPBattleResult;
+
+        /** SvWmGetAdvArenaBattleSettleR recordList. */
+        public recordList: Msg.IAdvArenaBattleRecordUnit[];
+
+        /** SvWmGetAdvArenaBattleSettleR battleId. */
+        public battleId: number;
+
+        /** SvWmGetAdvArenaBattleSettleR isDirectly. */
+        public isDirectly: boolean;
+
+        /**
+         * Encodes the specified SvWmGetAdvArenaBattleSettleR message. Does not implicitly {@link Msg.SvWmGetAdvArenaBattleSettleR.verify|verify} messages.
+         * @param m SvWmGetAdvArenaBattleSettleR message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvWmGetAdvArenaBattleSettleR, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvWmGetAdvArenaBattleSettleR message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvWmGetAdvArenaBattleSettleR
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvWmGetAdvArenaBattleSettleR;
+    }
+
+    /** Properties of a SvWmGetAdvArenaBattleSettleA. */
+    interface ISvWmGetAdvArenaBattleSettleA {
+
+        /** SvWmGetAdvArenaBattleSettleA abr */
+        abr?: (Msg.IAdvArenaBattleRecord|null);
+
+        /** SvWmGetAdvArenaBattleSettleA topRanks */
+        topRanks?: (Msg.IAdvArenaOpponentPlayer[]|null);
+    }
+
+    /** Represents a SvWmGetAdvArenaBattleSettleA. */
+    class SvWmGetAdvArenaBattleSettleA implements ISvWmGetAdvArenaBattleSettleA {
+
+        /**
+         * Constructs a new SvWmGetAdvArenaBattleSettleA.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvWmGetAdvArenaBattleSettleA);
+
+        /** SvWmGetAdvArenaBattleSettleA abr. */
+        public abr?: (Msg.IAdvArenaBattleRecord|null);
+
+        /** SvWmGetAdvArenaBattleSettleA topRanks. */
+        public topRanks: Msg.IAdvArenaOpponentPlayer[];
+
+        /**
+         * Encodes the specified SvWmGetAdvArenaBattleSettleA message. Does not implicitly {@link Msg.SvWmGetAdvArenaBattleSettleA.verify|verify} messages.
+         * @param m SvWmGetAdvArenaBattleSettleA message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvWmGetAdvArenaBattleSettleA, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvWmGetAdvArenaBattleSettleA message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvWmGetAdvArenaBattleSettleA
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvWmGetAdvArenaBattleSettleA;
+    }
+
+    /** Properties of a SvGuildMonsterContributionR. */
+    interface ISvGuildMonsterContributionR {
+
+        /** SvGuildMonsterContributionR num */
+        num?: (number|null);
+
+        /** SvGuildMonsterContributionR guildID */
+        guildID?: (number|null);
+
+        /** SvGuildMonsterContributionR playerID */
+        playerID?: (number|null);
+    }
+
+    /** Represents a SvGuildMonsterContributionR. */
+    class SvGuildMonsterContributionR implements ISvGuildMonsterContributionR {
+
+        /**
+         * Constructs a new SvGuildMonsterContributionR.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvGuildMonsterContributionR);
+
+        /** SvGuildMonsterContributionR num. */
+        public num: number;
+
+        /** SvGuildMonsterContributionR guildID. */
+        public guildID: number;
+
+        /** SvGuildMonsterContributionR playerID. */
+        public playerID: number;
+
+        /**
+         * Encodes the specified SvGuildMonsterContributionR message. Does not implicitly {@link Msg.SvGuildMonsterContributionR.verify|verify} messages.
+         * @param m SvGuildMonsterContributionR message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvGuildMonsterContributionR, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvGuildMonsterContributionR message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvGuildMonsterContributionR
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvGuildMonsterContributionR;
+    }
+
+    /** Properties of a SvGuildMonsterContributionA. */
+    interface ISvGuildMonsterContributionA {
+
+        /** SvGuildMonsterContributionA err */
+        err?: (Msg.TErrorCode|null);
+    }
+
+    /** Represents a SvGuildMonsterContributionA. */
+    class SvGuildMonsterContributionA implements ISvGuildMonsterContributionA {
+
+        /**
+         * Constructs a new SvGuildMonsterContributionA.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvGuildMonsterContributionA);
+
+        /** SvGuildMonsterContributionA err. */
+        public err: Msg.TErrorCode;
+
+        /**
+         * Encodes the specified SvGuildMonsterContributionA message. Does not implicitly {@link Msg.SvGuildMonsterContributionA.verify|verify} messages.
+         * @param m SvGuildMonsterContributionA message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvGuildMonsterContributionA, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvGuildMonsterContributionA message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvGuildMonsterContributionA
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvGuildMonsterContributionA;
+    }
+
+    /** Properties of a SvGuildMonsterBattleR. */
+    interface ISvGuildMonsterBattleR {
+
+        /** SvGuildMonsterBattleR battleResult */
+        battleResult?: (Msg.TPVPBattleResult|null);
+
+        /** SvGuildMonsterBattleR guildID */
+        guildID?: (number|null);
+
+        /** SvGuildMonsterBattleR bossID */
+        bossID?: (number|null);
+
+        /** SvGuildMonsterBattleR hurt */
+        hurt?: (number|null);
+
+        /** SvGuildMonsterBattleR playerID */
+        playerID?: (number|null);
+    }
+
+    /** Represents a SvGuildMonsterBattleR. */
+    class SvGuildMonsterBattleR implements ISvGuildMonsterBattleR {
+
+        /**
+         * Constructs a new SvGuildMonsterBattleR.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvGuildMonsterBattleR);
+
+        /** SvGuildMonsterBattleR battleResult. */
+        public battleResult: Msg.TPVPBattleResult;
+
+        /** SvGuildMonsterBattleR guildID. */
+        public guildID: number;
+
+        /** SvGuildMonsterBattleR bossID. */
+        public bossID: number;
+
+        /** SvGuildMonsterBattleR hurt. */
+        public hurt: number;
+
+        /** SvGuildMonsterBattleR playerID. */
+        public playerID: number;
+
+        /**
+         * Encodes the specified SvGuildMonsterBattleR message. Does not implicitly {@link Msg.SvGuildMonsterBattleR.verify|verify} messages.
+         * @param m SvGuildMonsterBattleR message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvGuildMonsterBattleR, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvGuildMonsterBattleR message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvGuildMonsterBattleR
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvGuildMonsterBattleR;
+    }
+
+    /** Properties of a SvGuildMonsterBattleA. */
+    interface ISvGuildMonsterBattleA {
+
+        /** SvGuildMonsterBattleA err */
+        err?: (Msg.TErrorCode|null);
+    }
+
+    /** Represents a SvGuildMonsterBattleA. */
+    class SvGuildMonsterBattleA implements ISvGuildMonsterBattleA {
+
+        /**
+         * Constructs a new SvGuildMonsterBattleA.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvGuildMonsterBattleA);
+
+        /** SvGuildMonsterBattleA err. */
+        public err: Msg.TErrorCode;
+
+        /**
+         * Encodes the specified SvGuildMonsterBattleA message. Does not implicitly {@link Msg.SvGuildMonsterBattleA.verify|verify} messages.
+         * @param m SvGuildMonsterBattleA message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvGuildMonsterBattleA, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvGuildMonsterBattleA message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvGuildMonsterBattleA
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvGuildMonsterBattleA;
+    }
+
+    /** Properties of a SvGuildMonsterAwardR. */
+    interface ISvGuildMonsterAwardR {
+
+        /** SvGuildMonsterAwardR bossID */
+        bossID?: (number|null);
+
+        /** SvGuildMonsterAwardR guildID */
+        guildID?: (number|null);
+
+        /** SvGuildMonsterAwardR playerID */
+        playerID?: (number|null);
+    }
+
+    /** Represents a SvGuildMonsterAwardR. */
+    class SvGuildMonsterAwardR implements ISvGuildMonsterAwardR {
+
+        /**
+         * Constructs a new SvGuildMonsterAwardR.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvGuildMonsterAwardR);
+
+        /** SvGuildMonsterAwardR bossID. */
+        public bossID: number;
+
+        /** SvGuildMonsterAwardR guildID. */
+        public guildID: number;
+
+        /** SvGuildMonsterAwardR playerID. */
+        public playerID: number;
+
+        /**
+         * Encodes the specified SvGuildMonsterAwardR message. Does not implicitly {@link Msg.SvGuildMonsterAwardR.verify|verify} messages.
+         * @param m SvGuildMonsterAwardR message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvGuildMonsterAwardR, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvGuildMonsterAwardR message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvGuildMonsterAwardR
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvGuildMonsterAwardR;
+    }
+
+    /** Properties of a SvGuildMonsterAwardA. */
+    interface ISvGuildMonsterAwardA {
+
+        /** SvGuildMonsterAwardA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** SvGuildMonsterAwardA awardIndex */
+        awardIndex?: (number|null);
+    }
+
+    /** Represents a SvGuildMonsterAwardA. */
+    class SvGuildMonsterAwardA implements ISvGuildMonsterAwardA {
+
+        /**
+         * Constructs a new SvGuildMonsterAwardA.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvGuildMonsterAwardA);
+
+        /** SvGuildMonsterAwardA err. */
+        public err: Msg.TErrorCode;
+
+        /** SvGuildMonsterAwardA awardIndex. */
+        public awardIndex: number;
+
+        /**
+         * Encodes the specified SvGuildMonsterAwardA message. Does not implicitly {@link Msg.SvGuildMonsterAwardA.verify|verify} messages.
+         * @param m SvGuildMonsterAwardA message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvGuildMonsterAwardA, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvGuildMonsterAwardA message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvGuildMonsterAwardA
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvGuildMonsterAwardA;
+    }
+
+    /** Properties of a SvGuildMonsterBattleDirectlyR. */
+    interface ISvGuildMonsterBattleDirectlyR {
+
+        /** SvGuildMonsterBattleDirectlyR bossID */
+        bossID?: (number|null);
+
+        /** SvGuildMonsterBattleDirectlyR guildID */
+        guildID?: (number|null);
+
+        /** SvGuildMonsterBattleDirectlyR playerID */
+        playerID?: (number|null);
+    }
+
+    /** Represents a SvGuildMonsterBattleDirectlyR. */
+    class SvGuildMonsterBattleDirectlyR implements ISvGuildMonsterBattleDirectlyR {
+
+        /**
+         * Constructs a new SvGuildMonsterBattleDirectlyR.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvGuildMonsterBattleDirectlyR);
+
+        /** SvGuildMonsterBattleDirectlyR bossID. */
+        public bossID: number;
+
+        /** SvGuildMonsterBattleDirectlyR guildID. */
+        public guildID: number;
+
+        /** SvGuildMonsterBattleDirectlyR playerID. */
+        public playerID: number;
+
+        /**
+         * Encodes the specified SvGuildMonsterBattleDirectlyR message. Does not implicitly {@link Msg.SvGuildMonsterBattleDirectlyR.verify|verify} messages.
+         * @param m SvGuildMonsterBattleDirectlyR message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvGuildMonsterBattleDirectlyR, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvGuildMonsterBattleDirectlyR message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvGuildMonsterBattleDirectlyR
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvGuildMonsterBattleDirectlyR;
+    }
+
+    /** Properties of a SvGuildMonsterBattleDirectlyA. */
+    interface ISvGuildMonsterBattleDirectlyA {
+
+        /** SvGuildMonsterBattleDirectlyA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** SvGuildMonsterBattleDirectlyA bossHp */
+        bossHp?: (number|null);
+    }
+
+    /** Represents a SvGuildMonsterBattleDirectlyA. */
+    class SvGuildMonsterBattleDirectlyA implements ISvGuildMonsterBattleDirectlyA {
+
+        /**
+         * Constructs a new SvGuildMonsterBattleDirectlyA.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvGuildMonsterBattleDirectlyA);
+
+        /** SvGuildMonsterBattleDirectlyA err. */
+        public err: Msg.TErrorCode;
+
+        /** SvGuildMonsterBattleDirectlyA bossHp. */
+        public bossHp: number;
+
+        /**
+         * Encodes the specified SvGuildMonsterBattleDirectlyA message. Does not implicitly {@link Msg.SvGuildMonsterBattleDirectlyA.verify|verify} messages.
+         * @param m SvGuildMonsterBattleDirectlyA message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvGuildMonsterBattleDirectlyA, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvGuildMonsterBattleDirectlyA message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvGuildMonsterBattleDirectlyA
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvGuildMonsterBattleDirectlyA;
+    }
+
+    /** Properties of a SvNtsGmSendMail. */
+    interface ISvNtsGmSendMail {
+
+        /** SvNtsGmSendMail mail */
+        mail?: (Msg.IGMMail|null);
+
+        /** SvNtsGmSendMail playerId */
+        playerId?: (number|null);
+
+        /** SvNtsGmSendMail isServerMail */
+        isServerMail?: (boolean|null);
+    }
+
+    /** Represents a SvNtsGmSendMail. */
+    class SvNtsGmSendMail implements ISvNtsGmSendMail {
+
+        /**
+         * Constructs a new SvNtsGmSendMail.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvNtsGmSendMail);
+
+        /** SvNtsGmSendMail mail. */
+        public mail?: (Msg.IGMMail|null);
+
+        /** SvNtsGmSendMail playerId. */
+        public playerId: number;
+
+        /** SvNtsGmSendMail isServerMail. */
+        public isServerMail: boolean;
+
+        /**
+         * Encodes the specified SvNtsGmSendMail message. Does not implicitly {@link Msg.SvNtsGmSendMail.verify|verify} messages.
+         * @param m SvNtsGmSendMail message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvNtsGmSendMail, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvNtsGmSendMail message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvNtsGmSendMail
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsGmSendMail;
+    }
+
+    /** Properties of a SvNtsGlobalSetOrder. */
+    interface ISvNtsGlobalSetOrder {
+
+        /** SvNtsGlobalSetOrder order */
+        order?: (Msg.IGMOrderData|null);
+    }
+
+    /** Represents a SvNtsGlobalSetOrder. */
+    class SvNtsGlobalSetOrder implements ISvNtsGlobalSetOrder {
+
+        /**
+         * Constructs a new SvNtsGlobalSetOrder.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvNtsGlobalSetOrder);
+
+        /** SvNtsGlobalSetOrder order. */
+        public order?: (Msg.IGMOrderData|null);
+
+        /**
+         * Encodes the specified SvNtsGlobalSetOrder message. Does not implicitly {@link Msg.SvNtsGlobalSetOrder.verify|verify} messages.
+         * @param m SvNtsGlobalSetOrder message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvNtsGlobalSetOrder, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvNtsGlobalSetOrder message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvNtsGlobalSetOrder
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsGlobalSetOrder;
+    }
+
+    /** Properties of a SvNtsSetLanguageData. */
+    interface ISvNtsSetLanguageData {
+
+        /** SvNtsSetLanguageData id */
+        id?: (string|null);
+
+        /** SvNtsSetLanguageData en */
+        en?: (string|null);
+
+        /** SvNtsSetLanguageData cn */
+        cn?: (string|null);
+
+        /** SvNtsSetLanguageData tw */
+        tw?: (string|null);
+
+        /** SvNtsSetLanguageData ja */
+        ja?: (string|null);
+
+        /** SvNtsSetLanguageData kr */
+        kr?: (string|null);
+    }
+
+    /** Represents a SvNtsSetLanguageData. */
+    class SvNtsSetLanguageData implements ISvNtsSetLanguageData {
+
+        /**
+         * Constructs a new SvNtsSetLanguageData.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvNtsSetLanguageData);
+
+        /** SvNtsSetLanguageData id. */
+        public id: string;
+
+        /** SvNtsSetLanguageData en. */
+        public en: string;
+
+        /** SvNtsSetLanguageData cn. */
+        public cn: string;
+
+        /** SvNtsSetLanguageData tw. */
+        public tw: string;
+
+        /** SvNtsSetLanguageData ja. */
+        public ja: string;
+
+        /** SvNtsSetLanguageData kr. */
+        public kr: string;
+
+        /**
+         * Encodes the specified SvNtsSetLanguageData message. Does not implicitly {@link Msg.SvNtsSetLanguageData.verify|verify} messages.
+         * @param m SvNtsSetLanguageData message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvNtsSetLanguageData, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvNtsSetLanguageData message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvNtsSetLanguageData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsSetLanguageData;
+    }
+
+    /** Properties of a SvNtsResetNoticeStatus. */
+    interface ISvNtsResetNoticeStatus {
+
+        /** SvNtsResetNoticeStatus nnn */
+        nnn?: (Msg.INotifyNewNotice|null);
+    }
+
+    /** Represents a SvNtsResetNoticeStatus. */
+    class SvNtsResetNoticeStatus implements ISvNtsResetNoticeStatus {
+
+        /**
+         * Constructs a new SvNtsResetNoticeStatus.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvNtsResetNoticeStatus);
+
+        /** SvNtsResetNoticeStatus nnn. */
+        public nnn?: (Msg.INotifyNewNotice|null);
+
+        /**
+         * Encodes the specified SvNtsResetNoticeStatus message. Does not implicitly {@link Msg.SvNtsResetNoticeStatus.verify|verify} messages.
+         * @param m SvNtsResetNoticeStatus message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvNtsResetNoticeStatus, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvNtsResetNoticeStatus message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvNtsResetNoticeStatus
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsResetNoticeStatus;
+    }
+
+    /** Properties of a SvNtsAddBanPlayer. */
+    interface ISvNtsAddBanPlayer {
+
+        /** SvNtsAddBanPlayer id */
+        id?: (number|null);
+
+        /** SvNtsAddBanPlayer banType */
+        banType?: (number|null);
+    }
+
+    /** Represents a SvNtsAddBanPlayer. */
+    class SvNtsAddBanPlayer implements ISvNtsAddBanPlayer {
+
+        /**
+         * Constructs a new SvNtsAddBanPlayer.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvNtsAddBanPlayer);
+
+        /** SvNtsAddBanPlayer id. */
+        public id: number;
+
+        /** SvNtsAddBanPlayer banType. */
+        public banType: number;
+
+        /**
+         * Encodes the specified SvNtsAddBanPlayer message. Does not implicitly {@link Msg.SvNtsAddBanPlayer.verify|verify} messages.
+         * @param m SvNtsAddBanPlayer message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvNtsAddBanPlayer, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvNtsAddBanPlayer message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvNtsAddBanPlayer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsAddBanPlayer;
+    }
+
+    /** Properties of a SvNtBanPlayer. */
+    interface ISvNtBanPlayer {
+
+        /** SvNtBanPlayer ids */
+        ids?: (number[]|null);
+    }
+
+    /** Represents a SvNtBanPlayer. */
+    class SvNtBanPlayer implements ISvNtBanPlayer {
+
+        /**
+         * Constructs a new SvNtBanPlayer.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvNtBanPlayer);
+
+        /** SvNtBanPlayer ids. */
+        public ids: number[];
+
+        /**
+         * Encodes the specified SvNtBanPlayer message. Does not implicitly {@link Msg.SvNtBanPlayer.verify|verify} messages.
+         * @param m SvNtBanPlayer message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvNtBanPlayer, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvNtBanPlayer message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvNtBanPlayer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtBanPlayer;
+    }
+
+    /** Properties of a SvGetGuildMonsterGInfoR. */
+    interface ISvGetGuildMonsterGInfoR {
+
+        /** SvGetGuildMonsterGInfoR guildID */
+        guildID?: (number|null);
+
+        /** SvGetGuildMonsterGInfoR playerID */
+        playerID?: (number|null);
+    }
+
+    /** Represents a SvGetGuildMonsterGInfoR. */
+    class SvGetGuildMonsterGInfoR implements ISvGetGuildMonsterGInfoR {
+
+        /**
+         * Constructs a new SvGetGuildMonsterGInfoR.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvGetGuildMonsterGInfoR);
+
+        /** SvGetGuildMonsterGInfoR guildID. */
+        public guildID: number;
+
+        /** SvGetGuildMonsterGInfoR playerID. */
+        public playerID: number;
+
+        /**
+         * Encodes the specified SvGetGuildMonsterGInfoR message. Does not implicitly {@link Msg.SvGetGuildMonsterGInfoR.verify|verify} messages.
+         * @param m SvGetGuildMonsterGInfoR message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvGetGuildMonsterGInfoR, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvGetGuildMonsterGInfoR message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvGetGuildMonsterGInfoR
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvGetGuildMonsterGInfoR;
+    }
+
+    /** Properties of a SvGetGuildMonsterGInfoA. */
+    interface ISvGetGuildMonsterGInfoA {
+
+        /** SvGetGuildMonsterGInfoA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** SvGetGuildMonsterGInfoA GInfo */
+        GInfo?: (Msg.IGuildMonsterGInfo|null);
+    }
+
+    /** Represents a SvGetGuildMonsterGInfoA. */
+    class SvGetGuildMonsterGInfoA implements ISvGetGuildMonsterGInfoA {
+
+        /**
+         * Constructs a new SvGetGuildMonsterGInfoA.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvGetGuildMonsterGInfoA);
+
+        /** SvGetGuildMonsterGInfoA err. */
+        public err: Msg.TErrorCode;
+
+        /** SvGetGuildMonsterGInfoA GInfo. */
+        public GInfo?: (Msg.IGuildMonsterGInfo|null);
+
+        /**
+         * Encodes the specified SvGetGuildMonsterGInfoA message. Does not implicitly {@link Msg.SvGetGuildMonsterGInfoA.verify|verify} messages.
+         * @param m SvGetGuildMonsterGInfoA message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvGetGuildMonsterGInfoA, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvGetGuildMonsterGInfoA message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvGetGuildMonsterGInfoA
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvGetGuildMonsterGInfoA;
+    }
+
+    /** Properties of a SvNtsActivityUpdate. */
+    interface ISvNtsActivityUpdate {
+    }
+
+    /** Represents a SvNtsActivityUpdate. */
+    class SvNtsActivityUpdate implements ISvNtsActivityUpdate {
+
+        /**
+         * Constructs a new SvNtsActivityUpdate.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvNtsActivityUpdate);
+
+        /**
+         * Encodes the specified SvNtsActivityUpdate message. Does not implicitly {@link Msg.SvNtsActivityUpdate.verify|verify} messages.
+         * @param m SvNtsActivityUpdate message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvNtsActivityUpdate, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvNtsActivityUpdate message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvNtsActivityUpdate
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsActivityUpdate;
+    }
+
+    /** Properties of a SvNtsUpdateMaxServerId. */
+    interface ISvNtsUpdateMaxServerId {
+
+        /** SvNtsUpdateMaxServerId MaxServerId */
+        MaxServerId?: (number|null);
+    }
+
+    /** Represents a SvNtsUpdateMaxServerId. */
+    class SvNtsUpdateMaxServerId implements ISvNtsUpdateMaxServerId {
+
+        /**
+         * Constructs a new SvNtsUpdateMaxServerId.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvNtsUpdateMaxServerId);
+
+        /** SvNtsUpdateMaxServerId MaxServerId. */
+        public MaxServerId: number;
+
+        /**
+         * Encodes the specified SvNtsUpdateMaxServerId message. Does not implicitly {@link Msg.SvNtsUpdateMaxServerId.verify|verify} messages.
+         * @param m SvNtsUpdateMaxServerId message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvNtsUpdateMaxServerId, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvNtsUpdateMaxServerId message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvNtsUpdateMaxServerId
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsUpdateMaxServerId;
+    }
+
+    /** Properties of a SvNtsLogicOnilnePlayers. */
+    interface ISvNtsLogicOnilnePlayers {
+
+        /** SvNtsLogicOnilnePlayers playerIds */
+        playerIds?: (number[]|null);
+    }
+
+    /** Represents a SvNtsLogicOnilnePlayers. */
+    class SvNtsLogicOnilnePlayers implements ISvNtsLogicOnilnePlayers {
+
+        /**
+         * Constructs a new SvNtsLogicOnilnePlayers.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvNtsLogicOnilnePlayers);
+
+        /** SvNtsLogicOnilnePlayers playerIds. */
+        public playerIds: number[];
+
+        /**
+         * Encodes the specified SvNtsLogicOnilnePlayers message. Does not implicitly {@link Msg.SvNtsLogicOnilnePlayers.verify|verify} messages.
+         * @param m SvNtsLogicOnilnePlayers message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvNtsLogicOnilnePlayers, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvNtsLogicOnilnePlayers message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvNtsLogicOnilnePlayers
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsLogicOnilnePlayers;
+    }
+
+    /** Properties of a SvWmGetGiftIdR. */
+    interface ISvWmGetGiftIdR {
+
+        /** SvWmGetGiftIdR code */
+        code?: (string|null);
+    }
+
+    /** Represents a SvWmGetGiftIdR. */
+    class SvWmGetGiftIdR implements ISvWmGetGiftIdR {
+
+        /**
+         * Constructs a new SvWmGetGiftIdR.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvWmGetGiftIdR);
+
+        /** SvWmGetGiftIdR code. */
+        public code: string;
+
+        /**
+         * Encodes the specified SvWmGetGiftIdR message. Does not implicitly {@link Msg.SvWmGetGiftIdR.verify|verify} messages.
+         * @param m SvWmGetGiftIdR message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvWmGetGiftIdR, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvWmGetGiftIdR message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvWmGetGiftIdR
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvWmGetGiftIdR;
+    }
+
+    /** Properties of a SvWmGetGiftIdA. */
+    interface ISvWmGetGiftIdA {
+
+        /** SvWmGetGiftIdA err */
+        err?: (Msg.TErrorCode|null);
+
+        /** SvWmGetGiftIdA objs */
+        objs?: (Msg.ILootObject[]|null);
+    }
+
+    /** Represents a SvWmGetGiftIdA. */
+    class SvWmGetGiftIdA implements ISvWmGetGiftIdA {
+
+        /**
+         * Constructs a new SvWmGetGiftIdA.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvWmGetGiftIdA);
+
+        /** SvWmGetGiftIdA err. */
+        public err: Msg.TErrorCode;
+
+        /** SvWmGetGiftIdA objs. */
+        public objs: Msg.ILootObject[];
+
+        /**
+         * Encodes the specified SvWmGetGiftIdA message. Does not implicitly {@link Msg.SvWmGetGiftIdA.verify|verify} messages.
+         * @param m SvWmGetGiftIdA message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvWmGetGiftIdA, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvWmGetGiftIdA message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvWmGetGiftIdA
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvWmGetGiftIdA;
+    }
+
+    /** Properties of a SvNtsGuildMonsterPInfo. */
+    interface ISvNtsGuildMonsterPInfo {
+
+        /** SvNtsGuildMonsterPInfo guildMonsterPInfo */
+        guildMonsterPInfo?: (Msg.IGuildMonsterPInfo|null);
+
+        /** SvNtsGuildMonsterPInfo playerID */
+        playerID?: (number|null);
+    }
+
+    /** Represents a SvNtsGuildMonsterPInfo. */
+    class SvNtsGuildMonsterPInfo implements ISvNtsGuildMonsterPInfo {
+
+        /**
+         * Constructs a new SvNtsGuildMonsterPInfo.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvNtsGuildMonsterPInfo);
+
+        /** SvNtsGuildMonsterPInfo guildMonsterPInfo. */
+        public guildMonsterPInfo?: (Msg.IGuildMonsterPInfo|null);
+
+        /** SvNtsGuildMonsterPInfo playerID. */
+        public playerID: number;
+
+        /**
+         * Encodes the specified SvNtsGuildMonsterPInfo message. Does not implicitly {@link Msg.SvNtsGuildMonsterPInfo.verify|verify} messages.
+         * @param m SvNtsGuildMonsterPInfo message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvNtsGuildMonsterPInfo, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvNtsGuildMonsterPInfo message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvNtsGuildMonsterPInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsGuildMonsterPInfo;
+    }
+
+    /** Properties of a SvNtsRegisterSubServerIds. */
+    interface ISvNtsRegisterSubServerIds {
+
+        /** SvNtsRegisterSubServerIds serverId */
+        serverId?: (number|null);
+
+        /** SvNtsRegisterSubServerIds SubServerIds */
+        SubServerIds?: (number[]|null);
+    }
+
+    /** Represents a SvNtsRegisterSubServerIds. */
+    class SvNtsRegisterSubServerIds implements ISvNtsRegisterSubServerIds {
+
+        /**
+         * Constructs a new SvNtsRegisterSubServerIds.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvNtsRegisterSubServerIds);
+
+        /** SvNtsRegisterSubServerIds serverId. */
+        public serverId: number;
+
+        /** SvNtsRegisterSubServerIds SubServerIds. */
+        public SubServerIds: number[];
+
+        /**
+         * Encodes the specified SvNtsRegisterSubServerIds message. Does not implicitly {@link Msg.SvNtsRegisterSubServerIds.verify|verify} messages.
+         * @param m SvNtsRegisterSubServerIds message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvNtsRegisterSubServerIds, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvNtsRegisterSubServerIds message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvNtsRegisterSubServerIds
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsRegisterSubServerIds;
+    }
+
+    /** Properties of a SvNtsLogicToRunSubLogic. */
+    interface ISvNtsLogicToRunSubLogic {
+
+        /** SvNtsLogicToRunSubLogic serverId */
+        serverId?: (number|null);
+    }
+
+    /** Represents a SvNtsLogicToRunSubLogic. */
+    class SvNtsLogicToRunSubLogic implements ISvNtsLogicToRunSubLogic {
+
+        /**
+         * Constructs a new SvNtsLogicToRunSubLogic.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvNtsLogicToRunSubLogic);
+
+        /** SvNtsLogicToRunSubLogic serverId. */
+        public serverId: number;
+
+        /**
+         * Encodes the specified SvNtsLogicToRunSubLogic message. Does not implicitly {@link Msg.SvNtsLogicToRunSubLogic.verify|verify} messages.
+         * @param m SvNtsLogicToRunSubLogic message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvNtsLogicToRunSubLogic, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvNtsLogicToRunSubLogic message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvNtsLogicToRunSubLogic
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsLogicToRunSubLogic;
+    }
+
+    /** Properties of a SvNtsSaveBattleRecord. */
+    interface ISvNtsSaveBattleRecord {
+
+        /** SvNtsSaveBattleRecord battleId */
+        battleId?: (number|null);
+
+        /** SvNtsSaveBattleRecord Data */
+        Data?: (Uint8Array|null);
+    }
+
+    /** Represents a SvNtsSaveBattleRecord. */
+    class SvNtsSaveBattleRecord implements ISvNtsSaveBattleRecord {
+
+        /**
+         * Constructs a new SvNtsSaveBattleRecord.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvNtsSaveBattleRecord);
+
+        /** SvNtsSaveBattleRecord battleId. */
+        public battleId: number;
+
+        /** SvNtsSaveBattleRecord Data. */
+        public Data: Uint8Array;
+
+        /**
+         * Encodes the specified SvNtsSaveBattleRecord message. Does not implicitly {@link Msg.SvNtsSaveBattleRecord.verify|verify} messages.
+         * @param m SvNtsSaveBattleRecord message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvNtsSaveBattleRecord, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvNtsSaveBattleRecord message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvNtsSaveBattleRecord
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsSaveBattleRecord;
+    }
+
+    /** Properties of a SvNtsAdvArenaRankAward. */
+    interface ISvNtsAdvArenaRankAward {
+
+        /** SvNtsAdvArenaRankAward RankPlayerId */
+        RankPlayerId?: ({ [k: string]: number }|null);
+    }
+
+    /** Represents a SvNtsAdvArenaRankAward. */
+    class SvNtsAdvArenaRankAward implements ISvNtsAdvArenaRankAward {
+
+        /**
+         * Constructs a new SvNtsAdvArenaRankAward.
+         * @param [p] Properties to set
+         */
+        constructor(p?: Msg.ISvNtsAdvArenaRankAward);
+
+        /** SvNtsAdvArenaRankAward RankPlayerId. */
+        public RankPlayerId: { [k: string]: number };
+
+        /**
+         * Encodes the specified SvNtsAdvArenaRankAward message. Does not implicitly {@link Msg.SvNtsAdvArenaRankAward.verify|verify} messages.
+         * @param m SvNtsAdvArenaRankAward message or plain object to encode
+         * @param [w] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(m: Msg.ISvNtsAdvArenaRankAward, w?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a SvNtsAdvArenaRankAward message from the specified reader or buffer.
+         * @param r Reader or buffer to decode from
+         * @param [l] Message length if known beforehand
+         * @returns SvNtsAdvArenaRankAward
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Msg.SvNtsAdvArenaRankAward;
     }
 
     /** MsgType enum. */
@@ -61281,18 +64834,18 @@ export namespace Msg {
         TheCampCopyBattleEndA = 623,
         TheGuildMonsterBattleDirectlyR = 624,
         TheGuildMonsterBattleDirectlyA = 625,
-        TheGmTempR4 = 626,
-        TheGmTempA4 = 627,
-        TheGmTempR5 = 628,
-        TheGmTempA5 = 629,
-        TheGmTempR6 = 630,
-        TheGmTempA6 = 631,
-        TheGmTempR7 = 632,
-        TheGmTempA7 = 633,
-        TheGmTempR8 = 634,
-        TheGmTempA8 = 635,
-        TheGmTempR9 = 636,
-        TheGmTempA9 = 637,
+        TheSyncChangeShowSkin = 626,
+        TheSyncKnowNewSkin = 627,
+        TheSkinUnit = 628,
+        TheFormationInfoNew = 629,
+        TheGuildBossBattleDirectlyR = 630,
+        TheGuildBossBattleDirectlyA = 631,
+        TheHuntingBossBattleDirectlyR = 632,
+        TheHuntingBossBattleDirectlyA = 633,
+        TheHeroReturnBackR = 634,
+        TheHeroReturnBackA = 635,
+        TheUseArtifactFragmentR = 636,
+        TheUseArtifactFragmentA = 637,
         TheCreatePVPBattleR = 638,
         TheCreatePVPBattleA = 639,
         TheRegisterBattleServerR = 640,
@@ -61303,45 +64856,45 @@ export namespace Msg {
         TheBattleStatisticUnit = 645,
         TheCreatePVEBattleR = 646,
         TheCreatePVEBattleA = 647,
-        ThebattleTempR05 = 648,
-        ThebattleTempA05 = 649,
-        ThebattleTempR06 = 650,
-        ThebattleTempA06 = 651,
-        ThebattleTempR07 = 652,
-        ThebattleTempA07 = 653,
-        ThebattleTempR08 = 654,
-        ThebattleTempA08 = 655,
-        ThebattleTempR09 = 656,
-        ThebattleTempA09 = 657,
-        TheReserveMessage343 = 658,
-        TheReserveMessage342 = 659,
-        TheReserveMessage341 = 660,
-        TheReserveMessage340 = 661,
-        TheReserveMessage339 = 662,
-        TheReserveMessage338 = 663,
-        TheReserveMessage337 = 664,
-        TheReserveMessage336 = 665,
-        TheReserveMessage335 = 666,
-        TheReserveMessage334 = 667,
-        TheReserveMessage333 = 668,
-        TheReserveMessage332 = 669,
-        TheReserveMessage331 = 670,
-        TheReserveMessage330 = 671,
-        TheReserveMessage329 = 672,
-        TheReserveMessage328 = 673,
-        TheReserveMessage327 = 674,
-        TheReserveMessage326 = 675,
-        TheReserveMessage325 = 676,
-        TheReserveMessage324 = 677,
-        TheReserveMessage323 = 678,
-        TheReserveMessage322 = 679,
-        TheReserveMessage321 = 680,
-        TheReserveMessage320 = 681,
-        TheReserveMessage319 = 682,
-        TheReserveMessage318 = 683,
-        TheReserveMessage317 = 684,
-        TheReserveMessage316 = 685,
-        TheReserveMessage315 = 686,
+        ThePutOnArtifactR = 648,
+        ThePutOnArtifactA = 649,
+        TheTakeOffArtifactR = 650,
+        TheTakeOffArtifactA = 651,
+        ThePutOnAutoR = 652,
+        ThePutOnAutoA = 653,
+        TheArtifactQualtiyUpR = 654,
+        TheArtifactQualtiyUpA = 655,
+        TheAwardDirectlyEventCopyAllR = 656,
+        TheAwardDirectlyEventCopyAllA = 657,
+        TheAdvArenaInfo = 658,
+        TheGetAdvArenaInfoR = 659,
+        TheGetAdvArenaInfoA = 660,
+        TheGetAdvArenaRankingR = 661,
+        TheGetAdvArenaRankingA = 662,
+        TheRefreshAdvArenaOpponentR = 663,
+        TheRefreshAdvArenaOpponentA = 664,
+        TheRecieveAdvArenaDailyAwardR = 665,
+        TheRecieveAdvArenaDailyAwardA = 666,
+        TheRecieveAdvArenaRankAwardR = 667,
+        TheRecieveAdvArenaRankAwardA = 668,
+        TheAdvArenaBattleDirectlyR = 669,
+        TheAdvArenaBattleDirectlyA = 670,
+        TheAdvArenaBattleRecordUnit = 671,
+        TheAdvArenaBattleRecord = 672,
+        TheAdvArenaPlayerInfo = 673,
+        TheAdvArenaChangeDefFormationR = 674,
+        TheAdvArenaChangeDefFormationA = 675,
+        TheAdvArenaPraiseR = 676,
+        TheAdvArenaPraiseA = 677,
+        TheStartAdvArenaBattleR = 678,
+        TheStartAdvArenaBattleA = 679,
+        TheEndAdvArenaBattleR = 680,
+        TheEndAdvArenaBattleA = 681,
+        TheNotifyAdvArenaBattleRecord = 682,
+        TheAdvArenaOpponentPlayer = 683,
+        TheGetAdvArenaOtherPlayerInfoR = 684,
+        TheGetAdvArenaOtherPlayerInfoA = 685,
+        TheNotifyAdvArenaSeasonSettlement = 686,
         TheReserveMessage314 = 687,
         TheReserveMessage313 = 688,
         TheReserveMessage312 = 689,
@@ -61650,12 +65203,12 @@ export namespace Msg {
         TheReserveMessage9 = 992,
         TheReserveMessage8 = 993,
         TheReserveMessage7 = 994,
-        TheReserveMessage6 = 995,
-        TheReserveMessage5 = 996,
-        TheReserveMessage4 = 997,
-        TheReserveMessage3 = 998,
-        TheReserveMessage2 = 999,
-        TheReserveMessage1 = 1000,
+        TheSvWmVerifyAccountR = 995,
+        TheSvWmVerifyAccountA = 996,
+        TheGmNotifyToReloadDataR = 997,
+        TheGmNotifyToReloadDataA = 998,
+        TheGmNotifyToMaintenanceR = 999,
+        TheGmNotifyToMaintenanceA = 1000,
         TheSvMsgSendPackMessageR = 1001,
         TheSvMsgSendPackMessageA = 1002,
         TheSvMsgWaitIndexMessageR = 1003,
@@ -61682,7 +65235,7 @@ export namespace Msg {
         TheSvNtsPlayerBaseInfo = 1024,
         TheSvNtsPlayerGuildInfo = 1025,
         TheSvNtsAddGuildExp = 1026,
-        TheSvFriendInfo = 1027,
+        TheSvFriendInfoXX = 1027,
         TheSvWmGetFriendInfoR = 1028,
         TheSvWmGetFriendInfoA = 1029,
         TheSvNtsSendFriendGift = 1030,
@@ -61692,22 +65245,53 @@ export namespace Msg {
         TheSvNtsDeleteFriend = 1034,
         TheSvWmGetGMPlayerDataR = 1035,
         TheSvWmGetGMPlayerDataA = 1036,
-        TheGetTemp18R = 1037,
-        TheGetTemp18A = 1038,
-        TheGetTemp19R = 1039,
-        TheGetTemp19A = 1040,
-        TheGetTemp20R = 1041,
-        TheGetTemp20A = 1042,
-        TheGetTemp21R = 1043,
-        TheGetTemp21A = 1044,
-        TheGetTemp22R = 1045,
-        TheGetTemp22A = 1046,
-        TheGetTemp23R = 1047,
-        TheGetTemp23A = 1048,
-        TheGetTemp24R = 1049,
-        TheGetTemp24A = 1050,
-        TheGetTemp25R = 1051,
-        TheGetTemp25A = 1052
+        TheSvPayOrderR = 1037,
+        TheSvPayOrderA = 1038,
+        TheSvPayReceiptLtR = 1039,
+        TheSvPayReceiptLtA = 1040,
+        TheSvPayReceiptBokeR = 1041,
+        TheSvPayReceiptBokeA = 1042,
+        TheSvWmBattlePlayerInfoR = 1043,
+        TheSvWmBattlePlayerInfoA = 1044,
+        TheSvWmGetAdvArenaPlayerInfoR = 1045,
+        TheSvWmGetAdvArenaPlayerInfoA = 1046,
+        TheSvNtsAdvArenaInfo = 1047,
+        TheSvNtsAdvArenaFighting = 1048,
+        TheSvNtsPraisePlayer = 1049,
+        TheSvWmGetAdvArenaBattleInfoR = 1050,
+        TheSvWmGetAdvArenaBattleInfoA = 1051,
+        TheSvNtsAdvArenaResult = 1052,
+        TheSvWmCheckPvpTicketR = 1053,
+        TheSvWmCheckPvpTicketA = 1054,
+        TheSvNtsJoinAdvArena = 1055,
+        TheSvWmGetAdvArenaBattleSettleR = 1056,
+        TheSvWmGetAdvArenaBattleSettleA = 1057,
+        TheSvGuildMonsterContributionR = 1058,
+        TheSvGuildMonsterContributionA = 1059,
+        TheSvGuildMonsterBattleR = 1060,
+        TheSvGuildMonsterBattleA = 1061,
+        TheSvGuildMonsterAwardR = 1062,
+        TheSvGuildMonsterAwardA = 1063,
+        TheSvGuildMonsterBattleDirectlyR = 1064,
+        TheSvGuildMonsterBattleDirectlyA = 1065,
+        TheSvNtsGmSendMail = 1066,
+        TheSvNtsGlobalSetOrder = 1067,
+        TheSvNtsSetLanguageData = 1068,
+        TheSvNtsResetNoticeStatus = 1069,
+        TheSvNtsAddBanPlayer = 1070,
+        TheSvNtBanPlayer = 1071,
+        TheSvGetGuildMonsterGInfoR = 1072,
+        TheSvGetGuildMonsterGInfoA = 1073,
+        TheSvNtsActivityUpdate = 1074,
+        TheSvNtsUpdateMaxServerId = 1075,
+        TheSvNtsLogicOnilnePlayers = 1076,
+        TheSvWmGetGiftIdR = 1077,
+        TheSvWmGetGiftIdA = 1078,
+        TheSvNtsGuildMonsterPInfo = 1079,
+        TheSvNtsRegisterSubServerIds = 1080,
+        TheSvNtsLogicToRunSubLogic = 1081,
+        TheSvNtsSaveBattleRecord = 1082,
+        TheSvNtsAdvArenaRankAward = 1083
     }
 }
  

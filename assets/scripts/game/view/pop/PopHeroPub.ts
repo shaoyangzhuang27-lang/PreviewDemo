@@ -2,7 +2,7 @@
 * @author 郭刚
 * @version 1.0.0,2021.3.13
 */
-import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger,Sprite, SpriteFrame, Button, ButtonComponent,ProgressBar, Color} from 'cc';
+import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger,EventHandler,Sprite, SpriteFrame, Button, ToggleContainer,Toggle,ProgressBar, Color} from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
 import { PopMgr } from '../../control/PopMgr';
@@ -11,6 +11,8 @@ import { NotifyMgr } from '../../control/NotifyMgr';
 import { MsgMgr } from '../../control/MsgMgr';
 import { XFuns } from '../../model/const/XFuns';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { PubHeroIcon } from '../pub/PubHeroIcon';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('PopHeroPub')
@@ -24,6 +26,9 @@ export class PopHeroPub extends PopBase {
     @property({type: Node})
     public node_ordinary:Node | null = null;
 
+    @property({type: Node})
+    public node_wonder:Node | null = null;
+    
     @property({type: Label})
     public lab_friend_info:Label | null = null;
 
@@ -66,6 +71,10 @@ export class PopHeroPub extends PopBase {
 
     @property({type: Button})
     public btn_summon_ten = null as unknown as Button;
+
+    @property({type: ToggleContainer})
+    public node_togglecontainer = null as unknown as ToggleContainer;
+    
     
     private submitCallFun:Function | null = null;
 
@@ -80,6 +89,9 @@ export class PopHeroPub extends PopBase {
     //英雄召唤进度
     private _nHeroSummonProgress : number = 0;
 
+    private _strSummonExplainTitle : string = "";
+    private _strSummonExplainContent : string = "";
+
 
     start () {
         super.start();
@@ -92,6 +104,18 @@ export class PopHeroPub extends PopBase {
         this.updateBtnSummonState();
         this.showPubHeroIconPrefab();
         this.updateProgressProcess();
+
+        const containerEventHandler = new EventHandler();
+        containerEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
+        containerEventHandler.component = 'PopHeroPub';// 这个是代码文件名
+        containerEventHandler.handler = '_onToggleContainerClick';
+        containerEventHandler.customEventData = '';
+
+        this.node_togglecontainer?.checkEvents.push(containerEventHandler);
+        this.updateShowNodeToggle();
+
+
+
         this.btn_hero_summon.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_friend_summon.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_summon_one.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
@@ -106,6 +130,8 @@ export class PopHeroPub extends PopBase {
 
     public initUILabel()
     {
+        this._strSummonExplainTitle  = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_SUMMONDESCTITLE) ;
+        this._strSummonExplainContent  = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_SUMMONDESC);
         if(this.lab_title)
         {
             this.lab_title.string = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_title");
@@ -126,14 +152,11 @@ export class PopHeroPub extends PopBase {
     }
     private _onIntroduceClick(event : any)
     {
-
-        var title = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_SUMMONDESCTITLE) as Config.language_ui.Record;
-        var desc = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.PUB_UI_SUMMONDESC) as Config.language_ui.Record;
-        PopMgr.getInstance().popExplain(title.cn,desc.cn,()=>{ PopMgr.getInstance().deleteWindow();});
+        PopMgr.getInstance().popExplain(this._strSummonExplainTitle,this._strSummonExplainContent,()=>{ PopMgr.getInstance().deleteWindow();});
     }
     private _onRecommendTeamClick(event : any)
     {
-        PopMgr.getInstance().popRecLineUpWindow("推荐阵容",()=>{console.log("")});
+        PopMgr.getInstance().popRecLineUpWindow(XConsts.PUB_UI_CAMPRECOMMEND,()=>{console.log("")});
     }
 
 
@@ -354,8 +377,10 @@ export class PopHeroPub extends PopBase {
 
     public showPubHeroIconPrefab()
     {
+        this.node_wonder && (this.node_wonder.active = false);
         resources.load('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
             let p = instantiate( res );
+            let script = p.getComponent(PubHeroIcon);
             var nodWindow = this.node.getChildByName("window");
             var node_ordinary = nodWindow?.getChildByName("node_ordinary");
             var nodeDiamond = node_ordinary?.getChildByName("node_diamond");
@@ -374,6 +399,7 @@ export class PopHeroPub extends PopBase {
                 lab_detail_dimaond.string = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_detail_dimaond");
             }
 
+            script.setWonderSummonShow(false);
             if(nodeFiveStar)
             {
                 p.setScale(0.4,0.4)
@@ -384,7 +410,7 @@ export class PopHeroPub extends PopBase {
 
         resources.load('prefabs_ui/pub/pub_wonder_summon', (err:any,res:any)=>{
             let p = instantiate( res );
-            this.node_ordinary?.addChild(p);
+            this.node_wonder?.addChild(p);
         } );
     }
 
@@ -652,8 +678,20 @@ export class PopHeroPub extends PopBase {
 
             // NotifyMgr.getInstance().notify()
             // NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
-            this.removePubNotifyHandler();
-            PopMgr.getInstance().popSummonSettleWindow(msgData,XConsts.POP_SUMMON_TYPE.HeroPub);
+            
+            if(msgData.summonType != Msg.TSummonType.ESummonType_Wonder)
+            {
+                if(this.isActive())
+                {
+                    PopMgr.getInstance().popSummonSettleWindow(msgData,XConsts.POP_SUMMON_TYPE.HeroPub);
+                }   
+                this.addPubNotifyHandler();
+                this.updateImgPropNum();
+                this.updateProgressProcess();
+                this.updateBtnSummonState();
+                this.updateShowNodeToggle();
+            }
+           
         }
         else
         {
@@ -689,13 +727,46 @@ export class PopHeroPub extends PopBase {
     }
 
 
-    public show()
+    // public show()
+    // {
+    //     super.show();
+    //     this.addPubNotifyHandler();
+    //     this.updateImgPropNum();
+    //     this.updateProgressProcess();
+    //     this.updateBtnSummonState();
+    //     this.updateShowNodeToggle();
+    // }
+
+
+    private _onToggleContainerClick(event: Event, customEventData: string){
+
+        let tog:Toggle = (event as any);
+        let  selectedToggle = tog.node.getComponent(Toggle);
+        
+        if(tog.node.name == "toggle_ordinary" &&  selectedToggle?.isChecked)
+        {
+            this.node_ordinary && (this.node_ordinary.active = true);
+            this.node_wonder && (this.node_wonder.active = false);
+            this._strSummonExplainTitle  = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_SUMMONDESCTITLE) ;
+            this._strSummonExplainContent  = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_SUMMONDESC);
+        }
+        else if(tog.node.name == "toggle_senior" &&  selectedToggle?.isChecked)
+        {
+            this.node_ordinary && (this.node_ordinary.active = false);
+            this.node_wonder && (this.node_wonder.active = true);
+            this._strSummonExplainTitle  = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERSUMMONEXPLAIN) ;
+            this._strSummonExplainContent  = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERSUMMONCONTENT);
+        }
+    }
+
+    public updateShowNodeToggle()
     {
-        super.show();
-        this.addPubNotifyHandler();
-        this.updateImgPropNum();
-        this.updateProgressProcess();
-        this.updateBtnSummonState();
+        let curLevel = GameModel.getInstance().getHeroPubModel().getPlayerLevel();
+        if(this.node_togglecontainer)
+        {
+            curLevel >= XConsts.PUB_OPEN_WONDER_SUMMON_LEVEL ? this.node_togglecontainer.node.active = true : this.node_togglecontainer.node.active = false;
+        }
+       
     }
 }
 
