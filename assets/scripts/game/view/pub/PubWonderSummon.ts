@@ -63,6 +63,8 @@ export class PubWonderSummon extends Component {
         this.img_update?.on(Node.EventType.TOUCH_END, this._onImgUpdateClick, this);
 
 
+        this.btn_summon_one.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
+        this.btn_summon_ten.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         
 
         // [3]
@@ -254,5 +256,179 @@ export class PubWonderSummon extends Component {
         // GameModel.getInstance().getHeroPubModel().initWonderHeartHeroIdList();
         PopMgr.getInstance().popPubWonderHeartHeroWindow();
     } 
+
+    private _onButtonClick(event:any){
+        let nPlayerDiamondsCounts = GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts();
+        let info : XStruct.common_one_info.Record = {
+            title : "",
+            content : "",
+            mode : 0,
+            isRichLabMode : false,
+            isChangeBtnSpriteFrame : false,
+            submitContent:"" ,
+            cancelContent:"" 
+        }
+        switch (event.target.getComponent(Button)) { 
+            case this.btn_summon_one:
+                console.log("summon_one");
+                PopMgr.getInstance().popPubWonderSummonSettleWindow();
+                // if(this._curSummonType == Msg.TSummonType.ESummonType_Friend)
+                // {
+                //     if(this._nFriendHeartNum < XConsts.PUB_SUMMON_FRIEND_ONE_COSUME)
+                //     {
+                //         info.title = "错误";
+                //         info.content = "爱心不足";
+                //         this.showPromptWindow(info);
+                //     }
+                //     else{
+                     
+                //         console.log("pppppppp 单个爱心");
+                //         this.onSubmit(Msg.TSummonType.ESummonType_Friend,Msg.TSummonConsumeType.ESummonConsumeType_FriendGift,true);
+                //     }
+                // }
+                // else
+                // {
+                //     if(this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_ONE_COSUME)
+                //     {
+                    
+                //         console.log("pppppppp 单个卷轴");
+                //         this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll,true);
+                //     }
+                //     else 
+                //     {
+                //         if(nPlayerDiamondsCounts >= XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME)
+                //         {
+                //             //普通召唤 中的钻石召唤
+                //             console.log("pppppppp 单个钻石");
+                //             this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,true);
+                //         }
+                //         else
+                //         {
+                //             info.title = "错误";
+                //             info.content = "钻石不足";
+                //             info.submitContent = "商城";
+                //             let sumbitCallFunc = ()=>{
+                //                 PopMgr.getInstance().deleteWindow();
+                //                 console.log("弹出商城窗口");
+                //             }
+                //             this.showPromptWindow(info,sumbitCallFunc);
+                //             // this.showPromptWindow("错误","钻石不足",1);
+                //         }
+                //     }
+                // }
+                break; 
+            case this.btn_summon_ten:
+                // console.log("summon_ten");
+                // if(this._curSummonType == Msg.TSummonType.ESummonType_Friend)
+                // {
+                //     if(this._nFriendHeartNum < XConsts.PUB_SUMMON_FRIEND_TEN_COSUME)
+                //     {
+                //         // this.showPromptWindow("错误","爱心不足",1);
+                //         info.title = "错误";
+                //         info.content = "爱心不足";
+                //         this.showPromptWindow(info);
+                //     }
+                //     else
+                //     {
+                //        console.log("pppppppppp 爱心10连");
+                //         this.onSubmit(Msg.TSummonType.ESummonType_Friend,Msg.TSummonConsumeType.ESummonConsumeType_FriendGift,false);
+                //     }
+                // }
+                // else
+                // {
+                //     if(this._nScorllNum > 0 && this._nScorllNum < XConsts.PUB_SUMMON_SCROLL_TEN_COSUME)
+                //     {
+                //         let nShortageDiamonds = XConsts.PUB_SUMMON_SCROLL_EXCHANGE_DIAMOND *  (XConsts.PUB_SUMMON_SCROLL_TEN_COSUME - this._nScorllNum);
+                //         if(nPlayerDiamondsCounts >= nShortageDiamonds)
+                //         {
+                //             let callFunc = ()=>{
+                //                 this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll_VRmb,false);
+                //             }
+                //             var str = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_BUYSUMMONSCROLL);
+                            
+                //             str = str.replace("{0}",String(nShortageDiamonds));
+                //             str = str.replace("{1}",String(XConsts.PUB_SUMMON_SCROLL_TEN_COSUME - this._nScorllNum));
+                //             str = str.replace("{2}",String(XConsts.PUB_SUMMON_SCROLL_EXCHANGE_DIAMOND));
+
+                //             info.title = "注意";
+                //             info.content = str;
+                //             info.mode = 1;
+                //             info.isRichLabMode = true;
+                //             this.showPromptWindow(info,callFunc);
+                //             // this.showPromptWindow("注意",str,2,callFunc,true);
+                //             // this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll_VRmb,false);
+                //         }
+                //         else
+                //         {
+                //             let callFunc = ()=>{
+                //                 PopMgr.getInstance().deleteWindow();
+                //                 let tempInfo : XStruct.common_one_info.Record = {
+                //                     title : "",
+                //                     content : "",
+                //                     mode : 0,
+                //                     isRichLabMode : false,
+                //                     isChangeBtnSpriteFrame : false,
+                //                     submitContent:"" ,
+                //                     cancelContent:"" 
+                //                 }
+                //                 // this.showPromptWindow("错误","钻石不足",1);
+                //                 tempInfo.title = "错误";
+                //                 tempInfo.content = "钻石不足";
+                //                 tempInfo.submitContent = "商城";
+                //                 let sumbitCallFunc = ()=>{
+                //                     PopMgr.getInstance().deleteWindow();
+                //                     console.log("弹出商城窗口");
+                //                 }
+                //                 // this.showPromptWindow(tempInfo,sumbitCallFunc);
+                //                 PopMgr.getInstance().popCommonOneWindow(tempInfo,sumbitCallFunc);
+                                
+                //             }
+                //             var str = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_BUYSUMMONSCROLL);
+                            
+                //             str = str.replace("{0}",String(nShortageDiamonds));
+                //             str = str.replace("{1}",String(XConsts.PUB_SUMMON_SCROLL_TEN_COSUME - this._nScorllNum));
+                //             str = str.replace("{2}",String(XConsts.PUB_SUMMON_SCROLL_EXCHANGE_DIAMOND));
+
+                //             info.title = "注意";
+                //             info.content = str;
+                //             info.mode = 1;
+                //             info.isRichLabMode = true;
+                //             this.showPromptWindow(info,callFunc);
+                            
+                //         }
+                //     }
+                //     else if(this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_TEN_COSUME)
+                //     {
+                //         //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
+                //         console.log("pppppppppp 卷轴10连");
+                //         this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll,false);
+                //     }
+                //     else 
+                //     {
+                //         if(nPlayerDiamondsCounts >= XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME)
+                //         {
+
+                //             //普通召唤 中的钻石召唤
+                //             console.log("pppppppppp 钻石10连");
+                //             this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,false);
+                //         }
+                //         else
+                //         {
+                //             // this.showPromptWindow("错误","钻石不足",1);
+
+                //             info.title = "错误";
+                //             info.content = "钻石不足";
+                //             info.submitContent = "商城";
+                //             let sumbitCallFunc = ()=>{
+                //                 PopMgr.getInstance().deleteWindow();
+                //                 console.log("弹出商城窗口");
+                //             }
+                //             this.showPromptWindow(info,sumbitCallFunc);
+                //         }
+                //     }
+                // }
+                // break;           
+        }
+    }
 }
 
