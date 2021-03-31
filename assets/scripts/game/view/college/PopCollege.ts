@@ -2,7 +2,7 @@
  * @Description: 英雄书院
  * @Author: 徐涛
  * @Date: 2021-03-30 19:49:03
- * @LastEditTime: 2021-03-31 10:39:55
+ * @LastEditTime: 2021-03-31 20:03:36
  */
 import { _decorator, Component, Node, Sprite, SpriteFrame, Label, ToggleContainer, EventHandler, Toggle, sys, resources, instantiate, Vec3, ScrollView, v3, math, Widget, Button } from 'cc';
 const { ccclass, property } = _decorator;
@@ -22,21 +22,21 @@ import { TableName, ValueMgr } from "../../model/ValueMgr";
 export class PopCollege extends PopBase {
 
     @property({ type: Node, displayName: "说明按钮" })
-    public btn_explain: Node | null = null as unknown as Node;
+    public btn_explain: Node = null as unknown as Node;
 
     @property({ type: Label, displayName: "符文水晶" })
-    public lab_has_fwsj: Label | null = null as unknown as Label;
+    public lab_has_fwsj: Label = null as unknown as Label;
 
     @property({ type: Label, displayName: "英雄1等级" })
-    public lab_lv_1: Label | null = null as unknown as Label;
+    public lab_lv_1: Label = null as unknown as Label;
     @property({ type: Label, displayName: "英雄2等级" })
-    public lab_lv_2: Label | null = null as unknown as Label;
+    public lab_lv_2: Label = null as unknown as Label;
     @property({ type: Label, displayName: "英雄3等级" })
-    public lab_lv_3: Label | null = null as unknown as Label;
+    public lab_lv_3: Label = null as unknown as Label;
     @property({ type: Label, displayName: "英雄4等级" })
-    public lab_lv_4: Label | null = null as unknown as Label;
+    public lab_lv_4: Label = null as unknown as Label;
     @property({ type: Label, displayName: "英雄5等级" })
-    public lab_lv_5: Label | null = null as unknown as Label;
+    public lab_lv_5: Label = null as unknown as Label;
 
     @property({ type: Label, displayName: "当前开启槽位数" })
     public lab_has_slot: Label = null as unknown as Label;
@@ -46,63 +46,121 @@ export class PopCollege extends PopBase {
     @property({ type: ScrollView, displayName: "英雄滚动视图组件" })
     public scroll_HeroView: ScrollView = null as unknown as ScrollView;
 
-    private _heroPosList:Node[] = [];
+    private _heroPosList: Node[] = [];
     //拥有的所有英雄
-    private _allHeroList:Map<number, HeroData> = new Map<number, HeroData>();
+    private _allHeroList: Map<number, HeroData> = new Map<number, HeroData>();
     //拥有的所有英雄列表显示对象
-    private _bottomHeroItemList:Map<number, Node> = new Map<number, Node>();
+    private _bottomHeroItemList: Map<number, Node> = new Map<number, Node>();
+
+    private _heroModelArray: HeroModel[] = [];
+    private _heroLvtxtArray: Label[] = [];
+    // public LoopScrollRect Lsr;
+    private _heroID: number = 0;
+    private _isAdd: boolean = false;
+    private _pos: number = 0;
 
     onLoad() {
         super.onLoad();
-        // [3]
-        this._getAllHeroList();
-
         this.btn_explain?.on(Node.EventType.TOUCH_END, this._explainHandle, this);
     }
 
     start() {
         super.start();
-        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_starUp_change,this._notifyStarUpChangeHandle,this);
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_set_college_hero, this._notifySetCollegeHeroHandle, this);
+        this._initView();
+    }
 
-        this._initBottomHeros();
+    onDestroy() {
+        super.onDestroy();
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_set_college_hero, this._notifySetCollegeHeroHandle, this);
+    }
+
+    private _notifySetCollegeHeroHandle(data: any = null) {
+        if (!data) {
+            return;
+        }
+
+        let msg = data as Msg.PutOnEquipA;
+        if (msg.err == Msg.TErrorCode.ERR_OK) {
+            //刷新槽位数
+            this._refreshSlotNum();
+            //刷新英雄列表
+            this._refreshCells();
+        }
+    }
+
+    private _refreshSlotNum() {
+        this.lab_has_slot.string = GameModel.getInstance().getHeroesModel().getHeroIDInCollegeCount().toString();
+        this.lab_all_slot.string = "/" + GameModel.getInstance().getHeroesModel().getCollegeUnlockBlockNum().toString();
+    }
+
+    private _refreshCells() {
+
     }
 
     //获取列表英雄
-    private _getAllHeroList(){
+    private _getAllHeroList() {
         this._allHeroList = GameModel.getInstance().getHeroList();
 
     }
 
     //说明界面
-    private _explainHandle(){
-        let strTitle = ValueMgr.getInstance().getLanguageString("UI_HeroCollegeTitle") ;
-        let strExplain = ValueMgr.getInstance().getLanguageString("UI_HeroCollegeExplainContent") ;        
-        PopMgr.getInstance().popExplain(strTitle,strExplain,()=>{
-                 PopMgr.getInstance().deleteWindow();
-             });
+    private _explainHandle() {
+        let strTitle = ValueMgr.getInstance().getLanguageString("UI_HeroCollegeTitle");
+        let strExplain = ValueMgr.getInstance().getLanguageString("UI_HeroCollegeExplainContent");
+        PopMgr.getInstance().popExplain(strTitle, strExplain, () => {
+            PopMgr.getInstance().deleteWindow();
+        });
         // ()=>{
         //     PopMgr.getInstance().deleteWindow();
         // },false);
     }
 
-    private _initBottomHeros()
-    {
-        if(this.scroll_HeroView.content)
-        {
+    private _initView() {
+        this._heroID = 0;
+        this._pos = 0;
+        this.refreshCollegeMoney();
+
+        let heroTop5 = GameModel.getInstance().getHeroesModel().heroesTop5;
+
+        // for (int i = 0; i < HeroRawImgList.Count; i++) {
+        //     if (i >= heroTop5.Count) {
+        //         HeroRawImgList[i].gameObject.SetActive(false);
+        //         continue;
+        //     }
+        //     if (heroTop5[i] != null) {
+        //         UIModelManager.instance.ShowModel(Constant.HeroModelPrefabs + heroTop5[i].Record.Prefab, HeroRawImgList[i], i);
+        //         HeroLvTexList[i].text = "Lv." + heroTop5[i].Level;
+        //         HeroRawImgList[i].gameObject.SetActive(true);
+        //     }
+        // }
+
+        // RefreshSlotNum();
+
+        // Lsr.totalCount = XLuaFunc.instance.KCollegeBlockMaxNum;
+        // Lsr.RefillCells();        
+    }
+
+    private refreshCollegeMoney() {
+        this.lab_has_fwsj.string = GameModel.getInstance().getPlayerModel().getPlayerInfo().CollegeMoney.toString();
+    }
+
+    private _initBottomHeros() {
+        if (this.scroll_HeroView.content) {
             this.scroll_HeroView.content.removeAllChildren();
         }
 
-        resources.load('prefabs_ui/college/college_item', (err:any,res:any)=>{
+        resources.load('prefabs_ui/college/college_item', (err: any, res: any) => {
             this._bottomHeroItemList.clear()
-            let k = new Array<[number,Node]>();     //排序存储对象
+            let k = new Array<[number, Node]>();     //排序存储对象
             for (let heroData of this._allHeroList.values()) {
                 let heroIcon = instantiate(res) as Node;
                 this.scroll_HeroView.content?.addChild(heroIcon);
 
 
-                let sortIndex_1:number = heroData.getLevel() * 10000 + heroData.getStar()*1000 + heroData.getCamp() * 10 + heroData.getClasses();
-                let sortIndex_2:number = 3000000 - sortIndex_1;
-                k.push([sortIndex_2,heroIcon]);
+                let sortIndex_1: number = heroData.getLevel() * 10000 + heroData.getStar() * 1000 + heroData.getCamp() * 10 + heroData.getClasses();
+                let sortIndex_2: number = 3000000 - sortIndex_1;
+                k.push([sortIndex_2, heroIcon]);
 
 
 
@@ -110,8 +168,8 @@ export class PopCollege extends PopBase {
             }
 
 
-            k.sort((n1,n2) => n1[0] - n2[0])
-            k.forEach((value,key)=>{
+            k.sort((n1, n2) => n1[0] - n2[0])
+            k.forEach((value, key) => {
                 value[1].setSiblingIndex(key);
             })
         });

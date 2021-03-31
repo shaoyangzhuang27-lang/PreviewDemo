@@ -12,7 +12,26 @@ export class HeroesModel extends BaseModel{
     
     private _heroList:Map<number,HeroData> = new Map<number,HeroData>();
     private _heroBookMap:Map<number, Msg.HeroBookUnit> = new Map<number, Msg.HeroBookUnit>();//图鉴
-    private _sortedHeroList = new XList<HeroData> (); //已排序的英雄队列
+    private _sortedHeroList:XList<HeroData> = new XList<HeroData> (); //已排序的英雄队列   
+
+    private _heroesTop5:XList<HeroData>=new XList<HeroData>(); // 英雄书院前5名等级最高英雄  
+    private _heroIDInCollege: Map<number, number> = new Map<number, number>();//在英雄学院中的英雄列表
+    private _collegeBlockLastAt:Map<number, number> = new Map<number, number>();//英雄学院槽位英雄 CD
+    private _heroCollegeLevel:number = 0;    //英雄书院等级
+    private _heroCollegeTier:number = 0;     //英雄书院品阶
+    
+    public get heroCollegeLevel() {        
+        return this._heroCollegeLevel;        
+    }
+    public set heroCollegeLevel(lv:number) {        
+        this._heroCollegeLevel= lv;        
+    }
+    public get heroCollegeTier() {        
+        return this._heroCollegeTier;        
+    }
+    public set heroCollegeTier(tier:number) {        
+        this._heroCollegeTier= tier;        
+    }
 
     public getHeroList(){
         return this._heroList;
@@ -532,5 +551,140 @@ export class HeroesModel extends BaseModel{
     public removeHeroByHeroDyncID(dyncID : number)
     {
         this._heroList.delete(dyncID);
+    }
+
+
+    
+    /**
+     * @description: 英雄书院
+     * @param {Msg} msg
+     */
+     public setCollegeHeroInfo(msg: Msg.SetCollegeHeroA) {
+        if (msg.err == Msg.TErrorCode.ERR_OK) {       
+            this._heroIDInCollege.clear();            
+            let tmp= Object.keys(msg.heroIDInCollege);
+            tmp.forEach(key => {
+                this._heroIDInCollege.set(Number(key), msg.heroIDInCollege[key]);
+                let hd = this._gameModel.getHeroesModel().getHeroInfoByDyncID(Number(key));
+                if (hd)
+                    hd.calcTalentSkillProperty(); 
+            });
+            
+            this._collegeBlockLastAt.clear();  
+            let tmp2= Object.keys(msg.CollegeBlockTimestamps);  
+            tmp2.forEach(key2 => {
+                this._collegeBlockLastAt.set(Number(key2), msg.CollegeBlockTimestamps[key2]);
+            }); 
+           
+            //抛出通知 英雄书院  
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_set_college_hero, msg);                
+            // 通知主城3D书院模型tip提示
+            // UINotificationCenter.Instance().PostNotification((int) NotificationMsg.RPHeroCollege);
+        } else {
+            // TipsMgr.instance.ShowErrDialog(msg.Err);
+            console.log(msg.errStr + " errCode=" + msg.err.toString());
+        }        
+    }
+    
+    /**
+     * @description: 
+     * @param {*}
+     */
+    public getHeroIDInCollegeCount(){
+        return this._heroIDInCollege.size;
+    }
+
+    /**
+     * @description: //英雄学院格子解锁数量
+     * @param {*}
+     */
+    public getCollegeUnlockBlockNum(){
+        return this._collegeBlockLastAt.size;
+    }
+        
+    public isHeroInCollege(heroId:number){
+        return this._heroIDInCollege.has(heroId);
+    }
+
+    public removeHeroIDInCollege(heroId:number){
+        return this._heroIDInCollege.delete(heroId);
+    }
+    
+    private sortHeroForColloge (hd1: HeroData, hd2:HeroData) :number {
+        if (hd1.getLevel() > hd2.getLevel() )
+            return -1;
+        else if (hd1.getLevel() < hd2.getLevel() )
+            return 1;
+        else {
+            if (hd1.getTier() > hd2.getTier())
+                return -1;
+            else if (hd1.getTier() > hd2.getTier())
+                return 1;
+            else {
+                if (hd1.getStar() > hd2.getStar())
+                    return -1;
+                else if (hd1.getStar() < hd2.getStar())
+                    return 1;
+                else {
+                    if (hd1.getDyncID() > hd2.getDyncID())
+                        return -1;
+                    else if (hd1.getDyncID() < hd2.getDyncID())
+                        return 1;
+                }
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * @description: 刷新前5名英雄,用于英雄书院
+     * @param {*}
+     */
+    public refreshHeroesCollege () {
+        //先重新排序，刷新前5名英雄
+        let tmpList:XList<HeroData> = new XList<HeroData>(); 
+        this._heroList.forEach(element => {
+            tmpList.Add (element);
+        });
+
+        tmpList.Sort(this.sortHeroForColloge);
+        this._heroesTop5.Clear();
+
+        for (let i:number = 0; i < 5; i++) {
+            if (tmpList.Count <= i)
+                break;
+            this._heroesTop5.Add (tmpList.Get(i) );
+            //如果在学院英雄列表中，则移除
+            if( this.isHeroInCollege(tmpList.Get(i).getDyncID() ) ){
+                this.removeHeroIDInCollege(tmpList.Get(i).getDyncID() );
+            }
+        }
+        //根据最低英雄，设置相应的参考等级和参考品阶
+        if (this._heroesTop5.Count > 0) {
+            let hd:HeroData = this._heroesTop5.Get(this._heroesTop5.Count - 1);
+            this.heroCollegeLevel = hd.getLevel();
+            this.heroCollegeTier = hd.getTier();
+        }
+        //学院中的英雄，刷新天赋
+        this._heroIDInCollege.forEach( (v,k,m)=>{
+            let hd = this.getHeroInfoByDyncID(k) ;
+            if (hd != null)
+               hd.calcTalentSkillProperty ();
+        });
+        //测试代码，加英雄进学院
+        // int count = 1;
+        // _heroIDInCollege.Clear();
+        // for (int i = 5; i < tmpList.Count; i++) {
+        //     if (tmpList[i].HeroInfo.Level == 1) {
+        //         _heroIDInCollege.Add(tmpList[i].HeroInfo.Id, count);
+        //         count++;
+        //         if (count > 5)
+        //             break;
+        //     }
+        // }
+    }
+
+    public get heroesTop5(){
+        return this._heroesTop5;
     }
 }

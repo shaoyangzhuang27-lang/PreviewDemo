@@ -222,7 +222,10 @@ export class XShare{
     public KRoleHeroStarUpReqChallenge = new Array<number>(0,30,60,100,125,150,180,200,250,300,350);
     public KRoleHeroStarUpReqMoney = new Array<number>(20000,300000,500000,800000,1500000,2000000,2500000,3000000,5000000,7500000,10000000);
     public KRoleHeroArmorUnlockCopy = new Array<number>(0, 312, 630, 840, 1050);
+    //--英雄学院
+    //--格子最大数量
     public KCollegeBlockMaxNum = 100;
+    //--格子冷却CD
     public KCollegeBlockCD = 0;
     public KHeroBagLimited = 1000;
     public KGuildBossVipTimes = new Array<number>(2,2,2,2,3,3,3,4,4,4,4,5,5,5);
@@ -571,6 +574,8 @@ export class XShare{
         }
         return copy
     }
+
+    //英雄书院--格子解锁需求符文水晶
     public GetCollegeMoneyConsume(index:number) {
         return (index - 1) * 100
     }
