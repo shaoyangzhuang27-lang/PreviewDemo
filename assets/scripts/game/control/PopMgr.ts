@@ -36,6 +36,7 @@ import { TipShareHeroToChat } from '../view/TipShareHeroToChat';
 import { PopPlayerLevelUpAward } from '../view/pop/PopPlayerLevelUpAward';
 import {PubWonderRewardList} from "../view/pub/PubWonderRewardList";
 import { PopSettingView } from '../view/pop/PopSettingView';
+import { PopServerListView } from '../view/pop/PopServerListView';
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
@@ -105,7 +106,7 @@ export class PopMgr extends PopCore  {
             let p = instantiate( res );
             this.pushWindow(p)
 
-            let script = p.getComponent("PopServerListView") as PopSettingView;
+            let script = p.getComponent("PopServerListView") as PopServerListView;
             script.setIsMaskClose(false);
 
             script.setData()
