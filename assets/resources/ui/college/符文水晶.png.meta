@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "1db60cdb-c123-47c5-ad09-1b704d984fbe",
+  "uuid": "846dbceb-7f1e-4106-a330-fb665e870e33",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "1db60cdb-c123-47c5-ad09-1b704d984fbe@6c48a",
-      "displayName": "卡槽数字背景",
+      "uuid": "846dbceb-7f1e-4106-a330-fb665e870e33@6c48a",
+      "displayName": "符文水晶",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "1db60cdb-c123-47c5-ad09-1b704d984fbe"
+        "imageUuidOrDatabaseUri": "846dbceb-7f1e-4106-a330-fb665e870e33"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "1db60cdb-c123-47c5-ad09-1b704d984fbe@f9941",
-      "displayName": "卡槽数字背景",
+      "uuid": "846dbceb-7f1e-4106-a330-fb665e870e33@f9941",
+      "displayName": "符文水晶",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -43,19 +43,19 @@
         "rotated": false,
         "offsetX": 0,
         "offsetY": 0,
-        "trimX": 0,
-        "trimY": 0,
-        "width": 79,
-        "height": 31,
-        "rawWidth": 79,
-        "rawHeight": 31,
-        "borderTop": 11,
-        "borderBottom": 9,
-        "borderLeft": 24,
-        "borderRight": 22,
+        "trimX": 13,
+        "trimY": 1,
+        "width": 49,
+        "height": 73,
+        "rawWidth": 75,
+        "rawHeight": 75,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "1db60cdb-c123-47c5-ad09-1b704d984fbe@6c48a",
+        "imageUuidOrDatabaseUri": "846dbceb-7f1e-4106-a330-fb665e870e33@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "1db60cdb-c123-47c5-ad09-1b704d984fbe@f9941"
+    "redirect": "846dbceb-7f1e-4106-a330-fb665e870e33@f9941"
   }
 }

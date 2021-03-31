@@ -145,6 +145,47 @@ export class PopMgr extends PopCore  {
     }
 
     /**
+     * @description:  英雄书院弹窗
+     * @param 
+     */
+    public popHeroCollegeView(closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        // resources.load('prefabs_ui/pop/pop_college', (err:any,res:any)=>{
+        //     let p = instantiate( res );
+        //     this.pushWindow(p);
+        //     let script = p.getComponent("HeroPromotion");
+        //     script.setIsMaskClose(isMaskClose);
+        // } );
+    }
+    
+    /**
+     * @description:  英雄书院注意弹窗
+     * @param 
+     */
+    public popHeroCollegeNoticeView(closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+
+    }
+
+    /**
+     * @description:  英雄书院选择英雄弹窗
+     * @param 
+     */
+    public popHeroCollegeSelectHeroView(closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+
+    }
+    
+    /**
+     * @description:  英雄书院卸下英雄弹窗
+     * @param heroId 待卸下英雄Id
+     */
+    public popHeroCollegeUnloadHeroView(heroId:number,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+
+    }    
+
+    /**
      * @description: 弹出融魂祭坛界面 
      * @param {boolean} isMaskClose
      */

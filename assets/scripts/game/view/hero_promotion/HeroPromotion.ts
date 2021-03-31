@@ -1081,7 +1081,12 @@ export class HeroPromotion extends PopBase {
         }
 
         // 满级显示
-        this.node_max_lv.active= isCurStarMaxLv;
+        this.node_max_lv.active= isCurStarMaxLv;        
+        if(isCurStarMaxLv){
+            this._touchFlag = false;
+            this._touchStartTime = 0;
+            this._isLongPressLvUpBtn= false;
+        }
     }
 
     private _showTier(tier: number = 0) {
