@@ -35,6 +35,8 @@ import { PopHaloView } from '../view/pop/PopHaloView';
 import { TipShareHeroToChat } from '../view/TipShareHeroToChat';
 import { PopPlayerLevelUpAward } from '../view/pop/PopPlayerLevelUpAward';
 import {PubWonderRewardList} from "../view/pub/PubWonderRewardList";
+import {PubWonderHeartHero} from "../view/pub/PubWonderHeartHero";
+
 
 
 export class PopMgr extends PopCore  {
@@ -569,6 +571,17 @@ export class PopMgr extends PopCore  {
         } );
     }
 
+    //奇迹召唤心愿英雄详情
+    public popPubWonderHeartHeroWindow(isMaskClose:boolean = true){
+        resources.load('prefabs_ui/pub/pub_wonder_hearthero', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            let script = p.getComponent("PubWonderHeartHero") as PubWonderHeartHero;
+            script.setIsMaskClose(isMaskClose);
+            
+        } );
+    }
     /**
      * 打开图鉴详情
      * @param sid 英雄静态id

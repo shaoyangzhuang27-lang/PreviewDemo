@@ -1,8 +1,10 @@
 
-import { _decorator, Component, Node,Label,ScrollView,ToggleContainer,EventHandler,Toggle } from 'cc';
+import { _decorator, Component, Node,Label,ScrollView,ToggleContainer,EventHandler,Toggle,resources,instantiate} from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { XConsts } from '../../model/const/XConsts';
+import { GameModel } from '../../model/GameModel';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { HeroSelectIcon } from '../hero/HeroSelectIcon';
 const { ccclass, property } = _decorator;
 
 @ccclass('PubWonderHeartHero')
@@ -16,15 +18,15 @@ export class PubWonderHeartHero extends PopBase {
     public btn_submit:Node | null = null;
 
     @property({type :  ScrollView})
-    public scroll_heroicon_view:ScrollView = null as unknown as ScrollView;
+    public scroll_select:ScrollView = null as unknown as ScrollView;
 
     @property({type: ToggleContainer})
-    public toggle_camp = null as unknown as ToggleContainer;
+    public toggle_camp:ToggleContainer = null as unknown as ToggleContainer;
 
     @property({type: Node})
     public img_hero:Node | null = null;
 
-    private _curSelectCamp : number = Msg.TCampType.ECampType_NULL;
+    private _curSelectCamp : number = 0;
 
     start () {
         super.start();
@@ -38,7 +40,12 @@ export class PubWonderHeartHero extends PopBase {
         containerEventHandler.handler = '_onToggleCampClick';
         containerEventHandler.customEventData = '';
 
-        this.toggle_camp?.checkEvents.push(containerEventHandler);
+        // this.toggle_camp?.checkEvents.push(containerEventHandler);
+        this.toggle_camp.toggleItems.forEach((tog)=>{
+            tog?.checkEvents.push(containerEventHandler);
+        });
+
+        this._updateHeroIconByCamp(this._curSelectCamp);
     }
     private _onSubmit(){
 
@@ -47,30 +54,62 @@ export class PubWonderHeartHero extends PopBase {
  
     private _onToggleCampClick(event: Event, customEventData: string){
 
-        console.log("zzzzzzzzzzzzzzzzzzzzz");
-        let tog:Toggle = (event as any);
-        let  selectedToggle = tog.node.getComponent(Toggle);
-        
-        if(selectedToggle?.isChecked)
+        let togs = this.toggle_camp?.activeToggles();
+        console.log("zzzzzzzzzzzzzzzzzzzzz",togs);
+        let nSelectCamp = Msg.TCampType.ECampType_NULL;
+        if(!togs)return;
+        if(togs?.length == 0){
+            nSelectCamp =  Msg.TCampType.ECampType_NULL;
+        }else{
+            let tog = togs[0] as Toggle;
+            let index:number = Number(tog.node.name.charAt(tog.node.name.length-1));
+            nSelectCamp = index;
+        }
+
+        if(this._curSelectCamp == nSelectCamp)
         {
-            switch(tog.node.name)
-            {
-                case "camp_water":
-                    console.log("camp_water");
-                    break;
-                case "camp_fire":
-                    console.log("camp_fire");
-                    break;
-                case "camp_wood":
-                    console.log("camp_wood");
-                    break;
-                case "camp_light":
-                    console.log("camp_light");
-                    break;
-                case "camp_dark":
-                    console.log("camp_dark");
-                    break;
-            }
+            return; 
+        }
+        else
+        {
+            this._curSelectCamp = nSelectCamp;
+            this._updateHeroIconByCamp(this._curSelectCamp);
         }
     }
+
+    private _updateHeroIconByCamp(nCamp : number)
+    {
+        if(this.scroll_select.content)
+        {
+            this.scroll_select.content.removeAllChildren()
+        }
+
+        let heroIdList = GameModel.getInstance().getHeroPubModel().getWonderHeartHeroIdByCamp(nCamp);
+        resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
+            for(var i=0; i < heroIdList.length; i++ )
+            {
+                let _heroIcon = instantiate(res) ;
+                let script = _heroIcon.getComponent(HeroSelectIcon);
+                script.setWonderSelectData(0,heroIdList[i],(value : number,itemType:number)=>{
+                    if(script.getItemType())
+                    {
+                        script.setItemType(0);
+                    }
+                    else
+                    {
+                        script.setItemType(1);
+                    }
+                    this.scroll_select.content?.children.forEach(element=>{
+                        if(element.getComponent(HeroSelectIcon)?.getItemType() && element.getComponent(HeroSelectIcon)?.getSelectWonderHeroId() != script.getSelectWonderHeroId())
+                        {
+                            element.getComponent(HeroSelectIcon)?.setItemType(0);
+                        }
+                    })
+                    
+                });
+                this.scroll_select.content?.addChild(_heroIcon);
+            }
+        });         
+    }
+
 }

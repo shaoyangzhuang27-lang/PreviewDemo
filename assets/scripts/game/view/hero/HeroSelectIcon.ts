@@ -2,6 +2,7 @@
 import { _decorator, Component, Node, resources, SpriteFrame,Sprite,instantiate,Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 import { HeroIcon } from '../hero/HeroIcon';
+import { XConsts } from '../../model/const/XConsts';
 import { HeroData } from '../../model/datas/HeroData';
 
 @ccclass('HeroSelectIcon')
@@ -19,6 +20,7 @@ export class HeroSelectIcon extends Component {
     private _choiceCallBack:Function | null = null as unknown as Function;
     private _heroInfo:HeroData | null = null as unknown as HeroData;
 
+    private _selectedWonderHeroId : number = 0;
     private _itemType:number = 0;
     start () {
         this.btnFrame.on(Node.EventType.TOUCH_END, this.btnChoiceCallBack, this);
@@ -106,4 +108,30 @@ export class HeroSelectIcon extends Component {
     {
         return this._heroInfo;
     }
+
+    public setWonderSelectData(value:number,id : number,callback:Function)
+    {
+        this.setItemType(value);
+        this._choiceCallBack = callback;
+        this.initWonderHeroIcon(id);
+        this._selectedWonderHeroId = id;
+    }
+    private initWonderHeroIcon(id : number)
+    {
+        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{                  
+            let heroIcon = instantiate(res) as Node;
+            heroIcon.scale = new Vec3(0.6,0.6,1);
+            this.btnFrame.addChild(heroIcon);
+            heroIcon.position = this.btnFrame.position;
+            heroIcon.name = "formationIcon"
+
+            let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+            script.initUIHeroIconInfo(id,XConsts.HERO_ICON_TYPE.RecLineUp);
+            script.setBtnCallBack(null);            
+        });
+    }
+    public getSelectWonderHeroId()
+    {
+        return this._selectedWonderHeroId;
+    } 
 }
