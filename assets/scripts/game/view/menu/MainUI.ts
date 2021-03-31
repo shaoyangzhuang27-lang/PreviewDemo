@@ -11,6 +11,7 @@ import { FlyItem } from '../pop/FlyItem';
 import { PopOffLineBonus} from '../pop/PopOffLineBonus';
 import { OfflineModel } from '../../model/datas/OfflineModel';
 import { UINodeMgr } from '../UINodeMgr';
+import { AvatarNode } from './AvatarNode';
 
 const { ccclass, property } = _decorator;
 
@@ -39,6 +40,9 @@ export class MainUI extends Component {
 
     @property({type: Node, displayName: "主城图标"})
     public ico_city:Node = null as unknown as Node;
+
+    @property({type: Node, displayName: "头像"})
+    public node_head:Node = null as unknown as Node;
     
     @property({type: ProgressBar, displayName: "等级进度条"})
     public pro_level:ProgressBar = null as unknown as ProgressBar;
@@ -117,6 +121,16 @@ export class MainUI extends Component {
         this.txt_coin.string = XFuns.FormatNumber(GameModel.getInstance().getPlayerModel().getPlayerInfo().money);
         this.txt_diamond.string = XFuns.FormatNumber(GameModel.getInstance().getPlayerModel().getPlayerInfo().vrmb);
         this.txt_level.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().level + "级");
+
+        //载入头像
+        resources.load('prefabs_ui/main/node_avatar', (err:any,res:any)=>{
+            let avatarNode = instantiate( res )
+            this.node_head.addChild(avatarNode)
+
+            let script = avatarNode.getComponent("AvatarNode") as AvatarNode;
+            script.hideLevel()
+            script.openClick()
+        })
         
         UINodeMgr.regNodeWithKey(this.btn_coin, "mainCoin")
         UINodeMgr.regNodeWithKey(this.btn_diamond, "mainDiamond")

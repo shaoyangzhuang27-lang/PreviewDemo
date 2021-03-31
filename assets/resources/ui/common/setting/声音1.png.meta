@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "00451e3c-d727-4652-b9c8-f69c61f26fb4",
+  "uuid": "8d3eacab-2132-4a09-b489-a30cef0229d5",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "00451e3c-d727-4652-b9c8-f69c61f26fb4@6c48a",
-      "displayName": "通用底板",
+      "uuid": "8d3eacab-2132-4a09-b489-a30cef0229d5@6c48a",
+      "displayName": "声音1",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "00451e3c-d727-4652-b9c8-f69c61f26fb4"
+        "imageUuidOrDatabaseUri": "8d3eacab-2132-4a09-b489-a30cef0229d5"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "00451e3c-d727-4652-b9c8-f69c61f26fb4@f9941",
-      "displayName": "通用底板",
+      "uuid": "8d3eacab-2132-4a09-b489-a30cef0229d5@f9941",
+      "displayName": "声音1",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -43,19 +43,19 @@
         "rotated": false,
         "offsetX": 0,
         "offsetY": 0,
-        "trimX": 0,
-        "trimY": 0,
-        "width": 100,
-        "height": 102,
-        "rawWidth": 100,
-        "rawHeight": 102,
-        "borderTop": 30,
-        "borderBottom": 30,
-        "borderLeft": 30,
-        "borderRight": 30,
+        "trimX": 8,
+        "trimY": 9,
+        "width": 24,
+        "height": 22,
+        "rawWidth": 40,
+        "rawHeight": 40,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "00451e3c-d727-4652-b9c8-f69c61f26fb4@6c48a",
+        "imageUuidOrDatabaseUri": "8d3eacab-2132-4a09-b489-a30cef0229d5@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "00451e3c-d727-4652-b9c8-f69c61f26fb4@f9941"
+    "redirect": "8d3eacab-2132-4a09-b489-a30cef0229d5@f9941"
   }
 }

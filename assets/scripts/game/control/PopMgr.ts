@@ -35,7 +35,8 @@ import { PopHaloView } from '../view/pop/PopHaloView';
 import { TipShareHeroToChat } from '../view/TipShareHeroToChat';
 import { PopPlayerLevelUpAward } from '../view/pop/PopPlayerLevelUpAward';
 import {PubWonderRewardList} from "../view/pub/PubWonderRewardList";
-
+import { PopSettingView } from '../view/pop/PopSettingView';
+import { PopServerListView } from '../view/pop/PopServerListView';
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
@@ -83,6 +84,32 @@ export class PopMgr extends PopCore  {
             // script.popSelf();
             // script.setIsNeedHide(false);
 
+        } );
+    }
+
+    //弹出角色信息设置界面
+    public popSettingView()
+    {
+        resources.load('prefabs_ui/pop/pop_setting', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopSettingView") as PopSettingView;
+            script.setIsMaskClose(false);
+        } );
+    }
+
+    //弹出服务器选择窗口
+    public popServerListView()
+    {
+        resources.load('prefabs_ui/pop/pop_serverlist', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopServerListView") as PopServerListView;
+            script.setIsMaskClose(false);
+
+            script.setData()
         } );
     }
 
