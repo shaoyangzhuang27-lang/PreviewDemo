@@ -25,6 +25,13 @@ export class HeroData extends BaseHeroData {
     private _crystalLevel: number = 0;
 
     
+    public get gameModel(){
+        return this._gameModel;
+    }
+    public get crystalLevel(){
+        return this._crystalLevel;
+    }
+
     /**
      * @description: 拷贝一个HeroData
      * @param {HeroData} hd
@@ -35,9 +42,10 @@ export class HeroData extends BaseHeroData {
         this._recordSkill = new Config.skill.Record(hd._recordSkill);
         this._equipOnList = new Map<Msg.TEquipLocationType, Config.equip.Record>(hd._equipOnList);
         
-        this._crystalLevel = hd._crystalLevel;
+        this._crystalLevel = hd.crystalLevel;
         this._crystalPropertyList = new Map<Msg.THeroPropertyType, number>(hd._crystalPropertyList);
-
+        
+        this._gameModel = hd.gameModel;
         this.calcTalentSkillProperty();
         this.refreshEquipProperty();
         return this;
