@@ -37,6 +37,12 @@ export class PubWonderSummon extends Component {
     public lab_summon_detail= null as unknown as Label;
 
 
+    @property({type: Node})
+    public node_fivestar:Node | null = null;
+
+    @property({type: Node})
+    public img_update:Node | null = null;
+
     @property({type: Button})
     public btn_detail = null as unknown as Button;
 
@@ -53,8 +59,14 @@ export class PubWonderSummon extends Component {
         this.lab_summon_ad.string = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERSUMMON);
         this.lab_summon_detail.string = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERSUMMONAWARD);
 
-        this.btn_detail.node.on(Node.EventType.TOUCH_END, this._onBtnDetailClick, this)
+        this.btn_detail.node.on(Node.EventType.TOUCH_END, this._onBtnDetailClick, this);
+        this.img_update?.on(Node.EventType.TOUCH_END, this._onImgUpdateClick, this);
+
+
+        
+
         // [3]
+        this.updateHeartHeroIcon();
         this.updateProgressProcess();
         this.updateBtnSummonState();
         this.initHeroIconPrefab();
@@ -221,5 +233,26 @@ export class PubWonderSummon extends Component {
        
     }
   
+
+    public updateHeartHeroIcon()
+    {
+        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+            let _heroIcon = instantiate(res);
+            _heroIcon.setScale(0.4,0.4,1)
+            let script = _heroIcon.getComponent(HeroIcon); 
+            script.initUIHeroIconInfo(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero(),XConsts.HERO_ICON_TYPE.WonderSummon);    
+            script.setBtnCallBack(()=>{
+                PopMgr.getInstance().popPubWonderHeartHeroWindow();
+            })
+            this.node_fivestar?.addChild(_heroIcon);   
+        });
+
+    }
+
+    private _onImgUpdateClick(event : any)
+    {
+        // GameModel.getInstance().getHeroPubModel().initWonderHeartHeroIdList();
+        PopMgr.getInstance().popPubWonderHeartHeroWindow();
+    } 
 }
 
