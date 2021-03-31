@@ -2,7 +2,7 @@
  * @Description: 协议收发处理
  * @Author: xxxxxx
  * @Date: 2021-03-02 13:53:04
- * @LastEditTime: 2021-03-25 20:03:21
+ * @LastEditTime: 2021-03-31 11:20:44
  */
 
 import { MsgCore} from "../../../core/network/MsgCore";
@@ -140,7 +140,22 @@ export class MsgFormation extends MsgBase{
     }
     //英雄升级,升阶,装备(一键装备,全部卸下)--------------------start
 
+    //设置英雄到书院槽位
+    public requestHeroCollege(heroId:number, isAdd: boolean, pos:number){
+        console.log("英雄书院-----请求");
+        const buffer_data = Msg.SetCollegeHeroR.encode({heroId: heroId, isAdd: isAdd, pos:pos}).finish();
+        this.msgMgr?.sendData(Msg.MsgType.TheSetCollegeHeroR, buffer_data);
+    }
 
+    public responeHeroCollege(msgId: number, msgData: any){
+        console.log("英雄书院-----响应",msgId);
+        let newMsgData = msgData as Msg.SetCollegeHeroA;
+        if(newMsgData)
+        {
+            GameModel.getInstance().getPlayerModel().setCollegeHeroInfo(newMsgData);
+        }
+    }
+    
     //请求激活图鉴
     public requestHeroBookActive(bookHeroid:number)
     {

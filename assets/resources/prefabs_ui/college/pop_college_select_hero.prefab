@@ -1813,8 +1813,8 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 600,
-      "height": 360
+      "width": 640,
+      "height": 336
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -4424,7 +4424,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -268,
+      "y": -272,
       "z": 0
     },
     "_lrot": {
