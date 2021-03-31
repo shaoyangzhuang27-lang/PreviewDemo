@@ -40,4 +40,6 @@ export class NotifyMgr extends NotifyCore {
     public static event_equip_compose_suc: string = "event_equip_compose_suc";         //装备合成
 
     public static event_player_levelup:string = "event_player_levelup";         //玩家升级
+
+    public static event_giftCode_award:string = "event_giftCode_award";         //兑换礼品
 }

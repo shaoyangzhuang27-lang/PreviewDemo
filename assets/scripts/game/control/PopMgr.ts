@@ -646,4 +646,21 @@ export class PopMgr extends PopCore  {
 
     }
 
+
+    
+      /**
+     * 弹出礼品兑换框
+     */
+    
+       public popGiftCodeExchangeWindow(){
+        resources.load('prefabs_ui/pop/pop_giftcode_exchange', (err: any, res: any) => {
+            let p = instantiate(res);
+            this.pushWindow(p);
+           // let script = p.getComponent("PopGiftCodeExchange") as PopGiftCodeExchange;
+
+        });
+
+    }
+
+
 }
