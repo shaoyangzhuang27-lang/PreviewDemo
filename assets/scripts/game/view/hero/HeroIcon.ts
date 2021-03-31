@@ -41,6 +41,9 @@ export class HeroIcon extends Component {
     //英雄数据
     private _heroData : HeroData | null = null as unknown as HeroData;
 
+    //
+    private _wonderHeartHeroId : number = 0;
+
     start () {
         // [3]
         // this.btn_frame.on(Node.EventType.TOUCH_END, this.openHeroInfoView, this);        
@@ -218,6 +221,7 @@ export class HeroIcon extends Component {
      */
     public initUIHeroIconInfo(id : number,nType : number)
     {
+        this._wonderHeartHeroId = id;
         let info = GameModel.getInstance().getHeroesModel().getHeroIconInfoByHeroId(id);
         this.img_camp.active = true;
         let campIconPath:string = "ui/common/team/" + info.camp + "/spriteFrame";
@@ -275,5 +279,10 @@ export class HeroIcon extends Component {
             return;
         }
         this._initHeroIcon(heroinfo,level);
+    }
+
+    public getWonderHeartHeroId()
+    {
+        return this._wonderHeartHeroId || 0;
     }
 }
