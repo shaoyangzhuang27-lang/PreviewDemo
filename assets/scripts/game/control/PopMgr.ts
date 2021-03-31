@@ -36,7 +36,7 @@ import { TipShareHeroToChat } from '../view/TipShareHeroToChat';
 import { PopPlayerLevelUpAward } from '../view/pop/PopPlayerLevelUpAward';
 import {PubWonderRewardList} from "../view/pub/PubWonderRewardList";
 import {PubWonderHeartHero} from "../view/pub/PubWonderHeartHero";
-
+import {PubWonderSummonSettle} from "../view/pub/PubWonderSummonSettle";
 
 
 export class PopMgr extends PopCore  {
@@ -578,6 +578,18 @@ export class PopMgr extends PopCore  {
             this.pushWindow(p);
 
             let script = p.getComponent("PubWonderHeartHero") as PubWonderHeartHero;
+            script.setIsMaskClose(isMaskClose);
+            
+        } );
+    }
+
+       //奇迹召唤心愿英雄详情
+    public popPubWonderSummonSettleWindow(isMaskClose:boolean = true){
+        resources.load('prefabs_ui/pub/pub_wonder_summonsettle', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            let script = p.getComponent("PubWonderSummonSettle") as PubWonderSummonSettle;
             script.setIsMaskClose(isMaskClose);
             
         } );

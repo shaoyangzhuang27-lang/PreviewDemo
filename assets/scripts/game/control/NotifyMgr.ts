@@ -41,4 +41,8 @@ export class NotifyMgr extends NotifyCore {
     public static event_equip_compose_suc: string = "event_equip_compose_suc";         //装备合成
 
     public static event_player_levelup:string = "event_player_levelup";         //玩家升级
+
+    public static event_net_pub_wonder_summon_hero : string = "event_net_pub_wonder_summon_hero"; //奇迹召唤英雄
+
+    public static event_net_pub_wonder_hero_select : string = "event_net_pub_wonder_hero_select"; //奇迹心愿英雄选择
 }

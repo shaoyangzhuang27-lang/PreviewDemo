@@ -7,6 +7,8 @@ import { HeroIcon } from '../hero/HeroIcon';
 import { ItemEquipType,ItemEquipCell } from '../menu/ItemEquipCell';
 import { PopMgr } from '../../control/PopMgr';
 import { PubHeroIcon } from '../pub/PubHeroIcon';
+import { MsgMgr } from '../../control/MsgMgr';
+import { NotifyMgr } from '../../control/NotifyMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PubWonderSummon')
@@ -54,6 +56,7 @@ export class PubWonderSummon extends Component {
 
     //奇迹召唤召唤进度
     private _nWonderSummonProgress : number = 0;
+
     start () {
 
         this.lab_summon_ad.string = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERSUMMON);
@@ -259,6 +262,7 @@ export class PubWonderSummon extends Component {
 
     private _onButtonClick(event:any){
         let nPlayerDiamondsCounts = GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts();
+        let nScrollCounts = GameModel.getInstance().getHeroPubModel().getHeroicSummonScrollNum();
         let info : XStruct.common_one_info.Record = {
             title : "",
             content : "",
@@ -271,164 +275,226 @@ export class PubWonderSummon extends Component {
         switch (event.target.getComponent(Button)) { 
             case this.btn_summon_one:
                 console.log("summon_one");
-                PopMgr.getInstance().popPubWonderSummonSettleWindow();
-                // if(this._curSummonType == Msg.TSummonType.ESummonType_Friend)
-                // {
-                //     if(this._nFriendHeartNum < XConsts.PUB_SUMMON_FRIEND_ONE_COSUME)
-                //     {
-                //         info.title = "错误";
-                //         info.content = "爱心不足";
-                //         this.showPromptWindow(info);
-                //     }
-                //     else{
-                     
-                //         console.log("pppppppp 单个爱心");
-                //         this.onSubmit(Msg.TSummonType.ESummonType_Friend,Msg.TSummonConsumeType.ESummonConsumeType_FriendGift,true);
-                //     }
-                // }
-                // else
-                // {
-                //     if(this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_ONE_COSUME)
-                //     {
-                    
-                //         console.log("pppppppp 单个卷轴");
-                //         this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll,true);
-                //     }
-                //     else 
-                //     {
-                //         if(nPlayerDiamondsCounts >= XConsts.PUB_SUMMON_DIAMOND_ONE_COSUME)
-                //         {
-                //             //普通召唤 中的钻石召唤
-                //             console.log("pppppppp 单个钻石");
-                //             this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,true);
-                //         }
-                //         else
-                //         {
-                //             info.title = "错误";
-                //             info.content = "钻石不足";
-                //             info.submitContent = "商城";
-                //             let sumbitCallFunc = ()=>{
-                //                 PopMgr.getInstance().deleteWindow();
-                //                 console.log("弹出商城窗口");
-                //             }
-                //             this.showPromptWindow(info,sumbitCallFunc);
-                //             // this.showPromptWindow("错误","钻石不足",1);
-                //         }
-                //     }
-                // }
+                //PopMgr.getInstance().popPubWonderSummonSettleWindow();
+                if(nScrollCounts >= XConsts.PUB_SUMMON_SCROLL_ONE_COSUME)
+                {
+                
+                    console.log("pppppppp 单个卷轴");
+                    this.onSubmit(Msg.TSummonType.ESummonType_Wonder,Msg.TSummonConsumeType.ESummonConsumeType_Wonder,true);
+                }
+                else 
+                {
+                    if(nPlayerDiamondsCounts >= XConsts.PUB_SUMMON_WONDER_ONE_COSUME)
+                    {
+                        //普通召唤 中的钻石召唤
+                        console.log("pppppppp 单个钻石");
+                        this.onSubmit(Msg.TSummonType.ESummonType_Wonder,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,true);
+                    }
+                    else
+                    {
+                        info.title = "错误";
+                        info.content = "钻石不足";
+                        info.submitContent = "商城";
+                        let sumbitCallFunc = ()=>{
+                            PopMgr.getInstance().deleteWindow();
+                            console.log("弹出商城窗口");
+                        }
+                        this.showPromptWindow(info,sumbitCallFunc);
+                        // this.showPromptWindow("错误","钻石不足",1);
+                    }
+                }
                 break; 
             case this.btn_summon_ten:
-                // console.log("summon_ten");
-                // if(this._curSummonType == Msg.TSummonType.ESummonType_Friend)
-                // {
-                //     if(this._nFriendHeartNum < XConsts.PUB_SUMMON_FRIEND_TEN_COSUME)
-                //     {
-                //         // this.showPromptWindow("错误","爱心不足",1);
-                //         info.title = "错误";
-                //         info.content = "爱心不足";
-                //         this.showPromptWindow(info);
-                //     }
-                //     else
-                //     {
-                //        console.log("pppppppppp 爱心10连");
-                //         this.onSubmit(Msg.TSummonType.ESummonType_Friend,Msg.TSummonConsumeType.ESummonConsumeType_FriendGift,false);
-                //     }
-                // }
-                // else
-                // {
-                //     if(this._nScorllNum > 0 && this._nScorllNum < XConsts.PUB_SUMMON_SCROLL_TEN_COSUME)
-                //     {
-                //         let nShortageDiamonds = XConsts.PUB_SUMMON_SCROLL_EXCHANGE_DIAMOND *  (XConsts.PUB_SUMMON_SCROLL_TEN_COSUME - this._nScorllNum);
-                //         if(nPlayerDiamondsCounts >= nShortageDiamonds)
-                //         {
-                //             let callFunc = ()=>{
-                //                 this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll_VRmb,false);
-                //             }
-                //             var str = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_BUYSUMMONSCROLL);
+                    if(nScrollCounts > 0 && nScrollCounts < XConsts.PUB_SUMMON_SCROLL_TEN_COSUME)
+                    {
+                        let nShortageDiamonds = XConsts.PUB_SUMMON_WONDER_ONE_COSUME *  (XConsts.PUB_SUMMON_SCROLL_TEN_COSUME - nScrollCounts);
+                        if(nPlayerDiamondsCounts >= nShortageDiamonds)
+                        {
+                            let callFunc = ()=>{
+                                this.onSubmit(Msg.TSummonType.ESummonType_Wonder,Msg.TSummonConsumeType.ESummonConsumeType_Wonder_VRmb,false);
+                            }
+                            var str = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_BUYSUMMONSCROLL);
                             
-                //             str = str.replace("{0}",String(nShortageDiamonds));
-                //             str = str.replace("{1}",String(XConsts.PUB_SUMMON_SCROLL_TEN_COSUME - this._nScorllNum));
-                //             str = str.replace("{2}",String(XConsts.PUB_SUMMON_SCROLL_EXCHANGE_DIAMOND));
+                            str = str.replace("{0}",String(nShortageDiamonds));
+                            str = str.replace("{1}",String(XConsts.PUB_SUMMON_SCROLL_TEN_COSUME - nScrollCounts));
+                            str = str.replace("{2}",String(XConsts.PUB_SUMMON_WONDER_ONE_COSUME));
 
-                //             info.title = "注意";
-                //             info.content = str;
-                //             info.mode = 1;
-                //             info.isRichLabMode = true;
-                //             this.showPromptWindow(info,callFunc);
-                //             // this.showPromptWindow("注意",str,2,callFunc,true);
-                //             // this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll_VRmb,false);
-                //         }
-                //         else
-                //         {
-                //             let callFunc = ()=>{
-                //                 PopMgr.getInstance().deleteWindow();
-                //                 let tempInfo : XStruct.common_one_info.Record = {
-                //                     title : "",
-                //                     content : "",
-                //                     mode : 0,
-                //                     isRichLabMode : false,
-                //                     isChangeBtnSpriteFrame : false,
-                //                     submitContent:"" ,
-                //                     cancelContent:"" 
-                //                 }
-                //                 // this.showPromptWindow("错误","钻石不足",1);
-                //                 tempInfo.title = "错误";
-                //                 tempInfo.content = "钻石不足";
-                //                 tempInfo.submitContent = "商城";
-                //                 let sumbitCallFunc = ()=>{
-                //                     PopMgr.getInstance().deleteWindow();
-                //                     console.log("弹出商城窗口");
-                //                 }
-                //                 // this.showPromptWindow(tempInfo,sumbitCallFunc);
-                //                 PopMgr.getInstance().popCommonOneWindow(tempInfo,sumbitCallFunc);
+                            info.title = "注意";
+                            info.content = str;
+                            info.mode = 1;
+                            info.isRichLabMode = true;
+                            this.showPromptWindow(info,callFunc);
+                        }
+                        else
+                        {
+                            let callFunc = ()=>{
+                                PopMgr.getInstance().deleteWindow();
+                                let tempInfo : XStruct.common_one_info.Record = {
+                                    title : "",
+                                    content : "",
+                                    mode : 0,
+                                    isRichLabMode : false,
+                                    isChangeBtnSpriteFrame : false,
+                                    submitContent:"" ,
+                                    cancelContent:"" 
+                                }
+                                // this.showPromptWindow("错误","钻石不足",1);
+                                tempInfo.title = "错误";
+                                tempInfo.content = "钻石不足";
+                                tempInfo.submitContent = "商城";
+                                let sumbitCallFunc = ()=>{
+                                    PopMgr.getInstance().deleteWindow();
+                                    console.log("弹出商城窗口");
+                                }
+                                // this.showPromptWindow(tempInfo,sumbitCallFunc);
+                                PopMgr.getInstance().popCommonOneWindow(tempInfo,sumbitCallFunc);
                                 
-                //             }
-                //             var str = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_BUYSUMMONSCROLL);
+                            }
+                            var str = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_BUYSUMMONSCROLL);
                             
-                //             str = str.replace("{0}",String(nShortageDiamonds));
-                //             str = str.replace("{1}",String(XConsts.PUB_SUMMON_SCROLL_TEN_COSUME - this._nScorllNum));
-                //             str = str.replace("{2}",String(XConsts.PUB_SUMMON_SCROLL_EXCHANGE_DIAMOND));
+                            str = str.replace("{0}",String(nShortageDiamonds));
+                            str = str.replace("{1}",String(XConsts.PUB_SUMMON_SCROLL_TEN_COSUME - nScrollCounts));
+                            str = str.replace("{2}",String(XConsts.PUB_SUMMON_WONDER_ONE_COSUME));
 
-                //             info.title = "注意";
-                //             info.content = str;
-                //             info.mode = 1;
-                //             info.isRichLabMode = true;
-                //             this.showPromptWindow(info,callFunc);
+                            info.title = "注意";
+                            info.content = str;
+                            info.mode = 1;
+                            info.isRichLabMode = true;
+                            this.showPromptWindow(info,callFunc);
                             
-                //         }
-                //     }
-                //     else if(this._nScorllNum >= XConsts.PUB_SUMMON_SCROLL_TEN_COSUME)
-                //     {
-                //         //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
-                //         console.log("pppppppppp 卷轴10连");
-                //         this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_Scroll,false);
-                //     }
-                //     else 
-                //     {
-                //         if(nPlayerDiamondsCounts >= XConsts.PUB_SUMMON_DIAMOND_TEN_COSUME)
-                //         {
+                        }
+                    }
+                    else if(nScrollCounts >= XConsts.PUB_SUMMON_SCROLL_TEN_COSUME)
+                    {
+                        //server此处应该向服务区发消息，然后在回调函数里面处理弹窗内容
+                        console.log("pppppppppp 卷轴10连");
+                        this.onSubmit(Msg.TSummonType.ESummonType_Wonder,Msg.TSummonConsumeType.ESummonConsumeType_Wonder,false);
+                    }
+                    else 
+                    {
+                        if(nPlayerDiamondsCounts >= XConsts.PUB_SUMMON_WONDER_TEN_COSUME)
+                        {
+                            console.log("pppppppppp 钻石10连");
+                            this.onSubmit(Msg.TSummonType.ESummonType_Wonder,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,false);
+                        }
+                        else
+                        {
+                            // this.showPromptWindow("错误","钻石不足",1);
 
-                //             //普通召唤 中的钻石召唤
-                //             console.log("pppppppppp 钻石10连");
-                //             this.onSubmit(Msg.TSummonType.ESummonType_Heroic,Msg.TSummonConsumeType.ESummonConsumeType_VRmb,false);
-                //         }
-                //         else
-                //         {
-                //             // this.showPromptWindow("错误","钻石不足",1);
-
-                //             info.title = "错误";
-                //             info.content = "钻石不足";
-                //             info.submitContent = "商城";
-                //             let sumbitCallFunc = ()=>{
-                //                 PopMgr.getInstance().deleteWindow();
-                //                 console.log("弹出商城窗口");
-                //             }
-                //             this.showPromptWindow(info,sumbitCallFunc);
-                //         }
-                //     }
-                // }
-                // break;           
+                            info.title = "错误";
+                            info.content = "钻石不足";
+                            info.submitContent = "商城";
+                            let sumbitCallFunc = ()=>{
+                                PopMgr.getInstance().deleteWindow();
+                                console.log("弹出商城窗口");
+                            }
+                            this.showPromptWindow(info,sumbitCallFunc);
+                        }
+                    }
+                break;           
         }
+    }
+
+    public onSubmit(nSummonType : Msg.TSummonType,nConsumeType : Msg.TSummonConsumeType, bIsOneOrTen : boolean)
+    {
+        let wonderSummonHeroR : Msg.WonderSummonHeroR = {
+             summonType : nSummonType,
+            consumeType : nConsumeType,
+            isOneOrTen : bIsOneOrTen
+        }
+        console.log("pub submit",wonderSummonHeroR);
+        MsgMgr.getInstance().getMsgHeroPub().requestWonderSummonHeroR(wonderSummonHeroR);
+    }
+
+    public showPromptWindow(info : XStruct.common_one_info.Record, submitFunc :Function | null = null)
+    {
+        let callCloseFunc = ()=>{
+            if(submitFunc)
+            {
+                submitFunc();
+            }
+            else{
+                PopMgr.getInstance().deleteWindow();
+            }
+        }
+        let callSummonTenFunc = ()=>{
+            if(submitFunc)
+            {
+                submitFunc();
+            }
+            PopMgr.getInstance().deleteWindow();
+        }
+        // if(mode == 1)
+        // {
+        //     PopMgr.getInstance().popCommonOneWindow(title,content,mode, mode ==callCloseFunc);
+        // }
+        PopMgr.getInstance().popCommonOneWindow(info,info.mode == 0 ? callCloseFunc : callSummonTenFunc);
+    } 
+
+    public addPubNotifyHandler()
+    {
+        console.log("开启");
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_wonder_summon_hero,this.notifyWonderSummonHeroHandle,this);
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_wonder_hero_select,this.notifyWonderSummonHeroSelectHandle,this);
+    }
+
+    public notifyWonderSummonHeroHandle ( msgData: Msg.WonderSummonHeroA){
+        if (msgData.err == Msg.TErrorCode.ERR_OK) {
+            
+            if(msgData.summonType != Msg.TSummonType.ESummonType_Wonder)
+            {
+                // if(this.isActive())
+                // {
+                //     PopMgr.getInstance().popSummonSettleWindow(msgData,XConsts.POP_SUMMON_TYPE.HeroPub);
+                // }   
+                // this.addPubNotifyHandler();
+                // this.updateImgPropNum();
+                // this.updateProgressProcess();
+                // this.updateBtnSummonState();
+                // this.updateShowNodeToggle();
+            }
+           
+        }
+        else
+        {
+            //此处消息错误处理 
+        }
+    }
+
+    public notifyWonderSummonHeroSelectHandle ( msgData: Msg.WonderHeroSelectA){
+        if (msgData.err == Msg.TErrorCode.ERR_OK) {
+            
+            // if(msgData.summonType != Msg.TSummonType.ESummonType_Wonder)
+            // {
+            //     // if(this.isActive())
+            //     // {
+            //     //     PopMgr.getInstance().popSummonSettleWindow(msgData,XConsts.POP_SUMMON_TYPE.HeroPub);
+            //     // }   
+            //     // this.addPubNotifyHandler();
+            //     // this.updateImgPropNum();
+            //     // this.updateProgressProcess();
+            //     // this.updateBtnSummonState();
+            //     // this.updateShowNodeToggle();
+            // }
+           
+        }
+        else
+        {
+            //此处消息错误处理 
+        }
+    }
+
+    public removePubNotifyHandler()
+    {
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_wonder_summon_hero,this.notifyWonderSummonHeroHandle,this);
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_wonder_hero_select,this.notifyWonderSummonHeroSelectHandle,this);
+        
+    }
+
+    onDestroy(){
+        console.log("wondersummon destory");
+        this.removePubNotifyHandler();
+        // this.node.off("OpenPubNotify");
     }
 }
 
