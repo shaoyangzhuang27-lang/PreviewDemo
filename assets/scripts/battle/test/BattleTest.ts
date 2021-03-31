@@ -38,8 +38,8 @@ let SkillPrefabPath: {[key: number]: string} = {
     552022: "skill_dark_knight",// TODO 骷髅王技能
     546022: "skill_priest_aoe_heal", 
     534012: "skill_mage_lightning",
-    523011: "skill_dark_knight"
-    // 技能粒子/火赏金猎人技能施放
+    523011: "skill_dark_knight",
+    525022: "skill_bounty_hunter"// 技能粒子/火赏金猎人技能施放
 }
 
 let BuffPrefabPath: {[key: string]: string} = {
@@ -53,7 +53,10 @@ let BuffPrefabPath: {[key: string]: string} = {
 let AttackPrefabPath: {[key: string]: string} = {
     "新普攻粒子/占星师普通攻击": "normal_attack_priest",
     "新普攻粒子/魔导师普通攻击": "normal_attack_mage", //  33 5093401 法师1_55_3
-    "新普攻粒子/火枪手普通攻击": "normal_attack_gun"
+    "新普攻粒子/火枪手普通攻击": "normal_attack_gun",
+
+
+    "normal_attack_dark_knight": "normal_attack_dark_knight" // 测试
     
 }
 
@@ -62,13 +65,16 @@ let BuffIcon: {[key: string]: string} = {
     "战斗_buff_攻击-": "攻击-",
     "战斗_buff_速度+": "攻速+",
     "战斗_buff_速度-": "攻速-",
+    "战斗_buff_破甲+": "破甲+",
+    "战斗_buff_破甲-": "破甲-",
     
 }
 
 let HeroTestInfo: {[key: number]: any} = {
     0: { // 100
         // prefab: "leader_00",
-        prefab: "hero_lvbu",
+        prefab: "hero_zhangfei",
+        normalAttack: "normal_attack_dark_knight",
         skillID: 1001,
         hp: 100,
         atk: 5,
@@ -124,6 +130,7 @@ let HeroTestInfo: {[key: number]: any} = {
         // prefab: "hero_013",
         prefab: "hero_zhugeliang",
         normalAttack: "normal_attack_gun",
+        skillID: 525022,
         hp: 100,
         atk: 6,
         def: 2,

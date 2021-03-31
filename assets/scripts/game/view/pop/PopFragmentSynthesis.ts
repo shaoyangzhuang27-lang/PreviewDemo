@@ -59,6 +59,9 @@ export class PopFragmentSynthesis extends PopBase {
 
     //当前显示的值
     private _nCurSysthesisCounts : number = 0;
+
+
+    private _isWonderSummonShow : boolean = false;
     // private _submitCallFun:Function | null = null;
 
 
@@ -77,6 +80,11 @@ export class PopFragmentSynthesis extends PopBase {
         bg : ""
     }  
 
+    public setIsWonderSummonShow(bState : boolean)
+    {
+        this._isWonderSummonShow = bState ;
+    }
+
     public set FragmentSysthesisInfo(data : XStruct.fragment_synthesis_info.IRecord)
     {
         this._fragmentSysthesisInfo = data;
@@ -85,13 +93,14 @@ export class PopFragmentSynthesis extends PopBase {
 
     public initUI()
     {
+
         resources.load('prefabs_ui/main/hero_fragment', (err:any,res:any)=>{
                 let fragment_item = instantiate( res );
                 let script = fragment_item.getComponent(HeroFragment);
                 fragment_item.scale = new Vec3(0.7,0.7,1);
                 let subWidget = fragment_item.getComponent(UITransform) as UITransform;
                 subWidget.contentSize = new Size(105,126);
-                script.fragmentInfo = this._fragmentSysthesisInfo;
+                script.setFragmentInfo(this._fragmentSysthesisInfo,this._isWonderSummonShow);
                 this.node_hero_fragment?.addChild(fragment_item);
         });
 
@@ -124,11 +133,20 @@ export class PopFragmentSynthesis extends PopBase {
             //var classesName = ValueMgr.getInstance().getItemByField(TableName.language_ui,this._fragmentSysthesisInfo.classesName) as Config.language_ui.Record;
             content = ValueMgr.getInstance().getLanguageString(this._fragmentSysthesisInfo.classesName);
         }
-        this.initFragmentNameAndDesc(this._fragmentSysthesisInfo.type,this._fragmentSysthesisInfo.star,this._fragmentSysthesisInfo.maxNum,content);
 
-        this.initUIState();
 
-        this.lab_num.string = String(this._nCurSysthesisCounts);
+        if(this._isWonderSummonShow)
+        {
+            this._ininWonderSummonFragemt(this._fragmentSysthesisInfo.type,this._fragmentSysthesisInfo.star,this._fragmentSysthesisInfo.maxNum,content);
+        }
+        else
+        {
+            this.initFragmentNameAndDesc(this._fragmentSysthesisInfo.type,this._fragmentSysthesisInfo.star,this._fragmentSysthesisInfo.maxNum,content);
+
+            this.initUIState();
+
+            this.lab_num.string = String(this._nCurSysthesisCounts);
+        }
     }
 
 
@@ -280,5 +298,45 @@ export class PopFragmentSynthesis extends PopBase {
         this.lab_num.string = String(this._nCurSysthesisCounts);
     }
     
+    private _ininWonderSummonFragemt(nType : number | null,nStar : number | null | undefined, nCounts : number | null|undefined, content : string)
+    {
+        let strFragmentName = "";
+        let strFragmentDesc = "";
+
+        let strName = "";
+        let strDesc = "";
+
+        var callFunc = (value : string) => {
+            return ValueMgr.getInstance().getLanguageString(value);
+        };
+
+
+        switch(nType)
+        {
+            case Msg.TFragmentType.EFragmentType_Random :
+                strName = callFunc(XConsts.UI_FRAGMENTNAME);
+                strDesc = callFunc(XConsts.UI_FRAGMENTDESC);
+                strFragmentName = strName.replace("{0}",String(nStar));
+                strDesc = strDesc.replace("{0}",String(nCounts));
+                strFragmentDesc = strDesc.replace("{1}",String(nStar));
+                break;
+            case Msg.TFragmentType.EFragmentType_CampRandom :
+                strName = callFunc(XConsts.UI_FRAGMENTCAMPNAME);
+                strDesc = callFunc(XConsts.UI_FRAGMENTCAMPDESC);
+                strName = strName.replace("{0}",String(nStar));
+                strFragmentName = strName.replace("{1}",String(content));
+                strDesc = strDesc.replace("{0}",String(nCounts));
+                strDesc = strDesc.replace("{1}",String(nStar));
+                strFragmentDesc = strDesc.replace("{2}",content);
+                break;
+        }
+
+        this.lab_fragment_title.string = strFragmentName;
+        this.lab_fragment_tips.string = strFragmentDesc;
+        this.btn_submit.active = false;
+        this.btn_info.active = false;
+        this.btn_summon.active = false;
+        this.node_summon_counts.active = false;
+    }
 
 }

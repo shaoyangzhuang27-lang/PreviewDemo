@@ -1,11 +1,12 @@
-import { _decorator, Component, Node,director,instantiate,resources,Scene } from 'cc';
+import { _decorator, Component, Node,director,instantiate,resources,Scene, Layers, Widget } from 'cc';
 const { ccclass, property } = _decorator;
 import { PopMgr } from "../control/PopMgr";
 import { NotifyMgr } from "../control/NotifyMgr";
 import { XConsts } from '../model/const/XConsts';
+import { BasisScene } from '../../core/control/BasisScene';
 
 @ccclass('BaseScene')
-export class BaseScene extends Component {
+export class BaseScene extends BasisScene {
 
     @property({type: Node, displayName: "当前场景[必填项]"})
     public curScene:Scene = null as unknown as Scene;
@@ -14,33 +15,53 @@ export class BaseScene extends Component {
     public curCanvas:Node = null as unknown as Node;
 
     onLoad(){
+        super.onLoad();
         if(!this.curScene){
             console.log("场景未设置,请设置当前场景");
             this.curScene = director.getScene() as Scene;
         }
-        PopMgr.getInstance().initPop(this.curCanvas);
+
+        // this._initSecondaryUINode();
+        PopMgr.getInstance().initPop(this);
         // NotifyMgr.getInstance().addNotifyHandler("test",this.notifyTest,this);
-        console.log("---------------------------------------------------- "+this.name+" start ----------------------------------------------------");
-    }
-    start () {
-        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_player_levelup,this._notifyPlayerLevelUp,this);
+		NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_player_levelup,this._notifyPlayerLevelUp,this);
     }
     onDestroy(){
-        // console.log("BaseScene onDestory")
-        console.log("---------------------------------------------------- "+this.name+" end ----------------------------------------------------");
+        super.onDestroy();
         PopMgr.getInstance().clearPop();
         // NotifyMgr.getInstance().removeNotifyHandler("test",this.notifyTest,this);
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_player_levelup,this._notifyPlayerLevelUp,this);
     }
+    start () {}
+    public getCanvas(){
+        return this.curCanvas;
+    }
+
+    // private _initSecondaryUINode(){
+        
+    //     let secondaryNode = new Node();
+    //     secondaryNode.parent = this.curCanvas;
+    //     secondaryNode.layer = Layers.Enum.UI_2D;
+    //     secondaryNode.addComponent(Widget);
+    //     let w = secondaryNode.getComponent(Widget) as Widget;
+    //     w.left = 0;
+    //     w.right = 0;
+    //     w.top = 0;
+    //     w.bottom = 0;
+    //     secondaryNode.setSiblingIndex(XConsts.OrderStage);
+    //     this.setUnderNode(secondaryNode);
+
+    // }
 
     protected initUI(callback?: (node: Node)=>void) {
         resources.load('prefabs_ui/main_ui', (err:any,res:any)=>{
-            let p = instantiate( res ) as Node;
-            this.curCanvas.addChild(p);
-            p.setSiblingIndex(XConsts.OrderMainUI)
+            let mainUINode = instantiate( res ) as Node;
+            this.curCanvas.addChild(mainUINode);
+            mainUINode.setSiblingIndex(XConsts.OrderMainUI)
             if (callback) {
-                callback(p);
+                callback(mainUINode);
             }
+            this.setUnderNode(mainUINode);
         } );
     }
 
@@ -48,7 +69,7 @@ export class BaseScene extends Component {
         // console.log("BaseScene notifyTest!!");
         // console.log(data);
     }
-    
+
 
 
     //玩家升级通知

@@ -20,7 +20,7 @@ export class BattleEffect extends Component {
     @property({type: HeroPot, displayName: "特效播放点", tooltip: "Base:原点, MainWeapon:主武器, Chest:胸骨, SubWeapon:副武器, Center:中心点, Hp:中心点"})
     public playPot: HeroPot = HeroPot.Center;
 
-    @property({type: CCFloat, displayName: "自动销毁时间", tooltip: "配置0不会自动销毁，如果是buff根据配置表duration销毁"})
+    @property({type: CCFloat, min: 0.1, displayName: "自动销毁时间", tooltip: "如果是buff根据配置表duration销毁，飞行类型撞击时销毁"})
     public playTime: number = 5;
 
     @property({type: CCFloat, displayName: "飞行速度", tooltip: "当类型为Fly时的飞行速度"})
@@ -42,6 +42,12 @@ export class BattleEffect extends Component {
 
     private _tmpLLTime: number = 15;
 
+    onLoad(): void{
+        if (this.effectType == EBattleEffectType.Fly) {
+            this.playTime = 0;
+        }
+    }
+
     update(dt: number) {
         if (this._actFun) {
             this._actFun.call(this, dt);
@@ -49,12 +55,11 @@ export class BattleEffect extends Component {
 
         this._tmpLLTime-=dt;
         if (this._tmpLLTime <= 0) {
+            console.warn("BattleEffect 注意特效没有释放++++++++++++++++++++++++++++++++" + this.node.name);
             this.node.destroy();
-            console.warn("注意资源没有释放++++++++++++++++++++++++++++++++")
             return;
         }
 
-        
 
         if (this.playTime == 0) {
             return;
@@ -120,6 +125,10 @@ export class BattleEffect extends Component {
             this.node.setWorldPosition(attack.getPlayPot(this.playPot).getWorldPosition());
             this.refreshFlyData();
 
+            if (this.endEffectPrefab) {
+                this.addEndTarget(target);
+            }
+
             this._actFun = this.updateFly;
         }
     }
@@ -131,8 +140,6 @@ export class BattleEffect extends Component {
             this._tmpPos.set(this.node.getWorldPosition());
             this._actTime = this._dirVector.length() / this.flySpeed;
         }
-        
-        
     }
 }
 

@@ -1,6 +1,7 @@
 import { _decorator, Component, Node,resources,instantiate,Vec3,Button,Label, UITransform, size, Size, Script } from 'cc';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { PopMgr } from '../../control/PopMgr';
 import { HeroIcon } from '../hero/HeroIcon';
 const { ccclass, property } = _decorator;
 
@@ -61,7 +62,7 @@ export class PubRecLineUpItem extends Component {
     private _onNodeClick(event : any)
     {
         console.log("clickNode");
-        //PopMgr.getInstance().popRecLineUpWindow("推荐阵容",()=>{console.log("")});
+        PopMgr.getInstance().popupSimpleWindow("推荐阵容","111111",()=>{console.log("")});
     }
     private _onViewDetailClick(event : any)
     {

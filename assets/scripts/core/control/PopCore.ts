@@ -1,6 +1,12 @@
-import {  Node,resources,instantiate,LabelComponent,Vec3,tween,Scene } from 'cc';
+/**
+ * 弹窗管理器基类
+ * @author 陈委津
+ * @version 1.0.0,2021.3.1
+ */
+import {  Node,resources,instantiate,LabelComponent,Vec3,tween, Component } from 'cc';
 import { XConsts } from '../../game/model/const/XConsts';
-import { PopBase } from "./PopBase";
+import { BasisScene } from './BasisScene';
+import { PopBase, PopType } from "./PopBase";
 export class PopCore {
 
     // private static _instance: PopManager = new PopManager();
@@ -8,16 +14,25 @@ export class PopCore {
     //     return this._instance;
     // }
 
-    protected popArray:Array<Node> = [];
-    protected popDataArray:Array<[Node,string,[] ]> = [];
-    // protected pop 
-    protected parent:Node | null = null;
+    private _popArray:Array<Node> = [];
+    protected _parent:Node | null = null;
+    protected _scene:BasisScene | null = null;
 
 
-    public initPop(parent:Node | null){
-        this.parent = parent;
+    public initPop(scene:BasisScene){
+        this._scene = scene;
+        this._parent = scene.getCanvas();
     }
     public clearPop(){
+        while(this._popArray.length > 0){
+            let w = this._popArray.pop() as Node;
+            if(!w)continue;
+            // w.destroy();
+            let curPopScript = this.getScript(w);
+            if(!curPopScript)continue;
+            curPopScript.systemDeleteMe();
+            curPopScript?.systemHide(false);
+        }
     }
     //节点
     //层级 
@@ -27,66 +42,59 @@ export class PopCore {
     //是否换场景换场景释放
     public pushWindow(w:Node,parent:Node|null = null){
         if(parent){
-            this.parent = parent
+            this._parent = parent
         }
-
-        this.popArray.push(w);
-
-        let curPop = w;
-        let prePop = this.popArray[this.popArray.length - 2];
-
-        let curPopScript = this.getScript(curPop)
-        let prePopScript = this.getScript(prePop)
-
-
-        curPopScript?.createMe(()=>{this.deleteWindow()});
-        this.parent?.addChild(curPop);
-        curPopScript?.show();
-        curPop.setSiblingIndex(XConsts.OrderPopShow);
-
-        // curPop.zIndex = -1
-        if(prePopScript){
-            prePop.setSiblingIndex(XConsts.OrderPopHide);
-            prePopScript.hide()
-        }
+        this.pushPop(w,parent,true,PopType.window);
     }
 
+    public pushFullScreen(w:Node,parent:Node|null=null){
+        if(parent){
+            this._parent = parent
+        }
+        //清理所有弹窗
+        this.clearWindows();
+        //隐藏3d窗口,次ui及主ui
+        this._scene?.setUnderNodeVisible(false);
+        //显示一级窗口
+        this.pushPop(w,parent,true,PopType.fullscreen);
+    }
     public deleteWindow(){
-        if(this.popArray.length == 0) return;
+        if(this._popArray.length == 0) return;
 
-        let w = this.popArray.pop();
+        let w = this._popArray.pop();
         if(w == undefined){
             console.log("已经没有弹窗了")
             return;
         }
 
+        //显示3d窗口,次ui及主ui
+        if(this._popArray.length == 0){
+            this._scene?.setUnderNodeVisible(true);
+        } 
+
         let curPop = w;
-        let prePop = this.popArray[this.popArray.length - 1];
+        let prePop = this._popArray[this._popArray.length - 1];
 
         let curPopScript = this.getScript(curPop)
         let prePopScript = this.getScript(prePop)
 
-        curPopScript?.deleteMe();
-        curPopScript?.hide();
+        curPopScript?.systemDeleteMe();
+        curPopScript?.systemHide();
         curPop.setSiblingIndex(XConsts.OrderPopHide);
 
         // curPop.zIndex = -1
         if(prePopScript){
             // prePop.zIndex = -1
             prePop.setSiblingIndex(XConsts.OrderPopShow);
-            prePopScript.show()
+            prePopScript.systemShow()
         }
-    }
-    protected getScript(node:Node | null){
-        let kk = node?.getComponent("PopBase") as PopBase;
-        return kk;
     }
 
     public popupPrompt(content:string){
 
         resources.load('prefabs_ui/pop/pop_prompt', (err:Error | null,res:any)=>{
             let p = instantiate( res ) as Node;
-            this.parent?.addChild(p)
+            this._parent?.addChild(p)
             p.setSiblingIndex(XConsts.OrderToash);
             let lab = p.getChildByName('content') as Node;
             let labcom = lab.getComponent(LabelComponent) as LabelComponent;
@@ -104,6 +112,54 @@ export class PopCore {
             .start()
         })
     }
+
+    private clearWindows(){
+        
+        while(this._popArray.length > 0){
+            let node = this._popArray[this._popArray.length - 1];
+
+            let script = this.getScript(node);
+            let type = script.getPopType();
+            if(type == PopType.fullscreen)break;
+
+            let w = this._popArray.pop() as Node;
+            if(!w)continue;
+            // w.destroy();
+            let curPopScript = this.getScript(w);
+            if(!curPopScript)continue;
+            curPopScript.systemDeleteMe();
+            curPopScript.systemHide(false);
+        }
+    }
+
+    private pushPop(w:Node,parent:Node|null = null,isAnim:boolean = true,popType:PopType = PopType.window){
+        
+        this._popArray.push(w);
+
+        let curPop = w;
+        let prePop = this._popArray[this._popArray.length - 2];
+
+        let curPopScript = this.getScript(curPop);
+        let prePopScript = this.getScript(prePop);
+
+
+        curPopScript?.systemCreateMe(()=>{this.deleteWindow()});
+        this._parent?.addChild(curPop);
+        curPopScript.setPopType(popType);
+        curPopScript?.systemShow(isAnim);
+        curPop.setSiblingIndex(XConsts.OrderPopShow);
+
+        if(prePopScript){
+            prePop.setSiblingIndex(XConsts.OrderPopHide);
+            prePopScript.systemHide()
+        }
+    }
+
+    protected getScript(node:Node | null){
+        let kk = node?.getComponent("PopBase") as PopBase;
+        return kk;
+    }
+
     
     
 }

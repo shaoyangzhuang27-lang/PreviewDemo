@@ -1482,7 +1482,7 @@
     },
     "effectType": 0,
     "playPot": 4,
-    "playTime": 0.3,
+    "playTime": 5,
     "flySpeed": 8,
     "endEffectPrefab": {
       "__uuid__": "36d850fb-53cc-48b4-96bc-65e825e80b5a"

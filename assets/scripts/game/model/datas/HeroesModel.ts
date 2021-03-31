@@ -46,7 +46,7 @@ export class HeroesModel extends BaseModel{
         this._sortedHeroList.Clear();  
 
         //优先加入当前阵容英雄
-        let curFormationList:Map<number,HeroData> = GameModel.getInstance().getFormationModel().getCurrentFormation();   
+        let curFormationList:Map<number,HeroData> = this._gameModel.getFormationModel().getCurrentFormation();   
         curFormationList.forEach((heroData,key, m)=>{
             console.log(" heroData=",heroData)
             console.log(" key=",key)
@@ -145,7 +145,7 @@ export class HeroesModel extends BaseModel{
         let magicDust = msg.magicDust;
         let money = msg.money;
 
-        let playerModel = GameModel.getInstance().getPlayerModel();
+        let playerModel = this._gameModel.getPlayerModel();
         //金币增加
         playerModel.addMoney(msg.money, Msg.TMoneyAddType.EMoneyAddType_HeroStarupReturn);
 
@@ -193,7 +193,7 @@ export class HeroesModel extends BaseModel{
         let magicDust = msg.magicDust;
         let money = msg.money;
 
-        let playerModel = GameModel.getInstance().getPlayerModel();
+        let playerModel = this._gameModel.getPlayerModel();
         //金币增加
         playerModel.addMoney(msg.money, Msg.TMoneyAddType.EMoneyAddType_HeroStarupReturn);
 
@@ -243,7 +243,7 @@ export class HeroesModel extends BaseModel{
         let vrmbConsume = msg.vrmbConsume;
 
         //扣除消耗
-        let playerModel = GameModel.getInstance().getPlayerModel();
+        let playerModel = this._gameModel.getPlayerModel();
         if(vrmbConsume > 0){
             playerModel.subVrmb(msg.vrmbConsume, Msg.TVRmbSubType.EVRmbSubType_HeroReset);
         }
@@ -275,6 +275,32 @@ export class HeroesModel extends BaseModel{
             //抛出通知  重置发生变化
             NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_reset_change,[msg]);
         }
+    }
+
+    /**
+     * 分解之后 改变英雄数据
+     * @param id 
+     */
+    public resetHeroDecomposeInfo(msg:Msg.HeroDecomposeA) {
+        let heroIDList = msg.heroIDList;
+        let upgradePoint = msg.upgradePoint;
+        let advanceExp = msg.advanceExp; 
+        let equipList = msg.equipList;
+        let soulStone = msg.soulStone;
+        let money = msg.money;
+        let magicDust = msg.magicDust;
+
+        let playerModel = this._gameModel.getPlayerModel();
+        //金币增加
+        playerModel.addMoney(msg.money, Msg.TMoneyAddType.EMoneyAddType_HeroReset);
+        //升级点 进阶点 灵魂石增加
+
+        for(var i = 0;i < heroIDList.length;i++){
+            if(this._heroList.has(heroIDList[i])){
+                this._heroList.delete(heroIDList[i]);
+            }
+        }
+        NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_decompose_change,[msg]);
     }
     
     /////////////////////////////////////////////////////
