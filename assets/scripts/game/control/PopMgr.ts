@@ -32,6 +32,7 @@ import { PopForge } from '../view/pop/PopForge';
 import { PopBookProUI } from '../view/pop/PopBookProUI';
 import { TipCampOrCareer } from '../view/TipCampOrCareer';
 import { PopHaloView } from '../view/pop/PopHaloView';
+import { PopHeroReplace } from '../view/pop/PopHeroReplace';
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
@@ -207,6 +208,21 @@ export class PopMgr extends PopCore  {
             script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
         } );
+    }
+
+    /**
+     * @description: 弹出英雄置换界面 
+     * @param {boolean} isMaskClose
+     */
+    public popHeroReplaceView(isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_heroreplace', (err : any, res : any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopHeroReplace") as PopHeroReplace;
+            script.setIsMaskClose(isMaskClose);
+        });
     }
     //弹窗放这里------------------------------------------------------------
 

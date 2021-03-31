@@ -37,4 +37,7 @@ export class NotifyMgr extends NotifyCore {
     public static event_net_pub_hero_decompose : string = "event_net_pub_hero_decompose"; //酒馆召唤英雄分解
 
     public static event_equip_compose_suc: string = "event_equip_compose_suc";         //装备合成
+
+    public static event_net_camp_change : string = "event_net_camp_change"; //英雄置换
+    public static event_net_camp_change_confirm : string = "event_net_camp_change_confirm"; //英雄置换确定
 }

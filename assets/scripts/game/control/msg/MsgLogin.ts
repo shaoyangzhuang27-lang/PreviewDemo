@@ -41,7 +41,7 @@ export class MsgLogin extends MsgBase{
     public requestDeviceLoginNew(){
         let data = new Msg.DeviceLoginNewR();
         // data.deviceId = "73f08c52ad36acf31baecfec8db006b8d1af428a";
-        data.deviceId = "0a8642915f9556629624ae70b48faafe26831e1b";
+        data.deviceId = "2293181038的Redmi K20 Pro_f8482e84c956baa675ed0f048033ee91";
         const buffer_data = Msg.DeviceLoginNewR.encode(data).finish();
         this.msgMgr.sendData(Msg.MsgType.TheDeviceLoginNewR,buffer_data);
         }

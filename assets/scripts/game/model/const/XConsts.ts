@@ -319,6 +319,8 @@ export class XConsts{
     public static KFragmentFrameSpriteName:string[] = new Array<string> ( "小卡框_品质随机", "小卡框_品质橙");
     public static KFragmentQualitySpriteName:string[] = new Array<string> ( "小卡框_碎片品质随机", "小卡框_碎片品质橙");
     public static KFragmentBgSpriteName:string[] = new Array<string> ( "小卡框_品质普通背景", "小卡框_品质金背景");
+    //英雄置换消耗
+    public static KClassesExchangeMiracleShard : number[] = new Array<number>(0, 0, 5, 20, 100, 500, 2000, 5000, 10000);
 
     public static KFragmentClassesName : string[] = new Array<string>("UI_OrdinaryHero","UI_SeniorHero","UI_LegendHero")
     public static POP_SUMMON_TYPE  = {

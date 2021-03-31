@@ -18,6 +18,7 @@ import { MsgBase } from "./msg/MsgBase";
 import { MsgOffline } from "./msg/MsgOffline";
 import { MsgHeroBagExtend } from "./msg/MsgHeroBagExtend";
 import { MsgForge } from "./msg/MsgForge";
+import { MsgHeroReplace } from "./msg/MsgHeroReplace";
 
 class NetTips implements INetworkTips {
     requestTips(isShow: boolean): void {}
@@ -87,8 +88,14 @@ export class MsgMgr extends MsgCore{
         this._msgs.push(this._msgHeroPub);
         this._msgs.push(this._msgHeroBagExtend)
         this._msgs.push(this._msgForge)
+        this._msgs.push(this._msgHeroReplace)
     }
     //消息注册-------------------------------------------------
+    private _msgHeroReplace: MsgHeroReplace = new MsgHeroReplace(this);
+    public getMsgHeroReplace() {
+        return this._msgHeroReplace
+    }
+
     private _msgForge: MsgForge = new MsgForge(this);
     public getMsgForge() {
         return this._msgForge
