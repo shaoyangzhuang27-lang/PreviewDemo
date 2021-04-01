@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-31 14:11:59
+ * @LastEditTime: 2021-03-31 20:11:27
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -605,7 +605,7 @@ export class HeroPromotion extends PopBase {
             //扣除消耗
             let playerModel = GameModel.getInstance().getPlayerModel();
             playerModel.subMoney(msg.moneyExpconsume, Msg.TMoneySubType.EMoneySubType_HeroLevelUp);
-            playerModel.consumeObjectByLoot(Msg.TObjectType.EObject_UpgradePoint, msg.upgradeExpConsume, Msg.TObjectConsumeType.EObjectConsumeType_HeroLevelUp);
+            playerModel.consumeObjectByNum(Msg.TObjectType.EObject_UpgradePoint, msg.upgradeExpConsume, Msg.TObjectConsumeType.EObjectConsumeType_HeroLevelUp);
                       
             this._curHeroData = heroData;
             // 刷新升阶引起的UI变化
@@ -644,7 +644,7 @@ export class HeroPromotion extends PopBase {
             //消耗
             let playerModel = GameModel.getInstance().getPlayerModel();
             playerModel.subMoney(msg.consumeMoney, Msg.TMoneySubType.EMoneySubType_HeroTierUp);
-            playerModel.consumeObjectByLoot(Msg.TObjectType.EObject_AdvanceExp, msg.consumeAdvanceExp, Msg.TObjectConsumeType.EObjectConsumeType_HeroTierUp);
+            playerModel.consumeObjectByNum(Msg.TObjectType.EObject_AdvanceExp, msg.consumeAdvanceExp, Msg.TObjectConsumeType.EObjectConsumeType_HeroTierUp);
             this._curHeroData = heroData;
             this._curHeroId = msg.heroID;
             // 刷新升阶引起的UI变化
@@ -1081,7 +1081,12 @@ export class HeroPromotion extends PopBase {
         }
 
         // 满级显示
-        this.node_max_lv.active= isCurStarMaxLv;
+        this.node_max_lv.active= isCurStarMaxLv;        
+        if(isCurStarMaxLv){
+            this._touchFlag = false;
+            this._touchStartTime = 0;
+            this._isLongPressLvUpBtn= false;
+        }
     }
 
     private _showTier(tier: number = 0) {

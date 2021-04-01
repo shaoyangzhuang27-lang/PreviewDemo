@@ -1,5 +1,5 @@
 
-import { Button, Component, Sprite, SpriteFrame } from 'cc';
+import { Button, ButtonComponent, Component, Sprite, SpriteFrame } from 'cc';
 import { _decorator, Node, Label } from 'cc';
 import { PopMgr } from '../../control/PopMgr';
 const { ccclass, property } = _decorator;
@@ -26,7 +26,7 @@ export class AvatarNode extends Component {
         
     }
     start() {
-        
+
     }
     onDestroy(){
         
@@ -37,16 +37,26 @@ export class AvatarNode extends Component {
 
     }
 
+    //设置数据
+    public setBriefPlayerData(playerInfo:Msg.IPlayerBriefInfo){
+        //等级
+        this.lab_lv.string = playerInfo.level?.toString() as string
+    }
+
     //隐藏等级
     public hideLevel() {
         this.spr_lvbg.node.active = false
     }
 
+    //开启点击
     public openClick() {
+        let button = this.getComponent(ButtonComponent) as ButtonComponent
+        button.interactable = true
         //绑定按钮事件
         this.node.on(Button.EventType.CLICK, this._onClick, this)
     }
 
+    //点击回调
     private _onClick(event:any){
         console.log("点击 头像")
         PopMgr.getInstance().popSettingView()

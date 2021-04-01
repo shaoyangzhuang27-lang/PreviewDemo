@@ -15,6 +15,7 @@ import { PopMgr } from '../../control/PopMgr';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { MsgMgr } from '../../control/MsgMgr';
 import { PopDecompose } from "../../view/pop/PopDecompose";
+import { PopHeroRollBack } from "../../view/pop/PopHeroRollBack";
 import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
 const { ccclass, property } = _decorator;
 
@@ -511,6 +512,9 @@ export class PopHeroReset extends PopBase {
         if(this.window.getChildByName("pop_decompose")){
             this.window.getChildByName("pop_decompose")?.destroy();
         }
+        if(this.window.getChildByName("pop_herorollback")){
+            this.window.getChildByName("pop_herorollback")?.destroy();
+        }
 
         if(!(this.top_reset) )return;
         if(tog.node.name == "Toggle1"){
@@ -522,11 +526,16 @@ export class PopHeroReset extends PopBase {
                 let p = instantiate( res );
                 p.name = "pop_decompose"
                 let script = p.getComponent("PopDecompose") as PopDecompose;
-                //script.setIsMaskClose(false);
                 this.window.addChild(p);
             } );
         }else if (tog.node.name == "Toggle3"){
             this.top_reset.active = false;
+            resources.load('prefabs_ui/pop/pop_herorollback', (err:any,res:any)=>{
+                let p = instantiate( res );
+                p.name = "pop_herorollback"
+                let script = p.getComponent("PopHeroRollBack") as PopHeroRollBack;
+                this.window.addChild(p);
+            } );
         }
     }
 
@@ -542,8 +551,13 @@ export class PopHeroReset extends PopBase {
                     strExplain = record.cn;
                     break;
                 }
-            }else{
+            }else if(this.window.getChildByName("pop_decompose")){
                 if(record.id == "UI_AltarExplain") { 
+                    strExplain = record.cn;
+                    break;
+                }
+            }else{
+                if(record.id == "UI_HeroReturnBackExplainContent") { 
                     strExplain = record.cn;
                     break;
                 }
