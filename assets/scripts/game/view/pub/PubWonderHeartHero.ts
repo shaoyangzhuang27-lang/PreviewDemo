@@ -31,6 +31,9 @@ export class PubWonderHeartHero extends PopBase {
     @property({type: Node})
     public img_hero:Node | null = null;
 
+    @property({type: Node})
+    public img_select_bg:Node | null = null;
+
     private _curSelectCamp : number = 0;
 
     private _heartHeroId : number = 0;
@@ -41,6 +44,7 @@ export class PubWonderHeartHero extends PopBase {
         this.lab_title.string = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERHERO);
         this.lab_select_desc.string = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERHEROSELECT);
 
+        this.img_select_bg?.on(Node.EventType.TOUCH_END, this._onSelectBgClick, this);
 
         this._heartHeroId = GameModel.getInstance().getHeroPubModel().getPlayerWonderHero();
         const containerEventHandler = new EventHandler();
@@ -57,6 +61,11 @@ export class PubWonderHeartHero extends PopBase {
         });
 
         this._updateHeroIconByCamp(this._curSelectCamp);
+    }
+
+    private _onSelectBgClick()
+    {
+     
     }
     private _onSubmit(){
 
