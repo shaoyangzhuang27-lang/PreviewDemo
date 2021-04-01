@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-31 20:11:27
+ * @LastEditTime: 2021-04-01 11:52:49
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -418,7 +418,7 @@ export class HeroPromotion extends PopBase {
                         }
                     }
 
-                    MsgMgr.getInstance().getMsgFormation().requestHeroPutOnEquip(this._curHeroId, putonEquipIDList);
+                    MsgMgr.getInstance().getMsgHeroPromotion().requestHeroPutOnEquip(this._curHeroId, putonEquipIDList);
                 }
                 break;
             case this.btn_all_unload:
@@ -430,7 +430,7 @@ export class HeroPromotion extends PopBase {
                             takeoffEquipLocList.push(locType);
                         }
                     });
-                    MsgMgr.getInstance().getMsgFormation().requestHeroTakeOffEquip(this._curHeroId, takeoffEquipLocList);
+                    MsgMgr.getInstance().getMsgHeroPromotion().requestHeroTakeOffEquip(this._curHeroId, takeoffEquipLocList);
                 }
                 break;
             case this.btn_up_lv:
@@ -459,7 +459,7 @@ export class HeroPromotion extends PopBase {
 
     private _doLockHero(isLocked:boolean = true){        
         if(this._curHeroId){
-            MsgMgr.getInstance().getMsgFormation().requestHeroLocked(this._curHeroId, isLocked);                
+            MsgMgr.getInstance().getMsgHeroPromotion().requestHeroLocked(this._curHeroId, isLocked);                
     
             console.log(" isLocked=",isLocked,"  this._curHeroData.isLocked 1= ", this._curHeroData.isLocked);
             let heroData = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(this._curHeroId);
@@ -518,7 +518,7 @@ export class HeroPromotion extends PopBase {
             return;
         }
 
-        MsgMgr.getInstance().getMsgFormation().requestHeroLvUp(this._curHeroId);
+        MsgMgr.getInstance().getMsgHeroPromotion().requestHeroLvUp(this._curHeroId);
         
         //由于升级协议走的是sync,服务器只接受不返回,也就是客户端自己处理,满足条件就能达成
         let newMsgData = new Msg.HeroUpgradeA;
@@ -553,7 +553,7 @@ export class HeroPromotion extends PopBase {
             return;
         }
 
-        MsgMgr.getInstance().getMsgFormation().requestHeroTierUp(this._curHeroId);
+        MsgMgr.getInstance().getMsgHeroPromotion().requestHeroTierUp(this._curHeroId);
     }
 
     start() {

@@ -731,7 +731,20 @@ export class PopMgr extends PopCore  {
 
     }
 
-
-
+    /**
+     * @description: 英雄学院
+     * @param {*}
+     */
+    public popCollege(){
+        resources.load('prefabs_ui/college/pop_college', (err: any, res: any) => {
+            let p = instantiate(res);
+            this.pushWindow(p);
+            // let script = p.getComponent("PopCollege") as PopCollege;
+            // script.setIsMaskClose(true);
+            // script.setCloseCallBack(()=>{
+            //     console.log("关闭窗口回调")
+            // });
+        });
+    }
   
 }

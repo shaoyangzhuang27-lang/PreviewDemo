@@ -556,7 +556,7 @@ export class HeroesModel extends BaseModel{
 
     
     /**
-     * @description: 英雄书院
+     * @description: 设置学院英雄
      * @param {Msg} msg
      */
      public setCollegeHeroInfo(msg: Msg.SetCollegeHeroA) {
@@ -584,6 +584,31 @@ export class HeroesModel extends BaseModel{
             // TipsMgr.instance.ShowErrDialog(msg.Err);
             console.log(msg.errStr + " errCode=" + msg.err.toString());
         }        
+    }
+    /**
+     * @description: 英雄学院开启新格
+     * @param {openCollegeBlockA} msg
+     */
+    public openCollegeBlock(msg:Msg.OpenCollegeBlockA){
+        if (msg.err == Msg.TErrorCode.ERR_OK) {
+            this._collegeBlockLastAt.clear();  
+            let tmp= Object.keys(msg.CollegeBlockTimestamps);
+            tmp.forEach(key => {
+                this._collegeBlockLastAt.set(Number(key), msg.CollegeBlockTimestamps[key]);
+            });
+
+            this._gameModel.getPlayerModel().getPlayerInfo().CollegeMoney= msg.CollegeMoney;
+            
+            if (msg.consumeVrmb > 0)
+                this._gameModel.getPlayerModel().subVrmb(msg.consumeVrmb, Msg.TVRmbSubType.EVRmbSubType_CollegeUnlockBlock);
+
+            
+            //抛出通知 英雄书院  
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_open_college_block, msg);  
+        } else {
+            // TipsMgr.instance.ShowErrDialog(msg.Err);
+            console.log(msg.errStr + " errCode=" + msg.err.toString());
+        }
     }
     
     /**

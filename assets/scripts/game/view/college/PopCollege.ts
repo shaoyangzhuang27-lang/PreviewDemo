@@ -2,21 +2,19 @@
  * @Description: 英雄书院
  * @Author: 徐涛
  * @Date: 2021-03-30 19:49:03
- * @LastEditTime: 2021-03-31 20:03:36
+ * @LastEditTime: 2021-04-01 11:25:23
  */
-import { _decorator, Component, Node, Sprite, SpriteFrame, Label, ToggleContainer, EventHandler, Toggle, sys, resources, instantiate, Vec3, ScrollView, v3, math, Widget, Button } from 'cc';
+import { _decorator, Node, Label, resources, instantiate, ScrollView } from 'cc';
 const { ccclass, property } = _decorator;
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
 import { HeroData } from '../../model/datas/HeroData';
-import { HeroIcon } from '../hero/HeroIcon';
-import { HeroSelectIconStarUp } from '../hero/HeroSelectIconStarUp';
 import { PopMgr } from '../../control/PopMgr';
-import { MsgMgr } from '../../control/MsgMgr';
-import { XConsts } from "../../model/const/XConsts";
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { HeroModel } from '../hero/HeroModel';
-import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { ValueMgr } from "../../model/ValueMgr";
+import { XFuns } from '../../model/const/XFuns';
+import { XShare } from '../../model/const/XShare';
 
 @ccclass('PopCollege')
 export class PopCollege extends PopBase {
@@ -67,12 +65,30 @@ export class PopCollege extends PopBase {
     start() {
         super.start();
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_set_college_hero, this._notifySetCollegeHeroHandle, this);
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_open_college_block, this._notifyOpenCollegeBlockHandle, this);
         this._initView();
     }
 
     onDestroy() {
         super.onDestroy();
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_set_college_hero, this._notifySetCollegeHeroHandle, this);
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_open_college_block, this._notifyOpenCollegeBlockHandle, this);
+    }
+
+    private _notifyOpenCollegeBlockHandle(data: any = null){
+        if (!data) {
+            return;
+        }
+
+        let msg = data as Msg.OpenCollegeBlockA;
+        if (msg.err == Msg.TErrorCode.ERR_OK) {
+            this._refreshCollegeMoney();
+            //刷新槽位数
+            this._refreshSlotNum();
+            //刷新英雄列表
+            this._refreshCells();            
+            PopMgr.getInstance().popupPrompt(ValueMgr.getInstance().getLanguageString("UI_UnlockPetSuccess"));
+        }
     }
 
     private _notifySetCollegeHeroHandle(data: any = null) {
@@ -80,7 +96,7 @@ export class PopCollege extends PopBase {
             return;
         }
 
-        let msg = data as Msg.PutOnEquipA;
+        let msg = data as Msg.SetCollegeHeroA;
         if (msg.err == Msg.TErrorCode.ERR_OK) {
             //刷新槽位数
             this._refreshSlotNum();
@@ -94,7 +110,8 @@ export class PopCollege extends PopBase {
         this.lab_all_slot.string = "/" + GameModel.getInstance().getHeroesModel().getCollegeUnlockBlockNum().toString();
     }
 
-    private _refreshCells() {
+    private _refreshCells() {        
+        // let totalCount = XShare.getInstance().KCollegeBlockMaxNum;
 
     }
 
@@ -119,29 +136,32 @@ export class PopCollege extends PopBase {
     private _initView() {
         this._heroID = 0;
         this._pos = 0;
-        this.refreshCollegeMoney();
+        this._refreshCollegeMoney();
 
         let heroTop5 = GameModel.getInstance().getHeroesModel().heroesTop5;
+        this._heroModelArray.forEach(heroModel => {
 
-        // for (int i = 0; i < HeroRawImgList.Count; i++) {
-        //     if (i >= heroTop5.Count) {
-        //         HeroRawImgList[i].gameObject.SetActive(false);
-        //         continue;
-        //     }
-        //     if (heroTop5[i] != null) {
-        //         UIModelManager.instance.ShowModel(Constant.HeroModelPrefabs + heroTop5[i].Record.Prefab, HeroRawImgList[i], i);
-        //         HeroLvTexList[i].text = "Lv." + heroTop5[i].Level;
-        //         HeroRawImgList[i].gameObject.SetActive(true);
-        //     }
-        // }
+        });
 
-        // RefreshSlotNum();
+        for (let index = 0; index < this._heroModelArray.length; index++) {
+            const element = this._heroModelArray[index];
+            if (index >= heroTop5.Count) {
+                // this._heroModelArray[index].node.acitve=false;
+                continue;
+            }
 
-        // Lsr.totalCount = XLuaFunc.instance.KCollegeBlockMaxNum;
-        // Lsr.RefillCells();        
+            if(heroTop5.Get(index) ){
+                // this._heroModelArray[index].updateByHeroPerfabPath("");
+                this._heroLvtxtArray[index].string = "Lv." + heroTop5.Get(index).level;
+                // this._heroModelArray[index].node.acitve=true;
+            }
+        }
+        
+        this._refreshSlotNum();
+        this._refreshCells();        
     }
 
-    private refreshCollegeMoney() {
+    private _refreshCollegeMoney() {
         this.lab_has_fwsj.string = GameModel.getInstance().getPlayerModel().getPlayerInfo().CollegeMoney.toString();
     }
 

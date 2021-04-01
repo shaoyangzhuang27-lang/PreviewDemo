@@ -139,7 +139,7 @@ export class PopHeroEquipReplace extends PopBase {
         switch (event.target.getComponent(Button)) {
             case this.btn_drag:
                 console.log("equip_drag");
-                MsgMgr.getInstance().getMsgFormation().requestHeroTakeOffEquip(this._curHeroId, [this._curEquipId]);
+                MsgMgr.getInstance().getMsgHeroPromotion().requestHeroTakeOffEquip(this._curHeroId, [this._curEquipId]);
 
                 break;
             case this.btn_wear:
@@ -147,7 +147,7 @@ export class PopHeroEquipReplace extends PopBase {
                     return;
                 }
                 console.log("equip_wear");
-                MsgMgr.getInstance().getMsgFormation().requestHeroPutOnEquip(this._curHeroId, [this._replaceEquipId]);
+                MsgMgr.getInstance().getMsgHeroPromotion().requestHeroPutOnEquip(this._curHeroId, [this._replaceEquipId]);
                 break;        
         }
 
