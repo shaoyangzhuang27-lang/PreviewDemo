@@ -16,9 +16,6 @@ export class MsgHeroReplace extends MsgBase{
     }
 
     //阵营职业置换请求
-    // message ClassesExchangeR {
-    //     int64 heroID = 1;
-    // }
     public requestClassesExchangeR(dyncId: number)
     {
         let data = new Msg.ClassesExchangeR()
@@ -28,12 +25,6 @@ export class MsgHeroReplace extends MsgBase{
     }
 
     //阵营职业置换应答
-    // message ClassesExchangeA {
-    //     TErrorCode err = 1;
-    //     string errStr = 2;
-    //     ClassesExchangeInfo exchangeInfo = 3;
-    //     int32 consumeMiracleShard = 4;
-    // }
     public responeClassesExchangeA(msgId: number, msgData: Msg.ClassesExchangeA){
         if (msgData.err == Msg.TErrorCode.ERR_OK) {
             let playerModel = GameModel.getInstance().getPlayerModel();

@@ -1,9 +1,7 @@
 import { Color } from "cc";
 import { HeroData } from './HeroData';
 import { BaseModel } from "./BaseModel";
-import { GameModel } from "../GameModel";
 import { XConsts } from "../const/XConsts";
-import { NotifyMgr } from '../../control/NotifyMgr';
 
 export class HeroReplaceModel extends BaseModel {
 

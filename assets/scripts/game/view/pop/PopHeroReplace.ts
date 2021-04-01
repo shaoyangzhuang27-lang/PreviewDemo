@@ -6,13 +6,14 @@
  * @FilePath: \PreviewDemo\assets\scripts\game\view\pop\PopHeroReplace.ts
  */
 
-import { _decorator, Color, Component, Node, ScrollView, ToggleContainer, EventHandler, Toggle, Label, Event, instantiate, resources, Vec3, Sprite, UITransform, size, SpriteFrame, Layers, Button } from 'cc';
+import { _decorator, Color, Component, Node, ScrollView, ToggleContainer, EventHandler, Toggle, Label, Event, instantiate, Vec3, Sprite, UITransform, size, SpriteFrame, Layers, Button } from 'cc';
 const { ccclass, property } = _decorator;
 
 import { PopBase } from '../../../core/control/PopBase';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { PopMgr } from '../../control/PopMgr';
 import { MsgMgr } from '../../control/MsgMgr';
+import { ResMgr } from '../../control/ResMgr';
 import { GameModel } from '../../model/GameModel';
 import { XFuns } from '../../model/const/XFuns';
 import { XConsts } from "../../model/const/XConsts";
@@ -20,9 +21,11 @@ import { HeroData } from '../../model/datas/HeroData';
 import { HeroIcon } from '../hero/HeroIcon';
 import { HeroModel } from '../hero/HeroModel';
 import { HeroSelectIcon } from '../hero/HeroSelectIcon';
+import { ResCore } from '../../../core/control/ResCore';
 
 @ccclass('PopHeroReplace')
 export class PopHeroReplace extends PopBase {
+    private _isDel = false;
     private _currFragment: number = 0;          // 当前灵魂碎片
     private _currConsumeFragment: number = 0;   // 当前需消耗灵魂碎片
     private _selectHeroData: HeroData | null = null as unknown as HeroData;      // 选择置换的英雄
@@ -152,7 +155,9 @@ export class PopHeroReplace extends PopBase {
         this._covertHeroData = null
         
         this._refrushHeroReplaceView()
-        this._initHeroItems()       
+        this._initHeroItems()
+        
+        PopMgr.getInstance().popHeroChangeResult(data.exchangeInfo.newHeroStaticID)
     }
 
     private _initHeroItems() : void {
@@ -160,7 +165,7 @@ export class PopHeroReplace extends PopBase {
             this.scrollContent.removeAllChildren()
         }
 
-        resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
             this._heroItemsMap.clear()
 
             let heroReplaceModel = GameModel.getInstance().getHeroReplaceModel()
@@ -176,7 +181,7 @@ export class PopHeroReplace extends PopBase {
                 this._heroItemsMap.set(heroData.getDyncID(), heroIcon);
             }
             this._frushHeroByCamp()
-        });
+        },"PopHeroReplace");
     }
 
     private _refrushHeroReplaceView() : void {
@@ -261,14 +266,14 @@ export class PopHeroReplace extends PopBase {
     
     //设置星星
     private _setStar(star:number, starlist: Node[]) : void {
-        let grade:number = Math.floor(star/5);
+        let grade:number = Math.ceil(star/5) - 1;
         let yu:number = (star - 1) % 5 + 1;
 
         let starName = this._starNameList[grade];
         let starPath = "ui/common/icon/" + starName + "/spriteFrame"
         for (let index = 0; index < starlist.length; index++) {
             starlist[index].active = index < yu || yu == 0
-            if (starlist[index].active && grade > 0) {
+            if (starlist[index].active) {
                 this._reloadSprFram(starlist[index], starPath);
             }            
         }
@@ -394,12 +399,12 @@ export class PopHeroReplace extends PopBase {
     }
 
     private _reloadSprFram(objNode: Node, path: string) : void {
-        resources.load(path, (err,spriteFrame:SpriteFrame) => {
+        ResMgr.getInstance().loadSpriteFrame(path, (err,spriteFrame:SpriteFrame | null) => {
             if(!err) {
                 let sprite = objNode.getComponent(Sprite) as Sprite;
                 sprite.spriteFrame = spriteFrame;
             }
-        });   
+        },"PopHeroReplace");   
     }
 
     private _showTips(info : XStruct.common_one_info.Record) : void {
@@ -450,6 +455,28 @@ export class PopHeroReplace extends PopBase {
         }
 
         return script
+    }
+
+    /**
+     * 关闭当前窗口
+     */
+    public delSelf(){
+        if(this._isDel)return;
+        this._isDel = true;
+        if (this._covertHeroData == null) {
+            PopMgr.getInstance().deleteWindow();
+            return
+        }
+        let info: XStruct.common_one_info.Record ={
+            title :"确定",
+            content : "确定放弃此次置换么?",
+            mode : 2,
+            isRichLabMode : false,
+            isChangeBtnSpriteFrame : false,
+            submitContent:"" ,
+            cancelContent:"" 
+        };           
+        this._showTips(info);
     }
 }
 
