@@ -2,7 +2,7 @@
  * @Description: 学院界面内待选择英雄槽位
  * @Author: 徐涛
  * @Date: 2021-03-30 16:03:26
- * @LastEditTime: 2021-04-01 15:26:01
+ * @LastEditTime: 2021-04-01 16:17:11
  */
 import { _decorator, Component, Node, Sprite, Label, Button, SpriteFrame, resources, math, UITransform, EventTouch, Vec3, instantiate } from 'cc';
 const { ccclass, property } = _decorator;
@@ -122,11 +122,14 @@ export class CollegeItem extends Component {
 
             //等级等于学院等级
             console.log(heroData.level);
+            console.log(GameModel.getInstance().getHeroesModel().heroCollegeLevel);
+            heroData.level= GameModel.getInstance().getHeroesModel().heroCollegeLevel;
             this._heroData = heroData;
             this._isCanDefaultCallBack = false;
             if (this._heroIcon && this._heroIcon instanceof HeroIcon) {
-                this._heroIcon.setHeroData(heroData);
+                this._heroIcon.setHeroInfo(heroData.record, GameModel.getInstance().getHeroesModel().heroCollegeLevel);
                 this._heroIcon.node.active = true;
+                
             } else {
                 this._heroIcon = null;
                 let target = this;
@@ -166,8 +169,9 @@ export class CollegeItem extends Component {
         this.img_bg.node.on(Node.EventType.TOUCH_END, (event: EventTouch) => {
             if (target._isCanDefaultCallBack) {
                 PopMgr.getInstance().popHeroCollegeNoticeView();
+            }else{
+                PopMgr.getInstance().popHeroCollegeSelectHeroView();   
             }
-            // PopMgr.getInstance().popHeroCollegeSelectHeroView();
         }, this);
     }
 

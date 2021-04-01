@@ -30,10 +30,13 @@
       },
       {
         "__id__": 99
+      },
+      {
+        "__id__": 101
       }
     ],
     "_prefab": {
-      "__id__": 101
+      "__id__": 103
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -1524,7 +1527,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "注意",
+    "_string": "",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 25,
@@ -1654,7 +1657,7 @@
       "b": 253,
       "a": 255
     },
-    "_string": "符文水晶不足，是否话费500钻石解锁1个槽位?",
+    "_string": "",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 18,
@@ -2241,6 +2244,47 @@
   {
     "__type__": "cc.CompPrefabInfo",
     "fileId": "59kljxtshCdbM7YITyMPyo"
+  },
+  {
+    "__type__": "9c2a8diYh9FCIaAhg+sTzRA",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 102
+    },
+    "btn_close": {
+      "__id__": 21
+    },
+    "btn_cancel": {
+      "__id__": 46
+    },
+    "window": {
+      "__id__": 12
+    },
+    "mask": {
+      "__id__": 2
+    },
+    "btn_submit": {
+      "__id__": 32
+    },
+    "lab_title": {
+      "__id__": 63
+    },
+    "lab_content": {
+      "__id__": 69
+    },
+    "layout_cost": {
+      "__id__": 75
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "3fvOfmKSxKmp5xA7VzNrVT"
   },
   {
     "__type__": "cc.PrefabInfo",

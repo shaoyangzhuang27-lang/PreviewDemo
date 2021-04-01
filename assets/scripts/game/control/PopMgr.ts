@@ -38,6 +38,7 @@ import {PubWonderRewardList} from "../view/pub/PubWonderRewardList";
 import { PopSettingView } from '../view/pop/PopSettingView';
 import { PopServerListView } from '../view/pop/PopServerListView';
 import { PopCollege } from '../view/college/PopCollege';
+import { PopCollegeNotice } from '../view/college/PopCollegeNotice';
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
@@ -147,17 +148,20 @@ export class PopMgr extends PopCore  {
     }
 
     /**
-     * @description:  英雄书院弹窗
+     * @description:  英雄学院 全屏弹窗
      * @param 
      */
     public popHeroCollegeView(closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
-        // resources.load('prefabs_ui/pop/pop_college', (err:any,res:any)=>{
-        //     let p = instantiate( res );
-        //     this.pushWindow(p);
-        //     let script = p.getComponent("HeroPromotion");
-        //     script.setIsMaskClose(isMaskClose);
-        // } );
+        resources.load('prefabs_ui/college/pop_college', (err: any, res: any) => {
+            let p = instantiate(res);
+            this.pushFullScreen(p);
+            let script = p.getComponent("PopCollege") as PopCollege;
+            script.setIsMaskClose(true);
+            // script.setCloseCallBack(()=>{
+            //     console.log("关闭窗口回调")
+            // });
+        });
     }
     
     /**
@@ -166,7 +170,13 @@ export class PopMgr extends PopCore  {
      */
     public popHeroCollegeNoticeView(closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
+        resources.load('prefabs_ui/college/pop_college_notice', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
 
+            let script = p.getComponent("PopCollegeNotice") as PopCollegeNotice;
+            script.setIsMaskClose(isMaskClose);
+        } );
     }
 
     /**
@@ -732,20 +742,5 @@ export class PopMgr extends PopCore  {
 
     }
 
-    /**
-     * @description: 英雄学院 全屏窗
-     * @param {*}
-     */
-    public popCollege(){
-        resources.load('prefabs_ui/college/pop_college', (err: any, res: any) => {
-            let p = instantiate(res);
-            this.pushFullScreen(p);
-            let script = p.getComponent("PopCollege") as PopCollege;
-            script.setIsMaskClose(true);
-            // script.setCloseCallBack(()=>{
-            //     console.log("关闭窗口回调")
-            // });
-        });
-    }
   
 }

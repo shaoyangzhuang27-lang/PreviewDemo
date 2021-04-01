@@ -102,7 +102,7 @@ export class MainCity extends Component {
 
         // 试炼， 暂时先给英雄学院用
         if (buildName == "building_23") {
-            PopMgr.getInstance().popCollege();
+            PopMgr.getInstance().popHeroCollegeView();
             return;
         }
 

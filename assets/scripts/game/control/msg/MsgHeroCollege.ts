@@ -2,7 +2,7 @@
  * @Description: 英雄学院协议收发处理
  * @Author: 徐涛
  * @Date: 2021-04-01 11:32:09
- * @LastEditTime: 2021-04-01 11:35:30
+ * @LastEditTime: 2021-04-01 20:36:06
  */
 import { NetCallFunc } from "../../../core/network/NetInterface";
 import { GameModel } from "../../model/GameModel";
@@ -12,8 +12,8 @@ export class MsgHeroCollege extends MsgBase {
 
     public initData() {
         this.responeMap = new Map<number, [any, NetCallFunc, any]>([
-            [Msg.MsgType.TheSetCollegeHeroA, [Msg.HeroUpgradeA, this.responeSetCollegeHero, this]],
-            [Msg.MsgType.TheOpenCollegeBlockA, [Msg.SyncHeroLocked, this.responeOpenCollegeBlock, this]],
+            [Msg.MsgType.TheSetCollegeHeroA, [Msg.SetCollegeHeroA, this.responeSetCollegeHero, this]],
+            [Msg.MsgType.TheOpenCollegeBlockA, [Msg.OpenCollegeBlockA, this.responeOpenCollegeBlock, this]],
         ]);
     }
 
