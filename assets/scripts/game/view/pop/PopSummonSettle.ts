@@ -91,6 +91,8 @@ export class PopSummonSettle extends PopBase {
         console.log("zzzzzzzzzzzz diamond", GameModel.getInstance().getHeroPubModel().getIsAutoDecompose());
         // console.log("palyer heros", GameModel.getInstance().getHeroesModel().getHeroList());
         // this.initHeroModelInfo(3042500);
+
+        this.btn_fragment_sure.on(Node.EventType.TOUCH_END, this._onBtnFragmentSureClick, this)
     }
 
     
@@ -132,6 +134,11 @@ export class PopSummonSettle extends PopBase {
         }
     }
 
+
+    public _onBtnFragmentSureClick(event : any)
+    {
+        PopMgr.getInstance().deleteWindow();
+    }
     public _onBtnSummonClick(event : any)
     {
         let summonHeroR : Msg.SummonHeroR = {
@@ -501,5 +508,24 @@ export class PopSummonSettle extends PopBase {
             PopMgr.getInstance().popMultiItemRewardWindow(null,arrProp);         
         }
        
+    }
+
+    public initUIFromExchange(id: number)
+    {
+        if(this.scroll_heroicon_view.content)
+        {
+            this.scroll_heroicon_view.content.removeAllChildren()
+        }
+
+        this.setShowScrollViewType(1)
+        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+            let reclineup_item = instantiate( res );
+            let script = reclineup_item.getComponent(HeroIcon);
+            reclineup_item.scale = new Vec3(0.75,0.75,1);
+            let subWidget = reclineup_item.getComponent(UITransform) as UITransform;
+            subWidget.contentSize = new Size(113,113);
+            script.initUIHeroIconInfo(id,this._popWindowType);
+            this.scroll_heroicon_view.content?.addChild(reclineup_item);   
+        });        
     }
 }
