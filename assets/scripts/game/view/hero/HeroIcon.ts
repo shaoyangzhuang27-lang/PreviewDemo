@@ -10,6 +10,7 @@ import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { XConsts } from "../../model/const/XConsts";
 import { HeroData } from '../../model/datas/HeroData';
 import {GameModel} from "../../model/GameModel";
+import { ResMgr } from '../../control/ResMgr';
 
 @ccclass('HeroIcon')
 export class HeroIcon extends Component {
@@ -63,14 +64,16 @@ export class HeroIcon extends Component {
         {
             this.img_camp.active = true;
             let campIconPath:string = "ui/common/team/" + campName + "/spriteFrame";
-            resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
-            {
-                if(!err)
-                {
-                    let sprite = this.img_camp.getComponent(Sprite) as Sprite;
-                    sprite.spriteFrame = spriteFrame;
-                }
-            });            
+            // resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
+            // {
+            //     if(!err)
+            //     {
+            //         let sprite = this.img_camp.getComponent(Sprite) as Sprite;
+            //         sprite.spriteFrame = spriteFrame;
+            //     }
+            // });
+            let sprite = this.img_camp.getComponent(Sprite) as Sprite;
+            this._resourceLoad(campIconPath,sprite);         
         }
         else
         {
@@ -95,9 +98,11 @@ export class HeroIcon extends Component {
     // }
 
     //资源替换
-    private _resourceLoad (path:string,obj:any)
+    private _resourceLoad(path:string,obj:any)
     {
-        resources.load(path, (err,spriteFrame:SpriteFrame) =>
+        // let strs = path.split("/"); 
+        // let name = strs[strs.length-2];
+        ResMgr.getInstance().loadSpriteFrame(path,(err,spriteFrame:SpriteFrame | null) =>
         {
             console.log("errerrerrerrerrerrerr",err)
             if(!err)
@@ -106,6 +111,15 @@ export class HeroIcon extends Component {
                 sprite.spriteFrame = spriteFrame;
             }
         });
+        // resources.load(path, (err,spriteFrame:SpriteFrame) =>
+        // {
+        //     console.log("errerrerrerrerrerrerr",err)
+        //     if(!err)
+        //     {
+        //         let sprite = obj.getComponent(Sprite) as Sprite;
+        //         sprite.spriteFrame = spriteFrame;
+        //     }
+        // });
     }
 
     private _setStar(star:number,firstid:number = 0)

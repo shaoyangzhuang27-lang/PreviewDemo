@@ -4,13 +4,11 @@
  * @version 1.0.0,2021.3.1
  */
 import { _decorator, Component, Node,Vec3,tween,Scene, EventTouch, UITransform, math, view, UIOpacity,Button} from 'cc';
+import { PopType,PopBasic } from './PopCore';
 import { PopMgr } from '../../game/control/PopMgr';
 const { ccclass, property } = _decorator;
-export enum PopType {
-    window,fullscreen,
-}
 @ccclass('PopBase')
-export class PopBase extends Component {
+export class PopBase extends PopBasic {
 
     @property({type: Node, displayName: "关闭按钮[选填项]"})
     public btn_close:Node | null = null;
@@ -31,8 +29,8 @@ export class PopBase extends Component {
     private _isLive:boolean = false;
     private _isMaskClose:boolean = true;
 
-    private _showTime:number = 0.15;
-    private _hideTime:number = 0.15;
+    private _showTime:number = 0.2;
+    private _hideTime:number = 0.2;
     private _isNeedHide:boolean = true;
     //关闭事件
     protected _closeFunc:Function | null = null;
@@ -41,6 +39,7 @@ export class PopBase extends Component {
     //临时变量
     private _hasPop = false;
     private _hasDel = false;
+
 
     //弹窗初始化-----
     onLoad(){
@@ -58,7 +57,6 @@ export class PopBase extends Component {
 
         this.systemShow();
     }
-
     /**
      * 弹出当前窗口
      * @param popType 窗口类型
