@@ -4281,7 +4281,9 @@
       "__id__": 31
     },
     "btn_cancel": null,
-    "window": null,
+    "window": {
+      "__id__": 12
+    },
     "mask": {
       "__id__": 2
     },
