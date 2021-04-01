@@ -40,6 +40,8 @@ import { PopSettingView } from '../view/pop/PopSettingView';
 import { PopServerListView } from '../view/pop/PopServerListView';
 import { HeroPromotion } from '../view/hero_promotion/HeroPromotion';
 import { PopBattleTeam } from '../view/pop/PopBattleTeam';
+import {PubWonderHeartHero} from "../view/pub/PubWonderHeartHero";
+// import {PubWonderSummonSettle} from "../view/pub/PubWonderSummonSettle";
 import { PopHeroReplace } from '../view/pop/PopHeroReplace';
 
 export class PopMgr extends PopCore  {
@@ -617,6 +619,29 @@ export class PopMgr extends PopCore  {
         } );
     }
 
+    //奇迹召唤心愿英雄详情
+    public popPubWonderHeartHeroWindow(isMaskClose:boolean = true){
+        resources.load('prefabs_ui/pub/pub_wonder_hearthero', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            let script = p.getComponent("PubWonderHeartHero") as PubWonderHeartHero;
+            script.setIsMaskClose(isMaskClose);
+            
+        } );
+    }
+
+    //    //奇迹召唤心愿英雄详情
+    // public popPubWonderSummonSettleWindow(isMaskClose:boolean = true){
+    //     resources.load('prefabs_ui/pub/pub_wonder_summonsettle', (err:any,res:any)=>{
+    //         let p = instantiate( res );
+    //         this.pushWindow(p);
+
+    //         let script = p.getComponent("PubWonderSummonSettle") as PubWonderSummonSettle;
+    //         script.setIsMaskClose(isMaskClose);
+            
+    //     } );
+    // }
     /**
      * 打开图鉴详情
      * @param sid 英雄静态id
@@ -714,7 +739,7 @@ export class PopMgr extends PopCore  {
       /**
      * 弹出礼品兑换框
      */
-    
+
        public popGiftCodeExchangeWindow(){
         resources.load('prefabs_ui/pop/pop_giftcode_exchange', (err: any, res: any) => {
             let p = instantiate(res);
@@ -722,6 +747,6 @@ export class PopMgr extends PopCore  {
            // let script = p.getComponent("PopGiftCodeExchange") as PopGiftCodeExchange;
 
         });
-
+  
     }
 }

@@ -408,6 +408,7 @@ export class PopHeroPub extends PopBase {
         } );
 
 
+        GameModel.getInstance().getHeroPubModel().initWonderHeartHeroIdList();
         resources.load('prefabs_ui/pub/pub_wonder_summon', (err:any,res:any)=>{
             let p = instantiate( res );
             this.node_wonder?.addChild(p);

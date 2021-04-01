@@ -2,10 +2,10 @@ import { assetManager,AssetManager,Prefab,resources,instantiate, director, Sprit
 
 export enum ResType{
     screen,//场景预加载,加载完成后,切换场景自动释放
-    prefab,//当前场景必要资源,切换场景后手动释放
-    spriteframes,//每个场景都需要使用到的通用资源,加载一次,后期不做释放操作
-    spriteframe,
-    single//临时使用资源,随用随删,不在场景加载界面中使用
+    prefab,//通用预制体资源,切换场景判断是否需要释放
+    spriteframes,//通用图像资源,切换场景判断是否需要释放
+    spriteframe,//通用图像资源,切换场景判断是否需要释放
+    //single//临时使用资源,随用随删,不在场景加载界面中使用
 }
 
 interface LoadData{
@@ -16,21 +16,14 @@ interface LoadData{
     resName:string, //资源名
     haveloaded:boolean,//是否加载完成
 }
-interface LoadDataT{
-    resUrl:string,  //资源路径
-    res:Asset,//资源
-}
-//push资源去重--完成
-//资源整理获取接口--未完成
 
 export class ResCore{
 
     //通用资源
     protected _loadArr:Array<LoadData> = [];
-    protected _tempArr:Map<string,Map<string,any>> =  new Map();
+    protected _tempArr:Map<string,Map<string,any>> =  new Map();//弃用-----------------
     //界面资源
     protected _viewArr:Map<string,Map<string,Asset>> =  new Map<string,Map<string,Asset>>();
-    // protected _viewArr:Map<string,Array<LoadDataT>> = new Map<string,Array<LoadDataT>>();
 
 
     /** 
@@ -41,14 +34,9 @@ export class ResCore{
      */
     public loadSpriteFrame(url:string,com_callback:(err: Error | null, data: SpriteFrame | null) => void, key:string = "default"){
         
-        let strs = url.split("/");
-        let fileName = url;
-        if(strs.length > 1){
-            fileName = strs[strs.length-2];
-        }
 
         //通用资源有资源就用通用资源
-        let spriteFrame = this._getSpriteFrameByName(fileName);
+        let spriteFrame = this._getSpriteFrameByUrl(url);
         if(spriteFrame){
             com_callback(null,spriteFrame);
             return;
@@ -68,7 +56,7 @@ export class ResCore{
     }
     
     /** 
-     * 加载图片spriteframe资源
+     * 加载预制体资源
      * @param url           预制体资源路径
      * @param com_callback  回调函数,返回需要使用的prefab
      * @param key           当前界面唯一关键字,用于关闭界面时清理资源使用标记,各个界面不能重复,通用资源这个关键字无效
@@ -127,6 +115,52 @@ export class ResCore{
     }
 
 
+    //将资源推入加载队列
+    protected pushRes(resUrl:string,resType:ResType,isRef:boolean,res:any = null,resName:string = ""){
+        let item = this._getLoadArrItem(resUrl);
+        if(!item){
+            let d:LoadData = {
+                resUrl:resUrl,
+                resType:resType,
+                isRef:true,
+                res:null,
+                resName:resName,
+                haveloaded:false,
+            }
+            this._loadArr.push(d);
+        }
+    }
+    //切换场景时确定是否需要清理资源
+    protected popRes(resUrl:string){
+        let item = this._getLoadArrItem(resUrl);
+        if(!item )return;
+        if(!item.haveloaded)return;
+
+        switch(item.resType){
+            case ResType.spriteframes:
+                let resMap = item.res as Map<string,SpriteFrame>;
+                resMap.forEach((value,key)=>{
+                    value.decRef();
+                })
+            break;
+            case ResType.prefab:
+                let res = item.res as Prefab;
+                res.decRef();
+            break;
+            case ResType.spriteframe:
+                let spriteFrame = item.res as SpriteFrame;
+                spriteFrame.decRef();
+            break;
+        }
+        
+        for (let i = 0; i < this._loadArr.length; i++) {
+            const element = this._loadArr[i];
+            if(element.resUrl == resUrl){
+                this._loadArr.splice(i, 1);
+                break;
+            }
+        }
+    }
 
     public startLoad(pro_callback:any,com_callback:any){
         let load_fun = (loadArr:Array<LoadData>,index:number)=> {
@@ -190,25 +224,7 @@ export class ResCore{
     }
 
 
-    
-    protected pushRes(resUrl:string,resType:ResType,isRef:boolean,res:any = null,resName:string = ""){
-        let item = this._getLoadArrItem(resUrl)
-        if(!item){
-            let d:LoadData = {
-                resUrl:resUrl,
-                resType:resType,
-                isRef:true,
-                res:null,
-                resName:resName,
-                haveloaded:false,
-            }
-            this._loadArr.push(d);
-        }
-    }
-    protected popRes(resUrl:string){
-        this._removeLoadArrItem(resUrl);
-    }
-
+    //加载一个资源后,判断是否加载下一个
     private _judgeComplete(index:number,com_callback:any,goon_callback:any){
         this._loadArr[index].haveloaded = true;
         index++;
@@ -218,7 +234,8 @@ export class ResCore{
             goon_callback(this._loadArr,index);
         }
     }
-    private _getLoadArrItem(str:string){
+    //获取通用资源数据
+    private _getLoadArrItem(str:string):LoadData | null{
         for (let i = 0; i < this._loadArr.length; i++) {
             const element = this._loadArr[i];
             if(element.resUrl == str){
@@ -227,27 +244,23 @@ export class ResCore{
         }
         return null;
     }
-    private _removeLoadArrItem(str:string){
-        for (let i = 0; i < this._loadArr.length; i++) {
-            const element = this._loadArr[i];
-            if(element.resUrl == str){
-                element.res.decRef();
-                this._loadArr.splice(i, 1);
-                break;
-            }
-        }
-    }
 
-    
-    private _getSpriteFrameByName(name:string){
+    //获取通用资源spriteframe
+    private _getSpriteFrameByUrl(url:string){
+        let strs = url.split("/");
+        let fileName = url;
+        if(strs.length > 1){
+            fileName = strs[strs.length-2];
+        }
         for (let i = 0; i < this._loadArr.length; i++) {
             let loadData = this._loadArr[i];
-            if(loadData.resType == ResType.spriteframes && loadData.res.get(name)){
+            if(loadData.resType == ResType.spriteframes && loadData.res.get(fileName)){
                 return loadData.res.get(name) as SpriteFrame
             }
         }
         return null;
     }
+    //获取通用资源预制体
     private _getPrefabByUrl(url:string){
         for (let i = 0; i < this._loadArr.length; i++) {
             let loadData = this._loadArr[i];
@@ -257,6 +270,7 @@ export class ResCore{
         }
         return null;
     }
+    //获取临时资源
     private _getViewAsset(url:string,key:string){
         let m = this._viewArr.get(key);
         if(m){
@@ -265,7 +279,7 @@ export class ResCore{
         }
         return null;
     }
-
+    //记录临时资源
     private _recordRes(url:string,obj:Asset,key:string){
         let m = this._viewArr.get(key);
         if(!m){
@@ -279,7 +293,9 @@ export class ResCore{
             n.addRef();
         }
     }
-    //-------------------------------------------------------------------------------------------
+
+
+    ////弃用------------------------------------------------------------------------------------------------------------
     /*
     * @method loadTempRes
     * @for ResMgr

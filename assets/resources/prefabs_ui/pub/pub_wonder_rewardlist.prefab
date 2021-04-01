@@ -1961,7 +1961,9 @@
     "__prefab": {
       "__id__": 92
     },
-    "btn_close": null,
+    "btn_close": {
+      "__id__": 27
+    },
     "btn_cancel": null,
     "window": {
       "__id__": 12
