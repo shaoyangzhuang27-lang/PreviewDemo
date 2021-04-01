@@ -1,4 +1,4 @@
-import { assetManager,AssetManager,Prefab,resources,instantiate, director } from 'cc';
+import { assetManager,AssetManager,Prefab,resources,instantiate, director, SpriteFrame } from 'cc';
 import {ResCore, ResType} from "../../core/control/ResCore";
 
 export class ResMgr extends ResCore{
@@ -8,19 +8,35 @@ export class ResMgr extends ResCore{
     }
     //加载登陆必要资源
 
+    //预加载游戏资源
+    private _hasPreLoadRes:boolean = false;
+    public preloadRes(){
+        if(this._hasPreLoadRes)return;
+        this._hasPreLoadRes = true;
+        resources.preloadDir("prefabs_ui/",Prefab);
+        resources.preloadDir("ui/",SpriteFrame);
+    }
+
+
     //加载游戏必要资源(主ui资源,其他ui资源[是否另外加载待定])
     public loadGameNecessaryRes(){
-        // this.pushRes("common",ResType.common,true,null,"通用资源");
-        this.pushRes("ui/common/bg_mask",ResType.common,true,null,"通用资源");
+        this.pushRes("ui/common",ResType.spriteframes,true,null,"通用资源");
     }
     //卸载游戏必要资源(主ui资源)
     public releaseGameNecessaryRes(){
-        this.popRes("ui/common/bg_mask");
+        this.popRes("ui/common");
+    }
+
+    public loadCommonPrefabs(){
+        this.pushRes("prefabs_ui/main/hero_icon",ResType.prefab,true,null,"英雄头像");
+        this.pushRes("prefabs_ui/main/hero_selecticon",ResType.prefab,true,null,"英雄选择框");
+        this.pushRes("prefabs_ui/main/team",ResType.prefab,true,null,"英雄队伍1");
+        this.pushRes('prefabs_ui/pop/pop_heropromotion',ResType.prefab,true,null,"英雄队伍2");
     }
 
     //加载主ui资源-------------------------
     public loadMainUI(){
-        this.pushRes("prefabs_ui/main_ui",ResType.screendynamic,true,null,"主界面");
+        this.pushRes("prefabs_ui/main_ui",ResType.prefab,true,null,"主界面");
     }
     public releaseMainUI(){
         this.popRes("prefabs_ui/main_ui");
@@ -29,7 +45,7 @@ export class ResMgr extends ResCore{
 
     //加载主城资源-----------------------------
     public loadMainCity(){
-        this.pushRes("prefabs_ui/main_city",ResType.screendynamic,true,null,"主城");
+        this.pushRes("prefabs_ui/main_city",ResType.prefab,true,null,"主城");
     }
     public releaseMainCity(){
         this.popRes("prefabs_ui/main_city");
@@ -38,13 +54,13 @@ export class ResMgr extends ResCore{
 
     //加载主界面场景---------------------------
     public loadMainScene(){
-        this.pushRes("scene_main",ResType.screenstatic,false,null,"主场景");
+        this.pushRes("scene_main",ResType.screen,false,null,"主场景");
     }
     //加载主界面场景---------------------------
 
     //加载战斗场景------------------------------
     public loadBattleScene(){
-        this.pushRes("battle",ResType.screenstatic,false,null,"战斗场景");
+        this.pushRes("battle",ResType.screen,false,null,"战斗场景");
     }
     //加载战斗场景------------------------------
 

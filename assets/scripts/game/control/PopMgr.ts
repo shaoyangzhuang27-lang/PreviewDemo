@@ -1,4 +1,4 @@
-import {  Node,resources,instantiate,LabelComponent,Vec3,tween,Scene, Script } from 'cc';
+import {  Node,resources,instantiate,LabelComponent,Vec3,tween,Scene, Script, Prefab } from 'cc';
 import { PopSimple } from "../view/pop/PopSimple";
 import { PopRisingStarTower } from "../view/pop/PopRisingStarTower";
 import { PopStarUpResult } from "../view/pop/PopStarUpResult";
@@ -35,9 +35,13 @@ import { PopHaloView } from '../view/pop/PopHaloView';
 import { TipShareHeroToChat } from '../view/TipShareHeroToChat';
 import { PopPlayerLevelUpAward } from '../view/pop/PopPlayerLevelUpAward';
 import {PubWonderRewardList} from "../view/pub/PubWonderRewardList";
+import { ResMgr } from './ResMgr';
+import { PopSettingView } from '../view/pop/PopSettingView';
+import { PopServerListView } from '../view/pop/PopServerListView';
+import { HeroPromotion } from '../view/hero_promotion/HeroPromotion';
+import { PopBattleTeam } from '../view/pop/PopBattleTeam';
 import {PubWonderHeartHero} from "../view/pub/PubWonderHeartHero";
 // import {PubWonderSummonSettle} from "../view/pub/PubWonderSummonSettle";
-
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
@@ -88,6 +92,32 @@ export class PopMgr extends PopCore  {
         } );
     }
 
+    //弹出角色信息设置界面
+    public popSettingView()
+    {
+        resources.load('prefabs_ui/pop/pop_setting', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopSettingView") as PopSettingView;
+            script.setIsMaskClose(false);
+        } );
+    }
+
+    //弹出服务器选择窗口
+    public popServerListView()
+    {
+        resources.load('prefabs_ui/pop/pop_serverlist', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopServerListView") as PopServerListView;
+            script.setIsMaskClose(false);
+
+            script.setData()
+        } );
+    }
+
     //type
     /**
      * 阵容更换界面  
@@ -97,9 +127,9 @@ export class PopMgr extends PopCore  {
     {
         resources.load('prefabs_ui/pop/pop_battleteam', (err:any,res:any)=>{
             let p = instantiate( res );
-            this.pushWindow(p)
+            this.pushWindow(p);
 
-            let script = p.getComponent("PopBattleTeam");
+            let script = p.getComponent("PopBattleTeam") as PopBattleTeam;
             // script.setIsMaskClose(isMaskClose);
             // script.setInitTeamView(type)
         } );
@@ -111,10 +141,12 @@ export class PopMgr extends PopCore  {
      */
     public popHeroPromotionView(heroId:number=0,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
-        resources.load('prefabs_ui/pop/pop_heropromotion', (err:any,res:any)=>{
-            let p = instantiate( res );
+        
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_heropromotion', (err:any,res:Prefab | null)=>{
+        // resources.load('prefabs_ui/pop/pop_heropromotion', (err:any,res:any)=>{
+            let p = instantiate( res as Prefab );
             this.pushWindow(p);
-            let script = p.getComponent("HeroPromotion");
+            let script = p.getComponent("HeroPromotion") as HeroPromotion;
             script.setIsMaskClose(isMaskClose);
             script.setCurrentHeroId(heroId);
         } );
@@ -688,7 +720,17 @@ export class PopMgr extends PopCore  {
 
     }
 
+      /**
+     * 弹出礼品兑换框
+     */
 
+       public popGiftCodeExchangeWindow(){
+        resources.load('prefabs_ui/pop/pop_giftcode_exchange', (err: any, res: any) => {
+            let p = instantiate(res);
+            this.pushWindow(p);
+           // let script = p.getComponent("PopGiftCodeExchange") as PopGiftCodeExchange;
 
+        });
   
+    }
 }

@@ -12,11 +12,11 @@ enum MsgType {
 	TheCopyInfo = 1;
 	TheCrystalInfo = 2;
 	TheRoleSkillInfo = 3;
-	TheTalentSkillInfo = 4;
-	TheEventCopyInfo = 5;
-	TheLimitTaskInfo = 6;
-	TheShopGoods = 7;
-	TheHeroMission = 8;
+	TheTalentSkillInfo = 4;
+	TheEventCopyInfo = 5;
+	TheLimitTaskInfo = 6;
+	TheShopGoods = 7;
+	TheHeroMission = 8;
 	TheHeroGoods = 9;
 	TheAchievementInfo = 10;
 	TheHeroInfo = 11;
@@ -36,7 +36,7 @@ enum MsgType {
 	TheNormalLoot = 25;
 	TheLootObject = 26;
 	TheLootObjectList = 27;
-	TheGameConfig = 28;
+	TheGameConfig = 28;
 	ThePVPOpponentInfo = 29;
 	TheClassesExchangeInfo = 30;
 	TheOtherPlayerInfo = 31;
@@ -368,39 +368,39 @@ enum MsgType {
 	TheGMLog = 357;
 	TheGMGetLogsR = 358;
 	TheGMGetLogsA = 359;
-	TheGuildBaseInfo = 360;
-	TheGuildInfo = 361;
-	TheGuildChangeR = 362;
-	TheGuildChangeA = 363;
-	TheGuildFindR = 364;
-	TheGuildFindA = 365;
-	TheGuildRightR = 366;
-	TheGuildRightA = 367;
-	TheGuildMemberInfo = 368;
-	TheGuildMemberR = 369;
-	TheGuildMemberA = 370;
-	TheGuildAllR = 371;
-	TheGuildAllA = 372;
-	TheGuildApplyA = 373;
-	TheGuildApplyR = 374;
-	TheGuildApplyNum = 375;
-	TheGuildSelfR = 376;
-	TheGuildSelf = 377;
-	TheGuildMsg = 378;
-	TheGuildSignR = 379;
-	TheGuildSignA = 380;
-	TheGuildMillR = 381;
-	TheGuildMillA = 382;
-	TheGuildMillBeginR = 383;
-	TheGuildMillBeginA = 384;
-	TheGuildMillGetR = 385;
-	TheGuildMillGetA = 386;
-	TheGuildMillAddR = 387;
-	TheGuildMillAddA = 388;
-	TheGuildRankR = 389;
-	TheGuildRankA = 390;
-	TheGuildNotifyInfo = 391;
-	TheGuildNotify = 392;
+	TheGuildBaseInfo = 360;
+	TheGuildInfo = 361;
+	TheGuildChangeR = 362;
+	TheGuildChangeA = 363;
+	TheGuildFindR = 364;
+	TheGuildFindA = 365;
+	TheGuildRightR = 366;
+	TheGuildRightA = 367;
+	TheGuildMemberInfo = 368;
+	TheGuildMemberR = 369;
+	TheGuildMemberA = 370;
+	TheGuildAllR = 371;
+	TheGuildAllA = 372;
+	TheGuildApplyA = 373;
+	TheGuildApplyR = 374;
+	TheGuildApplyNum = 375;
+	TheGuildSelfR = 376;
+	TheGuildSelf = 377;
+	TheGuildMsg = 378;
+	TheGuildSignR = 379;
+	TheGuildSignA = 380;
+	TheGuildMillR = 381;
+	TheGuildMillA = 382;
+	TheGuildMillBeginR = 383;
+	TheGuildMillBeginA = 384;
+	TheGuildMillGetR = 385;
+	TheGuildMillGetA = 386;
+	TheGuildMillAddR = 387;
+	TheGuildMillAddA = 388;
+	TheGuildRankR = 389;
+	TheGuildRankA = 390;
+	TheGuildNotifyInfo = 391;
+	TheGuildNotify = 392;
 	TheGuildBossStartR = 393;
 	TheGuildBossStartA = 394;
 	TheGuildBossEndR = 395;
@@ -634,18 +634,18 @@ enum MsgType {
 	TheCampCopyBattleEndA = 623;
 	TheGuildMonsterBattleDirectlyR = 624;
 	TheGuildMonsterBattleDirectlyA = 625;
-	TheGmTempR4 = 626;
-	TheGmTempA4 = 627;
-	TheGmTempR5 = 628;
-	TheGmTempA5 = 629;
-	TheGmTempR6 = 630;
-	TheGmTempA6 = 631;
-	TheGmTempR7 = 632;
-	TheGmTempA7 = 633;
-	TheGmTempR8 = 634;
-	TheGmTempA8 = 635;
-	TheGmTempR9 = 636;
-	TheGmTempA9 = 637;
+	TheSyncChangeShowSkin = 626;
+	TheSyncKnowNewSkin = 627;
+	TheSkinUnit = 628;
+	TheFormationInfoNew = 629;
+	TheGuildBossBattleDirectlyR = 630;
+	TheGuildBossBattleDirectlyA = 631;
+	TheHuntingBossBattleDirectlyR = 632;
+	TheHuntingBossBattleDirectlyA = 633;
+	TheHeroReturnBackR = 634;
+	TheHeroReturnBackA = 635;
+	TheUseArtifactFragmentR = 636;
+	TheUseArtifactFragmentA = 637;
 	TheCreatePVPBattleR = 638;
 	TheCreatePVPBattleA = 639;
 	TheRegisterBattleServerR = 640;
@@ -656,45 +656,45 @@ enum MsgType {
 	TheBattleStatisticUnit = 645;
 	TheCreatePVEBattleR = 646;
 	TheCreatePVEBattleA = 647;
-	ThebattleTempR05 = 648;
-	ThebattleTempA05 = 649;
-	ThebattleTempR06 = 650;
-	ThebattleTempA06 = 651;
-	ThebattleTempR07 = 652;
-	ThebattleTempA07 = 653;
-	ThebattleTempR08 = 654;
-	ThebattleTempA08 = 655;
-	ThebattleTempR09 = 656;
-	ThebattleTempA09 = 657;
-	TheReserveMessage343 = 658;
-	TheReserveMessage342 = 659;
-	TheReserveMessage341 = 660;
-	TheReserveMessage340 = 661;
-	TheReserveMessage339 = 662;
-	TheReserveMessage338 = 663;
-	TheReserveMessage337 = 664;
-	TheReserveMessage336 = 665;
-	TheReserveMessage335 = 666;
-	TheReserveMessage334 = 667;
-	TheReserveMessage333 = 668;
-	TheReserveMessage332 = 669;
-	TheReserveMessage331 = 670;
-	TheReserveMessage330 = 671;
-	TheReserveMessage329 = 672;
-	TheReserveMessage328 = 673;
-	TheReserveMessage327 = 674;
-	TheReserveMessage326 = 675;
-	TheReserveMessage325 = 676;
-	TheReserveMessage324 = 677;
-	TheReserveMessage323 = 678;
-	TheReserveMessage322 = 679;
-	TheReserveMessage321 = 680;
-	TheReserveMessage320 = 681;
-	TheReserveMessage319 = 682;
-	TheReserveMessage318 = 683;
-	TheReserveMessage317 = 684;
-	TheReserveMessage316 = 685;
-	TheReserveMessage315 = 686;
+	ThePutOnArtifactR = 648;
+	ThePutOnArtifactA = 649;
+	TheTakeOffArtifactR = 650;
+	TheTakeOffArtifactA = 651;
+	ThePutOnAutoR = 652;
+	ThePutOnAutoA = 653;
+	TheArtifactQualtiyUpR = 654;
+	TheArtifactQualtiyUpA = 655;
+	TheAwardDirectlyEventCopyAllR = 656;
+	TheAwardDirectlyEventCopyAllA = 657;
+	TheAdvArenaInfo = 658;
+	TheGetAdvArenaInfoR = 659;
+	TheGetAdvArenaInfoA = 660;
+	TheGetAdvArenaRankingR = 661;
+	TheGetAdvArenaRankingA = 662;
+	TheRefreshAdvArenaOpponentR = 663;
+	TheRefreshAdvArenaOpponentA = 664;
+	TheRecieveAdvArenaDailyAwardR = 665;
+	TheRecieveAdvArenaDailyAwardA = 666;
+	TheRecieveAdvArenaRankAwardR = 667;
+	TheRecieveAdvArenaRankAwardA = 668;
+	TheAdvArenaBattleDirectlyR = 669;
+	TheAdvArenaBattleDirectlyA = 670;
+	TheAdvArenaBattleRecordUnit = 671;
+	TheAdvArenaBattleRecord = 672;
+	TheAdvArenaPlayerInfo = 673;
+	TheAdvArenaChangeDefFormationR = 674;
+	TheAdvArenaChangeDefFormationA = 675;
+	TheAdvArenaPraiseR = 676;
+	TheAdvArenaPraiseA = 677;
+	TheStartAdvArenaBattleR = 678;
+	TheStartAdvArenaBattleA = 679;
+	TheEndAdvArenaBattleR = 680;
+	TheEndAdvArenaBattleA = 681;
+	TheNotifyAdvArenaBattleRecord = 682;
+	TheAdvArenaOpponentPlayer = 683;
+	TheGetAdvArenaOtherPlayerInfoR = 684;
+	TheGetAdvArenaOtherPlayerInfoA = 685;
+	TheNotifyAdvArenaSeasonSettlement = 686;
 	TheReserveMessage314 = 687;
 	TheReserveMessage313 = 688;
 	TheReserveMessage312 = 689;
@@ -1003,12 +1003,12 @@ enum MsgType {
 	TheReserveMessage9 = 992;
 	TheReserveMessage8 = 993;
 	TheReserveMessage7 = 994;
-	TheReserveMessage6 = 995;
-	TheReserveMessage5 = 996;
-	TheReserveMessage4 = 997;
-	TheReserveMessage3 = 998;
-	TheReserveMessage2 = 999;
-	TheReserveMessage1 = 1000;
+	TheSvWmVerifyAccountR = 995;
+	TheSvWmVerifyAccountA = 996;
+	TheGmNotifyToReloadDataR = 997;
+	TheGmNotifyToReloadDataA = 998;
+	TheGmNotifyToMaintenanceR = 999;
+	TheGmNotifyToMaintenanceA = 1000;
 	TheSvMsgSendPackMessageR = 1001;
 	TheSvMsgSendPackMessageA = 1002;
 	TheSvMsgWaitIndexMessageR = 1003;
@@ -1035,7 +1035,7 @@ enum MsgType {
 	TheSvNtsPlayerBaseInfo = 1024;
 	TheSvNtsPlayerGuildInfo = 1025;
 	TheSvNtsAddGuildExp = 1026;
-	TheSvFriendInfo = 1027;
+	TheSvFriendInfoXX = 1027;
 	TheSvWmGetFriendInfoR = 1028;
 	TheSvWmGetFriendInfoA = 1029;
 	TheSvNtsSendFriendGift = 1030;
@@ -1045,20 +1045,51 @@ enum MsgType {
 	TheSvNtsDeleteFriend = 1034;
 	TheSvWmGetGMPlayerDataR = 1035;
 	TheSvWmGetGMPlayerDataA = 1036;
-	TheGetTemp18R = 1037;
-	TheGetTemp18A = 1038;
-	TheGetTemp19R = 1039;
-	TheGetTemp19A = 1040;
-	TheGetTemp20R = 1041;
-	TheGetTemp20A = 1042;
-	TheGetTemp21R = 1043;
-	TheGetTemp21A = 1044;
-	TheGetTemp22R = 1045;
-	TheGetTemp22A = 1046;
-	TheGetTemp23R = 1047;
-	TheGetTemp23A = 1048;
-	TheGetTemp24R = 1049;
-	TheGetTemp24A = 1050;
-	TheGetTemp25R = 1051;
-	TheGetTemp25A = 1052;
+	TheSvPayOrderR = 1037;
+	TheSvPayOrderA = 1038;
+	TheSvPayReceiptLtR = 1039;
+	TheSvPayReceiptLtA = 1040;
+	TheSvPayReceiptBokeR = 1041;
+	TheSvPayReceiptBokeA = 1042;
+	TheSvWmBattlePlayerInfoR = 1043;
+	TheSvWmBattlePlayerInfoA = 1044;
+	TheSvWmGetAdvArenaPlayerInfoR = 1045;
+	TheSvWmGetAdvArenaPlayerInfoA = 1046;
+	TheSvNtsAdvArenaInfo = 1047;
+	TheSvNtsAdvArenaFighting = 1048;
+	TheSvNtsPraisePlayer = 1049;
+	TheSvWmGetAdvArenaBattleInfoR = 1050;
+	TheSvWmGetAdvArenaBattleInfoA = 1051;
+	TheSvNtsAdvArenaResult = 1052;
+	TheSvWmCheckPvpTicketR = 1053;
+	TheSvWmCheckPvpTicketA = 1054;
+	TheSvNtsJoinAdvArena = 1055;
+	TheSvWmGetAdvArenaBattleSettleR = 1056;
+	TheSvWmGetAdvArenaBattleSettleA = 1057;
+	TheSvGuildMonsterContributionR = 1058;
+	TheSvGuildMonsterContributionA = 1059;
+	TheSvGuildMonsterBattleR = 1060;
+	TheSvGuildMonsterBattleA = 1061;
+	TheSvGuildMonsterAwardR = 1062;
+	TheSvGuildMonsterAwardA = 1063;
+	TheSvGuildMonsterBattleDirectlyR = 1064;
+	TheSvGuildMonsterBattleDirectlyA = 1065;
+	TheSvNtsGmSendMail = 1066;
+	TheSvNtsGlobalSetOrder = 1067;
+	TheSvNtsSetLanguageData = 1068;
+	TheSvNtsResetNoticeStatus = 1069;
+	TheSvNtsAddBanPlayer = 1070;
+	TheSvNtBanPlayer = 1071;
+	TheSvGetGuildMonsterGInfoR = 1072;
+	TheSvGetGuildMonsterGInfoA = 1073;
+	TheSvNtsActivityUpdate = 1074;
+	TheSvNtsUpdateMaxServerId = 1075;
+	TheSvNtsLogicOnilnePlayers = 1076;
+	TheSvWmGetGiftIdR = 1077;
+	TheSvWmGetGiftIdA = 1078;
+	TheSvNtsGuildMonsterPInfo = 1079;
+	TheSvNtsRegisterSubServerIds = 1080;
+	TheSvNtsLogicToRunSubLogic = 1081;
+	TheSvNtsSaveBattleRecord = 1082;
+	TheSvNtsAdvArenaRankAward = 1083;
 }

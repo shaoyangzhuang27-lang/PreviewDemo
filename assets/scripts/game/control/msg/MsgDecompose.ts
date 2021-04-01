@@ -13,6 +13,7 @@ export class MsgDecompose extends MsgBase{
         this.responeMap = new Map<number,[any,NetCallFunc,any]>([
             [Msg.MsgType.TheHeroResetA,[Msg.HeroResetA,this.responeResetResult,this]],
             [Msg.MsgType.TheHeroDecomposeA,[Msg.HeroDecomposeA,this.responeDecomposeResult,this]],
+            [Msg.MsgType.TheHeroReturnBackA,[Msg.HeroReturnBackA,this.responeRollbackResult,this]],
         ]);
     }
 
@@ -48,12 +49,34 @@ export class MsgDecompose extends MsgBase{
      //分解结果
      public responeDecomposeResult(msgId: number, msgData: any)
      {
-        console.log("重置数据返回",msgId);
+        console.log("分解数据返回",msgId);
         let newMsgData = msgData as Msg.HeroDecomposeA
         
         if(newMsgData.err == 0)
         {
             GameModel.getInstance().getHeroesModel().resetHeroDecomposeInfo(newMsgData)
+        }
+        else{
+            console.log("打印输出错误码",newMsgData.err,newMsgData.errStr)
+        }
+     }
+
+      //回退
+    public requestHeroRollback(DyncHeroID:number)
+    {
+        const buffer_data = Msg.HeroReturnBackR.encode({heroID:DyncHeroID}).finish();
+        this.msgMgr?.sendData(Msg.MsgType.TheHeroReturnBackR,buffer_data);
+    }
+
+     //回退结果
+     public responeRollbackResult(msgId: number, msgData: any)
+     {
+        console.log("回退数据返回",msgId);
+        let newMsgData = msgData as Msg.HeroReturnBackA
+        
+        if(newMsgData.err == 0)
+        {
+            GameModel.getInstance().getHeroesModel().resetHeroRollBackInfo(newMsgData)
         }
         else{
             console.log("打印输出错误码",newMsgData.err,newMsgData.errStr)

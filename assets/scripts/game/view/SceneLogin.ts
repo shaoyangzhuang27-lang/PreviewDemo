@@ -8,6 +8,7 @@
 import { _decorator, Component, Node } from 'cc';
 import { MsgMgr } from '../control/MsgMgr';
 import { NotifyMgr } from '../control/NotifyMgr';
+import { ResMgr } from '../control/ResMgr';
 import { SceneMgr } from '../control/SceneMgr';
 import { BaseScene } from './BaseScene';
 const { ccclass, property } = _decorator;
@@ -20,6 +21,7 @@ export class SceneLogin extends BaseScene {
     start () {
         this.btn_login?.on(Node.EventType.TOUCH_END, this.submitHandle, this);
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_player_login,this.notifyPlayerLoginHandle,this);
+        ResMgr.getInstance().preloadRes();
     }
     submitHandle(){
         console.log("login");
@@ -29,6 +31,7 @@ export class SceneLogin extends BaseScene {
         MsgMgr.getInstance().getMsgLogin().requestGetHeroList();
         MsgMgr.getInstance().getMsgLogin().requestGetPlayerData();
         SceneMgr.getInstance().changeToBattle();
+        //SceneMgr.getInstance().changeToMain();
     }
     onDestroy(){
         super.onDestroy();

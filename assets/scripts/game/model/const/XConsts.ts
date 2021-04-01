@@ -40,9 +40,9 @@ export class XConsts{
     public static  OrderMainUI = 1;
     public static  OrderPopHide = 2;
     public static  OrderPopShow = 3;
-    public static  OrderTip = 3;
-    public static  OrderLoading = 4;
-    public static  OrderToash = 5;
+    public static  OrderTip = 4;
+    public static  OrderLoading = 5;
+    public static  OrderToash = 6;
 
 
     //图集名称

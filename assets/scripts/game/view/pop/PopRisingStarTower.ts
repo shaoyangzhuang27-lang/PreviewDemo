@@ -164,19 +164,19 @@ export class PopRisingStarTower extends PopBase {
 
     //获取升星列表英雄
     private _getAllHeroList(){
-        this._allHeroList = instantiate(GameModel.getInstance().getHeroList());   
+        this._allHeroList = GameModel.getInstance().getHeroList();   
     }
     //是否排除这个英雄
-    private _isDeleteHero(Data : HeroData){
+    private _isDeleteHero(HeroData : HeroData){
         //剔除满星级英雄
-        if(Data.getStar() >= 13){
+        if(HeroData.getStar() >= 13){
             return true
         }
         //剔除2星怪 不能升星的
         let heroDataes = ValueMgr.getInstance().getTableByName(TableName.heroes).records ;
         for (let Data of heroDataes) {
             let record = Data as Config.heroes.Record;
-            if(record.id == Data.getStaticID()) { 
+            if(record.id == HeroData.getStaticID()) { 
                 if(record.starupType == 0){
                     return true
                 }
