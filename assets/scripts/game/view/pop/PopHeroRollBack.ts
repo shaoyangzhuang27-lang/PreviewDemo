@@ -364,7 +364,7 @@ export class PopHeroRollBack extends Component {
             }
             //5星材料
             let heroInfo5  = new Msg.HeroInfo();
-            heroInfo5.id = 0;
+            heroInfo5.id = 5;
             heroInfo5.staticID = 3051202;
             heroInfo5.level = 1;
             heroInfo5.equipOnList = [];
