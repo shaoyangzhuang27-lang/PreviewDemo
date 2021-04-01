@@ -143,9 +143,6 @@ export class PopHeroEquipReplace extends PopBase {
 
                 break;
             case this.btn_wear:
-                if (!this.btn_wear.interactable) {
-                    return;
-                }
                 console.log("equip_wear");
                 MsgMgr.getInstance().getMsgFormation().requestHeroPutOnEquip(this._curHeroId, [this._replaceEquipId]);
                 break;        
@@ -164,12 +161,10 @@ export class PopHeroEquipReplace extends PopBase {
 
         //筛选出同类型装备
         for (let key of allEquipList.keys()) {
-            if(key!=0){
-                let equipData:Config.equip.Record = ValueMgr.getInstance().getItemByField(TableName.equip,key) as Config.equip.Record;
-                if(equipData.locationType == this._locationType){
-                    curlocationEquipData.push(equipData);
-                }
-            }            
+            let equipData:Config.equip.Record = ValueMgr.getInstance().getItemByField(TableName.equip,key) as Config.equip.Record;
+            if(equipData.locationType == this._locationType){
+                curlocationEquipData.push(equipData);
+            }
         }
 
         curlocationEquipData.sort((equip1, equip2) => {

@@ -12,6 +12,7 @@ export class MsgGame extends MsgBase{
             [Msg.MsgType.TheGetCacheChatListA,[Msg.GetCacheChatListA,this.responeGetCacheChatListA,this]],
             [Msg.MsgType.ThePong,[Msg.Pong,this.responePong,this]],
             [Msg.MsgType.TheNotifyLevelUpAward,[Msg.NotifyLevelUpAward,this._responeNotifyLevelUpAward,this]],
+            [Msg.MsgType.TheGiftCodeAwardA,[Msg.GiftCodeAwardA,this._responeReceiveGiftCodeAward,this]],
         ]);
     }
     
@@ -48,6 +49,19 @@ export class MsgGame extends MsgBase{
         NotifyMgr.getInstance().notify(NotifyMgr.event_player_levelup,newMsgData);
     }
 
+    //--------------------兑换 ----begin-----------------------------
+    private _responeReceiveGiftCodeAward(msgId: number, msgData: any){
+        let newMsgData = msgData as Msg.GiftCodeAwardA;
+        NotifyMgr.getInstance().notify(NotifyMgr.event_giftCode_award,newMsgData);
+    }
+
+    //兑换请求
+    public requestGiftCodeAward(giftCode :string){
+        const buffer_data = Msg.GiftCodeAwardR.encode({code : giftCode}).finish();
+        this.msgMgr?.sendData(Msg.MsgType.TheGiftCodeAwardR,buffer_data);
+    }
+
+   //-------------------兑换------end------------------------
 }
 /**
  * 消息类只处理两个事件

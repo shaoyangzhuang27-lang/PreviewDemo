@@ -168,6 +168,8 @@ export class PopSettingView extends PopBase {
     }
     private _onClick_gift(button:Button){
         console.log("点击 兑换")
+
+        PopMgr.getInstance().popGiftCodeExchangeWindow()
     }
 
     private _onClick_music(toggle:ToggleComponent){
