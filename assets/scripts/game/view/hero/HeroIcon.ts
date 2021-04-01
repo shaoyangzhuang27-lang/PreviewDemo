@@ -219,7 +219,7 @@ export class HeroIcon extends Component {
      * @param id 英雄id
      * @param nType 显示类型
      */
-    public initUIHeroIconInfo(id : number,nType : number)
+    public initUIHeroIconInfo(id : number,nType : number, level : number = 0)
     {
         this._wonderHeartHeroId = id;
         let info = GameModel.getInstance().getHeroesModel().getHeroIconInfoByHeroId(id);
@@ -250,7 +250,7 @@ export class HeroIcon extends Component {
                 this.lab_level.node.active = false;
                 break;
             case XConsts.HERO_ICON_TYPE.SummonSettle:
-                this.lab_level.string = "1"
+                this.lab_level.string = level ? String(level) : "1";
                 break;
             case XConsts.HERO_ICON_TYPE.WonderSummon :
                 this.lab_level.node.active = false;

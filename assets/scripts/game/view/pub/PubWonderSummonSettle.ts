@@ -1,7 +1,9 @@
 import { _decorator, Component, Node,Label,resources,instantiate } from 'cc';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { GameModel } from '../../model/GameModel';
 import { PubHeroIcon } from '../pub/PubHeroIcon';
+import { HeroIcon } from '../hero/HeroIcon';
 import { ItemEquipType,ItemEquipCell } from '../menu/ItemEquipCell';
 const { ccclass, property } = _decorator;
 
@@ -44,7 +46,7 @@ export class PubWonderSummonSettle extends Component {
     public initShowAwardList(msgData : Msg.WonderSummonHeroA)
     {
         this._clearData();
-        var nShowCounts = msgData.awardList.length;
+        var nShowCounts = msgData.awardList.length + msgData.heroList.length;
         if(nShowCounts == 0)
         {
             this.node_one && (this.node_one.active = false);
@@ -54,9 +56,15 @@ export class PubWonderSummonSettle extends Component {
         {
             this.node_one && (this.node_one.active = false);
             this.node_ten && (this.node_ten.active = true);
-            for(var i =0 ; i < nShowCounts; i++)
+            for(var i =0 ; i < msgData.awardList.length; i++)
             {
-                this.node_ten && this.initAwardInfo(this.nodelist[0],msgData.awardList[0] as Msg.LootObject);
+                this.node_ten && this.initAwardInfo(this.nodelist[i],msgData.awardList[i] as Msg.LootObject);
+            }
+
+            for(var k = 0; k < msgData.heroList.length ; k++ )
+            {
+                var index = k + msgData.awardList.length;
+                this.node_ten && this.initHeroIcon(this.nodelist[index],msgData.heroList[k] as Msg.HeroInfo);
             }
         }
         else
@@ -89,7 +97,7 @@ export class PubWonderSummonSettle extends Component {
             case Msg.TObjectType.EObject_UsableItem:
                 this.initUsableItem(info,node);
                 break;
-            default: //心愿英雄
+            default:   //心愿英雄    
         }
     }
  
@@ -210,5 +218,19 @@ export class PubWonderSummonSettle extends Component {
             });  
             node.addChild(equipItem);
         }) 
+    }
+
+    public initHeroIcon(node : Node, info : Msg.HeroInfo)
+    {
+        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+            let _heroIcon = instantiate(res);
+             _heroIcon.setScale(0.66,0.66,1)
+            let script = _heroIcon.getComponent(HeroIcon); 
+            script.initUIHeroIconInfo(info.staticID,XConsts.HERO_ICON_TYPE.SummonSettle,info.level);    
+            script.setBtnCallBack(()=>{
+                //PopMgr.getInstance().popOpenBookHeroDetail(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero());
+            })
+            node.addChild(_heroIcon); 
+        });
     }
 }
