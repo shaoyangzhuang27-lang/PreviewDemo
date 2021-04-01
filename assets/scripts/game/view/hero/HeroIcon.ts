@@ -187,6 +187,18 @@ export class HeroIcon extends Component {
     }
 
     /**
+     * 切换当前英雄为减一星状态,融魂 回退系统使用
+     * 调用此方法前请先设置英雄数据
+     */
+    public setNewStar(star:number)
+    {
+        if(this._heroData)
+        {
+            this._setStar(star,this._heroData.getStaticID());
+        }
+    }
+
+    /**
      * 设置为某英雄
      * @param heroData 英雄数据
      */

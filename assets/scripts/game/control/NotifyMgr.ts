@@ -32,6 +32,7 @@ export class NotifyMgr extends NotifyCore {
     public static event_net_OneKeyStarUp_change: string = "event_net_OneKeyStarUp_change";      //一键升星变化
     public static event_net_hero_reset_change: string = "event_net_hero_reset_change";          //英雄重置变化
     public static event_net_hero_decompose_change: string = "event_net_hero_decompose_change";   //英雄分解变化
+    public static event_net_hero_returnBack_change: string = "event_net_hero_returnBack_change";   //英雄回退变化
 
     public static event_net_pub_summon_hero: string = "event_net_pub_summon_hero";              //酒馆召唤
     public static event_hero_book_active: string = "event_hero_book_active";                    //英雄图鉴激活

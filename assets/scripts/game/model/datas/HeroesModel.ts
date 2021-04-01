@@ -321,6 +321,51 @@ export class HeroesModel extends BaseModel{
         }
         NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_decompose_change,[msg]);
     }
+
+    /**
+     * 回退之后 改变英雄数据
+     * @param id 
+     */
+    public resetHeroRollBackInfo(msg:Msg.HeroReturnBackA) {
+        let dyncHeroID = msg.heroID;
+        let vrmbConsume = msg.vrmbConsume;
+        let heroList = msg.heroList;
+
+        //扣除消耗
+        let playerModel = this._gameModel.getPlayerModel();
+        if(vrmbConsume > 0){
+            playerModel.subVrmb(msg.vrmbConsume, Msg.TVRmbSubType.EVRmbSubType_HeroReset);
+        }
+
+
+        if(this._heroList.has(dyncHeroID))
+        {
+            let oldHeroData = this._heroList.get(dyncHeroID) as HeroData;
+            let heroInfo  = new Msg.HeroInfo();
+            heroInfo.id = dyncHeroID;
+            heroInfo.staticID = oldHeroData.getStaticID() - 10000*(oldHeroData.getStar()-6);
+            heroInfo.level = oldHeroData.getLevel();
+            heroInfo.isLocked = oldHeroData.isLocked;
+            heroInfo.equipOnList = [];
+            //heroInfo.crystal = 
+            heroInfo.tier = oldHeroData.tier;
+
+            let hero = new HeroData();
+            hero.initDataByHero(heroInfo as Msg.HeroInfo, this._gameModel);
+            this._heroList.delete(dyncHeroID);
+            this._heroList.set(heroInfo.id as number,hero);
+
+            for (let index = 0; index < heroList.length; index++) {
+                let element = heroList[index] as Msg.HeroInfo;
+                let hero = new HeroData();
+                hero.initDataByHero(element as Msg.HeroInfo, this._gameModel);
+                this._heroList.set(element.id as number,hero);
+            }
+
+            //抛出通知  回退发生变化
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_hero_returnBack_change,[msg]);
+        }
+    }
     
     /////////////////////////////////////////////////////
     //////////////////////图鉴相关///////////////////////
