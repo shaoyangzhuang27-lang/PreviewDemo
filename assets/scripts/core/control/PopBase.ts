@@ -80,6 +80,10 @@ export class PopBase extends PopBasic {
         PopMgr.getInstance().deleteWindow();
     }
 
+    public setCloseFun(func:Function){
+        this._closeFunc = func;
+    }
+
     /**
      * 设置当前窗口是否点击空白区域就关闭,默认为是
      * @param bo 是否点击空白区域关闭窗口
@@ -223,6 +227,8 @@ export class PopBase extends PopBasic {
         if(this._closeFunc)
             this._closeFunc();
     }
+
+    
     
     private _isInWin(event:EventTouch){
 
