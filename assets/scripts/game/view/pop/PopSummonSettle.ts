@@ -7,6 +7,7 @@ import { GameModel } from '../../model/GameModel';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { MsgMgr } from '../../control/MsgMgr';
 import { PopMgr } from '../../control/PopMgr';
+import { ResMgr } from '../../control/ResMgr';
 
 const { ccclass, property } = _decorator;
 
