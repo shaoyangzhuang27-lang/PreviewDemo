@@ -456,28 +456,6 @@ export class PopHeroReplace extends PopBase {
 
         return script
     }
-
-    /**
-     * 关闭当前窗口
-     */
-    public delSelf(){
-        if(this._isDel)return;
-        this._isDel = true;
-        if (this._covertHeroData == null) {
-            PopMgr.getInstance().deleteWindow();
-            return
-        }
-        let info: XStruct.common_one_info.Record ={
-            title :"确定",
-            content : "确定放弃此次置换么?",
-            mode : 2,
-            isRichLabMode : false,
-            isChangeBtnSpriteFrame : false,
-            submitContent:"" ,
-            cancelContent:"" 
-        };           
-        this._showTips(info);
-    }
 }
 
 /**
