@@ -18,6 +18,7 @@ import { MsgBase } from "./msg/MsgBase";
 import { MsgOffline } from "./msg/MsgOffline";
 import { MsgHeroBagExtend } from "./msg/MsgHeroBagExtend";
 import { MsgForge } from "./msg/MsgForge";
+import { MsgDecompose } from "./msg/MsgDecompose";
 import { MsgHeroReplace } from "./msg/MsgHeroReplace";
 
 class NetTips implements INetworkTips {
@@ -75,6 +76,11 @@ export class MsgMgr extends MsgCore{
     public getMsgStarUp(){
         return this._msgStarUp;
     }
+
+    private _msgDecompose : MsgDecompose = new MsgDecompose(this);
+    public getMsgDecompose(){
+        return this._msgDecompose;
+    }
     //消息定义-------------------------------------------------
     
     //消息注册-------------------------------------------------
@@ -88,6 +94,7 @@ export class MsgMgr extends MsgCore{
         this._msgs.push(this._msgHeroPub);
         this._msgs.push(this._msgHeroBagExtend)
         this._msgs.push(this._msgForge)
+        this._msgs.push(this._msgDecompose);
         this._msgs.push(this._msgHeroReplace)
     }
     //消息注册-------------------------------------------------

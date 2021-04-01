@@ -11,7 +11,7 @@ export class MsgHeroReplace extends MsgBase{
     public initData(){
         this.responeMap = new Map<number,[any,NetCallFunc,any]>([
             [Msg.MsgType.TheClassesExchangeA,[Msg.ClassesExchangeA,this.responeClassesExchangeA,this]],
-            // [Msg.MsgType.TheHeroDecomposeA,[Msg.HeroDecomposeA,this.responeHeroDecomposeA,this]],
+            [Msg.MsgType.TheClassesExchangeConfirmA,[Msg.ClassesExchangeConfirmA,this.responeClassesExchangeConfirmA,this]],
         ]);
     }
 
@@ -38,7 +38,7 @@ export class MsgHeroReplace extends MsgBase{
         if (msgData.err == Msg.TErrorCode.ERR_OK) {
             let playerModel = GameModel.getInstance().getPlayerModel();
             // 消耗物品
-            playerModel.consumeObjectEx(Msg.TObjectType.EObject_MiracleShard, 
+            playerModel.consumeObjectByNum(Msg.TObjectType.EObject_MiracleShard, 
                 msgData.consumeMiracleShard, Msg.TObjectConsumeType.EObjectConsumeType_HeroExchange)
             
             // 通知英雄置换
@@ -47,24 +47,30 @@ export class MsgHeroReplace extends MsgBase{
         else {
             console.log('responeClassesExchangeA',msgData.err)
         }
-
-        
-        NotifyMgr.getInstance().notify(NotifyMgr.event_net_pub_summon_hero,msgData);
     }
 
+    //确定置换英雄请求
+    public requestClassesExchangeConfirmR(heroId: number, newDyncId: number)
+    {
+        let data = new Msg.ClassesExchangeConfirmR()
+        data.exchangeInfo = new Msg.ClassesExchangeInfo({
+            heroID : heroId,
+            newHeroStaticID : newDyncId
+        })
+    
+        const bufferData = Msg.ClassesExchangeConfirmR.encode(data).finish();
+        this.msgMgr?.sendData(Msg.MsgType.TheClassesExchangeConfirmR,bufferData);
+    }
 
-    //分解英雄请求
-    // public requestHeroDecomposeR(newHeroDecomposeData : Msg.HeroDecomposeR)
-    // {
-    //     console.log("requestHeroDecomposeR",newHeroDecomposeData);
-    //     const buffer_data = Msg.HeroDecomposeR.encode(newHeroDecomposeData).finish();
-    //     this.msgMgr?.sendData(Msg.MsgType.TheHeroDecomposeR,buffer_data);
-    // }
-
-    // //分解英雄回复
-    // public responeHeroDecomposeA(msgId: number, msgData: Msg.HeroDecomposeA)
-    // {
-    //     console.log("requestHeroDecomposeA",msgId,msgData);
-    //     NotifyMgr.getInstance().notify(NotifyMgr.event_net_pub_hero_decompose,msgData);
-    // }    
+    //确定置换英雄应答
+    public responeClassesExchangeConfirmA(msgId: number, msgData: Msg.ClassesExchangeConfirmA)
+    {
+        if (msgData.err == Msg.TErrorCode.ERR_OK) {            
+            // 通知英雄置换
+            NotifyMgr.getInstance().notify(NotifyMgr.event_net_camp_change_confirm, msgData);
+        }
+        else {
+            console.log("responeClassesExchangeConfirmA",msgData.err);
+        }
+    }    
 }

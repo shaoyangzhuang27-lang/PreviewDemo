@@ -902,7 +902,8 @@
     "_materials": [
       {
         "__uuid__": "61dce585-7a16-4398-bbbc-c410aebf5b26"
-      }
+      },
+      null
     ],
     "_visFlags": 0,
     "startColor": {
@@ -1590,6 +1591,7 @@
     "effectType": 0,
     "playPot": 4,
     "playTime": 5,
+    "flySpeed": 8,
     "endEffectPrefab": null,
     "_id": ""
   },

@@ -2,7 +2,7 @@
  * @Description: 协议收发处理
  * @Author: xxxxxx
  * @Date: 2021-03-02 13:53:04
- * @LastEditTime: 2021-03-25 14:20:56
+ * @LastEditTime: 2021-03-25 20:03:21
  */
 
 import { MsgCore} from "../../../core/network/MsgCore";
@@ -96,7 +96,19 @@ export class MsgFormation extends MsgBase{
     //         GameModel.getInstance().getHeroesModel().setHeroLocked(newMsgData);
     //     }
     // }
-
+    
+    /**
+     * @description: 发送聊天
+     * @param content 聊天文字
+     * @param chatChannel 聊天频道
+     */
+    public requestChat(content:string, chatChannel:Msg.TChatChannelType)
+    {
+        console.log("英雄升级分享发送到聊天-----请求");
+        const buffer_data = Msg.SyncChat.encode({content:content, chatChannel:chatChannel}).finish();
+        this.msgMgr?.sendData(Msg.MsgType.TheSyncChat,buffer_data);     
+    }
+    
     // 英雄穿上装备
     public requestHeroPutOnEquip(heroID:number, putonEquipIDList:number[]){
         console.log("英雄穿上装备-----请求");

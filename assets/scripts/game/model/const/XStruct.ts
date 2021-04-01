@@ -110,27 +110,58 @@ export namespace XStruct {
            }
         }
 
-
-
-
-       //自测数据
-       namespace test_info {
-           /** Properties of a Record. */
-           interface IRecord {
-               fragmentType?:(number|null);
-               param?: (number|null);
-               star :(number|null);
-               num : (number|null);
+        //通用类型一弹窗信息
+        //   {
+        //     /*属性值必填   
+        //     *没有用到的属性值默认手动填写 string设置"" number设置 0 boolean设置为false
+        //     */  
+        //     title 标题
+        //     content 文本内容
+        //     mode 底部按钮样式0,1
+        //     isRichLabeMode 文本内容是否是富文本
+        //     isChangeBtnSpriteFrame 是否修改按钮SpriteFrame
+        //     submitContent   submit按钮文本内容
+        //     cancelContent   mode为1 按钮文本内容
+        //   }
+        namespace common_one_info {
+            /** Properties of a Record. */
+            interface IRecord {
+                title?:(string | null);
+                content?:(string | null);
+                mode?:(number | null);
+                isRichLabMode?:(boolean | null);
+                isChangeBtnSpriteFrame?:(boolean | null);
+                submitContent?:(string | null);
+                cancelContent?:(string | null);
            }
            /** Represents a Record. */
            class Record implements IRecord {
-               constructor(p?: XStruct.test_info.IRecord);
-               fragmentType :number;
-               param : number;
-               star : number;
-               num : number;
+               constructor(p?: XStruct.common_one_info.IRecord);
+               title : string;
+               content : string;
+               mode : number ;
+               isRichLabMode : boolean;
+               isChangeBtnSpriteFrame : boolean;
+               submitContent:string ;
+               cancelContent:string ;
            }
-       }
+        }
    }
+export namespace XMsg {
+    //次数属性枚举-有可能不全，不全自己手动增加属性枚举值
+        enum TimesType
+        {
+            TRefreshHeroTalentTimes = 1,    //免费随从刷新天赋次数
+            TChallengeFailedTimes = 2,      //挑战塔失败次数
+            TBoughtBagTimes = 3,            //购买背包容量次数
+            TSummonScore = 4,               //召唤积分
+            TAdAwardTimes = 5,              //广告奖励领取次数
+            THeroComposeTimes = 6,          //合成英雄次数
+            TFastBattleTimes = 7,           //今日已经快速战斗的次数
+            THuntingBossTimes = 8,          //记录每日挑战的次数,从零开始增加 每日重置
+            TWonderTimes = 9,               //奇迹召唤次数
+            TAccumulatedCheckInTimes = 10   //累积签到次数
+        }
+    }       
 }
-   export {}
+export {}

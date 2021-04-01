@@ -262,13 +262,17 @@ export class XConsts{
     public static KSoundMusic_City:string = "主城音乐";
 
     //英雄酒馆
-    public static PUB_SUMMON_COUNT_MAX:number = 30 ;
+    public static PUB_HERO_SUMMON_COUNT_MAX:number = 30 ;  //英雄召唤
+    public static PUB_WONDER_SUMMON_COUNT_MAX:number = 70 ;  //奇迹召唤
     public static PUB_SUMMON_DIAMOND_ONE_COSUME:number = 300 ;
     public static PUB_SUMMON_DIAMOND_TEN_COSUME:number = 2700 ;
+    public static PUB_SUMMON_SCROLL_EXCHANGE_DIAMOND:number = 270 ;
     public static PUB_SUMMON_SCROLL_ONE_COSUME:number = 1 ;
     public static PUB_SUMMON_SCROLL_TEN_COSUME:number = 10 ;
     public static PUB_SUMMON_FRIEND_ONE_COSUME:number = 10 ;
     public static PUB_SUMMON_FRIEND_TEN_COSUME:number = 100 ;
+    public static PUB_SUMMON_WONDER_ONE_COSUME:number = 500 ;
+    public static PUB_SUMMON_WONDER_TEN_COSUME:number = 5000 ;
 
     public static PUB_UI_HEROSUMMON : string = "UI_HeroSummon";  //英雄酒馆
     public static PUB_UI_CAMPRECOMMEND : string = "UI_CampRecommend";  //推荐阵容
@@ -278,6 +282,32 @@ export class XConsts{
     public static PUB_UI_NEWSUMMONFRIENDCONTENT: string = "UI_NewSummonFriendContent";  //添加好友，每日互送爱心，即可免费召唤英雄。
     public static PUB_UI_FRIENDSUMMON : string = "UI_FriendSummon";
     public static PUB_UI_HEROICSUMMON : string = "UI_HeroicSummon";
+    public static PUB_UI_BUYSUMMONSCROLL : string = "UI_BuySummonScroll";
+
+    public static PUB_UI_HeroicSummon : string = "UI_HeroicSummon"; //英雄召唤
+    public static PUB_UI_FriendSummon : string = "UI_FriendSummon"; //友情召唤
+
+    //酒馆奇迹召唤 
+    public static PUB_UI_WONDERSUMMON : string = "UI_WonderSummon";  //奇迹召唤
+    public static PUB_UI_WONDERSUMMONAWARD : string = "UI_WondersummonAward";  //十连抽必得稀有奖励
+    public static PUB_UI_RAREAWARD : string = "UI_RareAward";  //奖池详情
+
+    public static PUB_UI_WONDERSUMMONRESIDUE : string = "UI_WonderSummonResidue";  //再召唤<color=#F2B633>{0}</color>次必得心愿英雄
+    public static PUB_UI_WONDERHERO : string = "UI_WonderHero";  //心愿英雄
+    public static PUB_UI_WONDERHEROSELECT : string = "UI_WonderHeroSelect";  //请在下方选择心愿英雄
+    public static PUB_UI_WONDERSUMMONMUST : string = "UI_WonderSummonMust";  //下次召唤必得心愿英雄
+    public static PUB_OPEN_WONDER_SUMMON_LEVEL : number = 80; //奇迹召唤开启等级 
+
+    public static PUB_UI_WONDERSUMMONEXPLAIN : string = "UI_WonderSummonExplain";  //奇迹召唤说明
+    public static PUB_UI_WONDERSUMMONCONTENT : string = "UI_WonderSummonContent";  //奇迹召唤说明内容
+
+    public static PUB_UI_WONDER_DEFAULT_HEARTHERO : number = 5051401;  //奇迹召唤默认心愿英雄
+
+    public static PUB_UI_WONDER_DEFAULT_DIAMOND_REWARD : number = 10000; //10.0k钻石
+
+    public static PUB_UI_WONDER_DEFAULT_EQUIP_REWARD : number = 1; // 1   装备奖励个数
+
+    public static PUB_UI_WONDER_DEFAULT_FRAGMENT_REWARD : number = 30; //碎片奖励个数
 
    //英雄推荐阵容-
     public static PUB_RECOMMEND_LINEUP_UI_PACKUP : string = "UI_PackUp";
@@ -290,13 +320,16 @@ export class XConsts{
     public static PUB_UI_SUMMONDESC : string = "UI_SummonDesc";
 
 
+
+
     //获得英雄界面
     public static SUMMON_SETTLE_TITLE : string = "DATA_Achievement6";  //获得英雄
     public static SUMMON_SETTLE_HORIZONTAL_COUNTS : number = 5;
 
     public static HERO_ICON_TYPE  = {
         RecLineUp : 1,
-        SummonSettle : 2
+        SummonSettle : 2,
+        WonderSummon :3
     }
 
     //碎片

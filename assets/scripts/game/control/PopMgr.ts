@@ -3,7 +3,7 @@ import { PopSimple } from "../view/pop/PopSimple";
 import { PopRisingStarTower } from "../view/pop/PopRisingStarTower";
 import { PopStarUpResult } from "../view/pop/PopStarUpResult";
 import { PopOneKeyStarUp } from "../view/pop/PopOneKeyStarUp";
-import { PopDecompose } from "../view/pop/PopDecompose";
+import { PopHeroReset } from "../view/pop/PopHeroReset";
 import { PopCommonOne } from "../view/pop/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
@@ -32,6 +32,11 @@ import { PopForge } from '../view/pop/PopForge';
 import { PopBookProUI } from '../view/pop/PopBookProUI';
 import { TipCampOrCareer } from '../view/TipCampOrCareer';
 import { PopHaloView } from '../view/pop/PopHaloView';
+import { TipShareHeroToChat } from '../view/TipShareHeroToChat';
+import { PopPlayerLevelUpAward } from '../view/pop/PopPlayerLevelUpAward';
+import {PubWonderRewardList} from "../view/pub/PubWonderRewardList";
+import { PopSettingView } from '../view/pop/PopSettingView';
+import { PopServerListView } from '../view/pop/PopServerListView';
 import { PopHeroReplace } from '../view/pop/PopHeroReplace';
 
 export class PopMgr extends PopCore  {
@@ -40,19 +45,19 @@ export class PopMgr extends PopCore  {
         return this._instance;
     }
     
-    public clearPop(){
+    // public clearPop(){
 
-    }
+    // }
 
     public setNetLoading(bo:boolean,content:string){
         resources.load('prefabs_ui/net_loading', (err:Error | null,res:any)=>{
             // this.netLoading = instantiate( res );
 
-            let net_loading = this.parent?.getChildByName("net_loading")
+            let net_loading = this._parent?.getChildByName("net_loading")
             if(!net_loading){
                 net_loading = instantiate( res );
                 if(net_loading)
-                    this.parent?.addChild(net_loading);
+                    this._parent?.addChild(net_loading);
             }
             if(net_loading){
                 let script = net_loading.getComponent("NetLoading") as NetLoading;
@@ -80,6 +85,32 @@ export class PopMgr extends PopCore  {
             // script.popSelf();
             // script.setIsNeedHide(false);
 
+        } );
+    }
+
+    //弹出角色信息设置界面
+    public popSettingView()
+    {
+        resources.load('prefabs_ui/pop/pop_setting', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopSettingView") as PopSettingView;
+            script.setIsMaskClose(false);
+        } );
+    }
+
+    //弹出服务器选择窗口
+    public popServerListView()
+    {
+        resources.load('prefabs_ui/pop/pop_serverlist', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopServerListView") as PopServerListView;
+            script.setIsMaskClose(false);
+
+            script.setData()
         } );
     }
 
@@ -119,13 +150,13 @@ export class PopMgr extends PopCore  {
      * @description: 弹出融魂祭坛界面 
      * @param {boolean} isMaskClose
      */
-    public popDecomposeView(isMaskClose:boolean = true)
+    public popHeroResetView(isMaskClose:boolean = true)
     {
-        resources.load('prefabs_ui/pop/pop_decompose', (err:any,res:any)=>{
+        resources.load('prefabs_ui/pop/pop_heroreset', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
-            let script = p.getComponent("PopDecompose") as PopDecompose;
+            let script = p.getComponent("PopHeroReset") as PopHeroReset;
             script.setIsMaskClose(isMaskClose);
         } );
     }
@@ -232,7 +263,7 @@ export class PopMgr extends PopCore  {
         
         resources.load('prefabs_ui/pop/tip_demo', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
-            this.parent?.addChild(p);
+            this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipDemo") as TipDemo;
@@ -249,7 +280,7 @@ export class PopMgr extends PopCore  {
 
         resources.load('prefabs_ui/pop/tip_hero_attribute', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
-            this.parent?.addChild(p);
+            this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipHeroAttribute") as TipHeroAttribute;
@@ -272,7 +303,7 @@ export class PopMgr extends PopCore  {
         // }
         resources.load('prefabs_ui/pop/tip_skill', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
-            this.parent?.addChild(p);
+            this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipSkill") as TipSkill;
@@ -291,7 +322,7 @@ export class PopMgr extends PopCore  {
     public tipCampOrCareerWindow(pos:Vec3, career:number, camp:number =0){
         resources.load('prefabs_ui/pop/tip_camp_or_career', (err:any,res:any)=>{
             let p = instantiate( res ) as Node;
-            this.parent?.addChild(p);
+            this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
 
             let script = p.getComponent("TipCampOrCareer") as TipCampOrCareer;
@@ -301,6 +332,24 @@ export class PopMgr extends PopCore  {
         });
     }
 
+    
+    /**
+     * @description: 英雄升级界面分享到聊天频道Tip
+     * @param {Vec3} pos
+     * @param {HeroData} _heroData
+     */
+     public tipShareHeroToChatindow(pos: Vec3, _heroData: HeroData) {
+        resources.load('prefabs_ui/pop/tip_share_chat', (err: any, res: any) => {
+            let p = instantiate(res) as Node;
+            this._parent?.addChild(p);
+            p.setSiblingIndex(XConsts.OrderTip);
+
+            let script = p.getComponent("TipShareHeroToChat") as TipShareHeroToChat;
+            script.setWinPos(pos, 1);
+            script.setHeroData(_heroData);
+            script.setIsWinClose(true);
+        });
+    }
     //弹出提示窗放这里-------------------------------------------------
 
     //弹出图鉴界面
@@ -418,26 +467,21 @@ export class PopMgr extends PopCore  {
     }
     
       /**
-     * 通用类型一弹窗
-     * @param title     窗口标题
-     * @param content   窗体描述内容
-     * @param mode      底部按钮显示样式
+     * @description: 通用弹窗类型一
+     * @param {XStruct.common_one_info.Record} info 窗口信息结构
+     * @param {Function} submitCallBack 发送按钮回调
+     * @param {Function} closeCallBack 关闭按钮回调
      */
-    public popCommonOneWindow(title:string,content:string,mode : number ,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+    public popCommonOneWindow(info : XStruct.common_one_info.Record,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_common_one', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
             let script = p.getComponent("PopCommonOne") as PopCommonOne;
-            script.setTitle(title);
-            script.setContent(content);
-            script.setShowMode(mode);
+            script.initUI(info);
             script.setSubmitCallBack(submitCallBack)
             script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
-            // script.popSelf();
-            // script.setIsNeedHide(false);
-
         } );
     }
 
@@ -473,13 +517,14 @@ export class PopMgr extends PopCore  {
     }
 
 
-    public popFragmentSynthesisWindow(data : XStruct.fragment_synthesis_info.IRecord,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+    public popFragmentSynthesisWindow(data : XStruct.fragment_synthesis_info.IRecord,submitCallBack:Function,isWonderSummonShow : boolean = false,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_fragment_synthesis', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 
             let script = p.getComponent("PopFragmentSynthesis") as PopFragmentSynthesis;
+            script.setIsWonderSummonShow(isWonderSummonShow);
             script.FragmentSysthesisInfo = data;
             script.setIsMaskClose(isMaskClose);
         } );
@@ -535,21 +580,35 @@ export class PopMgr extends PopCore  {
 
      /**
      * @description: 获得物品(多个)弹窗
-     * @param {Array<XStruct.prop_info.IRecord>} data 物品信息
+     * @param {Array<Msg.LootObject>} lootObjectData  Msg回包物品信息结构是LootObject类型的使用这个
+     * @param {Array<XStruct.prop_info.IRecord>} defineData  否则使用需要自己组数据
      * @param {boolean} bAutoDecompsePop 是否自动分解弹窗
      * @param {Function} closeCallBack
      */
-    public popMultiItemRewardWindow(data :Array<XStruct.prop_info.IRecord>,bAutoDecompsePop : boolean = false,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
+      public popMultiItemRewardWindow(lootObjectData : Array<Msg.LootObject> | null,  defineData :Array<XStruct.prop_info.Record> | null,bAutoDecompsePop : boolean = false,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
         resources.load('prefabs_ui/pop/pop_multi_itemreward', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
             let script = p.getComponent("PopMultiItemReward") as PopMultiItemReward;
-            script.setPropsInfo(data);
+            script.setPropsInfo(lootObjectData,defineData);
             script.autoDecompsePop = bAutoDecompsePop;
             script.setSubmitCallBack(submitCallBack);
             script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
+        } );
+    }
+
+       //奇迹召唤奖池详情
+    public popPubWonderRewardListWindow(closeCallBack:Function|null = null,isMaskClose:boolean = true){
+        resources.load('prefabs_ui/pub/pub_wonder_rewardlist', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p);
+
+            let script = p.getComponent("PubWonderRewardList") as PubWonderRewardList;
+            script.setCloseCallBack(closeCallBack);
+            script.setIsMaskClose(isMaskClose);
+            
         } );
     }
 
@@ -560,9 +619,11 @@ export class PopMgr extends PopCore  {
     public popOpenBookHeroDetail(sid:number)
     {
         resources.load('prefabs_ui/pop/pop_bookherodetail', (err:any,res:any)=>{
+            console.log("sssssssssss",sid);
             let p = instantiate( res );
             this.pushWindow(p);
 
+          
             let script = p.getComponent("PopBookHeroDetail") as PopBookHeroDetail;
             script.setBookData(sid);
 
@@ -626,4 +687,26 @@ export class PopMgr extends PopCore  {
              // let script = p.getComponent("PopBookProUI") as PopBookProUI;
          } );
      }
+
+
+    /**
+     * 弹出玩家升级奖励界面
+     */
+    
+    public popPlayerLevelUpWindow(msgData :Msg.NotifyLevelUpAward){
+
+        resources.load('prefabs_ui/pop/pop_player_levelup_award', (err: any, res: any) => {
+            let p = instantiate(res);
+            this.pushWindow(p);
+            let script = p.getComponent("PopPlayerLevelUpAward") as PopPlayerLevelUpAward;
+            script.setInitData(msgData);
+            // script.setIsMaskClose(true);
+
+        });
+
+    }
+
+
+
+  
 }

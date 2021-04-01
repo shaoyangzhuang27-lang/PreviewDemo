@@ -62,11 +62,6 @@ export class PopBookUpGrade extends PopBase {
 
     private _initData()
     {
-        if(this._heroId == -1)
-        {
-            this.deleteMe();
-            return;
-        }
         this._bookid = HeroData.GetHeroBookID(this._heroId);        
         let bookMap = GameModel.getInstance().getHeroesModel().getBookMap();
         this._heroUnit = bookMap.get(this._bookid) as Msg.HeroBookUnit;        

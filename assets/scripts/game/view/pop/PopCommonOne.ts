@@ -3,17 +3,20 @@
 * @author 郭刚
 * @version 1.0.0,2021.3.13
 */
-import { _decorator, Component, Node,LabelComponent,Button,SpriteFrame, Sprite,resources, Label } from 'cc';
+import { _decorator, Component, Node,LabelComponent,Button,SpriteFrame, Sprite,resources, Label, RichText } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopCommonOne')
 export class PopCommonOne extends PopBase {
-    @property({type: LabelComponent})
-    public lab_title:LabelComponent | null = null;
+    @property({type: Label})
+    public lab_title:Label= null as unknown as Label;
 
-    @property({type: LabelComponent})
-    public lab_content:LabelComponent | null = null;
+    @property({type: Label})
+    public lab_content:Label= null as unknown as Label;
+
+    @property({type: RichText})
+    public lab_rich:RichText  = null as unknown as RichText;
 
     @property({type: Button})
     public btn_submit = null as unknown as Button;
@@ -47,11 +50,11 @@ export class PopCommonOne extends PopBase {
     }
     public setContent(content:string){
         console.log(content)
-        if(this.lab_content)
-            this.lab_content.string = content
+       this.lab_content.node.activeInHierarchy ?  this.lab_content.string = content : this.lab_rich.string = content;
+           
     }
       /**
-    * 设置弹窗按钮mode = 2情况下取消发送回调
+    * 设置弹窗按钮mode = 1情况下取消发送回调
     * @param func      回调函数
     */
     public setSubmitCallBack(func:Function){
@@ -60,7 +63,7 @@ export class PopCommonOne extends PopBase {
     }
 
     /**
-    * 设置弹窗按钮mode = 1情况下按钮回调
+    * 设置弹窗按钮mode = 0情况下按钮回调
     * @param func      回调函数
     */
     public setGoCallBack(func:Function){
@@ -69,7 +72,7 @@ export class PopCommonOne extends PopBase {
     }
 
     /**
-    * 设置弹窗按钮mode = 2情况下取消按钮回调
+    * 设置弹窗按钮mode = 1情况下取消按钮回调
     * @param func      回调函数
     */
     public setCloseCallBack(func:Function | null){
@@ -78,7 +81,7 @@ export class PopCommonOne extends PopBase {
     }
 
     /**
-     * 设置弹窗按钮mode = 2情况下发送按钮
+     * 设置弹窗按钮mode = 1情况下发送按钮
      * @param spriteFramePath      图片路径
      * @param content      文本内容
     */
@@ -105,7 +108,7 @@ export class PopCommonOne extends PopBase {
     }
 
     /**
-     * 设置弹窗按钮mode = 2情况下取消按钮
+     * 设置弹窗按钮mode = 1情况下取消按钮
      * @param spriteFramePath      图片路径
      * @param content      文本内容
      */
@@ -132,7 +135,7 @@ export class PopCommonOne extends PopBase {
     }
 
     /**
-     * 设置弹窗按钮mode = 1情况下按钮
+     * 设置弹窗按钮mode = 0情况下按钮
      * @param spriteFramePath      图片路径
      * @param content      文本内容
      */
@@ -164,16 +167,55 @@ export class PopCommonOne extends PopBase {
      */
     public setShowMode(mode : number)
     {
-        if(mode == 1)
-        {
-            this.btn_submit.node.active = false;
-            this.btn_cancel.active = false;
-        }
-        else
+        if(mode)
         {
             this.btn_go.node.active = false;
         }
+        else
+        {
+
+            this.btn_submit.node.active = false;
+            this.btn_cancel.active = false;
+        }
     } 
+
+
+    public setRichLabMode(isRichLabelMode : boolean)
+    {
+        if(isRichLabelMode)
+        {
+            this.lab_content.node.active = false;
+        }
+        else
+        {
+            this.lab_rich.node.active = false;
+        }
+    }
+
+    public setBtnContent(mode:number, submitContent : string, cancelConent : string)
+    {
+        if(mode)
+        {
+            var lab_submit  = this.btn_submit.node.getChildByName("lab")?.getComponent(Label);
+            var lab_cancel  = this.btn_cancel.getChildByName("lab")?.getComponent(Label);
+            submitContent && lab_submit && (lab_submit.string = submitContent);
+            cancelConent && lab_cancel && (lab_cancel.string = cancelConent);
+        }
+        else
+        {
+            var lab  = this.btn_go.node.getChildByName("lab")?.getComponent(Label);
+            submitContent && lab &&(lab.string = submitContent);
+        }
+    }
+    public initUI(info : XStruct.common_one_info.Record)
+    {
+        this.setRichLabMode(info.isRichLabMode);
+        this.setTitle(info.title);
+        this.setContent(info.content);
+        this.setShowMode(info.mode);
+        this.setBtnContent(info.mode,info.submitContent,info.cancelContent);    
+    }
+
     // update (deltaTime: number) {
     //     // Your update function goes here.
     // }

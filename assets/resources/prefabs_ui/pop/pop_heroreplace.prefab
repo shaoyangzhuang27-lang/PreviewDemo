@@ -4113,7 +4113,7 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 40.71,
+      "width": 30.88,
       "height": 54.4
     },
     "_anchorPoint": {
@@ -4144,12 +4144,12 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 30,
-      "g": 143,
-      "b": 96,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
-    "_string": "419",
+    "_string": "??",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 22,
@@ -4429,7 +4429,7 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 28.47,
+      "width": 30.88,
       "height": 54.4
     },
     "_anchorPoint": {
@@ -4465,7 +4465,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "20",
+    "_string": "??",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 22,
@@ -9263,7 +9263,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 90,
-      "y": 19.108000000000004,
+      "y": -30,
       "z": 0
     },
     "_lrot": {
@@ -9375,7 +9375,7 @@
     "_target": null,
     "_left": 0,
     "_right": -61,
-    "_top": 9.892,
+    "_top": 59,
     "_bottom": 30,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
@@ -11597,9 +11597,6 @@
     "confirmBtn": {
       "__id__": 228
     },
-    "beforeHeroInfoBtn": {
-      "__id__": 295
-    },
     "afterHeroInfoBtn": {
       "__id__": 415
     },
@@ -11629,7 +11626,7 @@
       "__id__": 425
     },
     "afterHeroModel": null,
-    "starlist": [
+    "beforeStarList": [
       {
         "__id__": 312
       },
@@ -11644,6 +11641,23 @@
       },
       {
         "__id__": 336
+      }
+    ],
+    "afterStarList": [
+      {
+        "__id__": 432
+      },
+      {
+        "__id__": 438
+      },
+      {
+        "__id__": 444
+      },
+      {
+        "__id__": 450
+      },
+      {
+        "__id__": 456
       }
     ],
     "cancel_ok_node": {
