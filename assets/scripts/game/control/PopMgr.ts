@@ -537,6 +537,19 @@ export class PopMgr extends PopCore  {
         } );
     }
 
+    public popHeroChangeResult(heroId : number,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+            let script = p.getComponent("PopSummonSettle") as PopSummonSettle;
+            script.popWindowType = XConsts.POP_SUMMON_TYPE.FragmentSysthesis
+            script.initHeroModelInfo(heroId);
+            script.initUIFromExchange(heroId)            
+            script.setIsMaskClose(isMaskClose);
+        } );
+    }
+
     /**
      * 图鉴激活界面
      * @param id 英雄id
