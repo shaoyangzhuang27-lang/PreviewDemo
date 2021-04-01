@@ -190,6 +190,11 @@ export class PlayerModel extends BaseModel {
         this._playerInfo.WonderTimes = value;
     }
 
+
+    public updateWonderHero(id:number)
+    {
+        this._playerInfo.WonderHero = id;
+    }
     
     /**
      * @description: 消耗物品

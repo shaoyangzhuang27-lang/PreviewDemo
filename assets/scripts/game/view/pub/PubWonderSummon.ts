@@ -515,20 +515,9 @@ export class PubWonderSummon extends Component {
 
     public notifyWonderSummonHeroSelectHandle ( msgData: Msg.WonderHeroSelectA){
         if (msgData.err == Msg.TErrorCode.ERR_OK) {
-            
-            // if(msgData.summonType != Msg.TSummonType.ESummonType_Wonder)
-            // {
-            //     // if(this.isActive())
-            //     // {
-            //     //     PopMgr.getInstance().popSummonSettleWindow(msgData,XConsts.POP_SUMMON_TYPE.HeroPub);
-            //     // }   
-            //     // this.addPubNotifyHandler();
-            //     // this.updateImgPropNum();
-            //     // this.updateProgressProcess();
-            //     // this.updateBtnSummonState();
-            //     // this.updateShowNodeToggle();
-            // }
-           
+            let playerModel = GameModel.getInstance().getPlayerModel();
+            playerModel.updateWonderHero(msgData.WonderHero);
+            this.updateHeartHeroIcon();
         }
         else
         {

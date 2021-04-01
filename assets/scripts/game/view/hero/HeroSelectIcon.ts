@@ -4,6 +4,7 @@ const { ccclass, property } = _decorator;
 import { HeroIcon } from '../hero/HeroIcon';
 import { XConsts } from '../../model/const/XConsts';
 import { HeroData } from '../../model/datas/HeroData';
+import { GameModel } from '../../model/GameModel';
 
 @ccclass('HeroSelectIcon')
 export class HeroSelectIcon extends Component {
@@ -111,7 +112,14 @@ export class HeroSelectIcon extends Component {
 
     public setWonderSelectData(value:number,id : number,callback:Function)
     {
-        this.setItemType(value);
+        if(id == GameModel.getInstance().getHeroPubModel().getPlayerWonderHero())
+        {
+            this.setItemType(1);
+        }
+        else
+        {
+            this.setItemType(value);
+        }
         this._choiceCallBack = callback;
         this.initWonderHeroIcon(id);
         this._selectedWonderHeroId = id;

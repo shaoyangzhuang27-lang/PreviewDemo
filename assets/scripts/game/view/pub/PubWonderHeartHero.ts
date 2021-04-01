@@ -6,6 +6,9 @@ import { GameModel } from '../../model/GameModel';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { HeroSelectIcon } from '../hero/HeroSelectIcon';
 import { HeroIcon } from '../hero/HeroIcon';
+import { PopMgr } from '../../control/PopMgr';
+import { MsgMgr } from '../../control/MsgMgr';
+import { NotifyMgr } from '../../control/NotifyMgr';
 
 const { ccclass, property } = _decorator;
 
@@ -38,12 +41,16 @@ export class PubWonderHeartHero extends PopBase {
         this.lab_title.string = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERHERO);
         this.lab_select_desc.string = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERHEROSELECT);
 
+
+        this._heartHeroId = GameModel.getInstance().getHeroPubModel().getPlayerWonderHero();
         const containerEventHandler = new EventHandler();
         containerEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
         containerEventHandler.component = 'PubWonderHeartHero';// 这个是代码文件名
         containerEventHandler.handler = '_onToggleCampClick';
         containerEventHandler.customEventData = '';
 
+
+        this.addPubNotifyHandler();
         // this.toggle_camp?.checkEvents.push(containerEventHandler);
         this.toggle_camp.toggleItems.forEach((tog)=>{
             tog?.checkEvents.push(containerEventHandler);
@@ -54,6 +61,18 @@ export class PubWonderHeartHero extends PopBase {
     private _onSubmit(){
 
         //发消息确定绑定心愿英雄
+        if(this._heartHeroId != GameModel.getInstance().getHeroPubModel().getPlayerWonderHero())
+        {
+            let wonderHeroSelectR : Msg.WonderHeroSelectR = {
+                WonderHero : this._heartHeroId,
+           }
+           console.log("pub submit",wonderHeroSelectR);
+           MsgMgr.getInstance().getMsgHeroPub().requestWonderHeroSelectR(wonderHeroSelectR);
+        }
+        else
+        {
+            PopMgr.getInstance().deleteWindow();
+        }
     }
  
     private _onToggleCampClick(event: Event, customEventData: string){
@@ -176,5 +195,36 @@ export class PubWonderHeartHero extends PopBase {
        
         // GameModel.getInstance().getHeroPubModel().getPlayerWonderHero();
        
+    }
+
+    public addPubNotifyHandler()
+    {
+        console.log("开启");
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_pub_wonder_hero_select,this.notifyWonderSummonHeroSelectHandle,this);
+    }
+
+
+    public notifyWonderSummonHeroSelectHandle ( msgData: Msg.WonderHeroSelectA){
+        console.log("ssssssssss",msgData);
+        if (msgData.err == Msg.TErrorCode.ERR_OK) {
+           let playerModel = GameModel.getInstance().getPlayerModel();
+           playerModel.updateWonderHero(msgData.WonderHero);
+           PopMgr.getInstance().deleteWindow();
+        }
+        else
+        {
+            //此处消息错误处理 
+        }
+    }
+
+
+    public removePubNotifyHandler()
+    {
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_wonder_hero_select,this.notifyWonderSummonHeroSelectHandle,this); 
+    }
+
+    onDestroy(){
+        this.removePubNotifyHandler();
+        // this.node.off("OpenPubNotify");
     }
 }
