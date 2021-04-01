@@ -77,7 +77,7 @@ export class PopSummonSettle extends PopBase {
         this.lab_title.string = settleTitle.cn;
         this.btn_summon.node.on(Node.EventType.TOUCH_END, this._onBtnSummonClick, this);
         this.btn_sure.on(Node.EventType.TOUCH_END, this._onBtnSureClick, this);
-        this._initStarPos();
+        // this._initStarPos();
         this.initUI();
 
         if(this._popWindowType ==XConsts.POP_SUMMON_TYPE.HeroPub)
@@ -305,6 +305,7 @@ export class PopSummonSettle extends PopBase {
             var heroName = ValueMgr.getInstance().getItemByField(TableName.language_data,heroInfo.name) as Config.language_data.Record;
             this.lab_hero_name.string = heroName.cn
             this.resetResourcesSpriFame(camp,this.img_camp);
+            this._initStarPos();
             this._setStar(heroInfo.star);
             this.resetResourcesSpriFame(profession,this.img_profession);
         }
@@ -320,8 +321,30 @@ export class PopSummonSettle extends PopBase {
         }
     }
 
+    private _reloadSprFram(objNode: Node, path: string) : void {
+        ResMgr.getInstance().loadSpriteFrame(path, (err,spriteFrame:SpriteFrame | null) => {
+            if(!err) {
+                let sprite = objNode.getComponent(Sprite) as Sprite;
+                sprite.spriteFrame = spriteFrame;
+            }
+        },"PopHeroReplace");   
+    }
+
     private _setStar(star:number)
     {
+
+        let starNameList = ["星星初级","星星中级","星星高级"]
+        let grade:number = Math.ceil(star/5) - 1;
+        let yu:number = (star - 1) % 5 + 1;
+
+        let starName = starNameList[grade];
+        let starPath = "ui/common/icon/" + starName + "/spriteFrame"
+        for (let index = 0; index < this.starlist.length; index++) {
+            this.starlist[index].active = index < yu || yu == 0
+            if (this.starlist[index].active) {
+                this._reloadSprFram(this.starlist[index], starPath);
+            }            
+        }
         for (let index = 0; index < this.starlist.length; index++) {
             this.starlist[index].setPosition(this._arrStarPos[index]);
             if(index > star-1)
