@@ -177,12 +177,14 @@ export class PlayerModel extends BaseModel {
         }
     }
 
+    //普通召唤
     public updateSummonScore(value : number)
     {
         this._playerInfo.summonScore = value;
     }
 
 
+    //奇迹召唤
     public updateWonderTimes(value :number)
     {
         this._playerInfo.WonderTimes = value;

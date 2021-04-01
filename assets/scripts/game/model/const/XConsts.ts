@@ -300,6 +300,11 @@ export class XConsts{
 
     public static PUB_UI_WONDERSUMMONEXPLAIN : string = "UI_WonderSummonExplain";  //奇迹召唤说明
     public static PUB_UI_WONDERSUMMONCONTENT : string = "UI_WonderSummonContent";  //奇迹召唤说明内容
+    public static PUB_UI_BUYWONDERSUMMON : string = "UI_BuyWonderSummon";
+    public static PUB_UI_CLICKTOCONTINUE : string = "UI_ClickToContinue";   //点击屏幕继续
+
+    
+    
 
     public static PUB_UI_WONDER_DEFAULT_HEARTHERO : number = 5051401;  //奇迹召唤默认心愿英雄
 

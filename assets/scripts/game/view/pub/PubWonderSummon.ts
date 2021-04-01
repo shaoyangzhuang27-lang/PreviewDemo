@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node,Label,ProgressBar,Button,Sprite,Color,resources,RichText,instantiate } from 'cc';
+import { _decorator, Component, Node,Label,ProgressBar,Button,Sprite,Color,resources,RichText,instantiate,SpriteFrame, Vec3 } from 'cc';
 import { GameModel } from '../../model/GameModel';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
@@ -9,6 +9,8 @@ import { PopMgr } from '../../control/PopMgr';
 import { PubHeroIcon } from '../pub/PubHeroIcon';
 import { MsgMgr } from '../../control/MsgMgr';
 import { NotifyMgr } from '../../control/NotifyMgr';
+import { XFuns } from '../../model/const/XFuns';
+import {PubWonderSummonSettle} from "./PubWonderSummonSettle";
 const { ccclass, property } = _decorator;
 
 @ccclass('PubWonderSummon')
@@ -54,6 +56,9 @@ export class PubWonderSummon extends Component {
     @property({type: Button})
     public btn_summon_ten = null as unknown as Button;
 
+
+    @property({type: Node})
+    public node_wonder_summonsettle= null as unknown as Node;
     //奇迹召唤召唤进度
     private _nWonderSummonProgress : number = 0;
 
@@ -68,8 +73,9 @@ export class PubWonderSummon extends Component {
 
         this.btn_summon_one.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
         this.btn_summon_ten.node.on(Node.EventType.TOUCH_END, this._onButtonClick, this);
-        
+        this.addPubNotifyHandler();
 
+        this.node_wonder_summonsettle.active = false;
         // [3]
         this.updateHeartHeroIcon();
         this.updateProgressProcess();
@@ -85,24 +91,54 @@ export class PubWonderSummon extends Component {
     public updateBtnSummonState()
     {
         var lab_one = this.btn_summon_one.node.getChildByName("lab_summon_num")?.getComponent(Label);
+        var img_one = this.btn_summon_one.node.getChildByName("img_summon_icon")?.getComponent(Sprite);
         var img_one_remind = this.btn_summon_one.node.getChildByName("img_summon_remind")?.getComponent(Sprite);
         var lab_ten = this.btn_summon_ten.node.getChildByName("lab_summon_num")?.getComponent(Label);
+        var img_ten = this.btn_summon_ten.node.getChildByName("img_summon_icon")?.getComponent(Sprite);
         var img_ten_remind = this.btn_summon_ten.node.getChildByName("img_summon_remind")?.getComponent(Sprite);
         let changeLabColor = (obj : Label,bWhite : boolean)=>{
             obj.color = bWhite ? Color.WHITE :  Color.RED ;
         }
 
         var nCurDiamonds =  GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts();
-        lab_one && (lab_one.string = "x" + String(XConsts.PUB_SUMMON_WONDER_ONE_COSUME)) && changeLabColor(lab_one,nCurDiamonds >= XConsts.PUB_SUMMON_WONDER_ONE_COSUME);
-        lab_ten && (lab_ten.string = String(XConsts.PUB_SUMMON_WONDER_TEN_COSUME)) && changeLabColor(lab_ten,nCurDiamonds >= XConsts.PUB_SUMMON_WONDER_TEN_COSUME);
-        img_one_remind && (img_one_remind.node.active = nCurDiamonds >= XConsts.PUB_SUMMON_WONDER_ONE_COSUME);
-        img_ten_remind && (img_ten_remind.node.active = nCurDiamonds >= XConsts.PUB_SUMMON_WONDER_TEN_COSUME);
-
+        var nScrollCounts = GameModel.getInstance().getHeroPubModel().getHeroicSummonScrollNum();
+        if(nScrollCounts == 0)
+        {
+            lab_one && (lab_one.string = "x" + String(XConsts.PUB_SUMMON_WONDER_ONE_COSUME)) && changeLabColor(lab_one,nCurDiamonds >= XConsts.PUB_SUMMON_WONDER_ONE_COSUME);
+            lab_ten && (lab_ten.string = String(XConsts.PUB_SUMMON_WONDER_TEN_COSUME)) && changeLabColor(lab_ten,nCurDiamonds >= XConsts.PUB_SUMMON_WONDER_TEN_COSUME);
+            img_one_remind && (img_one_remind.node.active = nCurDiamonds >= XConsts.PUB_SUMMON_WONDER_ONE_COSUME);
+            img_ten_remind && (img_ten_remind.node.active = nCurDiamonds >= XConsts.PUB_SUMMON_WONDER_TEN_COSUME);
+            img_one && this.resetResourcesSpriFame("ui/hero_pub/pub_diamond/spriteFrame",img_one);
+            img_ten && this.resetResourcesSpriFame("ui/hero_pub/pub_diamond/spriteFrame",img_ten);
+            img_one?.node.setScale(new Vec3(0.25,0.25,1));
+            img_ten?.node.setScale(new Vec3(0.25,0.25,1));
+        }
+        else
+        {
+            if(img_one_remind && img_ten_remind)
+            {
+                if(nScrollCounts >= XConsts.PUB_SUMMON_SCROLL_TEN_COSUME)
+                {
+                    img_one_remind.node.active = true; 
+                    img_ten_remind.node.active = true; 
+                }
+                else
+                {
+                    img_one_remind.node.active = true; 
+                    img_ten_remind.node.active = false; 
+                }
+                
+            }
+            img_one?.node.setScale(new Vec3(0.75,0.75,1));
+            img_ten?.node.setScale(new Vec3(0.75,0.75,1));
+            img_one && this.resetResourcesSpriFame("ui/hero_pub/wonder_scroll/spriteFrame",img_one);
+            img_ten && this.resetResourcesSpriFame("ui/hero_pub/wonder_scroll/spriteFrame",img_ten);
+        }
     }
     public updateProgressProcess()
     {
         this._nWonderSummonProgress = GameModel.getInstance().getHeroPubModel().getPlayerWonderTimes();
-
+        this.lab_prop_num.string =  XFuns.FormatNumber(GameModel.getInstance().getHeroPubModel().getHeroicSummonScrollNum());
         if(this.lab_bar_rich)
         {
             var strInfo = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERSUMMONRESIDUE);
@@ -313,7 +349,7 @@ export class PubWonderSummon extends Component {
                             let callFunc = ()=>{
                                 this.onSubmit(Msg.TSummonType.ESummonType_Wonder,Msg.TSummonConsumeType.ESummonConsumeType_Wonder_VRmb,false);
                             }
-                            var str = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_BUYSUMMONSCROLL);
+                            var str = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_BUYWONDERSUMMON);
                             
                             str = str.replace("{0}",String(nShortageDiamonds));
                             str = str.replace("{1}",String(XConsts.PUB_SUMMON_SCROLL_TEN_COSUME - nScrollCounts));
@@ -350,7 +386,7 @@ export class PubWonderSummon extends Component {
                                 PopMgr.getInstance().popCommonOneWindow(tempInfo,sumbitCallFunc);
                                 
                             }
-                            var str = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_BUYSUMMONSCROLL);
+                            var str = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_BUYWONDERSUMMON);
                             
                             str = str.replace("{0}",String(nShortageDiamonds));
                             str = str.replace("{1}",String(XConsts.PUB_SUMMON_SCROLL_TEN_COSUME - nScrollCounts));
@@ -439,21 +475,37 @@ export class PubWonderSummon extends Component {
     }
 
     public notifyWonderSummonHeroHandle ( msgData: Msg.WonderSummonHeroA){
+        console.log("wwwwwwwwwwwwwwwwwwww",msgData);
         if (msgData.err == Msg.TErrorCode.ERR_OK) {
-            
-            if(msgData.summonType != Msg.TSummonType.ESummonType_Wonder)
+            let playerModel = GameModel.getInstance().getPlayerModel();
+            let nSrollNums = GameModel.getInstance().getHeroPubModel().getHeroicSummonScrollNum();
+            switch(msgData.consumeType)
             {
-                // if(this.isActive())
-                // {
-                //     PopMgr.getInstance().popSummonSettleWindow(msgData,XConsts.POP_SUMMON_TYPE.HeroPub);
-                // }   
-                // this.addPubNotifyHandler();
-                // this.updateImgPropNum();
-                // this.updateProgressProcess();
-                // this.updateBtnSummonState();
-                // this.updateShowNodeToggle();
+                case Msg.TSummonConsumeType.ESummonConsumeType_Wonder:
+                    playerModel.consumeObjectByNum(Msg.TObjectType.EObject_WonderGem, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    playerModel.updateWonderTimes(msgData.summonScore);
+                    console.log("消费奇迹宝石 ",msgData.consumeNum);
+                    break;
+                 case Msg.TSummonConsumeType.ESummonConsumeType_VRmb:
+                    playerModel.consumeObjectByNum(Msg.TObjectType.EObject_VRmb, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    playerModel.updateWonderTimes(msgData.summonScore);
+                    NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
+                    console.log("消费钻石 ",msgData.consumeNum);
+                    break;
+                case Msg.TSummonConsumeType.ESummonConsumeType_Wonder_VRmb:
+                    playerModel.consumeObjectByNum(Msg.TObjectType.EObject_VRmb, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    playerModel.consumeObjectByNum(Msg.TObjectType.EObject_WonderGem,nSrollNums,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+                    playerModel.updateWonderTimes(msgData.summonScore);
+                    console.log("消费钻石 ",msgData.consumeNum);
+                    console.log("消费奇迹宝石 ",nSrollNums);
+                    NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
+                    break;
             }
-           
+            this.updateBtnSummonState();
+            this.updateProgressProcess(); 
+            //展示奇迹召唤界面
+            this.showSummonSettle(msgData);
+            // PopMgr.getInstance().popPubWonderSummonSettleWindow();     
         }
         else
         {
@@ -495,6 +547,39 @@ export class PubWonderSummon extends Component {
         console.log("wondersummon destory");
         this.removePubNotifyHandler();
         // this.node.off("OpenPubNotify");
+    }
+
+    public resetResourcesSpriFame(path:string,objSprite : Sprite)
+    {
+        resources.load(path, SpriteFrame ,(err: any, spriteFrame: SpriteFrame) => {
+            objSprite.spriteFrame = spriteFrame;
+        });
+    }
+
+    public showSummonSettle(msgData : Msg.WonderSummonHeroA)
+    {
+        this.node_wonder_summonsettle.active = true;
+
+        let nodeSummonSettle = this.node_wonder_summonsettle.getChildByName("pub_wonder_summonsettle");
+
+        if(nodeSummonSettle)
+        {
+
+        }
+        else
+        {
+            resources.load('prefabs_ui/pub/pub_wonder_summonsettle', (err:any,res:any)=>{
+                let _settle = instantiate(res);
+                // _heroIcon.setScale(0.4,0.4,1)
+                let script = _settle.getComponent(PubWonderSummonSettle); 
+                // script.initUIHeroIconInfo(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero(),XConsts.HERO_ICON_TYPE.WonderSummon);    
+                // script.setBtnCallBack(()=>{
+                //     PopMgr.getInstance().popOpenBookHeroDetail(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero());
+                // })
+                this.node_wonder_summonsettle.addChild(_settle);   
+            });
+        }
+        
     }
 }
 
