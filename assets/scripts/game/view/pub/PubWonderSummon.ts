@@ -564,7 +564,9 @@ export class PubWonderSummon extends Component {
 
         if(nodeSummonSettle)
         {
-
+            nodeSummonSettle.active = true;
+            let script = nodeSummonSettle.getComponent(PubWonderSummonSettle); 
+            script && script.initShowAwardList(msgData);
         }
         else
         {
@@ -576,6 +578,7 @@ export class PubWonderSummon extends Component {
                 // script.setBtnCallBack(()=>{
                 //     PopMgr.getInstance().popOpenBookHeroDetail(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero());
                 // })
+                script.initShowAwardList(msgData);
                 this.node_wonder_summonsettle.addChild(_settle);   
             });
         }
