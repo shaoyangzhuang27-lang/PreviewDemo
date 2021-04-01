@@ -175,6 +175,7 @@ export class XShare{
     public KSkillTapTapParticle = "上帝技能粒子/火球";
     public KHeroPropertyToRole = 0.12;
     public KHeroResetVrmbConsume = new Array<number>(0, 0, 0, 0, 20, 20, 20, 20, 20, 20, 20, 20, 20);
+    public KHeroReturnBackConsumeVrmb = new Array<number>(0, 0, 0, 0, 0, 0, 0, 500, 1000, 2000, 3000, 4000, 5000, 5000);
     public KCopyProgressAutoDuration = 30;
     public KTrailShopRefreshCD = 72 * 60 * 60;
     public KTrailShopRefreshConsumeVrmb = 1000;
@@ -222,7 +223,10 @@ export class XShare{
     public KRoleHeroStarUpReqChallenge = new Array<number>(0,30,60,100,125,150,180,200,250,300,350);
     public KRoleHeroStarUpReqMoney = new Array<number>(20000,300000,500000,800000,1500000,2000000,2500000,3000000,5000000,7500000,10000000);
     public KRoleHeroArmorUnlockCopy = new Array<number>(0, 312, 630, 840, 1050);
+    //--英雄学院
+    //--格子最大数量
     public KCollegeBlockMaxNum = 100;
+    //--格子冷却CD
     public KCollegeBlockCD = 0;
     public KHeroBagLimited = 1000;
     public KGuildBossVipTimes = new Array<number>(2,2,2,2,3,3,3,4,4,4,4,5,5,5);
@@ -571,6 +575,8 @@ export class XShare{
         }
         return copy
     }
+
+    //英雄书院--格子解锁需求符文水晶
     public GetCollegeMoneyConsume(index:number) {
         return (index - 1) * 100
     }

@@ -39,6 +39,8 @@ export class SceneMgr{
 
         ResMgr.getInstance().loadMainUI();
         ResMgr.getInstance().loadMainCity();
+        ResMgr.getInstance().loadGameNecessaryRes();
+        ResMgr.getInstance().loadCommonPrefabs();
         ResMgr.getInstance().loadMainScene();
         ResMgr.getInstance().startLoad((finished:number,total:number,resName:string)=>{
             if(this.loadingScript){
@@ -73,6 +75,8 @@ export class SceneMgr{
             console.log(this.loadingScript);
         })
         ResMgr.getInstance().loadMainUI();
+        ResMgr.getInstance().loadGameNecessaryRes();
+        ResMgr.getInstance().loadCommonPrefabs();
         ResMgr.getInstance().loadBattleScene();
         ResMgr.getInstance().startLoad((finished:number,total:number,resName:string)=>{
             if(this.loadingScript){

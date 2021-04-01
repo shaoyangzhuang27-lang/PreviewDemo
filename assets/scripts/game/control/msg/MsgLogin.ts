@@ -2,6 +2,7 @@ import { MsgCore} from "../../../core/network/MsgCore";
 import { NetCallFunc } from "../../../core/network/NetInterface";
 import { NetManager } from "../../../core/network/NetManager";
 import { DataMgr } from "../../model/DataMgr";
+import { SystemModel } from "../../model/datas/SystemModel";
 import { GameModel } from "../../model/GameModel";
 import { NotifyMgr } from "../NotifyMgr";
 import { MsgBase } from "./MsgBase";
@@ -46,6 +47,10 @@ export class MsgLogin extends MsgBase{
         this.msgMgr.sendData(Msg.MsgType.TheDeviceLoginNewR,buffer_data);
         }
     public responeDeviceLoginNewA(msgId: number, msgData: Msg.DeviceLoginNewA){
+
+        //保存所有角色简要信息
+        GameModel.getInstance().getSystemModel().setAllPlayerData(msgData.allPlayerList)
+
         this.requestPlayerLogin(msgData.loginPlayerID);
     }
     //角色登陆------------------------------------
