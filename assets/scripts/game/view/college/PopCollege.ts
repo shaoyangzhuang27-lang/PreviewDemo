@@ -2,9 +2,9 @@
  * @Description: 英雄书院
  * @Author: 徐涛
  * @Date: 2021-03-30 19:49:03
- * @LastEditTime: 2021-04-01 11:25:23
+ * @LastEditTime: 2021-04-01 15:38:09
  */
-import { _decorator, Node, Label, resources, instantiate, ScrollView } from 'cc';
+import { _decorator, Node, Label, resources, instantiate, ScrollView, Vec3, UITransform, math } from 'cc';
 const { ccclass, property } = _decorator;
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
@@ -15,6 +15,7 @@ import { HeroModel } from '../hero/HeroModel';
 import { ValueMgr } from "../../model/ValueMgr";
 import { XFuns } from '../../model/const/XFuns';
 import { XShare } from '../../model/const/XShare';
+import { CollegeItem } from './CollegeItem';
 
 @ccclass('PopCollege')
 export class PopCollege extends PopBase {
@@ -46,13 +47,12 @@ export class PopCollege extends PopBase {
 
     private _heroPosList: Node[] = [];
     //拥有的所有英雄
-    private _allHeroList: Map<number, HeroData> = new Map<number, HeroData>();
-    //拥有的所有英雄列表显示对象
-    private _bottomHeroItemList: Map<number, Node> = new Map<number, Node>();
+    private _inCollegeHeroList: Map<number, number> = new Map<number, number>();
+    //学院英雄items
+    private _bottomHeroItemList: Map<number, CollegeItem> = new Map<number, CollegeItem>();
 
     private _heroModelArray: HeroModel[] = [];
     private _heroLvtxtArray: Label[] = [];
-    // public LoopScrollRect Lsr;
     private _heroID: number = 0;
     private _isAdd: boolean = false;
     private _pos: number = 0;
@@ -75,7 +75,7 @@ export class PopCollege extends PopBase {
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_open_college_block, this._notifyOpenCollegeBlockHandle, this);
     }
 
-    private _notifyOpenCollegeBlockHandle(data: any = null){
+    private _notifyOpenCollegeBlockHandle(data: any = null) {
         if (!data) {
             return;
         }
@@ -86,7 +86,7 @@ export class PopCollege extends PopBase {
             //刷新槽位数
             this._refreshSlotNum();
             //刷新英雄列表
-            this._refreshCells();            
+            this._refreshCells();
             PopMgr.getInstance().popupPrompt(ValueMgr.getInstance().getLanguageString("UI_UnlockPetSuccess"));
         }
     }
@@ -110,15 +110,15 @@ export class PopCollege extends PopBase {
         this.lab_all_slot.string = "/" + GameModel.getInstance().getHeroesModel().getCollegeUnlockBlockNum().toString();
     }
 
-    private _refreshCells() {        
+    private _refreshCells() {
         // let totalCount = XShare.getInstance().KCollegeBlockMaxNum;
 
     }
 
     //获取列表英雄
-    private _getAllHeroList() {
-        this._allHeroList = GameModel.getInstance().getHeroList();
-
+    private _getInCollegeHeroList() {
+        this._inCollegeHeroList.clear();
+        this._inCollegeHeroList = GameModel.getInstance().getHeroesModel().heroIdInCollegeMap;//GameModel.getInstance().getHeroesModel().getHeroList();
     }
 
     //说明界面
@@ -128,9 +128,6 @@ export class PopCollege extends PopBase {
         PopMgr.getInstance().popExplain(strTitle, strExplain, () => {
             PopMgr.getInstance().deleteWindow();
         });
-        // ()=>{
-        //     PopMgr.getInstance().deleteWindow();
-        // },false);
     }
 
     private _initView() {
@@ -139,26 +136,38 @@ export class PopCollege extends PopBase {
         this._refreshCollegeMoney();
 
         let heroTop5 = GameModel.getInstance().getHeroesModel().heroesTop5;
-        this._heroModelArray.forEach(heroModel => {
+        resources.load('prefabs_ui/main/hero_model', (err: any, res: any) => {
+            let p = instantiate(res);
+            if (this._heroModelArray.length < heroTop5.Count) {
+                for (let index = this._heroModelArray.length; index < heroTop5.Count; index++) {
+                    let model = p.getComponent("hero_model") as HeroModel;
+                    this.window.addChild(model.node);
+                    this._heroModelArray.push(model);
+                }
+            }
+            for (let index = 0; index < this._heroModelArray.length; index++) {
+                const element = this._heroModelArray[index];
+                if (index >= heroTop5.Count) {
+                    // this._heroModelArray[index].node.acitve=false;
+                    continue;
+                }
 
+                if (heroTop5.Get(index)) {
+                    // this._heroModelArray[index].updateByHeroPerfabPath("");
+                    this._heroLvtxtArray[index].string = "Lv." + heroTop5.Get(index).level;
+                    let pos = this._heroLvtxtArray[index].node.getPosition();
+                    let nodeSize = this._heroLvtxtArray[index].node.getComponent(UITransform)?.contentSize as math.Size;
+                    let posModel = new Vec3(pos);
+                    posModel.y = pos.y + nodeSize.height;
+                    this._heroModelArray[index].node.setPosition(posModel);
+                    // this._heroModelArray[index].node.acitve=true;
+                }
+            }
         });
 
-        for (let index = 0; index < this._heroModelArray.length; index++) {
-            const element = this._heroModelArray[index];
-            if (index >= heroTop5.Count) {
-                // this._heroModelArray[index].node.acitve=false;
-                continue;
-            }
-
-            if(heroTop5.Get(index) ){
-                // this._heroModelArray[index].updateByHeroPerfabPath("");
-                this._heroLvtxtArray[index].string = "Lv." + heroTop5.Get(index).level;
-                // this._heroModelArray[index].node.acitve=true;
-            }
-        }
-        
         this._refreshSlotNum();
-        this._refreshCells();        
+        this._getInCollegeHeroList();
+        this._initBottomHeros();
     }
 
     private _refreshCollegeMoney() {
@@ -171,88 +180,43 @@ export class PopCollege extends PopBase {
         }
 
         resources.load('prefabs_ui/college/college_item', (err: any, res: any) => {
-            this._bottomHeroItemList.clear()
-            let k = new Array<[number, Node]>();     //排序存储对象
-            for (let heroData of this._allHeroList.values()) {
-                let heroIcon = instantiate(res) as Node;
-                this.scroll_HeroView.content?.addChild(heroIcon);
+            this._bottomHeroItemList.clear();
+            let keys = this._inCollegeHeroList.keys();
+            let unlockBlockNum = GameModel.getInstance().getHeroesModel().getCollegeUnlockBlockNum();
+            let heroIDInCollegeCount = GameModel.getInstance().getHeroesModel().getHeroIDInCollegeCount();
+            for (let index = 0; index < XShare.getInstance().KCollegeBlockMaxNum; index++) {
+                let node = instantiate(res) as Node;
+                this.scroll_HeroView.content?.addChild(node);
 
+                let collegeItem = node.getComponent("CollegeItem") as CollegeItem;
+                let heroId = 0;
+                let isLocked = index >= unlockBlockNum;
+                let isShowCD = false;
+                let isShowTip = false;
+                // 1.符文水晶足够可以解锁 2.已解锁的格子还空着
+                let isCanUnLock = false;//
+                if (isLocked && isCanUnLock) {
+                    isShowTip = true;
+                }
+                else if (!isLocked && index > heroIDInCollegeCount) {
+                    isShowTip = true;
+                }
+                if (index < this._inCollegeHeroList.size) {
+                    let key = keys.next();
+                    let heroId = this._inCollegeHeroList.get(key.value) as number;
+                    this._bottomHeroItemList.set(heroId, collegeItem);
+                    collegeItem.setHeroData(heroId, isLocked, isShowCD, isShowTip);
 
-                let sortIndex_1: number = heroData.getLevel() * 10000 + heroData.getStar() * 1000 + heroData.getCamp() * 10 + heroData.getClasses();
-                let sortIndex_2: number = 3000000 - sortIndex_1;
-                k.push([sortIndex_2, heroIcon]);
-
-
-
-                this._bottomHeroItemList.set(heroData.getDyncID(), heroIcon);
+                } else {
+                    collegeItem.setHeroData(heroId, isLocked, isShowCD, isShowTip);
+                }
             }
-
-
-            k.sort((n1, n2) => n1[0] - n2[0])
-            k.forEach((value, key) => {
-                value[1].setSiblingIndex(key);
-            })
         });
+
     }
 
+    private _isCanUnLockBlock() {
 
-    // //点选英雄
-    // private _heroSelect(heroData:HeroData,isSelect:boolean)
-    // {
-    //     if(isSelect == null)return;
-
-    //     // this._heroToTop(heroData,isSelect);
-    //     // this._getBottomHeroItemScript(heroData)?.setSelect(isSelect);
-    //     // this._frushButtonHero();
-    // }
-
-
-
-    // //根据英雄动态id获取英雄静态id
-    // private _getTopHeroByStaticID(heroID:number){
-
-    //     let childName = "formationIcon_" + heroID;
-
-    //     for (let index = 0; index < this._heroPosList.length; index++) {
-    //         let child = this._heroPosList[index].getChildByName(childName);
-    //         if(child)return child
-    //     }
-    // }
-
-    // //根据herodata获取拥有英雄代码
-    // private _getBottomHeroItemScript(heroData:HeroData){
-    //     for (let value of this._bottomHeroItemList.values()) {
-    //         let script = value.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp; 
-    //         let scriptHeroInfo = script.getCurHeroInfo() as HeroData;
-    //         if(scriptHeroInfo.getDyncID() == heroData.getDyncID())
-    //         {
-    //             return script;
-    //         }
-    //     }
-    // }
-
-
-    // //根据动态ID获取HeroData
-    // private _getHeroData(heroID:number){
-    //     let HeroInfo;
-    //     for (let value of this._bottomHeroItemList.values()) {
-    //         let script = value.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp; 
-    //         let scriptHeroInfo = script.getCurHeroInfo() as HeroData;
-    //         if(scriptHeroInfo.getDyncID() == heroID)
-    //         {
-    //             HeroInfo = scriptHeroInfo;
-    //         }
-    //     }
-    //     return HeroInfo;
-    // }
-
-    // // 展示当前英雄形象
-    // private _showCurHeroModel(_iconName:string)
-    // {
-    //     // if(this.cur_hero_model)
-    //     // {
-    //     //     this.cur_hero_model.updateByHeroPerfabPath(_iconName);
-    //     // }
-    // }
+    }
 
 }

@@ -2,7 +2,7 @@
  * @Description: 学院界面内待选择英雄槽位
  * @Author: 徐涛
  * @Date: 2021-03-30 16:03:26
- * @LastEditTime: 2021-03-30 19:44:17
+ * @LastEditTime: 2021-04-01 15:26:01
  */
 import { _decorator, Component, Node, Sprite, Label, Button, SpriteFrame, resources, math, UITransform, EventTouch, Vec3, instantiate } from 'cc';
 const { ccclass, property } = _decorator;
@@ -120,8 +120,8 @@ export class CollegeItem extends Component {
                 return;
             }
 
-            //等级等于学院等级 todo!
-            // heroData.level= 
+            //等级等于学院等级
+            console.log(heroData.level);
             this._heroData = heroData;
             this._isCanDefaultCallBack = false;
             if (this._heroIcon && this._heroIcon instanceof HeroIcon) {
@@ -138,6 +138,7 @@ export class CollegeItem extends Component {
                         target._openCollegeUnLoadView(_data);
                     });
                     this.node.addChild(heroIcon);
+                    heroIcon.setScale(new Vec3(0.7, 0.7, 1));
                 });
             }
         }
