@@ -8,6 +8,7 @@ import { PopBase } from '../../../core/control/PopBase';
 import { PopMgr } from '../../control/PopMgr';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { ResMgr } from '../../control/ResMgr';
 import { ItemMultiReward } from '../risestartower/ItemMultiReward';
 const { ccclass, property } = _decorator;
 
@@ -72,7 +73,7 @@ export class PopMultiItemReward extends PopBase {
     {
         var title = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.KStarUpGainObjectTitle) as Config.language_ui.Record;
         this.lab_title.string = title.cn;
-          resources.load('prefabs_ui/main/item_multi_reward', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/item_multi_reward', (err:any,res:any)=>{
 
             var isPropInfo = this._propInfoArray.length > 0 ? true : false;
             var nCounts = isPropInfo ? this._propInfoArray.length : this._lootObjectArray.length;

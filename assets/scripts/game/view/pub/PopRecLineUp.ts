@@ -2,6 +2,7 @@ import { _decorator,Label, resources, instantiate, ScrollView } from 'cc';
 const { ccclass, property } = _decorator;
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
+import { ResMgr } from '../../control/ResMgr';
 import { PubRecLineUpItem } from './PubRecLineUpItem';
 
 
@@ -26,7 +27,7 @@ export class PopRecLineUp extends PopBase {
         {
             this.scroll_lineup_view.content.removeAllChildren()
         }
-        resources.load('prefabs_ui/main/pub_reclineup_item', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/pub_reclineup_item', (err:any,res:any)=>{
             for (var i = 0 ; i < GameModel.getInstance().getHeroPubModel().nLineUpCounts; i++) {
                 let reclineup_item = instantiate( res );
                 let script = reclineup_item.getComponent(PubRecLineUpItem);

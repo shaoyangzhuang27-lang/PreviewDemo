@@ -5,6 +5,7 @@
 */
 import { _decorator, Component, Node,LabelComponent,Button,SpriteFrame, Sprite,resources, Label, RichText } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
+import { ResMgr } from '../../control/ResMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopCommonOne')
@@ -89,13 +90,13 @@ export class PopCommonOne extends PopBase {
     {
         if(spriteFramePath)
         {
-            resources.load(spriteFramePath, SpriteFrame ,(err: any, spriteFrame: SpriteFrame) => {
+            ResMgr.getInstance().loadSpriteFrame(spriteFramePath ,(err: Error | null, spriteFrame: SpriteFrame | null) => {
                 var objSprite = this.btn_submit.getComponent(Sprite);
                 if(objSprite)
                 {
                     objSprite.spriteFrame = spriteFrame;
                 }
-            });
+            },"PopCommonOne");
         }
         if(content)
         {
@@ -116,13 +117,13 @@ export class PopCommonOne extends PopBase {
     {
         if(spriteFramePath)
         {
-            resources.load(spriteFramePath, SpriteFrame ,(err: any, spriteFrame: SpriteFrame) => {
+            ResMgr.getInstance().loadSpriteFrame(spriteFramePath,(err: Error | null, spriteFrame: SpriteFrame | null) => {
                 var objSprite = this.btn_cancel.getComponent(Sprite);
                 if(objSprite)
                 {
                     objSprite.spriteFrame = spriteFrame;
                 }
-            });
+            },"PopCommonOne");
         }
         if(content)
         {
@@ -143,13 +144,13 @@ export class PopCommonOne extends PopBase {
     {
         if(spriteFramePath)
         {
-            resources.load(spriteFramePath, SpriteFrame ,(err: any, spriteFrame: SpriteFrame) => {
+            ResMgr.getInstance().loadSpriteFrame(spriteFramePath,(err: Error | null, spriteFrame: SpriteFrame | null) => {
                 var objSprite = this.btn_go.getComponent(Sprite);
                 if(objSprite)
                 {
                     objSprite.spriteFrame = spriteFrame;
                 }
-            });
+            },"PopCommonOne");
         }
         if(content)
         {

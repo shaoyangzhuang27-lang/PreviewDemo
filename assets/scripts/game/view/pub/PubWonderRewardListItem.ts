@@ -5,6 +5,7 @@ import { GameModel } from '../../model/GameModel';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { ItemEquipType,ItemEquipCell } from '../menu/ItemEquipCell';
+import { ResMgr } from '../../control/ResMgr';
 import { HeroIcon } from '../hero/HeroIcon';
 import { PopMgr } from '../../control/PopMgr';
 const { ccclass, property } = _decorator;
@@ -24,7 +25,7 @@ export class PubWonderRewardListItem extends Component {
      * initFragmentIconInfo
      */
     public initFragmentIconInfo(data : any,node : Node) {
-        resources.load('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
             let fragmentItem = instantiate(res); 
             fragmentItem.setScale(0.6,0.6,1)
             var info : XStruct.fragment_synthesis_info.IRecord = {
@@ -68,7 +69,7 @@ export class PubWonderRewardListItem extends Component {
 
     public initEquipIconInfo(data : any,node :Node)
     {
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
             let equipItem = instantiate(res); 
             // equipItem.setScale(0.4,0.4,1)
             let id = data.awardParam1; 
@@ -86,7 +87,7 @@ export class PubWonderRewardListItem extends Component {
 
     public initMagicDust(data : any, node : Node)
     {
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
             let equipItem = instantiate(res); 
             // equipItem.setScale(0.4,0.4,1)
             let id = Msg.TObjectType.EObject_MagicDust; //data.awardParam1; 
@@ -104,7 +105,7 @@ export class PubWonderRewardListItem extends Component {
 
     public initAdvanceExp(data : any, node : Node)
     {
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
             let equipItem = instantiate(res); 
             // equipItem.setScale(0.4,0.4,1)
             let id = Msg.TObjectType.EObject_AdvanceExp; //data.awardParam1; 
@@ -122,7 +123,7 @@ export class PubWonderRewardListItem extends Component {
 
     public initUsableItem(data : any, node : Node)
     {
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
             let equipItem = instantiate(res); 
             // equipItem.setScale(0.4,0.4,1)
             let id = data.awardParam1; 
@@ -146,7 +147,7 @@ export class PubWonderRewardListItem extends Component {
 
         if(nCounts == 2)
         {
-            resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+            ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
                 let _heroIcon = instantiate(res);
                  _heroIcon.setScale(0.8,0.8,1)
                 let script = _heroIcon.getComponent(HeroIcon); 
@@ -157,7 +158,7 @@ export class PubWonderRewardListItem extends Component {
                this.node_list[4]?.addChild(_heroIcon);   
             });
 
-            resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+            ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
                 let itemEquipCell = instantiate(res);
                 //钻石 
                  itemEquipCell.setScale(1.2,1.2,1)

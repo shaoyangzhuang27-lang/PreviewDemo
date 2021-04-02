@@ -12,6 +12,7 @@ import { GameModel } from '../../model/GameModel';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { ResMgr } from '../../control/ResMgr';
 
+
 @ccclass('ItemMultiReward')
 export class ItemMultiReward extends Component {
     // [1]
@@ -77,12 +78,12 @@ export class ItemMultiReward extends Component {
     _resourceLoad (path:string | null | undefined,obj:any)
     {
       
-            path && resources.load(path,SpriteFrame,(err:any,spriteFrame:SpriteFrame) =>
-            {
-                obj.active = true;
-                let sprite = obj.getComponent(Sprite) as Sprite;
-                sprite.spriteFrame = spriteFrame;
-            });
+        path && ResMgr.getInstance().loadSpriteFrame(path,(err: Error | null,spriteFrame:SpriteFrame | null) =>
+        {
+            obj.active = true;
+            let sprite = obj.getComponent(Sprite) as Sprite;
+            sprite.spriteFrame = spriteFrame;
+        },"ItemMultiReward");
         
     }
 

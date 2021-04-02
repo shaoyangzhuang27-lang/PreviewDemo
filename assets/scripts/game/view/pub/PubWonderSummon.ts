@@ -11,6 +11,7 @@ import { MsgMgr } from '../../control/MsgMgr';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { XFuns } from '../../model/const/XFuns';
 import {PubWonderSummonSettle} from "./PubWonderSummonSettle";
+import { ResMgr } from '../../control/ResMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PubWonderSummon')
@@ -160,7 +161,7 @@ export class PubWonderSummon extends Component {
     //显示界面上7个预制体信息
     public initHeroIconPrefab()
     {
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
             let _heroIcon = instantiate(res);
             _heroIcon.setScale(0.4,0.4,1)
             let script = _heroIcon.getComponent(HeroIcon); 
@@ -171,7 +172,7 @@ export class PubWonderSummon extends Component {
             this.node_hero?.addChild(_heroIcon);   
         });
 
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
             let itemEquipCell = instantiate(res);
             //钻石 
             itemEquipCell.setScale(0.6,0.6,1)
@@ -190,7 +191,7 @@ export class PubWonderSummon extends Component {
 
         for(let i = 0; i < 3; i++)
         {
-            resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+            ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
                 let itemEquipCell = instantiate(res); 
                 itemEquipCell.setScale(0.4,0.4,1)
                 let id = 45 + i; 
@@ -220,7 +221,7 @@ export class PubWonderSummon extends Component {
 
         for(let i = 0; i < 2; i++)
         {
-            resources.load('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
+            ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
                 let itemEquipCell = instantiate(res); 
                 itemEquipCell.setScale(0.4,0.4,1)
                 // let id = 45 + i; 
@@ -277,7 +278,7 @@ export class PubWonderSummon extends Component {
 
     public updateHeartHeroIcon()
     {
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
             let _heroIcon = instantiate(res);
             _heroIcon.setScale(0.4,0.4,1)
             let script = _heroIcon.getComponent(HeroIcon); 

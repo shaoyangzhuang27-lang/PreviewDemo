@@ -9,6 +9,7 @@ import { HeroIcon } from '../hero/HeroIcon';
 import { PopMgr } from '../../control/PopMgr';
 import { MsgMgr } from '../../control/MsgMgr';
 import { NotifyMgr } from '../../control/NotifyMgr';
+import { ResMgr } from '../../control/ResMgr';
 
 const { ccclass, property } = _decorator;
 
@@ -117,7 +118,7 @@ export class PubWonderHeartHero extends PopBase {
         }
 
         let heroIdList = GameModel.getInstance().getHeroPubModel().getWonderHeartHeroIdByCamp(nCamp);
-        resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
             for(var i=0; i < heroIdList.length; i++ )
             {
                 let _heroIcon = instantiate(res) ;
@@ -188,7 +189,7 @@ export class PubWonderHeartHero extends PopBase {
                 }
                 else
                 {
-                    resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+                    ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
                         let _heroIcon = instantiate(res) ;
                         let script = _heroIcon.getComponent(HeroIcon); 
                         // script.setHeroID(this._heroInfo as HeroData);

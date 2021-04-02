@@ -3,6 +3,7 @@ import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { PopMgr } from '../../control/PopMgr';
 import { HeroIcon } from '../hero/HeroIcon';
+import { ResMgr } from '../../control/ResMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PubRecLineUpItem')
@@ -82,7 +83,7 @@ export class PubRecLineUpItem extends Component {
     
     public initHeroIconPrefab(index : number,id : number)
     {
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
             let _heroIcon = instantiate(res) ;
             let script = _heroIcon.getComponent(HeroIcon); 
             // script.setHeroID(this._heroInfo as HeroData);

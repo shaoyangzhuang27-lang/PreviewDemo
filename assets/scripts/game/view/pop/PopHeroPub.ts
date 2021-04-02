@@ -6,6 +6,7 @@ import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
 import { PopMgr } from '../../control/PopMgr';
+import { ResMgr } from '../../control/ResMgr';
 import { XConsts } from '../../model/const/XConsts';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { MsgMgr } from '../../control/MsgMgr';
@@ -378,7 +379,7 @@ export class PopHeroPub extends PopBase {
     public showPubHeroIconPrefab()
     {
         this.node_wonder && (this.node_wonder.active = false);
-        resources.load('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
             let p = instantiate( res );
             let script = p.getComponent(PubHeroIcon);
             var nodWindow = this.node.getChildByName("window");
@@ -408,11 +409,11 @@ export class PopHeroPub extends PopBase {
         } );
 
 
-        GameModel.getInstance().getHeroPubModel().initWonderHeartHeroIdList();
-        resources.load('prefabs_ui/pub/pub_wonder_summon', (err:any,res:any)=>{
-            let p = instantiate( res );
-            this.node_wonder?.addChild(p);
-        } );
+        // GameModel.getInstance().getHeroPubModel().initWonderHeartHeroIdList();
+        // ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_summon', (err:any,res:any)=>{
+        //     let p = instantiate( res );
+        //     this.node_wonder?.addChild(p);
+        // } );
     }
 
 
@@ -452,9 +453,9 @@ export class PopHeroPub extends PopBase {
 
     public resetResourcesSpriFame(path:string,objSprite : Sprite)
     {
-        resources.load(path, SpriteFrame ,(err: any, spriteFrame: SpriteFrame) => {
+        ResMgr.getInstance().loadSpriteFrame(path,(err: Error | null, spriteFrame: SpriteFrame | null) => {
             objSprite.spriteFrame = spriteFrame;
-        });
+        },"PopHeroPub");
     }
 
     public showPromptWindow(info : XStruct.common_one_info.Record, submitFunc :Function | null = null)
@@ -624,62 +625,9 @@ export class PopHeroPub extends PopBase {
         }
     }
 
-    public showSummonSettleWindow(title : string)
-    {
-        //20210322
-        //PopMgr.getInstance().popSummonSettleWindow(XConsts.POP_SUMMON_TYPE.HeroPub,1);
-    } 
-
-
     public notifyPubSummonHeroHandle ( msgData: Msg.SummonHeroA){
 
-        // console.log("palyer heros", GameModel.getInstance().getHeroesModel().getHeroList());
         if (msgData.err == Msg.TErrorCode.ERR_OK) {
-            // console.log("Notify PubHeroSummon",msgData);
-            // console.log("diamond", GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts());
-
-            // let playerModel = GameModel.getInstance().getPlayerModel();
-            // switch(msgData.consumeType)
-            // {
-            //     case Msg.TSummonConsumeType.ESummonConsumeType_Scroll:
-            //         playerModel.consumeObjectByNum(Msg.TObjectType.EObject_HeroicSummonScroll, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
-            //         // playerModel.updatePlayerInfoTimesAttribute(XMsg.TimesType.TSummonScore,msgData.summonScore);
-            //         playerModel.updateSummonScore(msgData.summonScore);
-            //         console.log("消费卷轴 ",msgData.consumeNum);
-            //         //召唤次数暂时未考虑
-            //         break;
-            //     case Msg.TSummonConsumeType.ESummonConsumeType_VRmb:
-            //         playerModel.consumeObjectByNum(Msg.TObjectType.EObject_VRmb, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
-            //         // playerModel.updatePlayerInfoTimesAttribute(XMsg.TimesType.TSummonScore,msgData.summonScore); 
-            //         playerModel.updateSummonScore(msgData.summonScore);
-            //         NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
-            //         break;
-            //     case Msg.TSummonConsumeType.ESummonConsumeType_Scroll_VRmb:
-            //         playerModel.consumeObjectByNum(Msg.TObjectType.EObject_VRmb, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
-            //         playerModel.consumeObjectByNum(Msg.TObjectType.EObject_HeroicSummonScroll,this._nScorllNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
-            //         playerModel.updateSummonScore(msgData.summonScore);
-            //         NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
-            //         break;
-            //     case Msg.TSummonConsumeType.ESummonConsumeType_FriendGift:
-            //         playerModel.consumeObjectByNum(Msg.TObjectType.EObject_FriendGift, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
-            //         break;
-            //     case Msg.TSummonConsumeType.ESummonConsumeType_Wonder:
-            //         playerModel.consumeObjectByNum(Msg.TObjectType.EObject_WonderGem, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
-                  
-            //         // playerModel.updatePlayerInfoTimesAttribute(XMsg.TimesType.TWonderTimes,msgData.summonScore); 
-            //         playerModel.updateWonderTimes(msgData.summonScore); 
-            //         break;
-            //     case Msg.TSummonConsumeType.ESummonConsumeType_Wonder_VRmb:
-            //         // playerModel.updatePlayerInfoTimesAttribute(XMsg.TimesType.TWonderTimes,msgData.summonScore);  
-            //         playerModel.updateWonderTimes(msgData.summonScore); 
-            //         NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);  
-            //         break;    
-            // }
-
-
-            // NotifyMgr.getInstance().notify()
-            // NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_pub_summon_hero,this.notifyPubSummonHeroHandle,this);
-            
             if(msgData.summonType != Msg.TSummonType.ESummonType_Wonder)
             {
                 if(this.isActive())
@@ -766,6 +714,14 @@ export class PopHeroPub extends PopBase {
         if(this.node_togglecontainer)
         {
             curLevel >= XConsts.PUB_OPEN_WONDER_SUMMON_LEVEL ? this.node_togglecontainer.node.active = true : this.node_togglecontainer.node.active = false;
+            if(this.node_togglecontainer.node.activeInHierarchy)
+            {
+                GameModel.getInstance().getHeroPubModel().initWonderHeartHeroIdList();
+                ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_summon', (err:any,res:any)=>{
+                    let p = instantiate( res );
+                    this.node_wonder?.addChild(p);
+                } );
+            }
         }
        
     }

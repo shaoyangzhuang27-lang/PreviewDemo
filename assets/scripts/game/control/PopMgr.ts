@@ -447,7 +447,7 @@ export class PopMgr extends PopCore  {
 
     public popHeroPubWindow(closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-        resources.load('prefabs_ui/pop_hero_pub', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pop_hero_pub', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
             let script = p.getComponent("PopHeroPub") as PopHeroPub;
@@ -465,7 +465,7 @@ export class PopMgr extends PopCore  {
      */
     public popCommonOneWindow(info : XStruct.common_one_info.Record,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-        resources.load('prefabs_ui/pop/pop_common_one', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_common_one', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
             let script = p.getComponent("PopCommonOne") as PopCommonOne;
@@ -479,7 +479,7 @@ export class PopMgr extends PopCore  {
      //弹出酒馆推荐阵容
     public popRecLineUpWindow(title:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
-        resources.load('prefabs_ui/pop/pop_reclineup', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_reclineup', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
             let script = p.getComponent("PopRecLineUp") as PopRecLineUp;
@@ -497,7 +497,7 @@ export class PopMgr extends PopCore  {
      */ 
     public popSummonSettleWindow(msgData: Msg.SummonHeroA,nType : number,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
-        resources.load('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
             let script = p.getComponent("PopSummonSettle") as PopSummonSettle;
@@ -510,7 +510,7 @@ export class PopMgr extends PopCore  {
 
     public popFragmentSynthesisWindow(data : XStruct.fragment_synthesis_info.IRecord,submitCallBack:Function,isWonderSummonShow : boolean = false,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-        resources.load('prefabs_ui/pop/pop_fragment_synthesis', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_fragment_synthesis', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 
@@ -578,7 +578,7 @@ export class PopMgr extends PopCore  {
      */
       public popMultiItemRewardWindow(lootObjectData : Array<Msg.LootObject> | null,  defineData :Array<XStruct.prop_info.Record> | null,bAutoDecompsePop : boolean = false,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-        resources.load('prefabs_ui/pop/pop_multi_itemreward', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_multi_itemreward', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
             let script = p.getComponent("PopMultiItemReward") as PopMultiItemReward;
@@ -592,7 +592,7 @@ export class PopMgr extends PopCore  {
 
        //奇迹召唤奖池详情
     public popPubWonderRewardListWindow(closeCallBack:Function|null = null,isMaskClose:boolean = true){
-        resources.load('prefabs_ui/pub/pub_wonder_rewardlist', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_rewardlist', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 
@@ -605,7 +605,7 @@ export class PopMgr extends PopCore  {
 
     //奇迹召唤心愿英雄详情
     public popPubWonderHeartHeroWindow(isMaskClose:boolean = true){
-        resources.load('prefabs_ui/pub/pub_wonder_hearthero', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_hearthero', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 
