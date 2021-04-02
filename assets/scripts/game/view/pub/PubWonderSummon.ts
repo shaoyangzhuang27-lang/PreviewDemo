@@ -238,7 +238,8 @@ export class PubWonderSummon extends Component {
                     heroName : "",
                     campName : "",
                     classesName : "",
-                    bg : ""
+                    bg : "",
+                    param : 0
                 }  
                 info.type = Msg.TFragmentType.EFragmentType_Random;
                 info.star = 4;

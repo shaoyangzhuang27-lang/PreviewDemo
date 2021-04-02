@@ -40,7 +40,8 @@ export class PubWonderRewardListItem extends Component {
                 heroName : "",
                 campName : "",
                 classesName : "",
-                bg : ""
+                bg : "",
+                param : 0
             }  
             info.type = data.awardParam1; // Msg.TFragmentType.EFragmentType_Random;
             info.star = data.awardParam3; //5

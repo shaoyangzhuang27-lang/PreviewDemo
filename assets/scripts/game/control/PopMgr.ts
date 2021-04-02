@@ -733,4 +733,19 @@ export class PopMgr extends PopCore  {
         });
   
     }
+
+
+    //碎片召唤
+    public popFramgentsynthesisResult(msgData: Msg.UseFragmentA,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    {
+        resources.load('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+            let script = p.getComponent("PopSummonSettle") as PopSummonSettle;
+            script.popWindowType = XConsts.POP_SUMMON_TYPE.FragmentSysthesis
+            script.initFragmentSynthesisFromMsgData(msgData);
+            // script.initUIFromExchange(heroId)            
+            script.setIsMaskClose(isMaskClose);
+        } );
+    }
 }

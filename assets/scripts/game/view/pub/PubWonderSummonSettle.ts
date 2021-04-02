@@ -120,7 +120,8 @@ export class PubWonderSummonSettle extends Component {
                 heroName : "",
                 campName : "",
                 classesName : "",
-                bg : ""
+                bg : "",
+                param : 0
             }  
             info.type = data.param1; // Msg.TFragmentType.EFragmentType_Random;
             info.star = data.param3; //5

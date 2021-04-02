@@ -400,7 +400,22 @@ export class PopHeroPub extends PopBase {
                 lab_detail_dimaond.string = GameModel.getInstance().getHeroPubModel().getPubUILabContentByUIName("lab_detail_dimaond");
             }
 
-            script.setWonderSummonShow(false);
+            let info : XStruct.fragment_synthesis_info.IRecord = {
+                frame :"",
+                camp : "",
+                star : 0,
+                quality : "",
+                icon : "",
+                type : 0,
+                maxNum : 0,
+                curNum : 0,
+                heroName : "",
+                campName : "",
+                classesName : "",
+                bg : "",
+                param : 0,
+            }  
+            script.setWonderSummonShow(false,info);
             if(nodeFiveStar)
             {
                 p.setScale(0.4,0.4)

@@ -528,4 +528,50 @@ export class PopSummonSettle extends PopBase {
             this.scroll_heroicon_view.content?.addChild(reclineup_item);   
         });        
     }
+
+    public initFragmentSynthesisFromMsgData(msgData: Msg.UseFragmentA)
+    {
+        // GameModel.getInstance().getHeroPubModel().getBaseSummonScrollNum()
+        // this._nSummonType = msgData.summonType;
+        // this._nSummonConsumeType = msgData.consumeType;
+        // this._bIsOne = msgData.heroList.length > 1 ? false : true;
+        // this._HeroList = [];
+        // this._HeroList = this._HeroList.concat(msgData.heroList);
+        // this.initBtnSummonUI(this._nSummonType, this._nSummonConsumeType, this._bIsOne);
+        // this.setShowScrollViewType(msgData.heroList.length);
+        // this.popWindowType = nType;
+
+       
+        // GameModel.getInstance().getHeroesModel().updateHeroListFromSummon(this._HeroList);
+
+
+        //    let playerModel = GameModel.getInstance().getPlayerModel();
+        //     switch(msgData.consumeType)
+        //     {
+        //         case Msg.TSummonConsumeType.ESummonConsumeType_Scroll:
+        //             playerModel.consumeObjectByNum(Msg.TObjectType.EObject_HeroicSummonScroll, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+        //             playerModel.updateSummonScore(msgData.summonScore);
+        //             console.log("消费卷轴  抽考结算 ",msgData.consumeNum);
+        //             //召唤次数暂时未考虑
+        //             break;
+        //         case Msg.TSummonConsumeType.ESummonConsumeType_VRmb:
+        //             playerModel.consumeObjectByNum(Msg.TObjectType.EObject_VRmb, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+        //             playerModel.updateSummonScore(msgData.summonScore);
+        //             NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
+        //             break;
+        //         case Msg.TSummonConsumeType.ESummonConsumeType_FriendGift:
+        //             playerModel.consumeObjectByNum(Msg.TObjectType.EObject_FriendGift, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+        //             break; 
+        //             //奇迹召唤不在这里显示
+        //         // case Msg.TSummonConsumeType.ESummonConsumeType_Wonder:
+        //         //     playerModel.consumeObjectByNum(Msg.TObjectType.EObject_WonderGem, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
+        //         //     playerModel.updateWonderTimes(msgData.summonScore); 
+        //         //     NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
+        //         //     break;
+   
+        //     }
+
+      
+        
+    }
 }

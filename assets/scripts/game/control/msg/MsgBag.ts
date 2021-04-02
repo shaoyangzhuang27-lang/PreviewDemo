@@ -13,6 +13,7 @@ export class MsgBag extends MsgBase{
         this.responeMap = new Map<number,[any,NetCallFunc,any]>([
             [Msg.MsgType.TheSellEquipA,[Msg.SellEquipA,this.responeSellEquip,this]],
             [Msg.MsgType.TheUseUsableItemA,[Msg.UseUsableItemA,this.responeUseItemBack,this]],
+            [Msg.MsgType.TheUseFragmentA,[Msg.UseFragmentA,this.responeUseFragmentA,this]],
         ]);
     }
 
@@ -56,10 +57,22 @@ export class MsgBag extends MsgBase{
         else{   //获得一个
             PopMgr.getInstance().popItemRewardView(newMsgData.gainObjList[0].objType as number,Number(newMsgData.gainObjList[0].num))
             GameModel.getInstance().getBagModel().changeBagEquipNumber(newMsgData.itemID,newMsgData.itemNum);
-        }
-        
-        
-        
-        
+        } 
+    }
+
+    
+    //碎片合成
+    public requestUseFragmentR(data: Msg.UseFragmentR)
+    {
+        console.log("requestUseFragmentR",data);
+        const buffer_data = Msg.UseFragmentR.encode(data).finish();
+        this.msgMgr?.sendData(Msg.MsgType.TheUseFragmentR,buffer_data);
+    }
+    
+    //碎片合成回复
+    public responeUseFragmentA(msgId: number, msgData: Msg.UseFragmentA)
+    {
+        console.log("responeUseFragmentA",msgId,msgData);
+        NotifyMgr.getInstance().notify(NotifyMgr.event_net_bag_fragment_synthesis,msgData);
     }
 }
