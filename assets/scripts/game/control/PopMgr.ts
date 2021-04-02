@@ -1,9 +1,9 @@
 import {  Node,resources,instantiate,LabelComponent,Vec3,tween,Scene, Script, Prefab } from 'cc';
 import { PopSimple } from "../view/pop/PopSimple";
-import { PopRisingStarTower } from "../view/pop/PopRisingStarTower";
-import { PopStarUpResult } from "../view/pop/PopStarUpResult";
-import { PopOneKeyStarUp } from "../view/pop/PopOneKeyStarUp";
-import { PopHeroReset } from "../view/pop/PopHeroReset";
+import { PopRisingStarTower } from "../view/features/starup/PopRisingStarTower";
+import { PopStarUpResult } from "../view/features/starup/PopStarUpResult";
+import { PopOneKeyStarUp } from "../view/features/starup/PopOneKeyStarUp";
+import { PopHeroReset } from "../view/features/decompose/PopHeroReset";
 import { PopCommonOne } from "../view/pop/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
@@ -158,7 +158,7 @@ export class PopMgr extends PopCore  {
      */
     public popHeroResetView(isMaskClose:boolean = true)
     {
-        resources.load('prefabs_ui/pop/pop_heroreset', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/decompose/pop_heroreset', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
@@ -174,7 +174,7 @@ export class PopMgr extends PopCore  {
      */
     public popStarUpView(isMaskClose:boolean = true)
     {
-        resources.load('prefabs_ui/pop/pop_risingstartower', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/starup/pop_risingstartower', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
@@ -192,7 +192,7 @@ export class PopMgr extends PopCore  {
      */
     public popStarUpResultView(HeroInfo:HeroData,newHeroInfo:HeroData,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
-        resources.load('prefabs_ui/pop/pop_starup_result', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/starup/pop_starup_result', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
@@ -213,7 +213,7 @@ export class PopMgr extends PopCore  {
      */
     public popOneKeyStarUpView(closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
-        resources.load('prefabs_ui/pop/pop_onekeystarup', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/starup/pop_onekeystarup', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 

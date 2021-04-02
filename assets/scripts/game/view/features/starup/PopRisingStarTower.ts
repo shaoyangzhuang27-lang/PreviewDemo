@@ -5,18 +5,18 @@
  */
 import { _decorator, Component, Node, Sprite,SpriteFrame, Label, ToggleContainer, EventHandler, Toggle, sys, resources, instantiate, Vec3, ScrollView, v3, math, Widget, Button } from 'cc';
 const { ccclass, property } = _decorator;
-import { PopBase } from '../../../core/control/PopBase';
-import { GameModel } from '../../model/GameModel';
-import { HeroData } from '../../model/datas/HeroData';
-import { HeroIcon } from '../hero/HeroIcon';
-import { HeroSelectIconStarUp } from '../hero/HeroSelectIconStarUp';
-import { PopMgr } from '../../control/PopMgr';
-import { MsgMgr } from '../../control/MsgMgr';
-import { XConsts } from "../../model/const/XConsts";
-import { NotifyMgr } from '../../control/NotifyMgr';
-import { HeroModel } from '../hero/HeroModel';
-import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { ResMgr } from '../../control/ResMgr';
+import { PopBase } from '../../../../core/control/PopBase';
+import { GameModel } from '../../../model/GameModel';
+import { HeroData } from '../../../model/datas/HeroData';
+import { HeroIcon } from '../../hero/HeroIcon';
+import { HeroSelectIconStarUp } from '../../hero/HeroSelectIconStarUp';
+import { PopMgr } from '../../../control/PopMgr';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { XConsts } from "../../../model/const/XConsts";
+import { NotifyMgr } from '../../../control/NotifyMgr';
+import { HeroModel } from '../../hero/HeroModel';
+import { TableName, ValueMgr } from "../../../model/ValueMgr";
+import { ResMgr } from '../../../control/ResMgr';
 
 @ccclass('PopRisingStarTower')
 export class PopRisingStarTower extends PopBase {

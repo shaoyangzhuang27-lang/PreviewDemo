@@ -4,18 +4,18 @@
  * @version 1.0.0,2021.3.26
  */
 import { _decorator,Label,Component,Size,UITransform, Button,instantiate,Widget,Vec3, Node,resources,ToggleContainer,EventHandler,Toggle,ScrollView } from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { HeroSelectIcon } from '../hero/HeroSelectIcon';
-import { GameModel } from '../../model/GameModel';
-import { HeroData } from '../../model/datas/HeroData';
-import { HeroIcon } from '../hero/HeroIcon';
-import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { XShare } from '../../model/const/XShare';
-import { PopMgr } from '../../control/PopMgr';
-import { NotifyMgr } from '../../control/NotifyMgr';
-import { MsgMgr } from '../../control/MsgMgr';
-import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
-import { XConsts } from '../../model/const/XConsts';
+import { PopBase } from '../../../../core/control/PopBase';
+import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
+import { GameModel } from '../../../model/GameModel';
+import { HeroData } from '../../../model/datas/HeroData';
+import { HeroIcon } from '../../hero/HeroIcon';
+import { TableName, ValueMgr } from "../../../model/ValueMgr";
+import { XShare } from '../../../model/const/XShare';
+import { PopMgr } from '../../../control/PopMgr';
+import { NotifyMgr } from '../../../control/NotifyMgr';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { ItemEquipCell, ItemEquipType } from '../../menu/ItemEquipCell';
+import { XConsts } from '../../../model/const/XConsts';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopDecompose')
