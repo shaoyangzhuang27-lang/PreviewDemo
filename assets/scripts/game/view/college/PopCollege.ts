@@ -2,7 +2,7 @@
  * @Description: 英雄书院
  * @Author: 徐涛
  * @Date: 2021-03-30 19:49:03
- * @LastEditTime: 2021-04-01 15:38:09
+ * @LastEditTime: 2021-04-02 15:43:50
  */
 import { _decorator, Node, Label, resources, instantiate, ScrollView, Vec3, UITransform, math } from 'cc';
 const { ccclass, property } = _decorator;
@@ -44,8 +44,7 @@ export class PopCollege extends PopBase {
 
     @property({ type: ScrollView, displayName: "英雄滚动视图组件" })
     public scroll_HeroView: ScrollView = null as unknown as ScrollView;
-
-    private _heroPosList: Node[] = [];
+    
     //拥有的所有英雄
     private _inCollegeHeroList: Map<number, number> = new Map<number, number>();
     //学院英雄items
@@ -198,17 +197,17 @@ export class PopCollege extends PopBase {
                 if (isLocked && isCanUnLock) {
                     isShowTip = true;
                 }
-                else if (!isLocked && index > heroIDInCollegeCount) {
+                else if (!isLocked && index >= heroIDInCollegeCount) {
                     isShowTip = true;
                 }
                 if (index < this._inCollegeHeroList.size) {
                     let key = keys.next();
                     let heroId = this._inCollegeHeroList.get(key.value) as number;
                     this._bottomHeroItemList.set(heroId, collegeItem);
-                    collegeItem.setHeroData(heroId, isLocked, isShowCD, isShowTip);
+                    collegeItem.setHeroData(heroId, index+1, isLocked, isShowCD, isShowTip);
 
                 } else {
-                    collegeItem.setHeroData(heroId, isLocked, isShowCD, isShowTip);
+                    collegeItem.setHeroData(heroId, index+1, isLocked, isShowCD, isShowTip);
                 }
             }
         });

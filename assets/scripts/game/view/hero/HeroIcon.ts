@@ -4,7 +4,7 @@
  * @version 1.0.0,2021.3.13
  */
 
-import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources, math, UITransform } from 'cc';
+import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources, math, UITransform, Color } from 'cc';
 const { ccclass, property } = _decorator;
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { XConsts } from "../../model/const/XConsts";
@@ -40,6 +40,8 @@ export class HeroIcon extends Component {
     
     //英雄数据
     private _heroData : HeroData | null = null as unknown as HeroData;
+    //是否显示成英雄学院的英雄，等级及等级颜色
+    private _isCollege: boolean = false;
 
     start () {
         // [3]
@@ -53,8 +55,7 @@ export class HeroIcon extends Component {
             return;
         }
         
-        let level : number = Number(this._heroData?.getLevel());
-
+        let level : number = Number(this._heroData?.getLevel());       
         let campName:string = XConsts.KHeroCampIcon[this._heroData?.getCamp() as number];
         let iconName:string = this._heroData?.getImageIcon() as string;
         let starNum:number = this._heroData?.getStar() as number;
@@ -80,7 +81,13 @@ export class HeroIcon extends Component {
         let heroIconPath:string = "ui/common/hero/" + iconName + "/spriteFrame";
         this._resourceLoad(heroIconPath,this.img_icon);
         
+        let lvColor= Color.WHITE;
+        if(this._isCollege){
+            lvColor= XConsts.KColorCollegeLevel;
+            level= GameModel.getInstance().getHeroesModel().heroCollegeLevel;
+        }
         this.lab_level.string = level.toString();
+        this.lab_level.color = lvColor;
 
         this._setStar(starNum,this._heroData.getStaticID());
     }
@@ -175,11 +182,12 @@ export class HeroIcon extends Component {
     /**
      * 设置为某英雄
      * @param heroData 英雄数据
+     * @param isCollege 显示英雄学院等级
      */
-    public setHeroData(heroData : HeroData)
+    public setHeroData(heroData : HeroData, isCollege= false)
     {
         this._heroData = heroData;
-        
+        this._isCollege= isCollege;
         this.init();
     }
     /**

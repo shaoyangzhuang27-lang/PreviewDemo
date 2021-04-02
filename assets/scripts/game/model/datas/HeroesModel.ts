@@ -537,29 +537,35 @@ export class HeroesModel extends BaseModel {
         this._heroList.delete(dyncID);
     }
 
+    /**
+     * @description: 设置英雄学院数据
+     * @param {object} heroIDInCollege
+     * @param {object} collegeBlockTimestamps
+     */
+    public setCollegeHeroData(heroIDInCollege:{[k: string]: number;}, collegeBlockTimestamps: {[k: string]: number;}){
+        this._heroIdInCollegeMap.clear();
+        let tmp = Object.keys(heroIDInCollege);
+        tmp.forEach(key => {
+            this._heroIdInCollegeMap.set(Number(key), heroIDInCollege[key]);
+            let hd = this._gameModel.getHeroesModel().getHeroInfoByDyncID(Number(key));
+            if (hd)
+                hd.calcTalentSkillProperty();
+        });
 
+        this._collegeBlockLastAtMap.clear();
+        let tmp2 = Object.keys(collegeBlockTimestamps);
+        tmp2.forEach(key2 => {
+            this._collegeBlockLastAtMap.set(Number(key2), collegeBlockTimestamps[key2]);
+        });
+    }
 
     /**
-     * @description: 设置学院英雄
+     * @description: 更新设置学院英雄
      * @param {Msg} msg
      */
     public setCollegeHeroInfo(msg: Msg.SetCollegeHeroA) {
         if (msg.err == Msg.TErrorCode.ERR_OK) {
-            this._heroIdInCollegeMap.clear();
-            let tmp = Object.keys(msg.heroIDInCollege);
-            tmp.forEach(key => {
-                this._heroIdInCollegeMap.set(Number(key), msg.heroIDInCollege[key]);
-                let hd = this._gameModel.getHeroesModel().getHeroInfoByDyncID(Number(key));
-                if (hd)
-                    hd.calcTalentSkillProperty();
-            });
-
-            this._collegeBlockLastAtMap.clear();
-            let tmp2 = Object.keys(msg.CollegeBlockTimestamps);
-            tmp2.forEach(key2 => {
-                this._collegeBlockLastAtMap.set(Number(key2), msg.CollegeBlockTimestamps[key2]);
-            });
-
+            this.setCollegeHeroData(msg.heroIDInCollege, msg.CollegeBlockTimestamps);
             //抛出通知 英雄书院  
             NotifyMgr.getInstance().notify(NotifyMgr.event_net_set_college_hero, msg);
             // 通知主城3D书院模型tip提示
@@ -604,7 +610,7 @@ export class HeroesModel extends BaseModel {
     }
 
     /**
-     * @description: //英雄学院格子解锁数量
+     * @description: //英雄学院格子解锁CD数量
      * @param {*}
      */
     public getCollegeUnlockBlockNum() {

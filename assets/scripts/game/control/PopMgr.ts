@@ -39,6 +39,8 @@ import { PopSettingView } from '../view/pop/PopSettingView';
 import { PopServerListView } from '../view/pop/PopServerListView';
 import { PopCollege } from '../view/college/PopCollege';
 import { PopCollegeNotice } from '../view/college/PopCollegeNotice';
+import { PopCollegeUnload } from '../view/college/PopCollegeUnload';
+import { PopCollegeSelectHero } from '../view/college/PopCollegeSelectHero';
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
@@ -136,7 +138,7 @@ export class PopMgr extends PopCore  {
      * @description:  英雄升级,升阶,装备弹窗
      * @param {heroId} 英雄动态Id
      */
-    public popHeroPromotionView(heroId:number=0,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    public popHeroPromotionView(heroId:number=0,isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/pop/pop_heropromotion', (err:any,res:any)=>{
             let p = instantiate( res );
@@ -151,16 +153,13 @@ export class PopMgr extends PopCore  {
      * @description:  英雄学院 全屏弹窗
      * @param 
      */
-    public popHeroCollegeView(closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    public popHeroCollegeView(isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/college/pop_college', (err: any, res: any) => {
             let p = instantiate(res);
             this.pushFullScreen(p);
             let script = p.getComponent("PopCollege") as PopCollege;
-            script.setIsMaskClose(true);
-            // script.setCloseCallBack(()=>{
-            //     console.log("关闭窗口回调")
-            // });
+            script.setIsMaskClose(isMaskClose);
         });
     }
     
@@ -168,7 +167,7 @@ export class PopMgr extends PopCore  {
      * @description:  英雄书院注意弹窗
      * @param 
      */
-    public popHeroCollegeNoticeView(closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    public popHeroCollegeNoticeView(isMaskClose:boolean = true)
     {
         resources.load('prefabs_ui/college/pop_college_notice', (err:any,res:any)=>{
             let p = instantiate( res );
@@ -180,21 +179,36 @@ export class PopMgr extends PopCore  {
     }
 
     /**
-     * @description:  英雄书院选择英雄弹窗
-     * @param 
+     * @description:  英雄书院选择英雄弹窗     
+     * @param pos  英雄书院中对应格子位置
      */
-    public popHeroCollegeSelectHeroView(closeCallBack:Function|null = null,isMaskClose:boolean = true)
-    {
+    public popHeroCollegeSelectHeroView(pos:number, isMaskClose:boolean = true)
+    {        
+        resources.load('prefabs_ui/college/pop_college_select_hero', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
 
+            let script = p.getComponent("PopCollegeSelectHero") as PopCollegeSelectHero;
+            script.setData(pos);
+            script.setIsMaskClose(isMaskClose);
+        } );
     }
     
     /**
      * @description:  英雄书院卸下英雄弹窗
-     * @param heroId 待卸下英雄Id
+     * @param heroId  待卸下英雄Id
+     * @param pos  英雄书院中对应格子位置
      */
-    public popHeroCollegeUnloadHeroView(heroId:number,closeCallBack:Function|null = null,isMaskClose:boolean = true)
+    public popHeroCollegeUnloadHeroView(heroId:number,pos:number,isMaskClose:boolean = true)
     {
+        resources.load('prefabs_ui/college/pop_college_unload', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
 
+            let script = p.getComponent("PopCollegeUnload") as PopCollegeUnload;
+            script.setData(heroId, pos);
+            script.setIsMaskClose(isMaskClose);
+        } );
     }    
 
     /**

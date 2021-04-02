@@ -2,7 +2,7 @@
  * @Description: 学院界面内待选择英雄槽位
  * @Author: 徐涛
  * @Date: 2021-03-30 16:03:26
- * @LastEditTime: 2021-04-01 16:17:11
+ * @LastEditTime: 2021-04-02 18:08:14
  */
 import { _decorator, Component, Node, Sprite, Label, Button, SpriteFrame, resources, math, UITransform, EventTouch, Vec3, instantiate } from 'cc';
 const { ccclass, property } = _decorator;
@@ -40,8 +40,8 @@ export class CollegeItem extends Component {
     private _isShowCD: boolean = false;
     private _isLocked: boolean = true;
     private _heroId: number = 0;
+    private _pos:number= 0;
     private _isShowTip: boolean = false;
-    private _isCanDefaultCallBack: boolean = true;
 
     start() {
         // [3]
@@ -49,7 +49,7 @@ export class CollegeItem extends Component {
     }
 
     onLoad() {
-        this._setDefaultBtnCallBack();
+        this._setBtnCallBack();
     }
 
     /**
@@ -58,8 +58,8 @@ export class CollegeItem extends Component {
      * @param {boolean} isLocked 是否解锁槽位标志
      * @param {boolean} isShowTip 是否显示槽位提醒标志
      */
-    public setHeroData(heroId: number = 0, isLocked: boolean = false, isShowCD: boolean = false, isShowTip: boolean = false) {
-        this._setHeroIcon(heroId);
+    public setHeroData(pos:number,heroId: number = 0, isLocked: boolean = false, isShowCD: boolean = false, isShowTip: boolean = false) {
+        this._setHeroIcon(heroId, pos);
         this._setShowCD(isShowCD);
         this._setLocked(isLocked);
         this._setShowTip(isShowTip);
@@ -108,8 +108,9 @@ export class CollegeItem extends Component {
         XFuns.ReplaceSpriteFrame(imgPath, this.img_bg);
     }
 
-    private _setHeroIcon(heroId: number) {
+    private _setHeroIcon(heroId: number, pos:number) {
         this._heroId = heroId;
+        this._pos = pos;
         if (heroId == 0) {
             this._clearHeroIcon();
 
@@ -123,13 +124,12 @@ export class CollegeItem extends Component {
             //等级等于学院等级
             console.log(heroData.level);
             console.log(GameModel.getInstance().getHeroesModel().heroCollegeLevel);
-            heroData.level= GameModel.getInstance().getHeroesModel().heroCollegeLevel;
+            heroData.level = GameModel.getInstance().getHeroesModel().heroCollegeLevel;
             this._heroData = heroData;
-            this._isCanDefaultCallBack = false;
             if (this._heroIcon && this._heroIcon instanceof HeroIcon) {
                 this._heroIcon.setHeroInfo(heroData.record, GameModel.getInstance().getHeroesModel().heroCollegeLevel);
                 this._heroIcon.node.active = true;
-                
+
             } else {
                 this._heroIcon = null;
                 let target = this;
@@ -137,9 +137,9 @@ export class CollegeItem extends Component {
                     let heroIcon = instantiate(res) as Node;
                     let script = heroIcon.getComponent("HeroIcon") as HeroIcon;
                     script.setHeroData(heroData as HeroData);
-                    script.setBtnCallBack((_data: HeroData) => {
-                        target._openCollegeUnLoadView(_data);
-                    });
+                    // script.setBtnCallBack((_data: HeroData) => {
+                    //     target._openCollegeUnLoadView(_data);
+                    // });
                     this.node.addChild(heroIcon);
                     heroIcon.setScale(new Vec3(0.7, 0.7, 1));
                 });
@@ -149,12 +149,11 @@ export class CollegeItem extends Component {
 
     private _openCollegeUnLoadView(_heroData: HeroData) {
         console.log(" _openCollegeUnLoadView _heroData=", _heroData);
-        PopMgr.getInstance().popHeroCollegeUnloadHeroView(_heroData.getDyncID());
+        PopMgr.getInstance().popHeroCollegeUnloadHeroView(_heroData.getDyncID(), this._pos);
     }
 
     private _clearHeroIcon() {
         this._heroData = null;
-        this._isCanDefaultCallBack = true;
         if (this._heroIcon && this._heroIcon instanceof HeroIcon) {
             this._heroIcon.node.active = false;
         } else {
@@ -163,14 +162,18 @@ export class CollegeItem extends Component {
     }
 
     // Item点击默认回调显示开启卡槽窗或选择放入书院的英雄窗       
-    private _setDefaultBtnCallBack() {
+    private _setBtnCallBack() {
         this.img_bg.addComponent(Button);
-        let target = this;
+        let target = this;        
         this.img_bg.node.on(Node.EventType.TOUCH_END, (event: EventTouch) => {
-            if (target._isCanDefaultCallBack) {
+            if (target._isLocked) {
                 PopMgr.getInstance().popHeroCollegeNoticeView();
-            }else{
-                PopMgr.getInstance().popHeroCollegeSelectHeroView();   
+            } else {
+                if(!target._heroData){
+                    PopMgr.getInstance().popHeroCollegeSelectHeroView(target._pos);                    
+                }else{
+                    PopMgr.getInstance().popHeroCollegeUnloadHeroView(target._heroData.getDyncID(),  target._pos);                    
+                }
             }
         }, this);
     }
