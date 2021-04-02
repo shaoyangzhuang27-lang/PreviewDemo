@@ -127,11 +127,12 @@ export class HeroIcon extends Component {
 
     private _setStar(star:number,firstid:number = 0)
     {
-        let grade:number = Math.floor(star/5);
+        let starNameList = ["星星初级","星星中级","星星高级"]
+        let grade:number = Math.ceil(star/5) - 1;
         let yu:number = (star - 1) % 5 + 1;
 
-        let starName = ["初级星星","中级星星","高级星星"];
-        let starPath = "ui/common/icon/" + starName + "/spriteFrame";
+        let starName = starNameList[grade];
+        let starPath = "ui/common/icon/" + starName + "/spriteFrame"
 
         for (let index = 0; index < this.starlist.length; index++) {
             if(index >= yu && yu != 0)
@@ -140,6 +141,7 @@ export class HeroIcon extends Component {
             }
             else{
                 this.starlist[index].active = true;
+                this._resourceLoad(starPath,this.starlist[index]);
             }
         }
         
