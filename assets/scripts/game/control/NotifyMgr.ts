@@ -55,3 +55,6 @@ export class NotifyMgr extends NotifyCore {
 
     public static event_net_pub_wonder_hero_select : string = "event_net_pub_wonder_hero_select"; //奇迹心愿英雄选择
 }
+    public static event_net_changeserver:string = "event_net_changeserver";                     //切换服务器
+    public static event_net_getherolist:string = "event_net_getherolist";                     //获取英雄列表
+    public static event_net_getplayerdata:string = "event_net_getplayerdata";                     //获取玩家信息

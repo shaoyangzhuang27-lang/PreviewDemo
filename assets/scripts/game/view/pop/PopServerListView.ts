@@ -134,7 +134,7 @@ export class PopServerListView extends PopBase {
             console.log("确认切换服务器 serverID=",serverID)
 
             PopMgr.getInstance().deleteWindow()
-
+			MsgMgr.getInstance().getMsgLogin().requestChangeServer(serverID);
             // MsgMgr.getInstance().getMsgLogin().chenageServer(serverID)
         })
     }
