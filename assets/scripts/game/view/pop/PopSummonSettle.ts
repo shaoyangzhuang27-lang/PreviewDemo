@@ -1,4 +1,4 @@
-import { _decorator, Component, Node,Label,ScrollView,resources,instantiate, Vec3, Size,Sprite,UITransform,Button,SpriteFrame, Layout, Color, Game } from 'cc';
+import { _decorator, Component, Node,Label,ScrollView,resources,instantiate, Vec3, Prefab ,Size,Sprite,UITransform,Button,SpriteFrame, Layout, Color, Game } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
@@ -518,7 +518,7 @@ export class PopSummonSettle extends PopBase {
         }
 
         this.setShowScrollViewType(1)
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
             let reclineup_item = instantiate( res );
             let script = reclineup_item.getComponent(HeroIcon);
             reclineup_item.scale = new Vec3(0.75,0.75,1);
@@ -526,22 +526,33 @@ export class PopSummonSettle extends PopBase {
             subWidget.contentSize = new Size(113,113);
             script.initUIHeroIconInfo(id,this._popWindowType);
             this.scroll_heroicon_view.content?.addChild(reclineup_item);   
-        });        
+        },"PopSummonSettle");        
     }
 
     public initFragmentSynthesisFromMsgData(msgData: Msg.UseFragmentA)
     {
-        // GameModel.getInstance().getHeroPubModel().getBaseSummonScrollNum()
-        // this._nSummonType = msgData.summonType;
-        // this._nSummonConsumeType = msgData.consumeType;
-        // this._bIsOne = msgData.heroList.length > 1 ? false : true;
-        // this._HeroList = [];
-        // this._HeroList = this._HeroList.concat(msgData.heroList);
-        // this.initBtnSummonUI(this._nSummonType, this._nSummonConsumeType, this._bIsOne);
-        // this.setShowScrollViewType(msgData.heroList.length);
-        // this.popWindowType = nType;
+        if(this.scroll_heroicon_view.content)
+        {
+            this.scroll_heroicon_view.content.removeAllChildren()
+        }
 
+        let herolist = msgData.heroList;
+
+        this.setShowScrollViewType(herolist.length);
        
+        for(var i=0 ; i < herolist.length; i++ )
+        {
+            ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:Error | null,res:Prefab | null)=>{
+                let reclineup_item = instantiate( res  as Prefab);
+                let script = reclineup_item.getComponent(HeroIcon) as HeroIcon;
+                reclineup_item.scale = new Vec3(0.75,0.75,1);
+                let subWidget = reclineup_item.getComponent(UITransform) as UITransform;
+                subWidget.contentSize = new Size(113,113);
+                // if(herolist[i].staticID)
+                herolist[i].staticID && script.initUIHeroIconInfo(herolist[i].staticID as number,this._popWindowType,herolist[i].level as number);
+                this.scroll_heroicon_view.content?.addChild(reclineup_item);   
+            },"PopSummonSettle"); 
+        }
         // GameModel.getInstance().getHeroesModel().updateHeroListFromSummon(this._HeroList);
 
 

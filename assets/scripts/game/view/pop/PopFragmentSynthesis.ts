@@ -365,7 +365,10 @@ export class PopFragmentSynthesis extends PopBase {
             // if(msgData.summonType != Msg.TSummonType.ESummonType_Wonder)
             // {
             // }
-           
+           PopMgr.getInstance().popFramgentsynthesisResult(msgData);
+           console.log("ffffffffffffff0", msgData.consumeNum )
+           console.log("ffffffffffffff1", msgData.fragmentType )
+           console.log("ffffffffffffff2", msgData.star )
         }
         else
         {
@@ -400,6 +403,11 @@ export class PopFragmentSynthesis extends PopBase {
         {
             useFragmentR.param = this._fragmentSysthesisInfo.param ? this._fragmentSysthesisInfo.param : 0;
         }
+        // if(this._fragmentSysthesisInfo.maxNum)
+        // {
+        //     useFragmentR.heroNum = this._nCurSysthesisCounts * this._fragmentSysthesisInfo.maxNum;
+        // }
+       
         useFragmentR.heroNum = this._nCurSysthesisCounts;
         console.log("pub submit",useFragmentR);
         MsgMgr.getInstance().getMsgBag().requestUseFragmentR(useFragmentR);
