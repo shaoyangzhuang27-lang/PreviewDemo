@@ -170,7 +170,7 @@ export class PubWonderSummon extends Component {
                 PopMgr.getInstance().popOpenBookHeroDetail(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero());
             })
             this.node_hero?.addChild(_heroIcon);   
-        });
+        },"PubWonderSummon");
 
         ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
             let itemEquipCell = instantiate(res);
@@ -187,7 +187,7 @@ export class PubWonderSummon extends Component {
             });  
 
             this.node_dimond?.addChild(itemEquipCell);   
-        });
+        },"PubWonderSummon");
 
         for(let i = 0; i < 3; i++)
         {
@@ -216,7 +216,7 @@ export class PubWonderSummon extends Component {
                         this.node_equip_2?.addChild(itemEquipCell);  
                         break;
                 }
-            });
+            },"PubWonderSummon");
         }
 
         for(let i = 0; i < 2; i++)
@@ -270,7 +270,7 @@ export class PubWonderSummon extends Component {
                         this.node_fragment_1?.addChild(itemEquipCell);  
                         break;
                 }
-            });
+            },"PubWonderSummon");
         }
        
     }
@@ -287,7 +287,7 @@ export class PubWonderSummon extends Component {
                 PopMgr.getInstance().popPubWonderHeartHeroWindow();
             })
             this.node_fivestar?.addChild(_heroIcon);   
-        });
+        },"PubWonderSummon");
 
     }
 

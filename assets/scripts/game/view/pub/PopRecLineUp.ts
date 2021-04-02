@@ -34,7 +34,7 @@ export class PopRecLineUp extends PopBase {
                 script.setViewDetaiLabelContent(GameModel.getInstance().getHeroPubModel().getRecLineUpItemInfoByIndex(i));
                 this.scroll_lineup_view.content?.addChild(reclineup_item);
             }
-        });
+        },"PopRecLineUp");
     }
     //设置标题
     public setTitle(title:string){

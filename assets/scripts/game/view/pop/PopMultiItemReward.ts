@@ -86,7 +86,7 @@ export class PopMultiItemReward extends PopBase {
                 script.setPropInfo(isPropInfo ? null : this._lootObjectArray[i] ,isPropInfo ? this._propInfoArray[i] : null);
                 this.scroll_item_view.content?.addChild(prop_item);
             }
-        });
+        },"PopMultiItemReward");
     }
 
 

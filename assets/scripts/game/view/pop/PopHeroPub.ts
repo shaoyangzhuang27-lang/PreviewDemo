@@ -406,7 +406,7 @@ export class PopHeroPub extends PopBase {
                 p.setScale(0.4,0.4)
                 nodeFiveStar.addChild(p)
             }
-        } );
+        },"PopHeroPub");
 
 
         // GameModel.getInstance().getHeroPubModel().initWonderHeartHeroIdList();
@@ -720,7 +720,7 @@ export class PopHeroPub extends PopBase {
                 ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_summon', (err:any,res:any)=>{
                     let p = instantiate( res );
                     this.node_wonder?.addChild(p);
-                } );
+                },"PopHeroPub");
             }
         }
        

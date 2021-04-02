@@ -109,7 +109,7 @@ export class PubRecLineUpItem extends Component {
                     break;
             }
            
-        });
+        },"PubRecLineUpItem");
     }
     public setAllDesLabelAndBtnState(state : boolean)
     {

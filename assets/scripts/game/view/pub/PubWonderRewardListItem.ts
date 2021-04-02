@@ -63,7 +63,7 @@ export class PubWonderRewardListItem extends Component {
             });  
 
             node.addChild(fragmentItem);
-        })
+        },"PubWonderRewardListItem")
     }
 
 
@@ -82,7 +82,7 @@ export class PubWonderRewardListItem extends Component {
                     PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.equip,false);
             });  
             node.addChild(equipItem);
-        })    
+        },"PubWonderRewardListItem")    
     }
 
     public initMagicDust(data : any, node : Node)
@@ -100,7 +100,7 @@ export class PubWonderRewardListItem extends Component {
                     PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
             });  
             node.addChild(equipItem);
-        }) 
+        },"PubWonderRewardListItem") 
     }
 
     public initAdvanceExp(data : any, node : Node)
@@ -118,7 +118,7 @@ export class PubWonderRewardListItem extends Component {
                     PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
             });  
             node.addChild(equipItem);
-        }) 
+        },"PubWonderRewardListItem") 
     }
 
     public initUsableItem(data : any, node : Node)
@@ -136,7 +136,7 @@ export class PubWonderRewardListItem extends Component {
                     PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
             });  
             node.addChild(equipItem);
-        }) 
+        },"PubWonderRewardListItem") 
     }
     public initItemInfo(data : Array<any>)
     {
@@ -156,7 +156,7 @@ export class PubWonderRewardListItem extends Component {
                     PopMgr.getInstance().popOpenBookHeroDetail(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero());
                 })
                this.node_list[4]?.addChild(_heroIcon);   
-            });
+            },"PubWonderRewardListItem");
 
             ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
                 let itemEquipCell = instantiate(res);
@@ -173,7 +173,7 @@ export class PubWonderRewardListItem extends Component {
                 });  
     
                 this.node_list[5]?.addChild(itemEquipCell);   
-            });
+            },"PubWonderRewardListItem");
         }
         else if(nCounts == 4 )
         {

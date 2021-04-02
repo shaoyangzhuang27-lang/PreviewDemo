@@ -145,7 +145,7 @@ export class PubWonderHeartHero extends PopBase {
                 });
                 this.scroll_select.content?.addChild(_heroIcon);
             }
-        });         
+        },"PubWonderHeartHero");         
     }
 
     private _updateHeartHeroIcon(id :number)
@@ -198,7 +198,7 @@ export class PubWonderHeartHero extends PopBase {
                         script.setBtnCallBack(callFunc); 
                         this.img_hero?.addChild(_heroIcon);
                        console.log("iiiiiiiiiiiiiiii",this.img_hero);
-                    });
+                    },"PubWonderHeartHero");
                 }
             // }
         }
