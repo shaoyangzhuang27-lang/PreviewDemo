@@ -1,8 +1,12 @@
 
-import { Button, Color, game, instantiate, resources, Size, Sprite, SpriteFrame } from 'cc';
+import { Button, Color, game, instantiate, Prefab, resources, Size, Sprite, SpriteFrame } from 'cc';
 import { _decorator, Node, EventHandler, ToggleContainer, UITransform, Label } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
+import { MsgGame } from '../../control/msg/MsgGame';
+import { MsgLogin } from '../../control/msg/MsgLogin';
+import { MsgMgr } from '../../control/MsgMgr';
 import { PopMgr } from '../../control/PopMgr';
+import { ResMgr } from '../../control/ResMgr';
 import { DataMgr } from '../../model/DataMgr';
 import { GameModel } from '../../model/GameModel';
 import { AvatarNode } from '../menu/AvatarNode';
@@ -16,7 +20,7 @@ export class PopServerListView extends PopBase {
     public content:Node = null as unknown as Node
 
     //单项子节点预制体资源
-    private item_res: any;
+    private item_res:Prefab = null as unknown as Prefab
 
     onLoad() {
         super.onLoad()
@@ -29,9 +33,9 @@ export class PopServerListView extends PopBase {
     }
 
     public setData() {
-        resources.load('prefabs_ui/main/server_item', (err:any,res:any)=>{
-            this.item_res = res
-            console.log("加载成功1111111111111111111111111111")
+        ResMgr.getInstance().loadPrefab("prefabs_ui/main/server_item", (err:any, res:Prefab | null)=>{
+            this.item_res = res as Prefab
+            
             this._initServerScrollView()
         })
     }
@@ -58,13 +62,14 @@ export class PopServerListView extends PopBase {
 
     //服务器cell
     private _createScrollItem(serverID:number, isCurServer:boolean) {
-        let cell_item = instantiate( this.item_res )
+        let cell_item = instantiate( this.item_res as Prefab ) as Node
 
         //高亮底图
         if (isCurServer) {
-            resources.load("ui/common/halo/高亮底/spriteFrame", SpriteFrame, (err, spriteFrame) => {
+            ResMgr.getInstance().loadSpriteFrame("ui/common/halo/高亮底/spriteFrame", (err:any, spriteFrame:SpriteFrame | null)=>{
                 if (!err && cell_item) {
-                    cell_item.getComponent(Sprite).spriteFrame = spriteFrame
+                    let spr = cell_item.getComponent(Sprite) as Sprite
+                    spr.spriteFrame = spriteFrame
                 }
             });
         }
@@ -74,24 +79,30 @@ export class PopServerListView extends PopBase {
             cell_item.on(Button.EventType.CLICK, this._onClick_server, this)
         }
 
+        
+        
         //服务器名字：
         let serverName = "S"
         if (serverID < 100) { serverName += "0" }
         if (serverID < 10) { serverName += "0" }
         serverName += serverID.toString()
-        cell_item.getChildByName("lab_serverName").getComponent(Label).string = serverName
+        let lab = cell_item.getChildByName("lab_serverName")?.getComponent(Label) as Label
+        lab.string = serverName
 
         //新服务器标识
-        cell_item.getChildByName("spr_icon").active = false
+        let spr_icon = cell_item.getChildByName("spr_icon") as Node
+        spr_icon.active = false
 
         //此服务器的玩家数据
         let playerData = GameModel.getInstance().getSystemModel().getPlayerDataByServerID(serverID)
 
         //载入头像
-        resources.load('prefabs_ui/main/node_avatar', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab("prefabs_ui/main/node_avatar", (err:any, res:Prefab | null)=>{
             if (!cell_item) { return }
-            let p = instantiate( res )
-            cell_item.getChildByName("node_avatar").addChild(p)
+            let p = instantiate( res as Prefab ) as Node
+
+            let node_avatar = cell_item.getChildByName("node_avatar") as Node
+            node_avatar.addChild(p)
 
             let script = p.getComponent("AvatarNode") as AvatarNode;
             if (playerData) {
@@ -104,10 +115,12 @@ export class PopServerListView extends PopBase {
         }
 
         //昵称 当前版本没有昵称 先用id做测试
-        cell_item.getChildByName("lab_nickName").getComponent(Label).string = playerData.playerID?.toString()
+        let lab_nickName = cell_item.getChildByName("lab_nickName")?.getComponent(Label) as Label
+        lab_nickName.string = playerData.playerID?.toString() as string
 
         //等级
-        cell_item.getChildByName("lab_lv").getComponent(Label).string = "等级：" + playerData.level
+        let lab_lv = cell_item.getChildByName("lab_lv")?.getComponent(Label)  as Label
+        lab_lv.string = "等级：" + playerData.level
 
         return cell_item
     }
@@ -119,6 +132,10 @@ export class PopServerListView extends PopBase {
         //弹窗确认
         PopMgr.getInstance().popupSimpleWindow("注意","不同服务器之间角色数据不互通，是否确定切换？",()=>{
             console.log("确认切换服务器 serverID=",serverID)
+
+            PopMgr.getInstance().deleteWindow()
+			MsgMgr.getInstance().getMsgLogin().requestChangeServer(serverID);
+            // MsgMgr.getInstance().getMsgLogin().chenageServer(serverID)
         })
     }
 }

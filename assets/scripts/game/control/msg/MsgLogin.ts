@@ -9,6 +9,8 @@ import { MsgBase } from "./MsgBase";
 
 export class MsgLogin extends MsgBase{
 
+    // private _tempDeviceId:string = "001_c6c5fb6886887901329e39bbd40f45f6";
+    private _tempDeviceId:string = "00202010151135140506929590896066_5f1ab04da3953dbd5f88eff1a37d4f39";
     
     public initData(){
         this.responeMap = new Map<number,[any,NetCallFunc,any]>([
@@ -17,6 +19,7 @@ export class MsgLogin extends MsgBase{
             [Msg.MsgType.ThePlayerLoginA,[Msg.PlayerLoginA,this.responePlayerLoginA,this]],
             [Msg.MsgType.TheGetHeroListA,[Msg.GetHeroListA,this.responeGetHeroListA,this]],
             [Msg.MsgType.TheGetPlayerDataA,[Msg.GetPlayerDataA,this.responeGetPlayerDataA,this]],
+            [Msg.MsgType.TheChangeServerA,[Msg.ChangeServerA,this.responeChangeServerA,this]],
         ]);
     }
     
@@ -38,18 +41,20 @@ export class MsgLogin extends MsgBase{
 
 
 
-    
+    //设备登陆-------------------------
     public requestDeviceLoginNew(){
         let data = new Msg.DeviceLoginNewR();
         // data.deviceId = "73f08c52ad36acf31baecfec8db006b8d1af428a";
-        data.deviceId = "2293181038的Redmi K20 Pro_f8482e84c956baa675ed0f048033ee91";
+        data.deviceId = this._tempDeviceId;
         const buffer_data = Msg.DeviceLoginNewR.encode(data).finish();
         this.msgMgr.sendData(Msg.MsgType.TheDeviceLoginNewR,buffer_data);
         }
     public responeDeviceLoginNewA(msgId: number, msgData: Msg.DeviceLoginNewA){
 
         //保存所有角色简要信息
-        GameModel.getInstance().getSystemModel().setAllPlayerData(msgData.allPlayerList)
+        // GameModel.getInstance().getSystemModel().setAllPlayerData(msgData.allPlayerList);
+        GameModel.getInstance().getSystemModel().setDeviceLoginNew(msgData);
+        GameModel.getInstance().getSystemModel().setDeviceId(this._tempDeviceId);
 
         this.requestPlayerLogin(msgData.loginPlayerID);
     }
@@ -88,6 +93,7 @@ export class MsgLogin extends MsgBase{
         DataMgr.getInstance().setHeroList(msgData);
         // GameModel.getInstance().initHeroList(DataMgr.getInstance().getHeroList());
         GameModel.getInstance().initHeroList(msgData);
+        NotifyMgr.getInstance().notify(NotifyMgr.event_net_getherolist);
     }
 
     public requestGetPlayerData(){
@@ -100,6 +106,27 @@ export class MsgLogin extends MsgBase{
         // MsgMgr.getInstance().requestGetCacheChatList();
         GameModel.getInstance().initPlayerBag(msgData);
         GameModel.getInstance().initPlayerItem(msgData);
+        NotifyMgr.getInstance().notify(NotifyMgr.event_net_getplayerdata);
     }
     //获取游戏数据-----------------------
+    // private _accountId:string;
+    // private _deviceId:string;
+    // private _playerId:number;
+    public requestChangeServer(serverID:number){
+        let accountId = GameModel.getInstance().getSystemModel().getAccountId();
+        let deviceId = GameModel.getInstance().getSystemModel().getDeviceId();
+        let playerId = GameModel.getInstance().getSystemModel().getPlayerId();
+
+        let msg:Msg.ChangeServerR = {
+            accountId : accountId,
+            deviceId : deviceId,
+            serverID : serverID,
+            playerId : playerId,
+        }
+        const buffer_data = Msg.ChangeServerR.encode(msg).finish();
+        this.msgMgr.sendData(Msg.MsgType.TheChangeServerR,buffer_data);
+    }
+    public responeChangeServerA(msgId: number, msgData: Msg.ChangeServerA){
+        NotifyMgr.getInstance().notify(NotifyMgr.event_net_changeserver,msgData.loginPlayerID);
+    }
 }

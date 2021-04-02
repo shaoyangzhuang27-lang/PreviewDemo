@@ -40,20 +40,26 @@ export class NotifyMgr extends NotifyCore {
 
     public static event_net_pub_hero_decompose: string = "event_net_pub_hero_decompose";        //酒馆召唤英雄分解
 
-    public static event_net_pub_summon_hero : string = "event_net_pub_summon_hero";     //酒馆召唤
-    public static event_hero_book_active:string = "event_hero_book_active";         //英雄图鉴激活
-    public static event_hero_book_upgrade:string = "event_hero_book_upgrade";         //英雄图鉴升级
+    // public static event_net_pub_summon_hero : string = "event_net_pub_summon_hero";     //酒馆召唤
+    // public static event_hero_book_active:string = "event_hero_book_active";         //英雄图鉴激活
+    // public static event_hero_book_upgrade:string = "event_hero_book_upgrade";         //英雄图鉴升级
 
-    public static event_net_pub_hero_decompose : string = "event_net_pub_hero_decompose"; //酒馆召唤英雄分解
+    // public static event_net_pub_hero_decompose : string = "event_net_pub_hero_decompose"; //酒馆召唤英雄分解
     public static event_equip_compose_suc: string = "event_equip_compose_suc";                  //装备合成
     public static event_player_levelup:string = "event_player_levelup";                         //玩家升级
     public static event_giftCode_award:string = "event_giftCode_award";                         //兑换礼品
 
-    public static event_player_levelup:string = "event_player_levelup";         //玩家升级
+    // public static event_player_levelup:string = "event_player_levelup";         //玩家升级
 
     public static event_net_pub_wonder_summon_hero : string = "event_net_pub_wonder_summon_hero"; //奇迹召唤英雄
 
     public static event_net_pub_wonder_hero_select : string = "event_net_pub_wonder_hero_select"; //奇迹心愿英雄选择
+    
+    public static event_net_changeserver:string = "event_net_changeserver";                     //切换服务器
+    public static event_net_getherolist:string = "event_net_getherolist";                     //获取英雄列表
+    public static event_net_getplayerdata:string = "event_net_getplayerdata";                     //获取玩家信息
+
+    public static event_net_bag_fragment_synthesis : string = "event_net_bag_fragment_synthesis"; //碎片合成
     public static event_net_camp_change : string = "event_net_camp_change"; //英雄置换
     public static event_net_camp_change_confirm : string = "event_net_camp_change_confirm"; //英雄置换确定
 

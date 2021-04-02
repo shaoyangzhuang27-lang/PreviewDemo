@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node,Label,ScrollView,ToggleContainer,EventHandler,Toggle,resources,instantiate,Vec3} from 'cc';
+import { _decorator, Component, Node,Label,ScrollView,ToggleContainer,EventHandler,Toggle,resources,instantiate,Vec3,Prefab} from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { XConsts } from '../../model/const/XConsts';
 import { GameModel } from '../../model/GameModel';
@@ -9,6 +9,7 @@ import { HeroIcon } from '../hero/HeroIcon';
 import { PopMgr } from '../../control/PopMgr';
 import { MsgMgr } from '../../control/MsgMgr';
 import { NotifyMgr } from '../../control/NotifyMgr';
+import { ResMgr } from '../../control/ResMgr';
 
 const { ccclass, property } = _decorator;
 
@@ -117,11 +118,11 @@ export class PubWonderHeartHero extends PopBase {
         }
 
         let heroIdList = GameModel.getInstance().getHeroPubModel().getWonderHeartHeroIdByCamp(nCamp);
-        resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_selecticon', (err: Error | null, res: Prefab | null)=>{
             for(var i=0; i < heroIdList.length; i++ )
             {
-                let _heroIcon = instantiate(res) ;
-                let script = _heroIcon.getComponent(HeroSelectIcon);
+                let _heroIcon = instantiate(res as Prefab) ;
+                let script = _heroIcon.getComponent(HeroSelectIcon) as HeroSelectIcon;
                 script.setWonderSelectData(0,heroIdList[i],(value : number,itemType:number)=>{
                     if(script.getItemType())
                     {
@@ -144,7 +145,7 @@ export class PubWonderHeartHero extends PopBase {
                 });
                 this.scroll_select.content?.addChild(_heroIcon);
             }
-        });         
+        },"PubWonderHeartHero");         
     }
 
     private _updateHeartHeroIcon(id :number)
@@ -188,16 +189,16 @@ export class PubWonderHeartHero extends PopBase {
                 }
                 else
                 {
-                    resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
-                        let _heroIcon = instantiate(res) ;
-                        let script = _heroIcon.getComponent(HeroIcon); 
+                    ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err: Error | null, res: Prefab | null)=>{
+                        let _heroIcon = instantiate(res as Prefab) ;
+                        let script = _heroIcon.getComponent(HeroIcon) as HeroIcon; 
                         // script.setHeroID(this._heroInfo as HeroData);
                         script.initUIHeroIconInfo(id,XConsts.HERO_ICON_TYPE.WonderSummon);
                         _heroIcon.scale = new Vec3(0.6,0.6,1);    
                         script.setBtnCallBack(callFunc); 
                         this.img_hero?.addChild(_heroIcon);
                        console.log("iiiiiiiiiiiiiiii",this.img_hero);
-                    });
+                    },"PubWonderHeartHero");
                 }
             // }
         }

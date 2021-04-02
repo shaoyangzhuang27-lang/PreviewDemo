@@ -2,12 +2,15 @@
 * @author 郭刚
 * @version 1.0.0,2021.3.13
 */
-import { _decorator, Component, Node,Label,Button, instantiate,UITransform,Vec3,Size,resources } from 'cc';
+import { _decorator, Component, Node,Label,Button, instantiate,Prefab,UITransform,Vec3,Size,resources } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { XConsts } from '../../model/const/XConsts';
 import { HeroFragment } from '../hero/HeroFragment';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { PopMgr } from '../../control/PopMgr';
+import { ResMgr } from '../../control/ResMgr';
+import { MsgMgr } from '../../control/MsgMgr';
+import { NotifyMgr } from '../../control/NotifyMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopFragmentSynthesis')
@@ -77,7 +80,8 @@ export class PopFragmentSynthesis extends PopBase {
         heroName : "",
         campName : "",
         classesName : "",
-        bg : ""
+        bg : "",
+        param : 0
     }  
 
     public setIsWonderSummonShow(bState : boolean)
@@ -89,20 +93,21 @@ export class PopFragmentSynthesis extends PopBase {
     {
         this._fragmentSysthesisInfo = data;
         this.initUI();
+        this.addNotifyHandle()
     }
 
     public initUI()
     {
 
-        resources.load('prefabs_ui/main/hero_fragment', (err:any,res:any)=>{
-                let fragment_item = instantiate( res );
-                let script = fragment_item.getComponent(HeroFragment);
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_fragment', (err: Error | null, res: Prefab | null)=>{
+                let fragment_item = instantiate( res as Prefab );
+                let script = fragment_item.getComponent(HeroFragment) as HeroFragment;
                 fragment_item.scale = new Vec3(0.7,0.7,1);
                 let subWidget = fragment_item.getComponent(UITransform) as UITransform;
                 subWidget.contentSize = new Size(105,126);
                 script.setFragmentInfo(this._fragmentSysthesisInfo,this._isWonderSummonShow);
                 this.node_hero_fragment?.addChild(fragment_item);
-        });
+        },"PopFragmentSynthesis");
 
 
         //let labtitle = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.UI_FRAGMENT) as Config.language_ui.Record;
@@ -268,14 +273,18 @@ export class PopFragmentSynthesis extends PopBase {
 
     private _onBtnSummonClick(event : any)
     {
-        //20200322
-        //PopMgr.getInstance().popSummonSettleWindow(XConsts.POP_SUMMON_TYPE.FragmentSysthesis,1);
+        if(this._nCurSysthesisCounts > 0)
+        {
+            this.requsetFragmentSysthensis();
+        }
     }
 
     private _onBtnSubmitClick(event : any)
     {
-        //20210322
-        // PopMgr.getInstance().popSummonSettleWindow(XConsts.POP_SUMMON_TYPE.FragmentSysthesis,1);
+        if(this._nCurSysthesisCounts > 0)
+        {
+            this.requsetFragmentSysthensis();
+        }
     }
     private _onBtnAddClick(event : any)
     {
@@ -337,6 +346,75 @@ export class PopFragmentSynthesis extends PopBase {
         this.btn_info.active = false;
         this.btn_summon.active = false;
         this.node_summon_counts.active = false;
+    }
+
+
+    public addNotifyHandle()
+    {
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_bag_fragment_synthesis,this.notifyFragmentSynthesisHandle,this);
+    }
+
+    public removeNotifyHandle()
+    {
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_bag_fragment_synthesis,this.notifyFragmentSynthesisHandle,this);
+    }
+
+    public notifyFragmentSynthesisHandle ( msgData: Msg.UseFragmentA){
+        console.log("ffffffffffffff",msgData)
+        if (msgData.err == Msg.TErrorCode.ERR_OK) {
+            // if(msgData.summonType != Msg.TSummonType.ESummonType_Wonder)
+            // {
+            // }
+           PopMgr.getInstance().popFramgentsynthesisResult(msgData);
+           console.log("ffffffffffffff0", msgData.consumeNum )
+           console.log("ffffffffffffff1", msgData.fragmentType )
+           console.log("ffffffffffffff2", msgData.star )
+        }
+        else
+        {
+            //此处消息错误处理 
+        }
+    }
+
+
+    public requsetFragmentSysthensis()
+    {
+        let useFragmentR : Msg.UseFragmentR = {
+            fragmentType : this._fragmentSysthesisInfo.type ? this._fragmentSysthesisInfo.type : 0,
+            param : 0,
+            star : 0,
+            heroNum : 0
+        }
+        if(this._fragmentSysthesisInfo.type == Msg.TFragmentType.EFragmentType_Random)
+        {
+            useFragmentR.star = this._fragmentSysthesisInfo.star ? this._fragmentSysthesisInfo.star : 0;
+        }
+        else if(this._fragmentSysthesisInfo.type == Msg.TFragmentType.EFragmentType_CampRandom)
+        {
+            useFragmentR.param = this._fragmentSysthesisInfo.param ? this._fragmentSysthesisInfo.param : 0;
+            useFragmentR.star = this._fragmentSysthesisInfo.star ? this._fragmentSysthesisInfo.star : 0;
+        }
+        else if(this._fragmentSysthesisInfo.type == Msg.TFragmentType.EFragmentType_ClassesRandom)
+        {
+            useFragmentR.param = this._fragmentSysthesisInfo.param ? this._fragmentSysthesisInfo.param : 0;
+            useFragmentR.star = this._fragmentSysthesisInfo.star ? this._fragmentSysthesisInfo.star : 0;
+        }
+        else if(this._fragmentSysthesisInfo.type == Msg.TFragmentType.EFragmentType_Hero)
+        {
+            useFragmentR.param = this._fragmentSysthesisInfo.param ? this._fragmentSysthesisInfo.param : 0;
+        }
+        // if(this._fragmentSysthesisInfo.maxNum)
+        // {
+        //     useFragmentR.heroNum = this._nCurSysthesisCounts * this._fragmentSysthesisInfo.maxNum;
+        // }
+       
+        useFragmentR.heroNum = this._nCurSysthesisCounts;
+        console.log("pub submit",useFragmentR);
+        MsgMgr.getInstance().getMsgBag().requestUseFragmentR(useFragmentR);
+    }
+    onDestroy()
+    {
+        this.removeNotifyHandle();
     }
 
 }

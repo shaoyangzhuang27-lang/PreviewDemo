@@ -147,7 +147,7 @@ export class PopBattleTeam extends PopBase {
             this._selectBattleHeroList.set(value.getDyncID(), key);
         });
        
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:any,res:Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err: Error | null, res: Prefab | null)=>{
         // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
 
             for (let index = 0; index < this.heroPosList.length; index++) {

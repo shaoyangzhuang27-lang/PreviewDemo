@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node,Label,ProgressBar,Button,Sprite,Color,resources,RichText,instantiate,SpriteFrame, Vec3 } from 'cc';
+import { _decorator, Component, Node,Label,ProgressBar,Button,Sprite,Color,resources,Prefab,RichText,instantiate,SpriteFrame, Vec3 } from 'cc';
 import { GameModel } from '../../model/GameModel';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
@@ -11,6 +11,7 @@ import { MsgMgr } from '../../control/MsgMgr';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { XFuns } from '../../model/const/XFuns';
 import {PubWonderSummonSettle} from "./PubWonderSummonSettle";
+import { ResMgr } from '../../control/ResMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PubWonderSummon')
@@ -160,19 +161,19 @@ export class PubWonderSummon extends Component {
     //显示界面上7个预制体信息
     public initHeroIconPrefab()
     {
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
-            let _heroIcon = instantiate(res);
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err: Error | null, res: Prefab | null)=>{
+            let _heroIcon = instantiate(res as Prefab);
             _heroIcon.setScale(0.4,0.4,1)
-            let script = _heroIcon.getComponent(HeroIcon); 
+            let script = _heroIcon.getComponent(HeroIcon) as HeroIcon; 
             script.initUIHeroIconInfo(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero(),XConsts.HERO_ICON_TYPE.WonderSummon);    
             script.setBtnCallBack(()=>{
                 PopMgr.getInstance().popOpenBookHeroDetail(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero());
             })
             this.node_hero?.addChild(_heroIcon);   
-        });
+        },"PubWonderSummon");
 
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
-            let itemEquipCell = instantiate(res);
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err: Error | null, res: Prefab | null)=>{
+            let itemEquipCell = instantiate(res as Prefab );
             //钻石 
             itemEquipCell.setScale(0.6,0.6,1)
             let id = Msg.TObjectType.EObject_VRmb; 
@@ -186,12 +187,12 @@ export class PubWonderSummon extends Component {
             });  
 
             this.node_dimond?.addChild(itemEquipCell);   
-        });
+        },"PubWonderSummon");
 
         for(let i = 0; i < 3; i++)
         {
-            resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
-                let itemEquipCell = instantiate(res); 
+            ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err: Error | null, res: Prefab | null)=>{
+                let itemEquipCell = instantiate(res as Prefab); 
                 itemEquipCell.setScale(0.4,0.4,1)
                 let id = 45 + i; 
                 let num = 1;
@@ -215,13 +216,13 @@ export class PubWonderSummon extends Component {
                         this.node_equip_2?.addChild(itemEquipCell);  
                         break;
                 }
-            });
+            },"PubWonderSummon");
         }
 
         for(let i = 0; i < 2; i++)
         {
-            resources.load('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
-                let itemEquipCell = instantiate(res); 
+            ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_heroicon', (err: Error | null, res: Prefab | null)=>{
+                let itemEquipCell = instantiate(res  as Prefab); 
                 itemEquipCell.setScale(0.4,0.4,1)
                 // let id = 45 + i; 
                 // let num = 1;
@@ -237,7 +238,8 @@ export class PubWonderSummon extends Component {
                     heroName : "",
                     campName : "",
                     classesName : "",
-                    bg : ""
+                    bg : "",
+                    param : 0
                 }  
                 info.type = Msg.TFragmentType.EFragmentType_Random;
                 info.star = 4;
@@ -252,7 +254,7 @@ export class PubWonderSummon extends Component {
                
                 info.maxNum = 30;
                 // 设置装备点击回调
-                let script = itemEquipCell.getComponent(PubHeroIcon);
+                let script = itemEquipCell.getComponent(PubHeroIcon) as PubHeroIcon;
                 script.setWonderSummonShow(true,info);
                 script.setBtnCallBack( 
                     ()=>{
@@ -269,7 +271,7 @@ export class PubWonderSummon extends Component {
                         this.node_fragment_1?.addChild(itemEquipCell);  
                         break;
                 }
-            });
+            },"PubWonderSummon");
         }
        
     }
@@ -277,16 +279,16 @@ export class PubWonderSummon extends Component {
 
     public updateHeartHeroIcon()
     {
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
-            let _heroIcon = instantiate(res);
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err: Error | null, res: Prefab | null)=>{
+            let _heroIcon = instantiate(res as Prefab);
             _heroIcon.setScale(0.4,0.4,1)
-            let script = _heroIcon.getComponent(HeroIcon); 
+            let script = _heroIcon.getComponent(HeroIcon) as HeroIcon; 
             script.initUIHeroIconInfo(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero(),XConsts.HERO_ICON_TYPE.WonderSummon);    
             script.setBtnCallBack(()=>{
                 PopMgr.getInstance().popPubWonderHeartHeroWindow();
             })
             this.node_fivestar?.addChild(_heroIcon);   
-        });
+        },"PubWonderSummon");
 
     }
 
@@ -540,9 +542,9 @@ export class PubWonderSummon extends Component {
 
     public resetResourcesSpriFame(path:string,objSprite : Sprite)
     {
-        resources.load(path, SpriteFrame ,(err: any, spriteFrame: SpriteFrame) => {
+        ResMgr.getInstance().loadSpriteFrame(path,(err: Error | null, spriteFrame: SpriteFrame | null) => {
             objSprite.spriteFrame = spriteFrame;
-        });
+        },"PopWonderSummon");
     }
 
     public showSummonSettle(msgData : Msg.WonderSummonHeroA)
@@ -559,17 +561,17 @@ export class PubWonderSummon extends Component {
         }
         else
         {
-            resources.load('prefabs_ui/pub/pub_wonder_summonsettle', (err:any,res:any)=>{
-                let _settle = instantiate(res);
+            ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_summonsettle', (err: Error | null, res: Prefab | null)=>{
+                let _settle = instantiate(res as Prefab);
                 // _heroIcon.setScale(0.4,0.4,1)
-                let script = _settle.getComponent(PubWonderSummonSettle); 
+                let script = _settle.getComponent(PubWonderSummonSettle) as PubWonderSummonSettle; 
                 // script.initUIHeroIconInfo(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero(),XConsts.HERO_ICON_TYPE.WonderSummon);    
                 // script.setBtnCallBack(()=>{
                 //     PopMgr.getInstance().popOpenBookHeroDetail(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero());
                 // })
                 script.initShowAwardList(msgData);
                 this.node_wonder_summonsettle.addChild(_settle);   
-            });
+            },"PubWonderSummon");
         }
         
     }

@@ -3,11 +3,12 @@
  * @author 郭刚
  * @version 1.0.0,2021.3.19
  */
-import { _decorator, Component, Node,LabelComponent,resources,ScrollView,instantiate,Vec3,UITransform,Size, Label } from 'cc';
+import { _decorator, Component, Node,LabelComponent,resources,ScrollView,instantiate,Vec3,UITransform,Size, Label,Prefab } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { PopMgr } from '../../control/PopMgr';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { ResMgr } from '../../control/ResMgr';
 import { ItemMultiReward } from '../risestartower/ItemMultiReward';
 const { ccclass, property } = _decorator;
 
@@ -72,20 +73,20 @@ export class PopMultiItemReward extends PopBase {
     {
         var title = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.KStarUpGainObjectTitle) as Config.language_ui.Record;
         this.lab_title.string = title.cn;
-          resources.load('prefabs_ui/main/item_multi_reward', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/item_multi_reward', (err: Error | null, res: Prefab | null)=>{
 
             var isPropInfo = this._propInfoArray.length > 0 ? true : false;
             var nCounts = isPropInfo ? this._propInfoArray.length : this._lootObjectArray.length;
             for (var i = 0 ; i < nCounts; i++) {
-                let prop_item = instantiate( res );
+                let prop_item = instantiate( res as Prefab );
                 prop_item.scale = new Vec3(0.7,0.7,1);
                 let subWidget = prop_item.getComponent(UITransform) as UITransform;
                 subWidget.contentSize = new Size(105,126);
-                let script = prop_item.getComponent(ItemMultiReward);
+                let script = prop_item.getComponent(ItemMultiReward) as ItemMultiReward;
                 script.setPropInfo(isPropInfo ? null : this._lootObjectArray[i] ,isPropInfo ? this._propInfoArray[i] : null);
                 this.scroll_item_view.content?.addChild(prop_item);
             }
-        });
+        },"PopMultiItemReward");
     }
 
 

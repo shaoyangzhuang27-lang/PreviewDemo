@@ -1,7 +1,8 @@
-import { _decorator,Label, resources, instantiate, ScrollView } from 'cc';
+import { _decorator,Label, resources, instantiate, ScrollView ,Prefab} from 'cc';
 const { ccclass, property } = _decorator;
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
+import { ResMgr } from '../../control/ResMgr';
 import { PubRecLineUpItem } from './PubRecLineUpItem';
 
 
@@ -26,14 +27,14 @@ export class PopRecLineUp extends PopBase {
         {
             this.scroll_lineup_view.content.removeAllChildren()
         }
-        resources.load('prefabs_ui/main/pub_reclineup_item', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/pub_reclineup_item', (err: Error | null, res: Prefab | null)=>{
             for (var i = 0 ; i < GameModel.getInstance().getHeroPubModel().nLineUpCounts; i++) {
-                let reclineup_item = instantiate( res );
-                let script = reclineup_item.getComponent(PubRecLineUpItem);
+                let reclineup_item = instantiate( res as Prefab );
+                let script = reclineup_item.getComponent(PubRecLineUpItem) as PubRecLineUpItem;
                 script.setViewDetaiLabelContent(GameModel.getInstance().getHeroPubModel().getRecLineUpItemInfoByIndex(i));
                 this.scroll_lineup_view.content?.addChild(reclineup_item);
             }
-        });
+        },"PopRecLineUp");
     }
     //设置标题
     public setTitle(title:string){
