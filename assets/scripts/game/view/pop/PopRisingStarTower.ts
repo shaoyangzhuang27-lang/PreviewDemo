@@ -16,6 +16,7 @@ import { XConsts } from "../../model/const/XConsts";
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { HeroModel } from '../hero/HeroModel';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { ResMgr } from '../../control/ResMgr';
 
 @ccclass('PopRisingStarTower')
 export class PopRisingStarTower extends PopBase {
@@ -153,7 +154,7 @@ export class PopRisingStarTower extends PopBase {
         super.start();
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_starUp_change,this._notifyStarUpChangeHandle,this);
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_OneKeyStarUp_change,this._notifyOneKeyStarUpChangeHandle,this);
-        this._starNameList = ["初级星星","中级星星","高级星星"]
+        this._starNameList = ["星星初级","星星中级","星星高级"]
         if(this._selectBattleList == null)
         {
             this._selectBattleList = new Map<number, number>();
@@ -276,6 +277,8 @@ export class PopRisingStarTower extends PopBase {
             }
             if(this.btn_submit && isShowOneKey == 1){
                 this.btn_submit.active = true;
+            }else if(this.btn_submit){
+                this.btn_submit.active = false;
             }
             
             k.sort((n1,n2) => n1[0] - n2[0])
@@ -734,11 +737,11 @@ export class PopRisingStarTower extends PopBase {
     //设置星星
     private _setStar(star:number)
     {
-        let grade:number = Math.floor(star/5);
+        let grade:number = Math.ceil(star/5) - 1;
         let yu:number = (star - 1) % 5 + 1;
 
         let starName = this._starNameList[grade];
-        let starPath = "ui/icon/" + starName + "/spriteFrame"
+        let starPath = "ui/common/icon/" + starName + "/spriteFrame"
 
         for (let index = 0; index < this.starlist.length; index++) {
             if(index >= yu && yu != 0)
@@ -747,8 +750,23 @@ export class PopRisingStarTower extends PopBase {
             }
             else{
                 this.starlist[index].active = true;
+                this._resourceLoad(starPath,this.starlist[index]);
             }
         }
+    }
+
+    //资源替换
+    private _resourceLoad(path:string,obj:any)
+    {
+        ResMgr.getInstance().loadSpriteFrame(path,(err,spriteFrame:SpriteFrame | null) =>
+        {
+            console.log("errerrerrerrerrerrerr",err)
+            if(!err)
+            {
+                let sprite = obj.getComponent(Sprite) as Sprite;
+                sprite.spriteFrame = spriteFrame;
+            }
+        });
     }
 
     public setCloseCallBack(func:Function | null){
