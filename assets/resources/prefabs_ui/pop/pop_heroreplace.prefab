@@ -584,7 +584,9 @@
     "_disabledSprite": null,
     "_duration": 0.1,
     "_zoomScale": 1.2,
-    "_target": null,
+    "_target": {
+      "__id__": 13
+    },
     "_id": ""
   },
   {
@@ -3940,7 +3942,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -42.367,
+      "x": -44,
       "y": -13.061,
       "z": 0
     },
@@ -4073,7 +4075,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -3,
+      "x": 17,
       "y": -13,
       "z": 0
     },
@@ -4118,7 +4120,7 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 1,
       "y": 0.5
     },
     "_id": ""
@@ -11686,58 +11688,6 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "caHj1ZL55BiqlPCGdaOPLc",
-    "targetOverrides": [
-      {
-        "__id__": 534
-      },
-      {
-        "__id__": 536
-      }
-    ]
-  },
-  {
-    "__type__": "cc.TargetOverrideInfo",
-    "source": {
-      "__id__": 531
-    },
-    "sourceInfo": null,
-    "propertyPath": [
-      "afterHeroModel"
-    ],
-    "target": {
-      "__id__": 468
-    },
-    "targetInfo": {
-      "__id__": 535
-    }
-  },
-  {
-    "__type__": "cc.TargetInfo",
-    "localID": [
-      "1emsSFCXFLsoNAJr+fd6qd"
-    ]
-  },
-  {
-    "__type__": "cc.TargetOverrideInfo",
-    "source": {
-      "__id__": 531
-    },
-    "sourceInfo": null,
-    "propertyPath": [
-      "beforeHeroModel"
-    ],
-    "target": {
-      "__id__": 348
-    },
-    "targetInfo": {
-      "__id__": 537
-    }
-  },
-  {
-    "__type__": "cc.TargetInfo",
-    "localID": [
-      "1emsSFCXFLsoNAJr+fd6qd"
-    ]
+    "fileId": "caHj1ZL55BiqlPCGdaOPLc"
   }
 ]
