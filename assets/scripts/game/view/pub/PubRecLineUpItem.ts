@@ -1,4 +1,4 @@
-import { _decorator, Component, Node,resources,instantiate,Vec3,Button,Label, UITransform, size, Size, Script } from 'cc';
+import { _decorator, Component, Node,resources,instantiate,Vec3,Button,Label, UITransform, size, Size, Script,Prefab } from 'cc';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { PopMgr } from '../../control/PopMgr';
@@ -83,9 +83,9 @@ export class PubRecLineUpItem extends Component {
     
     public initHeroIconPrefab(index : number,id : number)
     {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
-            let _heroIcon = instantiate(res) ;
-            let script = _heroIcon.getComponent(HeroIcon); 
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err: Error | null, res: Prefab | null)=>{
+            let _heroIcon = instantiate(res as Prefab) ;
+            let script = _heroIcon.getComponent(HeroIcon) as HeroIcon ; 
             // script.setHeroID(this._heroInfo as HeroData);
             script.initUIHeroIconInfo(id,XConsts.HERO_ICON_TYPE.RecLineUp);
                    

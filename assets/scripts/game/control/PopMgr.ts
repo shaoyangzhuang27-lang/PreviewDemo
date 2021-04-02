@@ -447,8 +447,8 @@ export class PopMgr extends PopCore  {
 
     public popHeroPubWindow(closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop_hero_pub', (err:any,res:any)=>{
-            let p = instantiate( res );
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pop_hero_pub', (err: Error | null, res: Prefab | null)=>{
+            let p = instantiate( res as Prefab);
             this.pushWindow(p)
             let script = p.getComponent("PopHeroPub") as PopHeroPub;
             script.setCloseCallBack(closeCallBack);
@@ -465,8 +465,8 @@ export class PopMgr extends PopCore  {
      */
     public popCommonOneWindow(info : XStruct.common_one_info.Record,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_common_one', (err:any,res:any)=>{
-            let p = instantiate( res );
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_common_one', (err: Error | null, res: Prefab | null)=>{
+            let p = instantiate( res as Prefab);
             this.pushWindow(p);
             let script = p.getComponent("PopCommonOne") as PopCommonOne;
             script.initUI(info);
@@ -479,8 +479,8 @@ export class PopMgr extends PopCore  {
      //弹出酒馆推荐阵容
     public popRecLineUpWindow(title:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_reclineup', (err:any,res:any)=>{
-            let p = instantiate( res );
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_reclineup', (err: Error | null, res: Prefab | null)=>{
+            let p = instantiate( res as Prefab );
             this.pushWindow(p)
             let script = p.getComponent("PopRecLineUp") as PopRecLineUp;
             script.setTitle(title);
@@ -497,8 +497,8 @@ export class PopMgr extends PopCore  {
      */ 
     public popSummonSettleWindow(msgData: Msg.SummonHeroA,nType : number,closeCallBack:Function|null = null,isMaskClose:boolean = true)
     {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
-            let p = instantiate( res );
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_summonsettle', (err: Error | null, res: Prefab | null)=>{
+            let p = instantiate( res as Prefab);
             this.pushWindow(p)
             let script = p.getComponent("PopSummonSettle") as PopSummonSettle;
             script.initDataFromMsgData(msgData,nType);
@@ -510,8 +510,8 @@ export class PopMgr extends PopCore  {
 
     public popFragmentSynthesisWindow(data : XStruct.fragment_synthesis_info.IRecord,submitCallBack:Function,isWonderSummonShow : boolean = false,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_fragment_synthesis', (err:any,res:any)=>{
-            let p = instantiate( res );
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_fragment_synthesis', (err: Error | null, res: Prefab | null)=>{
+            let p = instantiate( res as Prefab );
             this.pushWindow(p);
 
             let script = p.getComponent("PopFragmentSynthesis") as PopFragmentSynthesis;
@@ -578,8 +578,8 @@ export class PopMgr extends PopCore  {
      */
       public popMultiItemRewardWindow(lootObjectData : Array<Msg.LootObject> | null,  defineData :Array<XStruct.prop_info.Record> | null,bAutoDecompsePop : boolean = false,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_multi_itemreward', (err:any,res:any)=>{
-            let p = instantiate( res );
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_multi_itemreward', (err: Error | null, res: Prefab | null)=>{
+            let p = instantiate( res as Prefab);
             this.pushWindow(p);
             let script = p.getComponent("PopMultiItemReward") as PopMultiItemReward;
             script.setPropsInfo(lootObjectData,defineData);
@@ -592,8 +592,8 @@ export class PopMgr extends PopCore  {
 
        //奇迹召唤奖池详情
     public popPubWonderRewardListWindow(closeCallBack:Function|null = null,isMaskClose:boolean = true){
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_rewardlist', (err:any,res:any)=>{
-            let p = instantiate( res );
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_rewardlist', (err: Error | null, res: Prefab | null)=>{
+            let p = instantiate( res as Prefab);
             this.pushWindow(p);
 
             let script = p.getComponent("PubWonderRewardList") as PubWonderRewardList;
@@ -605,8 +605,8 @@ export class PopMgr extends PopCore  {
 
     //奇迹召唤心愿英雄详情
     public popPubWonderHeartHeroWindow(isMaskClose:boolean = true){
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_hearthero', (err:any,res:any)=>{
-            let p = instantiate( res );
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_hearthero', (err: Error | null, res: Prefab | null)=>{
+            let p = instantiate( res as Prefab );
             this.pushWindow(p);
 
             let script = p.getComponent("PubWonderHeartHero") as PubWonderHeartHero;

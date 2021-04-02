@@ -2,7 +2,7 @@
 * @author 郭刚
 * @version 1.0.0,2021.3.13
 */
-import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger,EventHandler,Sprite, SpriteFrame, Button, ToggleContainer,Toggle,ProgressBar, Color} from 'cc';
+import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger,EventHandler,Sprite, Prefab,SpriteFrame, Button, ToggleContainer,Toggle,ProgressBar, Color} from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
 import { PopMgr } from '../../control/PopMgr';
@@ -379,9 +379,9 @@ export class PopHeroPub extends PopBase {
     public showPubHeroIconPrefab()
     {
         this.node_wonder && (this.node_wonder.active = false);
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
-            let p = instantiate( res );
-            let script = p.getComponent(PubHeroIcon);
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_heroicon', (err: Error | null, res: Prefab | null)=>{
+            let p = instantiate( res as Prefab);
+            let script = p.getComponent(PubHeroIcon) as PubHeroIcon;
             var nodWindow = this.node.getChildByName("window");
             var node_ordinary = nodWindow?.getChildByName("node_ordinary");
             var nodeDiamond = node_ordinary?.getChildByName("node_diamond");
@@ -717,8 +717,8 @@ export class PopHeroPub extends PopBase {
             if(this.node_togglecontainer.node.activeInHierarchy)
             {
                 GameModel.getInstance().getHeroPubModel().initWonderHeartHeroIdList();
-                ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_summon', (err:any,res:any)=>{
-                    let p = instantiate( res );
+                ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_summon', (err: Error | null, res: Prefab | null)=>{
+                    let p = instantiate( res as Prefab );
                     this.node_wonder?.addChild(p);
                 },"PopHeroPub");
             }

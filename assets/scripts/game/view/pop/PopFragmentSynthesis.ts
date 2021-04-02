@@ -2,7 +2,7 @@
 * @author 郭刚
 * @version 1.0.0,2021.3.13
 */
-import { _decorator, Component, Node,Label,Button, instantiate,UITransform,Vec3,Size,resources } from 'cc';
+import { _decorator, Component, Node,Label,Button, instantiate,Prefab,UITransform,Vec3,Size,resources } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { XConsts } from '../../model/const/XConsts';
 import { HeroFragment } from '../hero/HeroFragment';
@@ -95,9 +95,9 @@ export class PopFragmentSynthesis extends PopBase {
     public initUI()
     {
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_fragment', (err:any,res:any)=>{
-                let fragment_item = instantiate( res );
-                let script = fragment_item.getComponent(HeroFragment);
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_fragment', (err: Error | null, res: Prefab | null)=>{
+                let fragment_item = instantiate( res as Prefab );
+                let script = fragment_item.getComponent(HeroFragment) as HeroFragment;
                 fragment_item.scale = new Vec3(0.7,0.7,1);
                 let subWidget = fragment_item.getComponent(UITransform) as UITransform;
                 subWidget.contentSize = new Size(105,126);
