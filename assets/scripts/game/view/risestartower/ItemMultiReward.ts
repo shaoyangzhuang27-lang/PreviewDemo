@@ -3,7 +3,7 @@
  * @author 郭刚
  * @version 1.0.0,2021.3.19
  */
-import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources,ProgressBar,instantiate, CCInteger } from 'cc';
+import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources,ProgressBar,instantiate, CCInteger ,Vec3} from 'cc';
 const { ccclass, property } = _decorator;
 import { PopMgr } from '../../control/PopMgr';
 import { XConsts } from '../../model/const/XConsts';
