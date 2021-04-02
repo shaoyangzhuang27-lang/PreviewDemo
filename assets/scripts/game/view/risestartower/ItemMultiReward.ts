@@ -11,6 +11,7 @@ import { XFuns } from '../../model/const/XFuns';
 import { GameModel } from '../../model/GameModel';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { ResMgr } from '../../control/ResMgr';
+import { HeroData } from '../../model/datas/HeroData';
 
 @ccclass('ItemMultiReward')
 export class ItemMultiReward extends Component {
@@ -105,26 +106,24 @@ export class ItemMultiReward extends Component {
         let starName = starNameList[grade];
         let starPath = "ui/common/icon/" + starName + "/spriteFrame"
         for (let index = 0; index < this.starlist.length; index++) {
-            this.starlist[index].active = index < yu || yu == 0
-            if (this.starlist[index].active) {
-                this._reloadSprFram(this.starlist[index], starPath);
-            }            
-        }
-        for (let index = 0; index < this.starlist.length; index++) {
-            this.starlist[index].setPosition(this._arrStarPos[index]);
-            if(index > star-1)
+            if(index >= yu && yu != 0)
             {
                 this.starlist[index].active = false;
             }
             else{
                 this.starlist[index].active = true;
-                if(star % 2 == 0)
-                {
-                   var pos =  this.starlist[index].getPosition();
-                   this.starlist[index].setPosition(pos.x + 7,pos.y);
-                }
-            } 
+                this._reloadSprFram(this.starlist[index], starPath);
+            }
         }
+        let firstid = Number(this._propInfo.nPropId);
+        let id1st = HeroData.getInitialStarByID(firstid);
+        let frameName:string = XConsts.GetQualityBgByStar(id1st);
+        if(firstid == 5)    //传奇英雄、主角才需要更换外框
+        {
+            frameName = XConsts.GetQualityBgByStar(star);            
+        }
+        let framePath:string = "ui/common/icon/" + frameName + "/spriteFrame"
+        this._resourceLoad(framePath,this.btn_frame);
     }
     // private _setStar(star:number)
     // {
