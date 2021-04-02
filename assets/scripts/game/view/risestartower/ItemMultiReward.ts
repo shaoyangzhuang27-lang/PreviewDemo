@@ -10,6 +10,7 @@ import { XConsts } from '../../model/const/XConsts';
 import { XFuns } from '../../model/const/XFuns';
 import { GameModel } from '../../model/GameModel';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { ResMgr } from '../../control/ResMgr';
 
 @ccclass('ItemMultiReward')
 export class ItemMultiReward extends Component {
@@ -45,6 +46,7 @@ export class ItemMultiReward extends Component {
     @property({type :  Node})
     public starlist:Node[] = [];
 
+    private _arrStarPos : Array<Vec3> = [];
 
     private _propInfo : XStruct.prop_info.IRecord = {
         nType : 0,
@@ -84,9 +86,24 @@ export class ItemMultiReward extends Component {
         
     }
 
+
     private _setStar(star:number)
     {
+
+        let starNameList = ["星星初级","星星中级","星星高级"]
+        let grade:number = Math.ceil(star/5) - 1;
+        let yu:number = (star - 1) % 5 + 1;
+
+        let starName = starNameList[grade];
+        let starPath = "ui/common/icon/" + starName + "/spriteFrame"
         for (let index = 0; index < this.starlist.length; index++) {
+            this.starlist[index].active = index < yu || yu == 0
+            if (this.starlist[index].active) {
+                this._reloadSprFram(this.starlist[index], starPath);
+            }            
+        }
+        for (let index = 0; index < this.starlist.length; index++) {
+            this.starlist[index].setPosition(this._arrStarPos[index]);
             if(index > star-1)
             {
                 this.starlist[index].active = false;
@@ -100,6 +117,32 @@ export class ItemMultiReward extends Component {
                 }
             } 
         }
+    }
+    // private _setStar(star:number)
+    // {
+    //     for (let index = 0; index < this.starlist.length; index++) {
+    //         if(index > star-1)
+    //         {
+    //             this.starlist[index].active = false;
+    //         }
+    //         else{
+    //             this.starlist[index].active = true;
+    //             if(star % 2 == 0)
+    //             {
+    //                var pos =  this.starlist[index].getPosition();
+    //                this.starlist[index].setPosition(pos.x + 7,pos.y);
+    //             }
+    //         } 
+    //     }
+    // }
+
+    private _reloadSprFram(objNode: Node, path: string) : void {
+        ResMgr.getInstance().loadSpriteFrame(path, (err,spriteFrame:SpriteFrame | null) => {
+            if(!err) {
+                let sprite = objNode.getComponent(Sprite) as Sprite;
+                sprite.spriteFrame = spriteFrame;
+            }
+        },"ItemMultiReward");   
     }
 
 

@@ -335,7 +335,7 @@ export class PopSummonSettle extends PopBase {
                 let sprite = objNode.getComponent(Sprite) as Sprite;
                 sprite.spriteFrame = spriteFrame;
             }
-        },"PopHeroReplace");   
+        },"PopSummonSettle");   
     }
 
     private _setStar(star:number)
