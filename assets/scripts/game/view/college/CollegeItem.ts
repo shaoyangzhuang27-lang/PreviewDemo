@@ -2,7 +2,7 @@
  * @Description: 学院界面内待选择英雄槽位
  * @Author: 徐涛
  * @Date: 2021-03-30 16:03:26
- * @LastEditTime: 2021-04-02 18:08:14
+ * @LastEditTime: 2021-04-02 20:18:07
  */
 import { _decorator, Component, Node, Sprite, Label, Button, SpriteFrame, resources, math, UITransform, EventTouch, Vec3, instantiate } from 'cc';
 const { ccclass, property } = _decorator;
@@ -43,6 +43,19 @@ export class CollegeItem extends Component {
     private _pos:number= 0;
     private _isShowTip: boolean = false;
 
+    public get heroId(){
+        return this._heroId;
+    }
+    public get isLocked(){
+        return this._isLocked;
+    }
+    public get pos(){
+        return this._pos;
+    }
+    public get isShowCD(){
+        return this._isShowCD;
+    }
+
     start() {
         // [3]
 
@@ -58,14 +71,25 @@ export class CollegeItem extends Component {
      * @param {boolean} isLocked 是否解锁槽位标志
      * @param {boolean} isShowTip 是否显示槽位提醒标志
      */
-    public setHeroData(pos:number,heroId: number = 0, isLocked: boolean = false, isShowCD: boolean = false, isShowTip: boolean = false) {
-        this._setHeroIcon(heroId, pos);
-        this._setShowCD(isShowCD);
-        this._setLocked(isLocked);
-        this._setShowTip(isShowTip);
+    public initHeroData(pos:number,heroId: number = 0, isLocked: boolean = false, isShowCD: boolean = false, isShowTip: boolean = false) {        
+        this._pos = pos;
+        this.setHeroIcon(heroId);
+        this.setShowCD(isShowCD);
+        this.setLocked(isLocked);
+        this.setShowTip(isShowTip);
     }
 
-    private _setShowCD(isShowCD: boolean) {
+    public updateHeroData(heroId: number = 0, isLocked: boolean = false, isShowCD: boolean = false, isShowTip: boolean = false) {        
+        this.setHeroIcon(heroId, true);
+        this.setShowCD(isShowCD, true);
+        this.setLocked(isLocked, true);
+        this.setShowTip(isShowTip, true);
+    }    
+
+    public setShowCD(isShowCD: boolean, isUpdate= false) {
+        if(isUpdate && isShowCD==this._isShowCD){
+            return ;
+        }
         this._isShowCD = isShowCD;
         if (isShowCD) {
             this._setCDTxt(true);
@@ -94,12 +118,18 @@ export class CollegeItem extends Component {
         }
     }
 
-    private _setShowTip(isShowTip: boolean) {
+    public setShowTip(isShowTip: boolean, isUpdate= false) {
+        if(isUpdate && isShowTip==this._isShowTip){
+            return ;
+        }
         this._isShowTip = isShowTip;
         this.img_tip.node.active = isShowTip;
     }
 
-    private _setLocked(isLocked: boolean) {
+    public setLocked(isLocked: boolean, isUpdate= false) {
+        if(isUpdate && isLocked==this._isLocked){
+            return ;
+        }
         this._isLocked = isLocked;
         let imgPath = "ui/college/阵型调整_出战阵容英雄背景/spriteFrame";
         if (isLocked) {
@@ -108,9 +138,11 @@ export class CollegeItem extends Component {
         XFuns.ReplaceSpriteFrame(imgPath, this.img_bg);
     }
 
-    private _setHeroIcon(heroId: number, pos:number) {
+    public setHeroIcon(heroId: number, isUpdate= false) {
+        if(isUpdate && heroId==this._heroId){
+            return ;
+        }
         this._heroId = heroId;
-        this._pos = pos;
         if (heroId == 0) {
             this._clearHeroIcon();
 

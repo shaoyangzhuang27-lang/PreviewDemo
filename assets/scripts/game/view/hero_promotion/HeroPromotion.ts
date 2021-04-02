@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-04-01 11:52:49
+ * @LastEditTime: 2021-04-02 19:38:24
  */
 import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
@@ -610,6 +610,8 @@ export class HeroPromotion extends PopBase {
             this._curHeroData = heroData;
             // 刷新升阶引起的UI变化
             this._showCurHeroView(msg.heroID, false);
+            //刷新学院信息
+            GameModel.getInstance().getHeroesModel().refreshHeroesCollege();
         } else {
             // TipsMgr.instance.ShowErrDialog (msg.Err);
             console.log(msg.errStr + " errCode=" + msg.err.toString());
@@ -649,6 +651,8 @@ export class HeroPromotion extends PopBase {
             this._curHeroId = msg.heroID;
             // 刷新升阶引起的UI变化
             this._showCurHeroView(msg.heroID, false);
+            //刷新学院信息
+            GameModel.getInstance().getHeroesModel().refreshHeroesCollege();
         } else {
             // TipsMgr.instance.ShowErrDialog (msg.Err);
             console.log(msg.errStr + " errCode=" + msg.err.toString());

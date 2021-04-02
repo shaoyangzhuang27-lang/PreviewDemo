@@ -23,18 +23,14 @@ export class HeroesModel extends BaseModel {
     public get heroIdInCollegeMap() {
         return this._heroIdInCollegeMap;
     }
-
     public get heroCollegeLevel() {
         return this._heroCollegeLevel;
-    }
-    public set heroCollegeLevel(lv: number) {
-        this._heroCollegeLevel = lv;
     }
     public get heroCollegeTier() {
         return this._heroCollegeTier;
     }
-    public set heroCollegeTier(tier: number) {
-        this._heroCollegeTier = tier;
+    public get collegeBlockLastAtMap(){
+        return this._collegeBlockLastAtMap;
     }
 
     public getHeroList() {
@@ -60,7 +56,8 @@ export class HeroesModel extends BaseModel {
             this._heroBookMap.set(Number(key), value as Msg.HeroBookUnit);
         }
         this.refreshHeroBookProperty(); //收到消息后刷新
-
+        
+        this.refreshHeroesCollege ();
         this._sortHeroList();
     }
 
@@ -677,8 +674,8 @@ export class HeroesModel extends BaseModel {
         //根据最低英雄，设置相应的参考等级和参考品阶
         if (this._heroesTop5.Count > 0) {
             let hd: HeroData = this._heroesTop5.Get(this._heroesTop5.Count - 1);
-            this.heroCollegeLevel = hd.getLevel();
-            this.heroCollegeTier = hd.getTier();
+            this._heroCollegeLevel = hd.getLevel();
+            this._heroCollegeTier = hd.getTier();
         }
         //学院中的英雄，刷新天赋
         this._heroIdInCollegeMap.forEach((v, k, m) => {
@@ -686,17 +683,6 @@ export class HeroesModel extends BaseModel {
             if (hd != null)
                 hd.calcTalentSkillProperty();
         });
-        //测试代码，加英雄进学院
-        // int count = 1;
-        // _heroIdInCollegeMap.Clear();
-        // for (int i = 5; i < tmpList.Count; i++) {
-        //     if (tmpList[i].HeroInfo.Level == 1) {
-        //         _heroIdInCollegeMap.Add(tmpList[i].HeroInfo.Id, count);
-        //         count++;
-        //         if (count > 5)
-        //             break;
-        //     }
-        // }
     }
 
     public get heroesTop5() {

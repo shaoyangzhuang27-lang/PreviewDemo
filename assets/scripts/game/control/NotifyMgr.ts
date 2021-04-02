@@ -2,7 +2,7 @@
  * @Description: 事件通知管理器
  * @Author: xxxx
  * @Date: 2021-02-23 16:07:59
- * @LastEditTime: 2021-04-01 11:16:54
+ * @LastEditTime: 2021-04-02 20:28:06
  */
 import { NotifyCore } from "../../core/control/NotifyCore";
 
@@ -27,7 +27,8 @@ export class NotifyMgr extends NotifyCore {
     public static event_net_hero_locked: string = "event_net_hero_locked";                      //英雄锁定状态变化
     public static event_net_hero_put_on_equip: string = "event_net_hero_put_on_equip";          //英雄穿上装备事件
     public static event_net_hero_take_off_equip: string = "event_net_hero_take_off_equip";      //英雄卸下装备事件
-    public static event_net_set_college_hero: string = "event_net_set_college_hero";            //设置英雄到书院槽位
+    public static event_net_set_college_hero: string = "event_net_set_college_hero";            //设置英雄到书院槽位网络协议用
+    public static event_ui_set_college_hero: string = "event_ui_set_college_hero";              //设置英雄到书院槽位UI用
     public static event_net_open_college_block: string = "event_net_open_college_block";        //英雄书院开启槽位
     public static event_net_starUp_change: string = "event_net_starUp_change";                  //升星变化
     public static event_net_OneKeyStarUp_change: string = "event_net_OneKeyStarUp_change";      //一键升星变化

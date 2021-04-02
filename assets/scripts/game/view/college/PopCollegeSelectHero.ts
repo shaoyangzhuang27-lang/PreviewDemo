@@ -2,7 +2,7 @@
  * @Description: 英雄书院选择放置英雄窗
  * @Author: 徐涛
  * @Date: 2021-04-02 15:37:22
- * @LastEditTime: 2021-04-02 18:26:58
+ * @LastEditTime: 2021-04-02 20:44:18
  */
 import { _decorator, Node, Label, resources, instantiate, ScrollView, ToggleContainer, EventHandler, Toggle } from 'cc';
 const { ccclass, property } = _decorator;
@@ -141,8 +141,10 @@ export class PopCollegeSelectHero extends PopBase {
             return ;
         }
         
-        if (this._heroId != 0 || this._pos != 0) {
+        if (this._heroId != 0 && this._pos != 0) {
             MsgMgr.getInstance().getMsgHeroCollege().requestSetCollegeHero(this._heroId, true, this._pos);
+            let msg = new Msg.SetCollegeHeroR({ heroId: this._heroId, isAdd: true, pos: this._pos });
+            NotifyMgr.getInstance().notify(NotifyMgr.event_ui_set_college_hero, msg);
         }
     }
 
@@ -161,7 +163,7 @@ export class PopCollegeSelectHero extends PopBase {
         }
 
         resources.load('prefabs_ui/main/hero_selecticon', (err: any, res: any) => {
-            this._bottomHeroItemList.clear()
+            this._bottomHeroItemList.clear();
             let k = new Array<[number, Node]>();     //排序存储对象
             for (let heroData of this._allHeroList.values()) {
                 let heroIcon = instantiate(res) as Node;
