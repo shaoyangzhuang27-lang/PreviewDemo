@@ -63,6 +63,9 @@ export class PubWonderSummon extends Component {
     //奇迹召唤召唤进度
     private _nWonderSummonProgress : number = 0;
 
+    @property({type: Node})
+    public node_parent_window= null as unknown as Node;
+
     start () {
 
         this.lab_summon_ad.string = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERSUMMON);
@@ -182,8 +185,11 @@ export class PubWonderSummon extends Component {
             let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
             script.setItemType(id, num, ItemEquipType.goods, 
                 ()=>{
-                    console.log("点击钻石显示道具信息")
-                    PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,true);
+                    console.log("点击钻石显示道具信息",id)
+                    console.log("gggggggggg",this.node);
+                    console.log("gggggggggg1",this.node_parent_window.parent);
+                    //this.node_parent_window.isActive
+                    PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
             });  
 
             this.node_dimond?.addChild(itemEquipCell);   
@@ -201,7 +207,7 @@ export class PubWonderSummon extends Component {
                 script.setItemType(id, num, ItemEquipType.equip, 
                     ()=>{
                         console.log("装备")
-                        PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.equip,false);
+                        PopMgr.getInstance().popEquipInfoView(id,true);
                 });  
     
                 switch(i)
@@ -574,6 +580,11 @@ export class PubWonderSummon extends Component {
             },"PubWonderSummon");
         }
         
+    }
+
+    public setParentWindow(node : Node)
+    {
+        this.node_parent_window = node;
     }
 }
 
