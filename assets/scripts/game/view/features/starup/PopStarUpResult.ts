@@ -4,11 +4,11 @@
  * @version 1.0.0,2021.3.15
  */
 import { _decorator,EventHandler,Button, Sprite,Vec3,tween, Component,SpriteFrame,Label,Node, resources,LabelComponent } from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { HeroModel } from '../hero/HeroModel';
-import { HeroData } from '../../model/datas/HeroData';
-import { XConsts } from "../../model/const/XConsts";
-import { PopMgr } from '../../control/PopMgr';
+import { PopBase } from '../../../../core/control/PopBase';
+import { HeroModel } from '../../hero/HeroModel';
+import { HeroData } from '../../../model/datas/HeroData';
+import { XConsts } from "../../../model/const/XConsts";
+import { PopMgr } from '../../../control/PopMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopStarUpResult')

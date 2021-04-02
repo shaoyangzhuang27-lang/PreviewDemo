@@ -76,24 +76,28 @@ export class SceneMgr{
             console.log(scriptNode);
             this._loadingScript = scriptNode?.getComponent("SceneLoading") as SceneLoading;
             console.log(this._loadingScript);
+
+
+            loadFun();
+            ResMgr.getInstance().startLoad((finished:number,total:number,resName:string)=>{
+                console.log("hhhhfffslkfj;::::;")
+                console.log(resName)
+                if(this._loadingScript){
+                    this._loadingScript.setProgress(finished/total,resName);
+                }
+            },
+            (objArray:any) => {
+                //进入主界面
+                this._loadingScript = null;
+                comFun();
+            });
         })
 
-        loadFun();
-        ResMgr.getInstance().startLoad((finished:number,total:number,resName:string)=>{
-            if(this._loadingScript){
-                this._loadingScript.setProgress(finished/total,resName);
-            }
-        },
-        (objArray:any) => {
-            //进入主界面
-            comFun();
-        });
     }
 
     private _erterScene(sceneName:SceneName){
         this._curSceneName = sceneName;
         director.loadScene(sceneName);
-        this._loadingScript = null;
     }
     private _releasePreRes(){
         switch(this._curSceneName){

@@ -20,22 +20,14 @@ export class SceneLogin extends BaseScene {
 
     start () {
         this.btn_login?.on(Node.EventType.TOUCH_END, this.submitHandle, this);
-        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_player_login,this.notifyPlayerLoginHandle,this);
         ResMgr.getInstance().preloadRes();
     }
     submitHandle(){
         console.log("login");
-        MsgMgr.getInstance().getMsgLogin().requestDeviceLoginNew();
-    }
-    notifyPlayerLoginHandle(data:any){
-        MsgMgr.getInstance().getMsgLogin().requestGetHeroList();
-        MsgMgr.getInstance().getMsgLogin().requestGetPlayerData();
-        SceneMgr.getInstance().changeToBattle();
-        //SceneMgr.getInstance().changeToMain();
+        this._loginServer();
     }
     onDestroy(){
         super.onDestroy();
-        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_player_login,this.notifyPlayerLoginHandle,this);
     }
 
 }
