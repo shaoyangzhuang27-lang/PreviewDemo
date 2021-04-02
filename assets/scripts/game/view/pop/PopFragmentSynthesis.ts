@@ -8,6 +8,7 @@ import { XConsts } from '../../model/const/XConsts';
 import { HeroFragment } from '../hero/HeroFragment';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { PopMgr } from '../../control/PopMgr';
+import { ResMgr } from '../../control/ResMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopFragmentSynthesis')
@@ -94,7 +95,7 @@ export class PopFragmentSynthesis extends PopBase {
     public initUI()
     {
 
-        resources.load('prefabs_ui/main/hero_fragment', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_fragment', (err:any,res:any)=>{
                 let fragment_item = instantiate( res );
                 let script = fragment_item.getComponent(HeroFragment);
                 fragment_item.scale = new Vec3(0.7,0.7,1);
@@ -102,7 +103,7 @@ export class PopFragmentSynthesis extends PopBase {
                 subWidget.contentSize = new Size(105,126);
                 script.setFragmentInfo(this._fragmentSysthesisInfo,this._isWonderSummonShow);
                 this.node_hero_fragment?.addChild(fragment_item);
-        });
+        },"PopFragmentSynthesis");
 
 
         //let labtitle = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.UI_FRAGMENT) as Config.language_ui.Record;

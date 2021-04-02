@@ -3,6 +3,7 @@ import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resourc
 const { ccclass, property } = _decorator;
 import { PopMgr } from '../../control/PopMgr';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { ResMgr } from '../../control/ResMgr';
 
 @ccclass('HeroFragment')
 export class HeroFragment extends Component {
@@ -75,12 +76,12 @@ export class HeroFragment extends Component {
     _resourceLoad (path:string | null | undefined,obj:any)
     {
       
-            path && resources.load(path,SpriteFrame,(err:any,spriteFrame:SpriteFrame) =>
+            path && ResMgr.getInstance().loadSpriteFrame(path,(err:Error | null,spriteFrame:SpriteFrame | null) =>
             {
                 obj.active = true;
                 let sprite = obj.getComponent(Sprite) as Sprite;
                 sprite.spriteFrame = spriteFrame;
-            });
+            },"HeroFragment");
         
     }
 

@@ -126,23 +126,6 @@ export class ItemMultiReward extends Component {
         let framePath:string = "ui/common/icon/" + frameName + "/spriteFrame"
         this._resourceLoad(framePath,this.btn_frame);
     }
-    // private _setStar(star:number)
-    // {
-    //     for (let index = 0; index < this.starlist.length; index++) {
-    //         if(index > star-1)
-    //         {
-    //             this.starlist[index].active = false;
-    //         }
-    //         else{
-    //             this.starlist[index].active = true;
-    //             if(star % 2 == 0)
-    //             {
-    //                var pos =  this.starlist[index].getPosition();
-    //                this.starlist[index].setPosition(pos.x + 7,pos.y);
-    //             }
-    //         } 
-    //     }
-    // }
 
     private _reloadSprFram(objNode: Node, path: string) : void {
         ResMgr.getInstance().loadSpriteFrame(path, (err,spriteFrame:SpriteFrame | null) => {
