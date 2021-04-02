@@ -1,8 +1,9 @@
 
-import { Button, Color, instantiate, ProgressBar, resources, Size, Sprite, SpriteFrame, Toggle, ToggleComponent } from 'cc';
+import { Button, Color, instantiate, Prefab, ProgressBar, resources, Size, Sprite, SpriteFrame, Toggle, ToggleComponent } from 'cc';
 import { _decorator, Node, EventHandler, ToggleContainer, UITransform, Label } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { PopMgr } from '../../control/PopMgr';
+import { ResMgr } from '../../control/ResMgr';
 import { GameModel } from '../../model/GameModel';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
 import { AvatarNode } from '../menu/AvatarNode';
@@ -120,12 +121,12 @@ export class PopSettingView extends PopBase {
         }
 
         //载入头像
-        resources.load('prefabs_ui/main/node_avatar', (err:any,res:any)=>{
-            let p = instantiate( res )
+        ResMgr.getInstance().loadPrefab("prefabs_ui/main/node_avatar", (err:any, res:Prefab | null)=>{
+            let p = instantiate( res as Prefab ) as Node
             this.node_avatar.addChild(p)
 
-            let script = p.getComponent("AvatarNode") as AvatarNode;
-            script.openClick()
+            // let script = p.getComponent("AvatarNode") as AvatarNode;
+            // script.openClick()
         })
     }
     onDestroy(){
@@ -165,6 +166,11 @@ export class PopSettingView extends PopBase {
     }
     private _onClick_service(button:Button){
         console.log("点击 客服")
+
+        //https://developers.weixin.qq.com/minigame/dev/api/open-api/customer-message/wx.openCustomerServiceConversation.html
+        // if (window.wx) {
+        //     window.wx.openCustomerServiceConversation({});
+        // }
     }
     private _onClick_gift(button:Button){
         console.log("点击 兑换")
