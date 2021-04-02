@@ -86,9 +86,17 @@ export class ItemMultiReward extends Component {
         
     }
 
+    private _initStarPos()
+    {
+        for (let index = 0; index < this.starlist.length; index++) {
+            var pos =  this.starlist[index].getPosition();
+            this._arrStarPos.push(instantiate(pos));
+        }
+    }
 
     private _setStar(star:number)
     {
+        this._initStarPos();
 
         let starNameList = ["星星初级","星星中级","星星高级"]
         let grade:number = Math.ceil(star/5) - 1;
