@@ -2,7 +2,7 @@
  * @Description: 英雄书院
  * @Author: 徐涛
  * @Date: 2021-03-30 19:49:03
- * @LastEditTime: 2021-04-02 21:05:07
+ * @LastEditTime: 2021-04-04 12:10:17
  */
 import { _decorator, Node, Label, resources, instantiate, ScrollView, Vec3, UITransform, math } from 'cc';
 const { ccclass, property } = _decorator;
@@ -96,7 +96,7 @@ export class PopCollege extends PopBase {
         }
 
         let msg= data as Msg.SetCollegeHeroR;
-        if ( (msg.pos!=0 && msg.isAdd && msg.heroId !=0) ||(msg.pos!=0 && !msg.isAdd && msg.heroId ==0) ){
+        if ( (msg.pos!=0 && msg.isAdd && msg.heroId !=0) ||(msg.pos!=0 && !msg.isAdd && msg.heroId !=0) ){
             this._heroId= msg.heroId;   
             this._isAdd= msg.isAdd;
             this._pos= msg.pos;

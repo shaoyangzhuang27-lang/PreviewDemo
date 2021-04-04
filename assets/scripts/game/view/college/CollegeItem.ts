@@ -2,7 +2,7 @@
  * @Description: 学院界面内待选择英雄槽位
  * @Author: 徐涛
  * @Date: 2021-03-30 16:03:26
- * @LastEditTime: 2021-04-02 20:18:07
+ * @LastEditTime: 2021-04-04 12:13:36
  */
 import { _decorator, Component, Node, Sprite, Label, Button, SpriteFrame, resources, math, UITransform, EventTouch, Vec3, instantiate } from 'cc';
 const { ccclass, property } = _decorator;
@@ -172,6 +172,7 @@ export class CollegeItem extends Component {
                     // script.setBtnCallBack((_data: HeroData) => {
                     //     target._openCollegeUnLoadView(_data);
                     // });
+                    this._heroIcon= script;
                     this.node.addChild(heroIcon);
                     heroIcon.setScale(new Vec3(0.7, 0.7, 1));
                 });

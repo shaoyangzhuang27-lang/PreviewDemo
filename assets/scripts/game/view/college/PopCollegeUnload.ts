@@ -2,7 +2,7 @@
  * @Description: 英雄书院卸下英雄
  * @Author: 徐涛
  * @Date: 2021-04-01 20:40:35
- * @LastEditTime: 2021-04-02 16:09:54
+ * @LastEditTime: 2021-04-04 12:08:15
  */
 import { _decorator, Node, Label, resources, instantiate, ScrollView, Vec3, UITransform, math, Layout } from 'cc';
 const { ccclass, property } = _decorator;
@@ -71,7 +71,10 @@ export class PopCollegeUnload extends PopBase {
 
     private _unLoadHandle() {
         if(this._heroId !=0 || this._pos != 0){
+            let msg = new Msg.SetCollegeHeroR({ heroId: this._heroId, isAdd: false, pos: this._pos });
+            NotifyMgr.getInstance().notify(NotifyMgr.event_ui_set_college_hero, msg);
             MsgMgr.getInstance().getMsgHeroCollege().requestSetCollegeHero(this._heroId, false, this._pos);
+            
         }
     }
     
