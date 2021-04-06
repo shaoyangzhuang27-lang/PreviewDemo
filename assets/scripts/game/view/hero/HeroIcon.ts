@@ -110,26 +110,11 @@ export class HeroIcon extends Component {
     //资源替换
     private _resourceLoad(path:string,obj:any)
     {
-        // let strs = path.split("/"); 
-        // let name = strs[strs.length-2];
-        ResMgr.getInstance().loadSpriteFrame(path,(err,spriteFrame:SpriteFrame | null) =>
+        ResMgr.getInstance().loadSpriteFrame(path,(err: Error | null, spriteFrame: SpriteFrame | null) =>
         {
-            console.log("errerrerrerrerrerrerr",err)
-            if(!err)
-            {
-                let sprite = obj.getComponent(Sprite) as Sprite;
-                sprite.spriteFrame = spriteFrame;
-            }
-        });
-        // resources.load(path, (err,spriteFrame:SpriteFrame) =>
-        // {
-        //     console.log("errerrerrerrerrerrerr",err)
-        //     if(!err)
-        //     {
-        //         let sprite = obj.getComponent(Sprite) as Sprite;
-        //         sprite.spriteFrame = spriteFrame;
-        //     }
-        // });
+            let sprite = obj.getComponent(Sprite) as Sprite;
+            sprite.spriteFrame = spriteFrame; 
+        },"HeroIcons");
     }
 
     private _setStar(star:number,firstid:number = 0)
@@ -261,14 +246,16 @@ export class HeroIcon extends Component {
         let info = GameModel.getInstance().getHeroesModel().getHeroIconInfoByHeroId(id);
         this.img_camp.active = true;
         let campIconPath:string = "ui/common/team/" + info.camp + "/spriteFrame";
-        resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
-        {
-            if(!err)
-            {
-                let sprite = this.img_camp.getComponent(Sprite) as Sprite;
-                sprite.spriteFrame = spriteFrame;
-            }
-        });
+        // ResMgr.getInstance().loadSpriteFrame(campIconPath, (err: Error | null, spriteFrame: SpriteFrame | null) =>
+        // {
+        //     if(!err)
+        //     {
+        //         let sprite = this.img_camp.getComponent(Sprite) as Sprite;
+        //         sprite.spriteFrame = spriteFrame;
+        //     }
+        // });
+
+        this._resourceLoad(campIconPath, this.img_camp);
 
         // let framePath:string = "ui/common/icon/" + info.frame + "/spriteFrame"
         // this._resourceLoad(framePath,this.btn_frame);

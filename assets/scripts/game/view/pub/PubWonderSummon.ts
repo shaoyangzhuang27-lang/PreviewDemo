@@ -12,6 +12,7 @@ import { NotifyMgr } from '../../control/NotifyMgr';
 import { XFuns } from '../../model/const/XFuns';
 import {PubWonderSummonSettle} from "./PubWonderSummonSettle";
 import { ResMgr } from '../../control/ResMgr';
+import { PopHeroPub } from "../../view/pop/PopHeroPub";
 const { ccclass, property } = _decorator;
 
 @ccclass('PubWonderSummon')
@@ -63,6 +64,8 @@ export class PubWonderSummon extends Component {
     //奇迹召唤召唤进度
     private _nWonderSummonProgress : number = 0;
 
+    public node_parent_window : PopHeroPub = null as unknown as PopHeroPub;
+
     start () {
 
         this.lab_summon_ad.string = ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_WONDERSUMMON);
@@ -86,6 +89,7 @@ export class PubWonderSummon extends Component {
 
     private _onBtnDetailClick(event:any)
     {
+        this.node_parent_window.setIsNeedHide(true);
         PopMgr.getInstance().popPubWonderRewardListWindow();
     }
 
@@ -182,8 +186,8 @@ export class PubWonderSummon extends Component {
             let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
             script.setItemType(id, num, ItemEquipType.goods, 
                 ()=>{
-                    console.log("点击钻石显示道具信息")
-                    PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,true);
+                    this.node_parent_window.setIsNeedHide(false);
+                    PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
             });  
 
             this.node_dimond?.addChild(itemEquipCell);   
@@ -201,7 +205,8 @@ export class PubWonderSummon extends Component {
                 script.setItemType(id, num, ItemEquipType.equip, 
                     ()=>{
                         console.log("装备")
-                        PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.equip,false);
+                        this.node_parent_window.setIsNeedHide(false);
+                        PopMgr.getInstance().popEquipInfoView(id,true);
                 });  
     
                 switch(i)
@@ -259,6 +264,7 @@ export class PubWonderSummon extends Component {
                 script.setBtnCallBack( 
                     ()=>{
                         console.log("碎片");
+                        this.node_parent_window.setIsNeedHide(false);
                         PopMgr.getInstance().popFragmentSynthesisWindow(info,()=>{console.log("碎片合成")},true);
                 });  
     
@@ -574,6 +580,11 @@ export class PubWonderSummon extends Component {
             },"PubWonderSummon");
         }
         
+    }
+
+    public setParentWindow(node : PopHeroPub)
+    {
+        this.node_parent_window = node;
     }
 }
 
