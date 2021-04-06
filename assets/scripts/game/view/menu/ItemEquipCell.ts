@@ -114,14 +114,14 @@ export class ItemEquipCell extends Component {
             
             if(this._objectType != Msg.TObjectType.EObject_UsableItem)
             {
-                this._itemID = this._objectType;    //不可使用道具  id就是道具类型
-                if(XShare.getInstance().KObjectQuality.has(this._objectType))
+                // this._itemID = this._objectType;    //不可使用道具  id就是道具类型
+                if(XShare.getInstance().KObjectQuality.has(this._itemID))
                 {
-                    let quality = Number(XShare.getInstance().KObjectQuality.get(this._objectType)) ;
+                    let quality = Number(XShare.getInstance().KObjectQuality.get(this._itemID)) ;
                     let qualityName:string = XConsts.KQualityBgSpriteName[quality];
                     qualityPath = "ui/common/icon/" + qualityName + "/spriteFrame";
                 }
-                let iconName:string = XConsts.KObjectIconSpriteName[this._objectType];
+                let iconName:string = XConsts.KObjectIconSpriteName[this._itemID];
                 iconPath = "ui/common/commonIcon/" + iconName + "/spriteFrame";
             }
             else{
@@ -130,6 +130,9 @@ export class ItemEquipCell extends Component {
                 let itemUseType:number = itemData.itemType;
 
                 qualityPath = "ui/common/icon/" + qualityName + "/spriteFrame"
+
+                let iconName:string = XConsts.KObjectIconSpriteName[this._itemID];
+                iconPath = "ui/common/commonIcon/" + iconName + "/spriteFrame";
                 if(itemUseType == Msg.TUsableItemType.EUsableItemType_ObjectOffline)
                 {
                     this.img_infoBg.active = true;
