@@ -84,6 +84,7 @@ export class ItemEquipCell extends Component {
         //数量
         let labCount:Label = this.lab_count.getComponent(Label) as Label;
         labCount.string = XFuns.FormatNumber(this._itemCount);
+        var pos = this.lab_count.getPosition();
         if(this._itemCount == 0)        //不需要显示数量时  数量设置为0
         {
             this.lab_count.active = false;
@@ -123,6 +124,8 @@ export class ItemEquipCell extends Component {
                 }
                 let iconName:string = XConsts.KObjectIconSpriteName[this._itemID];
                 iconPath = "ui/common/commonIcon/" + iconName + "/spriteFrame";
+
+                this.lab_count.setPosition(pos.x, pos.y - 20,pos.z);            
             }
             else{
                 let itemData:Config.item_usable.Record = ValueMgr.getInstance().getItemByField(TableName.item_usable,this._itemID) as Config.item_usable.Record;        
