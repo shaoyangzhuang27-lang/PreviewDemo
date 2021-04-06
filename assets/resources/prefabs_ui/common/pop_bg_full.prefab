@@ -402,7 +402,9 @@
       "b": 124,
       "a": 255
     },
-    "_normalSprite": null,
+    "_normalSprite": {
+      "__uuid__": "2069e149-3e22-4710-90e1-caa899309523@f9941"
+    },
     "_hoverSprite": null,
     "_pressedSprite": null,
     "_disabledSprite": null,
@@ -430,7 +432,7 @@
     },
     "_alignFlags": 9,
     "_target": null,
-    "_left": 7.5,
+    "_left": 17.5,
     "_right": 647.5,
     "_top": 16.5,
     "_bottom": 0,
