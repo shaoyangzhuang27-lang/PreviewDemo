@@ -9,19 +9,19 @@
 import { _decorator, Color, Component, Node, ScrollView, ToggleContainer, EventHandler, Toggle, Label, Event, instantiate, Vec3, Sprite, UITransform, size, SpriteFrame, Layers, Button } from 'cc';
 const { ccclass, property } = _decorator;
 
-import { PopBase } from '../../../core/control/PopBase';
-import { NotifyMgr } from '../../control/NotifyMgr';
-import { PopMgr } from '../../control/PopMgr';
-import { MsgMgr } from '../../control/MsgMgr';
-import { ResMgr } from '../../control/ResMgr';
-import { GameModel } from '../../model/GameModel';
-import { XFuns } from '../../model/const/XFuns';
-import { XConsts } from "../../model/const/XConsts";
-import { HeroData } from '../../model/datas/HeroData';
-import { HeroIcon } from '../hero/HeroIcon';
-import { HeroModel } from '../hero/HeroModel';
-import { HeroSelectIcon } from '../hero/HeroSelectIcon';
-import { ResCore } from '../../../core/control/ResCore';
+import { PopBase } from '../../../../core/control/PopBase';
+import { NotifyMgr } from '../../../control/NotifyMgr';
+import { PopMgr } from '../../../control/PopMgr';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { ResMgr } from '../../../control/ResMgr';
+import { GameModel } from '../../../model/GameModel';
+import { XFuns } from '../../../model/const/XFuns';
+import { XConsts } from "../../../model/const/XConsts";
+import { HeroData } from '../../../model/datas/HeroData';
+import { HeroIcon } from '../../hero/HeroIcon';
+import { HeroModel } from '../../hero/HeroModel';
+import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
+import { ResCore } from '../../../../core/control/ResCore';
 
 @ccclass('PopHeroReplace')
 export class PopHeroReplace extends PopBase {
