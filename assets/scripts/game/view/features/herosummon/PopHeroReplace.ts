@@ -195,7 +195,7 @@ export class PopHeroReplace extends PopBase {
 
         this._currFragment = GameModel.getInstance().getPlayerModel().getPlayerInfo().miracleShard;
         this.currLab.string = "??";
-        this.currLab.color = this._getMiracleShardFontColor()
+        this.currLab.color = this._getMiracleShardFontColor(true)
         this.consumpLab.string = "??"
 
         if (this._selectHeroData != null) {
@@ -211,15 +211,15 @@ export class PopHeroReplace extends PopBase {
             this.beforeHeroNameLab.string = _iconName.toString(); 
             let nameColor: Color = this._getHeorNameFontColor(this._selectHeroData)           
             this.beforeHeroNameLab.color = nameColor 
-            // this._showHeroModel(this.beforeHeroModel, _iconName);
+            this._showHeroModel(this.beforeHeroModel, this._selectHeroData);
 
             let _starNum: number = this._selectHeroData?.getStar() as number;
             this._setStar(_starNum, this.beforeStarList);
 
-            this.currLab.string = XFuns.FormatNumber(this._currFragment);
-            this.currLab.color = this._getMiracleShardFontColor()
             this._currConsumeFragment = XConsts.KClassesExchangeMiracleShard[_starNum - 1]
             this.consumpLab.string = XFuns.FormatNumber(this._currConsumeFragment);
+            this.currLab.string = XFuns.FormatNumber(this._currFragment);
+            this.currLab.color = this._getMiracleShardFontColor()            
         }
     }
 
@@ -241,7 +241,7 @@ export class PopHeroReplace extends PopBase {
             this.afterHeroNameLab.string = _iconName.toString(); 
             let nameColor: Color = this._getHeorNameFontColor(this._covertHeroData)           
             this.afterHeroNameLab.color = nameColor 
-            // this._showHeroModel(this.afterHeroModel, _iconName);
+            this._showHeroModel(this.afterHeroModel, this._covertHeroData);
 
             let _starNum: number = this._covertHeroData?.getStar() as number;
             this._setStar(_starNum, this.afterStarList);
@@ -347,7 +347,7 @@ export class PopHeroReplace extends PopBase {
         }
 
         //条件:当前碎片数量小于消耗碎片数量
-        if(this._currFragment <= this._currConsumeFragment){
+        if(this._currFragment == 0 || this._currFragment < this._currConsumeFragment){
             let info: XStruct.common_one_info.Record ={
                 title :"错误",
                 content : "灵魂碎片不足?",
@@ -392,9 +392,10 @@ export class PopHeroReplace extends PopBase {
     }
    
     // 展示当前英雄形象
-    private _showHeroModel(modelNode: HeroModel, _iconName: string) : void {
-        if(modelNode) {
-            modelNode.updateByHeroPerfabPath(_iconName);
+    private _showHeroModel(modelNode: HeroModel, currHeroData: HeroData) : void {
+        if(modelNode && currHeroData) {
+            let prefabPath: string = currHeroData.getPrefabPath()
+            modelNode.updateByHeroPerfabPath(prefabPath);
         }
     }
 
@@ -418,7 +419,10 @@ export class PopHeroReplace extends PopBase {
     }
     
     //获取灵魂碎片颜色
-    private _getMiracleShardFontColor() : Color {
+    private _getMiracleShardFontColor(isDefault?: boolean) : Color {
+        if (isDefault) {
+            return XConsts.KColorGreen
+        }
         return this._currFragment < this._currConsumeFragment 
             ? XConsts.KColorRed : XConsts.KColorGreen;
     }
