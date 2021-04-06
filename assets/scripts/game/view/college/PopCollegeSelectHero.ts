@@ -2,9 +2,9 @@
  * @Description: 英雄书院选择放置英雄窗
  * @Author: 徐涛
  * @Date: 2021-04-02 15:37:22
- * @LastEditTime: 2021-04-02 20:44:18
+ * @LastEditTime: 2021-04-06 18:09:17
  */
-import { _decorator, Node, Label, resources, instantiate, ScrollView, ToggleContainer, EventHandler, Toggle } from 'cc';
+import { _decorator, Node, Label, resources, instantiate, ScrollView, ToggleContainer, EventHandler, Toggle, Prefab } from 'cc';
 const { ccclass, property } = _decorator;
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
@@ -14,6 +14,7 @@ import { MsgMgr } from '../../control/MsgMgr';
 import { HeroSelectIcon } from '../hero/HeroSelectIcon';
 import { ValueMgr } from '../../model/ValueMgr';
 import { PopMgr } from '../../control/PopMgr';
+import { ResMgr } from '../../control/ResMgr';
 
 @ccclass('PopCollegeSelectHero')
 export class PopCollegeSelectHero extends PopBase {
@@ -25,7 +26,7 @@ export class PopCollegeSelectHero extends PopBase {
     public lab_save: Label = null as unknown as Label;
     @property({ type: Label, displayName: "标题" })
     public lab_title: Label = null as unknown as Label;
-    
+
     @property({ type: ToggleContainer, displayName: "阵营" })
     public campGroup: ToggleContainer | null = null as unknown as ToggleContainer;
 
@@ -60,14 +61,32 @@ export class PopCollegeSelectHero extends PopBase {
 
     start() {
         super.start();
-        
+
         this.lab_title.string = ValueMgr.getInstance().getLanguageString("UI_SelectHero_Title");
-		this.lab_save.string = ValueMgr.getInstance().getLanguageString("UI_Save");
+        this.lab_save.string = ValueMgr.getInstance().getLanguageString("UI_Save");
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_set_college_hero, this._notifySetCollegeHeroHandle, this);
 
-        this._allHeroList = GameModel.getInstance().getHeroList();
+        //筛选出英雄列表
+        this._allHeroList.clear();
+        let heroTop5 = GameModel.getInstance().getHeroesModel().heroesTop5;
+        let allHeroList = GameModel.getInstance().getHeroesModel().getHeroList();
+        allHeroList.forEach((hd, heroId, m) => {
+            let isTop5 = false;
+            let isInCollege = GameModel.getInstance().getHeroesModel().isHeroInCollege(heroId);
+            for (let hd2 of heroTop5.GetArr()) {
+                if (heroId == hd2.getDyncID()) {
+                    isTop5 = true;
+                    break;
+                }
+            }
+            if (!isTop5 && !isInCollege) {
+                this._allHeroList.set(heroId, hd);
+            }
+        });
+
         this._initBottomHeros();
     }
+
 
     onDestroy() {
         super.onDestroy();
@@ -136,11 +155,11 @@ export class PopCollegeSelectHero extends PopBase {
     }
 
     private _onSaveBtnCallBack() {
-        if(this._heroId == 0 ){
+        if (this._heroId == 0) {
             PopMgr.getInstance().popupPrompt(ValueMgr.getInstance().getLanguageString("UI_HeroCollegeNoSelectHero"));
-            return ;
+            return;
         }
-        
+
         if (this._heroId != 0 && this._pos != 0) {
             MsgMgr.getInstance().getMsgHeroCollege().requestSetCollegeHero(this._heroId, true, this._pos);
             let msg = new Msg.SetCollegeHeroR({ heroId: this._heroId, isAdd: true, pos: this._pos });
@@ -162,17 +181,17 @@ export class PopCollegeSelectHero extends PopBase {
             this.scroll_HeroView.content.removeAllChildren()
         }
 
-        resources.load('prefabs_ui/main/hero_selecticon', (err: any, res: any) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_selecticon', (err: any, res: any) => {
             this._bottomHeroItemList.clear();
             let k = new Array<[number, Node]>();     //排序存储对象
             for (let heroData of this._allHeroList.values()) {
-                let heroIcon = instantiate(res) as Node;
+                let heroIcon = instantiate(res as Prefab) as Node;
                 this.scroll_HeroView.content?.addChild(heroIcon);
                 let heroSelectScript = heroIcon.getComponent("HeroSelectIcon") as HeroSelectIcon;
                 let itemType = this._getItemType(heroData);
                 heroSelectScript.setItemType(itemType);
-                heroSelectScript.setSelectData(heroData as HeroData, (heroData: HeroData, itemType: number) => {                    
-                    this._heroSelect(heroData.getDyncID() );
+                heroSelectScript.setSelectData(heroData as HeroData, (heroData: HeroData, itemType: number) => {
+                    this._heroSelect(heroData.getDyncID());
                 });
 
                 let sortIndex_1: number = heroData.getLevel() * 10000 + heroData.getStar() * 1000 + heroData.getCamp() * 10 + heroData.getClasses();
@@ -190,21 +209,21 @@ export class PopCollegeSelectHero extends PopBase {
 
     //点选英雄
     private _heroSelect(heroId: number) {
-        let isSelect= false;
-        if(this._heroId==0){
-            isSelect= true;
-            this._heroId= heroId;
-        }else{            
-            if(this._heroId != heroId ){
-                isSelect= true;
-                this._heroId= heroId;
-            }else{
-                isSelect= false;
-                this._heroId= 0;
+        let isSelect = false;
+        if (this._heroId == 0) {
+            isSelect = true;
+            this._heroId = heroId;
+        } else {
+            if (this._heroId != heroId) {
+                isSelect = true;
+                this._heroId = heroId;
+            } else {
+                isSelect = false;
+                this._heroId = 0;
             }
         }
         // this._getBottomHeroItemScript(heroId)?.setSelect(isSelect);   
-        this._frushButtonHero();     
+        this._frushButtonHero();
     }
 
     //根据herodata获取拥有英雄代码
@@ -212,7 +231,7 @@ export class PopCollegeSelectHero extends PopBase {
         for (let value of this._bottomHeroItemList.values()) {
             let script = value.getComponent("HeroSelectIcon") as HeroSelectIcon;
             let scriptHeroInfo = script.getCurHeroInfo() as HeroData;
-            if (scriptHeroInfo.getDyncID() == heroId ) {
+            if (scriptHeroInfo.getDyncID() == heroId) {
                 return script;
             }
         }

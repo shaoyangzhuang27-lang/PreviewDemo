@@ -587,9 +587,9 @@ export class HeroesModel extends BaseModel {
     public setCollegeHeroData(heroIDInCollege:{[k: string]: number;}, collegeBlockTimestamps: {[k: string]: number;}){
         this._heroIdInCollegeMap.clear();
         let tmp = Object.keys(heroIDInCollege);
-        tmp.forEach(key => {
-            this._heroIdInCollegeMap.set(Number(key), heroIDInCollege[key]);
-            let hd = this._gameModel.getHeroesModel().getHeroInfoByDyncID(Number(key));
+        tmp.forEach(pos => {
+            this._heroIdInCollegeMap.set(Number(pos), heroIDInCollege[pos]);
+            let hd = this._gameModel.getHeroesModel().getHeroInfoByDyncID(Number(pos));
             if (hd)
                 hd.calcTalentSkillProperty();
         });

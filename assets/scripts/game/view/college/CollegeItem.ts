@@ -2,15 +2,16 @@
  * @Description: 学院界面内待选择英雄槽位
  * @Author: 徐涛
  * @Date: 2021-03-30 16:03:26
- * @LastEditTime: 2021-04-06 11:07:40
+ * @LastEditTime: 2021-04-06 16:35:25
  */
-import { _decorator, Component, Node, Sprite, Label, Button, SpriteFrame, resources, math, UITransform, EventTouch, Vec3, instantiate } from 'cc';
+import { _decorator, Component, Node, Sprite, Label, Button, SpriteFrame, resources, math, UITransform, EventTouch, Vec3, instantiate, Prefab } from 'cc';
 const { ccclass, property } = _decorator;
 import { HeroData } from '../../model/datas/HeroData';
 import { GameModel } from "../../model/GameModel";
 import { HeroIcon } from '../hero/HeroIcon';
 import { PopMgr } from '../../control/PopMgr';
 import { XFuns } from '../../model/const/XFuns';
+import { ResMgr } from '../../control/ResMgr';
 
 @ccclass('CollegeItem')
 export class CollegeItem extends Component {
@@ -40,19 +41,19 @@ export class CollegeItem extends Component {
     private _isShowCD: boolean = false;
     private _isLocked: boolean = true;
     private _heroId: number = 0;
-    private _pos:number= 0;
+    private _pos: number = 0;
     private _isShowTip: boolean = false;
 
-    public get heroId(){
+    public get heroId() {
         return this._heroId;
     }
-    public get isLocked(){
+    public get isLocked() {
         return this._isLocked;
     }
-    public get pos(){
+    public get pos() {
         return this._pos;
     }
-    public get isShowCD(){
+    public get isShowCD() {
         return this._isShowCD;
     }
 
@@ -71,7 +72,7 @@ export class CollegeItem extends Component {
      * @param {boolean} isLocked 是否解锁槽位标志
      * @param {boolean} isShowTip 是否显示槽位提醒标志
      */
-    public initHeroData(pos:number,heroId: number = 0, isLocked: boolean = false, isShowCD: boolean = false, isShowTip: boolean = false) {        
+    public initHeroData(pos: number, heroId: number = 0, isLocked: boolean = false, isShowCD: boolean = false, isShowTip: boolean = false) {
         this._pos = pos;
         this.setHeroIcon(heroId);
         this.setShowCD(isShowCD);
@@ -79,16 +80,16 @@ export class CollegeItem extends Component {
         this.setShowTip(isShowTip);
     }
 
-    public updateHeroData(heroId: number = 0, isLocked: boolean = false, isShowCD: boolean = false, isShowTip: boolean = false) {        
+    public updateHeroData(heroId: number = 0, isLocked: boolean = false, isShowCD: boolean = false, isShowTip: boolean = false) {
         this.setHeroIcon(heroId, true);
         this.setShowCD(isShowCD, true);
         this.setLocked(isLocked, true);
         this.setShowTip(isShowTip, true);
-    }    
+    }
 
-    public setShowCD(isShowCD: boolean, isUpdate= false) {
-        if(isUpdate && isShowCD==this._isShowCD){
-            return ;
+    public setShowCD(isShowCD: boolean, isUpdate = false) {
+        if (isUpdate && isShowCD == this._isShowCD) {
+            return;
         }
         this._isShowCD = isShowCD;
         if (isShowCD) {
@@ -114,22 +115,22 @@ export class CollegeItem extends Component {
                 this.lab_txt.string = "冷却中\n00:00:0" + second.toString();
             } else {
                 this.lab_txt.node.active = false;
-                this._isShowCD= false;
+                this._isShowCD = false;
             }
         }
     }
 
-    public setShowTip(isShowTip: boolean, isUpdate= false) {
-        if(isUpdate && isShowTip==this._isShowTip){
-            return ;
+    public setShowTip(isShowTip: boolean, isUpdate = false) {
+        if (isUpdate && isShowTip == this._isShowTip) {
+            return;
         }
         this._isShowTip = isShowTip;
         this.img_tip.node.active = isShowTip;
     }
 
-    public setLocked(isLocked: boolean, isUpdate= false) {
-        if(isUpdate && isLocked==this._isLocked){
-            return ;
+    public setLocked(isLocked: boolean, isUpdate = false) {
+        if (isUpdate && isLocked == this._isLocked) {
+            return;
         }
         this._isLocked = isLocked;
         let imgPath = "ui/college/阵型调整_出战阵容英雄背景/spriteFrame";
@@ -139,9 +140,9 @@ export class CollegeItem extends Component {
         XFuns.ReplaceSpriteFrame(imgPath, this.img_bg);
     }
 
-    public setHeroIcon(heroId: number, isUpdate= false) {
-        if(isUpdate && heroId==this._heroId){
-            return ;
+    public setHeroIcon(heroId: number, isUpdate = false) {
+        if (isUpdate && heroId == this._heroId) {
+            return;
         }
         this._heroId = heroId;
         if (heroId == 0) {
@@ -166,14 +167,14 @@ export class CollegeItem extends Component {
             } else {
                 this._heroIcon = null;
                 let target = this;
-                resources.load('prefabs_ui/main/hero_icon', (err: any, res: any) => {
-                    let heroIcon = instantiate(res) as Node;
+                ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err: any, res: any) => {
+                    let heroIcon = instantiate(res as Prefab) as Node;
                     let script = heroIcon.getComponent("HeroIcon") as HeroIcon;
                     script.setHeroData(heroData as HeroData);
                     // script.setBtnCallBack((_data: HeroData) => {
                     //     target._openCollegeUnLoadView(_data);
                     // });
-                    this._heroIcon= script;
+                    this._heroIcon = script;
                     this.node.addChild(heroIcon);
                     heroIcon.setScale(new Vec3(0.7, 0.7, 1));
                 });
@@ -198,18 +199,18 @@ export class CollegeItem extends Component {
     // Item点击默认回调显示开启卡槽窗或选择放入书院的英雄窗       
     private _setBtnCallBack() {
         this.img_bg.addComponent(Button);
-        let target = this;        
+        let target = this;
         this.img_bg.node.on(Node.EventType.TOUCH_END, (event: EventTouch) => {
-            if(target.isShowCD){
-                return ;
+            if (target.isShowCD) {
+                return;
             }
             if (target._isLocked) {
                 PopMgr.getInstance().popHeroCollegeNoticeView();
-            } else {                
-                if(!target._heroData){
-                    PopMgr.getInstance().popHeroCollegeSelectHeroView(target._pos);                    
-                }else{
-                    PopMgr.getInstance().popHeroCollegeUnloadHeroView(target._heroData.getDyncID(),  target._pos);                    
+            } else {
+                if (!target._heroData) {
+                    PopMgr.getInstance().popHeroCollegeSelectHeroView(target._pos);
+                } else {
+                    PopMgr.getInstance().popHeroCollegeUnloadHeroView(target._heroData.getDyncID(), target._pos);
                 }
             }
         }, this);

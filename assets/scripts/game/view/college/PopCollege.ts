@@ -2,9 +2,9 @@
  * @Description: 英雄书院
  * @Author: 徐涛
  * @Date: 2021-03-30 19:49:03
- * @LastEditTime: 2021-04-06 14:06:12
+ * @LastEditTime: 2021-04-06 20:00:12
  */
-import { _decorator, Node, Label, resources, instantiate, ScrollView, Vec3, UITransform, math } from 'cc';
+import { _decorator, Node, Label, resources, instantiate, ScrollView, Vec3, UITransform, math, Prefab } from 'cc';
 const { ccclass, property } = _decorator;
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
@@ -16,6 +16,7 @@ import { ValueMgr } from "../../model/ValueMgr";
 import { XFuns } from '../../model/const/XFuns';
 import { XShare } from '../../model/const/XShare';
 import { CollegeItem } from './CollegeItem';
+import { ResMgr } from '../../control/ResMgr';
 
 @ccclass('PopCollege')
 export class PopCollege extends PopBase {
@@ -44,7 +45,7 @@ export class PopCollege extends PopBase {
 
     @property({ type: ScrollView, displayName: "英雄滚动视图组件" })
     public scroll_HeroView: ScrollView = null as unknown as ScrollView;
-    
+
     //学院英雄items
     private _bottomHeroItemList: Map<number, CollegeItem> = new Map<number, CollegeItem>();
 
@@ -67,15 +68,15 @@ export class PopCollege extends PopBase {
     start() {
         super.start();
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_set_college_hero, this._notifySetCollegeHeroHandle, this);
-        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_ui_set_college_hero, this._notifyUISetCollegeHeroHandle, this);        
-        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_open_college_block, this._notifyOpenCollegeBlockHandle, this);        
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_ui_set_college_hero, this._notifyUISetCollegeHeroHandle, this);
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_open_college_block, this._notifyOpenCollegeBlockHandle, this);
         this._initView();
     }
 
     onDestroy() {
         super.onDestroy();
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_set_college_hero, this._notifySetCollegeHeroHandle, this);
-        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_ui_set_college_hero, this._notifyUISetCollegeHeroHandle, this);        
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_ui_set_college_hero, this._notifyUISetCollegeHeroHandle, this);
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_open_college_block, this._notifyOpenCollegeBlockHandle, this);
     }
 
@@ -88,23 +89,23 @@ export class PopCollege extends PopBase {
         if (msg.err == Msg.TErrorCode.ERR_OK) {
             this._refreshCollegeMoney();
             //刷新槽位数
-            this._refreshSlotNum();            
+            this._refreshSlotNum();
             //刷新英雄列表
             this._refreshCells();
             PopMgr.getInstance().popupPrompt(ValueMgr.getInstance().getLanguageString("UI_UnlockPetSuccess"));
         }
     }
 
-    private _notifyUISetCollegeHeroHandle(data: any= null){
-        if(!data){
-            return ;
+    private _notifyUISetCollegeHeroHandle(data: any = null) {
+        if (!data) {
+            return;
         }
 
-        let msg= data as Msg.SetCollegeHeroR;
-        if ( (msg.pos!=0 && msg.isAdd && msg.heroId !=0) ||(msg.pos!=0 && !msg.isAdd && msg.heroId !=0) ){
-            this._heroId= msg.heroId;   
-            this._isAdd= msg.isAdd;
-            this._pos= msg.pos;
+        let msg = data as Msg.SetCollegeHeroR;
+        if ((msg.pos != 0 && msg.isAdd && msg.heroId != 0) || (msg.pos != 0 && !msg.isAdd && msg.heroId != 0)) {
+            this._heroId = msg.heroId;
+            this._isAdd = msg.isAdd;
+            this._pos = msg.pos;
         }
     }
 
@@ -128,29 +129,29 @@ export class PopCollege extends PopBase {
     }
 
     private _refreshCells() {
-        let index=0;
-        let all_open_solt= GameModel.getInstance().getHeroesModel().getCollegeUnlockBlockNum();
+        let index = 0;
+        let all_open_solt = GameModel.getInstance().getHeroesModel().getCollegeUnlockBlockNum();
         let keys = GameModel.getInstance().getHeroesModel().heroIdInCollegeMap.keys();
         let heroIDInCollegeCount = GameModel.getInstance().getHeroesModel().getHeroIDInCollegeCount();
-        this._bottomHeroItemList.forEach((collegeItem, pos) => {              
-            let isLocked= collegeItem.isLocked;
-            if(index < all_open_solt){
-                isLocked= false;//开启对应格子
+        this._bottomHeroItemList.forEach((collegeItem, pos) => {
+            let isLocked = collegeItem.isLocked;
+            if (index < all_open_solt) {
+                isLocked = false;//开启对应格子
             }
-            let isShowTip = false;               
+            let isShowTip = false;
             let isShowCD = false;
-            let heroId = collegeItem.heroId; 
-            let isHasInCollege= GameModel.getInstance().getHeroesModel().heroIdInCollegeMap.has(heroId);                
-            if(heroId >0 && !isHasInCollege && heroId== this._heroId && !this._isAdd && this._pos== pos){
-                heroId= 0; //卸下 对应英雄
-                isShowCD= true;
-            }else if(heroId==0 && pos== this._pos && this._isAdd && this._heroId>0 && 
-                GameModel.getInstance().getHeroesModel().heroIdInCollegeMap.has(this._heroId) ){
-                heroId= this._heroId; //设置增加对应英雄
-            }                         
-            collegeItem.updateHeroData(heroId, isLocked, isShowCD, isShowTip);            
-            index +=1;
-        });    
+            let heroId = collegeItem.heroId;
+            let isHasInCollege = GameModel.getInstance().getHeroesModel().heroIdInCollegeMap.has(heroId);
+            if (heroId > 0 && !isHasInCollege && heroId == this._heroId && !this._isAdd && this._pos == pos) {
+                heroId = 0; //卸下 对应英雄
+                isShowCD = true;
+            } else if (heroId == 0 && pos == this._pos && this._isAdd && this._heroId > 0 &&
+                GameModel.getInstance().getHeroesModel().heroIdInCollegeMap.has(this._heroId)) {
+                heroId = this._heroId; //设置增加对应英雄
+            }
+            collegeItem.updateHeroData(heroId, isLocked, isShowCD, isShowTip);
+            index += 1;
+        });
     }
 
     //说明界面
@@ -162,18 +163,26 @@ export class PopCollege extends PopBase {
         });
     }
 
+    
     private _initView() {
         this._heroId = 0;
         this._pos = 0;
         this._refreshCollegeMoney();
 
         let heroTop5 = GameModel.getInstance().getHeroesModel().heroesTop5;
-        resources.load('prefabs_ui/main/hero_model', (err: any, res: any) => {
+        // let node = new Node("model")
+        // node.parent = this.window
+        // node.layer = this.window.layer
+
+        // let hero = node.addComponent(HeroModel)
+        // hero.updateByHeroPerfabPath("hero_zhangfei")
+
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_model', (err: any, res: any) => {
             let p = instantiate(res);
             if (this._heroModelArray.length < heroTop5.Count) {
                 for (let index = this._heroModelArray.length; index < heroTop5.Count; index++) {
                     let model = p.getComponent("hero_model") as HeroModel;
-                    if(model){
+                    if (model) {
                         this.window.addChild(model.node);
                         this._heroModelArray.push(model);
                     }
@@ -198,12 +207,12 @@ export class PopCollege extends PopBase {
                 }
             }
         });
-        
+
 
         for (let index = 0; index < this._heroLvtxtArray.length; index++) {
             if (heroTop5.Get(index)) {
                 this._heroLvtxtArray[index].string = "Lv." + heroTop5.Get(index).level;
-            }else{
+            } else {
                 this._heroLvtxtArray[index].string = "";
             }
         }
@@ -221,14 +230,14 @@ export class PopCollege extends PopBase {
             this.scroll_HeroView.content.removeAllChildren();
         }
 
-        resources.load('prefabs_ui/college/college_item', (err: any, res: any) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/college/college_item', (err: any, res: any) => {
             this._bottomHeroItemList.clear();
             let keys = GameModel.getInstance().getHeroesModel().heroIdInCollegeMap.keys();
             let unlockBlockNum = GameModel.getInstance().getHeroesModel().getCollegeUnlockBlockNum();
             let heroIDInCollegeCount = GameModel.getInstance().getHeroesModel().getHeroIDInCollegeCount();
-            let isFirstLocked= true;
+            let isFirstLocked = true;
             for (let index = 0; index < XShare.getInstance().KCollegeBlockMaxNum; index++) {
-                let node = instantiate(res) as Node;
+                let node = instantiate(res as Prefab) as Node;
                 this.scroll_HeroView.content?.addChild(node);
 
                 let collegeItem = node.getComponent("CollegeItem") as CollegeItem;
@@ -239,18 +248,18 @@ export class PopCollege extends PopBase {
                 // 1.符文水晶足够可以解锁 2.已解锁的格子还空着
                 let isCanUnLock = false;//todo
                 if (isLocked && isCanUnLock && isFirstLocked) {
-                    isShowTip = true;       
+                    isShowTip = true;
                 }
                 else if (!isLocked && index >= heroIDInCollegeCount) {
                     isShowTip = true;
                 }
-                isFirstLocked= false;
-                let pos= index+1;
-                
-                GameModel.getInstance().getHeroesModel().heroIdInCollegeMap.forEach( (_pos, _heroId, _m)=>{
-                    if(pos == _pos){                  
-                        heroId= _heroId;    
-                    } 
+                isFirstLocked = false;
+                let pos = index + 1;
+
+                GameModel.getInstance().getHeroesModel().heroIdInCollegeMap.forEach((_pos, _heroId, _m) => {
+                    if (pos == _pos) {
+                        heroId = _heroId;
+                    }
                 });
                 collegeItem.initHeroData(pos, heroId, isLocked, isShowCD, isShowTip);
                 this._bottomHeroItemList.set(pos, collegeItem);

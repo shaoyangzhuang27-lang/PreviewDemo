@@ -2,9 +2,9 @@
  * @Description: 英雄书院解锁消耗注意弹窗
  * @Author: 徐涛
  * @Date: 2021-04-01 16:04:23
- * @LastEditTime: 2021-04-01 20:28:57
+ * @LastEditTime: 2021-04-06 17:25:23
  */
-import { _decorator, Node, Label, resources, instantiate, ScrollView, Vec3, UITransform, math, Layout } from 'cc';
+import { _decorator, Node, Label, resources, instantiate, ScrollView, Vec3, UITransform, math, Layout, Prefab } from 'cc';
 const { ccclass, property } = _decorator;
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
@@ -18,6 +18,7 @@ import { XShare } from '../../model/const/XShare';
 import { CollegeItem } from './CollegeItem';
 import { CollegeCostItem } from './CollegeCostItem';
 import { MsgMgr } from '../../control/MsgMgr';
+import { ResMgr } from '../../control/ResMgr';
 
 @ccclass('PopCollegeNotice')
 export class PopCollegeNotice extends PopBase {
@@ -48,11 +49,11 @@ export class PopCollegeNotice extends PopBase {
     }
 
     onDestroy() {
-        super.onDestroy();        
+        super.onDestroy();
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_open_college_block, this._notifyOpenCollegeHeroHandle, this);
     }
 
-    private _notifyOpenCollegeHeroHandle(data:any = null){
+    private _notifyOpenCollegeHeroHandle(data: any = null) {
         if (!data) {
             return;
         }
@@ -67,11 +68,11 @@ export class PopCollegeNotice extends PopBase {
     private _submitHandle() {
         let unlockCollegeMoney = XShare.getInstance().GetCollegeMoneyConsume(GameModel.getInstance().getHeroesModel().getCollegeUnlockBlockNum() + 1);
         let hasCollegeMoney = GameModel.getInstance().getPlayerModel().getPlayerInfo().CollegeMoney;
-        if(!this._isUseVRmb && hasCollegeMoney< unlockCollegeMoney){
+        if (!this._isUseVRmb && hasCollegeMoney < unlockCollegeMoney) {
             PopMgr.getInstance().popupPrompt(ValueMgr.getInstance().getLanguageString("UI_CollegeMoneyInsufficient"));
-            return ;
+            return;
         }
-                
+
         MsgMgr.getInstance().getMsgHeroCollege().requestOpenCollegeBlock(this._isUseVRmb);
     }
 
@@ -81,9 +82,9 @@ export class PopCollegeNotice extends PopBase {
         let unlockCollegeMoney = XShare.getInstance().GetCollegeMoneyConsume(GameModel.getInstance().getHeroesModel().getCollegeUnlockBlockNum() + 1);
         let hasCollegeMoney = GameModel.getInstance().getPlayerModel().getPlayerInfo().CollegeMoney;
         strContent = strContent.replace("{0}", unlockCollegeMoney.toString());
-        this.lab_content.string =strContent;
-        resources.load('prefabs_ui/college/college_cost_item', (err: any, res: any) => {
-            let node = instantiate(res) as Node;
+        this.lab_content.string = strContent;
+        ResMgr.getInstance().loadPrefab('prefabs_ui/college/college_cost_item', (err: any, res: any) => {
+            let node = instantiate(res as Prefab) as Node;
             this.layout_cost.node.addChild(node);
             let collegeCostItem = node.getComponent("CollegeCostItem") as CollegeCostItem;
             collegeCostItem.setData(Msg.TObjectType.EObject_CollegeMoney, hasCollegeMoney, unlockCollegeMoney);
@@ -98,9 +99,9 @@ export class PopCollegeNotice extends PopBase {
             if (curVrmb >= unlockCollegeMoney) {
                 strContent = ValueMgr.getInstance().getLanguageString("UI_HeroCollegeUnlockVrmbTips");
                 strContent = strContent.replace("{0}", consumeVrmb.toString());
-                this.lab_content.string =strContent;
-                resources.load('prefabs_ui/college/college_cost_item', (err: any, res: any) => {
-                    let node = instantiate(res) as Node;
+                this.lab_content.string = strContent;
+                ResMgr.getInstance().loadPrefab('prefabs_ui/college/college_cost_item', (err: any, res: any) => {
+                    let node = instantiate(res as Prefab) as Node;
                     this.layout_cost.node.addChild(node);
                     let collegeCostItem = node.getComponent("CollegeCostItem") as CollegeCostItem;
                     collegeCostItem.setData(Msg.TObjectType.EObject_VRmb, curVrmb, consumeVrmb);
