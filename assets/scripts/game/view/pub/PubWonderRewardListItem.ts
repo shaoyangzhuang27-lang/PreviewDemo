@@ -138,6 +138,7 @@ export class PubWonderRewardListItem extends Component {
             let num = data.awardNum;
             // 设置装备点击回调
             let script = equipItem.getComponent("ItemEquipCell") as ItemEquipCell;
+            script.setItemUseType(data.awardType);
             script.setItemType(id, num, ItemEquipType.goods, 
                 ()=>{
                     console.log("道具")
