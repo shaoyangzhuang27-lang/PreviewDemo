@@ -3,13 +3,16 @@
  * @author 郭刚
  * @version 1.0.0,2021.3.19
  */
-import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources,ProgressBar,instantiate, CCInteger } from 'cc';
+import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources,ProgressBar,instantiate, CCInteger ,Vec3} from 'cc';
 const { ccclass, property } = _decorator;
 import { PopMgr } from '../../control/PopMgr';
 import { XConsts } from '../../model/const/XConsts';
 import { XFuns } from '../../model/const/XFuns';
 import { GameModel } from '../../model/GameModel';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
+import { ResMgr } from '../../control/ResMgr';
+import { HeroData } from '../../model/datas/HeroData';
+
 
 @ccclass('ItemMultiReward')
 export class ItemMultiReward extends Component {
@@ -45,6 +48,7 @@ export class ItemMultiReward extends Component {
     @property({type :  Node})
     public starlist:Node[] = [];
 
+    private _arrStarPos : Array<Vec3> = [];
 
     private _propInfo : XStruct.prop_info.IRecord = {
         nType : 0,
@@ -75,31 +79,61 @@ export class ItemMultiReward extends Component {
     _resourceLoad (path:string | null | undefined,obj:any)
     {
       
-            path && resources.load(path,SpriteFrame,(err:any,spriteFrame:SpriteFrame) =>
-            {
-                obj.active = true;
-                let sprite = obj.getComponent(Sprite) as Sprite;
-                sprite.spriteFrame = spriteFrame;
-            });
+        path && ResMgr.getInstance().loadSpriteFrame(path,(err: Error | null,spriteFrame:SpriteFrame | null) =>
+        {
+            obj.active = true;
+            let sprite = obj.getComponent(Sprite) as Sprite;
+            sprite.spriteFrame = spriteFrame;
+        },"ItemMultiReward");
         
+    }
+
+    private _initStarPos()
+    {
+        for (let index = 0; index < this.starlist.length; index++) {
+            var pos =  this.starlist[index].getPosition();
+            this._arrStarPos.push(instantiate(pos));
+        }
     }
 
     private _setStar(star:number)
     {
+        this._initStarPos();
+
+        let starNameList = ["星星初级","星星中级","星星高级"]
+        let grade:number = Math.ceil(star/5) - 1;
+        let yu:number = (star - 1) % 5 + 1;
+
+        let starName = starNameList[grade];
+        let starPath = "ui/common/icon/" + starName + "/spriteFrame"
         for (let index = 0; index < this.starlist.length; index++) {
-            if(index > star-1)
+            if(index >= yu && yu != 0)
             {
                 this.starlist[index].active = false;
             }
             else{
                 this.starlist[index].active = true;
-                if(star % 2 == 0)
-                {
-                   var pos =  this.starlist[index].getPosition();
-                   this.starlist[index].setPosition(pos.x + 7,pos.y);
-                }
-            } 
+                this._reloadSprFram(this.starlist[index], starPath);
+            }
         }
+        let firstid = Number(this._propInfo.nPropId);
+        let id1st = HeroData.getInitialStarByID(firstid);
+        let frameName:string = XConsts.GetQualityBgByStar(id1st);
+        if(firstid == 5)    //传奇英雄、主角才需要更换外框
+        {
+            frameName = XConsts.GetQualityBgByStar(star);            
+        }
+        let framePath:string = "ui/common/icon/" + frameName + "/spriteFrame"
+        this._resourceLoad(framePath,this.btn_frame);
+    }
+
+    private _reloadSprFram(objNode: Node, path: string) : void {
+        ResMgr.getInstance().loadSpriteFrame(path, (err,spriteFrame:SpriteFrame | null) => {
+            if(!err) {
+                let sprite = objNode.getComponent(Sprite) as Sprite;
+                sprite.spriteFrame = spriteFrame;
+            }
+        },"ItemMultiReward");   
     }
 
 

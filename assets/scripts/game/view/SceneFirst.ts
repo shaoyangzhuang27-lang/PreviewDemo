@@ -66,7 +66,7 @@ export class SceneFirst extends BaseScene {
         MsgMgr.getInstance().initLoginServer();
         MsgMgr.getInstance().connectLoginServer(ip);
         MsgMgr.getInstance().getMsgLogin().requestVersionCheck();
-        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_version_check,this.notifyVersionCheckHandle,this);
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_version_check,this._notifyVersionCheckHandle,this);
     }
     private _checkComplete(){
         if(this.isConfigComplete){
@@ -88,7 +88,7 @@ export class SceneFirst extends BaseScene {
             SceneMgr.getInstance().changeToLogin();
         }
     }
-    notifyVersionCheckHandle(data:any){
+    private _notifyVersionCheckHandle(data:any){
         //进入登陆界面
         this.isVersionComplete = true;
         this._checkComplete();

@@ -10,6 +10,7 @@ import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { XConsts } from "../../model/const/XConsts";
 import { HeroData } from '../../model/datas/HeroData';
 import {GameModel} from "../../model/GameModel";
+import { ResMgr } from '../../control/ResMgr';
 
 @ccclass('HeroIcon')
 export class HeroIcon extends Component {
@@ -43,6 +44,9 @@ export class HeroIcon extends Component {
     //是否显示成英雄学院的英雄，等级及等级颜色
     private _isCollege: boolean = false;
 
+    //
+    private _wonderHeartHeroId : number = 0;
+
     start () {
         // [3]
         // this.btn_frame.on(Node.EventType.TOUCH_END, this.openHeroInfoView, this);        
@@ -64,14 +68,16 @@ export class HeroIcon extends Component {
         {
             this.img_camp.active = true;
             let campIconPath:string = "ui/common/team/" + campName + "/spriteFrame";
-            resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
-            {
-                if(!err)
-                {
-                    let sprite = this.img_camp.getComponent(Sprite) as Sprite;
-                    sprite.spriteFrame = spriteFrame;
-                }
-            });            
+            // resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
+            // {
+            //     if(!err)
+            //     {
+            //         let sprite = this.img_camp.getComponent(Sprite) as Sprite;
+            //         sprite.spriteFrame = spriteFrame;
+            //     }
+            // });
+            let sprite = this.img_camp.getComponent(Sprite) as Sprite;
+            this._resourceLoad(campIconPath,sprite);         
         }
         else
         {
@@ -102,9 +108,11 @@ export class HeroIcon extends Component {
     // }
 
     //资源替换
-    private _resourceLoad (path:string,obj:any)
+    private _resourceLoad(path:string,obj:any)
     {
-        resources.load(path, (err,spriteFrame:SpriteFrame) =>
+        // let strs = path.split("/"); 
+        // let name = strs[strs.length-2];
+        ResMgr.getInstance().loadSpriteFrame(path,(err,spriteFrame:SpriteFrame | null) =>
         {
             console.log("errerrerrerrerrerrerr",err)
             if(!err)
@@ -113,15 +121,25 @@ export class HeroIcon extends Component {
                 sprite.spriteFrame = spriteFrame;
             }
         });
+        // resources.load(path, (err,spriteFrame:SpriteFrame) =>
+        // {
+        //     console.log("errerrerrerrerrerrerr",err)
+        //     if(!err)
+        //     {
+        //         let sprite = obj.getComponent(Sprite) as Sprite;
+        //         sprite.spriteFrame = spriteFrame;
+        //     }
+        // });
     }
 
     private _setStar(star:number,firstid:number = 0)
     {
-        let grade:number = Math.floor(star/5);
+        let starNameList = ["星星初级","星星中级","星星高级"]
+        let grade:number = Math.ceil(star/5) - 1;
         let yu:number = (star - 1) % 5 + 1;
 
-        let starName = ["初级星星","中级星星","高级星星"];
-        let starPath = "ui/common/icon/" + starName + "/spriteFrame";
+        let starName = starNameList[grade];
+        let starPath = "ui/common/icon/" + starName + "/spriteFrame"
 
         for (let index = 0; index < this.starlist.length; index++) {
             if(index >= yu && yu != 0)
@@ -130,6 +148,7 @@ export class HeroIcon extends Component {
             }
             else{
                 this.starlist[index].active = true;
+                this._resourceLoad(starPath,this.starlist[index]);
             }
         }
         
@@ -180,6 +199,18 @@ export class HeroIcon extends Component {
     }
 
     /**
+     * 切换当前英雄为减一星状态,融魂 回退系统使用
+     * 调用此方法前请先设置英雄数据
+     */
+    public setNewStar(star:number)
+    {
+        if(this._heroData)
+        {
+            this._setStar(star,this._heroData.getStaticID());
+        }
+    }
+
+    /**
      * 设置为某英雄
      * @param heroData 英雄数据
      * @param isCollege 显示英雄学院等级
@@ -224,8 +255,9 @@ export class HeroIcon extends Component {
      * @param id 英雄id
      * @param nType 显示类型
      */
-    public initUIHeroIconInfo(id : number,nType : number)
+    public initUIHeroIconInfo(id : number,nType : number, level : number = 0)
     {
+        this._wonderHeartHeroId = id;
         let info = GameModel.getInstance().getHeroesModel().getHeroIconInfoByHeroId(id);
         this.img_camp.active = true;
         let campIconPath:string = "ui/common/team/" + info.camp + "/spriteFrame";
@@ -254,7 +286,7 @@ export class HeroIcon extends Component {
                 this.lab_level.node.active = false;
                 break;
             case XConsts.HERO_ICON_TYPE.SummonSettle:
-                this.lab_level.string = "1"
+                this.lab_level.string = level ? String(level) : "1";
                 break;
             case XConsts.HERO_ICON_TYPE.WonderSummon :
                 this.lab_level.node.active = false;
@@ -283,5 +315,10 @@ export class HeroIcon extends Component {
             return;
         }
         this._initHeroIcon(heroinfo,level);
+    }
+
+    public getWonderHeartHeroId()
+    {
+        return this._wonderHeartHeroId || 0;
     }
 }

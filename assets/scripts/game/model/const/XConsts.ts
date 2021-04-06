@@ -40,9 +40,9 @@ export class XConsts{
     public static  OrderMainUI = 1;
     public static  OrderPopHide = 2;
     public static  OrderPopShow = 3;
-    public static  OrderTip = 3;
-    public static  OrderLoading = 4;
-    public static  OrderToash = 5;
+    public static  OrderTip = 4;
+    public static  OrderLoading = 5;
+    public static  OrderToash = 6;
 
 
     //图集名称
@@ -300,6 +300,11 @@ export class XConsts{
 
     public static PUB_UI_WONDERSUMMONEXPLAIN : string = "UI_WonderSummonExplain";  //奇迹召唤说明
     public static PUB_UI_WONDERSUMMONCONTENT : string = "UI_WonderSummonContent";  //奇迹召唤说明内容
+    public static PUB_UI_BUYWONDERSUMMON : string = "UI_BuyWonderSummon";
+    public static PUB_UI_CLICKTOCONTINUE : string = "UI_ClickToContinue";   //点击屏幕继续
+
+    
+    
 
     public static PUB_UI_WONDER_DEFAULT_HEARTHERO : number = 5051401;  //奇迹召唤默认心愿英雄
 
@@ -352,6 +357,8 @@ export class XConsts{
     public static KFragmentFrameSpriteName:string[] = new Array<string> ( "小卡框_品质随机", "小卡框_品质橙");
     public static KFragmentQualitySpriteName:string[] = new Array<string> ( "小卡框_碎片品质随机", "小卡框_碎片品质橙");
     public static KFragmentBgSpriteName:string[] = new Array<string> ( "小卡框_品质普通背景", "小卡框_品质金背景");
+    //英雄置换消耗
+    public static KClassesExchangeMiracleShard : number[] = new Array<number>(0, 0, 5, 20, 100, 500, 2000, 5000, 10000);
 
     public static KFragmentClassesName : string[] = new Array<string>("UI_OrdinaryHero","UI_SeniorHero","UI_LegendHero")
     public static POP_SUMMON_TYPE  = {

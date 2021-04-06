@@ -2,6 +2,7 @@
 import { _decorator, Node, Label ,ScrollView,resources,instantiate,Layout} from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
+// import { AvatarNode } from '../menu/AvatarNode';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopPlayerLevelUpAward')
@@ -24,10 +25,15 @@ export class PopPlayerLevelUpAward extends PopBase {
     public scroll_award:ScrollView = null as unknown as ScrollView; //奖励滚动层，支持多个奖励
 
 
+    // start () {
+    //     super.start();
+    //     this.node_head_portrait?.getComponents(AvatarNode).hideLevel();
+    // }
+
+
     public setInitData(msgData :Msg.NotifyLevelUpAward){
 
         this.lab_lv.string = "LV." +msgData.oldLevel.toString() + " -> " + "LV." +msgData.newLevel.toString();
-
 
         // msgData.vrmb
         this.scroll_award.horizontal = false;

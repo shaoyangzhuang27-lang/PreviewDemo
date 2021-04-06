@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Label, ToggleContainer, EventHandler, Toggle, sys, resources, instantiate, Vec3, ScrollView, v3, math, Widget, SystemEventType } from 'cc';
+import { _decorator, Component, Node, Label, ToggleContainer, EventHandler, Toggle, sys, resources, instantiate, Vec3, ScrollView, v3, math, Widget, SystemEventType, Prefab } from 'cc';
 const { ccclass, property } = _decorator;
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
@@ -10,6 +10,7 @@ import { PopMgr } from '../../control/PopMgr';
 import { MsgMgr } from '../../control/MsgMgr';
 import { XConsts } from "../../model/const/XConsts";
 import { XFuns } from '../../model/const/XFuns';
+import { ResMgr } from '../../control/ResMgr';
 
 @ccclass('PopBattleTeam')
 export class PopBattleTeam extends PopBase {
@@ -146,14 +147,15 @@ export class PopBattleTeam extends PopBase {
             this._selectBattleHeroList.set(value.getDyncID(), key);
         });
        
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err: Error | null, res: Prefab | null)=>{
+        // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
 
             for (let index = 0; index < this.heroPosList.length; index++) {
                 this.heroPosList[index].removeAllChildren();
             }
 
             this._formationList.forEach((value,key)=>{
-                let heroIcon = instantiate(res) as Node;
+                let heroIcon = instantiate(res as Prefab) as Node;
                 this._initTopHero(heroIcon, value);
                 this._getHeroHomeByIndex(key).addChild(heroIcon);
                 
@@ -174,11 +176,12 @@ export class PopBattleTeam extends PopBase {
             this.scroll_HeroView.content.removeAllChildren()
         }
 
-        resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_selecticon', (err:any,res:Prefab | null)=>{
+        // resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
             this._bottomHeroItemList.clear()
             let k = new Array<[number,Node]>();     //排序存储对象
             for (let heroData of this._allHeroList.values()) {
-                let heroIcon = instantiate(res) as Node;
+                let heroIcon = instantiate(res as Prefab) as Node;
                 this.scroll_HeroView.content?.addChild(heroIcon);
                 let heroSelectScript = heroIcon.getComponent("HeroSelectIcon") as HeroSelectIcon; 
                 let itemType =  this._getItemType(heroData);
@@ -374,8 +377,9 @@ export class PopBattleTeam extends PopBase {
             // console.log("点击滚动区域影响按时大多数",isSelect,heroStaticID,heroDyncID);
             let foremostHeroHomeIndex:number = this._getForemostHeroHomeIndex();
             let foremostHeroHome = this._getHeroHomeByIndex(foremostHeroHomeIndex);
-            resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
-                let heroIcon = instantiate(res) as Node;
+            ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:any,res:Prefab | null)=>{
+            // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+                let heroIcon = instantiate(res as Prefab) as Node;
                 this._initTopHero(heroIcon, heroData);
                 foremostHeroHome.addChild(heroIcon);  
             });

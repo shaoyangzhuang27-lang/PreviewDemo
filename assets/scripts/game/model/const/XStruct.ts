@@ -58,6 +58,7 @@ export namespace XStruct {
                campName : (string|null);
                classesName : (string|null);
                bg?: (string|null);
+               param : (number | null);
            }
            /** Represents a Record. */
            class Record implements IRecord {
@@ -74,6 +75,7 @@ export namespace XStruct {
                campName : string;
                classesName:string;
                bg : string;
+               param : number;
 
            }
        }

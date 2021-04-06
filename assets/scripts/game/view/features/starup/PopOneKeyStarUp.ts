@@ -4,12 +4,12 @@
  * @version 1.0.0,2021.3.16
  */
 import { _decorator,ScrollView,Widget,Button,Vec3, EventHandler, instantiate, Component, resources, Node,LabelComponent } from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { HeroData } from '../../model/datas/HeroData';
-import { GameModel } from '../../model/GameModel';
-import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { HeroIcon } from '../hero/HeroIcon';
-import { MsgMgr } from '../../control/MsgMgr';
+import { PopBase } from '../../../../core/control/PopBase';
+import { HeroData } from '../../../model/datas/HeroData';
+import { GameModel } from '../../../model/GameModel';
+import { TableName, ValueMgr } from "../../../model/ValueMgr";
+import { HeroIcon } from '../../hero/HeroIcon';
+import { MsgMgr } from '../../../control/MsgMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopOneKeyStarUp')

@@ -175,6 +175,7 @@ export class XShare{
     public KSkillTapTapParticle = "上帝技能粒子/火球";
     public KHeroPropertyToRole = 0.12;
     public KHeroResetVrmbConsume = new Array<number>(0, 0, 0, 0, 20, 20, 20, 20, 20, 20, 20, 20, 20);
+    public KHeroReturnBackConsumeVrmb = new Array<number>(0, 0, 0, 0, 0, 0, 0, 500, 1000, 2000, 3000, 4000, 5000, 5000);
     public KCopyProgressAutoDuration = 30;
     public KTrailShopRefreshCD = 72 * 60 * 60;
     public KTrailShopRefreshConsumeVrmb = 1000;

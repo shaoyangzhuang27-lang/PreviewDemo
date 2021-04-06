@@ -19,6 +19,7 @@ import { MsgOffline } from "./msg/MsgOffline";
 import { MsgHeroBagExtend } from "./msg/MsgHeroBagExtend";
 import { MsgForge } from "./msg/MsgForge";
 import { MsgDecompose } from "./msg/MsgDecompose";
+import { MsgHeroReplace } from "./msg/MsgHeroReplace";
 import { MsgHeroCollege } from "./msg/MsgHeroCollege";
 import { MsgHeroPromotion } from "./msg/MsgHeroPromotion";
 
@@ -108,8 +109,14 @@ export class MsgMgr extends MsgCore{
         this._msgs.push(this._msgHeroBagExtend)
         this._msgs.push(this._msgForge)
         this._msgs.push(this._msgDecompose);
+        this._msgs.push(this._msgHeroReplace)
     }
     //消息注册-------------------------------------------------
+    private _msgHeroReplace: MsgHeroReplace = new MsgHeroReplace(this);
+    public getMsgHeroReplace() {
+        return this._msgHeroReplace
+    }
+
     private _msgForge: MsgForge = new MsgForge(this);
     public getMsgForge() {
         return this._msgForge

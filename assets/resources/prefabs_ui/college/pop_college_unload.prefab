@@ -2471,7 +2471,9 @@
     "btn_close": {
       "__id__": 21
     },
-    "btn_cancel": null,
+    "btn_cancel": {
+      "__id__": 46
+    },
     "window": {
       "__id__": 12
     },
