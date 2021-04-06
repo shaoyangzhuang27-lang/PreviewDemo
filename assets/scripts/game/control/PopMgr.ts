@@ -42,11 +42,11 @@ import { HeroPromotion } from '../view/hero_promotion/HeroPromotion';
 import { PopBattleTeam } from '../view/pop/PopBattleTeam';
 import { PubWonderHeartHero } from "../view/pub/PubWonderHeartHero";
 // import {PubWonderSummonSettle} from "../view/pub/PubWonderSummonSettle";
-import { PopHeroReplace } from '../view/pop/PopHeroReplace';
-import { PopCollege } from '../view/college/PopCollege';
-import { PopCollegeNotice } from '../view/college/PopCollegeNotice';
-import { PopCollegeUnload } from '../view/college/PopCollegeUnload';
-import { PopCollegeSelectHero } from '../view/college/PopCollegeSelectHero';
+import { PopHeroReplace } from '../view/features/herosummon/PopHeroReplace';
+import { PopfCollege } from '../view/features/college/PopfCollege';
+import { PopCollegeNotice } from '../view/features/college/PopCollegeNotice';
+import { PopCollegeUnload } from '../view/features/college/PopCollegeUnload';
+import { PopCollegeSelectHero } from '../view/features/college/PopCollegeSelectHero';
 
 export class PopMgr extends PopCore {
     private static _instance: PopMgr = new PopMgr();
@@ -158,10 +158,10 @@ export class PopMgr extends PopCore {
      * @param 
      */
     public popHeroCollegeView(isMaskClose: boolean = true) {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/college/pop_college', (err, res) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/college/popf_college', (err, res) => {
             let p = instantiate(res as Prefab);
             this.pushFullScreen(p);
-            let script = p.getComponent("PopCollege") as PopCollege;
+            let script = p.getComponent("PopfCollege") as PopfCollege;
             script.setIsMaskClose(isMaskClose);
         });
     }
@@ -171,7 +171,7 @@ export class PopMgr extends PopCore {
      * @param 
      */
     public popHeroCollegeNoticeView(isMaskClose: boolean = true) {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/college/pop_college_notice', (err, res) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/college/pop_college_notice', (err, res) => {
             let p = instantiate(res as Prefab);
             this.pushWindow(p);
             let script = p.getComponent("PopCollegeNotice") as PopCollegeNotice;
@@ -184,7 +184,7 @@ export class PopMgr extends PopCore {
      * @param pos  英雄书院中对应格子位置
      */
     public popHeroCollegeSelectHeroView(pos: number, isMaskClose: boolean = true) {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/college/pop_college_select_hero', (err, res) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/college/pop_college_select_hero', (err, res) => {
             let p = instantiate(res as Prefab);
             this.pushWindow(p);
             let script = p.getComponent("PopCollegeSelectHero") as PopCollegeSelectHero;
@@ -199,7 +199,7 @@ export class PopMgr extends PopCore {
      * @param pos  英雄书院中对应格子位置
      */
     public popHeroCollegeUnloadHeroView(heroId: number, pos: number, isMaskClose: boolean = true) {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/college/pop_college_unload', (err, res) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/college/pop_college_unload', (err, res) => {
             let p = instantiate(res as Prefab);
             this.pushWindow(p);
             let script = p.getComponent("PopCollegeUnload") as PopCollegeUnload;
