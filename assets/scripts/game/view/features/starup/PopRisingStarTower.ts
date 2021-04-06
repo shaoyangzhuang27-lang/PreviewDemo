@@ -125,6 +125,10 @@ export class PopRisingStarTower extends PopBase {
             });
         }
 
+        if(this.btn_submit){
+            this.btn_submit.active = false;
+        }
+
         if(this.btn_risingstar){
             this.btn_risingstar.interactable = false;            //升星按钮禁用
         }
