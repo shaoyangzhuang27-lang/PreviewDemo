@@ -13,6 +13,7 @@ import { MsgMgr } from '../../control/MsgMgr';
 import { XFuns } from '../../model/const/XFuns';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { PubHeroIcon } from '../pub/PubHeroIcon';
+import { PubWonderSummon } from '../pub/PubWonderSummon';
 
 const { ccclass, property } = _decorator;
 
@@ -734,6 +735,8 @@ export class PopHeroPub extends PopBase {
                 GameModel.getInstance().getHeroPubModel().initWonderHeartHeroIdList();
                 ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_summon', (err: Error | null, res: Prefab | null)=>{
                     let p = instantiate( res as Prefab );
+                    let script = p.getComponent(PubWonderSummon) as PubWonderSummon;
+                    script.setParentWindow(this);
                     this.node_wonder?.addChild(p);
                 },"PopHeroPub");
             }

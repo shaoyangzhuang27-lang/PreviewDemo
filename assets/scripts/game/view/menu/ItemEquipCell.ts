@@ -84,6 +84,7 @@ export class ItemEquipCell extends Component {
         //数量
         let labCount:Label = this.lab_count.getComponent(Label) as Label;
         labCount.string = XFuns.FormatNumber(this._itemCount);
+        var pos = this.lab_count.getPosition();
         if(this._itemCount == 0)        //不需要显示数量时  数量设置为0
         {
             this.lab_count.active = false;
@@ -114,15 +115,17 @@ export class ItemEquipCell extends Component {
             
             if(this._objectType != Msg.TObjectType.EObject_UsableItem)
             {
-                this._itemID = this._objectType;    //不可使用道具  id就是道具类型
-                if(XShare.getInstance().KObjectQuality.has(this._objectType))
+                // this._itemID = this._objectType;    //不可使用道具  id就是道具类型
+                if(XShare.getInstance().KObjectQuality.has(this._itemID))
                 {
-                    let quality = Number(XShare.getInstance().KObjectQuality.get(this._objectType)) ;
+                    let quality = Number(XShare.getInstance().KObjectQuality.get(this._itemID)) ;
                     let qualityName:string = XConsts.KQualityBgSpriteName[quality];
                     qualityPath = "ui/common/icon/" + qualityName + "/spriteFrame";
                 }
-                let iconName:string = XConsts.KObjectIconSpriteName[this._objectType];
+                let iconName:string = XConsts.KObjectIconSpriteName[this._itemID];
                 iconPath = "ui/common/commonIcon/" + iconName + "/spriteFrame";
+
+                this.lab_count.setPosition(pos.x, pos.y - 20,pos.z);            
             }
             else{
                 let itemData:Config.item_usable.Record = ValueMgr.getInstance().getItemByField(TableName.item_usable,this._itemID) as Config.item_usable.Record;        
@@ -130,6 +133,9 @@ export class ItemEquipCell extends Component {
                 let itemUseType:number = itemData.itemType;
 
                 qualityPath = "ui/common/icon/" + qualityName + "/spriteFrame"
+
+                let iconName:string = XConsts.KObjectIconSpriteName[this._itemID];
+                iconPath = "ui/common/commonIcon/" + iconName + "/spriteFrame";
                 if(itemUseType == Msg.TUsableItemType.EUsableItemType_ObjectOffline)
                 {
                     this.img_infoBg.active = true;

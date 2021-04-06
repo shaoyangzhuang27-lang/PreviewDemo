@@ -8,6 +8,7 @@ import { ItemEquipType,ItemEquipCell } from '../menu/ItemEquipCell';
 import { ResMgr } from '../../control/ResMgr';
 import { HeroIcon } from '../hero/HeroIcon';
 import { PopMgr } from '../../control/PopMgr';
+import {PubWonderRewardList} from "./PubWonderRewardList";
 const { ccclass, property } = _decorator;
 
 @ccclass('PubWonderRewardListItem')
@@ -16,6 +17,8 @@ export class PubWonderRewardListItem extends Component {
     public node_list:Node[] = [];
 
     private _infoArray : Array<any> = [];
+
+    private _node_parent : PubWonderRewardList = null as unknown as PubWonderRewardList;
 
     start () {
         
@@ -60,6 +63,7 @@ export class PubWonderRewardListItem extends Component {
             script.setBtnCallBack( 
                 ()=>{
                     console.log("碎片");
+                    this._node_parent.setIsNeedHide(false);
                     PopMgr.getInstance().popFragmentSynthesisWindow(info,()=>{console.log("碎片合成")},true);
             });  
 
@@ -80,7 +84,8 @@ export class PubWonderRewardListItem extends Component {
             script.setItemType(id, num, ItemEquipType.equip, 
                 ()=>{
                     console.log("装备")
-                    PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.equip,false);
+                    this._node_parent.setIsNeedHide(false);
+                    PopMgr.getInstance().popEquipInfoView(id,true);
             });  
             node.addChild(equipItem);
         },"PubWonderRewardListItem")    
@@ -98,6 +103,7 @@ export class PubWonderRewardListItem extends Component {
             script.setItemType(id, num, ItemEquipType.goods, 
                 ()=>{
                     console.log("道具")
+                    this._node_parent.setIsNeedHide(false);
                     PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
             });  
             node.addChild(equipItem);
@@ -116,6 +122,7 @@ export class PubWonderRewardListItem extends Component {
             script.setItemType(id, num, ItemEquipType.goods, 
                 ()=>{
                     console.log("道具")
+                    this._node_parent.setIsNeedHide(false);
                     PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
             });  
             node.addChild(equipItem);
@@ -134,6 +141,7 @@ export class PubWonderRewardListItem extends Component {
             script.setItemType(id, num, ItemEquipType.goods, 
                 ()=>{
                     console.log("道具")
+                    this._node_parent.setIsNeedHide(false);
                     PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
             });  
             node.addChild(equipItem);
@@ -170,7 +178,8 @@ export class PubWonderRewardListItem extends Component {
                 script.setItemType(id, num, ItemEquipType.goods, 
                     ()=>{
                         console.log("点击钻石显示道具信息")
-                        PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,true);
+                        this._node_parent.setIsNeedHide(false);
+                        PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
                 });  
     
                 this.node_list[5]?.addChild(itemEquipCell);   
@@ -205,6 +214,12 @@ export class PubWonderRewardListItem extends Component {
                 }
             }
         }   
+    }
+
+
+    public setParentNode(node : PubWonderRewardList)
+    {
+        this._node_parent = node;
     }
 }
 

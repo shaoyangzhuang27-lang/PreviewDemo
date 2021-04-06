@@ -11,6 +11,7 @@ import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { HeroIcon } from '../../hero/HeroIcon';
 import { MsgMgr } from '../../../control/MsgMgr';
 import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
+import { PopMgr } from '../../../control/PopMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopOneKeyStarUp')
@@ -107,6 +108,7 @@ export class PopOneKeyStarUp extends PopBase {
 
         for (let heroData of this._copyAllHeroList.values()) {
             this._getHeroesDatas(heroData.getStaticID());
+            let firstid1 = Number((heroData.getStaticID() / 1000000).toFixed())
             for (let heroData2 of this._copyAllHeroList.values()){
                 if(this._curStarupType == 1){
                     if(heroData2.getStaticID() == this._curStarupParam
@@ -117,9 +119,11 @@ export class PopOneKeyStarUp extends PopBase {
                         }
                     }
                 }else if(this._curStarupType == 2){
+                    let firstid2 = Number((heroData2.getStaticID() / 1000000).toFixed())
                     if(heroData2.getStar() == this._curStarupParam
-                    && heroData2.getDyncID() != heroData.getDyncID() ){
-                        HeroIDs.heroIDList.push(heroData2.getDyncID());
+                    && heroData2.getDyncID() != heroData.getDyncID() 
+                    && firstid2 == firstid1){
+                        HeroIDs.heroIDList.push(heroData2.getDyncID())
                         if(HeroIDs.heroIDList.length == this._curStarupNum){
                             break;
                         }
@@ -253,5 +257,6 @@ export class PopOneKeyStarUp extends PopBase {
         }
         //发送消息
         MsgMgr.getInstance().getMsgStarUp().requestOneKeyStarUp(starUpHeroIDs);
+        PopMgr.getInstance().deleteWindow();
     }
 }

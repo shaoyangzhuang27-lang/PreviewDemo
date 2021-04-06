@@ -102,7 +102,7 @@ export class PopItemUseWin extends PopBase {
             
         }
         else{
-            let itemStrArr = GameModel.getInstance().getBagModel().getItemDescByType(this._objectType);
+            let itemStrArr = GameModel.getInstance().getBagModel().getItemDescByType(this._itemID);
             if(itemStrArr.length == 2)
             {
                 nameData = ValueMgr.getInstance().getItemByField(TableName.language_ui,itemStrArr[0]) as Config.language_ui.Record;

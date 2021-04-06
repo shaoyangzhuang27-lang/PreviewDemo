@@ -58,6 +58,7 @@ export class PubWonderRewardList extends PopBase {
                     let wonder_item = instantiate( res );
                     let script = wonder_item.getComponent(PubWonderRewardListItem);
                     script.initItemInfo(dataList[index]);
+                    script.setParentNode(this);
                     this.scroll_reward.content?.addChild(wonder_item);   
              },"PubWonderRewardList");
         }

@@ -302,6 +302,7 @@ export class BagItemModel extends BaseModel{
      * @returns 
      */
     public getItemDescByType(objType: Msg.TObjectType) {
+        console.log("zzzzzzzzzzz",this._notSellItemStingList,objType);
         if (this._notSellItemStingList.has(objType)) {
             let strArr = this._notSellItemStingList.get(objType) as Array<string>
             return strArr
