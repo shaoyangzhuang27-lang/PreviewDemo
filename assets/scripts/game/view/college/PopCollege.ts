@@ -2,7 +2,7 @@
  * @Description: 英雄书院
  * @Author: 徐涛
  * @Date: 2021-03-30 19:49:03
- * @LastEditTime: 2021-04-04 12:10:17
+ * @LastEditTime: 2021-04-06 14:06:12
  */
 import { _decorator, Node, Label, resources, instantiate, ScrollView, Vec3, UITransform, math } from 'cc';
 const { ccclass, property } = _decorator;
@@ -57,6 +57,11 @@ export class PopCollege extends PopBase {
     onLoad() {
         super.onLoad();
         this.btn_explain?.on(Node.EventType.TOUCH_END, this._explainHandle, this);
+        this._heroLvtxtArray.push(this.lab_lv_1);
+        this._heroLvtxtArray.push(this.lab_lv_2);
+        this._heroLvtxtArray.push(this.lab_lv_3);
+        this._heroLvtxtArray.push(this.lab_lv_4);
+        this._heroLvtxtArray.push(this.lab_lv_5);
     }
 
     start() {
@@ -183,7 +188,7 @@ export class PopCollege extends PopBase {
 
                 if (heroTop5.Get(index)) {
                     // this._heroModelArray[index].updateByHeroPerfabPath("");
-                    this._heroLvtxtArray[index].string = "Lv." + heroTop5.Get(index).level;
+                    // this._heroLvtxtArray[index].string = "Lv." + heroTop5.Get(index).level;
                     let pos = this._heroLvtxtArray[index].node.getPosition();
                     let nodeSize = this._heroLvtxtArray[index].node.getComponent(UITransform)?.contentSize as math.Size;
                     let posModel = new Vec3(pos);
@@ -193,6 +198,15 @@ export class PopCollege extends PopBase {
                 }
             }
         });
+        
+
+        for (let index = 0; index < this._heroLvtxtArray.length; index++) {
+            if (heroTop5.Get(index)) {
+                this._heroLvtxtArray[index].string = "Lv." + heroTop5.Get(index).level;
+            }else{
+                this._heroLvtxtArray[index].string = "";
+            }
+        }
 
         this._refreshSlotNum();
         this._initBottomHeros();

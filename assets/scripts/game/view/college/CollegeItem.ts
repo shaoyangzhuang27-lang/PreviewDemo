@@ -2,7 +2,7 @@
  * @Description: 学院界面内待选择英雄槽位
  * @Author: 徐涛
  * @Date: 2021-03-30 16:03:26
- * @LastEditTime: 2021-04-04 12:13:36
+ * @LastEditTime: 2021-04-06 11:07:40
  */
 import { _decorator, Component, Node, Sprite, Label, Button, SpriteFrame, resources, math, UITransform, EventTouch, Vec3, instantiate } from 'cc';
 const { ccclass, property } = _decorator;
@@ -114,6 +114,7 @@ export class CollegeItem extends Component {
                 this.lab_txt.string = "冷却中\n00:00:0" + second.toString();
             } else {
                 this.lab_txt.node.active = false;
+                this._isShowCD= false;
             }
         }
     }
@@ -199,9 +200,12 @@ export class CollegeItem extends Component {
         this.img_bg.addComponent(Button);
         let target = this;        
         this.img_bg.node.on(Node.EventType.TOUCH_END, (event: EventTouch) => {
+            if(target.isShowCD){
+                return ;
+            }
             if (target._isLocked) {
                 PopMgr.getInstance().popHeroCollegeNoticeView();
-            } else {
+            } else {                
                 if(!target._heroData){
                     PopMgr.getInstance().popHeroCollegeSelectHeroView(target._pos);                    
                 }else{
