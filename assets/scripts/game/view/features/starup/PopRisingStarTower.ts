@@ -312,7 +312,7 @@ export class PopRisingStarTower extends PopBase {
             let isDeleteHero = this._isDeleteHero(heroData)
             if(isDeleteHero){continue}
             if(curStarupType == 1){
-                if(curHeroData.getStaticID()  == heroData.getStaticID() 
+                if(curStarupParam  == heroData.getStaticID() 
                 && curHeroData.getDyncID() != heroData.getDyncID() ){
                     num++;
                     if(num == curStarupNum){
@@ -641,13 +641,21 @@ export class PopRisingStarTower extends PopBase {
 
             //同类型英雄
             if(this._curStarupType == 1){
+                let heroInfo5  = new Msg.HeroInfo();
+                heroInfo5.id = 5;
+                heroInfo5.staticID = this._curStarupParam;
+                heroInfo5.level = 1;
+                heroInfo5.equipOnList = [];
+                heroInfo5.tier = 0;
+                let hero = new HeroData();
+                hero.initDataByHero(heroInfo5 as Msg.HeroInfo, GameModel.getInstance());
                 resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
                     let heroIcon = instantiate(res) as Node;
                     heroIcon.scale = new Vec3(0.5,0.5,1);
                     heroIcon.addComponent(Widget);
         
                     let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
-                    script.setHeroData(HeroInfo as HeroData); 
+                    script.setHeroData(hero as HeroData); 
                     script.setLvIconVisib(false);
                     this.btn_head2.addChild(heroIcon);
                     this.maskNode2.active = true
@@ -665,7 +673,7 @@ export class PopRisingStarTower extends PopBase {
                         heroIcon.addComponent(Widget);
             
                         let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
-                        script.setHeroData(HeroInfo as HeroData); 
+                        script.setHeroData(hero as HeroData); 
                         script.setLvIconVisib(false);
                         this.btn_head3.addChild(heroIcon);
                         this.maskNode3.active = true
