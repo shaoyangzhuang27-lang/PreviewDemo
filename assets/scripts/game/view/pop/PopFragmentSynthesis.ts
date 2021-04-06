@@ -360,11 +360,9 @@ export class PopFragmentSynthesis extends PopBase {
     }
 
     public notifyFragmentSynthesisHandle ( msgData: Msg.UseFragmentA){
-        console.log("ffffffffffffff",msgData)
+        console.log("UseFragmentA",msgData)
         if (msgData.err == Msg.TErrorCode.ERR_OK) {
-            // if(msgData.summonType != Msg.TSummonType.ESummonType_Wonder)
-            // {
-            // }
+           PopMgr.getInstance().deleteWindow();
            PopMgr.getInstance().popFramgentsynthesisResult(msgData);
            console.log("ffffffffffffff0", msgData.consumeNum )
            console.log("ffffffffffffff1", msgData.fragmentType )
@@ -409,7 +407,7 @@ export class PopFragmentSynthesis extends PopBase {
         // }
        
         useFragmentR.heroNum = this._nCurSysthesisCounts;
-        console.log("pub submit",useFragmentR);
+        console.log("requestUseFragmentR data  ",useFragmentR);
         MsgMgr.getInstance().getMsgBag().requestUseFragmentR(useFragmentR);
     }
     onDestroy()

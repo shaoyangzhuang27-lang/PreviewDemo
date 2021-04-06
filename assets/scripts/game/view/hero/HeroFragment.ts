@@ -4,6 +4,7 @@ const { ccclass, property } = _decorator;
 import { PopMgr } from '../../control/PopMgr';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { ResMgr } from '../../control/ResMgr';
+import { NotifyMgr } from '../../control/NotifyMgr';
 
 @ccclass('HeroFragment')
 export class HeroFragment extends Component {
@@ -59,6 +60,7 @@ export class HeroFragment extends Component {
     }  
     
     start () {
+        this.addNotifyHandle();
         // [3]
         //英雄合成界面
       
@@ -107,9 +109,8 @@ export class HeroFragment extends Component {
 
     public setFragmentInfo(info : XStruct.fragment_synthesis_info.IRecord,isWonderSummon : boolean = false)
     {
-        this._fragmentInfo = instantiate(info);
-        this.img_camp.active = false;
-        
+        this._fragmentInfo = instantiate(info);  
+        this.img_camp.active = false; 
         console.log("vvvvvvvvvvvvv",this._fragmentInfo);
         Object.keys(this._fragmentInfo).forEach((val, idx, array) => {
             // val: 当前值
@@ -124,6 +125,111 @@ export class HeroFragment extends Component {
             
         });
 
+        this.updateFragmentInfo(this._fragmentInfo,isWonderSummon);
+        // this.img_camp.active = false;
+        // if(info.maxNum && info.curNum )
+        // {
+        //     let nPreocess = info.curNum / info.maxNum ;
+        //     if(nPreocess > 1)
+        //     {
+        //         nPreocess = 1;
+        //     }
+
+        //     let bar = this.probar_fragment.node.getChildByName("bar");
+        //     let path = nPreocess !=1 ? "ui/common/icon/" + "碎片未满进度条" + "/spriteFrame" : "ui/common/icon/" + "碎片已满进度条" + "/spriteFrame";
+        //     this._resourceLoad(path,bar);
+           
+        //     var barCompoent =  this.probar_fragment?.getComponent(ProgressBar);
+        //     if(barCompoent)
+        //     {
+        //         barCompoent.progress = nPreocess ;
+        //     }
+
+        //     var str = String(info.curNum) + "/" + String(info.maxNum);
+        //     this.lab_process_num.string = str;
+
+        //     nPreocess != 1 ? this.img_point.active = false : this.img_point.active = true;
+
+        //     this._setStar(info.star ? info.star : 0);
+
+        // }
+
+        // if(isWonderSummon)
+        // {
+
+        //     this._setStar(info.star ? info.star : 0);
+        //     this.probar_fragment.node.active = false;
+        //     this.lab_process_num.node.active = false;
+        //     this.img_point.active = false;
+        // }
+    }
+
+    public setBtnClick()
+    {
+        this.btn_frame.on(Node.EventType.TOUCH_END, this._onClickIcon, this);        
+    }
+
+
+    public addNotifyHandle()
+    {
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_bag_fragment_synthesis,this.notifyFragmentSynthesisHandle,this);
+    }
+
+    public removeNotifyHandle()
+    {
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_bag_fragment_synthesis,this.notifyFragmentSynthesisHandle,this);
+    }
+    
+
+
+    public notifyFragmentSynthesisHandle ( msgData: Msg.UseFragmentA){
+        console.log("UseFragmentA",msgData)
+        if (msgData.err == Msg.TErrorCode.ERR_OK) {
+            let isExeNode = false;
+            if(this._fragmentInfo.type == msgData.fragmentType)
+            {
+                if(this._fragmentInfo.type == Msg.TFragmentType.EFragmentType_Random)
+                {
+                    isExeNode = (this._fragmentInfo.star == msgData.star) ;
+                }
+                else if(this._fragmentInfo.type == Msg.TFragmentType.EFragmentType_CampRandom)
+                {
+                    isExeNode = (this._fragmentInfo.param == msgData.param ) && (this._fragmentInfo.star == msgData.star);
+                    
+                }
+                else if(this._fragmentInfo.type == Msg.TFragmentType.EFragmentType_ClassesRandom)
+                {
+                    isExeNode = (this._fragmentInfo.param == msgData.param ) && (this._fragmentInfo.star == msgData.star);
+                    
+                }
+                else if(this._fragmentInfo.type == Msg.TFragmentType.EFragmentType_Hero)
+                {
+                    isExeNode = (this._fragmentInfo.param == msgData.param);
+                }
+            }
+
+           if(isExeNode)
+           {
+                var nCurNum = this._fragmentInfo.curNum ? (this._fragmentInfo.curNum - msgData.consumeNum) : 0;
+                if(nCurNum > 0)
+                {
+                    this._fragmentInfo.curNum = nCurNum;
+                    this.updateFragmentInfo(this._fragmentInfo)
+                }
+                else{
+                    this.node.destroy();    
+                }
+                console.log("gggggggggggggggggggggg");
+           }
+        }
+        else
+        {
+            //此处消息错误处理 
+        }
+    }
+
+    public updateFragmentInfo(info : XStruct.fragment_synthesis_info.IRecord,isWonderSummon : boolean = false)
+    {
         if(info.maxNum && info.curNum )
         {
             let nPreocess = info.curNum / info.maxNum ;
@@ -161,20 +267,11 @@ export class HeroFragment extends Component {
         }
     }
 
-    public setBtnClick()
+
+    onDestroy()
     {
-        this.btn_frame.on(Node.EventType.TOUCH_END, this._onClickIcon, this);        
+        this.removeNotifyHandle();
     }
-
-
-    
-    // set FragmentInfo(info : XStruct.fragment_synthesis_info.IRecord)
-    // {
-
-    // }
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
 }
 
 /**

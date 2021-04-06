@@ -79,7 +79,7 @@ export class PopSummonSettle extends PopBase {
         this.btn_summon.node.on(Node.EventType.TOUCH_END, this._onBtnSummonClick, this);
         this.btn_sure.on(Node.EventType.TOUCH_END, this._onBtnSureClick, this);
         // this._initStarPos();
-        this.initUI();
+        //this.initUI();
 
         if(this._popWindowType ==XConsts.POP_SUMMON_TYPE.HeroPub)
         {
@@ -126,7 +126,7 @@ export class PopSummonSettle extends PopBase {
             console.log("summonsettle diamond", GameModel.getInstance().getHeroPubModel().getPlayerDiamondCounts());
 
             this.initDataFromMsgData(msgData,this._popWindowType);
-            this.initUI();
+            // this.initUI();
         }
         else
         {
@@ -206,33 +206,29 @@ export class PopSummonSettle extends PopBase {
         }
     }
 
-    public initUI()
+    public updateScrollView()
     {
         
-
         if(this.scroll_heroicon_view.content)
         {
             this.scroll_heroicon_view.content.removeAllChildren()
         }
-
-        // console.log("hhhhhhhhhhh",this._HeroList);
-        // console.log("ffffffffffff",this._HeroList.length);
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:Error | null,res:Prefab | null)=>{
                 for(var i = 0; i < this._HeroList.length; i++)
                 {
-                    let reclineup_item = instantiate( res );
-                    let script = reclineup_item.getComponent(HeroIcon);
+                    let reclineup_item = instantiate( res  as  Prefab);
+                    let script = reclineup_item.getComponent(HeroIcon) as HeroIcon;
                     reclineup_item.scale = new Vec3(0.75,0.75,1);
                     let subWidget = reclineup_item.getComponent(UITransform) as UITransform;
                     subWidget.contentSize = new Size(113,113);
-                    script.initUIHeroIconInfo(this._HeroList[i].staticID,this._popWindowType);
+                    script.initUIHeroIconInfo(this._HeroList[i].staticID as number,this._popWindowType,this._HeroList[i].level as number);
                     this.scroll_heroicon_view.content?.addChild(reclineup_item);
                     if(i ==0)
                     {
                         this.initHeroModelInfo(this._HeroList[0].staticID);
                     }
                 }    
-        });
+        },"PopSummonSettle");
     }
     
 
@@ -435,16 +431,9 @@ export class PopSummonSettle extends PopBase {
                 case Msg.TSummonConsumeType.ESummonConsumeType_FriendGift:
                     playerModel.consumeObjectByNum(Msg.TObjectType.EObject_FriendGift, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
                     break; 
-                    //奇迹召唤不在这里显示
-                // case Msg.TSummonConsumeType.ESummonConsumeType_Wonder:
-                //     playerModel.consumeObjectByNum(Msg.TObjectType.EObject_WonderGem, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
-                //     playerModel.updateWonderTimes(msgData.summonScore); 
-                //     NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
-                //     break;
-   
             }
 
-      
+            this.updateScrollView();
         
     }
 
@@ -518,9 +507,9 @@ export class PopSummonSettle extends PopBase {
         }
 
         this.setShowScrollViewType(1)
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
-            let reclineup_item = instantiate( res );
-            let script = reclineup_item.getComponent(HeroIcon);
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:Error | null,res:Prefab | null)=>{
+            let reclineup_item = instantiate( res as Prefab);
+            let script = reclineup_item.getComponent(HeroIcon) as HeroIcon;
             reclineup_item.scale = new Vec3(0.75,0.75,1);
             let subWidget = reclineup_item.getComponent(UITransform) as UITransform;
             subWidget.contentSize = new Size(113,113);
@@ -531,58 +520,8 @@ export class PopSummonSettle extends PopBase {
 
     public initFragmentSynthesisFromMsgData(msgData: Msg.UseFragmentA)
     {
-        if(this.scroll_heroicon_view.content)
-        {
-            this.scroll_heroicon_view.content.removeAllChildren()
-        }
-
-        let herolist = msgData.heroList;
-
-        this.setShowScrollViewType(herolist.length);
-       
-        for(var i=0 ; i < herolist.length; i++ )
-        {
-            ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:Error | null,res:Prefab | null)=>{
-                let reclineup_item = instantiate( res  as Prefab);
-                let script = reclineup_item.getComponent(HeroIcon) as HeroIcon;
-                reclineup_item.scale = new Vec3(0.75,0.75,1);
-                let subWidget = reclineup_item.getComponent(UITransform) as UITransform;
-                subWidget.contentSize = new Size(113,113);
-                // if(herolist[i].staticID)
-                herolist[i].staticID && script.initUIHeroIconInfo(herolist[i].staticID as number,this._popWindowType,herolist[i].level as number);
-                this.scroll_heroicon_view.content?.addChild(reclineup_item);   
-            },"PopSummonSettle"); 
-        }
-        // GameModel.getInstance().getHeroesModel().updateHeroListFromSummon(this._HeroList);
-
-
-        //    let playerModel = GameModel.getInstance().getPlayerModel();
-        //     switch(msgData.consumeType)
-        //     {
-        //         case Msg.TSummonConsumeType.ESummonConsumeType_Scroll:
-        //             playerModel.consumeObjectByNum(Msg.TObjectType.EObject_HeroicSummonScroll, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
-        //             playerModel.updateSummonScore(msgData.summonScore);
-        //             console.log("消费卷轴  抽考结算 ",msgData.consumeNum);
-        //             //召唤次数暂时未考虑
-        //             break;
-        //         case Msg.TSummonConsumeType.ESummonConsumeType_VRmb:
-        //             playerModel.consumeObjectByNum(Msg.TObjectType.EObject_VRmb, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
-        //             playerModel.updateSummonScore(msgData.summonScore);
-        //             NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
-        //             break;
-        //         case Msg.TSummonConsumeType.ESummonConsumeType_FriendGift:
-        //             playerModel.consumeObjectByNum(Msg.TObjectType.EObject_FriendGift, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
-        //             break; 
-        //             //奇迹召唤不在这里显示
-        //         // case Msg.TSummonConsumeType.ESummonConsumeType_Wonder:
-        //         //     playerModel.consumeObjectByNum(Msg.TObjectType.EObject_WonderGem, msgData.consumeNum,Msg.TObjectConsumeType.EObjectConsumeType_HeroSummon);
-        //         //     playerModel.updateWonderTimes(msgData.summonScore); 
-        //         //     NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
-        //         //     break;
-   
-        //     }
-
-      
-        
+        this._HeroList = this._HeroList.concat(msgData.heroList);
+        this.setShowScrollViewType(msgData.heroList.length);
+        this.updateScrollView();
     }
 }
