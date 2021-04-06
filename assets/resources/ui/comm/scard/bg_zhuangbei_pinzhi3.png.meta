@@ -30,11 +30,45 @@
         ".json"
       ],
       "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "67eaeddd-e40c-4e28-9bd5-9668083b125d@f9941",
+      "displayName": "bg_zhuangbei_pinzhi3",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 116,
+        "height": 119,
+        "rawWidth": 116,
+        "rawHeight": 119,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "67eaeddd-e40c-4e28-9bd5-9668083b125d@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
     }
   },
   "userData": {
     "hasAlpha": true,
-    "type": "texture",
-    "redirect": "67eaeddd-e40c-4e28-9bd5-9668083b125d@6c48a"
+    "type": "sprite-frame",
+    "redirect": "67eaeddd-e40c-4e28-9bd5-9668083b125d@f9941"
   }
 }
