@@ -30,11 +30,45 @@
         ".json"
       ],
       "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "946be307-9e62-4069-84ff-193af2cba73d@f9941",
+      "displayName": "img_wenhao",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 126,
+        "height": 185,
+        "rawWidth": 126,
+        "rawHeight": 185,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "946be307-9e62-4069-84ff-193af2cba73d@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
     }
   },
   "userData": {
     "hasAlpha": true,
-    "type": "texture",
-    "redirect": "946be307-9e62-4069-84ff-193af2cba73d@6c48a"
+    "type": "sprite-frame",
+    "redirect": "946be307-9e62-4069-84ff-193af2cba73d@f9941"
   }
 }

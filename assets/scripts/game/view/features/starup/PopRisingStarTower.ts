@@ -21,8 +21,8 @@ import { ResMgr } from '../../../control/ResMgr';
 @ccclass('PopRisingStarTower')
 export class PopRisingStarTower extends PopBase {
 
-    @property({type: Node, displayName: "一键升星按钮"})
-    public btn_submit:Node | null = null;
+    @property({type: Button, displayName: "一键升星按钮"})
+    public btn_submit:Button | null = null;
 
     @property({type: Button, displayName: "升星按钮"})
     public btn_risingstar:Button | null = null;
@@ -126,8 +126,14 @@ export class PopRisingStarTower extends PopBase {
         }
 
         if(this.btn_submit){
-            this.btn_submit.active = false;
+            this.btn_submit.interactable = false; 
         }
+        var clickEventHandler = new EventHandler();
+        clickEventHandler.target = this.node; //这个 node 节点是你的事件处理代码组件所属的节点
+        clickEventHandler.component = "PopRisingStarTower";//这个是代码文件名
+        clickEventHandler.handler = "_submitHandle";
+        clickEventHandler.customEventData = "";
+        this.btn_submit?.clickEvents.push(clickEventHandler);
 
         if(this.btn_risingstar){
             this.btn_risingstar.interactable = false;            //升星按钮禁用
@@ -147,7 +153,6 @@ export class PopRisingStarTower extends PopBase {
         }
 
         this.btn_explain?.on(Node.EventType.TOUCH_END, this._explainHandle, this);
-        this.btn_submit?.on(Node.EventType.TOUCH_END, this._submitHandle, this);
         this.btn_head1?.on(Node.EventType.TOUCH_END, this._platformMainHeadHandle, this);
         this.btn_head2?.on(Node.EventType.TOUCH_END, this._platformViceHeadHandle1, this);
         this.btn_head3?.on(Node.EventType.TOUCH_END, this._platformViceHeadHandle2, this);
@@ -280,9 +285,9 @@ export class PopRisingStarTower extends PopBase {
                 this._bottomHeroItemList.set(heroData.getDyncID(), heroIcon);
             }
             if(this.btn_submit && isShowOneKey == 1){
-                this.btn_submit.active = true;
+                this.btn_submit.interactable = true;
             }else if(this.btn_submit){
-                this.btn_submit.active = false;
+                this.btn_submit.interactable = false;
             }
             
             k.sort((n1,n2) => n1[0] - n2[0])
@@ -671,10 +676,10 @@ export class PopRisingStarTower extends PopBase {
                     this.maskNode2.setSiblingIndex(100)
                 });
                 if(this._curStarupNum == 1){
-                    this.btn_head2.setPosition(-137,91,0);
+                    this.btn_head2.setPosition(-173,95,0);
                     this.btn_head3.active = false;
                 }else if(this._curStarupNum == 2){
-                    this.btn_head2.setPosition(-192,91,0);
+                    this.btn_head2.setPosition(-222,95,0);
                     this.btn_head3.active = true;
                     resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
                         let heroIcon = instantiate(res) as Node;
@@ -703,10 +708,10 @@ export class PopRisingStarTower extends PopBase {
                     this.maskNode2.setSiblingIndex(100)
                 });
                 if(this._curStarupNum == 1){
-                    this.btn_head2.setPosition(-137,91,0);
+                    this.btn_head2.setPosition(-173,95,0);
                     this.btn_head3.active = false;
                 }else if(this._curStarupNum == 2){
-                    this.btn_head2.setPosition(-192,91,0);
+                    this.btn_head2.setPosition(-222,95,0);
                     this.btn_head3.active = true;
                     resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
                         let heroIcon = instantiate(res) as Node;
@@ -834,9 +839,9 @@ export class PopRisingStarTower extends PopBase {
         });
 
         this.lab_info1.string = HeroInfo.getStar()+1+"";
-        this.lab_info2.string = "属性提升:20%";
+        this.lab_info2.string = "20%";
         if(HeroInfo.getStar() < 2){
-            this.lab_info2.string = "属性提升:10%";
+            this.lab_info2.string = "10%";
         }
     }
 
@@ -974,7 +979,7 @@ export class PopRisingStarTower extends PopBase {
     }
 
     //一键升星
-    private _submitHandle(){
+    private _submitHandle(event: Event, customEventData: string){
         PopMgr.getInstance().popOneKeyStarUpView();
     }
 }
