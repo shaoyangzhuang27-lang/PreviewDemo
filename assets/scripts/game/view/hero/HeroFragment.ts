@@ -126,42 +126,6 @@ export class HeroFragment extends Component {
         });
 
         this.updateFragmentInfo(this._fragmentInfo,isWonderSummon);
-        // this.img_camp.active = false;
-        // if(info.maxNum && info.curNum )
-        // {
-        //     let nPreocess = info.curNum / info.maxNum ;
-        //     if(nPreocess > 1)
-        //     {
-        //         nPreocess = 1;
-        //     }
-
-        //     let bar = this.probar_fragment.node.getChildByName("bar");
-        //     let path = nPreocess !=1 ? "ui/common/icon/" + "碎片未满进度条" + "/spriteFrame" : "ui/common/icon/" + "碎片已满进度条" + "/spriteFrame";
-        //     this._resourceLoad(path,bar);
-           
-        //     var barCompoent =  this.probar_fragment?.getComponent(ProgressBar);
-        //     if(barCompoent)
-        //     {
-        //         barCompoent.progress = nPreocess ;
-        //     }
-
-        //     var str = String(info.curNum) + "/" + String(info.maxNum);
-        //     this.lab_process_num.string = str;
-
-        //     nPreocess != 1 ? this.img_point.active = false : this.img_point.active = true;
-
-        //     this._setStar(info.star ? info.star : 0);
-
-        // }
-
-        // if(isWonderSummon)
-        // {
-
-        //     this._setStar(info.star ? info.star : 0);
-        //     this.probar_fragment.node.active = false;
-        //     this.lab_process_num.node.active = false;
-        //     this.img_point.active = false;
-        // }
     }
 
     public setBtnClick()
