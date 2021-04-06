@@ -105,10 +105,6 @@ export class PopStarUpResult extends PopBase {
             this._closeFunc = func;
     }
 
-    private _onSubmitClick(event: Event, customEventData: string){
-        this.delSelf();
-    }
-
     //平台显示英雄信息
     private _showHeroInfo(){
         let HeroInfo = this._newHeroData;

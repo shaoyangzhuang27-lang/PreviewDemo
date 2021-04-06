@@ -10,6 +10,8 @@ import { GameModel } from '../../../model/GameModel';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { HeroIcon } from '../../hero/HeroIcon';
 import { MsgMgr } from '../../../control/MsgMgr';
+import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
+import { PopMgr } from '../../../control/PopMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopOneKeyStarUp')
@@ -30,6 +32,7 @@ export class PopOneKeyStarUp extends PopBase {
 
     //符合升星条件的组合
     private _starUpHeroIDs:Msg.HeroStarUpMultiR = new Msg.HeroStarUpMultiR();
+    
 
     private _curStarupType:number = 0;        //当前选择的升星材料类型
     private _curStarupParam:number = 0;        //当前选择的升星材料参数ID或星
@@ -41,8 +44,6 @@ export class PopOneKeyStarUp extends PopBase {
         this.btn_submit?.on(Node.EventType.TOUCH_END, this._onSubmit, this);
 
         this._getAllHeroList();
-        this._getStarUpList();
-        this._initBottomHeros();
     }
 
     public setCloseCallBack(func:Function | null){
@@ -54,37 +55,63 @@ export class PopOneKeyStarUp extends PopBase {
     //获取升星列表英雄
     private _getAllHeroList(){
         this._allHeroList = GameModel.getInstance().getHeroList();
+
+        resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
+            this._copyAllHeroList.clear()
+            let k = new Array<[number,Node]>();     //排序存储对象
+            let isShowOneKey = 0;       //是否显示一键升星按钮
+            for (let heroData of this._allHeroList.values()) {
+                let isDeleteHero = this._isDeleteHero(heroData)
+                if(isDeleteHero){continue}
+                let heroIcon = instantiate(res) as Node;
+                let heroSelectScript = heroIcon.getComponent("HeroSelectIcon") as HeroSelectIcon;  
+
+                heroSelectScript.setSelectData(heroData as HeroData,()=>{});
+                let sortIndex_1:number = heroData.getLevel() * 10000 + heroData.getStar()*1000 + heroData.getCamp() * 10 + heroData.getClasses();
+                let sortIndex_2:number = 3000000 - sortIndex_1;
+                k.push([sortIndex_2,heroIcon]);
+                
+                this._copyAllHeroList.set(heroData.getDyncID(), heroData);
+            }
+            
+            k.sort((n1,n2) => n1[0] - n2[0])
+            k.forEach((value,key)=>{
+                value[1].setSiblingIndex(key);
+            })
+            this._getStarUpList();
+            this._initBottomHeros();
+        });     
+    }
+    //是否排除这个英雄
+    private _isDeleteHero(HeroData : HeroData){
         //剔除满星级英雄
-        for (let heroData of this._allHeroList.values()) {
-            if(heroData.getStar() >= 13){
-                this._allHeroList.delete(heroData.getDyncID());
-            }
+        if(HeroData.getStar() >= 13){
+            return true
         }
+
         //剔除2星怪 不能升星的
-        for (let heroData of this._allHeroList.values()) {
-            let heroDataes = ValueMgr.getInstance().getTableByName(TableName.heroes).records ;
-            for (let herodata of heroDataes) {
-                let record = herodata as Config.heroes.Record;
-                if(record.id == heroData.getStaticID()) { 
-                    if(record.starupType == 0){
-                        this._allHeroList.delete(heroData.getDyncID());
-                    }
-                    break;
+        let heroDataes = ValueMgr.getInstance().getTableByName(TableName.heroes).records ;
+        for (let herodata of heroDataes) {
+            let record = herodata as Config.heroes.Record;
+            if(record.id == HeroData.getStaticID()) { 
+                if(record.starupType == 0){
+                    return true
                 }
+                break;
             }
         }
+        return false
     }
     //获取符合升星条件的组合
     private _getStarUpList(){
         let HeroIDs:Msg.HeroIDs = new Msg.HeroIDs();
-        for(let heroData of this._allHeroList.values()){
-            this._copyAllHeroList.set(heroData.getDyncID(),heroData);
-        }
+
         for (let heroData of this._copyAllHeroList.values()) {
             this._getHeroesDatas(heroData.getStaticID());
+            let firstid1 = Number((heroData.getStaticID() / 1000000).toFixed())
             for (let heroData2 of this._copyAllHeroList.values()){
                 if(this._curStarupType == 1){
-                    if(heroData2.getStaticID() == heroData.getStaticID() 
+                    if(heroData2.getStaticID() == this._curStarupParam
                     && heroData2.getDyncID() != heroData.getDyncID() ){
                         HeroIDs.heroIDList.push(heroData2.getDyncID());
                         if(HeroIDs.heroIDList.length == this._curStarupNum){
@@ -92,9 +119,11 @@ export class PopOneKeyStarUp extends PopBase {
                         }
                     }
                 }else if(this._curStarupType == 2){
+                    let firstid2 = Number((heroData2.getStaticID() / 1000000).toFixed())
                     if(heroData2.getStar() == this._curStarupParam
-                    && heroData2.getDyncID() != heroData.getDyncID() ){
-                        HeroIDs.heroIDList.push(heroData2.getDyncID());
+                    && heroData2.getDyncID() != heroData.getDyncID() 
+                    && firstid2 == firstid1){
+                        HeroIDs.heroIDList.push(heroData2.getDyncID())
                         if(HeroIDs.heroIDList.length == this._curStarupNum){
                             break;
                         }
@@ -135,7 +164,6 @@ export class PopOneKeyStarUp extends PopBase {
     }
     //滚动区域列表
     private _initBottomHeros(){
-        this._getAllHeroList();
         let item = this.itemNode;
         let index = 0;
 
@@ -229,6 +257,6 @@ export class PopOneKeyStarUp extends PopBase {
         }
         //发送消息
         MsgMgr.getInstance().getMsgStarUp().requestOneKeyStarUp(starUpHeroIDs);
-        this.delSelf();
+        PopMgr.getInstance().deleteWindow();
     }
 }

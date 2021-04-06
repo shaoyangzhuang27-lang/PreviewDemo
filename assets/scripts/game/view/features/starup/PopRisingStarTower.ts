@@ -125,6 +125,10 @@ export class PopRisingStarTower extends PopBase {
             });
         }
 
+        if(this.btn_submit){
+            this.btn_submit.active = false;
+        }
+
         if(this.btn_risingstar){
             this.btn_risingstar.interactable = false;            //升星按钮禁用
         }
@@ -295,6 +299,7 @@ export class PopRisingStarTower extends PopBase {
         let curStarupParam;
         let curStarupNum;
         let heroDataes = ValueMgr.getInstance().getTableByName(TableName.heroes).records ;
+        let firstid = Number((curHeroData.getStaticID() / 1000000).toFixed())
         for (let herodata of heroDataes) {
             let record = herodata as Config.heroes.Record;
             if(record.id == curHeroData.getStaticID()) { 
@@ -308,7 +313,7 @@ export class PopRisingStarTower extends PopBase {
             let isDeleteHero = this._isDeleteHero(heroData)
             if(isDeleteHero){continue}
             if(curStarupType == 1){
-                if(curHeroData.getStaticID()  == heroData.getStaticID() 
+                if(curStarupParam  == heroData.getStaticID() 
                 && curHeroData.getDyncID() != heroData.getDyncID() ){
                     num++;
                     if(num == curStarupNum){
@@ -316,8 +321,10 @@ export class PopRisingStarTower extends PopBase {
                     }
                 }
             }else if(curStarupType == 2){
+                let firstid2 = Number((heroData.getStaticID() / 1000000).toFixed())
                 if(heroData.getStar() == curStarupParam
-                && curHeroData.getDyncID() != heroData.getDyncID() ){
+                && curHeroData.getDyncID() != heroData.getDyncID() 
+                && firstid2 == firstid){
                     num++;
                     if(num == curStarupNum){
                         return true;
@@ -360,7 +367,7 @@ export class PopRisingStarTower extends PopBase {
 
 //         PopMgr.getInstance().popStarUpResultView(this._firstHeroData,HeroData,()=>{
 //             PopMgr.getInstance().deleteWindow();
-//         });
+//         },false);
 //弹出升星结果界面****************测试**************
             }else{
                 if(this._risingDyncViceID1 == 0){
@@ -570,22 +577,28 @@ export class PopRisingStarTower extends PopBase {
             let heroData = heroSelectScript.getHeroData() as HeroData;
             let itemType =  this._getItemType(heroData);
             heroSelectScript.setItemType(itemType);
-            
-            //静态ID一样的
-            if(this._curStarupType == 1){
-                let risingdyncHeroData = this._getHeroData(this._risingdyncMaiID)as HeroData
-                if(risingdyncHeroData.getStaticID() == heroData.getStaticID()){
-                    heroNode.active = true;
-                }else{
-                    heroNode.active = false;
+
+            if(this._risingdyncMaiID != 0){
+                let HeroInfo = this._getHeroData(this._risingdyncMaiID) as HeroData
+                let firstid1 = Number((HeroInfo.getStaticID() / 1000000).toFixed())
+                
+                //静态ID一样的
+                if(this._curStarupType == 1){
+                    let risingdyncHeroData = this._getHeroData(this._risingdyncMaiID)as HeroData
+                    if(this._curStarupParam == heroData.getStaticID()){
+                        heroNode.active = true;
+                    }else{
+                        heroNode.active = false;
+                    }
+                }else if(this._curStarupType == 2){
+                    let firstid2 = Number((heroData.getStaticID() / 1000000).toFixed())
+                    if(this._curStarupParam == heroData.getStar() && firstid2 == firstid1){
+                        heroNode.active = true;
+                    }else{
+                        heroNode.active = false;
+                    }
                 }
-            }else if(this._curStarupType == 2){
-                if(this._curStarupParam == heroData.getStar()){
-                    heroNode.active = true;
-                }else{
-                    heroNode.active = false;
-                }
-            }
+            }  
         });
     }
 
@@ -637,13 +650,21 @@ export class PopRisingStarTower extends PopBase {
 
             //同类型英雄
             if(this._curStarupType == 1){
+                let heroInfo5  = new Msg.HeroInfo();
+                heroInfo5.id = 5;
+                heroInfo5.staticID = this._curStarupParam;
+                heroInfo5.level = 1;
+                heroInfo5.equipOnList = [];
+                heroInfo5.tier = 0;
+                let hero = new HeroData();
+                hero.initDataByHero(heroInfo5 as Msg.HeroInfo, GameModel.getInstance());
                 resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
                     let heroIcon = instantiate(res) as Node;
                     heroIcon.scale = new Vec3(0.5,0.5,1);
                     heroIcon.addComponent(Widget);
         
                     let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
-                    script.setHeroData(HeroInfo as HeroData); 
+                    script.setHeroData(hero as HeroData); 
                     script.setLvIconVisib(false);
                     this.btn_head2.addChild(heroIcon);
                     this.maskNode2.active = true
@@ -661,7 +682,7 @@ export class PopRisingStarTower extends PopBase {
                         heroIcon.addComponent(Widget);
             
                         let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
-                        script.setHeroData(HeroInfo as HeroData); 
+                        script.setHeroData(hero as HeroData); 
                         script.setLvIconVisib(false);
                         this.btn_head3.addChild(heroIcon);
                         this.maskNode3.active = true
@@ -784,7 +805,7 @@ export class PopRisingStarTower extends PopBase {
     {
         if(this.cur_hero_model)
         {
-            this.cur_hero_model.updateByHeroPerfabPath(_iconName);
+            //this.cur_hero_model.updateByHeroPerfabPath(_iconName);
         }
     }
 
@@ -865,12 +886,15 @@ export class PopRisingStarTower extends PopBase {
         }
          
         //金币
-        stuProp.nType = Msg.TObjectType.EObject_Money;
-        stuProp.nPropId = 0;
-        stuProp.nLevel = 0;
-        stuProp.nPropQuality = 0;
-        stuProp.num = ItemData.money;
-        arrProp.push(instantiate(stuProp));  
+        if(ItemData.money > 0){
+            stuProp.nType = Msg.TObjectType.EObject_Money;
+            stuProp.nPropId = 0;
+            stuProp.nLevel = 0;
+            stuProp.nPropQuality = 0;
+            stuProp.num = ItemData.money;
+            arrProp.push(instantiate(stuProp));  
+        }
+        
         //升级点
         if(ItemData.upgradePoint > 0){
             stuProp.nType = Msg.TObjectType.EObject_UpgradePoint;
