@@ -229,6 +229,5 @@ export class PopOneKeyStarUp extends PopBase {
         }
         //发送消息
         MsgMgr.getInstance().getMsgStarUp().requestOneKeyStarUp(starUpHeroIDs);
-        this.delSelf();
     }
 }

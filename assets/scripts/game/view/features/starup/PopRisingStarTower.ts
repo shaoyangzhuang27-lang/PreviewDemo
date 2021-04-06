@@ -364,7 +364,7 @@ export class PopRisingStarTower extends PopBase {
 
 //         PopMgr.getInstance().popStarUpResultView(this._firstHeroData,HeroData,()=>{
 //             PopMgr.getInstance().deleteWindow();
-//         });
+//         },false);
 //弹出升星结果界面****************测试**************
             }else{
                 if(this._risingDyncViceID1 == 0){
@@ -788,7 +788,7 @@ export class PopRisingStarTower extends PopBase {
     {
         if(this.cur_hero_model)
         {
-            this.cur_hero_model.updateByHeroPerfabPath(_iconName);
+            //this.cur_hero_model.updateByHeroPerfabPath(_iconName);
         }
     }
 
