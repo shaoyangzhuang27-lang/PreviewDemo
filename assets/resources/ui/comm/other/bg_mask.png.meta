@@ -30,11 +30,45 @@
         ".json"
       ],
       "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "bcb43f1f-da3d-4fbc-a7af-d51032caefcf@f9941",
+      "displayName": "bg_mask",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 6,
+        "height": 6,
+        "rawWidth": 6,
+        "rawHeight": 6,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "bcb43f1f-da3d-4fbc-a7af-d51032caefcf@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
     }
   },
   "userData": {
     "hasAlpha": true,
-    "type": "texture",
-    "redirect": "bcb43f1f-da3d-4fbc-a7af-d51032caefcf@6c48a"
+    "type": "sprite-frame",
+    "redirect": "bcb43f1f-da3d-4fbc-a7af-d51032caefcf@f9941"
   }
 }

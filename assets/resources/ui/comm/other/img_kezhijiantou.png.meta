@@ -30,11 +30,45 @@
         ".json"
       ],
       "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "4ca14c94-3c82-4587-9cb2-e301e766286f@f9941",
+      "displayName": "img_kezhijiantou",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 49,
+        "height": 83,
+        "rawWidth": 49,
+        "rawHeight": 83,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "4ca14c94-3c82-4587-9cb2-e301e766286f@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
     }
   },
   "userData": {
     "hasAlpha": true,
-    "type": "texture",
-    "redirect": "4ca14c94-3c82-4587-9cb2-e301e766286f@6c48a"
+    "type": "sprite-frame",
+    "redirect": "4ca14c94-3c82-4587-9cb2-e301e766286f@f9941"
   }
 }
