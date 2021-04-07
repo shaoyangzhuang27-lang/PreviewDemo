@@ -4,7 +4,7 @@ import { PopRisingStarTower } from "../view/features/starup/PopRisingStarTower";
 import { PopStarUpResult } from "../view/features/starup/PopStarUpResult";
 import { PopOneKeyStarUp } from "../view/features/starup/PopOneKeyStarUp";
 import { PopHeroReset } from "../view/features/decompose/PopHeroReset";
-import { PopCommonOne } from "../view/pop/PopCommonOne";
+import { PopCommonOne } from "../view/common/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from '../view/NetLoading';
 import { TipDemo } from '../view/TipDemo';
