@@ -21,7 +21,7 @@ import { PopHeroChoiceGiftView } from '../view/pop/PopHeroChoiceGiftView';
 import { PopHeroPub } from "../view/features/pub/PopHeroPub";
 import { PopRecLineUp } from "../view/features/pub/PopRecLineUp";
 import { PopSummonSettle } from "../view/common/PopSummonSettle";
-import { PopFragmentSynthesis } from "../view/pop/PopFragmentSynthesis";
+import { PopFragmentSynthesis } from "../view/features/bag/PopFragmentSynthesis";
 import { PopBookActive } from '../view/pop/PopBookActive';
 import { PopHeroEquipReplace } from '../view/hero_promotion/PopHeroEquipReplace';
 import { PopBookUpGrade } from '../view/pop/PopBookUpgrade';
