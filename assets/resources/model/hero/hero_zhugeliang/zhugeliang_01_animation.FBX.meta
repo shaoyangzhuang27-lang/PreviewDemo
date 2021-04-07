@@ -38,7 +38,7 @@
         },
         "events": [
           {
-            "frame": 1.1666666666666667,
+            "frame": 1.2333333333333334,
             "functionName": "onSkill",
             "parameters": []
           }
