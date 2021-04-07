@@ -25,6 +25,13 @@ export class HeroData extends BaseHeroData {
     private _crystalLevel: number = 0;
 
     
+    public get gameModel(){
+        return this._gameModel;
+    }
+    public get crystalLevel(){
+        return this._crystalLevel;
+    }
+
     /**
      * @description: 拷贝一个HeroData
      * @param {HeroData} hd
@@ -35,12 +42,22 @@ export class HeroData extends BaseHeroData {
         this._recordSkill = new Config.skill.Record(hd._recordSkill);
         this._equipOnList = new Map<Msg.TEquipLocationType, Config.equip.Record>(hd._equipOnList);
         
-        this._crystalLevel = hd._crystalLevel;
+        this._crystalLevel = hd.crystalLevel;
         this._crystalPropertyList = new Map<Msg.THeroPropertyType, number>(hd._crystalPropertyList);
-
+        
+        this._gameModel = hd.gameModel;
         this.calcTalentSkillProperty();
         this.refreshEquipProperty();
         return this;
+    }
+
+    public ClassesExchange(newStaticID: number) : void {
+        this._heroInfo.staticID = newStaticID
+        this._record = ValueMgr.getInstance().getItemByField(TableName.heroes, newStaticID) as Config.heroes.Record;
+        this._recordSkill = ValueMgr.getInstance().getItemByField(TableName.skill, this._record.skillId) as Config.skill.Record;
+
+        this.calcTalentSkillProperty();
+        // this.refreshEquipProperty();
     }
 
     public initDataByKnight(pi: Msg.PlayerInfo, gameModel: GameModel) {
@@ -91,31 +108,33 @@ export class HeroData extends BaseHeroData {
         }
     }
 
-
-
     public calcTalentSkillProperty(hdList: Array<HeroData> | null = null) {
         this._talentSkillPropertyList = new Map<Msg.THeroPropertyType, number>();
         for (let i = 0; i < this._record.talentId.length; i++) {
             //判断天赋技能是否解锁
             if (!this.isTalentActive(i, hdList))
                 continue;
-            let record = ValueMgr.getInstance().getItemByField(TableName.talent, this.getTalentID(i)) as Config.talent.Record;// CfgMgr.GetTable<talent>().GetRecordById(GetTalentID(i));//Config.talent.Record
-            if (record != null && record.talentType == Msg.TTalentType.ETalentType_Passive) {
-                for (let j = 0; j < record.effectType.length; j++) {
-                    if (record.effectType[j] == Msg.TEffectType.EEffectType_AddBuff && record.effectCondType[j] == 0) {
-                        let propertyType = record.effectParam1[j] as Msg.THeroPropertyType;
-                        if (this._talentSkillPropertyList.has(propertyType)) {
-                            let t = this._talentSkillPropertyList.get(propertyType) as number + record.effectParam2[j] / 100.0;
-                            this._talentSkillPropertyList.set(propertyType, t);
-                        } else {
-                            this._talentSkillPropertyList.set(propertyType, record.effectParam2[j] / 100.0);
+            let tmp = ValueMgr.getInstance().getItemByField(TableName.talent, this.getTalentID(i));
+            if(tmp){
+                let record = tmp as Config.talent.Record;
+                if (record.talentType == Msg.TTalentType.ETalentType_Passive) {
+                    for (let j = 0; j < record.effectType.length; j++) {
+                        if (record.effectType[j] == Msg.TEffectType.EEffectType_AddBuff && record.effectCondType[j] == 0) {
+                            let propertyType = record.effectParam1[j] as Msg.THeroPropertyType;
+                            if (this._talentSkillPropertyList.has(propertyType)) {
+                                let t = this._talentSkillPropertyList.get(propertyType) as number + record.effectParam2[j] / 100.0;
+                                this._talentSkillPropertyList.set(propertyType, t);
+                            } else {
+                                this._talentSkillPropertyList.set(propertyType, record.effectParam2[j] / 100.0);
+                            }
                         }
                     }
+    
                 }
-
-            }
+            }            
         }
     }
+
     public getSkillID() {
         let skillID = this._record.skillId;
         return skillID;
@@ -145,11 +164,16 @@ export class HeroData extends BaseHeroData {
         }
     }
 
+    /**
+     * @description: 英雄等级属性,需考虑英雄在英雄学院的等级
+     * @param {*}
+     */
     public get level() {
-        if (!this.isRoleHero()) {
-            return Math.min(this._heroInfo.level, XShare.getInstance().KHeroMaxLevelForTier[this._record.star]);//假如英雄在学院中需要处理成学院等级
-        } else
-            return this._heroInfo.level;
+        if (!this.isRoleHero() && this._gameModel.getHeroesModel().isHeroInCollege(this.getDyncID() )) {
+            return Math.min(XShare.getInstance().KHeroMaxLevelForTier[this._record.star], this._gameModel.getHeroesModel().heroCollegeLevel);
+        } 
+        else
+            return this._heroInfo.level;             
     }
 
     public set level(_lv: number) {
@@ -160,9 +184,21 @@ export class HeroData extends BaseHeroData {
         this._heroInfo.level = _lv;
     }
 
+    /**
+     * @description: 直接获取英雄的品阶
+     * @param {*}
+     */
+    public getTier() {
+        return this._heroInfo.tier;
+    }
+
+    /**
+     * @description: 英雄品阶属性,需考虑英雄在英雄学院的品阶   
+     * @param {*}
+     */
     public get tier() {
-        if (!this.isRoleHero()) {
-            return Math.min(this._heroInfo.tier, this.GetMaxTier()); //假如英雄在学院中需要处理成学院品阶   
+        if (!this.isRoleHero() && this._gameModel.getHeroesModel().isHeroInCollege(this.getDyncID() )) {
+            return Math.min(this.GetMaxTier(), this._gameModel.getHeroesModel().heroCollegeTier);
         } else
             return this._heroInfo.tier;
     }
@@ -730,14 +766,18 @@ export class HeroData extends BaseHeroData {
 
         return active_talents;
     }
-
-    //等级
+    
+    /**
+     * @description: 直接获取英雄的等级
+     * @param {*}
+     */
     public getLevel() {
         return this._heroInfo.level;
     }
     public setLevel(lv:number ) {
         this._heroInfo.level = lv;
     }
+
     //静态ID对应英雄表内id
     public getStaticID() {
         return this._heroInfo.staticID;

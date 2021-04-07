@@ -1,7 +1,8 @@
 
-import { Color, instantiate, resources, Size, Sprite, SpriteFrame } from 'cc';
+import { Color, instantiate, Prefab, resources, Size, Sprite, SpriteFrame } from 'cc';
 import { _decorator, Node, EventHandler, ToggleContainer, UITransform, Label } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
+import { ResMgr } from '../../control/ResMgr';
 import { HeroData } from '../../model/datas/HeroData';
 import { GameModel } from '../../model/GameModel';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
@@ -40,7 +41,7 @@ export class PopHaloView extends PopBase {
     public lab_allProperty:Label = null as unknown as Label
 
     //单项子节点预制体资源
-    private item_res: any;
+    private item_res:Prefab = null as unknown as Prefab
 
     //英雄阵营数量数据
     private campInfo:any;
@@ -134,8 +135,8 @@ export class PopHaloView extends PopBase {
             this._updateAllProperty()
         }
 
-        resources.load('prefabs_ui/halo/halo_item', (err:any,res:any)=>{
-            this.item_res = res
+        ResMgr.getInstance().loadPrefab("prefabs_ui/halo/halo_item", (err:any, res:Prefab | null)=>{
+            this.item_res = res as Prefab
             // console.log("PopHaloView 加载子项目资源完成")
             this._initHaloView()
             this._initSkillView()
@@ -270,32 +271,35 @@ export class PopHaloView extends PopBase {
         }
     }
     private _createHaloItem(campType:any, allItemData:any) {
-        let halo_item = instantiate( this.item_res )
+        let halo_item = instantiate( this.item_res ) as Node
 
         let isHighlight = this.campInfo[campType] > 0
         let highlightCount = this.campInfo[campType]
 
         //高亮底图
         if (isHighlight) {
-            resources.load("ui/common/halo/高亮底/spriteFrame", SpriteFrame, (err, spriteFrame) => {
+            ResMgr.getInstance().loadSpriteFrame("ui/common/halo/高亮底/spriteFrame", (err:any, spriteFrame:SpriteFrame | null)=>{
                 if (!err && halo_item) {
-                    halo_item.getComponent(Sprite).spriteFrame = spriteFrame
+                    let sprbg = halo_item.getComponent(Sprite) as Sprite
+                    sprbg.spriteFrame = spriteFrame
                 }
             });
         }
 
         //图标底图
         if (isHighlight) {
-            resources.load("ui/common/camp/光环_激活框/spriteFrame", SpriteFrame, (err, spriteFrame) => {
+            ResMgr.getInstance().loadSpriteFrame("ui/common/camp/光环_激活框/spriteFrame", (err:any, spriteFrame:SpriteFrame | null)=>{
                 if (!err && halo_item) {
-                    halo_item.getChildByName("spr_iconBg").getComponent(Sprite).spriteFrame = spriteFrame
+                    let spr_iconBg = halo_item.getChildByName("spr_iconBg")?.getComponent(Sprite) as Sprite
+                    spr_iconBg.spriteFrame = spriteFrame
                 }
             });
         }
         else {
-            resources.load("ui/common/camp/光环_未激活框/spriteFrame", SpriteFrame, (err, spriteFrame) => {
+            ResMgr.getInstance().loadSpriteFrame("ui/common/camp/光环_未激活框/spriteFrame", (err:any, spriteFrame:SpriteFrame | null)=>{
                 if (!err && halo_item) {
-                    halo_item.getChildByName("spr_iconBg").getComponent(Sprite).spriteFrame = spriteFrame
+                    let spr_iconBg = halo_item.getChildByName("spr_iconBg")?.getComponent(Sprite) as Sprite
+                    spr_iconBg.spriteFrame = spriteFrame
                 }
             });
         }
@@ -303,9 +307,10 @@ export class PopHaloView extends PopBase {
         //图标
         let campIcons:any = ["无","水","火","木","光","暗"]
         let curCampIcon = "ui/common/team/" + campIcons[campType] + "/spriteFrame"
-        resources.load(curCampIcon, SpriteFrame, (err, spriteFrame) => {
+        ResMgr.getInstance().loadSpriteFrame(curCampIcon, (err:any, spriteFrame:SpriteFrame | null)=>{
             if (!err && halo_item) {
-                halo_item.getChildByName("spr_iconBg").getChildByName("spr_icon").getComponent(Sprite).spriteFrame = spriteFrame
+                let spr_icon = halo_item.getChildByName("spr_iconBg")?.getChildByName("spr_icon")?.getComponent(Sprite) as Sprite
+                spr_icon.spriteFrame = spriteFrame
             }
         })
 
@@ -316,7 +321,7 @@ export class PopHaloView extends PopBase {
             let str = "上阵" + heroCount + "个英雄："
             str += this._parseProperty(allItemData[heroCount].propertyType, allItemData[heroCount].propertyNum)
 
-            let lab = halo_item.getChildByName("layout_labs").getChildByName("lab_"+heroCount).getComponent(Label)
+            let lab = halo_item.getChildByName("layout_labs")?.getChildByName("lab_"+heroCount)?.getComponent(Label) as Label
             lab.string = str
             if (highlightCount == heroCount) {
                 lab.color = new Color(218,170,90)
@@ -398,17 +403,19 @@ export class PopHaloView extends PopBase {
 
         //高亮底图
         if (isHighlight) {
-            resources.load("ui/common/halo/高亮底/spriteFrame", SpriteFrame, (err, spriteFrame) => {
+            ResMgr.getInstance().loadSpriteFrame("ui/common/halo/高亮底/spriteFrame", (err:any, spriteFrame:SpriteFrame | null)=>{
                 if (!err && halo_item) {
-                    halo_item.getComponent(Sprite).spriteFrame = spriteFrame
+                    let sprbg = halo_item.getComponent(Sprite) as Sprite
+                    sprbg.spriteFrame = spriteFrame
                 }
             });
         }
 
         //图标底图
-        resources.load("ui/common/main/技能按钮_按钮背景/spriteFrame", SpriteFrame, (err, spriteFrame) => {
+        ResMgr.getInstance().loadSpriteFrame("ui/common/main/技能按钮_按钮背景/spriteFrame", (err:any, spriteFrame:SpriteFrame | null)=>{
             if (!err && halo_item) {
-                halo_item.getChildByName("spr_iconBg").getComponent(Sprite).spriteFrame = spriteFrame
+                let spr_iconBg = halo_item.getChildByName("spr_iconBg")?.getComponent(Sprite) as Sprite
+                spr_iconBg.spriteFrame = spriteFrame
             }
         });
 
@@ -421,9 +428,10 @@ export class PopHaloView extends PopBase {
             "UI_CampSkillDark" : "技能按钮_暗球",
         }
         let curSkillIcon = "ui/common/main/" + skillIcons[key] + "/spriteFrame"
-        resources.load(curSkillIcon, SpriteFrame, (err, spriteFrame) => {
+        ResMgr.getInstance().loadSpriteFrame(curSkillIcon, (err:any, spriteFrame:SpriteFrame | null)=>{
             if (!err && halo_item) {
-                halo_item.getChildByName("spr_iconBg").getChildByName("spr_icon").getComponent(Sprite).spriteFrame = spriteFrame
+                let spr_icon = halo_item.getChildByName("spr_iconBg")?.getChildByName("spr_icon")?.getComponent(Sprite) as Sprite
+                spr_icon.spriteFrame = spriteFrame
             }
         });
 
@@ -431,15 +439,22 @@ export class PopHaloView extends PopBase {
         let data1 = ValueMgr.getInstance().getItemByField(TableName.language_ui,key+"1") as Config.language_ui.Record
         let data2 = ValueMgr.getInstance().getItemByField(TableName.language_ui,key+"2") as Config.language_ui.Record
         let data3 = ValueMgr.getInstance().getItemByField(TableName.language_ui,key+"3") as Config.language_ui.Record
-        halo_item.getChildByName("layout_labs").getChildByName("lab_1").getComponent(Label).string = data1.cn
-        halo_item.getChildByName("layout_labs").getChildByName("lab_2").getComponent(Label).string = data2.cn
-        halo_item.getChildByName("layout_labs").getChildByName("lab_3").getComponent(Label).string = data3.cn
-        halo_item.getChildByName("layout_labs").getChildByName("lab_4").destroy()
-        halo_item.getChildByName("layout_labs").getChildByName("lab_5").destroy()
+
+        let lab1 = halo_item.getChildByName("layout_labs")?.getChildByName("lab_1")?.getComponent(Label) as Label
+        let lab2 = halo_item.getChildByName("layout_labs")?.getChildByName("lab_2")?.getComponent(Label) as Label
+        let lab3 = halo_item.getChildByName("layout_labs")?.getChildByName("lab_3")?.getComponent(Label) as Label
+
+        lab1.string = data1.cn
+        lab2.string = data2.cn
+        lab3.string = data3.cn
+
+        halo_item.getChildByName("layout_labs")?.getChildByName("lab_4")?.destroy()
+        halo_item.getChildByName("layout_labs")?.getChildByName("lab_5")?.destroy()
 
         //高亮文字
         if (isHighlight && highlightHeroCount>=3 && highlightHeroCount<=5) {
-            halo_item.getChildByName("layout_labs").getChildByName("lab_"+(highlightHeroCount-2)).getComponent(Label).color = new Color(218,170,90)
+            let lab = halo_item.getChildByName("layout_labs")?.getChildByName("lab_"+(highlightHeroCount-2))?.getComponent(Label) as Label
+            lab.color = new Color(218,170,90)
         }
 
         return halo_item

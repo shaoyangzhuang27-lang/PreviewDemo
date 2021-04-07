@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: xxxxxx
  * @Date: 2021-03-01 16:08:56
- * @LastEditTime: 2021-03-23 15:33:28
+ * @LastEditTime: 2021-04-01 10:57:22
  */
 import { NotifyMgr } from "../../control/NotifyMgr";
 import { GameModel } from "../GameModel";
@@ -14,6 +14,9 @@ export class PlayerModel extends BaseModel {
     private _playerInfo: Msg.PlayerInfo = null as unknown as Msg.PlayerInfo;
     private _gameConf: Msg.GameConfig = null as unknown as Msg.GameConfig;
     private _roleHero: HeroData = null as unknown as HeroData;
+    
+    // private _heroIDInCollege: Map<number, number> = new Map<number, number>();//英雄学院前5名等级最高英雄
+    // private _collegeBlockLastAt:Map<number, number> = new Map<number, number>();//英雄学院槽位英雄
 
     public initPlayerData(msg: Msg.PlayerLoginA) {
         this._playerInfo = msg.playerInfo as Msg.PlayerInfo;
@@ -177,17 +180,24 @@ export class PlayerModel extends BaseModel {
         }
     }
 
+    //普通召唤
     public updateSummonScore(value : number)
     {
         this._playerInfo.summonScore = value;
     }
 
 
+    //奇迹召唤
     public updateWonderTimes(value :number)
     {
         this._playerInfo.WonderTimes = value;
     }
 
+
+    public updateWonderHero(id:number)
+    {
+        this._playerInfo.WonderHero = id;
+    }
     
     /**
      * @description: 消耗物品
@@ -654,4 +664,6 @@ export class PlayerModel extends BaseModel {
         oValue = oValue > num ? oValue - num : 0;
         return oValue;
     }
+
+
 }

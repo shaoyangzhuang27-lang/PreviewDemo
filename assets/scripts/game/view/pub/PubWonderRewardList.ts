@@ -7,6 +7,7 @@ import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { PopMgr } from '../../control/PopMgr';
 import { PubWonderRewardListItem } from "./PubWonderRewardListItem";
 import { HeroIcon } from '../hero/HeroIcon';
+import { ResMgr } from '../../control/ResMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PubWonderRewardList')
@@ -53,12 +54,13 @@ export class PubWonderRewardList extends PopBase {
         }
         for(let index = 0 ; index < dataList.length; ++index)
         {
-            resources.load('prefabs_ui/main/pub_wonder_rewardlist_item', (err:any,res:any)=>{
+            ResMgr.getInstance().loadPrefab('prefabs_ui/main/pub_wonder_rewardlist_item', (err:any,res:any)=>{
                     let wonder_item = instantiate( res );
                     let script = wonder_item.getComponent(PubWonderRewardListItem);
                     script.initItemInfo(dataList[index]);
+                    script.setParentNode(this);
                     this.scroll_reward.content?.addChild(wonder_item);   
-             });
+             },"PubWonderRewardList");
         }
     }
 

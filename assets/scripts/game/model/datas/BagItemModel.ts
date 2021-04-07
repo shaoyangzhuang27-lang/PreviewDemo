@@ -68,6 +68,7 @@ export class BagItemModel extends BaseModel{
                 campName : "",
                 classesName : "",
                 bg : "",
+                param : 0,
             }  
             let value = msg.fragmentList[key];
 
@@ -94,6 +95,7 @@ export class BagItemModel extends BaseModel{
                 info.maxNum = XConsts.KFragmentNumRequired[value.star ? value.star : 1];
                 info.curNum = value.num ? value.num : 0;
                 info.campName = XConsts.KCampName[value.param ? value.param : 1];
+                info.param = value.param ? value.param  : 0 ;
             }
             else if(value?.fragmentType == Msg.TFragmentType.EFragmentType_ClassesRandom)
             {
@@ -108,6 +110,7 @@ export class BagItemModel extends BaseModel{
                 info.curNum = value.num ? value.num : 0;
                 info.classesName = XConsts.KFragmentClassesName[2];
                 info.bg = "ui/common/icon/" + XConsts.KFragmentBgSpriteName[1] + "/spriteFrame";
+                info.param = value.param ? value.param  : 0 ;
             }
             else if(value?.fragmentType == Msg.TFragmentType.EFragmentType_Hero)
             {
@@ -125,6 +128,7 @@ export class BagItemModel extends BaseModel{
                 info.curNum = value.num ? value.num : 0;
                 info.heroName = heroInfo.name;
                 info.campName = XConsts.KCampName[heroInfo.camp];
+                info.param  = value.param ? value.param  : 0 ;
             }
 
 
@@ -298,6 +302,7 @@ export class BagItemModel extends BaseModel{
      * @returns 
      */
     public getItemDescByType(objType: Msg.TObjectType) {
+        console.log("zzzzzzzzzzz",this._notSellItemStingList,objType);
         if (this._notSellItemStingList.has(objType)) {
             let strArr = this._notSellItemStingList.get(objType) as Array<string>
             return strArr

@@ -1,4 +1,4 @@
-import { _decorator, Component, Node,director,tween,Vec3, instantiate, resources, Label, ProgressBar } from 'cc';
+import { _decorator, Component, Node,director,tween,Vec3, instantiate, resources, Label, ProgressBar, Prefab } from 'cc';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { XFuns } from '../../model/const/XFuns';
 import { MsgMgr } from '../../control/MsgMgr';
@@ -12,6 +12,7 @@ import { PopOffLineBonus} from '../pop/PopOffLineBonus';
 import { OfflineModel } from '../../model/datas/OfflineModel';
 import { UINodeMgr } from '../UINodeMgr';
 import { AvatarNode } from './AvatarNode';
+import { ResMgr } from '../../control/ResMgr';
 
 const { ccclass, property } = _decorator;
 
@@ -123,8 +124,8 @@ export class MainUI extends Component {
         this.txt_level.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().level + "级");
 
         //载入头像
-        resources.load('prefabs_ui/main/node_avatar', (err:any,res:any)=>{
-            let avatarNode = instantiate( res )
+        ResMgr.getInstance().loadPrefab("prefabs_ui/main/node_avatar", (err:any, res:Prefab | null)=>{
+            let avatarNode = instantiate( res as Prefab ) as Node
             this.node_head.addChild(avatarNode)
 
             let script = avatarNode.getComponent("AvatarNode") as AvatarNode;

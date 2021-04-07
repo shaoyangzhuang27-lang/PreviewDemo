@@ -6,7 +6,19 @@
 import {  Node,resources,instantiate,LabelComponent,Vec3,tween, Component } from 'cc';
 import { XConsts } from '../../game/model/const/XConsts';
 import { BasisScene } from './BasisScene';
-import { PopBase, PopType } from "./PopBase";
+// import { PopBase, PopType } from "./PopBase";
+export enum PopType {
+    window,fullscreen,
+}
+export class PopBasic extends Component{
+    systemCreateMe(closeFunc:Function):void{};
+    systemDeleteMe():void{};
+    systemHide(isAnim:boolean = true):void{};
+    systemShow(isAnim:boolean = true):void{};
+    getPopType():PopType{return PopType.window};
+    setPopType(popType:PopType):void{};
+}
+
 export class PopCore {
 
     // private static _instance: PopManager = new PopManager();
@@ -156,8 +168,8 @@ export class PopCore {
     }
 
     protected getScript(node:Node | null){
-        let kk = node?.getComponent("PopBase") as PopBase;
-        return kk;
+        let kk = node?.getComponent("PopBase");
+        return kk as unknown as PopBasic;
     }
 
     

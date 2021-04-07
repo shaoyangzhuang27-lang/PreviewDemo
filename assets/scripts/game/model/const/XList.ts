@@ -3,7 +3,7 @@
                  原文链接：https://blog.csdn.net/qq_27461747/article/details/108480896
  * @Author: 徐涛
  * @Date: 2021-03-18 16:31:10
- * @LastEditTime: 2021-03-18 16:40:34
+ * @LastEditTime: 2021-04-06 17:57:04
  */
 export class XList<T>{
     private arr: Array<T> = [];
@@ -14,6 +14,10 @@ export class XList<T>{
         }
     }
 
+    public GetArr(): Array<T> {
+        return this.arr;
+    }
+    
     public Get(index: number): T {
         return this.arr[index];
     }

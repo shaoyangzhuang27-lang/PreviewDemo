@@ -1,12 +1,14 @@
 
-import { _decorator, Component, Node,resources,instantiate } from 'cc';
+import { _decorator, Component, Node,resources,instantiate,Prefab } from 'cc';
 import { PubHeroIcon } from '../pub/PubHeroIcon';
 import { GameModel } from '../../model/GameModel';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { ItemEquipType,ItemEquipCell } from '../menu/ItemEquipCell';
+import { ResMgr } from '../../control/ResMgr';
 import { HeroIcon } from '../hero/HeroIcon';
 import { PopMgr } from '../../control/PopMgr';
+import {PubWonderRewardList} from "./PubWonderRewardList";
 const { ccclass, property } = _decorator;
 
 @ccclass('PubWonderRewardListItem')
@@ -16,6 +18,8 @@ export class PubWonderRewardListItem extends Component {
 
     private _infoArray : Array<any> = [];
 
+    private _node_parent : PubWonderRewardList = null as unknown as PubWonderRewardList;
+
     start () {
         
     }
@@ -24,8 +28,8 @@ export class PubWonderRewardListItem extends Component {
      * initFragmentIconInfo
      */
     public initFragmentIconInfo(data : any,node : Node) {
-        resources.load('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
-            let fragmentItem = instantiate(res); 
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_heroicon', (err: Error | null, res: Prefab | null)=>{
+            let fragmentItem = instantiate(res as Prefab); 
             fragmentItem.setScale(0.6,0.6,1)
             var info : XStruct.fragment_synthesis_info.IRecord = {
                 frame :"",
@@ -39,7 +43,8 @@ export class PubWonderRewardListItem extends Component {
                 heroName : "",
                 campName : "",
                 classesName : "",
-                bg : ""
+                bg : "",
+                param : 0
             }  
             info.type = data.awardParam1; // Msg.TFragmentType.EFragmentType_Random;
             info.star = data.awardParam3; //5
@@ -53,23 +58,24 @@ export class PubWonderRewardListItem extends Component {
             
             info.maxNum = data.awardNum;
             // 设置装备点击回调
-            let script = fragmentItem.getComponent(PubHeroIcon);
+            let script = fragmentItem.getComponent(PubHeroIcon) as PubHeroIcon;
             script.setWonderSummonShow(true,info);
             script.setBtnCallBack( 
                 ()=>{
                     console.log("碎片");
+                    this._node_parent.setIsNeedHide(false);
                     PopMgr.getInstance().popFragmentSynthesisWindow(info,()=>{console.log("碎片合成")},true);
             });  
 
             node.addChild(fragmentItem);
-        })
+        },"PubWonderRewardListItem")
     }
 
 
     public initEquipIconInfo(data : any,node :Node)
     {
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
-            let equipItem = instantiate(res); 
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err: Error | null, res: Prefab | null)=>{
+            let equipItem = instantiate(res as Prefab); 
             // equipItem.setScale(0.4,0.4,1)
             let id = data.awardParam1; 
             let num = data.awardNum;
@@ -78,16 +84,17 @@ export class PubWonderRewardListItem extends Component {
             script.setItemType(id, num, ItemEquipType.equip, 
                 ()=>{
                     console.log("装备")
-                    PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.equip,false);
+                    this._node_parent.setIsNeedHide(false);
+                    PopMgr.getInstance().popEquipInfoView(id,true);
             });  
             node.addChild(equipItem);
-        })    
+        },"PubWonderRewardListItem")    
     }
 
     public initMagicDust(data : any, node : Node)
     {
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
-            let equipItem = instantiate(res); 
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err: Error | null, res: Prefab | null)=>{
+            let equipItem = instantiate(res as Prefab); 
             // equipItem.setScale(0.4,0.4,1)
             let id = Msg.TObjectType.EObject_MagicDust; //data.awardParam1; 
             let num = data.awardNum;
@@ -96,16 +103,17 @@ export class PubWonderRewardListItem extends Component {
             script.setItemType(id, num, ItemEquipType.goods, 
                 ()=>{
                     console.log("道具")
+                    this._node_parent.setIsNeedHide(false);
                     PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
             });  
             node.addChild(equipItem);
-        }) 
+        },"PubWonderRewardListItem") 
     }
 
     public initAdvanceExp(data : any, node : Node)
     {
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
-            let equipItem = instantiate(res); 
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err: Error | null, res: Prefab | null)=>{
+            let equipItem = instantiate(res as Prefab); 
             // equipItem.setScale(0.4,0.4,1)
             let id = Msg.TObjectType.EObject_AdvanceExp; //data.awardParam1; 
             let num = data.awardNum;
@@ -114,28 +122,31 @@ export class PubWonderRewardListItem extends Component {
             script.setItemType(id, num, ItemEquipType.goods, 
                 ()=>{
                     console.log("道具")
+                    this._node_parent.setIsNeedHide(false);
                     PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
             });  
             node.addChild(equipItem);
-        }) 
+        },"PubWonderRewardListItem") 
     }
 
     public initUsableItem(data : any, node : Node)
     {
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
-            let equipItem = instantiate(res); 
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err: Error | null, res: Prefab | null)=>{
+            let equipItem = instantiate(res as Prefab); 
             // equipItem.setScale(0.4,0.4,1)
             let id = data.awardParam1; 
             let num = data.awardNum;
             // 设置装备点击回调
             let script = equipItem.getComponent("ItemEquipCell") as ItemEquipCell;
+            script.setItemUseType(data.awardType);
             script.setItemType(id, num, ItemEquipType.goods, 
                 ()=>{
                     console.log("道具")
+                    this._node_parent.setIsNeedHide(false);
                     PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
             });  
             node.addChild(equipItem);
-        }) 
+        },"PubWonderRewardListItem") 
     }
     public initItemInfo(data : Array<any>)
     {
@@ -146,19 +157,19 @@ export class PubWonderRewardListItem extends Component {
 
         if(nCounts == 2)
         {
-            resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
-                let _heroIcon = instantiate(res);
+            ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err: Error | null, res: Prefab | null)=>{
+                let _heroIcon = instantiate(res as Prefab);
                  _heroIcon.setScale(0.8,0.8,1)
-                let script = _heroIcon.getComponent(HeroIcon); 
+                let script = _heroIcon.getComponent(HeroIcon) as HeroIcon; 
                 script.initUIHeroIconInfo(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero(),XConsts.HERO_ICON_TYPE.WonderSummon);    
                 script.setBtnCallBack(()=>{
                     PopMgr.getInstance().popOpenBookHeroDetail(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero());
                 })
                this.node_list[4]?.addChild(_heroIcon);   
-            });
+            },"PubWonderRewardListItem");
 
-            resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
-                let itemEquipCell = instantiate(res);
+            ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err: Error | null, res: Prefab | null)=>{
+                let itemEquipCell = instantiate(res as Prefab);
                 //钻石 
                  itemEquipCell.setScale(1.2,1.2,1)
                 let id = this._infoArray[1].awardType; //Msg.TObjectType.EObject_VRmb; 
@@ -168,11 +179,12 @@ export class PubWonderRewardListItem extends Component {
                 script.setItemType(id, num, ItemEquipType.goods, 
                     ()=>{
                         console.log("点击钻石显示道具信息")
-                        PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,true);
+                        this._node_parent.setIsNeedHide(false);
+                        PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
                 });  
     
                 this.node_list[5]?.addChild(itemEquipCell);   
-            });
+            },"PubWonderRewardListItem");
         }
         else if(nCounts == 4 )
         {
@@ -203,6 +215,12 @@ export class PubWonderRewardListItem extends Component {
                 }
             }
         }   
+    }
+
+
+    public setParentNode(node : PubWonderRewardList)
+    {
+        this._node_parent = node;
     }
 }
 

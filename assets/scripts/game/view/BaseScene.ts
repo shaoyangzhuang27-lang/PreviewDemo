@@ -4,6 +4,8 @@ import { PopMgr } from "../control/PopMgr";
 import { NotifyMgr } from "../control/NotifyMgr";
 import { XConsts } from '../model/const/XConsts';
 import { BasisScene } from '../../core/control/BasisScene';
+import { MsgMgr } from '../control/MsgMgr';
+import { SceneMgr } from '../control/SceneMgr';
 
 @ccclass('BaseScene')
 export class BaseScene extends BasisScene {
@@ -23,14 +25,20 @@ export class BaseScene extends BasisScene {
 
         // this._initSecondaryUINode();
         PopMgr.getInstance().initPop(this);
-        // NotifyMgr.getInstance().addNotifyHandler("test",this.notifyTest,this);
 		NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_player_levelup,this._notifyPlayerLevelUp,this);
+		NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_changeserver,this._notifyChangeServer,this);
+        NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_player_login,this._notifyPlayerLoginHandle,this);
+		NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_getherolist,this._notifyGetHeroList,this);
+		NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_getplayerdata,this._notifyGetPlayerData,this);
     }
     onDestroy(){
         super.onDestroy();
         PopMgr.getInstance().clearPop();
-        // NotifyMgr.getInstance().removeNotifyHandler("test",this.notifyTest,this);
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_player_levelup,this._notifyPlayerLevelUp,this);
+		NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_changeserver,this._notifyChangeServer,this);
+        NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_player_login,this._notifyPlayerLoginHandle,this);
+		NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_getherolist,this._notifyGetHeroList,this);
+		NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_net_getplayerdata,this._notifyGetPlayerData,this);
     }
     start () {}
     public getCanvas(){
@@ -77,5 +85,43 @@ export class BaseScene extends BasisScene {
     {
         PopMgr.getInstance().popPlayerLevelUpWindow(data as Msg.NotifyLevelUpAward)
     }
+    //切换服务器
+    private _notifyChangeServer(data:number){
+        MsgMgr.getInstance().getMsgLogin().requestPlayerLogin(data);
+        //显示登陆黑幕
+    }
+    
+    protected _loginServer(){
+        MsgMgr.getInstance().getMsgLogin().requestDeviceLoginNew();
+        //显示登陆黑幕
+    }
+
+    private _isLoadHeroList = false;
+    private _isLoadPlayerData = false;
+    private _notifyGetHeroList(){
+        this._isLoadHeroList = true;
+        this._reloadGame();
+    }
+    private _notifyGetPlayerData(){
+        this._isLoadPlayerData = true;
+        this._reloadGame();
+    }
+    private _notifyPlayerLoginHandle(data:any){
+        // MsgMgr.getInstance().getMsgLogin().requestGetHeroList();
+        // MsgMgr.getInstance().getMsgLogin().requestGetPlayerData();
+        MsgMgr.getInstance().getMsgLogin().requestGetHeroList();
+        MsgMgr.getInstance().getMsgLogin().requestGetPlayerData();
+        // this._loadData();
+        // SceneMgr.getInstance().changeToBattle();
+        //SceneMgr.getInstance().changeToMain();
+    }
+    private _reloadGame(){
+        if(this._isLoadHeroList && this._isLoadPlayerData){
+            SceneMgr.getInstance().changeToBattle();
+        }
+    }
+
+    //断线重连
+
 
 }

@@ -19,6 +19,8 @@ export class HeroPubModel extends BaseModel{
 
     private _strPubUILabContents : Map<number|string,string> = new Map();
 
+    private _heroIdArray : Array<Array<number>> = [];
+
 
     public initPubUILabContents()
     {
@@ -152,7 +154,7 @@ export class HeroPubModel extends BaseModel{
     public getPlayerLevel()
     {
          
-        return  80 ;//this._gameModel.getPlayerModel().getPlayerInfo().level || 0;
+        return this._gameModel.getPlayerModel().getPlayerInfo().level || 0;
     } 
 
     //玩家1,2星英雄是否自动分解
@@ -222,4 +224,53 @@ export class HeroPubModel extends BaseModel{
         
     }
     
+
+    //奇迹召唤传奇英雄id列表
+    public initWonderHeartHeroIdList()
+    {
+        if(this._heroIdArray.length > 0)
+        {
+            return 
+        }
+        for(var i =0 ; i < 6; i++)
+        {
+            this._heroIdArray.push([]);
+        }
+        var hero_rec_tab = ValueMgr.getInstance().getTableByName(TableName.heroes).records
+        for (let index = 0; index < hero_rec_tab.length; index++) {
+            if(Math.floor(hero_rec_tab[index].id / 10000) == 505 )
+            {
+                switch(hero_rec_tab[index].camp)
+                {
+                    case Msg.TCampType.ECampType_Water:
+                        this._heroIdArray[Msg.TCampType.ECampType_Water].push(hero_rec_tab[index].id);
+                        break;
+                    case Msg.TCampType.ECampType_Fire:
+                        this._heroIdArray[Msg.TCampType.ECampType_Fire].push(hero_rec_tab[index].id);
+                        break;
+                    case Msg.TCampType.ECampType_Wood:
+                        this._heroIdArray[Msg.TCampType.ECampType_Wood].push(hero_rec_tab[index].id);
+                        break;
+                    case Msg.TCampType.ECampType_Light:
+                        this._heroIdArray[Msg.TCampType.ECampType_Light].push(hero_rec_tab[index].id);
+                        break;
+                    case Msg.TCampType.ECampType_Dark:
+                        this._heroIdArray[Msg.TCampType.ECampType_Dark].push(hero_rec_tab[index].id);
+                        break;
+                }
+            }
+        } 
+        for(var i = 1; i < 6; i ++)
+        {
+            this._heroIdArray[0] = this._heroIdArray[0].concat(this._heroIdArray[i]);
+        }
+     } 
+
+
+    public getWonderHeartHeroIdByCamp(nCamp : number)
+    {
+        return this._heroIdArray[nCamp] || [];
+    }
+
+
 }

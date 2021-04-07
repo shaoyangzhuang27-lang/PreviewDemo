@@ -2,7 +2,7 @@
  * @Description: 分享到聊天频道Tip
  * @Author: 徐涛
  * @Date: 2021-03-25 19:29:47
- * @LastEditTime: 2021-03-25 20:54:19
+ * @LastEditTime: 2021-04-01 11:52:29
  */
 import { _decorator, Node, Label, Vec3 } from 'cc';
 import { MsgMgr } from '../control/MsgMgr';
@@ -84,7 +84,7 @@ export class TipShareHeroToChat extends TipBase {
         let content = "<a href=" + heroStaticId.toString() + "-" + heroTier + "-" + heroLevel.toString() + ">" + "[" + heroName + "]" + "</a>";
         //<a href=5064600-4-71>[Brewmaster]</a>                :格式 //chat.InputContent(content);
 
-        MsgMgr.getInstance().getMsgFormation().requestChat(content, channelType);
+        MsgMgr.getInstance().getMsgHeroPromotion().requestChat(content, channelType);
 
         //分享成功tips
         console.log(ValueMgr.getInstance().getLanguageString("UI_Share"));

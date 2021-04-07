@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, Vec3, tween, Label, Widget, resources, instantiate, UITransform, size, Button} from 'cc';
+import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, Vec3, tween, Label, Widget, resources, instantiate, UITransform, size, Button, Prefab} from 'cc';
 import { MsgMgr } from '../../control/MsgMgr';
 import { PopMgr } from '../../control/PopMgr';
 import { NotifyMgr } from '../../control/NotifyMgr';
@@ -8,6 +8,7 @@ import { GameModel } from '../../model/GameModel';
 import { HeroIcon } from '../hero/HeroIcon';
 import { XFuns } from '../../model/const/XFuns';
 import { XConsts } from '../../model/const/XConsts';
+import { ResMgr } from '../../control/ResMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('TeamMain')
@@ -100,14 +101,16 @@ export class TeamMain extends Component {
     private _initTeam()
     {
         let curFormationList:Map<number,HeroData> = GameModel.getInstance().getFormationModel().getCurrentFormation();
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{        
+        
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:any,res:Prefab | null)=>{
+        // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{        
             for (let index = 0; index < this.heroPosList.length; index++) {
                 this.heroPosList[index].removeAllChildren();                
             }
 
             curFormationList.forEach((heroData,key)=>{
         
-                let heroIcon = instantiate(res) as Node;
+                let heroIcon = instantiate(res as Prefab) as Node;
                 this._initTopHero(heroIcon, heroData);
                 this.heroPosList[key-1].addChild(heroIcon);
 
@@ -155,10 +158,11 @@ export class TeamMain extends Component {
         let heroList = campType ? heroModel.getHeroListByCampType(campType) : heroModel.getHeroList();
         let sortList = heroModel.sortHeroList(heroList)
         // 绘制
-        resources.load('prefabs_ui/main/hero_icon', (err: any, res: any) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:any,res:Prefab | null)=>{
+        // resources.load('prefabs_ui/main/hero_icon', (err: any, res: any) => {
             sortList.forEach((heroData, key) => {
                 // 创建头像
-                let heroIcon = instantiate(res) as Node;
+                let heroIcon = instantiate(res as Prefab) as Node;
                 // 大小适配自动排版
                 let trans = heroIcon.getComponent(UITransform) as UITransform
                 trans.contentSize = size(82, 82)

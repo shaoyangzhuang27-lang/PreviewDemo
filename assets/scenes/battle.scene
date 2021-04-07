@@ -28,7 +28,7 @@
     "_active": true,
     "_components": [],
     "_prefab": null,
-    "autoReleaseAssets": false,
+    "autoReleaseAssets": true,
     "_globals": {
       "__id__": 26
     },
@@ -577,8 +577,8 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 15,
-      "z": 30
+      "y": 10,
+      "z": 20
     },
     "_lrot": {
       "__type__": "cc.Quat",
