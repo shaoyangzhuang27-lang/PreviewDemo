@@ -1,13 +1,13 @@
 import { _decorator, Component, Node,resources,instantiate,Vec3,Button,Label, UITransform, size, Size, Script,Prefab } from 'cc';
-import { XConsts } from '../../model/const/XConsts';
-import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { PopMgr } from '../../control/PopMgr';
-import { HeroIcon } from '../hero/HeroIcon';
-import { ResMgr } from '../../control/ResMgr';
+import { XConsts } from '../../../model/const/XConsts';
+import { TableName, ValueMgr } from "../../../model/ValueMgr";
+import { PopMgr } from '../../../control/PopMgr';
+import { HeroIcon } from '../../hero/HeroIcon';
+import { ResMgr } from '../../../control/ResMgr';
 const { ccclass, property } = _decorator;
 
-@ccclass('PubRecLineUpItem')
-export class PubRecLineUpItem extends Component {
+@ccclass('CellPubRecLineUp')
+export class CellPubRecLineUp extends Component {
 
     @property({type: Node })
     public node_hero_0 = null as unknown as Node;
@@ -109,7 +109,7 @@ export class PubRecLineUpItem extends Component {
                     break;
             }
            
-        },"PubRecLineUpItem");
+        },"CellPubRecLineUp");
     }
     public setAllDesLabelAndBtnState(state : boolean)
     {

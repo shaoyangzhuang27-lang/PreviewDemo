@@ -158,7 +158,7 @@ export class PopHeroPub extends PopBase {
     }
     private _onRecommendTeamClick(event : any)
     {
-        PopMgr.getInstance().popRecLineUpWindow(XConsts.PUB_UI_CAMPRECOMMEND,()=>{console.log("")});
+        PopMgr.getInstance().popRecLineUpWindow(ValueMgr.getInstance().getLanguageString(XConsts.PUB_UI_CAMPRECOMMEND),()=>{console.log("")});
     }
 
 

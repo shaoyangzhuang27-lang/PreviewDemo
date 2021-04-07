@@ -3,7 +3,7 @@ const { ccclass, property } = _decorator;
 import { PopBase } from '../../../../core/control/PopBase';
 import { GameModel } from '../../../model/GameModel';
 import { ResMgr } from '../../../control/ResMgr';
-import { PubRecLineUpItem } from '../../pub/PubRecLineUpItem';
+import { CellPubRecLineUp } from './CellPubRecLineUp';
 
 
 @ccclass('PopRecLineUp')
@@ -30,7 +30,7 @@ export class PopRecLineUp extends PopBase {
         ResMgr.getInstance().loadPrefab('prefabs_ui/main/pub_reclineup_item', (err: Error | null, res: Prefab | null)=>{
             for (var i = 0 ; i < GameModel.getInstance().getHeroPubModel().nLineUpCounts; i++) {
                 let reclineup_item = instantiate( res as Prefab );
-                let script = reclineup_item.getComponent(PubRecLineUpItem) as PubRecLineUpItem;
+                let script = reclineup_item.getComponent(CellPubRecLineUp) as CellPubRecLineUp;
                 script.setViewDetaiLabelContent(GameModel.getInstance().getHeroPubModel().getRecLineUpItemInfoByIndex(i));
                 this.scroll_lineup_view.content?.addChild(reclineup_item);
             }
