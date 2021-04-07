@@ -1,17 +1,13 @@
 
-import { _decorator, Component, Node, Label, resources, Color, Sprite, SpriteFrame, Button, instantiate, ScrollView, Prefab } from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { GameModel } from '../../model/GameModel';
-import { HeroData } from '../../model/datas/HeroData';
-import { HeroModel } from '../hero/HeroModel';
-import { PopMgr } from '../../control/PopMgr';
-import { NotifyMgr } from '../../control/NotifyMgr';
-import { MsgMgr } from '../../control/MsgMgr';
-import { XShare } from '../../model/const/XShare';
-import { XConsts } from '../../model/const/XConsts';
-import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
-import { ResMgr } from '../../control/ResMgr';
+import { _decorator, Node, Label, Sprite, Button, instantiate, ScrollView, Prefab } from 'cc';
+import { PopBase } from '../../../../core/control/PopBase';
+import { GameModel } from '../../../model/GameModel';
+import { NotifyMgr } from '../../../control/NotifyMgr';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { XConsts } from '../../../model/const/XConsts';
+import { TableName, ValueMgr } from "../../../model/ValueMgr";
+import { ItemEquipCell, ItemEquipType } from '../../menu/ItemEquipCell';
+import { ResMgr } from '../../../control/ResMgr';
 
 const { ccclass, property } = _decorator;
 

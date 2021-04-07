@@ -2,12 +2,12 @@
  * @Description: 技能框点击弹出的Tip窗体
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-04-06 16:34:45
+ * @LastEditTime: 2021-04-07 10:52:18
  */
 import { _decorator, Node, Label, Vec3, Sprite, Color, UITransform, math, resources, SpriteFrame } from 'cc';
-import { ResMgr } from '../control/ResMgr';
-import { TableName, ValueMgr } from '../model/ValueMgr';
-import { TipBase } from './TipBase';
+import { ResMgr } from '../../control/ResMgr';
+import { TableName, ValueMgr } from '../../model/ValueMgr';
+import { TipBase } from '../TipBase';
 const { ccclass, property } = _decorator;
 
 @ccclass('TipSkill')

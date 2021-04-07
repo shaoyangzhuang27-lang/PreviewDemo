@@ -618,7 +618,7 @@
     "fileId": "b9O25tiixAgabxJvDwjuiS"
   },
   {
-    "__type__": "3374c9Ht79I56JprF/63d03",
+    "__type__": "5c88fN1euZGEbcM8KdIrG71",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -632,7 +632,7 @@
       "__id__": 5
     },
     "img_icon": {
-      "__id__": 8
+      "__id__": 11
     },
     "lab_level": {
       "__id__": 23
@@ -644,7 +644,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "92wGcQl9hJ4aeNoXYDtZwH"
+    "fileId": "a4dbG1wwlHG5DkJ0soulFe"
   },
   {
     "__type__": "cc.PrefabInfo",

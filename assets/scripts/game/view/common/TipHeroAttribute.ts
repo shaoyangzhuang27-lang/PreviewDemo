@@ -2,14 +2,13 @@
  * @Description: 英雄属性Tip弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-04-06 16:29:39
+ * @LastEditTime: 2021-04-07 14:39:08
  */
-import { _decorator, Component, Node, Sprite, math, Label, Layout, resources, instantiate, UITransform, Prefab } from 'cc';
-import { ResMgr } from '../control/ResMgr';
-import { DataMgr } from '../model/DataMgr';
-import { HeroData } from '../model/datas/HeroData';
-import { GameModel } from '../model/GameModel';
-import { TipBase } from './TipBase';
+import { _decorator, Node, math, Layout, instantiate, UITransform, Prefab } from 'cc';
+import { ResMgr } from '../../control/ResMgr';
+import { HeroData } from '../../model/datas/HeroData';
+import { GameModel } from '../../model/GameModel';
+import { TipBase } from '../TipBase';
 import { TipHeroAttributeItem } from './TipHeroAttributeItem';
 const { ccclass, property } = _decorator;
 
@@ -51,9 +50,9 @@ export class TipHeroAttribute extends TipBase {
      */
     public setHeroId(heroid: number = 0) {
         //todo  debug value
-        let listNames: string[] = ["血量", "攻击", "防御", "速度", "暴击", "暴击伤害", "命中", "闪避", "破甲", "破甲2", "破甲3"];
-        let listValues: number[] = [123, 123, 123, 2, 0.01, 0.02, 0.03, 0.04, 0.05, 0.08, 0.2];
-        let listTypes: number[] = [0, 0, 0, 1, 2, 2, 2, 2, 2, 0, 1];
+        let listNames: string[] = ["血量", "攻击", "防御", "速度", "暴击", "暴击伤害", "命中", "闪避", "破甲"];//, "破甲2", "破甲3"];
+        let listValues: number[] = [123, 123, 123, 2, 0.01, 0.02, 0.03, 0.04, 0.05];//, 0.08, 0.2];
+        let listTypes: number[] = [0, 0, 0, 1, 2, 2, 2, 2, 2];//, 0, 1];
         // //骑士
         // if(heroid==0)
         // {            
@@ -70,18 +69,18 @@ export class TipHeroAttribute extends TipBase {
         //     // listValues[8] = herodata.getDEFBreak();
         // }
         // else
-        // {
-        //     let herodata = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(heroid) as HeroData;        
-        //     listValues[0] = herodata.getMaxHP();
-        //     listValues[1] = herodata.getATK();
-        //     listValues[2] = herodata.getDEF();
-        //     listValues[3] = herodata.getSpeed();
-        //     listValues[4] = herodata.getCrit();
-        //     listValues[5] = herodata.getCritDamage();
-        //     listValues[6] = herodata.getHit();
-        //     listValues[7] = herodata.getDodge();
-        //     listValues[8] = herodata.getDEFBreak();
-        // }
+        if (heroid != 0) {
+            let herodata = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(heroid) as HeroData;
+            listValues[0] = herodata.getMaxHP();
+            listValues[1] = herodata.getATK();
+            listValues[2] = herodata.getDEF();
+            listValues[3] = herodata.getSpeed();
+            listValues[4] = herodata.getCrit();
+            listValues[5] = herodata.getCritDamage();
+            listValues[6] = herodata.getHit();
+            listValues[7] = herodata.getDodge();
+            listValues[8] = herodata.getDEFBreak();
+        }
 
         this._setContents(listNames, listValues, listTypes);
     }
@@ -117,7 +116,7 @@ export class TipHeroAttribute extends TipBase {
 
             });
         }
-        else if (items.length > values.length) {
+        else if (items.length >= values.length) {
             let nSub1 = items.length - values.length;
             let pos = this.layout.node.getPosition();
             for (let i = 0; i < items.length; i++) {

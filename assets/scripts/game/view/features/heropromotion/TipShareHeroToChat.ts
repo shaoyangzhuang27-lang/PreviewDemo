@@ -2,14 +2,14 @@
  * @Description: 分享到聊天频道Tip
  * @Author: 徐涛
  * @Date: 2021-03-25 19:29:47
- * @LastEditTime: 2021-04-01 11:52:29
+ * @LastEditTime: 2021-04-07 11:14:17
  */
 import { _decorator, Node, Label, Vec3 } from 'cc';
-import { MsgMgr } from '../control/MsgMgr';
-import { HeroData } from '../model/datas/HeroData';
-import { GameModel } from '../model/GameModel';
-import { ValueMgr } from '../model/ValueMgr';
-import { TipBase } from './TipBase';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { HeroData } from '../../../model/datas/HeroData';
+import { GameModel } from '../../../model/GameModel';
+import { ValueMgr } from '../../../model/ValueMgr';
+import { TipBase } from '../../TipBase';
 const { ccclass, property } = _decorator;
 
 @ccclass('TipShareHeroToChat')
@@ -39,7 +39,7 @@ export class TipShareHeroToChat extends TipBase {
     }
 
     private _onBtnClick(event: any) {
-        console.log(" HeroPromotion _buttonBtnClick: " + event.target?._name)
+        console.log("  _buttonBtnClick: " + event.target?._name)
 
         switch (event.target) {
             case this.btn_world:

@@ -2,29 +2,27 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-04-06 16:49:17
+ * @LastEditTime: 2021-04-07 14:29:11
  */
-import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color, Prefab } from 'cc';
-import { DataMgr } from '../../model/DataMgr';
-
-import { PopBase } from '../../../core/control/PopBase';
-import { GameModel } from '../../model/GameModel';
-import { HeroData } from '../../model/datas/HeroData';
-import { PopMgr } from '../../control/PopMgr';
-import { MsgMgr } from '../../control/MsgMgr';
-import { HeroModel } from '../hero/HeroModel';
-import { SkillItem } from '../hero/SkillItem';
-import { NotifyMgr } from '../../control/NotifyMgr';
-import { XShare } from '../../model/const/XShare';
-import { XConsts } from '../../model/const/XConsts';
-import { XFuns } from '../../model/const/XFuns';
-import { TableName, ValueMgr } from '../../model/ValueMgr';
-import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
-import { ResMgr } from '../../control/ResMgr';
+import { _decorator, Vec3, instantiate, Node, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, Layout, Label, Color, Prefab } from 'cc';
+import { PopBase } from '../../../../core/control/PopBase';
+import { GameModel } from '../../../model/GameModel';
+import { HeroData } from '../../../model/datas/HeroData';
+import { PopMgr } from '../../../control/PopMgr';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { HeroModel } from '../../hero/HeroModel';
+import { CellSkill } from '../../common/CellSkill';
+import { NotifyMgr } from '../../../control/NotifyMgr';
+import { XShare } from '../../../model/const/XShare';
+import { XConsts } from '../../../model/const/XConsts';
+import { XFuns } from '../../../model/const/XFuns';
+import { TableName, ValueMgr } from '../../../model/ValueMgr';
+import { ItemEquipCell, ItemEquipType } from '../../menu/ItemEquipCell';
+import { ResMgr } from '../../../control/ResMgr';
 const { ccclass, property } = _decorator;
 
-@ccclass('HeroPromotion')
-export class HeroPromotion extends PopBase {
+@ccclass('PopfHeroPromotion')
+export class PopfHeroPromotion extends PopBase {
     @property({ type: Node, displayName: "锁定" })
     public btn_lock: Node = null as unknown as Node;
 
@@ -160,17 +158,17 @@ export class HeroPromotion extends PopBase {
     @property({ type: HeroModel, displayName: "英雄形象" })
     public cur_hero_model: HeroModel = null as unknown as HeroModel;
 
-    @property({ type: SkillItem, displayName: "主动技能" })
-    public skillItem0: SkillItem = null as unknown as SkillItem;
+    @property({ type: CellSkill, displayName: "主动技能" })
+    public skillItem0: CellSkill = null as unknown as CellSkill;
 
-    @property({ type: SkillItem, displayName: "天赋技能1" })
-    public skillItem1: SkillItem = null as unknown as SkillItem;
+    @property({ type: CellSkill, displayName: "天赋技能1" })
+    public skillItem1: CellSkill = null as unknown as CellSkill;
 
-    @property({ type: SkillItem, displayName: "天赋技能2" })
-    public skillItem2: SkillItem = null as unknown as SkillItem;
+    @property({ type: CellSkill, displayName: "天赋技能2" })
+    public skillItem2: CellSkill = null as unknown as CellSkill;
 
-    @property({ type: SkillItem, displayName: "天赋技能3" })
-    public skillItem3: SkillItem = null as unknown as SkillItem;
+    @property({ type: CellSkill, displayName: "天赋技能3" })
+    public skillItem3: CellSkill = null as unknown as CellSkill;
 
     @property({ type: ToggleContainer, displayName: "升级装备tab" })
     public tabGroup: ToggleContainer = null as unknown as ToggleContainer;
@@ -245,7 +243,7 @@ export class HeroPromotion extends PopBase {
         // tabGroup
         const containerEventHandler = new EventHandler();
         containerEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
-        containerEventHandler.component = 'HeroPromotion';// 这个是代码文件名
+        containerEventHandler.component = 'PopfHeroPromotion';// 这个是代码文件名
         containerEventHandler.handler = '_onTabClick';
         containerEventHandler.customEventData = '';
         this.tabGroup?.checkEvents.push(containerEventHandler);
@@ -261,7 +259,7 @@ export class HeroPromotion extends PopBase {
     }
 
     update(deltatime: number) {
-        // console.log("HeroPromotion update() number= ", deltatime);
+        // console.log("PopfHeroPromotion update() number= ", deltatime);
         //判断是否检测按钮长按状态        
         if (this._touchFlag && this._touchStartTime != 0) {
             this._touchHold();
@@ -272,7 +270,7 @@ export class HeroPromotion extends PopBase {
     private _touchHold() {
         //判断按钮的按压时长
         let milliseconds = new Date().getTime() - this._touchStartTime;
-        if (milliseconds > HeroPromotion._longPressTime * 1000) {
+        if (milliseconds > PopfHeroPromotion._longPressTime * 1000) {
             this._isLongPressLvUpBtn = true;
             //触发托管事务逻辑 
             this._onBtnLvUp();
@@ -301,7 +299,7 @@ export class HeroPromotion extends PopBase {
     }
 
     private _buttonBtnClick(event: any) {
-        console.log(" HeroPromotion _buttonBtnClick: " + event.target?._name)
+        console.log(" PopfHeroPromotion _buttonBtnClick: " + event.target?._name)
 
         switch (event.target) {
             case this.btn_lock:
@@ -348,52 +346,52 @@ export class HeroPromotion extends PopBase {
                     let nodeSize = this.btn_fight_params.getComponent(UITransform)?.contentSize as math.Size;
                     pos.x -= nodeSize.width / 2;
                     pos.y += nodeSize.height / 2;
-                    PopMgr.getInstance().tipHeroAttributeWindow(pos);
+                    PopMgr.getInstance().tipHeroAttributeWindow(pos, this._curHeroId);
                 }
                 break;
             case this.btn_arrow_left:
-                console.log("HeroPromotion btn_arrow_left");
+                console.log("PopfHeroPromotion btn_arrow_left");
                 let preHeroData = GameModel.getInstance().getHeroesModel().getPrevHero(this._curHeroData);
                 this.setCurrentHeroId(preHeroData.getDyncID());
                 break;
             case this.btn_arrow_right:
                 let nextHeroData = GameModel.getInstance().getHeroesModel().getNextHero(this._curHeroData);
                 this.setCurrentHeroId(nextHeroData.getDyncID());
-                console.log("HeroPromotion btn_arrow_right");
+                console.log("PopfHeroPromotion btn_arrow_right");
                 break;
             case this.btn_equip_1:
                 {
-                    console.log("HeroPromotion btn_equip_1");
+                    console.log("PopfHeroPromotion btn_equip_1");
                     PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), Msg.TEquipLocationType.EEquipLocationType_Weapon);
                 }
                 break;
             case this.btn_equip_2:
                 {
-                    console.log("HeroPromotion btn_equip_2");
+                    console.log("PopfHeroPromotion btn_equip_2");
                     PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), Msg.TEquipLocationType.EEquipLocationType_Head);
                 }
                 break;
             case this.btn_equip_3:
                 {
-                    console.log("HeroPromotion btn_equip_3");
+                    console.log("PopfHeroPromotion btn_equip_3");
                     PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), Msg.TEquipLocationType.EEquipLocationType_Chest);
                 }
                 break;
             case this.btn_equip_4:
                 {
-                    console.log("HeroPromotion btn_equip_4");
+                    console.log("PopfHeroPromotion btn_equip_4");
                     PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), Msg.TEquipLocationType.EEquipLocationType_Trinket);
                 }
                 break;
             case this.btn_equip_5:
                 {
-                    console.log("HeroPromotion btn_equip_5");
+                    console.log("PopfHeroPromotion btn_equip_5");
                     // 钻石下阶段待开发                                                        
                 }
                 break;
             case this.btn_all_load:
                 {
-                    console.log("HeroPromotion btn_all_load");
+                    console.log("PopfHeroPromotion btn_all_load");
                     let putonEquipIDList: number[] = [];
                     for (let i = Msg.TEquipLocationType.EEquipLocationType_Weapon; i <= Msg.TEquipLocationType.EEquipLocationType_Trinket; i++) {
                         let bestEquipInBag = GameModel.getInstance().getBagModel().getBestEquipInBag(i);
@@ -424,7 +422,7 @@ export class HeroPromotion extends PopBase {
                 break;
             case this.btn_all_unload:
                 {
-                    console.log("HeroPromotion btn_all_unload");
+                    console.log("PopfHeroPromotion btn_all_unload");
                     let takeoffEquipLocList: number[] = [];
                     this._equipCellsMap.forEach((itemEquipCell, locType, m) => {
                         if (itemEquipCell && itemEquipCell.getItemId() != 0) {
@@ -436,7 +434,7 @@ export class HeroPromotion extends PopBase {
                 break;
             case this.btn_up_lv:
                 {
-                    console.log("HeroPromotion btn_up_lv touchEnd ");
+                    console.log("PopfHeroPromotion btn_up_lv touchEnd ");
                     if (this._touchFlag && this._touchStartTime) {
                         //单击升级逻辑
                         this._onBtnLvUp();
@@ -448,7 +446,7 @@ export class HeroPromotion extends PopBase {
                 break;
             case this.btn_up_tier:
                 {
-                    console.log("HeroPromotion btn_up_tier");
+                    console.log("PopfHeroPromotion btn_up_tier");
                     this._onBtnTierUp();
 
                 }
@@ -1291,7 +1289,7 @@ export class HeroPromotion extends PopBase {
     //资源替换
     private _resourceLoad(path: string, obj: any) {
         ResMgr.getInstance().loadSpriteFrame(path, (err, spriteFrame) => {
-            console.log("HeroPromotion _resourceLoad ---------", err)
+            console.log("PopfHeroPromotion _resourceLoad ---------", err)
             if (!err) {
                 let sprite = obj.getComponent(Sprite) as Sprite;
                 sprite.spriteFrame = spriteFrame;

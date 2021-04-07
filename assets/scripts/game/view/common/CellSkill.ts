@@ -11,8 +11,8 @@ import { XFuns } from '../../model/const/XFuns';
 const { ccclass, property } = _decorator;
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 
-@ccclass('SkillItem')
-export class SkillItem extends Component {
+@ccclass('CellSkill')
+export class CellSkill extends Component {
     // [1]
     // dummy = '';
 
