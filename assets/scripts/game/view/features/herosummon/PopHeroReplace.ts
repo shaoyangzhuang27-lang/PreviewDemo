@@ -348,7 +348,8 @@ export class PopHeroReplace extends PopBase {
 
     private _clickReplace(event : Event) : void {        
         if (this._selectHeroData == null) {
-            console.log("请选择一个英雄")
+            PopMgr.getInstance().popupPrompt("请选择一个英雄")
+            return
         }
 
         //条件:当前碎片数量小于消耗碎片数量
