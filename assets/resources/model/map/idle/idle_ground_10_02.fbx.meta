@@ -62,22 +62,6 @@
       ],
       "subMetas": {}
     },
-    "50a43": {
-      "importer": "gltf-material",
-      "uuid": "e3fd2660-8cd5-469c-aaf3-e437df30e045@50a43",
-      "displayName": "",
-      "id": "50a43",
-      "name": "Material #1129.material",
-      "userData": {
-        "gltfIndex": 0
-      },
-      "ver": "1.0.14",
-      "imported": true,
-      "files": [
-        ".json"
-      ],
-      "subMetas": {}
-    },
     "549e2": {
       "importer": "gltf-scene",
       "uuid": "e3fd2660-8cd5-469c-aaf3-e437df30e045@549e2",
@@ -114,11 +98,13 @@
         "e3fd2660-8cd5-469c-aaf3-e437df30e045@d0482"
       ],
       "materials": [
-        "e3fd2660-8cd5-469c-aaf3-e437df30e045@50a43"
+        "e3109e20-d5cb-40d5-9fab-87bfaf1ee58c"
       ],
       "scenes": [
         "e3fd2660-8cd5-469c-aaf3-e437df30e045@549e2"
       ]
-    }
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/resources/model/map/idle/mat"
   }
 }
