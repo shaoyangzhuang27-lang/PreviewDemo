@@ -226,7 +226,7 @@ export class ModPubWonderSummon extends Component {
 
         for(let i = 0; i < 2; i++)
         {
-            ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_heroicon', (err: Error | null, res: Prefab | null)=>{
+            ResMgr.getInstance().loadPrefab('prefabs_ui/features/pub/element_pubheroicon', (err: Error | null, res: Prefab | null)=>{
                 let itemEquipCell = instantiate(res  as Prefab); 
                 itemEquipCell.setScale(0.4,0.4,1)
                 // let id = 45 + i; 
@@ -557,7 +557,7 @@ export class ModPubWonderSummon extends Component {
     {
         this.node_wonder_summonsettle.active = true;
 
-        let nodeSummonSettle = this.node_wonder_summonsettle.getChildByName("pub_wonder_summonsettle");
+        let nodeSummonSettle = this.node_wonder_summonsettle.getChildByName("pop_pubwondersummonsettle");
 
         if(nodeSummonSettle)
         {
@@ -567,7 +567,7 @@ export class ModPubWonderSummon extends Component {
         }
         else
         {
-            ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_summonsettle', (err: Error | null, res: Prefab | null)=>{
+            ResMgr.getInstance().loadPrefab('prefabs_ui/features/pub/pop_pubwondersummonsettle', (err: Error | null, res: Prefab | null)=>{
                 let _settle = instantiate(res as Prefab);
                 // _heroIcon.setScale(0.4,0.4,1)
                 let script = _settle.getComponent(PopPubWonderSummonSettle) as PopPubWonderSummonSettle; 

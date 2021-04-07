@@ -28,7 +28,7 @@ export class CellPubWonderRewardList extends Component {
      * initFragmentIconInfo
      */
     public initFragmentIconInfo(data : any,node : Node) {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_heroicon', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/pub/element_pubheroicon', (err: Error | null, res: Prefab | null)=>{
             let fragmentItem = instantiate(res as Prefab); 
             fragmentItem.setScale(0.6,0.6,1)
             var info : XStruct.fragment_synthesis_info.IRecord = {

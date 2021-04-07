@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "pub_wonder_summon",
+    "_name": "mod_pubwondersummon",
     "_objFlags": 0,
     "_parent": null,
     "_children": [

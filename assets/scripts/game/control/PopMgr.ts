@@ -503,7 +503,7 @@ export class PopMgr extends PopCore  {
 
     public popHeroPubWindow(closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop_hero_pub', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/pub/pop_hero_pub', (err: Error | null, res: Prefab | null)=>{
             let p = instantiate( res as Prefab);
             this.pushWindow(p)
             let script = p.getComponent("PopHeroPub") as PopHeroPub;
@@ -656,7 +656,7 @@ export class PopMgr extends PopCore  {
 
        //奇迹召唤奖池详情
     public popPubWonderRewardListWindow(closeCallBack:Function|null = null,isMaskClose:boolean = true){
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_rewardlist', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/pub/pop_pubwonderrewardlist', (err: Error | null, res: Prefab | null)=>{
             let p = instantiate( res as Prefab);
             this.pushWindow(p);
 
@@ -669,7 +669,7 @@ export class PopMgr extends PopCore  {
 
     //奇迹召唤心愿英雄详情
     public popPubWonderHeartHeroWindow(isMaskClose:boolean = true){
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_hearthero', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/pub/pop_pubwonderhearthero', (err: Error | null, res: Prefab | null)=>{
             let p = instantiate( res as Prefab );
             this.pushWindow(p);
 
