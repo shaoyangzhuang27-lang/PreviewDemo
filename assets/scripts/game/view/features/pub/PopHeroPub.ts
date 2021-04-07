@@ -12,7 +12,7 @@ import { NotifyMgr } from '../../../control/NotifyMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
 import { XFuns } from '../../../model/const/XFuns';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
-import { PubHeroIcon } from '../../pub/PubHeroIcon';
+import { ElementPubHeroIcon } from './ElementPubHeroIcon';
 import { ModPubWonderSummon } from '../../features/pub/ModPubWonderSummon';
 
 const { ccclass, property } = _decorator;
@@ -382,7 +382,7 @@ export class PopHeroPub extends PopBase {
         this.node_wonder && (this.node_wonder.active = false);
         ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_heroicon', (err: Error | null, res: Prefab | null)=>{
             let p = instantiate( res as Prefab);
-            let script = p.getComponent(PubHeroIcon) as PubHeroIcon;
+            let script = p.getComponent(ElementPubHeroIcon) as ElementPubHeroIcon;
             var nodWindow = this.node.getChildByName("window");
             var node_ordinary = nodWindow?.getChildByName("node_ordinary");
             var nodeDiamond = node_ordinary?.getChildByName("node_diamond");

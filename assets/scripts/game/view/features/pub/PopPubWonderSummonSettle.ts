@@ -2,7 +2,7 @@ import { _decorator, Component, Node,Label,resources,instantiate } from 'cc';
 import { XConsts } from '../../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { GameModel } from '../../../model/GameModel';
-import { PubHeroIcon } from '../../pub/PubHeroIcon';
+import { ElementPubHeroIcon } from './ElementPubHeroIcon';
 import { HeroIcon } from '../../hero/HeroIcon';
 import { ItemEquipType,ItemEquipCell } from '../../menu/ItemEquipCell';
 const { ccclass, property } = _decorator;
@@ -135,7 +135,7 @@ export class PopPubWonderSummonSettle extends Component {
             
             info.maxNum = data.num;
             // 设置装备点击回调
-            let script = fragmentItem.getComponent(PubHeroIcon);
+            let script = fragmentItem.getComponent(ElementPubHeroIcon);
             script.setWonderSummonShow(true,info);
             script.setBtnCallBack( 
                 ()=>{

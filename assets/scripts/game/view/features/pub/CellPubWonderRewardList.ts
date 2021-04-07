@@ -1,6 +1,6 @@
 
 import { _decorator, Component, Node,resources,instantiate,Prefab } from 'cc';
-import { PubHeroIcon } from '../../pub/PubHeroIcon';
+import { ElementPubHeroIcon } from './ElementPubHeroIcon';
 import { GameModel } from '../../../model/GameModel';
 import { XConsts } from '../../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
@@ -58,7 +58,7 @@ export class CellPubWonderRewardList extends Component {
             
             info.maxNum = data.awardNum;
             // 设置装备点击回调
-            let script = fragmentItem.getComponent(PubHeroIcon) as PubHeroIcon;
+            let script = fragmentItem.getComponent(ElementPubHeroIcon) as ElementPubHeroIcon;
             script.setWonderSummonShow(true,info);
             script.setBtnCallBack( 
                 ()=>{

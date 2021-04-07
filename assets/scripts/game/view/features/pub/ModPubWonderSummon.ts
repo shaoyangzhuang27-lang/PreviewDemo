@@ -6,7 +6,7 @@ import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { HeroIcon } from '../../hero/HeroIcon';
 import { ItemEquipType,ItemEquipCell } from '../../menu/ItemEquipCell';
 import { PopMgr } from '../../../control/PopMgr';
-import { PubHeroIcon } from '../../pub/PubHeroIcon';
+import { ElementPubHeroIcon } from './ElementPubHeroIcon';
 import { MsgMgr } from '../../../control/MsgMgr';
 import { NotifyMgr } from '../../../control/NotifyMgr';
 import { XFuns } from '../../../model/const/XFuns';
@@ -259,7 +259,7 @@ export class ModPubWonderSummon extends Component {
                
                 info.maxNum = 30;
                 // 设置装备点击回调
-                let script = itemEquipCell.getComponent(PubHeroIcon) as PubHeroIcon;
+                let script = itemEquipCell.getComponent(ElementPubHeroIcon) as ElementPubHeroIcon;
                 script.setWonderSummonShow(true,info);
                 script.setBtnCallBack( 
                     ()=>{
