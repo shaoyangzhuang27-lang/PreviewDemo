@@ -5,7 +5,7 @@ import { GameModel } from '../../../model/GameModel';
 import { XConsts } from '../../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { PopMgr } from '../../../control/PopMgr';
-import { PubWonderRewardListItem } from "../../../view/pub/PubWonderRewardListItem";
+import { CellPubWonderRewardList } from "./CellPubWonderRewardList";
 import { HeroIcon } from '../../hero/HeroIcon';
 import { ResMgr } from '../../../control/ResMgr';
 const { ccclass, property } = _decorator;
@@ -56,7 +56,7 @@ export class PopPubWonderRewardList extends PopBase {
         {
             ResMgr.getInstance().loadPrefab('prefabs_ui/main/pub_wonder_rewardlist_item', (err:any,res:any)=>{
                     let wonder_item = instantiate( res );
-                    let script = wonder_item.getComponent(PubWonderRewardListItem);
+                    let script = wonder_item.getComponent(CellPubWonderRewardList);
                     script.initItemInfo(dataList[index]);
                     script.setParentNode(this);
                     this.scroll_reward.content?.addChild(wonder_item);   

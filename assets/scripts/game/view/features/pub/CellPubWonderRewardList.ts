@@ -1,18 +1,18 @@
 
 import { _decorator, Component, Node,resources,instantiate,Prefab } from 'cc';
-import { PubHeroIcon } from '../pub/PubHeroIcon';
-import { GameModel } from '../../model/GameModel';
-import { XConsts } from '../../model/const/XConsts';
-import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { ItemEquipType,ItemEquipCell } from '../menu/ItemEquipCell';
-import { ResMgr } from '../../control/ResMgr';
-import { HeroIcon } from '../hero/HeroIcon';
-import { PopMgr } from '../../control/PopMgr';
-import {PopPubWonderRewardList} from "../../view/features/pub/PopPubWonderRewardList";
+import { PubHeroIcon } from '../../pub/PubHeroIcon';
+import { GameModel } from '../../../model/GameModel';
+import { XConsts } from '../../../model/const/XConsts';
+import { TableName, ValueMgr } from "../../../model/ValueMgr";
+import { ItemEquipType,ItemEquipCell } from '../../menu/ItemEquipCell';
+import { ResMgr } from '../../../control/ResMgr';
+import { HeroIcon } from '../../hero/HeroIcon';
+import { PopMgr } from '../../../control/PopMgr';
+import {PopPubWonderRewardList} from "./PopPubWonderRewardList";
 const { ccclass, property } = _decorator;
 
-@ccclass('PubWonderRewardListItem')
-export class PubWonderRewardListItem extends Component {
+@ccclass('CellPubWonderRewardList')
+export class CellPubWonderRewardList extends Component {
     @property({type :  Node})
     public node_list:Node[] = [];
 
@@ -68,7 +68,7 @@ export class PubWonderRewardListItem extends Component {
             });  
 
             node.addChild(fragmentItem);
-        },"PubWonderRewardListItem")
+        },"CellPubWonderRewardList")
     }
 
 
@@ -88,7 +88,7 @@ export class PubWonderRewardListItem extends Component {
                     PopMgr.getInstance().popEquipInfoView(id,true);
             });  
             node.addChild(equipItem);
-        },"PubWonderRewardListItem")    
+        },"CellPubWonderRewardList")    
     }
 
     public initMagicDust(data : any, node : Node)
@@ -107,7 +107,7 @@ export class PubWonderRewardListItem extends Component {
                     PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
             });  
             node.addChild(equipItem);
-        },"PubWonderRewardListItem") 
+        },"CellPubWonderRewardList") 
     }
 
     public initAdvanceExp(data : any, node : Node)
@@ -126,7 +126,7 @@ export class PubWonderRewardListItem extends Component {
                     PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
             });  
             node.addChild(equipItem);
-        },"PubWonderRewardListItem") 
+        },"CellPubWonderRewardList") 
     }
 
     public initUsableItem(data : any, node : Node)
@@ -146,7 +146,7 @@ export class PubWonderRewardListItem extends Component {
                     PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
             });  
             node.addChild(equipItem);
-        },"PubWonderRewardListItem") 
+        },"CellPubWonderRewardList") 
     }
     public initItemInfo(data : Array<any>)
     {
@@ -166,7 +166,7 @@ export class PubWonderRewardListItem extends Component {
                     PopMgr.getInstance().popOpenBookHeroDetail(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero());
                 })
                this.node_list[4]?.addChild(_heroIcon);   
-            },"PubWonderRewardListItem");
+            },"CellPubWonderRewardList");
 
             ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err: Error | null, res: Prefab | null)=>{
                 let itemEquipCell = instantiate(res as Prefab);
@@ -184,7 +184,7 @@ export class PubWonderRewardListItem extends Component {
                 });  
     
                 this.node_list[5]?.addChild(itemEquipCell);   
-            },"PubWonderRewardListItem");
+            },"CellPubWonderRewardList");
         }
         else if(nCounts == 4 )
         {
