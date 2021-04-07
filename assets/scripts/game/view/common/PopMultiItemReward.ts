@@ -73,7 +73,7 @@ export class PopMultiItemReward extends PopBase {
     {
         var title = ValueMgr.getInstance().getItemByField(TableName.language_ui,XConsts.KStarUpGainObjectTitle) as Config.language_ui.Record;
         this.lab_title.string = title.cn;
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/item_multi_reward', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/celll_multiitemreward', (err: Error | null, res: Prefab | null)=>{
 
             var isPropInfo = this._propInfoArray.length > 0 ? true : false;
             var nCounts = isPropInfo ? this._propInfoArray.length : this._lootObjectArray.length;

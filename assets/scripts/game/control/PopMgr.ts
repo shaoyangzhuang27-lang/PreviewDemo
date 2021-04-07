@@ -521,7 +521,7 @@ export class PopMgr extends PopCore  {
      */
     public popCommonOneWindow(info : XStruct.common_one_info.Record,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_common_one', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/pop_common_one', (err: Error | null, res: Prefab | null)=>{
             let p = instantiate( res as Prefab);
             this.pushWindow(p);
             let script = p.getComponent("PopCommonOne") as PopCommonOne;
@@ -642,7 +642,7 @@ export class PopMgr extends PopCore  {
      */
       public popMultiItemRewardWindow(lootObjectData : Array<Msg.LootObject> | null,  defineData :Array<XStruct.prop_info.Record> | null,bAutoDecompsePop : boolean = false,submitCallBack:Function | null = null,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_multi_itemreward', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/pop_multi_itemreward', (err: Error | null, res: Prefab | null)=>{
             let p = instantiate( res as Prefab);
             this.pushWindow(p);
             let script = p.getComponent("PopMultiItemReward") as PopMultiItemReward;
