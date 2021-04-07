@@ -635,15 +635,15 @@ export class PopRisingStarTower extends PopBase {
             return;
         }
 
-        let _campName:string = XConsts.KHeroCampIcon[HeroInfo?.getCamp() as number];
-        let _classesName:string = XConsts.KClassesSpriteName[HeroInfo?.getClasses() as number];
+        let _campName:string = XConsts.KNewHeroCampIcon[HeroInfo?.getCamp() as number];
+        let _classesName:string = XConsts.KNewClassesSpriteName[HeroInfo?.getClasses() as number];
         let _iconName:string = HeroInfo?.getName() as string;
         let _starNum:number = HeroInfo?.getStar() as number;
 
         if(this._selectBattleList.size == 1)
         {
             this.img_camp.active = true;
-            let campIconPath:string = "ui/team/" + _campName + "/spriteFrame"
+            let campIconPath:string = "ui/comm/icon/" + _campName + "/spriteFrame"
             resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
             {
                 if(!err)
@@ -653,7 +653,7 @@ export class PopRisingStarTower extends PopBase {
                 }
             });   
             this.img_classes.active = true;
-            let classesIconPath:string = "ui/lv_up/" + _classesName + "/spriteFrame"
+            let classesIconPath:string = "ui/comm/icon/" + _classesName + "/spriteFrame"
             resources.load(classesIconPath, (err,spriteFrame:SpriteFrame) =>
             {
                 if(!err)

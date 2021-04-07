@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "07bb89d0-33c4-4ce5-a3d1-fa16040d60dc",
+  "uuid": "1f499d99-c1b2-48ab-8075-edc82cefeee6",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "07bb89d0-33c4-4ce5-a3d1-fa16040d60dc@6c48a",
-      "displayName": "btn_choice1",
+      "uuid": "1f499d99-c1b2-48ab-8075-edc82cefeee6@6c48a",
+      "displayName": "img_xingxing_hui",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "07bb89d0-33c4-4ce5-a3d1-fa16040d60dc"
+        "imageUuidOrDatabaseUri": "1f499d99-c1b2-48ab-8075-edc82cefeee6"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,29 +33,29 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "07bb89d0-33c4-4ce5-a3d1-fa16040d60dc@f9941",
-      "displayName": "btn_choice1",
+      "uuid": "1f499d99-c1b2-48ab-8075-edc82cefeee6@f9941",
+      "displayName": "img_xingxing_hui",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": -1,
+        "offsetX": 0,
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 38,
-        "height": 37,
-        "rawWidth": 40,
-        "rawHeight": 37,
-        "borderTop": 12,
-        "borderBottom": 17,
-        "borderLeft": 19,
-        "borderRight": 12,
+        "width": 136,
+        "height": 33,
+        "rawWidth": 136,
+        "rawHeight": 33,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "07bb89d0-33c4-4ce5-a3d1-fa16040d60dc@6c48a",
+        "imageUuidOrDatabaseUri": "1f499d99-c1b2-48ab-8075-edc82cefeee6@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "07bb89d0-33c4-4ce5-a3d1-fa16040d60dc@f9941"
+    "redirect": "1f499d99-c1b2-48ab-8075-edc82cefeee6@f9941"
   }
 }
