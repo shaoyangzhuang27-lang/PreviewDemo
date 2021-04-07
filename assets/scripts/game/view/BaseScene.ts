@@ -83,7 +83,7 @@ export class BaseScene extends BasisScene {
     //玩家升级通知
     private _notifyPlayerLevelUp(data:any)
     {
-        PopMgr.getInstance().popPlayerLevelUpWindow(data as Msg.NotifyLevelUpAward)
+        PopMgr.getInstance().popPlayerLevelUpWindow(data as Msg.NotifyLevelUpAward);
     }
     //切换服务器
     private _notifyChangeServer(data:number){
