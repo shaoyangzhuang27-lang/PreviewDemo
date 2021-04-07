@@ -6,7 +6,7 @@ import { PopOneKeyStarUp } from "../view/features/starup/PopOneKeyStarUp";
 import { PopHeroReset } from "../view/features/decompose/PopHeroReset";
 import { PopCommonOne } from "../view/common/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
-import { NetLoading } from '../view/NetLoading';
+import { NetLoading } from './NetLoading';
 import { TipDemo } from '../view/TipDemo';
 import { TipHeroAttribute } from '../view/TipHeroAttribute';
 import { XConsts } from '../model/const/XConsts';
@@ -59,7 +59,7 @@ export class PopMgr extends PopCore  {
     // }
 
     public setNetLoading(bo:boolean,content:string){
-        resources.load('prefabs_ui/net_loading', (err:Error | null,res:any)=>{
+        resources.load('prefabs_ui/initial/net_loading', (err:Error | null,res:any)=>{
             // this.netLoading = instantiate( res );
 
             let net_loading = this._parent?.getChildByName("net_loading")

@@ -1,11 +1,11 @@
 import { _decorator, Component, Node,director,instantiate,resources,Scene, Layers, Widget } from 'cc';
 const { ccclass, property } = _decorator;
-import { PopMgr } from "../control/PopMgr";
-import { NotifyMgr } from "../control/NotifyMgr";
-import { XConsts } from '../model/const/XConsts';
-import { BasisScene } from '../../core/control/BasisScene';
-import { MsgMgr } from '../control/MsgMgr';
-import { SceneMgr } from '../control/SceneMgr';
+import { PopMgr } from "../../control/PopMgr";
+import { NotifyMgr } from "../../control/NotifyMgr";
+import { XConsts } from '../../model/const/XConsts';
+import { BasisScene } from '../../../core/control/BasisScene';
+import { MsgMgr } from '../../control/MsgMgr';
+import { SceneMgr } from '../../control/SceneMgr';
 
 @ccclass('BaseScene')
 export class BaseScene extends BasisScene {

@@ -6,10 +6,10 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import { _decorator, Component, Node } from 'cc';
-import { MsgMgr } from '../control/MsgMgr';
-import { NotifyMgr } from '../control/NotifyMgr';
-import { ResMgr } from '../control/ResMgr';
-import { SceneMgr } from '../control/SceneMgr';
+import { MsgMgr } from '../../control/MsgMgr';
+import { NotifyMgr } from '../../control/NotifyMgr';
+import { ResMgr } from '../../control/ResMgr';
+import { SceneMgr } from '../../control/SceneMgr';
 import { BaseScene } from './BaseScene';
 const { ccclass, property } = _decorator;
 
