@@ -1,20 +1,20 @@
 
 import { _decorator, Component, Node,Label,ScrollView,ToggleContainer,EventHandler,Toggle,resources,instantiate,Vec3,Prefab} from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { XConsts } from '../../model/const/XConsts';
-import { GameModel } from '../../model/GameModel';
-import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { HeroSelectIcon } from '../hero/HeroSelectIcon';
-import { HeroIcon } from '../hero/HeroIcon';
-import { PopMgr } from '../../control/PopMgr';
-import { MsgMgr } from '../../control/MsgMgr';
-import { NotifyMgr } from '../../control/NotifyMgr';
-import { ResMgr } from '../../control/ResMgr';
+import { PopBase } from '../../../../core/control/PopBase';
+import { XConsts } from '../../../model/const/XConsts';
+import { GameModel } from '../../../model/GameModel';
+import { TableName, ValueMgr } from "../../../model/ValueMgr";
+import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
+import { HeroIcon } from '../../hero/HeroIcon';
+import { PopMgr } from '../../../control/PopMgr';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { NotifyMgr } from '../../../control/NotifyMgr';
+import { ResMgr } from '../../../control/ResMgr';
 
 const { ccclass, property } = _decorator;
 
-@ccclass('PubWonderHeartHero')
-export class PubWonderHeartHero extends PopBase {
+@ccclass('PopPubWonderHeartHero')
+export class PopPubWonderHeartHero extends PopBase {
     @property({type: Label})
     public lab_title= null as unknown as Label;
     @property({type: Label})
@@ -50,7 +50,7 @@ export class PubWonderHeartHero extends PopBase {
         this._heartHeroId = GameModel.getInstance().getHeroPubModel().getPlayerWonderHero();
         const containerEventHandler = new EventHandler();
         containerEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
-        containerEventHandler.component = 'PubWonderHeartHero';// 这个是代码文件名
+        containerEventHandler.component = 'PopPubWonderHeartHero';// 这个是代码文件名
         containerEventHandler.handler = '_onToggleCampClick';
         containerEventHandler.customEventData = '';
 
@@ -145,7 +145,7 @@ export class PubWonderHeartHero extends PopBase {
                 });
                 this.scroll_select.content?.addChild(_heroIcon);
             }
-        },"PubWonderHeartHero");         
+        },"PopPubWonderHeartHero");         
     }
 
     private _updateHeartHeroIcon(id :number)
@@ -198,7 +198,7 @@ export class PubWonderHeartHero extends PopBase {
                         script.setBtnCallBack(callFunc); 
                         this.img_hero?.addChild(_heroIcon);
                        console.log("iiiiiiiiiiiiiiii",this.img_hero);
-                    },"PubWonderHeartHero");
+                    },"PopPubWonderHeartHero");
                 }
             // }
         }

@@ -40,7 +40,7 @@ import { PopSettingView } from '../view/pop/PopSettingView';
 import { PopServerListView } from '../view/pop/PopServerListView';
 import { HeroPromotion } from '../view/hero_promotion/HeroPromotion';
 import { PopBattleTeam } from '../view/pop/PopBattleTeam';
-import {PubWonderHeartHero} from "../view/pub/PubWonderHeartHero";
+import {PopPubWonderHeartHero} from "../view/features/pub/PopPubWonderHeartHero";
 // import {PubWonderSummonSettle} from "../view/pub/PubWonderSummonSettle";
 import { PopHeroReplace } from '../view/features/herosummon/PopHeroReplace';
 import { PopfCollege } from '../view/features/college/PopfCollege';
@@ -673,7 +673,7 @@ export class PopMgr extends PopCore  {
             let p = instantiate( res as Prefab );
             this.pushWindow(p);
 
-            let script = p.getComponent("PubWonderHeartHero") as PubWonderHeartHero;
+            let script = p.getComponent("PopPubWonderHeartHero") as PopPubWonderHeartHero;
             script.setIsMaskClose(isMaskClose);
             
         } );
