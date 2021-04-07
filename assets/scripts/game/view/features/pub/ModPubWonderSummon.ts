@@ -1,22 +1,22 @@
 
 import { _decorator, Component, Node,Label,ProgressBar,Button,Sprite,Color,resources,Prefab,RichText,instantiate,SpriteFrame, Vec3 } from 'cc';
-import { GameModel } from '../../model/GameModel';
-import { XConsts } from '../../model/const/XConsts';
-import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { HeroIcon } from '../hero/HeroIcon';
-import { ItemEquipType,ItemEquipCell } from '../menu/ItemEquipCell';
-import { PopMgr } from '../../control/PopMgr';
-import { PubHeroIcon } from '../pub/PubHeroIcon';
-import { MsgMgr } from '../../control/MsgMgr';
-import { NotifyMgr } from '../../control/NotifyMgr';
-import { XFuns } from '../../model/const/XFuns';
-import {PubWonderSummonSettle} from "./PubWonderSummonSettle";
-import { ResMgr } from '../../control/ResMgr';
-import { PopHeroPub } from "../../view/features/pub/PopHeroPub";
+import { GameModel } from '../../../model/GameModel';
+import { XConsts } from '../../../model/const/XConsts';
+import { TableName, ValueMgr } from "../../../model/ValueMgr";
+import { HeroIcon } from '../../hero/HeroIcon';
+import { ItemEquipType,ItemEquipCell } from '../../menu/ItemEquipCell';
+import { PopMgr } from '../../../control/PopMgr';
+import { PubHeroIcon } from '../../pub/PubHeroIcon';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { NotifyMgr } from '../../../control/NotifyMgr';
+import { XFuns } from '../../../model/const/XFuns';
+import {PubWonderSummonSettle} from "../../../view/pub/PubWonderSummonSettle";
+import { ResMgr } from '../../../control/ResMgr';
+import { PopHeroPub } from "../../../view/features/pub/PopHeroPub";
 const { ccclass, property } = _decorator;
 
-@ccclass('PubWonderSummon')
-export class PubWonderSummon extends Component {
+@ccclass('ModPubWonderSummon')
+export class ModPubWonderSummon extends Component {
     @property({type: Node})
     public node_hero:Node | null = null;
     @property({type: Node})
@@ -174,7 +174,7 @@ export class PubWonderSummon extends Component {
                 PopMgr.getInstance().popOpenBookHeroDetail(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero());
             })
             this.node_hero?.addChild(_heroIcon);   
-        },"PubWonderSummon");
+        },"ModPubWonderSummon");
 
         ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err: Error | null, res: Prefab | null)=>{
             let itemEquipCell = instantiate(res as Prefab );
@@ -191,7 +191,7 @@ export class PubWonderSummon extends Component {
             });  
 
             this.node_dimond?.addChild(itemEquipCell);   
-        },"PubWonderSummon");
+        },"ModPubWonderSummon");
 
         for(let i = 0; i < 3; i++)
         {
@@ -221,7 +221,7 @@ export class PubWonderSummon extends Component {
                         this.node_equip_2?.addChild(itemEquipCell);  
                         break;
                 }
-            },"PubWonderSummon");
+            },"ModPubWonderSummon");
         }
 
         for(let i = 0; i < 2; i++)
@@ -277,7 +277,7 @@ export class PubWonderSummon extends Component {
                         this.node_fragment_1?.addChild(itemEquipCell);  
                         break;
                 }
-            },"PubWonderSummon");
+            },"ModPubWonderSummon");
         }
        
     }
@@ -294,7 +294,7 @@ export class PubWonderSummon extends Component {
                 PopMgr.getInstance().popPubWonderHeartHeroWindow();
             })
             this.node_fivestar?.addChild(_heroIcon);   
-        },"PubWonderSummon");
+        },"ModPubWonderSummon");
 
     }
 
@@ -577,7 +577,7 @@ export class PubWonderSummon extends Component {
                 // })
                 script.initShowAwardList(msgData);
                 this.node_wonder_summonsettle.addChild(_settle);   
-            },"PubWonderSummon");
+            },"ModPubWonderSummon");
         }
         
     }
