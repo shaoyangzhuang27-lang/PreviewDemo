@@ -3,17 +3,17 @@
 * @version 1.0.0,2021.3.13
 */
 import { _decorator, Component, Node,Label,resources,instantiate,Vec3, CCInteger,EventHandler,Sprite, Prefab,SpriteFrame, Button, ToggleContainer,Toggle,ProgressBar, Color} from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { GameModel } from '../../model/GameModel';
-import { PopMgr } from '../../control/PopMgr';
-import { ResMgr } from '../../control/ResMgr';
-import { XConsts } from '../../model/const/XConsts';
-import { NotifyMgr } from '../../control/NotifyMgr';
-import { MsgMgr } from '../../control/MsgMgr';
-import { XFuns } from '../../model/const/XFuns';
-import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { PubHeroIcon } from '../pub/PubHeroIcon';
-import { PubWonderSummon } from '../pub/PubWonderSummon';
+import { PopBase } from '../../../../core/control/PopBase';
+import { GameModel } from '../../../model/GameModel';
+import { PopMgr } from '../../../control/PopMgr';
+import { ResMgr } from '../../../control/ResMgr';
+import { XConsts } from '../../../model/const/XConsts';
+import { NotifyMgr } from '../../../control/NotifyMgr';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { XFuns } from '../../../model/const/XFuns';
+import { TableName, ValueMgr } from "../../../model/ValueMgr";
+import { PubHeroIcon } from '../../pub/PubHeroIcon';
+import { PubWonderSummon } from '../../pub/PubWonderSummon';
 
 const { ccclass, property } = _decorator;
 

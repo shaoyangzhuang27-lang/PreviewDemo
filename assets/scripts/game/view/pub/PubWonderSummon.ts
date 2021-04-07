@@ -12,7 +12,7 @@ import { NotifyMgr } from '../../control/NotifyMgr';
 import { XFuns } from '../../model/const/XFuns';
 import {PubWonderSummonSettle} from "./PubWonderSummonSettle";
 import { ResMgr } from '../../control/ResMgr';
-import { PopHeroPub } from "../../view/pop/PopHeroPub";
+import { PopHeroPub } from "../../view/features/pub/PopHeroPub";
 const { ccclass, property } = _decorator;
 
 @ccclass('PubWonderSummon')
