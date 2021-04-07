@@ -2,9 +2,9 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-31 20:11:27
+ * @LastEditTime: 2021-04-06 16:49:17
  */
-import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color } from 'cc';
+import { _decorator, Component, resources, director, tween, Vec3, instantiate, Node, UIOpacity, UIMeshRenderer, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, SpriteFrame, Layout, Layers, Label, Color, Prefab } from 'cc';
 import { DataMgr } from '../../model/DataMgr';
 
 import { PopBase } from '../../../core/control/PopBase';
@@ -20,6 +20,7 @@ import { XConsts } from '../../model/const/XConsts';
 import { XFuns } from '../../model/const/XFuns';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
 import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
+import { ResMgr } from '../../control/ResMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('HeroPromotion')
@@ -204,8 +205,8 @@ export class HeroPromotion extends PopBase {
     private _equipBtnsMap: Map<Msg.TEquipLocationType, Node> = new Map<Msg.TEquipLocationType, Node>();  //装备宝石按钮列表
 
     // 按钮长按功能实现
-    static readonly _longPressTime:number = 0.5;//秒s
-    private _touchStartTime:number = 0;
+    static readonly _longPressTime: number = 0.5;//秒s
+    private _touchStartTime: number = 0;
     private _touchFlag: boolean = false;
     private _isLongPressLvUpBtn: boolean = false;
 
@@ -219,9 +220,9 @@ export class HeroPromotion extends PopBase {
         this._equipBtnsMap.set(4, this.btn_equip_4);
         this._equipBtnsMap.set(5, this.btn_equip_5);
 
-         //添加按钮触摸监听 长按弹托管弹窗列表
-         this.btn_up_lv?.on(Node.EventType.TOUCH_START, this._touchStart, this);
-         this.btn_up_lv?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
+        //添加按钮触摸监听 长按弹托管弹窗列表
+        this.btn_up_lv?.on(Node.EventType.TOUCH_START, this._touchStart, this);
+        this.btn_up_lv?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
 
         this.btn_lock?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
         this.btn_unlock?.on(Node.EventType.TOUCH_END, this._buttonBtnClick, this);
@@ -251,33 +252,33 @@ export class HeroPromotion extends PopBase {
     }
 
     private _touchStart(event: any) {
-        if(event.target == this.btn_up_lv){
+        if (event.target == this.btn_up_lv) {
             //触摸开始 
             this._touchFlag = true;
             //记录下触摸开始时间
-            this._touchStartTime = new Date().getTime();            
+            this._touchStartTime = new Date().getTime();
         }
-    }   
+    }
 
-    update(deltatime: number) {        
+    update(deltatime: number) {
         // console.log("HeroPromotion update() number= ", deltatime);
         //判断是否检测按钮长按状态        
-        if(this._touchFlag && this._touchStartTime != 0){
+        if (this._touchFlag && this._touchStartTime != 0) {
             this._touchHold();
         }
     }
-    
-     //长按检测函数
-     private _touchHold(){
+
+    //长按检测函数
+    private _touchHold() {
         //判断按钮的按压时长
         let milliseconds = new Date().getTime() - this._touchStartTime;
-        if(milliseconds > HeroPromotion._longPressTime*1000 ){
-            this._isLongPressLvUpBtn= true;
+        if (milliseconds > HeroPromotion._longPressTime * 1000) {
+            this._isLongPressLvUpBtn = true;
             //触发托管事务逻辑 
-            this._onBtnLvUp(); 
-        }    
+            this._onBtnLvUp();
+        }
     }
-    
+
     private _onTabClick(event: Event, customEventData: string) {
         //let tog = event.target as unknown as Toggle;
         let tog: Toggle = (event as any);
@@ -295,7 +296,7 @@ export class HeroPromotion extends PopBase {
             this._isHeroUpView = false;
             if (this._curHeroId) {
                 this._showCurHeroView(this._curHeroId, false);
-            }            
+            }
         }
     }
 
@@ -320,19 +321,19 @@ export class HeroPromotion extends PopBase {
                 break;
             case this.btn_camp:
                 {
-                    let pos1 = new Vec3(event.getLocation());  
-                    console.log("pos1=", pos1);                    
-                    let pos2= new Vec3(this.btn_camp.getPosition());
+                    let pos1 = new Vec3(event.getLocation());
+                    console.log("pos1=", pos1);
+                    let pos2 = new Vec3(this.btn_camp.getPosition());
                     console.log("pos2=", pos2);
-                    let pos= this.btn_camp.getWorldPosition();
+                    let pos = this.btn_camp.getWorldPosition();
                     console.log("pos=", pos);
-                    PopMgr.getInstance().tipCampOrCareerWindow(pos, Msg.TClassesType.EClassesType_NULL, this._curHeroData.getCamp());                    
+                    PopMgr.getInstance().tipCampOrCareerWindow(pos, Msg.TClassesType.EClassesType_NULL, this._curHeroData.getCamp());
                 }
                 break;
-            case this.btn_career:                
+            case this.btn_career:
                 {
-                    let pos= this.btn_career.getWorldPosition();
-                    PopMgr.getInstance().tipCampOrCareerWindow(pos, this._curHeroData.getClasses(), Msg.TCampType.ECampType_NULL);                    
+                    let pos = this.btn_career.getWorldPosition();
+                    PopMgr.getInstance().tipCampOrCareerWindow(pos, this._curHeroData.getClasses(), Msg.TCampType.ECampType_NULL);
                 }
                 break;
             case this.btn_story:
@@ -418,7 +419,7 @@ export class HeroPromotion extends PopBase {
                         }
                     }
 
-                    MsgMgr.getInstance().getMsgFormation().requestHeroPutOnEquip(this._curHeroId, putonEquipIDList);
+                    MsgMgr.getInstance().getMsgHeroPromotion().requestHeroPutOnEquip(this._curHeroId, putonEquipIDList);
                 }
                 break;
             case this.btn_all_unload:
@@ -430,19 +431,19 @@ export class HeroPromotion extends PopBase {
                             takeoffEquipLocList.push(locType);
                         }
                     });
-                    MsgMgr.getInstance().getMsgFormation().requestHeroTakeOffEquip(this._curHeroId, takeoffEquipLocList);
+                    MsgMgr.getInstance().getMsgHeroPromotion().requestHeroTakeOffEquip(this._curHeroId, takeoffEquipLocList);
                 }
                 break;
             case this.btn_up_lv:
                 {
-                    console.log("HeroPromotion btn_up_lv touchEnd ");                                   
-                    if(this._touchFlag && this._touchStartTime){
+                    console.log("HeroPromotion btn_up_lv touchEnd ");
+                    if (this._touchFlag && this._touchStartTime) {
                         //单击升级逻辑
-                        this._onBtnLvUp();     
+                        this._onBtnLvUp();
                     }
-                    this._touchFlag= false;
-                    this._isLongPressLvUpBtn= false;
-                    
+                    this._touchFlag = false;
+                    this._isLongPressLvUpBtn = false;
+
                 }
                 break;
             case this.btn_up_tier:
@@ -457,20 +458,20 @@ export class HeroPromotion extends PopBase {
         }
     }
 
-    private _doLockHero(isLocked:boolean = true){        
-        if(this._curHeroId){
-            MsgMgr.getInstance().getMsgFormation().requestHeroLocked(this._curHeroId, isLocked);                
-    
-            console.log(" isLocked=",isLocked,"  this._curHeroData.isLocked 1= ", this._curHeroData.isLocked);
+    private _doLockHero(isLocked: boolean = true) {
+        if (this._curHeroId) {
+            MsgMgr.getInstance().getMsgHeroPromotion().requestHeroLocked(this._curHeroId, isLocked);
+
+            console.log(" isLocked=", isLocked, "  this._curHeroData.isLocked 1= ", this._curHeroData.isLocked);
             let heroData = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(this._curHeroId);
-            console.log("heroData?.isLocked ",heroData?.isLocked);
+            console.log("heroData?.isLocked ", heroData?.isLocked);
             this._curHeroData.isLocked = isLocked;
             console.log(" this._curHeroData.isLocked 2= ", this._curHeroData.isLocked);
-            
+
             this._showLocked(isLocked);
         }
     }
-    
+
     private _onBtnLvUp() {
         let record = ValueMgr.getInstance().getItemByField(TableName.upgrade_exp, this._curHeroData.level);
         if (!record) {
@@ -482,51 +483,51 @@ export class HeroPromotion extends PopBase {
         if (playerInfo.money < recordExp.heroMoney) {
             // TipsMgr.instance.ShowErrTips (TErrorCode.ErrMoneyNotEnough);
             console.log("  TErrorCode.ErrMoneyNotEnough");
-            let temp:XStruct.common_one_info.Record ={
-                title :"",
-                content : "金币不足",
-                mode : 1,
-                isRichLabMode : false,
-                isChangeBtnSpriteFrame : false,
-                submitContent:"" ,
-                cancelContent:"" 
-            };            
-            PopMgr.getInstance().popCommonOneWindow(temp,()=>{PopMgr.getInstance().deleteWindow();});
+            let temp: XStruct.common_one_info.Record = {
+                title: "",
+                content: "金币不足",
+                mode: 1,
+                isRichLabMode: false,
+                isChangeBtnSpriteFrame: false,
+                submitContent: "",
+                cancelContent: ""
+            };
+            PopMgr.getInstance().popCommonOneWindow(temp, () => { PopMgr.getInstance().deleteWindow(); });
             this._touchFlag = false;
             this._touchStartTime = 0;
-            this._isLongPressLvUpBtn= false;
+            this._isLongPressLvUpBtn = false;
             return;
         }
         if (playerInfo.heroUpgradeExp < recordExp.heroExp) {
             // OnPointerUp ();
             // TipsMgr.instance.ShowErrTips (TErrorCode.ErrUpgradeExpNotEnough);            
             console.log("  TErrorCode.ErrUpgradeExpNotEnough");
-            let temp:XStruct.common_one_info.Record ={
-                title :"",
-                content : "灵魂碎片不足",
-                mode : 1,
-                isRichLabMode : false,
-                isChangeBtnSpriteFrame : false,
-                submitContent:"" ,
-                cancelContent:"" 
-            };            
-            PopMgr.getInstance().popCommonOneWindow(temp,()=>{PopMgr.getInstance().deleteWindow();});
-            
+            let temp: XStruct.common_one_info.Record = {
+                title: "",
+                content: "灵魂碎片不足",
+                mode: 1,
+                isRichLabMode: false,
+                isChangeBtnSpriteFrame: false,
+                submitContent: "",
+                cancelContent: ""
+            };
+            PopMgr.getInstance().popCommonOneWindow(temp, () => { PopMgr.getInstance().deleteWindow(); });
+
             this._touchFlag = false;
             this._touchStartTime = 0;
-            this._isLongPressLvUpBtn= false;
+            this._isLongPressLvUpBtn = false;
             return;
         }
 
-        MsgMgr.getInstance().getMsgFormation().requestHeroLvUp(this._curHeroId);
-        
+        MsgMgr.getInstance().getMsgHeroPromotion().requestHeroLvUp(this._curHeroId);
+
         //由于升级协议走的是sync,服务器只接受不返回,也就是客户端自己处理,满足条件就能达成
         let newMsgData = new Msg.HeroUpgradeA;
         newMsgData.heroID = this._curHeroId;
-        newMsgData.moneyExpconsume= recordExp.heroMoney;
-        newMsgData.upgradeExpConsume= recordExp.heroExp;
+        newMsgData.moneyExpconsume = recordExp.heroMoney;
+        newMsgData.upgradeExpConsume = recordExp.heroExp;
         newMsgData.err = Msg.TErrorCode.ERR_OK;
-        newMsgData.newLevel= this._curHeroData.level+1;
+        newMsgData.newLevel = this._curHeroData.level + 1;
         this._notifyHeroLvUpHandle(newMsgData);
     }
 
@@ -553,7 +554,7 @@ export class HeroPromotion extends PopBase {
             return;
         }
 
-        MsgMgr.getInstance().getMsgFormation().requestHeroTierUp(this._curHeroId);
+        MsgMgr.getInstance().getMsgHeroPromotion().requestHeroTierUp(this._curHeroId);
     }
 
     start() {
@@ -606,10 +607,12 @@ export class HeroPromotion extends PopBase {
             let playerModel = GameModel.getInstance().getPlayerModel();
             playerModel.subMoney(msg.moneyExpconsume, Msg.TMoneySubType.EMoneySubType_HeroLevelUp);
             playerModel.consumeObjectByNum(Msg.TObjectType.EObject_UpgradePoint, msg.upgradeExpConsume, Msg.TObjectConsumeType.EObjectConsumeType_HeroLevelUp);
-                      
+
             this._curHeroData = heroData;
             // 刷新升阶引起的UI变化
             this._showCurHeroView(msg.heroID, false);
+            //刷新学院信息
+            GameModel.getInstance().getHeroesModel().refreshHeroesCollege();
         } else {
             // TipsMgr.instance.ShowErrDialog (msg.Err);
             console.log(msg.errStr + " errCode=" + msg.err.toString());
@@ -624,7 +627,7 @@ export class HeroPromotion extends PopBase {
         if (msg.err == Msg.TErrorCode.ERR_OK) {
             // 修改数据及显示
             let heroData = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(msg.heroID);
-            console.log("heroData?.tier =",heroData?.tier);
+            console.log("heroData?.tier =", heroData?.tier);
             if (!heroData) {
                 return;
             }
@@ -632,13 +635,13 @@ export class HeroPromotion extends PopBase {
             let hdOld = new HeroData();
             hdOld = hdOld.CopyHeroData(heroData);
             console.log("hdOld?.tier =", hdOld?.tier);
-            
+
             let heroData2 = GameModel.getInstance().getHeroesModel().getHeroInfoByDyncID(msg.heroID);
             console.log("heroData2?.tier = ", heroData2?.tier);
             heroData.tier = msg.newTier;
-            console.log("hdOld?.tier 2 =",hdOld?.tier);
-            console.log("heroData2?.tier = ",heroData2?.tier);
-            
+            console.log("hdOld?.tier 2 =", hdOld?.tier);
+            console.log("heroData2?.tier = ", heroData2?.tier);
+
             //重新计算天赋属性
             heroData.calcTalentSkillProperty();
             //消耗
@@ -649,6 +652,8 @@ export class HeroPromotion extends PopBase {
             this._curHeroId = msg.heroID;
             // 刷新升阶引起的UI变化
             this._showCurHeroView(msg.heroID, false);
+            //刷新学院信息
+            GameModel.getInstance().getHeroesModel().refreshHeroesCollege();
         } else {
             // TipsMgr.instance.ShowErrDialog (msg.Err);
             console.log(msg.errStr + " errCode=" + msg.err.toString());
@@ -821,7 +826,7 @@ export class HeroPromotion extends PopBase {
     _initView() {
     }
 
-   
+
 
     /**
      * @description: 设置当前英雄id
@@ -852,22 +857,22 @@ export class HeroPromotion extends PopBase {
 
         // 星级下的每个品阶有对应的等级最大限制，当等级提升到最大限制后，通过升阶操作扩展更高的等级上限。       
         let curcurTierMaxLv = XShare.getInstance().KHeroMaxLevelForTier[this._curHeroData.tier];
-        if (this._curHeroData.getLevel() < curcurTierMaxLv  && (this._curHeroData.tier <= XShare.getInstance().KMaxHeroTier)) {
+        if (this._curHeroData.getLevel() < curcurTierMaxLv && (this._curHeroData.tier <= XShare.getInstance().KMaxHeroTier)) {
             this._isLvUpView = true; // 当前应该显示升级界面
         }
         else {
             this._isLvUpView = false;// 当前应该显示升阶界面
         }
-        
+
         if (this._isHeroUpView) {
             if (this._isLvUpView) {
                 this._showHeroLvUpView();
             }
             else {
-                
+
                 this._touchFlag = false;
                 this._touchStartTime = 0;
-                this._isLongPressLvUpBtn= false;
+                this._isLongPressLvUpBtn = false;
                 this._showHeroTierUpView();
             }
         }
@@ -927,8 +932,8 @@ export class HeroPromotion extends PopBase {
 
     }
 
-    private _showLocked(isLocked:boolean = true){
-        if(this._curHeroId){
+    private _showLocked(isLocked: boolean = true) {
+        if (this._curHeroId) {
             this.btn_lock.active = !isLocked;
             this.btn_unlock.active = isLocked;
         }
@@ -938,9 +943,9 @@ export class HeroPromotion extends PopBase {
         let tier = this._curHeroData.tier;
         let costExp = XShare.getInstance().KHeroTierUpAdvanceExp[tier];
         let costGold = XShare.getInstance().KHeroTierUpMoney[tier];
-        if(!costGold || !costExp){
+        if (!costGold || !costExp) {
             console.log(" _showUpTierCost error   ");
-            return ;
+            return;
         }
         let playerInfo = GameModel.getInstance().getPlayerModel().getPlayerInfo();
         let color = Color.WHITE;
@@ -968,11 +973,11 @@ export class HeroPromotion extends PopBase {
         let playerInfo = GameModel.getInstance().getPlayerModel().getPlayerInfo();
         let color = Color.WHITE;
 
-        let isCanContinueLvUp= true;
+        let isCanContinueLvUp = true;
         // 升级消耗金币
-        if (playerInfo.money < record.heroMoney) {            
+        if (playerInfo.money < record.heroMoney) {
             color = Color.RED;
-            isCanContinueLvUp= false;
+            isCanContinueLvUp = false;
         }
         this.lab_need_gold_1.string = XFuns.FormatNumber(playerInfo.money);
         this.lab_need_gold_1.color = color;
@@ -982,20 +987,20 @@ export class HeroPromotion extends PopBase {
         color = Color.WHITE;
         if (playerInfo.heroUpgradeExp < record.heroExp) {
             color = Color.RED;
-            isCanContinueLvUp= false;
+            isCanContinueLvUp = false;
         }
         this.lab_need_exp_1.string = XFuns.FormatNumber(playerInfo.heroUpgradeExp);
         this.lab_need_exp_1.color = color;
         this.lab_need_exp_2.string = "/" + XFuns.FormatNumber(record.heroExp);
 
-        if(this._isLongPressLvUpBtn){
-            if(!isCanContinueLvUp){
+        if (this._isLongPressLvUpBtn) {
+            if (!isCanContinueLvUp) {
                 //触摸开始 
                 this._touchFlag = isCanContinueLvUp;
             }
             //记录下触摸开始时间
-            this._touchStartTime = isCanContinueLvUp ? new Date().getTime(): 0;  
-            this._isLongPressLvUpBtn= false;
+            this._touchStartTime = isCanContinueLvUp ? new Date().getTime() : 0;
+            this._isLongPressLvUpBtn = false;
         }
     }
 
@@ -1014,7 +1019,7 @@ export class HeroPromotion extends PopBase {
     }
 
     private _showUpTierFightValues() {
-        let _nextTierHeroData = new HeroData;        
+        let _nextTierHeroData = new HeroData;
         _nextTierHeroData = _nextTierHeroData.CopyHeroData(this._curHeroData);
         _nextTierHeroData.tier = this._curHeroData.tier + 1;
 
@@ -1049,9 +1054,9 @@ export class HeroPromotion extends PopBase {
         let lv = this._curHeroData.getLevel();
         let curTierMaxLv = XShare.getInstance().KHeroMaxLevelForTier[tier];
         this.lab_lv.string = lv.toString() + "/" + curTierMaxLv.toString();
-        
-        let isCurStarMaxLv = (this._curHeroData.getStar()==tier) && (lv == curTierMaxLv);
-        
+
+        let isCurStarMaxLv = (this._curHeroData.getStar() == tier) && (lv == curTierMaxLv);
+
         let tierNext = this._curHeroData.tier + 1;
         let isMaxTier = tierNext > XShare.getInstance().KMaxHeroTier;
 
@@ -1065,7 +1070,7 @@ export class HeroPromotion extends PopBase {
 
             this.sp_arrow_tier.node.active = false;
             this.layout_lv_tier.node.active = false;
-            
+
             this.btn_up_lv.active = !isCurStarMaxLv;
         } else {//升阶界面等级显示            
             pos.x = -nodeSize.width / 2;
@@ -1081,11 +1086,11 @@ export class HeroPromotion extends PopBase {
         }
 
         // 满级显示
-        this.node_max_lv.active= isCurStarMaxLv;        
-        if(isCurStarMaxLv){
+        this.node_max_lv.active = isCurStarMaxLv;
+        if (isCurStarMaxLv) {
             this._touchFlag = false;
             this._touchStartTime = 0;
-            this._isLongPressLvUpBtn= false;
+            this._isLongPressLvUpBtn = false;
         }
     }
 
@@ -1106,32 +1111,32 @@ export class HeroPromotion extends PopBase {
             // 1.品阶图标原来的也需要保证设置成正确的样式
             for (let index = 0; index < items.length; index++) {
                 let iconPath = "ui/lv_up/黑白进阶宝石/spriteFrame";
-                if (tier >= (index +1)) {
+                if (tier >= (index + 1)) {
                     iconPath = "ui/lv_up/进阶宝石/spriteFrame";
                 }
-                XFuns.ReplaceSpriteFrame(iconPath, items[index]);                
+                XFuns.ReplaceSpriteFrame(iconPath, items[index]);
             }
             // 2.品阶原先图标不足的，需要创建新的图标补充
             let nSub = maxTier - items.length;
             for (let index = 0; index < nSub; index++) {
                 let iconPath0 = "ui/lv_up/黑白进阶宝石/spriteFrame";
-                if (tier >= (index + items.length+1)) {
+                if (tier >= (index + items.length + 1)) {
                     iconPath0 = "ui/lv_up/进阶宝石/spriteFrame";
                 }
 
                 XFuns.CreateSprite(iconPath0, target.layout_tier.node, "img_grade_gem_" + (items.length + 1 + index).toString());
             }
-            
+
         }
         else if (items.length >= maxTier) {
             // 1.品阶图标多的需要先释放
             let nSub1 = items.length - maxTier;
             let pos = this.layout_tier.node.getPosition();
-            for (let i = 0; i < nSub1; i++) {  
+            for (let i = 0; i < nSub1; i++) {
                 items[i].node.removeFromParent();
                 items[i].onDestroy();
             }
-             // 2.品阶图标需要保证设置成正确的样式
+            // 2.品阶图标需要保证设置成正确的样式
             let itemNews: Sprite[] = this.layout_tier.node.getComponentsInChildren(Sprite) as [Sprite];
             for (let index = 0; index < itemNews.length; index++) {
                 let iconPath = "ui/lv_up/黑白进阶宝石/spriteFrame";
@@ -1200,11 +1205,11 @@ export class HeroPromotion extends PopBase {
                 break;
             case 2:
                 {
-                    pos.x -= this._starXSub/2;
+                    pos.x -= this._starXSub / 2;
                     this.img_star1.position = pos;
 
                     let posNew = new Vec3(this._starsMiddlePos);
-                    posNew.x += this._starXSub/2;
+                    posNew.x += this._starXSub / 2;
                     this.img_star2.position = posNew;
 
                     this.img_star1.active = true;
@@ -1285,7 +1290,7 @@ export class HeroPromotion extends PopBase {
 
     //资源替换
     private _resourceLoad(path: string, obj: any) {
-        resources.load(path, SpriteFrame, (err, spriteFrame: SpriteFrame) => {
+        ResMgr.getInstance().loadSpriteFrame(path, (err, spriteFrame) => {
             console.log("HeroPromotion _resourceLoad ---------", err)
             if (!err) {
                 let sprite = obj.getComponent(Sprite) as Sprite;
@@ -1311,8 +1316,8 @@ export class HeroPromotion extends PopBase {
         this.node_upgrade.active = !this._isLvUpView;    //升阶底部属性界面
         this.btn_up_tier.active = !this._isLvUpView;     //升阶按钮
 
-         //显示锁定
-         this._showLocked(this._curHeroData.isLocked);
+        //显示锁定
+        this._showLocked(this._curHeroData.isLocked);
         //显示技能
         this._showSkillItems();
         //显示星级
@@ -1358,9 +1363,9 @@ export class HeroPromotion extends PopBase {
 
             let itemEquipCell = this._equipCellsMap.get(key);
             if (!itemEquipCell) {
-                resources.load('prefabs_ui/main/itemequip_cell', (err: any, res: any) => {
+                ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err, res) => {
 
-                    let node = instantiate(res) as Node;
+                    let node = instantiate(res as Prefab) as Node;
                     let equip_btn_node = this._equipBtnsMap.get(key);
                     if (equip_btn_node) {
                         equip_btn_node.addChild(node);

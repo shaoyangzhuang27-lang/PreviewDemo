@@ -2,9 +2,10 @@
  * @Description: 技能框点击弹出的Tip窗体
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-03-15 16:25:15
+ * @LastEditTime: 2021-04-06 16:34:45
  */
 import { _decorator, Node, Label, Vec3, Sprite, Color, UITransform, math, resources, SpriteFrame } from 'cc';
+import { ResMgr } from '../control/ResMgr';
 import { TableName, ValueMgr } from '../model/ValueMgr';
 import { TipBase } from './TipBase';
 const { ccclass, property } = _decorator;
@@ -13,15 +14,15 @@ const { ccclass, property } = _decorator;
 export class TipSkill extends TipBase {
     // [1]
     // dummy = '';
-    
-    private _skillId:number =0 ; //主动技能id
-    private _talentId:number =0 ; //被动天赋id
-    private _unlockTier:number =0 ; // 天赋解锁品阶
-    private _skillOrTalentLv:number =0 ; // 当前技能/天赋等级    
+
+    private _skillId: number = 0; //主动技能id
+    private _talentId: number = 0; //被动天赋id
+    private _unlockTier: number = 0; // 天赋解锁品阶
+    private _skillOrTalentLv: number = 0; // 当前技能/天赋等级    
     private _isUnLocked: boolean = true; // 当前技能/天赋是否已解锁
-    private _recordSkill : Config.skill.Record = null as unknown as Config.skill.Record;//对应技能表内的一条记录数据
-    private _recordTalent : Config.talent.Record = null as unknown as Config.talent.Record;//对应天赋表内的一条记录数据
-    
+    private _recordSkill: Config.skill.Record = null as unknown as Config.skill.Record;//对应技能表内的一条记录数据
+    private _recordTalent: Config.talent.Record = null as unknown as Config.talent.Record;//对应天赋表内的一条记录数据
+
     //技能图标
     @property({ type: Sprite, displayName: "技能图标" })
     public skill_icon: Sprite = null as unknown as Sprite;
@@ -88,43 +89,38 @@ export class TipSkill extends TipBase {
      * @param skillData : {skillId: 技能id, talentId:天赋id, isUnlock:是否解锁, unlockTier:解锁品阶(天赋会用到)}
      */
     public setSkillData(skillData: any) {
-        if(!skillData || ( !skillData.skillId && !skillData.talentId) )
-        {
+        if (!skillData || (!skillData.skillId && !skillData.talentId)) {
             console.log(" TipSkill::setSkillData() skillData err ");
-            return ;
+            return;
         }
-        
-        let skillId= skillData.skillId as number;
-        let talentId= skillData.talentId as number;
+
+        let skillId = skillData.skillId as number;
+        let talentId = skillData.talentId as number;
         this._isUnLocked = skillData.isUnlock as boolean;
         this._unlockTier = skillData.unlockTier as number;
 
         let recordSkill, recordTalent;
-        if(skillId>0)
-        {
-            recordSkill = ValueMgr.getInstance().getItemByField(TableName.skill, skillId);            
-            if(recordSkill)
-            {
+        if (skillId > 0) {
+            recordSkill = ValueMgr.getInstance().getItemByField(TableName.skill, skillId);
+            if (recordSkill) {
                 this._recordSkill = recordSkill as Config.skill.Record;
                 this._skillId = skillId;
                 this._doSetSkillData();
             }
         }
-        
-        if(talentId> 0)
-        {
-            recordTalent = ValueMgr.getInstance().getItemByField(TableName.talent, talentId);   
-            if(recordTalent)
-            {
+
+        if (talentId > 0) {
+            recordTalent = ValueMgr.getInstance().getItemByField(TableName.talent, talentId);
+            if (recordTalent) {
                 this._recordTalent = recordTalent as Config.talent.Record;
                 this._talentId = talentId;
                 this._doSetTalentData();
-            }         
+            }
         }
-        
+
     }
 
-    private _doSetSkillData(){
+    private _doSetSkillData() {
         // 等级
         this._skillOrTalentLv = this._recordSkill.level;
         // 技能名称
@@ -182,7 +178,7 @@ export class TipSkill extends TipBase {
 
     }
 
-    private _doSetTalentData(){
+    private _doSetTalentData() {
         // 等级
         this._skillOrTalentLv = this._recordTalent.level;
         // 技能名称
@@ -195,7 +191,7 @@ export class TipSkill extends TipBase {
         // 技能图标
         let framePath: string = "ui/skill_icon/" + this._recordTalent.image + "/spriteFrame";
         // todo 由于天赋图标还没资源,暂时统一用  愈合伤口 替代
-        framePath = "ui/skill_icon/愈合伤口/spriteFrame";    
+        framePath = "ui/skill_icon/愈合伤口/spriteFrame";
         this._resourceLoad(framePath, this.skill_icon);
 
         let skillId0 = this._talentId;  //等级0的技能id    
@@ -241,10 +237,10 @@ export class TipSkill extends TipBase {
         }
 
     }
-    
+
     //资源替换
     private _resourceLoad(path: string, obj: any) {
-        resources.load(path, SpriteFrame, (err, spriteFrame:SpriteFrame) =>{
+        ResMgr.getInstance().loadSpriteFrame(path, (err, spriteFrame) => {
             console.log("tipSkill _resourceLoad err=", err)
             if (!err) {
                 let sprite = obj.getComponent(Sprite) as Sprite;
@@ -253,12 +249,12 @@ export class TipSkill extends TipBase {
         });
     }
 
-    private _setSkillText(lv: number, lab_txt: Label, record: Config.skill.Record| null | undefined ) {
+    private _setSkillText(lv: number, lab_txt: Label, record: Config.skill.Record | null | undefined) {
         if (!record) {
             lab_txt.string = "";
             return;
         }
-        
+
         let recordSkill = record as Config.skill.Record;
         let desc_id = recordSkill.desc;
         // 获取技能描述
@@ -266,15 +262,14 @@ export class TipSkill extends TipBase {
         let strTmp = "Lv" + lv.toString() + ":" + record_language_data.cn;
         let values = [10, 9, 8]; //todo
         let strFmtTmp = this._formatSkillDesc(strTmp, values);
-        if( (recordSkill.unlockStar>0) && (lv == (this._skillOrTalentLv+1) ) )
-        {
+        if ((recordSkill.unlockStar > 0) && (lv == (this._skillOrTalentLv + 1))) {
             // 组装技能解锁描述
-            strFmtTmp += "("+recordSkill.unlockStar.toString()+"星解锁)"; 
+            strFmtTmp += "(" + recordSkill.unlockStar.toString() + "星解锁)";
         }
         lab_txt.string = strFmtTmp;
     }
 
-    private _setTalentText(lv: number, lab_txt: Label, record: Config.talent.Record| null | undefined) {
+    private _setTalentText(lv: number, lab_txt: Label, record: Config.talent.Record | null | undefined) {
         if (!record) {
             lab_txt.string = "";
             return;
@@ -286,20 +281,17 @@ export class TipSkill extends TipBase {
         let record_language_data = ValueMgr.getInstance().getItemByField(TableName.language_data, desc_id) as Config.language_data.Record;
         let strTmp = "Lv" + lv.toString() + ":" + record_language_data.cn;
         let values = [10, 9, 8]; //todo
-        let strFmtTmp = this._formatSkillDesc(strTmp, values);        
-        if( !this._isUnLocked )        
-        {
-            if( (lv == this._skillOrTalentLv) && (this._unlockTier>0)  ) {            
+        let strFmtTmp = this._formatSkillDesc(strTmp, values);
+        if (!this._isUnLocked) {
+            if ((lv == this._skillOrTalentLv) && (this._unlockTier > 0)) {
                 // 组装解锁描述
-                strFmtTmp += "(品阶"+this._unlockTier.toString()+"解锁)";
+                strFmtTmp += "(品阶" + this._unlockTier.toString() + "解锁)";
             }
-        }        
-        else
-        {
-            if( (recordTalent.unlockStar>0) && (lv == (this._skillOrTalentLv+1) ) )
-            {                    
+        }
+        else {
+            if ((recordTalent.unlockStar > 0) && (lv == (this._skillOrTalentLv + 1))) {
                 // 组装解锁描述
-                strFmtTmp += "("+recordTalent.unlockStar.toString()+"星解锁)"; 
+                strFmtTmp += "(" + recordTalent.unlockStar.toString() + "星解锁)";
             }
         }
         lab_txt.string = strFmtTmp;
