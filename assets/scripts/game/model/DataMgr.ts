@@ -35,6 +35,9 @@ export class DataMgr{
     }
     public setPlayerData(data:Msg.GetPlayerDataA){
         this.playerData = data;
+
+        // 初始化英雄学院数据
+        GameModel.getInstance().getHeroesModel().setCollegeHeroData(data.heroIDInCollege, data.CollegeBlockTimestamps);
     }
 
     //英雄数据

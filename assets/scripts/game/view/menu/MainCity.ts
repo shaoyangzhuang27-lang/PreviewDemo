@@ -109,6 +109,12 @@ export class MainCity extends Component {
             return;
         }
 
+        // 试炼， 暂时先给英雄学院用
+        if (buildName == "building_23") {
+            PopMgr.getInstance().popHeroCollegeView();
+            return;
+        }
+
         beast.popupSimpleWindow("建筑:"+buildName,"我是内容"+buildName,()=>{
             console.log("提交内容!")
             beast.popupSimpleWindow("删除建筑?","删除",()=>{

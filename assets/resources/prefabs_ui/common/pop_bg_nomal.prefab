@@ -229,7 +229,7 @@
     "_originalWidth": 0,
     "_originalHeight": 795,
     "_alignMode": 1,
-    "_lockFlags": 0,
+    "_lockFlags": 5,
     "_id": ""
   },
   {
@@ -397,7 +397,7 @@
     "_originalWidth": 0,
     "_originalHeight": 795,
     "_alignMode": 1,
-    "_lockFlags": 0,
+    "_lockFlags": 5,
     "_id": ""
   },
   {
@@ -565,7 +565,7 @@
     "_originalWidth": 0,
     "_originalHeight": 0,
     "_alignMode": 1,
-    "_lockFlags": 0,
+    "_lockFlags": 1,
     "_id": ""
   },
   {
@@ -584,7 +584,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "bg_top-001",
+    "_name": "bg_top_line",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -733,7 +733,7 @@
     "_originalWidth": 0,
     "_originalHeight": 0,
     "_alignMode": 1,
-    "_lockFlags": 0,
+    "_lockFlags": 1,
     "_id": ""
   },
   {
@@ -901,7 +901,7 @@
     "_originalWidth": 0,
     "_originalHeight": 0,
     "_alignMode": 1,
-    "_lockFlags": 0,
+    "_lockFlags": 4,
     "_id": ""
   },
   {
@@ -1130,8 +1130,8 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_alignMode": 2,
-    "_lockFlags": 0,
+    "_alignMode": 1,
+    "_lockFlags": 1,
     "_id": ""
   },
   {
@@ -1298,8 +1298,8 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_alignMode": 2,
-    "_lockFlags": 0,
+    "_alignMode": 1,
+    "_lockFlags": 1,
     "_id": ""
   },
   {
