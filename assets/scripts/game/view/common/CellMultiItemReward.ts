@@ -14,8 +14,8 @@ import { ResMgr } from '../../control/ResMgr';
 import { HeroData } from '../../model/datas/HeroData';
 
 
-@ccclass('ItemMultiReward')
-export class ItemMultiReward extends Component {
+@ccclass('CellMultiItemReward')
+export class CellMultiItemReward extends Component {
     // [1]
     // dummy = '';
 
@@ -84,7 +84,7 @@ export class ItemMultiReward extends Component {
             obj.active = true;
             let sprite = obj.getComponent(Sprite) as Sprite;
             sprite.spriteFrame = spriteFrame;
-        },"ItemMultiReward");
+        },"CellMultiItemReward");
         
     }
 
@@ -133,7 +133,7 @@ export class ItemMultiReward extends Component {
                 let sprite = objNode.getComponent(Sprite) as Sprite;
                 sprite.spriteFrame = spriteFrame;
             }
-        },"ItemMultiReward");   
+        },"CellMultiItemReward");   
     }
 
 

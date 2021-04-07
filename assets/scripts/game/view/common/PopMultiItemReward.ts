@@ -9,7 +9,7 @@ import { PopMgr } from '../../control/PopMgr';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { ResMgr } from '../../control/ResMgr';
-import { ItemMultiReward } from '../risestartower/ItemMultiReward';
+import { CellMultiItemReward } from './CellMultiItemReward';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopMultiItemReward')
@@ -82,7 +82,7 @@ export class PopMultiItemReward extends PopBase {
                 prop_item.scale = new Vec3(0.7,0.7,1);
                 let subWidget = prop_item.getComponent(UITransform) as UITransform;
                 subWidget.contentSize = new Size(105,126);
-                let script = prop_item.getComponent(ItemMultiReward) as ItemMultiReward;
+                let script = prop_item.getComponent(CellMultiItemReward) as CellMultiItemReward;
                 script.setPropInfo(isPropInfo ? null : this._lootObjectArray[i] ,isPropInfo ? this._propInfoArray[i] : null);
                 this.scroll_item_view.content?.addChild(prop_item);
             }
