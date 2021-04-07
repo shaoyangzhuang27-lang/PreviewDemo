@@ -1,17 +1,17 @@
 
 import { _decorator, Component, Node,Label,resources,instantiate,ScrollView } from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { GameModel } from '../../model/GameModel';
-import { XConsts } from '../../model/const/XConsts';
-import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { PopMgr } from '../../control/PopMgr';
-import { PubWonderRewardListItem } from "./PubWonderRewardListItem";
-import { HeroIcon } from '../hero/HeroIcon';
-import { ResMgr } from '../../control/ResMgr';
+import { PopBase } from '../../../../core/control/PopBase';
+import { GameModel } from '../../../model/GameModel';
+import { XConsts } from '../../../model/const/XConsts';
+import { TableName, ValueMgr } from "../../../model/ValueMgr";
+import { PopMgr } from '../../../control/PopMgr';
+import { PubWonderRewardListItem } from "../../../view/pub/PubWonderRewardListItem";
+import { HeroIcon } from '../../hero/HeroIcon';
+import { ResMgr } from '../../../control/ResMgr';
 const { ccclass, property } = _decorator;
 
-@ccclass('PubWonderRewardList')
-export class PubWonderRewardList extends PopBase {
+@ccclass('PopPubWonderRewardList')
+export class PopPubWonderRewardList extends PopBase {
     @property({type: Label})
     public lab_title= null as unknown as Label;
 
@@ -60,7 +60,7 @@ export class PubWonderRewardList extends PopBase {
                     script.initItemInfo(dataList[index]);
                     script.setParentNode(this);
                     this.scroll_reward.content?.addChild(wonder_item);   
-             },"PubWonderRewardList");
+             },"PopPubWonderRewardList");
         }
     }
 

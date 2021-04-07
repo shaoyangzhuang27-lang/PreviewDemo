@@ -8,7 +8,7 @@ import { ItemEquipType,ItemEquipCell } from '../menu/ItemEquipCell';
 import { ResMgr } from '../../control/ResMgr';
 import { HeroIcon } from '../hero/HeroIcon';
 import { PopMgr } from '../../control/PopMgr';
-import {PubWonderRewardList} from "./PubWonderRewardList";
+import {PopPubWonderRewardList} from "../../view/features/pub/PopPubWonderRewardList";
 const { ccclass, property } = _decorator;
 
 @ccclass('PubWonderRewardListItem')
@@ -18,7 +18,7 @@ export class PubWonderRewardListItem extends Component {
 
     private _infoArray : Array<any> = [];
 
-    private _node_parent : PubWonderRewardList = null as unknown as PubWonderRewardList;
+    private _node_parent : PopPubWonderRewardList = null as unknown as PopPubWonderRewardList;
 
     start () {
         
@@ -218,7 +218,7 @@ export class PubWonderRewardListItem extends Component {
     }
 
 
-    public setParentNode(node : PubWonderRewardList)
+    public setParentNode(node : PopPubWonderRewardList)
     {
         this._node_parent = node;
     }

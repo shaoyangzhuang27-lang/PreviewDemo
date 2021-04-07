@@ -34,7 +34,7 @@ import { TipCampOrCareer } from '../view/TipCampOrCareer';
 import { PopHaloView } from '../view/pop/PopHaloView';
 import { TipShareHeroToChat } from '../view/TipShareHeroToChat';
 import { PopPlayerLevelUpAward } from '../view/pop/PopPlayerLevelUpAward';
-import {PubWonderRewardList} from "../view/pub/PubWonderRewardList";
+import {PopPubWonderRewardList} from "../view/features/pub/PopPubWonderRewardList";
 import { ResMgr } from './ResMgr';
 import { PopSettingView } from '../view/pop/PopSettingView';
 import { PopServerListView } from '../view/pop/PopServerListView';
@@ -660,7 +660,7 @@ export class PopMgr extends PopCore  {
             let p = instantiate( res as Prefab);
             this.pushWindow(p);
 
-            let script = p.getComponent("PubWonderRewardList") as PubWonderRewardList;
+            let script = p.getComponent("PopPubWonderRewardList") as PopPubWonderRewardList;
             script.setCloseCallBack(closeCallBack);
             script.setIsMaskClose(isMaskClose);
             
