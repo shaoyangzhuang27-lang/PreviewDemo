@@ -2,13 +2,13 @@
  * @Description: 单个英雄属性框UI单元
  * @Author: 徐涛
  * @Date: 2021-03-10 20:30:26
- * @LastEditTime: 2021-04-07 14:42:56
+ * @LastEditTime: 2021-04-07 15:14:25
  */
 import { _decorator, Component, Label } from 'cc';
 const { ccclass, property } = _decorator;
 
-@ccclass('TipHeroAttributeItem')
-export class TipHeroAttributeItem extends Component {
+@ccclass('CellTipHeroAttribute')
+export class CellTipHeroAttribute extends Component {
     // [1]
     // dummy = '';
 

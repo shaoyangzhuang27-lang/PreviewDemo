@@ -2,14 +2,14 @@
  * @Description: 英雄属性Tip弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-04-07 14:39:08
+ * @LastEditTime: 2021-04-07 15:28:54
  */
 import { _decorator, Node, math, Layout, instantiate, UITransform, Prefab } from 'cc';
 import { ResMgr } from '../../control/ResMgr';
 import { HeroData } from '../../model/datas/HeroData';
 import { GameModel } from '../../model/GameModel';
 import { TipBase } from '../TipBase';
-import { TipHeroAttributeItem } from './TipHeroAttributeItem';
+import { CellTipHeroAttribute } from './CellTipHeroAttribute';
 const { ccclass, property } = _decorator;
 
 @ccclass('TipHeroAttribute')
@@ -21,24 +21,24 @@ export class TipHeroAttribute extends TipBase {
     @property({ type: Layout, displayName: "layout" })
     public layout: Layout = null as unknown as Layout;
 
-    @property({ type: TipHeroAttributeItem, displayName: "血量" })
-    public tipHeroAttributeItem0: TipHeroAttributeItem = null as unknown as TipHeroAttributeItem;
-    @property({ type: TipHeroAttributeItem, displayName: "攻击" })
-    public tipHeroAttributeItem1: TipHeroAttributeItem = null as unknown as TipHeroAttributeItem;
-    @property({ type: TipHeroAttributeItem, displayName: "防御" })
-    public tipHeroAttributeItem2: TipHeroAttributeItem = null as unknown as TipHeroAttributeItem;
-    @property({ type: TipHeroAttributeItem, displayName: "速度" })
-    public tipHeroAttributeItem3: TipHeroAttributeItem = null as unknown as TipHeroAttributeItem;
-    @property({ type: TipHeroAttributeItem, displayName: "暴击" })
-    public tipHeroAttributeItem4: TipHeroAttributeItem = null as unknown as TipHeroAttributeItem;
-    @property({ type: TipHeroAttributeItem, displayName: "暴击伤害" })
-    public tipHeroAttributeItem5: TipHeroAttributeItem = null as unknown as TipHeroAttributeItem;
-    @property({ type: TipHeroAttributeItem, displayName: "命中" })
-    public tipHeroAttributeItem6: TipHeroAttributeItem = null as unknown as TipHeroAttributeItem;
-    @property({ type: TipHeroAttributeItem, displayName: "闪避" })
-    public tipHeroAttributeItem7: TipHeroAttributeItem = null as unknown as TipHeroAttributeItem;
-    @property({ type: TipHeroAttributeItem, displayName: "破甲" })
-    public tipHeroAttributeItem8: TipHeroAttributeItem = null as unknown as TipHeroAttributeItem;
+    @property({ type: CellTipHeroAttribute, displayName: "血量" })
+    public tipHeroAttributeItem0: CellTipHeroAttribute = null as unknown as CellTipHeroAttribute;
+    @property({ type: CellTipHeroAttribute, displayName: "攻击" })
+    public tipHeroAttributeItem1: CellTipHeroAttribute = null as unknown as CellTipHeroAttribute;
+    @property({ type: CellTipHeroAttribute, displayName: "防御" })
+    public tipHeroAttributeItem2: CellTipHeroAttribute = null as unknown as CellTipHeroAttribute;
+    @property({ type: CellTipHeroAttribute, displayName: "速度" })
+    public tipHeroAttributeItem3: CellTipHeroAttribute = null as unknown as CellTipHeroAttribute;
+    @property({ type: CellTipHeroAttribute, displayName: "暴击" })
+    public tipHeroAttributeItem4: CellTipHeroAttribute = null as unknown as CellTipHeroAttribute;
+    @property({ type: CellTipHeroAttribute, displayName: "暴击伤害" })
+    public tipHeroAttributeItem5: CellTipHeroAttribute = null as unknown as CellTipHeroAttribute;
+    @property({ type: CellTipHeroAttribute, displayName: "命中" })
+    public tipHeroAttributeItem6: CellTipHeroAttribute = null as unknown as CellTipHeroAttribute;
+    @property({ type: CellTipHeroAttribute, displayName: "闪避" })
+    public tipHeroAttributeItem7: CellTipHeroAttribute = null as unknown as CellTipHeroAttribute;
+    @property({ type: CellTipHeroAttribute, displayName: "破甲" })
+    public tipHeroAttributeItem8: CellTipHeroAttribute = null as unknown as CellTipHeroAttribute;
 
     start() {
         super.start();
@@ -90,11 +90,11 @@ export class TipHeroAttribute extends TipBase {
             return;
         }
 
-        let items: TipHeroAttributeItem[] = this.layout.node.getComponentsInChildren(TipHeroAttributeItem) as [TipHeroAttributeItem];
+        let items: CellTipHeroAttribute[] = this.layout.node.getComponentsInChildren(CellTipHeroAttribute) as [CellTipHeroAttribute];
         if (items.length < values.length) {
             let nSub = values.length - items.length;
             let target = this;
-            ResMgr.getInstance().loadPrefab('prefabs_ui/pop/tip_hero_attribute_item', (err, res) => {
+            ResMgr.getInstance().loadPrefab('prefabs_ui/common/cell_tip_hero_attribute', (err, res) => {
 
                 let pos = target.layout.node.getPosition();
                 let hight = 0;
@@ -103,7 +103,7 @@ export class TipHeroAttribute extends TipBase {
                     let p = instantiate(res as Prefab) as Node;
                     target.layout.node.addChild(p);
                 }
-                items = target.layout.node.getComponentsInChildren(TipHeroAttributeItem) as [TipHeroAttributeItem];
+                items = target.layout.node.getComponentsInChildren(CellTipHeroAttribute) as [CellTipHeroAttribute];
 
                 let nodeSize = items[0].node.getComponent(UITransform)?.contentSize as math.Size;
                 hight = (nodeSize.height + target.layout.spacingY) * nSub;

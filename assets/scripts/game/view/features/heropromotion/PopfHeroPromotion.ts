@@ -11,7 +11,7 @@ import { HeroData } from '../../../model/datas/HeroData';
 import { PopMgr } from '../../../control/PopMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
 import { HeroModel } from '../../hero/HeroModel';
-import { CellSkill } from '../../common/CellSkill';
+import { ElementSkill } from '../../common/ElementSkill';
 import { NotifyMgr } from '../../../control/NotifyMgr';
 import { XShare } from '../../../model/const/XShare';
 import { XConsts } from '../../../model/const/XConsts';
@@ -158,17 +158,17 @@ export class PopfHeroPromotion extends PopBase {
     @property({ type: HeroModel, displayName: "英雄形象" })
     public cur_hero_model: HeroModel = null as unknown as HeroModel;
 
-    @property({ type: CellSkill, displayName: "主动技能" })
-    public skillItem0: CellSkill = null as unknown as CellSkill;
+    @property({ type: ElementSkill, displayName: "主动技能" })
+    public skillItem0: ElementSkill = null as unknown as ElementSkill;
 
-    @property({ type: CellSkill, displayName: "天赋技能1" })
-    public skillItem1: CellSkill = null as unknown as CellSkill;
+    @property({ type: ElementSkill, displayName: "天赋技能1" })
+    public skillItem1: ElementSkill = null as unknown as ElementSkill;
 
-    @property({ type: CellSkill, displayName: "天赋技能2" })
-    public skillItem2: CellSkill = null as unknown as CellSkill;
+    @property({ type: ElementSkill, displayName: "天赋技能2" })
+    public skillItem2: ElementSkill = null as unknown as ElementSkill;
 
-    @property({ type: CellSkill, displayName: "天赋技能3" })
-    public skillItem3: CellSkill = null as unknown as CellSkill;
+    @property({ type: ElementSkill, displayName: "天赋技能3" })
+    public skillItem3: ElementSkill = null as unknown as ElementSkill;
 
     @property({ type: ToggleContainer, displayName: "升级装备tab" })
     public tabGroup: ToggleContainer = null as unknown as ToggleContainer;

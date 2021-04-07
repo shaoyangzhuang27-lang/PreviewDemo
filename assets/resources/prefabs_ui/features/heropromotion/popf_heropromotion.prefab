@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "pop_heropromotion",
+    "_name": "popf_heropromotion",
     "_objFlags": 0,
     "_parent": null,
     "_children": [

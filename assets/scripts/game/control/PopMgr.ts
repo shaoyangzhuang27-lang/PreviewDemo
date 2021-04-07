@@ -143,7 +143,7 @@ export class PopMgr extends PopCore {
      */
     public popHeroPromotionView(heroId: number = 0, isMaskClose: boolean = true) {
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_heropromotion', (err: any, res: Prefab | null) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/heropromotion/popf_heropromotion', (err: any, res: Prefab | null) => {
             // resources.load('prefabs_ui/pop/pop_heropromotion', (err:any,res:any)=>{
             let p = instantiate(res as Prefab);
             this.pushWindow(p);
@@ -332,7 +332,7 @@ export class PopMgr extends PopCore {
      * @param {number} heroId
      */
     public tipHeroAttributeWindow(pos: Vec3, heroId: number = 0) {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/tip_hero_attribute', (err, res) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/tip_hero_attribute', (err, res) => {
             let p = instantiate(res as Prefab) as Node;
             this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
@@ -355,7 +355,7 @@ export class PopMgr extends PopCore {
         // {
         //     skillData= {skillId:535002};// 破甲弹2级
         // }
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/tip_skill', (err, res) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/tip_skill', (err, res) => {
             let p = instantiate(res as Prefab) as Node;
             this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
@@ -374,7 +374,7 @@ export class PopMgr extends PopCore {
      * @param {number} camp
      */
     public tipCampOrCareerWindow(pos: Vec3, career: number, camp: number = 0) {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/tip_camp_or_career', (err, res) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/heropromotion/tip_camp_or_career', (err, res) => {
             let p = instantiate(res as Prefab) as Node;
             this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
@@ -393,7 +393,7 @@ export class PopMgr extends PopCore {
      * @param {HeroData} _heroData
      */
     public tipShareHeroToChatindow(pos: Vec3, _heroData: HeroData) {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/tip_share_chat', (err, res) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/heropromotion/tip_share_chat', (err, res) => {
             let p = instantiate(res as Prefab) as Node;
             this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
@@ -624,7 +624,7 @@ export class PopMgr extends PopCore {
      */
     public popHeroEquipReplaceWindow(heroId: number, locationType: Msg.TEquipLocationType | 0, closeCallBack: Function | null = null) {
 
-        resources.load('prefabs_ui/pop/pop_replaceequip', (err: any, res: any) => {
+        resources.load('prefabs_ui/features/heropromotion/pop_replaceequip', (err: any, res: any) => {
             let p = instantiate(res);
             this.pushWindow(p);
             let script = p.getComponent("PopHeroEquipReplace") as PopHeroEquipReplace;

@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "tip_hero_attribute_item",
+    "_name": "cell_tip_hero_attribute",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
