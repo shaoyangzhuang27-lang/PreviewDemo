@@ -236,7 +236,7 @@ export class BagMain extends Component {
 
     //    GameModel.getInstance().getBagModel().initTestFragmentList();
        let fragmentSysthesisiInfoList = GameModel.getInstance().getBagModel().getFragmentSynthesisInfoList();
-       ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_fragment', (err:Error | null,res:Prefab | null)=>{
+       ResMgr.getInstance().loadPrefab('prefabs_ui/features/bag/element_herofragment', (err:Error | null,res:Prefab | null)=>{
             for (var i = 0 ; i < fragmentSysthesisiInfoList.length; i++) {
                 let fragment_item = instantiate( res  as Prefab);
                 let script = fragment_item.getComponent(ElementHeroFragment) as ElementHeroFragment;

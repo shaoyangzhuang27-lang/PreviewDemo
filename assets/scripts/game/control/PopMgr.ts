@@ -564,7 +564,7 @@ export class PopMgr extends PopCore  {
 
     public popFragmentSynthesisWindow(data : XStruct.fragment_synthesis_info.IRecord,submitCallBack:Function,isWonderSummonShow : boolean = false,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_fragment_synthesis', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/bag/pop_fragment_synthesis', (err: Error | null, res: Prefab | null)=>{
             let p = instantiate( res as Prefab );
             this.pushWindow(p);
 

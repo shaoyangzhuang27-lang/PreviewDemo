@@ -99,7 +99,7 @@ export class PopFragmentSynthesis extends PopBase {
     public initUI()
     {
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_fragment', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/bag/element_herofragment', (err: Error | null, res: Prefab | null)=>{
                 let fragment_item = instantiate( res as Prefab );
                 let script = fragment_item.getComponent(ElementHeroFragment) as ElementHeroFragment;
                 fragment_item.scale = new Vec3(0.7,0.7,1);
