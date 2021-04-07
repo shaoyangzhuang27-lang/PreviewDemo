@@ -54,7 +54,7 @@ export class PopPubWonderRewardList extends PopBase {
         }
         for(let index = 0 ; index < dataList.length; ++index)
         {
-            ResMgr.getInstance().loadPrefab('prefabs_ui/main/pub_wonder_rewardlist_item', (err:any,res:any)=>{
+            ResMgr.getInstance().loadPrefab('prefabs_ui/features/pub/cell_pubwonderrewardlist', (err:any,res:any)=>{
                     let wonder_item = instantiate( res );
                     let script = wonder_item.getComponent(CellPubWonderRewardList);
                     script.initItemInfo(dataList[index]);

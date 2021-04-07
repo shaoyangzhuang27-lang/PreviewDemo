@@ -2,12 +2,12 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-  "uuid": "33271240-39fd-44cb-936d-d542c8c433c2",
+  "uuid": "0c52cdd1-fd7d-4bae-a58d-4b43f82c6c5a",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "pub_wonder_rewardlist"
+    "syncNodeName": "element_pubheroicon"
   }
 }

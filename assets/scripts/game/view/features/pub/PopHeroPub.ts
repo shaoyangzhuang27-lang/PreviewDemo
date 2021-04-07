@@ -380,7 +380,7 @@ export class PopHeroPub extends PopBase {
     public showPubHeroIconPrefab()
     {
         this.node_wonder && (this.node_wonder.active = false);
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_heroicon', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/pub/element_pubheroicon', (err: Error | null, res: Prefab | null)=>{
             let p = instantiate( res as Prefab);
             let script = p.getComponent(ElementPubHeroIcon) as ElementPubHeroIcon;
             var nodWindow = this.node.getChildByName("window");
@@ -733,7 +733,7 @@ export class PopHeroPub extends PopBase {
             if(this.node_togglecontainer.node.activeInHierarchy)
             {
                 GameModel.getInstance().getHeroPubModel().initWonderHeartHeroIdList();
-                ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_summon', (err: Error | null, res: Prefab | null)=>{
+                ResMgr.getInstance().loadPrefab('prefabs_ui/features/pub/mod_pubwondersummon', (err: Error | null, res: Prefab | null)=>{
                     let p = instantiate( res as Prefab );
                     let script = p.getComponent(ModPubWonderSummon) as ModPubWonderSummon;
                     script.setParentWindow(this);

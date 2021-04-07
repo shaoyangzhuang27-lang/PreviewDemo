@@ -105,7 +105,7 @@ export class PopPubWonderSummonSettle extends Component {
      * initFragmentIconInfo
      */
      public initFragmentIconInfo(data : any,node : Node) {
-        resources.load('prefabs_ui/pub/pub_heroicon', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/pub/element_pubheroicon', (err:any,res:any)=>{
             let fragmentItem = instantiate(res); 
             fragmentItem.setScale(0.6,0.6,1)
             var info : XStruct.fragment_synthesis_info.IRecord = {
