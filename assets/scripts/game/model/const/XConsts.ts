@@ -111,10 +111,12 @@ export class XConsts{
     public static KHeroDetailTierSpriteName:string[] = new Array<string> ( "英雄详情_标题背景品质灰", "英雄详情_标题背景品质绿","英雄详情_标题背景品质蓝", "英雄详情_标题背景品质紫", "英雄详情_标题背景品质橙", "英雄详情_标题背景品质红" );
     public static KHeroDetailCampSpriteName:string[] = new Array<string> ( "英雄详情_背景", "英雄详情_背景图4", "英雄详情_背景图5", "英雄详情_背景图1", "英雄详情_背景图2", "英雄详情_背景图3" );
     public static KCampSpriteName:string[] = new Array<string> ( "无", "水属性", "火属性", "木属性", "光属性", "暗属性" );
+    public static KCampSpriteNameForHeroPromotion:string[] = new Array<string> ( "无", "ico_water", "ico_fire", "ico_tree", "ico_light", "ico_dark" );
     public static KCampFrameSpriteName:string[] = new Array<string> ( "无", "光环_水框", "光环_火框", "光环_木框", "光环_光框", "光环_暗框" );
     public static KCampLVSpriteName:string[] = new Array<string> ( "光环_骑士", "光环_水", "光环_火", "光环_木", "光环_光", "光环_暗" );
     public static KCampBGSpriteName:string[] = new Array<string> ( "无", "光环_水", "光环_火", "光环_木", "光环_光", "光环_暗" );
     public static KClassesSpriteName:string[] = new Array<string> ( "无", "无", "战士图标", "刺客图标", "法师图标", "游侠图标", "牧师图标" );
+    public static KClassesSpriteNameForHeroPromotion:string[] = new Array<string> ( "无", "无", "ico_zs", "ico_ck", "ico_fs", "ico_yx", "ico_ms" );
     public static KClassesCombatSpriteName:string[] = new Array<string> ( "无", "无", "战斗_职业战士", "战斗_职业刺客", "战斗_职业法师", "战斗_职业游侠", "战斗_职业牧师" );
     public static KHeroQualityBgSpriteName:string[] = new Array<string> ( "小卡框_品质灰", "小卡框_品质绿", "小卡框_品质蓝", "小卡框_品质紫", "小卡框_品质橙", "小卡框_品质红", "小卡框_品质金");
     public static KItemHeroBookBGSpriteName:string[] = new Array<string> ( "无", "图鉴_新背景4", "图鉴_新背景5", "图鉴_新背景1", "图鉴_新背景2", "图鉴_新背景3");
@@ -183,6 +185,7 @@ export class XConsts{
     public static KPetBgSpriteName:string[] = new Array<string> ( "无", "宠物系统_龙背景水", "宠物系统_龙背景火", "宠物系统_龙背景木", "宠物系统_龙背景光", "宠物系统_龙背景暗");
     public static KHeroCampIcon:string[] = new Array<string> ( "无", "水", "火", "木", "光", "暗" );
     public static KHeroCampRestrainIcon:string[] = new Array<string> ( "无", "阵营克制_水", "阵营克制_火", "阵营克制_木", "阵营克制_光", "阵营克制_暗" );
+    public static KHeroCampRestrainIconForHeroPromotion:string[] = new Array<string> ( "无", "ico_camp_restrain_water", "ico_camp_restrain_fire", "ico_camp_restrain_tree", "ico_camp_restrain_light", "ico_camp_restrain_dark" );
     public static KHeroClasses:string[] = new Array<string> ( "无", "无", "UI_Warrior", "UI_Assassin", "UI_Mage", "UI_Rogue", "UI_Pastor" );
     public static KCampColor:Color[] = new Array<Color>(
         Color.WHITE,

@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-04-07 14:29:11
+ * @LastEditTime: 2021-04-07 19:39:14
  */
 import { _decorator, Vec3, instantiate, Node, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, Layout, Label, Color, Prefab } from 'cc';
 import { PopBase } from '../../../../core/control/PopBase';
@@ -896,9 +896,9 @@ export class PopfHeroPromotion extends PopBase {
         // if(id1st == 5) // 传奇
         // else if(id1st == 3){// 高级
         // else if(id1st == 1 || id1st == 2){// 普通
-        let imgPath = "ui/lv_up/英雄详情_标题背景品质紫/spriteFrame";// 高级
+        let imgPath = "ui/features/heropromotion/img_hero_name_quality_purple/spriteFrame";// 高级
         // if (id1st==5) {// 传奇
-        imgPath = "ui/lv_up/英雄详情_标题背景品质橙/spriteFrame";
+        imgPath = "ui/features/heropromotion/img_hero_name_quality_orange/spriteFrame";
         // }
         XFuns.ReplaceSpriteFrame(imgPath, this.sp_title_bg);
     }
@@ -1108,18 +1108,18 @@ export class PopfHeroPromotion extends PopBase {
         if (items.length < maxTier) {
             // 1.品阶图标原来的也需要保证设置成正确的样式
             for (let index = 0; index < items.length; index++) {
-                let iconPath = "ui/lv_up/黑白进阶宝石/spriteFrame";
+                let iconPath = "ui/features/heropromotion/ico_hero_tier_gray/spriteFrame";
                 if (tier >= (index + 1)) {
-                    iconPath = "ui/lv_up/进阶宝石/spriteFrame";
+                    iconPath = "ui/features/heropromotion/ico_hero_tier/spriteFrame";
                 }
                 XFuns.ReplaceSpriteFrame(iconPath, items[index]);
             }
             // 2.品阶原先图标不足的，需要创建新的图标补充
             let nSub = maxTier - items.length;
             for (let index = 0; index < nSub; index++) {
-                let iconPath0 = "ui/lv_up/黑白进阶宝石/spriteFrame";
+                let iconPath0 = "ui/features/heropromotion/ico_hero_tier_gray/spriteFrame";
                 if (tier >= (index + items.length + 1)) {
-                    iconPath0 = "ui/lv_up/进阶宝石/spriteFrame";
+                    iconPath0 = "ui/features/heropromotion/ico_hero_tier/spriteFrame";
                 }
 
                 XFuns.CreateSprite(iconPath0, target.layout_tier.node, "img_grade_gem_" + (items.length + 1 + index).toString());
@@ -1137,9 +1137,9 @@ export class PopfHeroPromotion extends PopBase {
             // 2.品阶图标需要保证设置成正确的样式
             let itemNews: Sprite[] = this.layout_tier.node.getComponentsInChildren(Sprite) as [Sprite];
             for (let index = 0; index < itemNews.length; index++) {
-                let iconPath = "ui/lv_up/黑白进阶宝石/spriteFrame";
+                let iconPath = "ui/features/heropromotion/ico_hero_tier_gray/spriteFrame";
                 if (index < tier) {
-                    iconPath = "ui/lv_up/进阶宝石/spriteFrame";
+                    iconPath = "ui/features/heropromotion/ico_hero_tier/spriteFrame";
                 }
                 XFuns.ReplaceSpriteFrame(iconPath, itemNews[index]);
             }
@@ -1148,13 +1148,13 @@ export class PopfHeroPromotion extends PopBase {
 
     private _showCampAndCareer() {
         if (!this._curHeroData.isRoleHero()) {
-            let name = XConsts.KCampSpriteName[this._curHeroData.getCamp() as number];
-            let iconPath: string = "ui/lv_up/" + name + "/spriteFrame";
+            let name = XConsts.KCampSpriteNameForHeroPromotion[this._curHeroData.getCamp() as number];
+            let iconPath: string = "ui/features/heropromotion/" + name + "/spriteFrame";
             this._resourceLoad(iconPath, this.btn_camp);
             this.btn_camp.active = true;
 
-            name = XConsts.KClassesSpriteName[this._curHeroData.getClasses() as number];
-            iconPath = "ui/lv_up/" + name + "/spriteFrame";
+            name = XConsts.KClassesSpriteNameForHeroPromotion[this._curHeroData.getClasses() as number];
+            iconPath = "ui/features/heropromotion/" + name + "/spriteFrame";
             this._resourceLoad(iconPath, this.btn_career);
             this.btn_career.active = true;
         }
@@ -1289,7 +1289,7 @@ export class PopfHeroPromotion extends PopBase {
     //资源替换
     private _resourceLoad(path: string, obj: any) {
         ResMgr.getInstance().loadSpriteFrame(path, (err, spriteFrame) => {
-            console.log("PopfHeroPromotion _resourceLoad ---------", err)
+            console.log("PopfHeroPromotion _resourceLoad ---------path=",path, "  err=", err)
             if (!err) {
                 let sprite = obj.getComponent(Sprite) as Sprite;
                 sprite.spriteFrame = spriteFrame;

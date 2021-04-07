@@ -203,8 +203,8 @@ export class PopHeroReplace extends PopBase {
             let campIconPath: string = "ui/team/" + _campName + "/spriteFrame";
             this._reloadSprFram(this.beforeCampImg, campIconPath);
 
-            let _classesName: string = XConsts.KClassesSpriteName[this._selectHeroData?.getClasses() as number];
-            let classesIconPath:string = "ui/lv_up/" + _classesName + "/spriteFrame";
+            let _classesName: string = XConsts.KClassesSpriteNameForHeroPromotion[this._selectHeroData?.getClasses() as number];
+            let classesIconPath:string = "ui/features/heropromotion/" + _classesName + "/spriteFrame";
             this._reloadSprFram(this.beforeClassesImg, classesIconPath);
 
             let _iconName: string = this._selectHeroData?.getName() as string;            
@@ -233,8 +233,8 @@ export class PopHeroReplace extends PopBase {
             let campIconPath: string = "ui/team/" + _campName + "/spriteFrame";
             this._reloadSprFram(this.afterCampImg, campIconPath);
 
-            let _classesName: string = XConsts.KClassesSpriteName[this._covertHeroData?.getClasses() as number];
-            let classesIconPath:string = "ui/lv_up/" + _classesName + "/spriteFrame";
+            let _classesName: string = XConsts.KClassesSpriteNameForHeroPromotion[this._covertHeroData?.getClasses() as number];
+            let classesIconPath:string = "ui/features/heropromotion/" + _classesName + "/spriteFrame";
             this._reloadSprFram(this.afterClassesImg, classesIconPath);
 
             let _iconName: string = this._covertHeroData?.getName() as string;            

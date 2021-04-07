@@ -1,0 +1,74 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "671adb21-9ffe-4b4e-ade6-cb9bb1bd6faa",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "671adb21-9ffe-4b4e-ade6-cb9bb1bd6faa@6c48a",
+      "displayName": "bg_camp_restrain",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "671adb21-9ffe-4b4e-ade6-cb9bb1bd6faa"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "671adb21-9ffe-4b4e-ade6-cb9bb1bd6faa@f9941",
+      "displayName": "bg_camp_restrain",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 33,
+        "height": 27,
+        "rawWidth": 33,
+        "rawHeight": 27,
+        "borderTop": 11,
+        "borderBottom": 8,
+        "borderLeft": 9,
+        "borderRight": 9,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "671adb21-9ffe-4b4e-ade6-cb9bb1bd6faa@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "671adb21-9ffe-4b4e-ade6-cb9bb1bd6faa@f9941"
+  }
+}

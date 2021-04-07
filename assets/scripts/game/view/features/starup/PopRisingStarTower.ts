@@ -619,7 +619,7 @@ export class PopRisingStarTower extends PopBase {
         }
 
         let _campName:string = XConsts.KHeroCampIcon[HeroInfo?.getCamp() as number];
-        let _classesName:string = XConsts.KClassesSpriteName[HeroInfo?.getClasses() as number];
+        let _classesName:string = XConsts.KClassesSpriteNameForHeroPromotion[HeroInfo?.getClasses() as number];
         let _iconName:string = HeroInfo?.getName() as string;
         let _starNum:number = HeroInfo?.getStar() as number;
 
@@ -636,7 +636,7 @@ export class PopRisingStarTower extends PopBase {
                 }
             });   
             this.img_classes.active = true;
-            let classesIconPath:string = "ui/lv_up/" + _classesName + "/spriteFrame"
+            let classesIconPath:string = "ui/features/heropromotion/" + _classesName + "/spriteFrame"
             resources.load(classesIconPath, (err,spriteFrame:SpriteFrame) =>
             {
                 if(!err)

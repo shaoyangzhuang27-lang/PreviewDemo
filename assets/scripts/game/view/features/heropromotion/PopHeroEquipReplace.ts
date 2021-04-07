@@ -71,7 +71,8 @@ export class PopHeroEquipReplace extends PopBase {
 
     private _curEquipId: number = 0;//当前穿戴的装备ID
 
-    private TEquipLocationTypeIcon: string[] = new Array<string>("无", "英雄详情_装备图标1", "英雄详情_装备图标2", "英雄详情_装备图标3", "英雄详情_装备图标4");
+    private TEquipLocationTypeIcon: string[] = new Array<string>("无", "ico_hero_equip1", "ico_hero_equip2", "ico_hero_equip3", "ico_hero_equip4");
+    //new Array<string>("无", "英雄详情_装备图标1", "英雄详情_装备图标2", "英雄详情_装备图标3", "英雄详情_装备图标4");
 
     // private _suitPropertyList: Map<Msg.THeroPropertyType, number> = new Map<Msg.THeroPropertyType, number>();      //套装属性
 
@@ -201,7 +202,7 @@ export class PopHeroEquipReplace extends PopBase {
     private _initView(equipData: Config.equip.Record, locationType: Msg.TEquipLocationType) {
 
         let iconName: string = this.TEquipLocationTypeIcon[locationType];
-        let classesIconPath: string = "ui/lv_up/" + iconName + "/spriteFrame"
+        let classesIconPath: string = "ui/features/heropromotion/" + iconName + "/spriteFrame"
         ResMgr.getInstance().loadSpriteFrame(classesIconPath, (err, spriteFrame) => {
             if (!err) {
                 let sprite = this.epuip_icon_wear.getComponent(Sprite) as Sprite;
