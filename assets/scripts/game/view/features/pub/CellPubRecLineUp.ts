@@ -47,11 +47,11 @@ export class CellPubRecLineUp extends Component {
     private _HeroIdArray : number[] = [];
  
     start () {
-        this.node_hero_0?.on(Node.EventType.TOUCH_END, this._onNodeClick, this);
-        this.node_hero_1?.on(Node.EventType.TOUCH_END, this._onNodeClick, this);
-        this.node_hero_2?.on(Node.EventType.TOUCH_END, this._onNodeClick, this);
-        this.node_hero_3?.on(Node.EventType.TOUCH_END, this._onNodeClick, this);
-        this.node_hero_4?.on(Node.EventType.TOUCH_END, this._onNodeClick, this);
+        // this.node_hero_0?.on(Node.EventType.TOUCH_END, this._onNodeClick, this);
+        // this.node_hero_1?.on(Node.EventType.TOUCH_END, this._onNodeClick, this);
+        // this.node_hero_2?.on(Node.EventType.TOUCH_END, this._onNodeClick, this);
+        // this.node_hero_3?.on(Node.EventType.TOUCH_END, this._onNodeClick, this);
+        // this.node_hero_4?.on(Node.EventType.TOUCH_END, this._onNodeClick, this);
         this.btn_view_detail?.on(Node.EventType.TOUCH_END, this._onViewDetailClick, this);
         this.btn_retract?.on(Node.EventType.TOUCH_END, this._onRetractClick, this);
        
@@ -60,11 +60,11 @@ export class CellPubRecLineUp extends Component {
     }
 
 
-    private _onNodeClick(event : any)
-    {
-        console.log("clickNode");
-        PopMgr.getInstance().popupSimpleWindow("推荐阵容","111111",()=>{console.log("")});
-    }
+    // private _onNodeClick(event : any)
+    // {
+    //     console.log("clickNode");
+    //     PopMgr.getInstance().popupSimpleWindow("推荐阵容","111111",()=>{console.log("")});
+    // }
     private _onViewDetailClick(event : any)
     {
        this.setShowViewDetailState(true);
@@ -89,6 +89,9 @@ export class CellPubRecLineUp extends Component {
             // script.setHeroID(this._heroInfo as HeroData);
             script.initUIHeroIconInfo(id,XConsts.HERO_ICON_TYPE.RecLineUp);
                    
+            script.setBtnCallBack(()=>{
+                PopMgr.getInstance().popOpenBookHeroDetail(id);
+            })
             // _heroIcon.scale = new Vec3(0.5,0.5,1);
             switch(index)
             {
