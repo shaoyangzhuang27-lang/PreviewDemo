@@ -650,7 +650,18 @@ export class PopHeroPub extends PopBase {
                 {
                     PopMgr.getInstance().popSummonSettleWindow(msgData,XConsts.POP_SUMMON_TYPE.HeroPub);
                 }   
-                this.addPubNotifyHandler();
+                
+                let playerModel = GameModel.getInstance().getPlayerModel();
+                switch(msgData.consumeType)
+                {
+                    case Msg.TSummonConsumeType.ESummonConsumeType_Scroll:
+                        playerModel.updateSummonScore(msgData.summonScore);
+                        break;
+                    case Msg.TSummonConsumeType.ESummonConsumeType_VRmb:
+                        playerModel.updateSummonScore(msgData.summonScore);
+                        break;
+                }    
+                // this.addPubNotifyHandler();
                 this.updateImgPropNum();
                 this.updateProgressProcess();
                 this.updateBtnSummonState();
@@ -664,7 +675,7 @@ export class PopHeroPub extends PopBase {
         }
     }
     onDestroy(){
-        console.log("hero pub destory");
+        console.log("hero pub destory关闭");
         this.removePubNotifyHandler();
         // this.node.off("OpenPubNotify");
     }
