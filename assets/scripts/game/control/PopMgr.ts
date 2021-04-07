@@ -551,7 +551,7 @@ export class PopMgr extends PopCore  {
      * @param {Function} closeCallBack
      */ 
     public popSummonSettleWindow(msgData: Msg.SummonHeroA, nType: number, closeCallBack: Function | null = null, isMaskClose: boolean = true) {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_summonsettle', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/pop_summonsettle', (err: Error | null, res: Prefab | null)=>{
             let p = instantiate( res as Prefab);
             this.pushWindow(p)
             let script = p.getComponent("PopSummonSettle") as PopSummonSettle;
@@ -576,8 +576,8 @@ export class PopMgr extends PopCore  {
     }
 
     public popHeroChangeResult(heroId: number, closeCallBack: Function | null = null, isMaskClose: boolean = true) {
-        resources.load('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
-            let p = instantiate( res );
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/pop_summonsettle', (err: Error | null, res: Prefab | null)=>{
+            let p = instantiate( res as Prefab );
             this.pushWindow(p)
             let script = p.getComponent("PopSummonSettle") as PopSummonSettle;
             script.popWindowType = XConsts.POP_SUMMON_TYPE.FragmentSysthesis
@@ -797,7 +797,7 @@ export class PopMgr extends PopCore  {
 
     //碎片召唤
     public popFramgentsynthesisResult(msgData: Msg.UseFragmentA, closeCallBack: Function | null = null, isMaskClose: boolean = true) {
-        resources.load('prefabs_ui/pop/pop_summonsettle', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/pop_summonsettle', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
             let script = p.getComponent("PopSummonSettle") as PopSummonSettle;
