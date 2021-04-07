@@ -324,6 +324,11 @@ export class PopHeroReplace extends PopBase {
         let heroData: any = data;        
         let script: HeroSelectIcon = this._getHeroItemScript(heroData);               
         let selectType: number = script.getItemType() == 0 ? 1 : 0;
+        // if (script.getItemType() == 1) {
+        //     // 再次点击同一个图鉴不取消选中状态
+        //     return
+        // }
+        
         // 清除其他节点上的选中状态
         let childrens = this.scrollContent.children
         childrens.forEach(element => {

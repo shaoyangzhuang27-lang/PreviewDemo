@@ -303,7 +303,7 @@ export class PopMgr extends PopCore {
      * @param {boolean} isMaskClose
      */
     public popHeroReplaceView(isMaskClose: boolean = true) {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_heroreplace', (err, res) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/herosummon/pop_heroreplace', (err, res) => {
             let p = instantiate(res as Prefab);
             this.pushWindow(p);
             let script = p.getComponent("PopHeroReplace") as PopHeroReplace;
