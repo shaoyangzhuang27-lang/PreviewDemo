@@ -1,9 +1,9 @@
 
 import { _decorator, Component, Node,ProgressBarComponent, assetManager, macro, dynamicAtlasManager, EditBox } from 'cc';
-import { MsgMgr } from '../control/MsgMgr';
-import { NotifyMgr } from '../control/NotifyMgr';
-import { SceneMgr } from '../control/SceneMgr';
-import { ValueMgr, TableName } from '../model/ValueMgr';
+import { MsgMgr } from '../../control/MsgMgr';
+import { NotifyMgr } from '../../control/NotifyMgr';
+import { SceneMgr } from '../../control/SceneMgr';
+import { ValueMgr, TableName } from '../../model/ValueMgr';
 import { BaseScene } from './BaseScene';
 const { ccclass, property } = _decorator;
 

@@ -1,11 +1,11 @@
 import { _decorator, Component, Node,director,instantiate,resources,Scene, Layers, Widget } from 'cc';
 const { ccclass, property } = _decorator;
-import { PopMgr } from "../control/PopMgr";
-import { NotifyMgr } from "../control/NotifyMgr";
-import { XConsts } from '../model/const/XConsts';
-import { BasisScene } from '../../core/control/BasisScene';
-import { MsgMgr } from '../control/MsgMgr';
-import { SceneMgr } from '../control/SceneMgr';
+import { PopMgr } from "../../control/PopMgr";
+import { NotifyMgr } from "../../control/NotifyMgr";
+import { XConsts } from '../../model/const/XConsts';
+import { BasisScene } from '../../../core/control/BasisScene';
+import { MsgMgr } from '../../control/MsgMgr';
+import { SceneMgr } from '../../control/SceneMgr';
 
 @ccclass('BaseScene')
 export class BaseScene extends BasisScene {
@@ -83,7 +83,7 @@ export class BaseScene extends BasisScene {
     //玩家升级通知
     private _notifyPlayerLevelUp(data:any)
     {
-        PopMgr.getInstance().popPlayerLevelUpWindow(data as Msg.NotifyLevelUpAward)
+        PopMgr.getInstance().popPlayerLevelUpWindow(data as Msg.NotifyLevelUpAward);
     }
     //切换服务器
     private _notifyChangeServer(data:number){

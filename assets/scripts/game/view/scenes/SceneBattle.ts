@@ -1,11 +1,12 @@
 
+
 import { _decorator, Node } from 'cc';
 const { ccclass, property } = _decorator;
 
 
-import { BattleCtrl } from '../../battle/BattleCtrl';
+import { BattleCtrl } from '../../../battle/BattleCtrl';
 import { BaseScene } from './BaseScene';
-import { MainUI } from './menu/MainUI';
+import { MainUI } from './../menu/MainUI';
 
 @ccclass('SceneBattle')
 export class SceneBattle extends BaseScene {
