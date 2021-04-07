@@ -534,7 +534,7 @@ export class PopMgr extends PopCore  {
 
      //弹出酒馆推荐阵容
     public popRecLineUpWindow(title: string, submitCallBack: Function, closeCallBack: Function | null = null, isMaskClose: boolean = true) {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_reclineup', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/pub/pop_reclineup', (err: Error | null, res: Prefab | null)=>{
             let p = instantiate( res as Prefab );
             this.pushWindow(p)
             let script = p.getComponent("PopRecLineUp") as PopRecLineUp;

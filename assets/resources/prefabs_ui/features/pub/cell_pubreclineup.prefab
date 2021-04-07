@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "pub_reclineup_item",
+    "_name": "cell_pubreclineup",
     "_objFlags": 0,
     "_parent": null,
     "_children": [

@@ -27,7 +27,7 @@ export class PopRecLineUp extends PopBase {
         {
             this.scroll_lineup_view.content.removeAllChildren()
         }
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/pub_reclineup_item', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/pub/cell_pubreclineup', (err: Error | null, res: Prefab | null)=>{
             for (var i = 0 ; i < GameModel.getInstance().getHeroPubModel().nLineUpCounts; i++) {
                 let reclineup_item = instantiate( res as Prefab );
                 let script = reclineup_item.getComponent(CellPubRecLineUp) as CellPubRecLineUp;
