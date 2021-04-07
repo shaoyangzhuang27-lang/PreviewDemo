@@ -36,9 +36,6 @@ export class PopRisingStarTower extends PopBase {
     @property({type: Node, displayName: "显示区域信息"})
     public top_platform_hero:Node | null = null;
 
-    @property({type: Label})
-    public lab_title:Label = null as unknown as Label;
-
     @property({type: Label, displayName: "当前英雄名称"})
     public lab_Name:Label = null as unknown as Label;
 
@@ -48,20 +45,41 @@ export class PopRisingStarTower extends PopBase {
     @property({type :  Node, displayName: "当前英雄职业"})
     public img_classes:Node = null as unknown as Node;
 
-    @property({type :  Node, displayName: "当前英雄星级"})
-    public starlist:Node[] = [];
+    @property({type :  Node, displayName: "当前英雄升星信息星级1"})
+    public starlist1:Node[] = [];
+
+    @property({type :  Node, displayName: "当前英雄升星信息星级2"})
+    public starlist2:Node[] = [];
+
+    @property({type :  Node, displayName: "当前英雄升星信息技能节点1"})
+    public node_skill1:Node = null as unknown as Node;
+
+    @property({type :  Node, displayName: "当前英雄升星信息技能节点2"})
+    public node_skill2:Node = null as unknown as Node;
+
+    @property({type :  Node, displayName: "当前英雄升星信息技能1"})
+    public img_skill1:Node = null as unknown as Node;
+
+    @property({type :  Node, displayName: "当前英雄升星信息技能2"})
+    public img_skill2:Node = null as unknown as Node;
+
+    @property({type: Label, displayName: "当前英雄升星信息技能名称1"})
+    public lab_skillName1:Label = null as unknown as Label;
+
+    @property({type: Label, displayName: "当前英雄升星信息技能名称2"})
+    public lab_skillName2:Label = null as unknown as Label;
+
+    @property({type: Label, displayName: "当前英雄升星信息技能等级1"})
+    public lab_skillLevel1:Label = null as unknown as Label;
+
+    @property({type: Label, displayName: "当前英雄升星信息技能等级2"})
+    public lab_skillLevel2:Label = null as unknown as Label;
 
     @property({ type: HeroModel, displayName: "当前英雄形象" })
     public cur_hero_model: HeroModel | null = null;
 
     @property({type: ToggleContainer , displayName: "阵营" })
     public campGroup:ToggleContainer | null = null as unknown as ToggleContainer;
-
-    @property({type :  Node, displayName: "当前英雄升星信息头像1"})
-    public img_info_head1:Node = null as unknown as Node;
-
-    @property({type :  Node, displayName: "当前英雄升星信息头像2"})
-    public img_info_head2:Node = null as unknown as Node;
 
     @property({type: Label, displayName: "当前英雄升星信息label1"})
     public lab_info1:Label = null as unknown as Label;
@@ -108,7 +126,6 @@ export class PopRisingStarTower extends PopBase {
     private _risingDyncViceID2:number = 0;        //当前升星副ID2
     private _selectBattleList:Map<number, number> = new Map<number, number>();      //选择升星英雄列表
 
-    private _starNameList:string[] = new Array<string>();
     onLoad () {
         super.onLoad();
         // [3]
@@ -163,7 +180,7 @@ export class PopRisingStarTower extends PopBase {
         super.start();
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_starUp_change,this._notifyStarUpChangeHandle,this);
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_OneKeyStarUp_change,this._notifyOneKeyStarUpChangeHandle,this);
-        this._starNameList = ["星星初级","星星中级","星星高级"]
+        
         if(this._selectBattleList == null)
         {
             this._selectBattleList = new Map<number, number>();
@@ -618,15 +635,15 @@ export class PopRisingStarTower extends PopBase {
             return;
         }
 
-        let _campName:string = XConsts.KHeroCampIcon[HeroInfo?.getCamp() as number];
-        let _classesName:string = XConsts.KClassesSpriteNameForHeroPromotion[HeroInfo?.getClasses() as number];
+        let _campName:string = XConsts.KNewHeroCampIcon[HeroInfo?.getCamp() as number];
+        let _classesName:string = XConsts.KNewClassesSpriteName[HeroInfo?.getClasses() as number];
         let _iconName:string = HeroInfo?.getName() as string;
         let _starNum:number = HeroInfo?.getStar() as number;
 
         if(this._selectBattleList.size == 1)
         {
             this.img_camp.active = true;
-            let campIconPath:string = "ui/team/" + _campName + "/spriteFrame"
+            let campIconPath:string = "ui/comm/icon/" + _campName + "/spriteFrame"
             resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
             {
                 if(!err)
@@ -636,7 +653,7 @@ export class PopRisingStarTower extends PopBase {
                 }
             });   
             this.img_classes.active = true;
-            let classesIconPath:string = "ui/features/heropromotion/" + _classesName + "/spriteFrame"
+            let classesIconPath:string = "ui/comm/icon/" + _classesName + "/spriteFrame"
             resources.load(classesIconPath, (err,spriteFrame:SpriteFrame) =>
             {
                 if(!err)
@@ -647,7 +664,6 @@ export class PopRisingStarTower extends PopBase {
             });  
             
             this.lab_Name.string = _iconName.toString();
-            this._setStar(_starNum);
             this._showCurHeroModel(_iconName);
             this._getHeroesDatas(HeroInfo.getStaticID());
             this._showStarUpInfo(HeroInfo);
@@ -761,22 +777,23 @@ export class PopRisingStarTower extends PopBase {
     }
 
     //设置星星
-    private _setStar(star:number)
+    private _setStar(star:number,nodes:Node[])
     {
         let grade:number = Math.ceil(star/5) - 1;
         let yu:number = (star - 1) % 5 + 1;
+        let starNameList:string[] = new Array<string>();
+        starNameList = ["icon_star1","icon_star2","icon_star3"]
+        let starName = starNameList[grade];
+        let starPath = "ui/comm/icon/" + starName + "/spriteFrame"
 
-        let starName = this._starNameList[grade];
-        let starPath = "ui/common/icon/" + starName + "/spriteFrame"
-
-        for (let index = 0; index < this.starlist.length; index++) {
+        for (let index = 0; index < nodes.length; index++) {
             if(index >= yu && yu != 0)
             {
-                this.starlist[index].active = false;
+                nodes[index].active = false;
             }
             else{
-                this.starlist[index].active = true;
-                this._resourceLoad(starPath,this.starlist[index]);
+                nodes[index].active = true;
+                this._resourceLoad(starPath,nodes[index]);
             }
         }
     }
@@ -817,32 +834,41 @@ export class PopRisingStarTower extends PopBase {
     // 展示升星信息
     private _showStarUpInfo(HeroInfo:HeroData)
     {
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
-            let heroIcon = instantiate(res) as Node;
-            heroIcon.scale = new Vec3(0.5,0.5,1);
-            heroIcon.addComponent(Widget);
-
-            let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
-            script.setHeroData(HeroInfo as HeroData); 
-            this.img_info_head1.addChild(heroIcon);
-        });
-
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
-            let heroIcon = instantiate(res) as Node;
-            heroIcon.scale = new Vec3(0.5,0.5,1);
-            heroIcon.addComponent(Widget);
-            let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
-            
-            script.setHeroData(HeroInfo as HeroData); 
-            script.addOneStar()
-            this.img_info_head2.addChild(heroIcon);
-        });
+        this._setStar(HeroInfo.getStar(),this.starlist1)
+        this._setStar(HeroInfo.getStar()+1,this.starlist2)
 
         this.lab_info1.string = HeroInfo.getStar()+1+"";
         this.lab_info2.string = "20%";
         if(HeroInfo.getStar() < 2){
             this.lab_info2.string = "10%";
         }
+
+        //技能
+        let recordSkill = ValueMgr.getInstance().getItemByField(TableName.skill, 
+            HeroInfo.getSkillID()) as Config.skill.Record;
+        let framePath: string = "ui/skill_icon/" + recordSkill.image + "/spriteFrame"
+        this._resourceLoad(framePath, this.img_skill1);
+        this.lab_skillName1.string = ""+HeroInfo.getSkillName()
+        this.lab_skillLevel1.string = "等级"+recordSkill.level
+
+        let record = ValueMgr.getInstance().getItemByField(TableName.heroes, HeroInfo.getStaticID()+10000) as Config.heroes.Record;
+        recordSkill = ValueMgr.getInstance().getItemByField(TableName.skill, 
+            record.skillId) as Config.skill.Record;
+        framePath = "ui/skill_icon/" + recordSkill.image + "/spriteFrame"
+        this._resourceLoad(framePath, this.img_skill2);
+        this.lab_skillName2.string = ""+(ValueMgr.getInstance().getItemByField(TableName.language_data, 
+            recordSkill.name) as Config.language_data.Record).cn;
+        this.lab_skillLevel2.string = "等级"+recordSkill.level
+        //技能不一样 显示技能
+        if(this.lab_skillName1.string == this.lab_skillName2.string && this.lab_skillLevel1.string
+        == this.lab_skillLevel2.string){
+            this.node_skill2.active = true
+            this.node_skill1.active = false
+        }else{
+            this.node_skill2.active = false
+            this.node_skill1.active = true
+        }
+        
     }
 
     //////////////////////////////////////////////////////
@@ -950,13 +976,6 @@ export class PopRisingStarTower extends PopBase {
     }
 
     //////////////////////////////////////////////////////
-
-
-    //设置标题
-    public setTitle(title:string){
-        if(this.lab_title)
-            this.lab_title.string = title
-    }
 
     private _onCampClick(event: Event, customEventData: string){
         let tog:Toggle = (event as any);

@@ -202,8 +202,8 @@ export class ResCore{
                     resources.loadDir(loadData.resUrl,SpriteFrame,(finished,total)=>{
                         pro_callback(finished + total*index,total*this._loadArr.length,loadData.resName);
                     },(err, obj:SpriteFrame[])=>{
-                        console.log("fjfjfjfj::");
-                        console.log(obj);
+                        // console.log("fjfjfjfj::");
+                        // console.log(obj);
                         let resMap:Map<string,SpriteFrame> = new Map<string,SpriteFrame>();
                         for (let i = 0; i < obj.length; i++) {
                             let spriteFrame = obj[i];

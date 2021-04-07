@@ -327,6 +327,8 @@
       ]
     },
     "dumpMaterials": true,
-    "materialDumpDir": "db://assets/resources/model/hero/hero_zhangfei/mat"
+    "materialDumpDir": "db://assets/resources/model/hero/hero_zhangfei/mat",
+    "disableMeshSplit": true,
+    "meshOptimizer": false
   }
 }

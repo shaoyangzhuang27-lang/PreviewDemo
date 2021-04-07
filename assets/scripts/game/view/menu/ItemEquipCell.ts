@@ -139,6 +139,10 @@ export class ItemEquipCell extends Component {
                 if(itemUseType == Msg.TUsableItemType.EUsableItemType_ObjectOffline)
                 {
                     this.img_infoBg.active = true;
+                    if(itemData.num && itemData.num[0])
+                    {
+                        this.lab_info.string = String(itemData.num[0]) + "小时";
+                    }
                 }
             }
             

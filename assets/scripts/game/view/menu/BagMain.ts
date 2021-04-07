@@ -5,7 +5,7 @@ import { ItemEquipType,ItemEquipCell } from './ItemEquipCell';
 import { PopItemUseWin } from '../pop/PopItemUseWin';
 import { PopMgr } from '../../control/PopMgr';
 import { NotifyMgr } from '../../control/NotifyMgr';
-import { HeroFragment } from '../hero/HeroFragment';
+import { ElementHeroFragment } from '../features/bag/ElementHeroFragment';
 import { ResMgr } from '../../control/ResMgr';
 const { ccclass, property } = _decorator;
 
@@ -236,10 +236,10 @@ export class BagMain extends Component {
 
     //    GameModel.getInstance().getBagModel().initTestFragmentList();
        let fragmentSysthesisiInfoList = GameModel.getInstance().getBagModel().getFragmentSynthesisInfoList();
-       ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_fragment', (err:Error | null,res:Prefab | null)=>{
+       ResMgr.getInstance().loadPrefab('prefabs_ui/features/bag/element_herofragment', (err:Error | null,res:Prefab | null)=>{
             for (var i = 0 ; i < fragmentSysthesisiInfoList.length; i++) {
                 let fragment_item = instantiate( res  as Prefab);
-                let script = fragment_item.getComponent(HeroFragment) as HeroFragment;
+                let script = fragment_item.getComponent(ElementHeroFragment) as ElementHeroFragment;
                 fragment_item.scale = new Vec3(0.7,0.7,1);
                 let subWidget = fragment_item.getComponent(UITransform) as UITransform;
                 subWidget.contentSize = new Size(105,126);
