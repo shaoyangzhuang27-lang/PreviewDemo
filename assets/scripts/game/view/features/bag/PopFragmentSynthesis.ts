@@ -3,14 +3,14 @@
 * @version 1.0.0,2021.3.13
 */
 import { _decorator, Component, Node,Label,Button, instantiate,Prefab,UITransform,Vec3,Size,resources } from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { XConsts } from '../../model/const/XConsts';
-import { HeroFragment } from '../hero/HeroFragment';
-import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { PopMgr } from '../../control/PopMgr';
-import { ResMgr } from '../../control/ResMgr';
-import { MsgMgr } from '../../control/MsgMgr';
-import { NotifyMgr } from '../../control/NotifyMgr';
+import { PopBase } from '../../../../core/control/PopBase';
+import { XConsts } from '../../../model/const/XConsts';
+import { ElementHeroFragment } from './ElementHeroFragment';
+import { TableName, ValueMgr } from "../../../model/ValueMgr";
+import { PopMgr } from '../../../control/PopMgr';
+import { ResMgr } from '../../../control/ResMgr';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { NotifyMgr } from '../../../control/NotifyMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopFragmentSynthesis')
@@ -101,7 +101,7 @@ export class PopFragmentSynthesis extends PopBase {
 
         ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_fragment', (err: Error | null, res: Prefab | null)=>{
                 let fragment_item = instantiate( res as Prefab );
-                let script = fragment_item.getComponent(HeroFragment) as HeroFragment;
+                let script = fragment_item.getComponent(ElementHeroFragment) as ElementHeroFragment;
                 fragment_item.scale = new Vec3(0.7,0.7,1);
                 let subWidget = fragment_item.getComponent(UITransform) as UITransform;
                 subWidget.contentSize = new Size(105,126);

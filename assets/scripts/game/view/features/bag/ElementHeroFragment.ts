@@ -1,13 +1,13 @@
 //英雄碎片
 import { _decorator, Component, Node, Sprite, Label, Button,SpriteFrame, resources,ProgressBar,instantiate, CCInteger } from 'cc';
 const { ccclass, property } = _decorator;
-import { PopMgr } from '../../control/PopMgr';
-import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { ResMgr } from '../../control/ResMgr';
-import { NotifyMgr } from '../../control/NotifyMgr';
+import { PopMgr } from '../../../control/PopMgr';
+import { TableName, ValueMgr } from "../../../model/ValueMgr";
+import { ResMgr } from '../../../control/ResMgr';
+import { NotifyMgr } from '../../../control/NotifyMgr';
 
-@ccclass('HeroFragment')
-export class HeroFragment extends Component {
+@ccclass('ElementHeroFragment')
+export class ElementHeroFragment extends Component {
     // [1]
     // dummy = '';
 
@@ -84,7 +84,7 @@ export class HeroFragment extends Component {
                 obj.active = true;
                 let sprite = obj.getComponent(Sprite) as Sprite;
                 sprite.spriteFrame = spriteFrame;
-            },"HeroFragment");
+            },"ElementHeroFragment");
         
     }
 
