@@ -18,8 +18,8 @@ import { PopEquipSaleView } from "../view/pop/PopEquipSaleView";
 import { PopItemReward } from '../view/pop/popItemReward';
 import { HeroData } from '../model/datas/HeroData';
 import { PopHeroChoiceGiftView } from '../view/pop/PopHeroChoiceGiftView';
-import { PopHeroPub } from "../view/pop/PopHeroPub";
-import { PopRecLineUp } from "../view/pub/PopRecLineUp";
+import { PopHeroPub } from "../view/features/pub/PopHeroPub";
+import { PopRecLineUp } from "../view/features/pub/PopRecLineUp";
 import { PopSummonSettle } from "../view/pop/PopSummonSettle";
 import { PopFragmentSynthesis } from "../view/pop/PopFragmentSynthesis";
 import { PopBookActive } from '../view/pop/PopBookActive';
@@ -42,7 +42,7 @@ import { HeroPromotion } from '../view/hero_promotion/HeroPromotion';
 import { PopBattleTeam } from '../view/pop/PopBattleTeam';
 import {PubWonderHeartHero} from "../view/pub/PubWonderHeartHero";
 // import {PubWonderSummonSettle} from "../view/pub/PubWonderSummonSettle";
-import { PopHeroReplace } from '../view/pop/PopHeroReplace';
+import { PopHeroReplace } from '../view/features/herosummon/PopHeroReplace';
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();

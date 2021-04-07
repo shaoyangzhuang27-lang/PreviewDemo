@@ -1,9 +1,9 @@
 import { _decorator,Label, resources, instantiate, ScrollView ,Prefab} from 'cc';
 const { ccclass, property } = _decorator;
-import { PopBase } from '../../../core/control/PopBase';
-import { GameModel } from '../../model/GameModel';
-import { ResMgr } from '../../control/ResMgr';
-import { PubRecLineUpItem } from './PubRecLineUpItem';
+import { PopBase } from '../../../../core/control/PopBase';
+import { GameModel } from '../../../model/GameModel';
+import { ResMgr } from '../../../control/ResMgr';
+import { PubRecLineUpItem } from '../../pub/PubRecLineUpItem';
 
 
 @ccclass('PopRecLineUp')
