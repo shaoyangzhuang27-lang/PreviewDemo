@@ -10,7 +10,7 @@ import { PubHeroIcon } from '../../pub/PubHeroIcon';
 import { MsgMgr } from '../../../control/MsgMgr';
 import { NotifyMgr } from '../../../control/NotifyMgr';
 import { XFuns } from '../../../model/const/XFuns';
-import {PubWonderSummonSettle} from "../../../view/pub/PubWonderSummonSettle";
+import {PopPubWonderSummonSettle} from "./PopPubWonderSummonSettle";
 import { ResMgr } from '../../../control/ResMgr';
 import { PopHeroPub } from "../../../view/features/pub/PopHeroPub";
 const { ccclass, property } = _decorator;
@@ -562,7 +562,7 @@ export class ModPubWonderSummon extends Component {
         if(nodeSummonSettle)
         {
             nodeSummonSettle.active = true;
-            let script = nodeSummonSettle.getComponent(PubWonderSummonSettle); 
+            let script = nodeSummonSettle.getComponent(PopPubWonderSummonSettle); 
             script && script.initShowAwardList(msgData);
         }
         else
@@ -570,7 +570,7 @@ export class ModPubWonderSummon extends Component {
             ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_summonsettle', (err: Error | null, res: Prefab | null)=>{
                 let _settle = instantiate(res as Prefab);
                 // _heroIcon.setScale(0.4,0.4,1)
-                let script = _settle.getComponent(PubWonderSummonSettle) as PubWonderSummonSettle; 
+                let script = _settle.getComponent(PopPubWonderSummonSettle) as PopPubWonderSummonSettle; 
                 // script.initUIHeroIconInfo(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero(),XConsts.HERO_ICON_TYPE.WonderSummon);    
                 // script.setBtnCallBack(()=>{
                 //     PopMgr.getInstance().popOpenBookHeroDetail(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero());

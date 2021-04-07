@@ -1,14 +1,14 @@
 import { _decorator, Component, Node,Label,resources,instantiate } from 'cc';
-import { XConsts } from '../../model/const/XConsts';
-import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { GameModel } from '../../model/GameModel';
-import { PubHeroIcon } from '../pub/PubHeroIcon';
-import { HeroIcon } from '../hero/HeroIcon';
-import { ItemEquipType,ItemEquipCell } from '../menu/ItemEquipCell';
+import { XConsts } from '../../../model/const/XConsts';
+import { TableName, ValueMgr } from "../../../model/ValueMgr";
+import { GameModel } from '../../../model/GameModel';
+import { PubHeroIcon } from '../../pub/PubHeroIcon';
+import { HeroIcon } from '../../hero/HeroIcon';
+import { ItemEquipType,ItemEquipCell } from '../../menu/ItemEquipCell';
 const { ccclass, property } = _decorator;
 
-@ccclass('PubWonderSummonSettle')
-export class PubWonderSummonSettle extends Component {
+@ccclass('PopPubWonderSummonSettle')
+export class PopPubWonderSummonSettle extends Component {
     @property({type: Label})
     public lab_title:Label | null = null;
 

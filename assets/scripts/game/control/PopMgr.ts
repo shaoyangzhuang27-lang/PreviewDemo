@@ -41,7 +41,7 @@ import { PopServerListView } from '../view/pop/PopServerListView';
 import { HeroPromotion } from '../view/hero_promotion/HeroPromotion';
 import { PopBattleTeam } from '../view/pop/PopBattleTeam';
 import {PopPubWonderHeartHero} from "../view/features/pub/PopPubWonderHeartHero";
-// import {PubWonderSummonSettle} from "../view/pub/PubWonderSummonSettle";
+// import {PopPubWonderSummonSettle} from "../view/features/pub/PopPubWonderSummonSettle";
 import { PopHeroReplace } from '../view/features/herosummon/PopHeroReplace';
 import { PopfCollege } from '../view/features/college/PopfCollege';
 import { PopCollegeNotice } from '../view/features/college/PopCollegeNotice';
@@ -679,13 +679,13 @@ export class PopMgr extends PopCore  {
         } );
     }
 
-    //    //奇迹召唤心愿英雄详情
-    // public popPubWonderSummonSettleWindow(isMaskClose:boolean = true){
+    // //奇迹召唤心愿英雄详情
+    // public popPopPubWonderSummonSettleWindow(isMaskClose:boolean = true){
     //     resources.load('prefabs_ui/pub/pub_wonder_summonsettle', (err:any,res:any)=>{
     //         let p = instantiate( res );
     //         this.pushWindow(p);
 
-    //         let script = p.getComponent("PubWonderSummonSettle") as PubWonderSummonSettle;
+    //         let script = p.getComponent("PopPubWonderSummonSettle") as PopPubWonderSummonSettle;
     //         script.setIsMaskClose(isMaskClose);
             
     //     } );
