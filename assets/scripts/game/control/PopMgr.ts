@@ -285,7 +285,7 @@ export class PopMgr extends PopCore  {
      * @param {boolean} isMaskClose
      */
     public popExplain(title: string, content: string, submitCallBack: Function, closeCallBack: Function | null = null, isMaskClose: boolean = true) {
-        resources.load('prefabs_ui/pop/pop_explain', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/pop_explain', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 
