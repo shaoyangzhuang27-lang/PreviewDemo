@@ -142,7 +142,8 @@ export class ElementSkill extends Component {
         this._isUnLocked = false;
         this._unlockTier = 0;
         // 显示无技能图标
-        XFuns.ReplaceSpriteFrame("ui/skill_item/英雄详情_无/spriteFrame", this.img_icon);
+        XFuns.ReplaceSpriteFrame("ui/comm/cellskill/ico_skill_forbid/spriteFrame", this.img_icon);
+
         // 技能等级及等级背景不显示
         this._setLv();
         return;

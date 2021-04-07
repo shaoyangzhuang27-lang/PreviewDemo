@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "d55c1637-4263-4efb-a50c-ac4fd09a7b30",
+  "uuid": "615b1792-702d-41e2-89b4-c4c583fb1970",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "d55c1637-4263-4efb-a50c-ac4fd09a7b30@6c48a",
-      "displayName": "等级底板",
+      "uuid": "615b1792-702d-41e2-89b4-c4c583fb1970@6c48a",
+      "displayName": "bg_cell_skill_dark",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "d55c1637-4263-4efb-a50c-ac4fd09a7b30"
+        "imageUuidOrDatabaseUri": "615b1792-702d-41e2-89b4-c4c583fb1970"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "d55c1637-4263-4efb-a50c-ac4fd09a7b30@f9941",
-      "displayName": "等级底板",
+      "uuid": "615b1792-702d-41e2-89b4-c4c583fb1970@f9941",
+      "displayName": "bg_cell_skill_dark",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 30,
-        "height": 27,
-        "rawWidth": 30,
-        "rawHeight": 27,
+        "width": 76,
+        "height": 77,
+        "rawWidth": 76,
+        "rawHeight": 77,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "d55c1637-4263-4efb-a50c-ac4fd09a7b30@6c48a",
+        "imageUuidOrDatabaseUri": "615b1792-702d-41e2-89b4-c4c583fb1970@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "d55c1637-4263-4efb-a50c-ac4fd09a7b30@f9941"
+    "redirect": "615b1792-702d-41e2-89b4-c4c583fb1970@f9941"
   }
 }

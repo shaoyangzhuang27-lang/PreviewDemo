@@ -621,6 +621,8 @@ export class PopMgr extends PopCore  {
      * @param {number} heroId 英雄动态Id
      * @param {number} equipId 装备Id
      * @param {Function} closeCallBack
+     */
+     public popHeroEquipReplaceWindow(heroId: number, locationType: Msg.TEquipLocationType | 0, closeCallBack: Function | null = null) {
 
         resources.load('prefabs_ui/features/heropromotion/pop_replaceequip', (err: any, res: any) => {
             let p = instantiate(res);
