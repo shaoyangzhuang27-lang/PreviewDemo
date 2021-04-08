@@ -346,7 +346,7 @@ export class PopRisingStarTower extends PopBase {
                 let firstid2 = Number((heroData.getStaticID() / 1000000).toFixed())
                 if(heroData.getStar() == curStarupParam
                 && curHeroData.getDyncID() != heroData.getDyncID() 
-                && firstid2 == firstid){
+                && firstid2 == firstid && curHeroData.getCamp() == heroData.getCamp()){
                     num++;
                     if(num == curStarupNum){
                         return true;
@@ -614,7 +614,7 @@ export class PopRisingStarTower extends PopBase {
                     }
                 }else if(this._curStarupType == 2){
                     let firstid2 = Number((heroData.getStaticID() / 1000000).toFixed())
-                    if(this._curStarupParam == heroData.getStar() && firstid2 == firstid1){
+                    if(this._curStarupParam == heroData.getStar() && firstid2 == firstid1 && HeroInfo.getCamp() == heroData.getCamp()){
                         heroNode.active = true;
                     }else{
                         heroNode.active = false;
