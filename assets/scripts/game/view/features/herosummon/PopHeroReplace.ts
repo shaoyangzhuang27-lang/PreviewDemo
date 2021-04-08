@@ -161,10 +161,7 @@ export class PopHeroReplace extends PopBase {
     }
 
     private _initHeroItems() : void {
-        if(this.scrollContent) {
-            this.scrollContent.removeAllChildren()
-        }
-
+        this.scrollContent.destroyAllChildren()
         ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
             this._heroItemsMap.clear()
 

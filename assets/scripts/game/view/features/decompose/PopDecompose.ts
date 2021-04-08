@@ -248,6 +248,10 @@ export class PopDecompose extends Component {
             
         if(isSelect)
         {
+            if(this._selectBattleList.size >= this.goodsNodes.length)
+            {
+                return
+            }
             //top上阵
             this._selectBattleList.set(dyncID, HeroData.GetHeroBookID(staticID));
             this._platformExhibition();
@@ -265,6 +269,7 @@ export class PopDecompose extends Component {
         //清空物品栏
         for (let index = 0; index < this.goodsNodes.length; index++) {
             if(this.goodsNodes[index].getChildByName("heroIcon")){
+                this.goodsNodes[index].getChildByName("heroIcon")?.removeFromParent();
                 this.goodsNodes[index].getChildByName("heroIcon")?.destroy();
                 this.goodsNodes[index].getComponent(Button)?.clickEvents.splice(0);
             }
@@ -291,9 +296,6 @@ export class PopDecompose extends Component {
                 this.goodsNodes[index].getComponent(Button)?.clickEvents.push(clickEventHandler);
 
                 index++;
-                if(index == this.goodsNodes.length){
-                    break
-                }
             }
         });
     }
@@ -448,7 +450,7 @@ export class PopDecompose extends Component {
             let node = this._bottomHeroItemList.get(scriptHeroInfo.getDyncID()) as Node
             let script2 = node.getComponent("HeroSelectIcon") as HeroSelectIcon; 
             script2.setItemType(1);
-            if(this._selectBattleList.size >= 10)
+            if(this._selectBattleList.size >= this.goodsNodes.length)
             {
                 break
             }
