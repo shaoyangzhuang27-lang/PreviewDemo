@@ -33,12 +33,6 @@ export class PopHeroRollBack extends Component {
     @property({type: Node, displayName: "回退人"})
     public btn_rollback_icon:Node = null as unknown as Node;
 
-    @property({type: Node, displayName: "回退头像节点"})
-    public head_Node:Node = null as unknown as Node;
-
-    @property({type: Node, displayName: "回退label"})
-    public lab_head_ts:Node = null as unknown as Node;
-
     @property({type: ToggleContainer , displayName: "阵营" })
     public campGroup:ToggleContainer | null = null as unknown as ToggleContainer;
 
@@ -69,8 +63,6 @@ export class PopHeroRollBack extends Component {
             });
         }
 
-        this.head_Node.active = false;
-        this.lab_head_ts.active = true;
         for(let index = 0;index < this.goodsNodes.length;index++){
             if(this.goodsNodes[index].getChildByName("lab_heroCount")){
                 let node = this.goodsNodes[index].getChildByName("lab_heroCount") as Node;
@@ -265,13 +257,6 @@ export class PopHeroRollBack extends Component {
                 this._platformViceHeadHandle();
             }
         }
-        if(this._curResetHero == 0){
-            this.head_Node.active = false;
-            this.lab_head_ts.active = true;
-        }else{
-            this.head_Node.active = true;
-            this.lab_head_ts.active = false;
-        }
         this._resetBtnStateChange()
     }
 
@@ -306,6 +291,7 @@ export class PopHeroRollBack extends Component {
     //平台展示
     private _platformExhibition(){
         let HeroInfo = this._getHeroData(this._curResetHero)as HeroData
+        this.btn_rollback_icon.getChildByName("heroIcon")?.removeFromParent();
         this.btn_rollback_icon.getChildByName("heroIcon")?.destroy();
         resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
             let heroIcon = instantiate(res) as Node;
@@ -547,11 +533,13 @@ export class PopHeroRollBack extends Component {
         this._heroSelect(heroData as HeroData,false); 
 
         this._curResetHero = 0;
+        this.btn_rollback_icon.getChildByName("heroIcon")?.removeFromParent();
         this.btn_rollback_icon.getChildByName("heroIcon")?.destroy();
 
         //清空物品栏
         for (let index = 0; index < this.goodsNodes.length; index++) {
             if(this.goodsNodes[index].getChildByName("heroIcon")){
+                this.goodsNodes[index].getChildByName("heroIcon")?.removeFromParent();
                 this.goodsNodes[index].getChildByName("heroIcon")?.destroy();
             }
             if(this.goodsNodes[index].getChildByName("lab_heroCount")){
@@ -589,6 +577,7 @@ export class PopHeroRollBack extends Component {
         //清空物品栏
         for (let index = 0; index < this.goodsNodes.length; index++) {
             if(this.goodsNodes[index].getChildByName("heroIcon")){
+                this.goodsNodes[index].getChildByName("heroIcon")?.removeFromParent();
                 this.goodsNodes[index].getChildByName("heroIcon")?.destroy();
             }
             if(this.goodsNodes[index].getChildByName("lab_heroCount")){
