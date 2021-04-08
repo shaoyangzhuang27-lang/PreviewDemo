@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "tab_hero",
+    "_name": "component_tab_hero",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
