@@ -25,7 +25,7 @@ export class PopRecLineUp extends PopBase {
     {
         if(this.scroll_lineup_view.content)
         {
-            this.scroll_lineup_view.content.removeAllChildren()
+            this.scroll_lineup_view.content.destroyAllChildren()
         }
         ResMgr.getInstance().loadPrefab('prefabs_ui/features/pub/cell_pubreclineup', (err: Error | null, res: Prefab | null)=>{
             for (var i = 0 ; i < GameModel.getInstance().getHeroPubModel().nLineUpCounts; i++) {

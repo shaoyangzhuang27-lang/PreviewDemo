@@ -37,10 +37,10 @@ export class PopPubWonderSummonSettle extends Component {
 
     private _clearData()
     {
-        this.node_one?.removeAllChildren();
+        this.node_one?.destroyAllChildren();
         for(var i=0; i < this.nodelist.length; i++)
         {
-            this.nodelist[i].removeAllChildren();
+            this.nodelist[i].destroyAllChildren();
         }
     }
     public initShowAwardList(msgData : Msg.WonderSummonHeroA)

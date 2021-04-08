@@ -211,7 +211,7 @@ export class PopSummonSettle extends PopBase {
         
         if(this.scroll_heroicon_view.content)
         {
-            this.scroll_heroicon_view.content.removeAllChildren()
+            this.scroll_heroicon_view.content.destroyAllChildren()
         }
         ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:Error | null,res:Prefab | null)=>{
                 for(var i = 0; i < this._HeroList.length; i++)
@@ -503,7 +503,7 @@ export class PopSummonSettle extends PopBase {
     {
         if(this.scroll_heroicon_view.content)
         {
-            this.scroll_heroicon_view.content.removeAllChildren()
+            this.scroll_heroicon_view.content.destroyAllChildren()
         }
 
         this.setShowScrollViewType(1)

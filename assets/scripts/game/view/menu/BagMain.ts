@@ -229,7 +229,7 @@ export class BagMain extends Component {
     {
         if(this.scroll_fragment.content)
         {
-            this.scroll_fragment.content.removeAllChildren()
+            this.scroll_fragment.content.destroyAllChildren()
         }
 
          

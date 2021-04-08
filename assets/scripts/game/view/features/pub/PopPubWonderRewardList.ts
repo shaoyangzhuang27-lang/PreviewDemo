@@ -50,7 +50,7 @@ export class PopPubWonderRewardList extends PopBase {
         }
         if(this.scroll_reward.content)
         {
-            this.scroll_reward.content.removeAllChildren()
+            this.scroll_reward.content.destroyAllChildren()
         }
         for(let index = 0 ; index < dataList.length; ++index)
         {
