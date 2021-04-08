@@ -8,7 +8,7 @@ import { _decorator, Label, Vec3, Sprite } from 'cc';
 import { XConsts } from '../../../model/const/XConsts';
 import { XFuns } from '../../../model/const/XFuns';
 import { ValueMgr } from '../../../model/ValueMgr';
-import { TipBase } from '../../TipBase';
+import { TipBase } from '../../../../core/control/TipBase';
 const { ccclass, property } = _decorator;
 
 @ccclass('TipCampOrCareer')

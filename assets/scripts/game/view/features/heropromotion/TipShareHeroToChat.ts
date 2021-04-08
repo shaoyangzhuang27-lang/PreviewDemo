@@ -9,7 +9,7 @@ import { MsgMgr } from '../../../control/MsgMgr';
 import { HeroData } from '../../../model/datas/HeroData';
 import { GameModel } from '../../../model/GameModel';
 import { ValueMgr } from '../../../model/ValueMgr';
-import { TipBase } from '../../TipBase';
+import { TipBase } from '../../../../core/control/TipBase';
 const { ccclass, property } = _decorator;
 
 @ccclass('TipShareHeroToChat')
