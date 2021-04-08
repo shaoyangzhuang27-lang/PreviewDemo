@@ -173,8 +173,64 @@ export class HeroBase extends Component {
 
     
 
-    playEffect(effectNode: Node): void {
+    playEffect(effectNode: Node): boolean {
+        // 暂时不需要判断特效类型，如果是Fly会直接调用playEffectInWorld方法
+        if ((effectNode.getComponent("BattleEffect") as BattleEffect).bFollow) {
+            return this.playEffectFollowPot(effectNode);
+        } else {
+            return this.playEffectInWorld(effectNode);
+        }
+    }
+
+    playEffectFollowPot(effectNode: Node): boolean {
         this.getPlayPot((effectNode.getComponent("BattleEffect") as BattleEffect).playPot).addChild(effectNode);
+        return true;
+    }
+
+    playEffectInWorld(effectNode: Node): boolean {
+        let parent = this.node.parent?.parent;
+        
+        if (parent) {      
+            parent.addChild(effectNode);
+            effectNode.setWorldPosition(this.getPlayPot((effectNode.getComponent("BattleEffect") as BattleEffect).playPot).getWorldPosition());
+            return true;
+        }
+
+        return false;
+    }
+
+    public clearImmediatelyEffect(): void {
+        if (this.heroBasePot && this.heroBasePot.children.length > 0) {
+            this._clearAllChildren(this.heroBasePot);
+        }
+
+        if (this.heroMainWeaponPot && this.heroMainWeaponPot.children.length > 0) {
+            this._clearAllChildren(this.heroMainWeaponPot);
+        }
+
+        if (this.heroChestPot && this.heroChestPot.children.length > 0) {
+            this._clearAllChildren(this.heroChestPot);
+        }
+
+        if (this.heroSubWeaponPot && this.heroSubWeaponPot.children.length > 0) {
+            this._clearAllChildren(this.heroSubWeaponPot);
+        }
+
+        if (this.heroCenterPot && this.heroCenterPot.children.length > 0) {
+            this._clearAllChildren(this.heroCenterPot);
+        }
+
+        if (this.heroHpPot && this.heroHpPot.children.length > 0) {
+            this._clearAllChildren(this.heroHpPot);
+        }
+    }
+
+    private _clearAllChildren(node: Node) {
+        let c = node.children.slice();
+        node.removeAllChildren();
+        for (let i = c.length - 1; i >= 0; i--) {
+            c[i].destroy();
+        }
     }
 
     getPlayPot(playPot: HeroPot): Node {

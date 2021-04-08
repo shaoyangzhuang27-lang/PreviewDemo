@@ -2,12 +2,12 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-  "uuid": "c6a6aec9-512d-4108-ba28-8d3c1a3a1c94",
+  "uuid": "a07b8355-e56a-4996-b09a-3a5f380de326",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "skill_bounty_hunter_end"
+    "syncNodeName": "skill_fly_bounty_hunter"
   }
 }

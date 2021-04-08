@@ -394,6 +394,7 @@ export class BattleHero extends Component {
         this.setPow(0);
         this.clearBuff();
         this.clearDelayDamage();
+        this.clearImmediatelyEffect();
     }
 
     public refreshAttackSpeed(): void {
@@ -1116,28 +1117,41 @@ export class BattleHero extends Component {
                     break;
             }
 
+            let skillPrefab: Prefab | null = this._skillPrefab;
             let skillEffectNode = instantiate(this._skillPrefab);
             let battleEffect: BattleEffect = skillEffectNode.getComponent("BattleEffect") as BattleEffect;
 
+
             if (battleEffect.isImmediately()) {
                 this.playEffect(skillEffectNode);
-                
+                skillPrefab = null;
+
                 if (targetList.length == 0) {
                     return;
                 }
+                
+                if (battleEffect.endEffectPrefab) {
+                    let endEffectNode = instantiate(battleEffect.endEffectPrefab);
+                    if ((endEffectNode.getComponent("BattleEffect") as BattleEffect).isImmediately()) {
+                        targetList[0].playEffect(endEffectNode);
+                        for (let i = 1; i < targetList.length; i++) {
+                            targetList[i].playEffect(instantiate(battleEffect.endEffectPrefab));
+                        }
 
-                for (let i = 0; i < targetList.length; i++) {
-                    if (battleEffect.endEffectPrefab) {
-                        targetList[i].playEffect(instantiate(battleEffect.endEffectPrefab));
+                        this.doSkillEffect(this._recordSkill, targetList);
+                    } else {
+                        skillPrefab = battleEffect.endEffectPrefab;
+                        skillEffectNode = endEffectNode;
+                        battleEffect = endEffectNode.getComponent("BattleEffect") as BattleEffect;
                     }
-                    
-                }
-
-                this.doSkillEffect(this._recordSkill, targetList);
-            } else {
+                } 
+            }
+            
+            
+            if (skillPrefab) {
                 for (let i = 0; i < targetList.length; i++) {
                     if (i > 0) {
-                        battleEffect = instantiate(this._skillPrefab).getComponent("BattleEffect") as BattleEffect;
+                        battleEffect = instantiate(skillPrefab).getComponent("BattleEffect") as BattleEffect;
                     }
 
                     let delayDamage = new BattleDelayDamage(battleEffect, this, targetList[i], (target: BattleHero)=> {
@@ -1396,17 +1410,28 @@ export class BattleHero extends Component {
 
         if (this._normalAttackPrefab) {
             let normalAttackEffect = instantiate(this._normalAttackPrefab);
-            let battleEffect = normalAttackEffect.getComponent("BattleEffect") as BattleEffect;
+            let battleEffect: BattleEffect | null = normalAttackEffect.getComponent("BattleEffect") as BattleEffect;
+
+            
             if (battleEffect.isImmediately()) {
-                // TODO 普通刀光
+                this.playEffect(normalAttackEffect);
                 this.doHitDamager(this._target);
 
-                this.playEffect(normalAttackEffect);
-
                 if (battleEffect.endEffectPrefab) {
-                    this._target.playEffect(instantiate(battleEffect.endEffectPrefab));
+                    let endEffectNode = instantiate(battleEffect.endEffectPrefab);
+                    battleEffect = endEffectNode.getComponent("BattleEffect") as BattleEffect;
+
+                    if (battleEffect.isImmediately()) {
+                        this._target.playEffect(endEffectNode);
+                        battleEffect = null;
+                    }
+   
+                } else {
+                    battleEffect = null;
                 }
-            } else {
+            } 
+
+            if (battleEffect) {
                 let delayDamage = new BattleDelayDamage(battleEffect, this, this._target, (target: BattleHero)=> {
                     this.doHitDamager(target);
                     target.removeFlyDamagePool(delayDamage);
@@ -1729,8 +1754,12 @@ export class BattleHero extends Component {
         this._flyDamagePool.clear();
     }
 
-    public playEffect(effectNode: Node): void {
-        this._heroBase.playEffect(effectNode);
+    public clearImmediatelyEffect(): void {
+        this._heroBase.clearImmediatelyEffect();
+    }
+
+    public playEffect(effectNode: Node): boolean {
+        return this._heroBase.playEffect(effectNode);
     }
 
     public stopAnim(): void {
