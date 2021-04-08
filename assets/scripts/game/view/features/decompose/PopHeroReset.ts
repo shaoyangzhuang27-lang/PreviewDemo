@@ -59,6 +59,9 @@ export class PopHeroReset extends PopBase {
     @property({type :  Node, displayName: "重置获得的物品"})
     public goodsNodes:Node[] = [];
 
+    @property({type :  Node, displayName: "重置获得的物品节点"})
+    public node_goods:Node = null as unknown as Node;
+
     @property({type :  ScrollView})
     public scroll_HeroView:ScrollView = null as unknown as ScrollView;
 
@@ -111,7 +114,23 @@ export class PopHeroReset extends PopBase {
         {
             this._selectBattleList = new Map<number, number>();
         }
-        this._selectBattleList.clear();   
+        this._selectBattleList.clear();  
+        
+        //物品栏
+        let posX = -164
+        let posY = -28
+        for(let i = 2;i <= 10;i++){
+            let node = instantiate(this.goodsNodes[0]) as Node;
+            node.name = "goods"+i
+            posX = posX + 80
+            if(i == 6){
+                posY = -93
+                posX = -164
+            }
+            node.setPosition(new Vec3(posX,posY,0))
+            this.goodsNodes.push(node)
+            this.node_goods?.addChild(node);
+        }
 
         this._initBottomHeros();
     }
@@ -148,6 +167,7 @@ export class PopHeroReset extends PopBase {
         }
         if(scroll.content)
         {
+            scroll.content.removeAllChildren()
             scroll.content.destroyAllChildren()
         }
 
@@ -276,6 +296,7 @@ export class PopHeroReset extends PopBase {
     //平台展示
     private _platformExhibition(){
         let HeroInfo = this._getHeroData(this._curResetHero)as HeroData
+        this.btn_reset_icon.getChildByName("heroIcon")?.removeFromParent();
         this.btn_reset_icon.getChildByName("heroIcon")?.destroy();
         resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
             let heroIcon = instantiate(res) as Node;
@@ -485,11 +506,13 @@ export class PopHeroReset extends PopBase {
         this._heroSelect(heroData as HeroData,false); 
 
         this._curResetHero = 0;
+        this.btn_reset_icon.getChildByName("heroIcon")?.removeFromParent();
         this.btn_reset_icon.getChildByName("heroIcon")?.destroy();
 
         //清空物品栏
         for (let index = 0; index < this.goodsNodes.length; index++) {
             if(this.goodsNodes[index].getChildByName("heroIcon")){
+                this.goodsNodes[index].getChildByName("heroIcon")?.removeFromParent();
                 this.goodsNodes[index].getChildByName("heroIcon")?.destroy();
             }
         }
@@ -501,9 +524,11 @@ export class PopHeroReset extends PopBase {
         let tog:Toggle = (event as any);
         console.log(tog.node.name)
         if(this.window.getChildByName("pop_decompose")){
+            this.window.getChildByName("pop_decompose")?.removeFromParent();
             this.window.getChildByName("pop_decompose")?.destroy();
         }
         if(this.window.getChildByName("pop_herorollback")){
+            this.window.getChildByName("pop_herorollback")?.removeFromParent();
             this.window.getChildByName("pop_herorollback")?.destroy();
         }
 
@@ -588,6 +613,7 @@ export class PopHeroReset extends PopBase {
         //清空物品栏
         for (let index = 0; index < this.goodsNodes.length; index++) {
             if(this.goodsNodes[index].getChildByName("heroIcon")){
+                this.goodsNodes[index].getChildByName("heroIcon")?.removeFromParent();
                 this.goodsNodes[index].getChildByName("heroIcon")?.destroy();
             }
         }
