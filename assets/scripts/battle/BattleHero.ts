@@ -186,7 +186,9 @@ export class BattleHero extends Component {
 
     private _recordSkill: Config.skill.Record | null = null;
 
+    private _prepareAttackPrefab: Prefab | null = null;
     private _normalAttackPrefab: Prefab | null = null;
+    private _prepareSkillPrefab: Prefab | null = null;
     private _skillPrefab: Prefab | null = null;
     
 
@@ -275,18 +277,35 @@ export class BattleHero extends Component {
         heroRigidBody.destroy();
         this._heroRigidBody.enabled = false;
 
-        this._heroBase.setSkillEventCallBack(() => {
-            this.onSkill();
-        })
+        this._heroBase.setPrepareAttackEventCallBack(() => {
+            this.onPrepareAttack();
+        });
 
         this._heroBase.setAttackEventCallBack(() => {
             this.onAttack();
-        })
+        });
+
+        this._heroBase.setPrepareSkillEventCallBack(() => {
+            this.onPrepareSkill();
+        });
+
+        this._heroBase.setSkillEventCallBack(() => {
+            this.onSkill();
+        });
+
+        
     }
 
     private initBattleData(): void {
         this.refreshBattleDataBase();
         this.refreshBattleData();
+
+        // 普通攻击蓄力特效
+        let prepareAttackParticleName = this._heroData.getPrepareAttackParticleName();
+        if (prepareAttackParticleName != "0") {
+            this._prepareAttackPrefab = BattleResMgr.getInstance().getRes(prepareAttackParticleName);
+        }
+
         // 普通攻击特效
         let normalAttackParticleName = this._heroData.getNormalAttackParticleName();
         if (normalAttackParticleName != "0") {
@@ -307,7 +326,15 @@ export class BattleHero extends Component {
                     }
                 } else {
                     this._recordSkill = null as unknown as Config.skill.Record;
-                    console.warn("技能id" + this._heroData.getSkillID() + "特效预制体测试路径不存在")
+                    console.warn("技能id" + this._heroData.getSkillID() + "技能特效预制体测试路径不存在")
+                }
+
+                path = BattleTest.getPrepareSkillPrefabPath(this._recordSkill.id);
+                if (path) {
+                    this._prepareSkillPrefab = BattleResMgr.getInstance().getRes(path);
+                    if (!this._prepareSkillPrefab) {
+                        console.warn("技能id:" + this._heroData.getSkillID() + "技能蓄力特效预制体不存在")
+                    }
                 }
                 
             } else {
@@ -1001,6 +1028,12 @@ export class BattleHero extends Component {
         this._heroBase.playSkill();
     }
 
+    private onPrepareSkill(): void {
+        if (this._prepareSkillPrefab) {
+            this.playEffect(instantiate(this._prepareSkillPrefab));
+        }
+    }
+
     private onSkill(): void {
         
         // 到技能关键帧了
@@ -1111,7 +1144,8 @@ export class BattleHero extends Component {
                         target.removeFlyDamagePool(delayDamage);
                         this.doSkillEffect(this._recordSkill as Config.skill.Record, [target]);
                     });
-    
+                    
+                    
                     targetList[i].addFlyDamagePool(delayDamage);
                 }        
             }
@@ -1347,6 +1381,12 @@ export class BattleHero extends Component {
 
     private doAttack(): void {
         this._heroBase.playAttack();
+    }
+
+    private onPrepareAttack(): void {
+        if (this._prepareAttackPrefab) {
+            this.playEffect(instantiate(this._prepareAttackPrefab));
+        }
     }
 
     private onAttack(): void {

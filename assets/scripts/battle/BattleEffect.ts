@@ -93,6 +93,10 @@ export class BattleEffect extends Component {
         return this.effectType == EBattleEffectType.Immediately;
     }
 
+    isFly(): boolean {
+        return this.effectType == EBattleEffectType.Fly;
+    }
+
     addEndTarget(target: HeroBase): void {
         this._endTargetList.push(target);
     }

@@ -1,5 +1,5 @@
 
-import { resources } from 'cc';
+import { CircleCollider2D, resources } from 'cc';
 
 export class BattleResMgr {
     private static _instance: BattleResMgr = new BattleResMgr();
@@ -62,11 +62,11 @@ export class BattleResMgr {
 
         resources.load(path, (err: any, obj: any)=>{
             if (err) {
-                // TODO
+                console.error(err);
             } else {
                 this._tmpResMap[path] = obj;
-                cb(err, obj);
             }
+            cb(err, obj);
         })
 
     }
