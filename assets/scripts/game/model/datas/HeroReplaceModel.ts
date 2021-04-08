@@ -107,6 +107,11 @@ export class HeroReplaceModel extends BaseModel {
         return data?.isOrangeQuality() 
             ? XConsts.KQualityColor[5] : XConsts.KQualityColor[4];
     }
+
+    //英雄是否超过5星
+    public isHeroStarOverFive(data: HeroData) : boolean {
+        return data?.getStar() > 5;
+    }
 }
 
 /**

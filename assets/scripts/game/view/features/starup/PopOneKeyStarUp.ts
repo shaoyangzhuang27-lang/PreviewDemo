@@ -122,7 +122,7 @@ export class PopOneKeyStarUp extends PopBase {
                     let firstid2 = Number((heroData2.getStaticID() / 1000000).toFixed())
                     if(heroData2.getStar() == this._curStarupParam
                     && heroData2.getDyncID() != heroData.getDyncID() 
-                    && firstid2 == firstid1){
+                    && firstid2 == firstid1 && heroData2.getCamp() == heroData.getCamp()){
                         HeroIDs.heroIDList.push(heroData2.getDyncID())
                         if(HeroIDs.heroIDList.length == this._curStarupNum){
                             break;

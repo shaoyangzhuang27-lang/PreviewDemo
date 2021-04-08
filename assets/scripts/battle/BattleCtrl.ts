@@ -472,7 +472,7 @@ export class BattleCtrl extends Component {
         let a = 0;
         let b = 0;
         for(let i = 0; i < 6; i++) {
-            if (this._army[a].embattleedSite == i) {
+            if (this._army.length > a && this._army[a].embattleedSite == i) {
                 if (!this._army[a].getTarget()) {
                     this._army[a].seekFirstTarget();
                 }
@@ -480,7 +480,7 @@ export class BattleCtrl extends Component {
                 a++;
             }
 
-            if (this._enemy[b].embattleedSite == i) {
+            if (this._enemy.length > b && this._enemy[b].embattleedSite == i) {
                 if (!this._enemy[b].getTarget()) {
                     this._enemy[b].seekFirstTarget();
                 }

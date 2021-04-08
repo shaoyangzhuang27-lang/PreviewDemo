@@ -17,6 +17,7 @@ import { MsgMgr } from '../../../control/MsgMgr';
 import { PopDecompose } from "../../../view/features/decompose/PopDecompose";
 import { PopHeroRollBack } from "../../../view/features/decompose/PopHeroRollBack";
 import { ItemEquipCell, ItemEquipType } from '../../menu/ItemEquipCell';
+import { XFuns } from '../../../model/const/XFuns';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopHeroReset')
@@ -42,12 +43,6 @@ export class PopHeroReset extends PopBase {
 
     @property({type: Node, displayName: "重置人"})
     public btn_reset_icon:Node = null as unknown as Node;
-
-    @property({type: Node, displayName: "重置头像"})
-    public head_Node:Node = null as unknown as Node;
-
-    @property({type: Node, displayName: "重置label"})
-    public lab_head_ts:Node = null as unknown as Node;
 
     @property({type: Label, displayName: "重置金币"})
     public lab_Goid:Label = null as unknown as Label;
@@ -97,9 +92,6 @@ export class PopHeroReset extends PopBase {
             });
         }
 
-        this.head_Node.active = false;
-        this.lab_head_ts.active = true;
-
         this._resetBtnStateChange()
         var clickEventHandler = new EventHandler();
         clickEventHandler.target = this.node; //这个 node 节点是你的事件处理代码组件所属的节点
@@ -127,9 +119,9 @@ export class PopHeroReset extends PopBase {
     //刷新金币 进化点 进阶点
     private _updataMoney(){
         let playerInfo = GameModel.getInstance().getPlayerModel().getPlayerInfo();
-        this.lab_Goid.string = playerInfo.money.toString();
-        this.lab_upgrade.string = playerInfo.heroUpgradeExp.toString();
-        this.lab_Advanced.string = playerInfo.heroAdvanceExp.toString();
+        this.lab_Goid.string = XFuns.FormatNumber(playerInfo.money);
+        this.lab_upgrade.string = XFuns.FormatNumber(playerInfo.heroUpgradeExp);
+        this.lab_Advanced.string = XFuns.FormatNumber(playerInfo.heroAdvanceExp);
     }
 
     //获取升星列表英雄
@@ -156,7 +148,7 @@ export class PopHeroReset extends PopBase {
         }
         if(scroll.content)
         {
-            scroll.content.removeAllChildren()
+            scroll.content.destroyAllChildren()
         }
 
         resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
@@ -249,13 +241,6 @@ export class PopHeroReset extends PopBase {
         }
         //重置界面
         if( this.top_reset?.active){
-            if(this._curResetHero == 0){
-                this.head_Node.active = false;
-                this.lab_head_ts.active = true;
-            }else{
-                this.head_Node.active = true;
-                this.lab_head_ts.active = false;
-            }
             this._resetBtnStateChange()
         }  
     }
@@ -291,7 +276,7 @@ export class PopHeroReset extends PopBase {
     //平台展示
     private _platformExhibition(){
         let HeroInfo = this._getHeroData(this._curResetHero)as HeroData
-        this.btn_reset_icon.getChildByName("heroIcon")?.removeFromParent();
+        this.btn_reset_icon.getChildByName("heroIcon")?.destroy();
         resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
             let heroIcon = instantiate(res) as Node;
             heroIcon.scale = new Vec3(0.5,0.5,1);
@@ -338,13 +323,16 @@ export class PopHeroReset extends PopBase {
                 let costGold = XShare.getInstance().KHeroTierUpAdvanceExp[index];
                 num += costGold;
             }
-            equipCell = instantiate(res) as Node;
-            equipCell.setScale(new Vec3(0.8, 0.8, 0.8))
-            equipCell.name = "heroIcon";
-            this.goodsNodes[index]?.addChild(equipCell);
-            this._initPrefab(equipCell, Number(ID), Number(num), ItemEquipType.goods,
-             Number(Msg.TObjectType.EObject_UpgradePoint)); 
-             index++;
+            if(num > 0){
+                equipCell = instantiate(res) as Node;
+                equipCell.setScale(new Vec3(0.8, 0.8, 0.8))
+                equipCell.name = "heroIcon";
+                this.goodsNodes[index]?.addChild(equipCell);
+                this._initPrefab(equipCell, Number(ID), Number(num), ItemEquipType.goods,
+                Number(Msg.TObjectType.EObject_UpgradePoint)); 
+                index++;
+            }
+            
              //进阶点
             ID = Msg.TObjectType.EObject_AdvanceExp;
             num = 0;
@@ -352,13 +340,16 @@ export class PopHeroReset extends PopBase {
                 let costGold = XShare.getInstance().KHeroTierUpAdvanceExp[index];
                 num += costGold;
             }
-            equipCell = instantiate(res) as Node;
-            equipCell.setScale(new Vec3(0.8, 0.8, 0.8))
-            equipCell.name = "heroIcon";
-            this.goodsNodes[index]?.addChild(equipCell);
-            this._initPrefab(equipCell, Number(ID), Number(num), ItemEquipType.goods,
-             Number(Msg.TObjectType.EObject_AdvanceExp)); 
-             index++;
+            if(num > 0){
+                equipCell = instantiate(res) as Node;
+                equipCell.setScale(new Vec3(0.8, 0.8, 0.8))
+                equipCell.name = "heroIcon";
+                this.goodsNodes[index]?.addChild(equipCell);
+                this._initPrefab(equipCell, Number(ID), Number(num), ItemEquipType.goods,
+                Number(Msg.TObjectType.EObject_AdvanceExp)); 
+                index++;
+            }
+            
              //装备
              if(HeroInfo.getEquipPropertyList().size > 0){
                 for (let key of HeroInfo.getEquipPropertyList().keys()) {

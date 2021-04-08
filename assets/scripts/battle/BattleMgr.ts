@@ -11,6 +11,10 @@ let preloadResList: string[] = [];
 
 let preloadFunc: (v: HeroData, k: Number) => void = (v: HeroData, k: Number) => {
 
+    if (v.getPrepareAttackParticleName() != "0") {
+        preloadResList.push(v.getPrepareAttackParticleName());
+    }
+
     if (v.getNormalAttackParticleName() != "0") {
         preloadResList.push(v.getNormalAttackParticleName());
     }
@@ -22,6 +26,11 @@ let preloadFunc: (v: HeroData, k: Number) => void = (v: HeroData, k: Number) => 
             let recordSkill = ValueMgr.getInstance().getItemByField(TableName.skill, v.getSkillID()) as Config.skill.Record;
             if (recordSkill) {
                 let path = BattleTest.getSkillPrefabPath(recordSkill.id);
+                if (path) {
+                    preloadResList.push(path);
+                }
+
+                path = BattleTest.getPrepareSkillPrefabPath(recordSkill.id);
                 if (path) {
                     preloadResList.push(path);
                 }
