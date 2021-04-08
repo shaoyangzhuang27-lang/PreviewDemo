@@ -93,8 +93,16 @@ export class HeroBase extends Component {
         }
     }
 
+    setPrepareAttackEventCallBack(prepareAttackEventCallBack: Function) {
+        (this._bodyNode.getComponent("HeroAnimationEvent") as HeroAnimationEvent).setPrepareAttackEventCallBack(prepareAttackEventCallBack);
+    }
+
     setAttackEventCallBack(attackEventCallBack: Function) {
         (this._bodyNode.getComponent("HeroAnimationEvent") as HeroAnimationEvent).setAttackEventCallBack(attackEventCallBack);
+    }
+
+    setPrepareSkillEventCallBack(prepareSkillEventCallBack: Function) {
+        (this._bodyNode.getComponent("HeroAnimationEvent") as HeroAnimationEvent).setPrepareSkillEventCallBack(prepareSkillEventCallBack);
     }
 
     setSkillEventCallBack(skillEventCallBack: Function) {
