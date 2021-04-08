@@ -237,7 +237,7 @@ export class PopRisingStarTower extends PopBase {
         this._getAllHeroList();
         if(this.scroll_HeroView.content)
         {
-            this.scroll_HeroView.content.removeAllChildren()
+            this.scroll_HeroView.content.destroyAllChildren()
         }
 
         resources.load('prefabs_ui/main/hero_selecticonstarup', (err:any,res:any)=>{
@@ -412,7 +412,7 @@ export class PopRisingStarTower extends PopBase {
                 }
                     
                 let node = this._getTopHeroByStaticID(staticID)
-                if(node)node.removeFromParent();
+                if(node)node.destroy();
             }
             this._bottomHeroChange();
             this._changeStarUpState();
@@ -511,8 +511,8 @@ export class PopRisingStarTower extends PopBase {
             script2.setItemType(0);
         }
         this._selectBattleList.clear();
-        this.btn_head2.getChildByName("heroIcon2")?.removeFromParent();
-        this.btn_head3.getChildByName("heroIcon3")?.removeFromParent();
+        this.btn_head2.getChildByName("heroIcon2")?.destroy();
+        this.btn_head3.getChildByName("heroIcon3")?.destroy();
         this._risingDyncViceID1 = 0;
         this._risingDyncViceID2 = 0;
         this._curStarupType = 0;
@@ -531,7 +531,7 @@ export class PopRisingStarTower extends PopBase {
         this._heroSelect(heroData as HeroData,false); 
 
         this._risingDyncViceID1 = 0;
-        this.btn_head2.getChildByName("heroIcon2")?.removeFromParent();
+        this.btn_head2.getChildByName("heroIcon2")?.destroy();
         this._bottomHeroChange();
     }
     private _platformViceHeadHandle2(){
@@ -541,7 +541,7 @@ export class PopRisingStarTower extends PopBase {
         let heroData = this._getHeroData(this._risingDyncViceID2);
         this._heroSelect(heroData as HeroData,false); 
         this._risingDyncViceID2 = 0;
-        this.btn_head3.getChildByName("heroIcon3")?.removeFromParent();
+        this.btn_head3.getChildByName("heroIcon3")?.destroy();
         this._bottomHeroChange();
     }
 
@@ -746,7 +746,7 @@ export class PopRisingStarTower extends PopBase {
         }
         else{//副材料显示
             if(HeroInfo2){
-                this.btn_head2.getChildByName("heroIcon2")?.removeFromParent();
+                this.btn_head2.getChildByName("heroIcon2")?.destroy();
                 resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
                     let heroIcon = instantiate(res) as Node;
                     heroIcon.scale = new Vec3(0.5,0.5,1);
@@ -760,7 +760,7 @@ export class PopRisingStarTower extends PopBase {
                 });
             }
             if(HeroInfo3){
-                this.btn_head3.getChildByName("heroIcon3")?.removeFromParent();
+                this.btn_head3.getChildByName("heroIcon3")?.destroy();
                 resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
                     let heroIcon = instantiate(res) as Node;
                     heroIcon.scale = new Vec3(0.5,0.5,1);

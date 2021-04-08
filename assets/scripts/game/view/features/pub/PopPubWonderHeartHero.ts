@@ -114,7 +114,7 @@ export class PopPubWonderHeartHero extends PopBase {
     {
         if(this.scroll_select.content)
         {
-            this.scroll_select.content.removeAllChildren()
+            this.scroll_select.content.destroyAllChildren()
         }
 
         let heroIdList = GameModel.getInstance().getHeroPubModel().getWonderHeartHeroIdByCamp(nCamp);

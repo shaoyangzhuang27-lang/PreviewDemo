@@ -4,17 +4,15 @@
  * @version 1.0.0,2021.3.26
  */
 import { _decorator,Label,Component,Size,UITransform, Button,instantiate,Widget,Vec3, Node,resources,ToggleContainer,EventHandler,Toggle,ScrollView } from 'cc';
-import { PopBase } from '../../../../core/control/PopBase';
 import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
 import { GameModel } from '../../../model/GameModel';
 import { HeroData } from '../../../model/datas/HeroData';
 import { HeroIcon } from '../../hero/HeroIcon';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
-import { XShare } from '../../../model/const/XShare';
 import { PopMgr } from '../../../control/PopMgr';
 import { NotifyMgr } from '../../../control/NotifyMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
-import { ItemEquipCell, ItemEquipType } from '../../menu/ItemEquipCell';
+import { XFuns } from '../../../model/const/XFuns';
 import { XConsts } from '../../../model/const/XConsts';
 const { ccclass, property } = _decorator;
 
@@ -125,9 +123,9 @@ export class PopDecompose extends Component {
     //刷新灵魂石 进化点 进阶点 背包容量
     private _updataMoney(){
         let playerInfo = GameModel.getInstance().getPlayerModel().getPlayerInfo();
-        this.lab_decompose_soul.string = playerInfo.soulStone.toString();
-        this.lab_decompose_upgrade.string = playerInfo.heroUpgradeExp.toString();
-        this.lab_decompose_Advanced.string = playerInfo.heroAdvanceExp.toString();
+        this.lab_decompose_soul.string = XFuns.FormatNumber(playerInfo.soulStone);
+        this.lab_decompose_upgrade.string = XFuns.FormatNumber(playerInfo.heroUpgradeExp);
+        this.lab_decompose_Advanced.string = XFuns.FormatNumber(playerInfo.heroAdvanceExp);
 
         let PlayerData = GameModel.getInstance().getPlayerModel()
         let allGoodsList = XConsts.KHeroBagMaxNum 
@@ -151,6 +149,9 @@ export class PopDecompose extends Component {
         if(Data.getStar() > 4){
             return true
         }
+        if(Data.getCamp() == Msg.TCampType.ECampType_Light || Data.getCamp() == Msg.TCampType.ECampType_Dark){
+            return true
+        }
         return false
     }
 
@@ -162,7 +163,7 @@ export class PopDecompose extends Component {
         scroll = this.scroll_HeroView
         if(scroll.content)
         {
-            scroll.content.removeAllChildren()
+            scroll.content.destroyAllChildren()
         }
 
         resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
@@ -247,6 +248,10 @@ export class PopDecompose extends Component {
             
         if(isSelect)
         {
+            if(this._selectBattleList.size >= this.goodsNodes.length)
+            {
+                return
+            }
             //top上阵
             this._selectBattleList.set(dyncID, HeroData.GetHeroBookID(staticID));
             this._platformExhibition();
@@ -264,6 +269,7 @@ export class PopDecompose extends Component {
         //清空物品栏
         for (let index = 0; index < this.goodsNodes.length; index++) {
             if(this.goodsNodes[index].getChildByName("heroIcon")){
+                this.goodsNodes[index].getChildByName("heroIcon")?.removeFromParent();
                 this.goodsNodes[index].getChildByName("heroIcon")?.destroy();
                 this.goodsNodes[index].getComponent(Button)?.clickEvents.splice(0);
             }
@@ -444,7 +450,7 @@ export class PopDecompose extends Component {
             let node = this._bottomHeroItemList.get(scriptHeroInfo.getDyncID()) as Node
             let script2 = node.getComponent("HeroSelectIcon") as HeroSelectIcon; 
             script2.setItemType(1);
-            if(this._selectBattleList.size >= 15)
+            if(this._selectBattleList.size >= this.goodsNodes.length)
             {
                 break
             }

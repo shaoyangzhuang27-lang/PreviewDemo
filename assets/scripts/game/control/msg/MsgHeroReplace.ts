@@ -36,7 +36,7 @@ export class MsgHeroReplace extends MsgBase{
             NotifyMgr.getInstance().notify(NotifyMgr.event_net_camp_change, msgData);
         }
         else {
-            console.log('responeClassesExchangeA',msgData.err)
+            console.log('responeClassesExchangeA',msgData.errStr)
         }
     }
 
@@ -61,7 +61,7 @@ export class MsgHeroReplace extends MsgBase{
             NotifyMgr.getInstance().notify(NotifyMgr.event_net_camp_change_confirm, msgData);
         }
         else {
-            console.log("responeClassesExchangeConfirmA",msgData.err);
+            console.log("responeClassesExchangeConfirmA",msgData.errStr);
         }
     }    
 }
