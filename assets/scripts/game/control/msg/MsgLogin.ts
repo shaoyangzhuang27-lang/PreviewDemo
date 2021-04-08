@@ -10,7 +10,7 @@ import { MsgBase } from "./MsgBase";
 export class MsgLogin extends MsgBase{
 
     // private _tempDeviceId:string = "001_c6c5fb6886887901329e39bbd40f45f6";
-    private _tempDeviceId:string = "00202010151135140506929590896066_5f1ab04da3953dbd5f88eff1a37d4f39";
+    private _tempDeviceId:string = "000111_7d7785ab654adff39122f535393bc9d6";
     
     public initData(){
         this.responeMap = new Map<number,[any,NetCallFunc,any]>([

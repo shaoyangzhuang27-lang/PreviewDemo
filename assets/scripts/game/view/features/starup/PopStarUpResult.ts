@@ -8,7 +8,8 @@ import { PopBase } from '../../../../core/control/PopBase';
 import { HeroModel } from '../../hero/HeroModel';
 import { HeroData } from '../../../model/datas/HeroData';
 import { XConsts } from "../../../model/const/XConsts";
-import { PopMgr } from '../../../control/PopMgr';
+import { TableName, ValueMgr } from "../../../model/ValueMgr";
+import { ResMgr } from '../../../control/ResMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopStarUpResult')
@@ -62,6 +63,30 @@ export class PopStarUpResult extends PopBase {
     @property({type :  Node, displayName: "当前移动节点"})
     public nodelist:Node[] = [];
 
+    @property({type :  Node, displayName: "当前英雄升星信息技能节点1"})
+    public node_skill1:Node = null as unknown as Node;
+
+    @property({type :  Node, displayName: "当前英雄升星信息技能节点2"})
+    public node_skill2:Node = null as unknown as Node;
+
+    @property({type :  Node, displayName: "当前英雄升星信息技能1"})
+    public img_skill1:Node = null as unknown as Node;
+
+    @property({type :  Node, displayName: "当前英雄升星信息技能2"})
+    public img_skill2:Node = null as unknown as Node;
+
+    @property({type: Label, displayName: "当前英雄升星信息技能名称1"})
+    public lab_skillName1:Label = null as unknown as Label;
+
+    @property({type: Label, displayName: "当前英雄升星信息技能名称2"})
+    public lab_skillName2:Label = null as unknown as Label;
+
+    @property({type: Label, displayName: "当前英雄升星信息技能等级1"})
+    public lab_skillLevel1:Label = null as unknown as Label;
+
+    @property({type: Label, displayName: "当前英雄升星信息技能等级2"})
+    public lab_skillLevel2:Label = null as unknown as Label;
+
     private _starNameList:string[] = new Array<string>();
 
     private _showDataTime:number = 0.25;
@@ -87,6 +112,7 @@ export class PopStarUpResult extends PopBase {
         this._showHeroData();
         this._showHeroInfo();
         this._showNewHeroData();
+        this._showSkill();
         this._starChangeAnimation();
     }
 
@@ -108,12 +134,12 @@ export class PopStarUpResult extends PopBase {
     //平台显示英雄信息
     private _showHeroInfo(){
         let HeroInfo = this._newHeroData;
-        let _campName:string = XConsts.KHeroCampIcon[HeroInfo?.getCamp() as number];
-        let _classesName:string = XConsts.KClassesSpriteName[HeroInfo?.getClasses() as number];
+        let _campName:string = XConsts.KNewHeroCampIcon[HeroInfo?.getCamp() as number];
+        let _classesName:string = XConsts.KNewClassesSpriteName[HeroInfo?.getClasses() as number];
         let _iconName:string = HeroInfo?.getName() as string;
         let _starNum:number = HeroInfo?.getStar() as number;
         this.img_camp.active = true;
-        let campIconPath:string = "ui/team/" + _campName + "/spriteFrame"
+        let campIconPath:string = "ui/comm/icon/" + _campName + "/spriteFrame"
         resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
         {
             if(!err)
@@ -123,7 +149,7 @@ export class PopStarUpResult extends PopBase {
             }
         });   
         this.img_classes.active = true;
-        let classesIconPath:string = "ui/lv_up/" + _classesName + "/spriteFrame"
+        let classesIconPath:string = "ui/comm/icon/" + _classesName + "/spriteFrame"
         resources.load(classesIconPath, (err,spriteFrame:SpriteFrame) =>
         {
             if(!err)
@@ -140,12 +166,13 @@ export class PopStarUpResult extends PopBase {
     //设置星星
     private _setStar(star:number)
     {
-        this._starNameList = ["初级星星","中级星星","高级星星"]
-        let grade:number = Math.floor(star/5);
+        let grade:number = Math.ceil(star/5) - 1;
         let yu:number = (star - 1) % 5 + 1;
 
-        let starName = this._starNameList[grade];
-        let starPath = "ui/icon/" + starName + "/spriteFrame"
+        let starNameList:string[] = new Array<string>();
+        starNameList = ["icon_star1","icon_star2","icon_star3"]
+        let starName = starNameList[grade];
+        let starPath = "ui/comm/icon/" + starName + "/spriteFrame"
 
         for (let index = 0; index < this.starlist.length; index++) {
             if(index >= yu && yu != 0)
@@ -154,6 +181,7 @@ export class PopStarUpResult extends PopBase {
             }
             else{
                 this.starlist[index].active = true;
+                this._resourceLoad(starPath,this.starlist[index]);
             }
         }
     }
@@ -165,6 +193,50 @@ export class PopStarUpResult extends PopBase {
         {
             //this.cur_hero_model.updateByHeroPerfabPath(_iconName);
         }
+    }
+
+    //显示技能
+    private _showSkill(){
+        let HeroInfo = this._HeroData
+        //技能
+        let recordSkill = ValueMgr.getInstance().getItemByField(TableName.skill, 
+            HeroInfo.getSkillID()) as Config.skill.Record;
+        let framePath: string = "ui/skill_icon/" + recordSkill.image + "/spriteFrame"
+        this._resourceLoad(framePath, this.img_skill1);
+        this.lab_skillName1.string = ""+HeroInfo.getSkillName()
+        this.lab_skillLevel1.string = "等级"+recordSkill.level
+
+        let record = ValueMgr.getInstance().getItemByField(TableName.heroes, HeroInfo.getStaticID()+10000) as Config.heroes.Record;
+        recordSkill = ValueMgr.getInstance().getItemByField(TableName.skill, 
+            record.skillId) as Config.skill.Record;
+        framePath = "ui/skill_icon/" + recordSkill.image + "/spriteFrame"
+        this._resourceLoad(framePath, this.img_skill2);
+        this.lab_skillName2.string = ""+(ValueMgr.getInstance().getItemByField(TableName.language_data, 
+            recordSkill.name) as Config.language_data.Record).cn;
+        this.lab_skillLevel2.string = "等级"+recordSkill.level
+        //技能不一样 显示技能
+        if(this.lab_skillName1.string == this.lab_skillName2.string && this.lab_skillLevel1.string
+        == this.lab_skillLevel2.string){
+            this.node_skill2.active = true
+            this.node_skill1.active = false
+        }else{
+            this.node_skill2.active = false
+            this.node_skill1.active = true
+        }
+    }
+
+    //资源替换
+    private _resourceLoad(path:string,obj:any)
+    {
+        ResMgr.getInstance().loadSpriteFrame(path,(err,spriteFrame:SpriteFrame | null) =>
+        {
+            console.log("errerrerrerrerrerrerr",err)
+            if(!err)
+            {
+                let sprite = obj.getComponent(Sprite) as Sprite;
+                sprite.spriteFrame = spriteFrame;
+            }
+        });
     }
 
     //显示数据

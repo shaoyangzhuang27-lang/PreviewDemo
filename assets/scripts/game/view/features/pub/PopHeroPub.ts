@@ -12,8 +12,8 @@ import { NotifyMgr } from '../../../control/NotifyMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
 import { XFuns } from '../../../model/const/XFuns';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
-import { PubHeroIcon } from '../../pub/PubHeroIcon';
-import { PubWonderSummon } from '../../pub/PubWonderSummon';
+import { ElementPubHeroIcon } from './ElementPubHeroIcon';
+import { ModPubWonderSummon } from '../../features/pub/ModPubWonderSummon';
 
 const { ccclass, property } = _decorator;
 
@@ -380,9 +380,9 @@ export class PopHeroPub extends PopBase {
     public showPubHeroIconPrefab()
     {
         this.node_wonder && (this.node_wonder.active = false);
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_heroicon', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/pub/element_pubheroicon', (err: Error | null, res: Prefab | null)=>{
             let p = instantiate( res as Prefab);
-            let script = p.getComponent(PubHeroIcon) as PubHeroIcon;
+            let script = p.getComponent(ElementPubHeroIcon) as ElementPubHeroIcon;
             var nodWindow = this.node.getChildByName("window");
             var node_ordinary = nodWindow?.getChildByName("node_ordinary");
             var nodeDiamond = node_ordinary?.getChildByName("node_diamond");
@@ -650,7 +650,18 @@ export class PopHeroPub extends PopBase {
                 {
                     PopMgr.getInstance().popSummonSettleWindow(msgData,XConsts.POP_SUMMON_TYPE.HeroPub);
                 }   
-                this.addPubNotifyHandler();
+                
+                let playerModel = GameModel.getInstance().getPlayerModel();
+                switch(msgData.consumeType)
+                {
+                    case Msg.TSummonConsumeType.ESummonConsumeType_Scroll:
+                        playerModel.updateSummonScore(msgData.summonScore);
+                        break;
+                    case Msg.TSummonConsumeType.ESummonConsumeType_VRmb:
+                        playerModel.updateSummonScore(msgData.summonScore);
+                        break;
+                }    
+                // this.addPubNotifyHandler();
                 this.updateImgPropNum();
                 this.updateProgressProcess();
                 this.updateBtnSummonState();
@@ -664,7 +675,7 @@ export class PopHeroPub extends PopBase {
         }
     }
     onDestroy(){
-        console.log("hero pub destory");
+        console.log("hero pub destory关闭");
         this.removePubNotifyHandler();
         // this.node.off("OpenPubNotify");
     }
@@ -733,9 +744,9 @@ export class PopHeroPub extends PopBase {
             if(this.node_togglecontainer.node.activeInHierarchy)
             {
                 GameModel.getInstance().getHeroPubModel().initWonderHeartHeroIdList();
-                ResMgr.getInstance().loadPrefab('prefabs_ui/pub/pub_wonder_summon', (err: Error | null, res: Prefab | null)=>{
+                ResMgr.getInstance().loadPrefab('prefabs_ui/features/pub/mod_pubwondersummon', (err: Error | null, res: Prefab | null)=>{
                     let p = instantiate( res as Prefab );
-                    let script = p.getComponent(PubWonderSummon) as PubWonderSummon;
+                    let script = p.getComponent(ModPubWonderSummon) as ModPubWonderSummon;
                     script.setParentWindow(this);
                     this.node_wonder?.addChild(p);
                 },"PopHeroPub");
