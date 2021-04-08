@@ -149,6 +149,9 @@ export class PopDecompose extends Component {
         if(Data.getStar() > 4){
             return true
         }
+        if(Data.getCamp() == Msg.TCampType.ECampType_Light || Data.getCamp() == Msg.TCampType.ECampType_Dark){
+            return true
+        }
         return false
     }
 
@@ -160,7 +163,7 @@ export class PopDecompose extends Component {
         scroll = this.scroll_HeroView
         if(scroll.content)
         {
-            scroll.content.removeAllChildren()
+            scroll.content.destroyAllChildren()
         }
 
         resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
@@ -288,6 +291,9 @@ export class PopDecompose extends Component {
                 this.goodsNodes[index].getComponent(Button)?.clickEvents.push(clickEventHandler);
 
                 index++;
+                if(index == this.goodsNodes.length){
+                    break
+                }
             }
         });
     }
@@ -442,7 +448,7 @@ export class PopDecompose extends Component {
             let node = this._bottomHeroItemList.get(scriptHeroInfo.getDyncID()) as Node
             let script2 = node.getComponent("HeroSelectIcon") as HeroSelectIcon; 
             script2.setItemType(1);
-            if(this._selectBattleList.size >= 15)
+            if(this._selectBattleList.size >= 10)
             {
                 break
             }

@@ -148,7 +148,7 @@ export class PopHeroReset extends PopBase {
         }
         if(scroll.content)
         {
-            scroll.content.removeAllChildren()
+            scroll.content.destroyAllChildren()
         }
 
         resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
@@ -276,7 +276,7 @@ export class PopHeroReset extends PopBase {
     //平台展示
     private _platformExhibition(){
         let HeroInfo = this._getHeroData(this._curResetHero)as HeroData
-        this.btn_reset_icon.getChildByName("heroIcon")?.removeFromParent();
+        this.btn_reset_icon.getChildByName("heroIcon")?.destroy();
         resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
             let heroIcon = instantiate(res) as Node;
             heroIcon.scale = new Vec3(0.5,0.5,1);
