@@ -30,11 +30,45 @@
         ".json"
       ],
       "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "1e0c5729-ea86-4df6-8e99-ef804f47166b@f9941",
+      "displayName": "bg_fenjierenrong",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 435,
+        "height": 96,
+        "rawWidth": 435,
+        "rawHeight": 96,
+        "borderTop": 67,
+        "borderBottom": 24,
+        "borderLeft": 403,
+        "borderRight": 28,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "1e0c5729-ea86-4df6-8e99-ef804f47166b@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
     }
   },
   "userData": {
     "hasAlpha": true,
-    "type": "texture",
-    "redirect": "1e0c5729-ea86-4df6-8e99-ef804f47166b@6c48a"
+    "type": "sprite-frame",
+    "redirect": "1e0c5729-ea86-4df6-8e99-ef804f47166b@f9941"
   }
 }

@@ -2,7 +2,7 @@
  * @Description: 通用函数类
  * @Author: xxx
  * @Date: 2021-03-08 10:30:05
- * @LastEditTime: 2021-04-06 16:26:43
+ * @LastEditTime: 2021-04-07 20:02:06
  */
 import { resources, Node, Sprite, SpriteFrame, Layers, Component } from "cc";
 import { ResMgr } from "../../control/ResMgr";
@@ -33,15 +33,14 @@ export class XFuns {
 
     /**
      * @description: 代码创建图片SpriteFrame
-     * @param imgPath resources目录下资源路径 eg."ui/lv_up/黑白进阶宝石/spriteFrame"
+     * @param imgPath resources目录下资源路径 eg."ui/features/heropromotion/ico_hero_tier/spriteFrame"
      * @param parent 父节点
      * @param spriteName 图片名字
      * @param callBack 回调函数
      */
     public static CreateSprite(imgPath: string, parent: Node, spriteName: string = "sp", callBack: Function | null = null) {
         ResMgr.getInstance().loadSpriteFrame(imgPath, (err, spriteFrame) => {
-            console.log("XFuns CreateSprite _resourceLoad ---------", err)
-            if (!err) {
+            if (!err && spriteFrame) {
                 let node = new Node(spriteName);
                 const sprite = node.addComponent(Sprite);
                 sprite.spriteFrame = spriteFrame;
@@ -51,24 +50,27 @@ export class XFuns {
                 if (callBack) {
                     callBack();
                 }
+            }else{                
+                console.log("XFuns CreateSprite _resourceLoad ---------imgPath=",imgPath," err=", err)
             }
         });
     }
 
     /**
      * @description: 资源替换SpriteFrame
-     * @param imgPath resources目录下资源路径 eg."ui/lv_up/黑白进阶宝石/spriteFrame"
+     * @param imgPath resources目录下资源路径 eg."ui/features/heropromotion/ico_hero_tier/spriteFrame"
      * @param sp 图片节点
      * @param callBack 回调函数
      */
     public static ReplaceSpriteFrame(imgPath: string, sp: Sprite, callBack: Function | null = null) {
         ResMgr.getInstance().loadSpriteFrame(imgPath, (err, spriteFrame) => {
-            console.log("XFuns ReplaceSpriteFrame _resourceLoad ---------", err)
             if (!err && spriteFrame) {
                 sp.spriteFrame = spriteFrame;
                 if (callBack) {
                     callBack();
                 }
+            }else{
+                console.log("XFuns CreateSprite _resourceLoad ---------imgPath=",imgPath," err=", err)
             }
         });
     }

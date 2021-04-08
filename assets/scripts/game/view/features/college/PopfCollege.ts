@@ -2,7 +2,7 @@
  * @Description: 英雄书院
  * @Author: 徐涛
  * @Date: 2021-03-30 19:49:03
- * @LastEditTime: 2021-04-06 20:28:39
+ * @LastEditTime: 2021-04-07 11:24:48
  */
 import { _decorator, Node, Label, instantiate, ScrollView, Vec3, UITransform, math, Prefab } from 'cc';
 const { ccclass, property } = _decorator;
@@ -17,7 +17,7 @@ import { CellCollege } from './CellCollege';
 import { ResMgr } from '../../../control/ResMgr';
 
 @ccclass('PopfCollege')
-export class PopFCollege extends PopBase {
+export class PopfCollege extends PopBase {
 
     @property({ type: Node, displayName: "说明按钮" })
     public btn_explain: Node = null as unknown as Node;

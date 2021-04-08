@@ -30,11 +30,45 @@
         ".json"
       ],
       "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "55a4c7bb-28be-422b-bbba-9cf07bd54eba@f9941",
+      "displayName": "bg_jitan",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 1080,
+        "height": 855,
+        "rawWidth": 1080,
+        "rawHeight": 855,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "55a4c7bb-28be-422b-bbba-9cf07bd54eba@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
     }
   },
   "userData": {
     "hasAlpha": false,
-    "type": "texture",
-    "redirect": "55a4c7bb-28be-422b-bbba-9cf07bd54eba@6c48a"
+    "type": "sprite-frame",
+    "redirect": "55a4c7bb-28be-422b-bbba-9cf07bd54eba@f9941"
   }
 }

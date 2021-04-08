@@ -8,9 +8,9 @@ import { PopCommonOne } from "../view/common/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from './NetLoading';
 import { TipDemo } from '../view/TipDemo';
-import { TipHeroAttribute } from '../view/TipHeroAttribute';
+import { TipHeroAttribute } from '../view/common/TipHeroAttribute';
 import { XConsts } from '../model/const/XConsts';
-import { TipSkill } from '../view/TipSkill';
+import { TipSkill } from '../view/common/TipSkill';
 import { PopHeroBookView } from "../view/pop/PopHeroBookView";
 import { PopItemUseWin } from "../view/pop/PopItemUseWin";
 import { PopEquipInfoWin } from "../view/pop/PopEquipInfoWin";
@@ -23,22 +23,22 @@ import { PopRecLineUp } from "../view/features/pub/PopRecLineUp";
 import { PopSummonSettle } from "../view/common/PopSummonSettle";
 import { PopFragmentSynthesis } from "../view/features/bag/PopFragmentSynthesis";
 import { PopBookActive } from '../view/pop/PopBookActive';
-import { PopHeroEquipReplace } from '../view/hero_promotion/PopHeroEquipReplace';
+import { PopHeroEquipReplace } from '../view/features/heropromotion/PopHeroEquipReplace';
 import { PopBookUpGrade } from '../view/pop/PopBookUpgrade';
 import { PopMultiItemReward } from "../view/common/PopMultiItemReward";
 import { PopBookHeroDetail } from '../view/pop/PopBookHeroDetail';
 import { PopHeroStoryUI } from '../view/pop/PopHeroStoryUI';
 import { PopForge } from '../view/pop/PopForge';
 import { PopBookProUI } from '../view/pop/PopBookProUI';
-import { TipCampOrCareer } from '../view/TipCampOrCareer';
+import { TipCampOrCareer } from '../view/features/heropromotion/TipCampOrCareer';
 import { PopHaloView } from '../view/pop/PopHaloView';
-import { TipShareHeroToChat } from '../view/TipShareHeroToChat';
+import { TipShareHeroToChat } from '../view/features/heropromotion/TipShareHeroToChat';
 import { PopPlayerLevelUpAward } from '../view/pop/PopPlayerLevelUpAward';
 import {PopPubWonderRewardList} from "../view/features/pub/PopPubWonderRewardList";
 import { ResMgr } from './ResMgr';
 import { PopSettingView } from '../view/pop/PopSettingView';
 import { PopServerListView } from '../view/pop/PopServerListView';
-import { HeroPromotion } from '../view/hero_promotion/HeroPromotion';
+import { PopfHeroPromotion } from '../view/features/heropromotion/PopfHeroPromotion';
 import { PopBattleTeam } from '../view/pop/PopBattleTeam';
 import {PopPubWonderHeartHero} from "../view/features/pub/PopPubWonderHeartHero";
 // import {PopPubWonderSummonSettle} from "../view/features/pub/PopPubWonderSummonSettle";
@@ -142,15 +142,15 @@ export class PopMgr extends PopCore  {
      * @param {heroId} 英雄动态Id
      */
     public popHeroPromotionView(heroId: number = 0, isMaskClose: boolean = true) {
-        
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_heropromotion', (err:any,res:Prefab | null)=>{
-        // resources.load('prefabs_ui/pop/pop_heropromotion', (err:any,res:any)=>{
-            let p = instantiate( res as Prefab );
+
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/heropromotion/popf_heropromotion', (err: any, res: Prefab | null) => {
+            // resources.load('prefabs_ui/pop/pop_heropromotion', (err:any,res:any)=>{
+            let p = instantiate(res as Prefab);
             this.pushWindow(p);
-            let script = p.getComponent("HeroPromotion") as HeroPromotion;
+            let script = p.getComponent("PopfHeroPromotion") as PopfHeroPromotion;
             script.setIsMaskClose(isMaskClose);
             script.setCurrentHeroId(heroId);
-        } );
+        });
     }
 
     /**
@@ -332,7 +332,7 @@ export class PopMgr extends PopCore  {
      * @param {number} heroId
      */
     public tipHeroAttributeWindow(pos:Vec3, heroId:number = 0){
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/tip_hero_attribute', (err, res) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/tip_hero_attribute', (err, res) => {
             let p = instantiate(res as Prefab) as Node;
             this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
@@ -355,7 +355,7 @@ export class PopMgr extends PopCore  {
         // {
         //     skillData= {skillId:535002};// 破甲弹2级
         // }
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/tip_skill', (err, res) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/tip_skill', (err, res) => {
             let p = instantiate(res as Prefab) as Node;
             this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
@@ -374,7 +374,7 @@ export class PopMgr extends PopCore  {
      * @param {number} camp
      */
     public tipCampOrCareerWindow(pos:Vec3, career:number, camp:number =0){
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/tip_camp_or_career', (err, res) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/heropromotion/tip_camp_or_career', (err, res) => {
             let p = instantiate(res as Prefab) as Node;
             this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
@@ -393,7 +393,7 @@ export class PopMgr extends PopCore  {
      * @param {HeroData} _heroData
      */
      public tipShareHeroToChatindow(pos: Vec3, _heroData: HeroData) {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/tip_share_chat', (err, res) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/heropromotion/tip_share_chat', (err, res) => {
             let p = instantiate(res as Prefab) as Node;
             this._parent?.addChild(p);
             p.setSiblingIndex(XConsts.OrderTip);
@@ -621,16 +621,16 @@ export class PopMgr extends PopCore  {
      * @param {number} heroId 英雄动态Id
      * @param {number} equipId 装备Id
      * @param {Function} closeCallBack
-     */    
-    public popHeroEquipReplaceWindow(heroId: number, locationType:Msg.TEquipLocationType | 0, closeCallBack:Function|null = null){
+     */
+     public popHeroEquipReplaceWindow(heroId: number, locationType: Msg.TEquipLocationType | 0, closeCallBack: Function | null = null) {
 
-        resources.load('prefabs_ui/pop/pop_replaceequip', (err:any,res:any)=>{
-            let p = instantiate( res );
+        resources.load('prefabs_ui/features/heropromotion/pop_replaceequip', (err: any, res: any) => {
+            let p = instantiate(res);
             this.pushWindow(p);
             let script = p.getComponent("PopHeroEquipReplace") as PopHeroEquipReplace;
             script.setEquipData(heroId, locationType);
             script.setCloseCallBack(closeCallBack);
-        } );
+        });
     }
 
      /**
