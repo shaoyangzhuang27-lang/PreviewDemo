@@ -102,8 +102,8 @@ export class ElementEquipProp extends Component {
             let iconName:string = equipData.imageName;
             let starCount:number = equipData.star;
 
-            iconPath = "ui/comm/equip/" + iconName + "/spriteFrame"
-            qualityPath = "ui/comm/scard/bg_zhuangbei_pinzhi" + equipData.quality + "/spriteFrame"
+            iconPath = "ui/comm/equip_prop/equip/" + iconName + "/spriteFrame"
+            qualityPath = "ui/comm/equip_prop/bg_zhuangbei_pinzhi" + equipData.quality + "/spriteFrame"
 
             for (let index = 0; index < this.starlist.length; index++) {
                 if(index >= starCount)
@@ -122,19 +122,19 @@ export class ElementEquipProp extends Component {
                 if(XShare.getInstance().KObjectQuality.has(this._itemID))
                 {
                     let quality = Number(XShare.getInstance().KObjectQuality.get(this._itemID)) ;
-                    qualityPath = "ui/comm/scard/bg_zhuangbei_pinzhi" + quality + "/spriteFrame";
+                    qualityPath = "ui/comm/equip_prop/bg_zhuangbei_pinzhi" + quality + "/spriteFrame";
                 }
                 let iconName:string = XConsts.KObjectIconSpriteName[this._itemID];
-                iconPath = "ui/comm/prop/" + iconName + "/spriteFrame";
+                iconPath = "ui/comm/equip_prop/prop/" + iconName + "/spriteFrame";
                 // this.lab_count.setPosition(pos.x, pos.y - 20,pos.z);            
             }
             else{
                 let itemData:Config.item_usable.Record = ValueMgr.getInstance().getItemByField(TableName.item_usable,this._itemID) as Config.item_usable.Record;
                 let itemUseType:number = itemData.itemType;
 
-                qualityPath = "ui/comm/scard/bg_zhuangbei_pinzhi" + itemData.quality + "/spriteFrame"
+                qualityPath = "ui/comm/equip_prop/bg_zhuangbei_pinzhi" + itemData.quality + "/spriteFrame"
                 let iconName:string = itemData.icon;
-                iconPath = "ui/comm/prop/" + iconName + "/spriteFrame";
+                iconPath = "ui/comm/equip_prop/prop/" + iconName + "/spriteFrame";
                 if(itemUseType == Msg.TUsableItemType.EUsableItemType_ObjectOffline)
                 {
                     this.img_infoBg.active = true;
