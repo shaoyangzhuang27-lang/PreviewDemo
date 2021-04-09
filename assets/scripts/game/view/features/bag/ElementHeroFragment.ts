@@ -214,7 +214,7 @@ export class ElementHeroFragment extends Component {
             }
 
             let bar = this.probar_fragment.node.getChildByName("bar");
-            let path = nPreocess !=1 ? "ui/common/icon/" + "碎片未满进度条" + "/spriteFrame" : "ui/common/icon/" + "碎片已满进度条" + "/spriteFrame";
+            let path = nPreocess !=1 ? "ui/comm/hero/img_jingdutiao_suipian01/spriteFrame" : "ui/comm/hero/img_jingdutiao_suipian02/spriteFrame";
             this._resourceLoad(path,bar);
            
             var barCompoent =  this.probar_fragment?.getComponent(ProgressBar);
