@@ -37,7 +37,7 @@ export class PopPlayerLevelUpAward extends PopBase {
 
         // msgData.vrmb
         this.scroll_award.horizontal = false;
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_equipprop', (err:any,res:any)=>{
             for (var i = 0 ; i < 1; i++) {
                 let equip_item = instantiate( res );
                 this.scroll_award.content?.addChild(equip_item);
@@ -47,7 +47,7 @@ export class PopPlayerLevelUpAward extends PopBase {
                 // // {
                 // //     lay.type = 1
                 // // }
-                equip_item.getComponent(ItemEquipCell).setItemType(1,0,ItemEquipType.equip,(id:number,itemClickType:number,objClickType:number)=>{
+                equip_item.getComponent(ElementEquipProp).setItemType(1,0,EquipPropType.equip,(id:number,itemClickType:number,objClickType:number)=>{
                     console.log(" 玩家升级界面=>",id);
                 });
             }

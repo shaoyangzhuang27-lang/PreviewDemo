@@ -38,7 +38,7 @@ export class ElementEquipProp extends Component {
     @property({type :  Node})
     public img_infoBg:Node = null as unknown as Node;
 
-    private _itemType : number = 1;     //区分道具:1 、装备:2 ItemEquipType.equip
+    private _itemType : number = 1;     //区分道具:1 、装备:2 EquipPropType.equip
     private _itemID:number = -1;
     private _itemCount:number = 0;
     private _clickCallback :Function | null = null;
@@ -54,7 +54,7 @@ export class ElementEquipProp extends Component {
      * 
      * @param id        道具id
      * @param count     数量
-     * @param type      类型：道具:1 ItemEquipType.goods、装备:2 ItemEquipType.equip
+     * @param type      类型：道具:1 EquipPropType.goods、装备:2 EquipPropType.equip
      * @param callback  回调方法
      */
     public setItemType(id:number,count:number,type:number,callback:Function | null)

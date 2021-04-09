@@ -1,4 +1,4 @@
-import { assetManager,AssetManager,Prefab,resources,instantiate, director, SpriteFrame } from 'cc';
+import { assetManager,AssetManager,Prefab,resources,instantiate, director, SpriteFrame, sys } from 'cc';
 import {ResCore, ResType} from "../../core/control/ResCore";
 
 export class ResMgr extends ResCore{
@@ -20,18 +20,23 @@ export class ResMgr extends ResCore{
 
     //加载游戏必要资源(主ui资源,其他ui资源[是否另外加载待定])
     public loadGameNecessaryRes(){
-        // this.pushRes("ui/common",ResType.spriteframes,true,null,"通用资源");
+        if(sys.platform === sys.DESKTOP_BROWSER)return;
+        // if(sys.platform === sys.WECHAT_GAME){
+        this.pushRes("ui/common",ResType.spriteframes,true,null,"通用资源");
     }
     //卸载游戏必要资源(主ui资源)
     public releaseGameNecessaryRes(){
-        // this.popRes("ui/common");
+        if(sys.platform === sys.DESKTOP_BROWSER)return;
+        this.popRes("ui/common");
+        
     }
 
     public loadCommonPrefabs(){
-        // this.pushRes("prefabs_ui/common/element_heroicon",ResType.prefab,true,null,"英雄头像");
-        // this.pushRes("prefabs_ui/main/hero_selecticon",ResType.prefab,true,null,"英雄选择框");
-        // this.pushRes("prefabs_ui/main/team",ResType.prefab,true,null,"英雄队伍1");
-        // this.pushRes('prefabs_ui/features/heropromotion/popf_heropromotion',ResType.prefab,true,null,"英雄队伍2");
+        if(sys.platform === sys.DESKTOP_BROWSER)return;
+        this.pushRes("prefabs_ui/common/element_heroicon",ResType.prefab,true,null,"英雄头像");
+        this.pushRes("prefabs_ui/main/hero_selecticon",ResType.prefab,true,null,"英雄选择框");
+        this.pushRes("prefabs_ui/main/team",ResType.prefab,true,null,"英雄队伍1");
+        this.pushRes('prefabs_ui/features/heropromotion/popf_heropromotion',ResType.prefab,true,null,"英雄队伍2");
     }
 
     //加载主ui资源-------------------------

@@ -180,12 +180,12 @@ export class PopHeroEquipReplace extends PopBase {
             }
         });
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err, res) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_equipprop', (err, res) => {
             for (var i = 0; i < curlocationEquipData.length; i++) {
                 let equip_item = instantiate(res as Prefab) as Node;
                 this.scroll_equip.content?.addChild(equip_item);
                 let equipData = curlocationEquipData[i];
-                equip_item.getComponent(ItemEquipCell)?.setItemType(equipData.id, 0, ItemEquipType.equip, (id: number, itemClickType: number, objClickType: number) => {
+                equip_item.getComponent(ElementEquipProp)?.setItemType(equipData.id, 0, EquipPropType.equip, (id: number, itemClickType: number, objClickType: number) => {
                     console.log(" 当前点击的背包装备ID=>", id);
                     this._refreshReplaceEquip(id)
                 });
@@ -245,7 +245,7 @@ export class PopHeroEquipReplace extends PopBase {
         var suitID = equipData.quality * 100 + equipData.star;
         if (suitID != 0) {
             this.itemequip_cell_drag.node.active = true;
-            this.itemequip_cell_drag.setItemType(equipData.id, 0, ItemEquipType.equip, null);
+            this.itemequip_cell_drag.setItemType(equipData.id, 0, EquipPropType.equip, null);
 
             let suitEquipData = ValueMgr.getInstance().getItemByField(TableName.suit, suitID) as Config.suit.Record;
             if (!suitEquipData) {
@@ -326,7 +326,7 @@ export class PopHeroEquipReplace extends PopBase {
             let nameData = ValueMgr.getInstance().getItemByField(TableName.language_data, equipData.name) as Config.language_data.Record;
             this.equip_name_wear.string = nameData.cn;
             this.equip_name_wear.color = XConsts.KQualityColor[equipData.quality];
-            this.itemequip_cell_wear.setItemType(equipData.id, 0, ItemEquipType.equip, null);
+            this.itemequip_cell_wear.setItemType(equipData.id, 0, EquipPropType.equip, null);
             var suitID = equipData.quality * 100 + equipData.star;
             if (suitID != 0) {
                 let suitEquipData = ValueMgr.getInstance().getItemByField(TableName.suit, suitID) as Config.suit.Record;

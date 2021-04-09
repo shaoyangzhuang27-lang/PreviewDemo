@@ -199,7 +199,7 @@ export class PopfHeroPromotion extends PopBase {
     private _starXSub: number = 10; //星级图片X轴间隔
     private _isHeroUpView: boolean = true; //true标记当前是英雄升级/阶界面，false标记当前是英雄装备界面
     private _isLvUpView: boolean = true; //true标记当前是英雄升级界面，false标记当前是英雄升阶界面
-    private _equipCellsMap: Map<Msg.TEquipLocationType, ItemEquipCell> = new Map<Msg.TEquipLocationType, ItemEquipCell>();  //装备宝石列表
+    private _equipCellsMap: Map<Msg.TEquipLocationType, ElementEquipProp> = new Map<Msg.TEquipLocationType, ElementEquipProp>();  //装备宝石列表
     private _equipBtnsMap: Map<Msg.TEquipLocationType, Node> = new Map<Msg.TEquipLocationType, Node>();  //装备宝石按钮列表
 
     // 按钮长按功能实现
@@ -1361,7 +1361,7 @@ export class PopfHeroPromotion extends PopBase {
 
             let itemEquipCell = this._equipCellsMap.get(key);
             if (!itemEquipCell) {
-                ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err, res) => {
+                ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_equipprop', (err, res) => {
 
                     let node = instantiate(res as Prefab) as Node;
                     let equip_btn_node = this._equipBtnsMap.get(key);
@@ -1372,8 +1372,8 @@ export class PopfHeroPromotion extends PopBase {
                     }
                     node.name = "BagEquipCell_" + Number(key);
                     node.setScale(new Vec3(0.8, 0.8, 1));
-                    let equipCell = node.getComponent("ItemEquipCell") as ItemEquipCell;
-                    equipCell.setItemType(equipData.id, 0, ItemEquipType.equip, () => {
+                    let equipCell = node.getComponent("ElementEquipProp") as ElementEquipProp;
+                    equipCell.setItemType(equipData.id, 0, EquipPropType.equip, () => {
                         console.log(" 显示装备具体界面 ");
                         PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), key);
                     });
@@ -1382,8 +1382,8 @@ export class PopfHeroPromotion extends PopBase {
                 })
             }
             else {
-                let equipCell = itemEquipCell as ItemEquipCell;
-                equipCell.setItemType(equipData.id, 0, ItemEquipType.equip, () => {
+                let equipCell = itemEquipCell as ElementEquipProp;
+                equipCell.setItemType(equipData.id, 0, EquipPropType.equip, () => {
                     console.log(" 显示装备具体界面 ");
                     PopMgr.getInstance().popHeroEquipReplaceWindow(this._curHeroData.getDyncID(), key);
                 });
