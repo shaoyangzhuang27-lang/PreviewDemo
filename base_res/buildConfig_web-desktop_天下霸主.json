@@ -1,0 +1,106 @@
+{
+  "name": "PreviewDemo",
+  "platform": "web-desktop",
+  "buildPath": "./build",
+  "debug": true,
+  "md5Cache": false,
+  "sourceMaps": false,
+  "replaceSplashScreen": true,
+  "mainBundleCompressionType": "merge_dep",
+  "mainBundleIsRemote": false,
+  "mergeStartScene": false,
+  "experimentalEraseModules": false,
+  "compressTexture": true,
+  "packAutoAtlas": true,
+  "startScene": "c9a6cb4a-d805-4287-a7bc-d84d16c48173",
+  "scenes": [
+    {
+      "url": "db://assets/scenes/battle.scene",
+      "uuid": "fc9a22ee-7940-490b-97c4-0c5382deefd8"
+    },
+    {
+      "url": "db://assets/scenes/loading.scene",
+      "uuid": "2ad87d38-621f-4550-b370-a76519a980f0"
+    },
+    {
+      "url": "db://assets/scenes/scene_first.scene",
+      "uuid": "c9a6cb4a-d805-4287-a7bc-d84d16c48173"
+    },
+    {
+      "url": "db://assets/scenes/scene_loading.scene",
+      "uuid": "72b7be8c-e586-4e49-8d2b-5afddcaa957e"
+    },
+    {
+      "url": "db://assets/scenes/scene_login.scene",
+      "uuid": "85f94776-f604-4c1d-a0df-48844a4c6ddc"
+    },
+    {
+      "url": "db://assets/scenes/scene_main.scene",
+      "uuid": "02efecea-b9bd-47c2-aebe-020f510db6da"
+    },
+    {
+      "url": "db://assets/scenes/test.scene",
+      "uuid": "fa969955-c726-4615-ab65-d53250439849"
+    }
+  ],
+  "outputName": "web-desktop",
+  "packages": {
+    "cocos-service": {
+      "configID": "f4cae2",
+      "services": []
+    },
+    "web-desktop": {
+      "resolution": {
+        "designWidth": 720,
+        "designHeight": 1280
+      },
+      "polyfills": {
+        "asyncFunctions": true
+      }
+    }
+  },
+  "includeModules": [
+    "base",
+    "gfx-webgl",
+    "profiler",
+    "audio",
+    "video",
+    "webview",
+    "tween",
+    "3d",
+    "particle",
+    "physics-ammo",
+    "primitive",
+    "terrain",
+    "2d",
+    "ui",
+    "intersection-2d",
+    "particle-2d"
+  ],
+  "designResolution": {
+    "width": 720,
+    "height": 1280,
+    "fitWidth": true,
+    "fitHeight": false
+  },
+  "renderPipeline": "fd8ec536-a354-4a17-9c74-4f3883c378c8",
+  "physicsConfig": {
+    "gravity": {
+      "x": 0,
+      "y": -10,
+      "z": 0
+    },
+    "allowSleep": true,
+    "sleepThreshold": 0.1,
+    "autoSimulation": true,
+    "fixedTimeStep": 0.0166667,
+    "maxSubSteps": 1,
+    "defaultMaterial": {
+      "friction": 0.5,
+      "rollingFriction": 0.1,
+      "spinningFriction": 0.1,
+      "restitution": 0.1
+    }
+  },
+  "__version__": "1.2.6"
+}

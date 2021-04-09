@@ -4,7 +4,7 @@ import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { GameModel } from '../../../model/GameModel';
 import { ElementPubHeroIcon } from './ElementPubHeroIcon';
 import { ElementHeroIcon } from '../../common/ElementHeroIcon';
-import { ItemEquipType,ItemEquipCell } from '../../menu/ItemEquipCell';
+import { EquipPropType,ElementEquipProp } from '../../common/ElementEquipProp';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopPubWonderSummonSettle')

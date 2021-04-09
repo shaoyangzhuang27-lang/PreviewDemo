@@ -15,7 +15,7 @@ import { PopMgr } from '../../../control/PopMgr';
 import { NotifyMgr } from '../../../control/NotifyMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
 import { PopDecompose } from "../../../view/features/decompose/PopDecompose";
-import { ItemEquipCell, ItemEquipType } from '../../menu/ItemEquipCell';
+import { ElementEquipProp, EquipPropType } from '../../common/ElementEquipProp';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopHeroRollBack')

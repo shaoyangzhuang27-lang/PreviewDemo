@@ -13,7 +13,7 @@ import { MsgMgr } from '../../control/MsgMgr';
 import { XConsts } from '../../model/const/XConsts';
 import { XFuns } from '../../model/const/XFuns';
 import { GameModel } from '../../model/GameModel';
-import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
+import { ElementEquipProp, EquipPropType } from '../common/ElementEquipProp';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopQuickCompose')

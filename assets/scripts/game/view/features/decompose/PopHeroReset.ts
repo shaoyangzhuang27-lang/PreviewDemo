@@ -16,7 +16,7 @@ import { NotifyMgr } from '../../../control/NotifyMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
 import { PopDecompose } from "../../../view/features/decompose/PopDecompose";
 import { PopHeroRollBack } from "../../../view/features/decompose/PopHeroRollBack";
-import { ItemEquipCell, ItemEquipType } from '../../menu/ItemEquipCell';
+import { ElementEquipProp, EquipPropType } from '../../common/ElementEquipProp';
 import { XFuns } from '../../../model/const/XFuns';
 const { ccclass, property } = _decorator;
 

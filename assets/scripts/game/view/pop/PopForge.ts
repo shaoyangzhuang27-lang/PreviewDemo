@@ -15,7 +15,7 @@ import { PopMgr } from '../../control/PopMgr';
 import { XConsts } from '../../model/const/XConsts';
 import { XFuns } from '../../model/const/XFuns';
 import { GameModel } from '../../model/GameModel';
-import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
+import { ElementEquipProp, EquipPropType } from '../common/ElementEquipProp';
 import { PopQuickCompose } from './PopQuickCompose';
 const { ccclass, property } = _decorator;
 

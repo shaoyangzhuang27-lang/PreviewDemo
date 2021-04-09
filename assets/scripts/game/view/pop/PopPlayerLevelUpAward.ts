@@ -1,7 +1,7 @@
 
 import { _decorator, Node, Label ,ScrollView,resources,instantiate,Layout} from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
-import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
+import { ElementEquipProp, EquipPropType } from '../common/ElementEquipProp';
 // import { AvatarNode } from '../menu/AvatarNode';
 const { ccclass, property } = _decorator;
 

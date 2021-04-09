@@ -5,7 +5,7 @@ import { PopMgr } from '../../control/PopMgr';
 import { XFuns } from '../../model/const/XFuns';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
 const { ccclass, property } = _decorator;
-import { ItemEquipType,ItemEquipCell } from '../menu/ItemEquipCell';
+import { EquipPropType,ElementEquipProp } from '../common/ElementEquipProp';
 
 @ccclass('PopItemReward')
 export class PopItemReward extends PopBase {

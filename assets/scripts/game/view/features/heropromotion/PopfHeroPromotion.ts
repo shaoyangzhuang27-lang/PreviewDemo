@@ -17,7 +17,7 @@ import { XShare } from '../../../model/const/XShare';
 import { XConsts } from '../../../model/const/XConsts';
 import { XFuns } from '../../../model/const/XFuns';
 import { TableName, ValueMgr } from '../../../model/ValueMgr';
-import { ItemEquipCell, ItemEquipType } from '../../menu/ItemEquipCell';
+import { ElementEquipProp, EquipPropType } from '../../common/ElementEquipProp';
 import { ResMgr } from '../../../control/ResMgr';
 const { ccclass, property } = _decorator;
 

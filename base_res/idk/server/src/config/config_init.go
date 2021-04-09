@@ -409,7 +409,7 @@ func init(){
 	equip_r27.ForwardId = 21
 	equip_r27.ComposeMoney = 10000
 	equip_r27.ImageName = "weapon7"
-	equip_r27.SuitId = 0
+	equip_r27.SuitId = 303
 	equip_r27.Price = 1000
 	EquipRecords = append(EquipRecords,&equip_r27)
 	Map_equip[25] = &equip_r27
@@ -425,7 +425,7 @@ func init(){
 	equip_r28.ForwardId = 22
 	equip_r28.ComposeMoney = 10000
 	equip_r28.ImageName = "head7"
-	equip_r28.SuitId = 0
+	equip_r28.SuitId = 303
 	equip_r28.Price = 1000
 	EquipRecords = append(EquipRecords,&equip_r28)
 	Map_equip[26] = &equip_r28
@@ -441,7 +441,7 @@ func init(){
 	equip_r29.ForwardId = 23
 	equip_r29.ComposeMoney = 10000
 	equip_r29.ImageName = "chest7"
-	equip_r29.SuitId = 0
+	equip_r29.SuitId = 303
 	equip_r29.Price = 1000
 	EquipRecords = append(EquipRecords,&equip_r29)
 	Map_equip[27] = &equip_r29
@@ -457,7 +457,7 @@ func init(){
 	equip_r30.ForwardId = 24
 	equip_r30.ComposeMoney = 10000
 	equip_r30.ImageName = "trinket7"
-	equip_r30.SuitId = 0
+	equip_r30.SuitId = 303
 	equip_r30.Price = 1000
 	EquipRecords = append(EquipRecords,&equip_r30)
 	Map_equip[28] = &equip_r30
@@ -473,7 +473,7 @@ func init(){
 	equip_r31.ForwardId = 25
 	equip_r31.ComposeMoney = 12000
 	equip_r31.ImageName = "weapon8"
-	equip_r31.SuitId = 0
+	equip_r31.SuitId = 401
 	equip_r31.Price = 1200
 	EquipRecords = append(EquipRecords,&equip_r31)
 	Map_equip[29] = &equip_r31
@@ -489,7 +489,7 @@ func init(){
 	equip_r32.ForwardId = 26
 	equip_r32.ComposeMoney = 12000
 	equip_r32.ImageName = "head8"
-	equip_r32.SuitId = 0
+	equip_r32.SuitId = 401
 	equip_r32.Price = 1200
 	EquipRecords = append(EquipRecords,&equip_r32)
 	Map_equip[30] = &equip_r32
@@ -505,7 +505,7 @@ func init(){
 	equip_r33.ForwardId = 27
 	equip_r33.ComposeMoney = 12000
 	equip_r33.ImageName = "chest8"
-	equip_r33.SuitId = 0
+	equip_r33.SuitId = 401
 	equip_r33.Price = 1200
 	EquipRecords = append(EquipRecords,&equip_r33)
 	Map_equip[31] = &equip_r33
@@ -521,7 +521,7 @@ func init(){
 	equip_r34.ForwardId = 28
 	equip_r34.ComposeMoney = 12000
 	equip_r34.ImageName = "trinket8"
-	equip_r34.SuitId = 0
+	equip_r34.SuitId = 401
 	equip_r34.Price = 1200
 	EquipRecords = append(EquipRecords,&equip_r34)
 	Map_equip[32] = &equip_r34
@@ -537,7 +537,7 @@ func init(){
 	equip_r35.ForwardId = 29
 	equip_r35.ComposeMoney = 20000
 	equip_r35.ImageName = "weapon9"
-	equip_r35.SuitId = 0
+	equip_r35.SuitId = 402
 	equip_r35.Price = 2000
 	EquipRecords = append(EquipRecords,&equip_r35)
 	Map_equip[33] = &equip_r35
@@ -553,7 +553,7 @@ func init(){
 	equip_r36.ForwardId = 30
 	equip_r36.ComposeMoney = 20000
 	equip_r36.ImageName = "head9"
-	equip_r36.SuitId = 0
+	equip_r36.SuitId = 402
 	equip_r36.Price = 2000
 	EquipRecords = append(EquipRecords,&equip_r36)
 	Map_equip[34] = &equip_r36
@@ -569,7 +569,7 @@ func init(){
 	equip_r37.ForwardId = 31
 	equip_r37.ComposeMoney = 20000
 	equip_r37.ImageName = "chest9"
-	equip_r37.SuitId = 0
+	equip_r37.SuitId = 402
 	equip_r37.Price = 2000
 	EquipRecords = append(EquipRecords,&equip_r37)
 	Map_equip[35] = &equip_r37
@@ -585,7 +585,7 @@ func init(){
 	equip_r38.ForwardId = 32
 	equip_r38.ComposeMoney = 20000
 	equip_r38.ImageName = "trinket9"
-	equip_r38.SuitId = 0
+	equip_r38.SuitId = 402
 	equip_r38.Price = 2000
 	EquipRecords = append(EquipRecords,&equip_r38)
 	Map_equip[36] = &equip_r38
@@ -601,7 +601,7 @@ func init(){
 	equip_r39.ForwardId = 33
 	equip_r39.ComposeMoney = 40000
 	equip_r39.ImageName = "weapon10"
-	equip_r39.SuitId = 0
+	equip_r39.SuitId = 403
 	equip_r39.Price = 4000
 	EquipRecords = append(EquipRecords,&equip_r39)
 	Map_equip[37] = &equip_r39
@@ -617,7 +617,7 @@ func init(){
 	equip_r40.ForwardId = 34
 	equip_r40.ComposeMoney = 40000
 	equip_r40.ImageName = "head10"
-	equip_r40.SuitId = 0
+	equip_r40.SuitId = 403
 	equip_r40.Price = 4000
 	EquipRecords = append(EquipRecords,&equip_r40)
 	Map_equip[38] = &equip_r40
@@ -633,7 +633,7 @@ func init(){
 	equip_r41.ForwardId = 35
 	equip_r41.ComposeMoney = 40000
 	equip_r41.ImageName = "chest10"
-	equip_r41.SuitId = 0
+	equip_r41.SuitId = 403
 	equip_r41.Price = 4000
 	EquipRecords = append(EquipRecords,&equip_r41)
 	Map_equip[39] = &equip_r41
@@ -649,7 +649,7 @@ func init(){
 	equip_r42.ForwardId = 36
 	equip_r42.ComposeMoney = 40000
 	equip_r42.ImageName = "trinket10"
-	equip_r42.SuitId = 0
+	equip_r42.SuitId = 403
 	equip_r42.Price = 4000
 	EquipRecords = append(EquipRecords,&equip_r42)
 	Map_equip[40] = &equip_r42
@@ -665,7 +665,7 @@ func init(){
 	equip_r43.ForwardId = 37
 	equip_r43.ComposeMoney = 60000
 	equip_r43.ImageName = "weapon11"
-	equip_r43.SuitId = 0
+	equip_r43.SuitId = 404
 	equip_r43.Price = 6000
 	EquipRecords = append(EquipRecords,&equip_r43)
 	Map_equip[41] = &equip_r43
@@ -681,7 +681,7 @@ func init(){
 	equip_r44.ForwardId = 38
 	equip_r44.ComposeMoney = 60000
 	equip_r44.ImageName = "head11"
-	equip_r44.SuitId = 0
+	equip_r44.SuitId = 404
 	equip_r44.Price = 6000
 	EquipRecords = append(EquipRecords,&equip_r44)
 	Map_equip[42] = &equip_r44
@@ -697,7 +697,7 @@ func init(){
 	equip_r45.ForwardId = 39
 	equip_r45.ComposeMoney = 60000
 	equip_r45.ImageName = "chest11"
-	equip_r45.SuitId = 0
+	equip_r45.SuitId = 404
 	equip_r45.Price = 6000
 	EquipRecords = append(EquipRecords,&equip_r45)
 	Map_equip[43] = &equip_r45
@@ -713,7 +713,7 @@ func init(){
 	equip_r46.ForwardId = 40
 	equip_r46.ComposeMoney = 60000
 	equip_r46.ImageName = "trinket11"
-	equip_r46.SuitId = 0
+	equip_r46.SuitId = 404
 	equip_r46.Price = 6000
 	EquipRecords = append(EquipRecords,&equip_r46)
 	Map_equip[44] = &equip_r46
@@ -729,7 +729,7 @@ func init(){
 	equip_r47.ForwardId = 41
 	equip_r47.ComposeMoney = 80000
 	equip_r47.ImageName = "weapon12"
-	equip_r47.SuitId = 0
+	equip_r47.SuitId = 501
 	equip_r47.Price = 8000
 	EquipRecords = append(EquipRecords,&equip_r47)
 	Map_equip[45] = &equip_r47
@@ -745,7 +745,7 @@ func init(){
 	equip_r48.ForwardId = 42
 	equip_r48.ComposeMoney = 80000
 	equip_r48.ImageName = "head12"
-	equip_r48.SuitId = 0
+	equip_r48.SuitId = 501
 	equip_r48.Price = 8000
 	EquipRecords = append(EquipRecords,&equip_r48)
 	Map_equip[46] = &equip_r48
@@ -761,7 +761,7 @@ func init(){
 	equip_r49.ForwardId = 43
 	equip_r49.ComposeMoney = 80000
 	equip_r49.ImageName = "chest12"
-	equip_r49.SuitId = 0
+	equip_r49.SuitId = 501
 	equip_r49.Price = 8000
 	EquipRecords = append(EquipRecords,&equip_r49)
 	Map_equip[47] = &equip_r49
@@ -777,7 +777,7 @@ func init(){
 	equip_r50.ForwardId = 44
 	equip_r50.ComposeMoney = 80000
 	equip_r50.ImageName = "trinket12"
-	equip_r50.SuitId = 0
+	equip_r50.SuitId = 501
 	equip_r50.Price = 8000
 	EquipRecords = append(EquipRecords,&equip_r50)
 	Map_equip[48] = &equip_r50
@@ -793,7 +793,7 @@ func init(){
 	equip_r51.ForwardId = 45
 	equip_r51.ComposeMoney = 100000
 	equip_r51.ImageName = "weapon13"
-	equip_r51.SuitId = 0
+	equip_r51.SuitId = 502
 	equip_r51.Price = 10000
 	EquipRecords = append(EquipRecords,&equip_r51)
 	Map_equip[49] = &equip_r51
@@ -809,7 +809,7 @@ func init(){
 	equip_r52.ForwardId = 46
 	equip_r52.ComposeMoney = 100000
 	equip_r52.ImageName = "head13"
-	equip_r52.SuitId = 0
+	equip_r52.SuitId = 502
 	equip_r52.Price = 10000
 	EquipRecords = append(EquipRecords,&equip_r52)
 	Map_equip[50] = &equip_r52
@@ -825,7 +825,7 @@ func init(){
 	equip_r53.ForwardId = 47
 	equip_r53.ComposeMoney = 100000
 	equip_r53.ImageName = "chest13"
-	equip_r53.SuitId = 0
+	equip_r53.SuitId = 502
 	equip_r53.Price = 10000
 	EquipRecords = append(EquipRecords,&equip_r53)
 	Map_equip[51] = &equip_r53
@@ -841,7 +841,7 @@ func init(){
 	equip_r54.ForwardId = 48
 	equip_r54.ComposeMoney = 100000
 	equip_r54.ImageName = "trinket13"
-	equip_r54.SuitId = 0
+	equip_r54.SuitId = 502
 	equip_r54.Price = 10000
 	EquipRecords = append(EquipRecords,&equip_r54)
 	Map_equip[52] = &equip_r54
@@ -857,7 +857,7 @@ func init(){
 	equip_r55.ForwardId = 49
 	equip_r55.ComposeMoney = 120000
 	equip_r55.ImageName = "weapon14"
-	equip_r55.SuitId = 0
+	equip_r55.SuitId = 503
 	equip_r55.Price = 12000
 	EquipRecords = append(EquipRecords,&equip_r55)
 	Map_equip[53] = &equip_r55
@@ -873,7 +873,7 @@ func init(){
 	equip_r56.ForwardId = 50
 	equip_r56.ComposeMoney = 120000
 	equip_r56.ImageName = "head14"
-	equip_r56.SuitId = 0
+	equip_r56.SuitId = 503
 	equip_r56.Price = 12000
 	EquipRecords = append(EquipRecords,&equip_r56)
 	Map_equip[54] = &equip_r56
@@ -889,7 +889,7 @@ func init(){
 	equip_r57.ForwardId = 51
 	equip_r57.ComposeMoney = 120000
 	equip_r57.ImageName = "chest14"
-	equip_r57.SuitId = 0
+	equip_r57.SuitId = 503
 	equip_r57.Price = 12000
 	EquipRecords = append(EquipRecords,&equip_r57)
 	Map_equip[55] = &equip_r57
@@ -905,7 +905,7 @@ func init(){
 	equip_r58.ForwardId = 52
 	equip_r58.ComposeMoney = 120000
 	equip_r58.ImageName = "trinket14"
-	equip_r58.SuitId = 0
+	equip_r58.SuitId = 503
 	equip_r58.Price = 12000
 	EquipRecords = append(EquipRecords,&equip_r58)
 	Map_equip[56] = &equip_r58
@@ -921,7 +921,7 @@ func init(){
 	equip_r59.ForwardId = 53
 	equip_r59.ComposeMoney = 160000
 	equip_r59.ImageName = "weapon15"
-	equip_r59.SuitId = 0
+	equip_r59.SuitId = 504
 	equip_r59.Price = 16000
 	EquipRecords = append(EquipRecords,&equip_r59)
 	Map_equip[57] = &equip_r59
@@ -937,7 +937,7 @@ func init(){
 	equip_r60.ForwardId = 54
 	equip_r60.ComposeMoney = 160000
 	equip_r60.ImageName = "head15"
-	equip_r60.SuitId = 0
+	equip_r60.SuitId = 504
 	equip_r60.Price = 16000
 	EquipRecords = append(EquipRecords,&equip_r60)
 	Map_equip[58] = &equip_r60
@@ -953,7 +953,7 @@ func init(){
 	equip_r61.ForwardId = 55
 	equip_r61.ComposeMoney = 160000
 	equip_r61.ImageName = "chest15"
-	equip_r61.SuitId = 0
+	equip_r61.SuitId = 504
 	equip_r61.Price = 16000
 	EquipRecords = append(EquipRecords,&equip_r61)
 	Map_equip[59] = &equip_r61
@@ -969,7 +969,7 @@ func init(){
 	equip_r62.ForwardId = 56
 	equip_r62.ComposeMoney = 160000
 	equip_r62.ImageName = "trinket15"
-	equip_r62.SuitId = 0
+	equip_r62.SuitId = 504
 	equip_r62.Price = 16000
 	EquipRecords = append(EquipRecords,&equip_r62)
 	Map_equip[60] = &equip_r62
@@ -985,7 +985,7 @@ func init(){
 	equip_r63.ForwardId = 57
 	equip_r63.ComposeMoney = 200000
 	equip_r63.ImageName = "weapon16"
-	equip_r63.SuitId = 0
+	equip_r63.SuitId = 505
 	equip_r63.Price = 20000
 	EquipRecords = append(EquipRecords,&equip_r63)
 	Map_equip[61] = &equip_r63
@@ -1001,7 +1001,7 @@ func init(){
 	equip_r64.ForwardId = 58
 	equip_r64.ComposeMoney = 200000
 	equip_r64.ImageName = "head16"
-	equip_r64.SuitId = 0
+	equip_r64.SuitId = 505
 	equip_r64.Price = 20000
 	EquipRecords = append(EquipRecords,&equip_r64)
 	Map_equip[62] = &equip_r64
@@ -1017,7 +1017,7 @@ func init(){
 	equip_r65.ForwardId = 59
 	equip_r65.ComposeMoney = 200000
 	equip_r65.ImageName = "chest16"
-	equip_r65.SuitId = 0
+	equip_r65.SuitId = 505
 	equip_r65.Price = 20000
 	EquipRecords = append(EquipRecords,&equip_r65)
 	Map_equip[63] = &equip_r65
@@ -1033,7 +1033,7 @@ func init(){
 	equip_r66.ForwardId = 60
 	equip_r66.ComposeMoney = 200000
 	equip_r66.ImageName = "trinket16"
-	equip_r66.SuitId = 0
+	equip_r66.SuitId = 505
 	equip_r66.Price = 20000
 	EquipRecords = append(EquipRecords,&equip_r66)
 	Map_equip[64] = &equip_r66
@@ -1049,7 +1049,7 @@ func init(){
 	equip_r67.ForwardId = 61
 	equip_r67.ComposeMoney = 250000
 	equip_r67.ImageName = "weapon17"
-	equip_r67.SuitId = 0
+	equip_r67.SuitId = 601
 	equip_r67.Price = 25000
 	EquipRecords = append(EquipRecords,&equip_r67)
 	Map_equip[65] = &equip_r67
@@ -1065,7 +1065,7 @@ func init(){
 	equip_r68.ForwardId = 62
 	equip_r68.ComposeMoney = 250000
 	equip_r68.ImageName = "head17"
-	equip_r68.SuitId = 0
+	equip_r68.SuitId = 601
 	equip_r68.Price = 25000
 	EquipRecords = append(EquipRecords,&equip_r68)
 	Map_equip[66] = &equip_r68
@@ -1081,7 +1081,7 @@ func init(){
 	equip_r69.ForwardId = 63
 	equip_r69.ComposeMoney = 250000
 	equip_r69.ImageName = "chest17"
-	equip_r69.SuitId = 0
+	equip_r69.SuitId = 601
 	equip_r69.Price = 25000
 	EquipRecords = append(EquipRecords,&equip_r69)
 	Map_equip[67] = &equip_r69
@@ -1097,14 +1097,14 @@ func init(){
 	equip_r70.ForwardId = 64
 	equip_r70.ComposeMoney = 250000
 	equip_r70.ImageName = "trinket17"
-	equip_r70.SuitId = 0
+	equip_r70.SuitId = 601
 	equip_r70.Price = 25000
 	EquipRecords = append(EquipRecords,&equip_r70)
 	Map_equip[68] = &equip_r70
 
 	EquipIns.Records = EquipRecords
-	EquipIns.Version = 20201223091739
-	TableVersions["equip"] = 20201223091739
+	EquipIns.Version = 20210408061112
+	TableVersions["equip"] = 20210408061112
 
 	if data, err := proto.Marshal(EquipIns); err != nil {
 		panic(err.Error())
