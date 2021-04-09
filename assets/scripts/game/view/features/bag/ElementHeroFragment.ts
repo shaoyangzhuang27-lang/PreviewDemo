@@ -42,6 +42,11 @@ export class ElementHeroFragment extends Component {
     @property({type :  Node})
     public img_occupation:Node = null as unknown as Node;
 
+
+    @property({type :  Node})
+    public img_quality:Node = null as unknown as Node;
+
+    
     @property({type :  Node})
     public starlist:Node[] = [];
 
@@ -125,7 +130,7 @@ export class ElementHeroFragment extends Component {
             val == "icon" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_icon);
             // val == "frame" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.btn_frame);
             val == "camp" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_camp);
-            val == "quality" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_debris);
+            val == "quality" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_quality);
             val == "bg" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_bg);
             val =="occupation"&& this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_occupation);
             
