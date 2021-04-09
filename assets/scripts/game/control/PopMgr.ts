@@ -767,7 +767,7 @@ export class PopMgr extends PopCore  {
     
     public popPlayerLevelUpWindow(msgData :Msg.NotifyLevelUpAward){
 
-        resources.load('prefabs_ui/pop/pop_player_levelup_award', (err: any, res: any) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_player_levelup_award', (err: any, res: any) => {
             let p = instantiate(res);
             this.pushWindow(p);
             let script = p.getComponent("PopPlayerLevelUpAward") as PopPlayerLevelUpAward;
@@ -783,7 +783,7 @@ export class PopMgr extends PopCore  {
      */
 
        public popGiftCodeExchangeWindow(){
-        resources.load('prefabs_ui/pop/pop_giftcode_exchange', (err: any, res: any) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/setting/pop_giftcode_exchange', (err: any, res: any) => {
             let p = instantiate(res);
             this.pushWindow(p);
            // let script = p.getComponent("PopGiftCodeExchange") as PopGiftCodeExchange;

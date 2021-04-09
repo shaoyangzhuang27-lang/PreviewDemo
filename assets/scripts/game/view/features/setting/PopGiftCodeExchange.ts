@@ -1,9 +1,9 @@
 
 import { _decorator, Component, Node ,Label, Button, EditBox} from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { MsgMgr } from '../../control/MsgMgr';
-import { NotifyMgr } from '../../control/NotifyMgr';
-import { PopMgr } from '../../control/PopMgr';
+import { PopBase } from '../../../../core/control/PopBase';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { NotifyMgr } from '../../../control/NotifyMgr';
+import { PopMgr } from '../../../control/PopMgr';
 
 const { ccclass, property } = _decorator;
 
