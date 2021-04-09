@@ -8,7 +8,7 @@ import { _decorator, Component, Node, Sprite, Label, Button, SpriteFrame, resour
 const { ccclass, property } = _decorator;
 import { HeroData } from '../../../model/datas/HeroData';
 import { GameModel } from '../../../model/GameModel';
-import { HeroIcon } from '../../hero/HeroIcon';
+import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { PopMgr } from '../../../control/PopMgr';
 import { XFuns } from '../../../model/const/XFuns';
 import { ResMgr } from '../../../control/ResMgr';
@@ -34,7 +34,7 @@ export class CellCollege extends Component {
     //英雄数据
     private _heroData: HeroData | null = null;// as unknown as HeroData;    
     //有英雄在这个槽位时对应英雄ui预制体
-    private _heroIcon: HeroIcon | null = null;// as unknown as HeroIcon;
+    private _heroIcon: ElementHeroIcon | null = null;// as unknown as ElementHeroIcon;
     //倒计时(单位:秒s)
     private _leftTime: number = 0;
     private CONST_LEFT_TIME: number = 2;
@@ -160,16 +160,16 @@ export class CellCollege extends Component {
             console.log(GameModel.getInstance().getHeroesModel().heroCollegeLevel);
             heroData.level = GameModel.getInstance().getHeroesModel().heroCollegeLevel;
             this._heroData = heroData;
-            if (this._heroIcon && this._heroIcon instanceof HeroIcon) {
+            if (this._heroIcon && this._heroIcon instanceof ElementHeroIcon) {
                 this._heroIcon.setHeroInfo(heroData.record, GameModel.getInstance().getHeroesModel().heroCollegeLevel);
                 this._heroIcon.node.active = true;
 
             } else {
                 this._heroIcon = null;
                 let target = this;
-                ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err: any, res: any) => {
+                ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_heroicon', (err: any, res: any) => {
                     let heroIcon = instantiate(res as Prefab) as Node;
-                    let script = heroIcon.getComponent("HeroIcon") as HeroIcon;
+                    let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon;
                     script.setHeroData(heroData as HeroData);
                     // script.setBtnCallBack((_data: HeroData) => {
                     //     target._openCollegeUnLoadView(_data);
@@ -189,7 +189,7 @@ export class CellCollege extends Component {
 
     private _clearHeroIcon() {
         this._heroData = null;
-        if (this._heroIcon && this._heroIcon instanceof HeroIcon) {
+        if (this._heroIcon && this._heroIcon instanceof ElementHeroIcon) {
             this._heroIcon.node.active = false;
         } else {
             this._heroIcon = null;

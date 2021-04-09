@@ -6,7 +6,7 @@
 import { _decorator, Component, Node, Label, Button, resources, instantiate, Widget, EventTouch } from 'cc';
 import { PopMgr } from '../../control/PopMgr';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
-import { HeroIcon } from './HeroIcon';
+import { ElementHeroIcon } from './ElementHeroIcon';
 const { ccclass, property } = _decorator;
 
 @ccclass('HeroGiftChoiceCell')
@@ -67,7 +67,7 @@ export class HeroGiftChoiceCell extends Component {
         let heroInfo:Config.heroes.Record = ValueMgr.getInstance().getItemByField(TableName.heroes,this._data[1]) as Config.heroes.Record;
         let heroNameData = ValueMgr.getInstance().getItemByField(TableName.language_data,heroInfo.name) as Config.language_data.Record;
         this.lab_heroname.string = heroNameData.cn;
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
             let heroIcon = instantiate(res) as Node;
             this.iconNode.addChild(heroIcon); 
             heroIcon.addComponent(Widget);
@@ -75,7 +75,7 @@ export class HeroGiftChoiceCell extends Component {
             subWidget.updateAlignment();
             
             
-            let script = heroIcon.getComponent("HeroIcon") as HeroIcon;
+            let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon;
             script.setHeroInfo(heroInfo,this._data[2]);
             script.setBtnCallBack((data:Config.heroes.Record)=>{
                 this._openHeroBookView(data);

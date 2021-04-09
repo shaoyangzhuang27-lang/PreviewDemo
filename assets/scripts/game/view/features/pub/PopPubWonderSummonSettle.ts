@@ -3,7 +3,7 @@ import { XConsts } from '../../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { GameModel } from '../../../model/GameModel';
 import { ElementPubHeroIcon } from './ElementPubHeroIcon';
-import { HeroIcon } from '../../hero/HeroIcon';
+import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { ItemEquipType,ItemEquipCell } from '../../menu/ItemEquipCell';
 const { ccclass, property } = _decorator;
 
@@ -223,10 +223,10 @@ export class PopPubWonderSummonSettle extends Component {
 
     public initHeroIcon(node : Node, info : Msg.HeroInfo)
     {
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
             let _heroIcon = instantiate(res);
              _heroIcon.setScale(0.66,0.66,1)
-            let script = _heroIcon.getComponent(HeroIcon); 
+            let script = _heroIcon.getComponent(ElementHeroIcon); 
             script.initUIHeroIconInfo(info.staticID,XConsts.HERO_ICON_TYPE.SummonSettle,info.level);    
             script.setBtnCallBack(()=>{
                 //PopMgr.getInstance().popOpenBookHeroDetail(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero());

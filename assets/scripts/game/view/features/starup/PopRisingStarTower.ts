@@ -8,7 +8,7 @@ const { ccclass, property } = _decorator;
 import { PopBase } from '../../../../core/control/PopBase';
 import { GameModel } from '../../../model/GameModel';
 import { HeroData } from '../../../model/datas/HeroData';
-import { HeroIcon } from '../../hero/HeroIcon';
+import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { HeroSelectIconStarUp } from '../../hero/HeroSelectIconStarUp';
 import { PopMgr } from '../../../control/PopMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
@@ -679,12 +679,12 @@ export class PopRisingStarTower extends PopBase {
                 heroInfo5.tier = 0;
                 let hero = new HeroData();
                 hero.initDataByHero(heroInfo5 as Msg.HeroInfo, GameModel.getInstance());
-                resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+                resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
                     let heroIcon = instantiate(res) as Node;
                     heroIcon.scale = new Vec3(0.5,0.5,1);
                     heroIcon.addComponent(Widget);
         
-                    let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+                    let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
                     script.setHeroData(hero as HeroData); 
                     script.setLvIconVisib(false);
                     this.btn_head2.addChild(heroIcon);
@@ -697,12 +697,12 @@ export class PopRisingStarTower extends PopBase {
                 }else if(this._curStarupNum == 2){
                     this.btn_head2.setPosition(-222,95,0);
                     this.btn_head3.active = true;
-                    resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+                    resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
                         let heroIcon = instantiate(res) as Node;
                         heroIcon.scale = new Vec3(0.5,0.5,1);
                         heroIcon.addComponent(Widget);
             
-                        let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+                        let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
                         script.setHeroData(hero as HeroData); 
                         script.setLvIconVisib(false);
                         this.btn_head3.addChild(heroIcon);
@@ -711,12 +711,12 @@ export class PopRisingStarTower extends PopBase {
                     }); 
                 }
             }else if(this._curStarupType == 2){ //同星级英雄
-                resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+                resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
                     let heroIcon = instantiate(res) as Node;
                     heroIcon.scale = new Vec3(0.5,0.5,1);
                     heroIcon.addComponent(Widget);
         
-                    let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+                    let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
                     script.setMaskHeroData((HeroInfo as HeroData).getCamp(),this._curStarupParam,0); 
                     script.setLvIconVisib(false);
                     this.btn_head2.addChild(heroIcon);
@@ -729,12 +729,12 @@ export class PopRisingStarTower extends PopBase {
                 }else if(this._curStarupNum == 2){
                     this.btn_head2.setPosition(-222,95,0);
                     this.btn_head3.active = true;
-                    resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+                    resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
                         let heroIcon = instantiate(res) as Node;
                         heroIcon.scale = new Vec3(0.5,0.5,1);
                         heroIcon.addComponent(Widget);
             
-                        let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+                        let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
                         script.setMaskHeroData((HeroInfo as HeroData).getCamp(),this._curStarupParam,0); 
                         script.setLvIconVisib(false);
                         this.btn_head3.addChild(heroIcon);
@@ -747,12 +747,12 @@ export class PopRisingStarTower extends PopBase {
         else{//副材料显示
             if(HeroInfo2){
                 this.btn_head2.getChildByName("heroIcon2")?.destroy();
-                resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+                resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
                     let heroIcon = instantiate(res) as Node;
                     heroIcon.scale = new Vec3(0.5,0.5,1);
                     heroIcon.addComponent(Widget);
         
-                    let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+                    let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
                     script.setHeroData(HeroInfo2 as HeroData);
                     script.setLvIconVisib(true); 
                     this.btn_head2.addChild(heroIcon);
@@ -761,12 +761,12 @@ export class PopRisingStarTower extends PopBase {
             }
             if(HeroInfo3){
                 this.btn_head3.getChildByName("heroIcon3")?.destroy();
-                resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+                resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
                     let heroIcon = instantiate(res) as Node;
                     heroIcon.scale = new Vec3(0.5,0.5,1);
                     heroIcon.addComponent(Widget);
         
-                    let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+                    let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
                     script.setHeroData(HeroInfo3 as HeroData); 
                     script.setLvIconVisib(true); 
                     this.btn_head3.addChild(heroIcon);

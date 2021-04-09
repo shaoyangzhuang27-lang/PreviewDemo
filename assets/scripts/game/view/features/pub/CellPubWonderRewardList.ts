@@ -6,7 +6,7 @@ import { XConsts } from '../../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { ItemEquipType,ItemEquipCell } from '../../menu/ItemEquipCell';
 import { ResMgr } from '../../../control/ResMgr';
-import { HeroIcon } from '../../hero/HeroIcon';
+import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { PopMgr } from '../../../control/PopMgr';
 import {PopPubWonderRewardList} from "./PopPubWonderRewardList";
 const { ccclass, property } = _decorator;
@@ -157,10 +157,10 @@ export class CellPubWonderRewardList extends Component {
 
         if(nCounts == 2)
         {
-            ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err: Error | null, res: Prefab | null)=>{
+            ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_heroicon', (err: Error | null, res: Prefab | null)=>{
                 let _heroIcon = instantiate(res as Prefab);
                  _heroIcon.setScale(0.8,0.8,1)
-                let script = _heroIcon.getComponent(HeroIcon) as HeroIcon; 
+                let script = _heroIcon.getComponent(ElementHeroIcon) as ElementHeroIcon; 
                 script.initUIHeroIconInfo(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero(),XConsts.HERO_ICON_TYPE.WonderSummon);    
                 script.setBtnCallBack(()=>{
                     PopMgr.getInstance().popOpenBookHeroDetail(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero());

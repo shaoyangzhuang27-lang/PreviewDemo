@@ -7,7 +7,7 @@ import { _decorator,Label,Component,Size,UITransform, Button,instantiate,Widget,
 import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
 import { GameModel } from '../../../model/GameModel';
 import { HeroData } from '../../../model/datas/HeroData';
-import { HeroIcon } from '../../hero/HeroIcon';
+import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { PopMgr } from '../../../control/PopMgr';
 import { NotifyMgr } from '../../../control/NotifyMgr';
@@ -296,7 +296,7 @@ export class PopDecompose extends Component {
             }
         }
         let index = 0
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
             for (let key of this._selectBattleList.keys()){
                 let HeroInfo = this._getHeroData(key) as HeroData;
                 let Info = ValueMgr.getInstance().getItemByField(TableName.heroes,HeroInfo.getStaticID()) as Config.heroes.Record;
@@ -304,7 +304,7 @@ export class PopDecompose extends Component {
                 heroIcon.scale = new Vec3(0.5,0.5,1);
                 heroIcon.addComponent(Widget);
 
-                let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+                let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
                 script.setHeroData(HeroInfo as HeroData);
                 this.goodsNodes[index].addChild(heroIcon);
                 heroIcon.name = "heroIcon";

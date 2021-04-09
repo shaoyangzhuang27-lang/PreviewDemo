@@ -5,7 +5,7 @@ import { PopMgr } from '../../control/PopMgr';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { HeroData } from '../../model/datas/HeroData';
 import { GameModel } from '../../model/GameModel';
-import { HeroIcon } from '../hero/HeroIcon';
+import { ElementHeroIcon } from '../common/ElementHeroIcon';
 import { XFuns } from '../../model/const/XFuns';
 import { XConsts } from '../../model/const/XConsts';
 import { ResMgr } from '../../control/ResMgr';
@@ -102,8 +102,8 @@ export class TeamMain extends Component {
     {
         let curFormationList:Map<number,HeroData> = GameModel.getInstance().getFormationModel().getCurrentFormation();
         
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:any,res:Prefab | null)=>{
-        // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{        
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_heroicon', (err:any,res:Prefab | null)=>{
+        // resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{        
             for (let index = 0; index < this.heroPosList.length; index++) {
                 this.heroPosList[index].removeAllChildren();                
             }
@@ -128,7 +128,7 @@ export class TeamMain extends Component {
         subWidget.updateAlignment();
         // heroIcon.name = childName;
 
-        let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+        let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
         script.setHeroData(value as HeroData);
         script.setBtnCallBack((_data:HeroData)=>{
             this._openHeroUpGradeView(_data);
@@ -158,8 +158,8 @@ export class TeamMain extends Component {
         let heroList = campType ? heroModel.getHeroListByCampType(campType) : heroModel.getHeroList();
         let sortList = heroModel.sortHeroList(heroList)
         // 绘制
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:any,res:Prefab | null)=>{
-        // resources.load('prefabs_ui/main/hero_icon', (err: any, res: any) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_heroicon', (err:any,res:Prefab | null)=>{
+        // resources.load('prefabs_ui/common/element_heroicon', (err: any, res: any) => {
             sortList.forEach((heroData, key) => {
                 // 创建头像
                 let heroIcon = instantiate(res as Prefab) as Node;
@@ -170,7 +170,7 @@ export class TeamMain extends Component {
                 heroIcon.scale = new Vec3(0.55, 0.55, 1);
                 heroIcon.parent = this.layHero
                 // 刷新和回调
-                let script = heroIcon.getComponent("HeroIcon") as HeroIcon;
+                let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon;
                 script.setHeroData(heroData);
                 script.setBtnCallBack((_data: HeroData) => {
                     // 弹出英雄详细界面

@@ -12,8 +12,8 @@ import { HeroData } from '../../model/datas/HeroData';
 import {GameModel} from "../../model/GameModel";
 import { ResMgr } from '../../control/ResMgr';
 
-@ccclass('HeroIcon')
-export class HeroIcon extends Component {
+@ccclass('ElementHeroIcon')
+export class ElementHeroIcon extends Component {
     // [1]
     // dummy = '';
 
@@ -22,22 +22,28 @@ export class HeroIcon extends Component {
     // serializableDummy = 0;
     
     @property({type :  Node})
-    public img_bg:Node = null as unknown as Node;
+    public img_bg:Node = null as unknown as Node;       //背景
 
     @property({type :  Node})
-    public img_icon:Node = null as unknown as Node;
+    public img_icon:Node = null as unknown as Node;     //头像
 
     @property({type :  Node})
-    public btn_frame:Node = null as unknown as Node;
+    public btn_frame:Node = null as unknown as Node;    //外框
 
     @property({type :  Node})
-    public img_camp:Node = null as unknown as Node;
+    public img_quality:Node = null as unknown as Node;  //品质
+
+    @property({type :  Node})
+    public img_camp:Node = null as unknown as Node;     //阵营
 
     @property({type :  Label})
-    public lab_level:Label = null as unknown as Label;
+    public lab_level:Label = null as unknown as Label;  //登记
 
     @property({type :  Node})
-    public starlist:Node[] = [];
+    public img_career:Node = null as unknown as Node;   //职业
+
+    @property({type :  Node})
+    public starlist:Node = null as unknown as Node;     //星星节点
     
     //英雄数据
     private _heroData : HeroData | null = null as unknown as HeroData;
@@ -126,16 +132,16 @@ export class HeroIcon extends Component {
         let starName = starNameList[grade];
         let starPath = "ui/common/icon/" + starName + "/spriteFrame"
 
-        for (let index = 0; index < this.starlist.length; index++) {
-            if(index >= yu && yu != 0)
-            {
-                this.starlist[index].active = false;
-            }
-            else{
-                this.starlist[index].active = true;
-                this._resourceLoad(starPath,this.starlist[index]);
-            }
-        }
+        // for (let index = 0; index < this.starlist.length; index++) {
+        //     if(index >= yu && yu != 0)
+        //     {
+        //         this.starlist[index].active = false;
+        //     }
+        //     else{
+        //         this.starlist[index].active = true;
+        //         this._resourceLoad(starPath,this.starlist[index]);
+        //     }
+        // }
         
         firstid = firstid || Number(this._heroData?.getStaticID());
         let id1st = HeroData.getInitialStarByID(firstid);

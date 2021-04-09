@@ -6,7 +6,7 @@ import { XConsts } from '../../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { PopMgr } from '../../../control/PopMgr';
 import { CellPubWonderRewardList } from "./CellPubWonderRewardList";
-import { HeroIcon } from '../../hero/HeroIcon';
+import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { ResMgr } from '../../../control/ResMgr';
 const { ccclass, property } = _decorator;
 

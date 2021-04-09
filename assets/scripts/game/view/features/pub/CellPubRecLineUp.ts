@@ -2,7 +2,7 @@ import { _decorator, Component, Node,resources,instantiate,Vec3,Button,Label, UI
 import { XConsts } from '../../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { PopMgr } from '../../../control/PopMgr';
-import { HeroIcon } from '../../hero/HeroIcon';
+import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { ResMgr } from '../../../control/ResMgr';
 const { ccclass, property } = _decorator;
 
@@ -83,9 +83,9 @@ export class CellPubRecLineUp extends Component {
     
     public initHeroIconPrefab(index : number,id : number)
     {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_heroicon', (err: Error | null, res: Prefab | null)=>{
             let _heroIcon = instantiate(res as Prefab) ;
-            let script = _heroIcon.getComponent(HeroIcon) as HeroIcon ; 
+            let script = _heroIcon.getComponent(ElementHeroIcon) as ElementHeroIcon ; 
             // script.setHeroID(this._heroInfo as HeroData);
             script.initUIHeroIconInfo(id,XConsts.HERO_ICON_TYPE.RecLineUp);
                    

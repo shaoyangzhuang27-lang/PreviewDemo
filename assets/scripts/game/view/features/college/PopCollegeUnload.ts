@@ -12,7 +12,7 @@ import { HeroData } from '../../../model/datas/HeroData';
 import { NotifyMgr } from '../../../control/NotifyMgr';
 import { ValueMgr } from '../../../model/ValueMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
-import { HeroIcon } from '../../hero/HeroIcon';
+import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 
 @ccclass('PopCollegeUnload')
 export class PopCollegeUnload extends PopBase {
@@ -26,11 +26,11 @@ export class PopCollegeUnload extends PopBase {
     @property({ type: Label, displayName: "内容" })
     public lab_content: Label = null as unknown as Label;
 
-    @property({ type: HeroIcon, displayName: "在学院英雄" })
-    public hero_icon_college: HeroIcon = null as unknown as HeroIcon;
+    @property({ type: ElementHeroIcon, displayName: "在学院英雄" })
+    public hero_icon_college: ElementHeroIcon = null as unknown as ElementHeroIcon;
     
-    @property({ type: HeroIcon, displayName: "卸下英雄" })
-    public hero_icon_unload: HeroIcon = null as unknown as HeroIcon;
+    @property({ type: ElementHeroIcon, displayName: "卸下英雄" })
+    public hero_icon_unload: ElementHeroIcon = null as unknown as ElementHeroIcon;
     
     private _heroId:number = 0;
     private _pos:number =0;        

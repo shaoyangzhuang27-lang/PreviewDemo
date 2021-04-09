@@ -18,7 +18,7 @@ import { GameModel } from '../../../model/GameModel';
 import { XFuns } from '../../../model/const/XFuns';
 import { XConsts } from "../../../model/const/XConsts";
 import { HeroData } from '../../../model/datas/HeroData';
-import { HeroIcon } from '../../hero/HeroIcon';
+import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { HeroModel } from '../../hero/HeroModel';
 import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
 import { ResCore } from '../../../../core/control/ResCore';

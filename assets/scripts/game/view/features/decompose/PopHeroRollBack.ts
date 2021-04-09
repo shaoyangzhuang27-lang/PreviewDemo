@@ -8,7 +8,7 @@ import { PopBase } from '../../../../core/control/PopBase';
 import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
 import { GameModel } from '../../../model/GameModel';
 import { HeroData } from '../../../model/datas/HeroData';
-import { HeroIcon } from '../../hero/HeroIcon';
+import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { XShare } from '../../../model/const/XShare';
 import { PopMgr } from '../../../control/PopMgr';
@@ -313,12 +313,12 @@ export class PopHeroRollBack extends Component {
         let HeroInfo = this._getHeroData(this._curResetHero)as HeroData
         this.btn_rollback_icon.getChildByName("heroIcon")?.removeFromParent();
         this.btn_rollback_icon.getChildByName("heroIcon")?.destroy();
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
             let heroIcon = instantiate(res) as Node;
             heroIcon.scale = new Vec3(0.5,0.5,1);
             heroIcon.addComponent(Widget);
 
-            let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+            let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
             script.setHeroData(HeroInfo as HeroData);
 
             this.btn_rollback_icon.addChild(heroIcon);
@@ -327,12 +327,12 @@ export class PopHeroRollBack extends Component {
 
         //物品栏展示
         //1级英雄
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
             //本体
             let heroIcon = instantiate(res) as Node;
             heroIcon.scale = new Vec3(0.5,0.5,1);
             heroIcon.addComponent(Widget);
-            let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+            let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
             script.setHeroData(HeroInfo as HeroData);
             script.setNewStar(6)
             this.goodsNodes[0].addChild(heroIcon);
@@ -353,7 +353,7 @@ export class PopHeroRollBack extends Component {
                 let heroIcon = instantiate(res) as Node;
                 heroIcon.scale = new Vec3(0.5,0.5,1);
                 heroIcon.addComponent(Widget);
-                let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+                let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
                 script.setHeroData(HeroInfo as HeroData);
                 script.setNewStar(6)
                 this.goodsNodes[index].addChild(heroIcon);
@@ -381,7 +381,7 @@ export class PopHeroRollBack extends Component {
                 let heroIcon = instantiate(res) as Node;
                 heroIcon.scale = new Vec3(0.5,0.5,1);
                 heroIcon.addComponent(Widget);
-                let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+                let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
                 script.setHeroData(hero as HeroData);
                 this.goodsNodes[index].addChild(heroIcon);
                 heroIcon.name = "heroIcon";

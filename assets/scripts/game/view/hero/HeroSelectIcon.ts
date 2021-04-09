@@ -1,7 +1,7 @@
 
 import { _decorator, Component, Node, resources, SpriteFrame,Sprite,instantiate,Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
-import { HeroIcon } from '../hero/HeroIcon';
+import { ElementHeroIcon } from '../common/ElementHeroIcon';
 import { XConsts } from '../../model/const/XConsts';
 import { HeroData } from '../../model/datas/HeroData';
 import { GameModel } from '../../model/GameModel';
@@ -41,14 +41,14 @@ export class HeroSelectIcon extends Component {
 
     private initHeroIcon()
     {
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{                  
+        resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{                  
             let heroIcon = instantiate(res) as Node;
             heroIcon.scale = new Vec3(0.6,0.6,1);
             this.btnFrame.addChild(heroIcon);
             heroIcon.position = this.btnFrame.position;
             heroIcon.name = "formationIcon"
 
-            let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+            let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
             script.setHeroData(this._heroInfo as HeroData);
             script.setBtnCallBack(null);            
         });
@@ -126,14 +126,14 @@ export class HeroSelectIcon extends Component {
     }
     private initWonderHeroIcon(id : number)
     {
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{                  
+        resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{                  
             let heroIcon = instantiate(res) as Node;
             heroIcon.scale = new Vec3(0.6,0.6,1);
             this.btnFrame.addChild(heroIcon);
             heroIcon.position = this.btnFrame.position;
             heroIcon.name = "formationIcon"
 
-            let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+            let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
             script.initUIHeroIconInfo(id,XConsts.HERO_ICON_TYPE.RecLineUp);
             script.setBtnCallBack(null);            
         });

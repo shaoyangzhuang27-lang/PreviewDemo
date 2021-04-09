@@ -8,7 +8,7 @@ import { PopBase } from '../../../../core/control/PopBase';
 import { HeroData } from '../../../model/datas/HeroData';
 import { GameModel } from '../../../model/GameModel';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
-import { HeroIcon } from '../../hero/HeroIcon';
+import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { MsgMgr } from '../../../control/MsgMgr';
 import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
 import { PopMgr } from '../../../control/PopMgr';
@@ -167,7 +167,7 @@ export class PopOneKeyStarUp extends PopBase {
         let item = this.itemNode;
         let index = 0;
 
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
             for (let key in this._starUpHeroIDs.heroAndMaterial){
                 let heroList = this._starUpHeroIDs.heroAndMaterial[key];
                 let item1 = instantiate(item)  as Node; 
@@ -180,7 +180,7 @@ export class PopOneKeyStarUp extends PopBase {
                 let heroIcon = instantiate(res) as Node;
                 heroIcon.scale = new Vec3(0.5,0.5,1);
                 heroIcon.addComponent(Widget);
-                let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+                let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
                 script.setHeroData(heroData as HeroData); 
                 let node1 = item1.getChildByName("img_info_head"+imgIndex) as Node;
                 node1.addChild(heroIcon);
@@ -192,7 +192,7 @@ export class PopOneKeyStarUp extends PopBase {
                     heroIcon = instantiate(res) as Node;
                     heroIcon.scale = new Vec3(0.5,0.5,1);
                     heroIcon.addComponent(Widget);
-                    script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+                    script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
                     script.setHeroData(heroData as HeroData); 
                     node1 = item1.getChildByName("img_info_head"+imgIndex) as Node;
                     node1.addChild(heroIcon);
@@ -204,7 +204,7 @@ export class PopOneKeyStarUp extends PopBase {
                 heroIcon = instantiate(res) as Node;
                 heroIcon.scale = new Vec3(0.5,0.5,1);
                 heroIcon.addComponent(Widget);
-                script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+                script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
                 script.setHeroData(heroData as HeroData); 
                 script.addOneStar()
                 node1 = item1.getChildByName("img_info_head4") as Node;

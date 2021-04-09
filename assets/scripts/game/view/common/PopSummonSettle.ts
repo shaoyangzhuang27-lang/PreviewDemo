@@ -2,7 +2,7 @@ import { _decorator, Component, Node,Label,ScrollView,resources,instantiate, Vec
 import { PopBase } from '../../../core/control/PopBase';
 import { XConsts } from '../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { HeroIcon } from '../hero/HeroIcon';
+import { ElementHeroIcon } from '../common/ElementHeroIcon';
 import { GameModel } from '../../model/GameModel';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { MsgMgr } from '../../control/MsgMgr';
@@ -213,11 +213,11 @@ export class PopSummonSettle extends PopBase {
         {
             this.scroll_heroicon_view.content.destroyAllChildren()
         }
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:Error | null,res:Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_heroicon', (err:Error | null,res:Prefab | null)=>{
                 for(var i = 0; i < this._HeroList.length; i++)
                 {
                     let reclineup_item = instantiate( res  as  Prefab);
-                    let script = reclineup_item.getComponent(HeroIcon) as HeroIcon;
+                    let script = reclineup_item.getComponent(ElementHeroIcon) as ElementHeroIcon;
                     reclineup_item.scale = new Vec3(0.75,0.75,1);
                     let subWidget = reclineup_item.getComponent(UITransform) as UITransform;
                     subWidget.contentSize = new Size(113,113);
@@ -507,9 +507,9 @@ export class PopSummonSettle extends PopBase {
         }
 
         this.setShowScrollViewType(1)
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:Error | null,res:Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_heroicon', (err:Error | null,res:Prefab | null)=>{
             let reclineup_item = instantiate( res as Prefab);
-            let script = reclineup_item.getComponent(HeroIcon) as HeroIcon;
+            let script = reclineup_item.getComponent(ElementHeroIcon) as ElementHeroIcon;
             reclineup_item.scale = new Vec3(0.75,0.75,1);
             let subWidget = reclineup_item.getComponent(UITransform) as UITransform;
             subWidget.contentSize = new Size(113,113);

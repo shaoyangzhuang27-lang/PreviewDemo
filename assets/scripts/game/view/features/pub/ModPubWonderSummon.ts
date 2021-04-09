@@ -3,7 +3,7 @@ import { _decorator, Component, Node,Label,ProgressBar,Button,Sprite,Color,resou
 import { GameModel } from '../../../model/GameModel';
 import { XConsts } from '../../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
-import { HeroIcon } from '../../hero/HeroIcon';
+import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { ItemEquipType,ItemEquipCell } from '../../menu/ItemEquipCell';
 import { PopMgr } from '../../../control/PopMgr';
 import { ElementPubHeroIcon } from './ElementPubHeroIcon';
@@ -165,10 +165,10 @@ export class ModPubWonderSummon extends Component {
     //显示界面上7个预制体信息
     public initHeroIconPrefab()
     {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_heroicon', (err: Error | null, res: Prefab | null)=>{
             let _heroIcon = instantiate(res as Prefab);
             _heroIcon.setScale(0.4,0.4,1)
-            let script = _heroIcon.getComponent(HeroIcon) as HeroIcon; 
+            let script = _heroIcon.getComponent(ElementHeroIcon) as ElementHeroIcon; 
             script.initUIHeroIconInfo(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero(),XConsts.HERO_ICON_TYPE.WonderSummon);    
             script.setBtnCallBack(()=>{
                 PopMgr.getInstance().popOpenBookHeroDetail(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero());
@@ -285,10 +285,10 @@ export class ModPubWonderSummon extends Component {
 
     public updateHeartHeroIcon()
     {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_heroicon', (err: Error | null, res: Prefab | null)=>{
             let _heroIcon = instantiate(res as Prefab);
             _heroIcon.setScale(0.4,0.4,1)
-            let script = _heroIcon.getComponent(HeroIcon) as HeroIcon; 
+            let script = _heroIcon.getComponent(ElementHeroIcon) as ElementHeroIcon; 
             script.initUIHeroIconInfo(GameModel.getInstance().getHeroPubModel().getPlayerWonderHero(),XConsts.HERO_ICON_TYPE.WonderSummon);    
             script.setBtnCallBack(()=>{
                 PopMgr.getInstance().popPubWonderHeartHeroWindow();

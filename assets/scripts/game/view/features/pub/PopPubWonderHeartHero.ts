@@ -5,7 +5,7 @@ import { XConsts } from '../../../model/const/XConsts';
 import { GameModel } from '../../../model/GameModel';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
-import { HeroIcon } from '../../hero/HeroIcon';
+import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { PopMgr } from '../../../control/PopMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
 import { NotifyMgr } from '../../../control/NotifyMgr';
@@ -173,7 +173,7 @@ export class PopPubWonderHeartHero extends PopBase {
             if(node_HeroIcon)
             {
                 node_HeroIcon.active = false;
-               // node_HeroIcon.getComponent(HeroIcon)?.initUIHeroIconInfo(this._heartHeroId,XConsts.HERO_ICON_TYPE.RecLineUp);
+               // node_HeroIcon.getComponent(ElementHeroIcon)?.initUIHeroIconInfo(this._heartHeroId,XConsts.HERO_ICON_TYPE.RecLineUp);
             }
         }
         else
@@ -185,13 +185,13 @@ export class PopPubWonderHeartHero extends PopBase {
                 if(node_HeroIcon)
                 {
                     node_HeroIcon.active = true;
-                    node_HeroIcon.getComponent(HeroIcon)?.initUIHeroIconInfo(this._heartHeroId,XConsts.HERO_ICON_TYPE.RecLineUp);
+                    node_HeroIcon.getComponent(ElementHeroIcon)?.initUIHeroIconInfo(this._heartHeroId,XConsts.HERO_ICON_TYPE.RecLineUp);
                 }
                 else
                 {
-                    ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err: Error | null, res: Prefab | null)=>{
+                    ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_heroicon', (err: Error | null, res: Prefab | null)=>{
                         let _heroIcon = instantiate(res as Prefab) ;
-                        let script = _heroIcon.getComponent(HeroIcon) as HeroIcon; 
+                        let script = _heroIcon.getComponent(ElementHeroIcon) as ElementHeroIcon; 
                         // script.setHeroID(this._heroInfo as HeroData);
                         script.initUIHeroIconInfo(id,XConsts.HERO_ICON_TYPE.WonderSummon);
                         _heroIcon.scale = new Vec3(0.6,0.6,1);    
