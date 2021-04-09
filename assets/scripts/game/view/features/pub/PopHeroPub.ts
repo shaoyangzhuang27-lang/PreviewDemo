@@ -415,6 +415,7 @@ export class PopHeroPub extends PopBase {
                 classesName : "",
                 bg : "",
                 param : 0,
+                occupation : "",
             }  
             script.setWonderSummonShow(false,info);
             if(nodeFiveStar)

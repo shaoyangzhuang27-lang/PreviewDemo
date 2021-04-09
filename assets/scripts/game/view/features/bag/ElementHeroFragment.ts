@@ -56,7 +56,8 @@ export class ElementHeroFragment extends Component {
         campName : "",
         classesName : "",
         bg : "",
-        param : 0
+        param : 0,
+        occupation : "",
     }  
     
     start () {

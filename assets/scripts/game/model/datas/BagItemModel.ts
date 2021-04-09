@@ -69,6 +69,7 @@ export class BagItemModel extends BaseModel{
                 classesName : "",
                 bg : "",
                 param : 0,
+                occupation : "",
             }  
             let value = msg.fragmentList[key];
 
@@ -122,7 +123,8 @@ export class BagItemModel extends BaseModel{
                 // info.frame = "ui/common/icon/" +  XConsts.GetQualityBgByStar(heroInfo.star) + "/spriteFrame";
                 info.quality = "ui/comm/hero/" + XConsts.GetFragmentQualityByStar(heroInfo.star) + "/spriteFrame";
                 info.icon = "ui/common/hero/" + heroInfo.image + "/spriteFrame";
-                // info.camp = "ui/common/team/" + XConsts.KHeroCampIcon[heroInfo.camp] + "/spriteFrame";
+                info.camp = "ui/comm/hero/" + XConsts.KFragmentCampIcon[heroInfo.camp] + "/spriteFrame";
+                info.occupation = "ui/comm/hero/" + XConsts.KFragmentClassesSpriteName[heroInfo.classes] + "/spriteFrame";
                 info.star = heroInfo.star;
                 info.maxNum = XConsts.KFragmentNumRequired[info.star ? info.star : 1];
                 info.curNum = value.num ? value.num : 0;
