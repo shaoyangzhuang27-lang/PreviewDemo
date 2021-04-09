@@ -4,7 +4,7 @@ import { GameModel } from '../../../model/GameModel';
 import { XConsts } from '../../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { ElementHeroIcon } from '../../common/ElementHeroIcon';
-import { ItemEquipType,ItemEquipCell } from '../../menu/ItemEquipCell';
+import { EquipPropType,ElementEquipProp } from '../../common/ElementEquipProp';
 import { PopMgr } from '../../../control/PopMgr';
 import { ElementPubHeroIcon } from './ElementPubHeroIcon';
 import { MsgMgr } from '../../../control/MsgMgr';

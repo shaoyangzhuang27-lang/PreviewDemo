@@ -1,7 +1,7 @@
 
 import { _decorator, Component, Node, Label, instantiate, resources, EditBox, } from 'cc';
 const { ccclass, property } = _decorator;
-import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
+import { ElementEquipProp, EquipPropType } from '../common/ElementEquipProp';
 import { PopBase } from '../../../core/control/PopBase';
 import { MsgMgr } from '../../control/MsgMgr';
 import { TableName, ValueMgr } from '../../model/ValueMgr';

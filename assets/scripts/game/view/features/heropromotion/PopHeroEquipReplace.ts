@@ -6,7 +6,7 @@ import { NotifyMgr } from '../../../control/NotifyMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
 import { XConsts } from '../../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
-import { ItemEquipCell, ItemEquipType } from '../../menu/ItemEquipCell';
+import { ElementEquipProp, EquipPropType } from '../../common/ElementEquipProp';
 import { ResMgr } from '../../../control/ResMgr';
 
 const { ccclass, property } = _decorator;
@@ -17,8 +17,8 @@ export class PopHeroEquipReplace extends PopBase {
     @property({ type: Label })
     public lab_title: Label | null = null;
 
-    @property({ type: ItemEquipCell })
-    public itemequip_cell_drag: ItemEquipCell = null as unknown as ItemEquipCell; //穿戴装备（当前穿戴的装备）
+    @property({ type: ElementEquipProp })
+    public itemequip_cell_drag: ElementEquipProp = null as unknown as ElementEquipProp; //穿戴装备（当前穿戴的装备）
 
     @property({ type: Node })
     public node_equip_drag: Node = null as unknown as Node; //拖装备Node（穿戴的装备）
@@ -36,8 +36,8 @@ export class PopHeroEquipReplace extends PopBase {
     public node_suit_drag: Node = null as unknown as Node; //穿戴装备套装属性Node
 
 
-    @property({ type: ItemEquipCell })
-    public itemequip_cell_wear: ItemEquipCell = null as unknown as ItemEquipCell; //替换的装备（当前要替换的的装备）
+    @property({ type: ElementEquipProp })
+    public itemequip_cell_wear: ElementEquipProp = null as unknown as ElementEquipProp; //替换的装备（当前要替换的的装备）
 
     @property({ type: Node })
     public node_equip_wear: Node = null as unknown as Node; //替换装备Node

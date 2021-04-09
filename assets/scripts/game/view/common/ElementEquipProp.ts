@@ -2,21 +2,24 @@
  * 游戏组件:道具装备cell
  * @author 黄志清
  * @version 1.0.0,2021.3.15
+ * @LastEditTime: 2021-04-09
+ * @LastEditors: 庄佳福
  */
-import { _decorator, Component, Node, Label, resources, SpriteFrame, Sprite } from 'cc';
+import { _decorator, Component, Node, Label, resources, SpriteFrame, Sprite, UITransform, Vec3 } from 'cc';
+import { ResMgr } from '../../control/ResMgr';
 import { XConsts } from '../../model/const/XConsts';
 import { XFuns } from '../../model/const/XFuns';
 import { XShare } from '../../model/const/XShare';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
 const { ccclass, property } = _decorator;
 
-export enum ItemEquipType{
+export enum EquipPropType{
     goods = 1,      //道具
     equip = 2       //装备           
 }
 
-@ccclass('ItemEquipCell')
-export class ItemEquipCell extends Component {
+@ccclass('ElementEquipProp')
+export class ElementEquipProp extends Component {
     @property({type :  Node})
     public img_bg:Node = null as unknown as Node;
 
@@ -83,9 +86,9 @@ export class ItemEquipCell extends Component {
     {
         //数量
         let labCount:Label = this.lab_count.getComponent(Label) as Label;
-        labCount.string = XFuns.FormatNumber(this._itemCount);
-        var pos = this.lab_count.getPosition();
-        if(this._itemCount == 0)        //不需要显示数量时  数量设置为0
+        labCount.string = 'x' + XFuns.FormatNumber(this._itemCount);
+        // var pos = this.lab_count.getPosition();
+        if(this._itemCount == 0)       //不需要显示数量时  数量设置为0
         {
             this.lab_count.active = false;
         }
@@ -98,10 +101,9 @@ export class ItemEquipCell extends Component {
             let equipData:Config.equip.Record = ValueMgr.getInstance().getItemByField(TableName.equip,this._itemID) as Config.equip.Record;
             let iconName:string = equipData.imageName;
             let starCount:number = equipData.star;
-            let qualityName:string = XConsts.KQualityBgSpriteName[equipData.quality];
 
-            iconPath = "ui/common/equip/" + iconName + "/spriteFrame"
-            qualityPath = "ui/common/icon/" + qualityName + "/spriteFrame"
+            iconPath = "ui/comm/equip/" + iconName + "/spriteFrame"
+            qualityPath = "ui/comm/scard/bg_zhuangbei_pinzhi" + equipData.quality + "/spriteFrame"
 
             for (let index = 0; index < this.starlist.length; index++) {
                 if(index >= starCount)
@@ -109,6 +111,7 @@ export class ItemEquipCell extends Component {
                     this.starlist[index].active = false;
                 }
             }
+            this._refreshStartPos(starCount);
         }
         else{       //道具
             this._setUIIConVisible(false);
@@ -119,23 +122,19 @@ export class ItemEquipCell extends Component {
                 if(XShare.getInstance().KObjectQuality.has(this._itemID))
                 {
                     let quality = Number(XShare.getInstance().KObjectQuality.get(this._itemID)) ;
-                    let qualityName:string = XConsts.KQualityBgSpriteName[quality];
-                    qualityPath = "ui/common/icon/" + qualityName + "/spriteFrame";
+                    qualityPath = "ui/comm/scard/bg_zhuangbei_pinzhi" + quality + "/spriteFrame";
                 }
                 let iconName:string = XConsts.KObjectIconSpriteName[this._itemID];
-                iconPath = "ui/common/commonIcon/" + iconName + "/spriteFrame";
-
-                this.lab_count.setPosition(pos.x, pos.y - 20,pos.z);            
+                iconPath = "ui/comm/prop/" + iconName + "/spriteFrame";
+                // this.lab_count.setPosition(pos.x, pos.y - 20,pos.z);            
             }
             else{
-                let itemData:Config.item_usable.Record = ValueMgr.getInstance().getItemByField(TableName.item_usable,this._itemID) as Config.item_usable.Record;        
-                let qualityName:string = XConsts.KQualityBgSpriteName[itemData.quality];
+                let itemData:Config.item_usable.Record = ValueMgr.getInstance().getItemByField(TableName.item_usable,this._itemID) as Config.item_usable.Record;
                 let itemUseType:number = itemData.itemType;
 
-                qualityPath = "ui/common/icon/" + qualityName + "/spriteFrame"
-
-                let iconName:string = XConsts.KObjectIconSpriteName[this._itemID];
-                iconPath = "ui/common/commonIcon/" + iconName + "/spriteFrame";
+                qualityPath = "ui/comm/scard/bg_zhuangbei_pinzhi" + itemData.quality + "/spriteFrame"
+                let iconName:string = itemData.icon;
+                iconPath = "ui/comm/prop/" + iconName + "/spriteFrame";
                 if(itemUseType == Msg.TUsableItemType.EUsableItemType_ObjectOffline)
                 {
                     this.img_infoBg.active = true;
@@ -147,24 +146,28 @@ export class ItemEquipCell extends Component {
             }
             
         }
-
         
-        resources.load(iconPath, (err,spriteFrame:SpriteFrame) =>
+        ResMgr.getInstance().loadSpriteFrame(iconPath, (err: any, spriteFrame: SpriteFrame | null) =>
         {
             if(!err)
             {
-                let sprite = this.img_icon.getComponent(Sprite) as Sprite;
-                sprite.spriteFrame = spriteFrame;
+                let sprite = this.img_icon?.getComponent(Sprite) as Sprite;
+                if (sprite)
+                {
+                    sprite.spriteFrame = spriteFrame;
+                }
             }
         });
-
         
-        resources.load(qualityPath, (err,spriteFrame:SpriteFrame) =>
+        ResMgr.getInstance().loadSpriteFrame(qualityPath, (err: any, spriteFrame: SpriteFrame | null) =>
         {
             if(!err)
             {
-                let sprite = this.img_bg.getComponent(Sprite) as Sprite;
-                sprite.spriteFrame = spriteFrame;
+                let sprite = this.img_bg?.getComponent(Sprite) as Sprite;
+                if (sprite)
+                {
+                    sprite.spriteFrame = spriteFrame;
+                }
             }
         });
     }
@@ -180,9 +183,26 @@ export class ItemEquipCell extends Component {
     private _setUIIConVisible(show:boolean)
     {
         // this.img_infoBg.active = show;
+        let activeCount: number = 0;
         for (let index = 0; index < this.starlist.length; index++) {
             let star = this.starlist[index] as Node;
-            star.active = show;                
+            star.active = show;
+            activeCount = show ? activeCount + 1 : activeCount
+        }
+        this._refreshStartPos(activeCount);
+    }
+
+    /**
+     * 刷新星星位置，使其居中
+     * @param activeCount 活动(显示)的星星数
+     */
+    private _refreshStartPos(activeCount: number) {
+        for (let i = 0; i < activeCount; i++) {
+            let star: Node = this.starlist[i];
+            let pos: Vec3 = star.getPosition()
+            let offsetX = 18    // 星星间距
+            let startPos = -9 * (activeCount - 1);  // 第一个星星的位置
+            star.setPosition(startPos + offsetX * i, pos.y, pos.z);
         }
     }
     
@@ -194,7 +214,7 @@ export class ItemEquipCell extends Component {
     {
         this._itemCount = count;
         let labCount:Label = this.lab_count.getComponent(Label) as Label;
-        labCount.string = XFuns.FormatNumber(this._itemCount);
+        labCount.string = 'x' + XFuns.FormatNumber(this._itemCount);
     }
 }
 

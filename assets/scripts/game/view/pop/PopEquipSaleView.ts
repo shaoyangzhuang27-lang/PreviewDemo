@@ -5,7 +5,7 @@ import { MsgMgr } from '../../control/MsgMgr';
 import { PopMgr } from '../../control/PopMgr';
 import { GameModel } from '../../model/GameModel';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
-import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
+import { ElementEquipProp, EquipPropType } from '../common/ElementEquipProp';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopEquipSaleView')
