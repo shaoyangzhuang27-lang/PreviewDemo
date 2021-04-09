@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "component_tab_hero",
+    "_name": "element_tab_hero",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -39,10 +39,13 @@
     "_components": [
       {
         "__id__": 116
+      },
+      {
+        "__id__": 118
       }
     ],
     "_prefab": {
-      "__id__": 118
+      "__id__": 120
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2722,7 +2725,7 @@
     "fileId": "05VnEhls5K9rqCnS20aana"
   },
   {
-    "__type__": "cc.ToggleContainer",
+    "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -2731,6 +2734,34 @@
     "_enabled": true,
     "__prefab": {
       "__id__": 117
+    },
+    "_priority": 0,
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 100,
+      "height": 100
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "bcmKdbQvFJ2IOiEi2+rzv/"
+  },
+  {
+    "__type__": "cc.ToggleContainer",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 119
     },
     "_allowSwitchOff": true,
     "checkEvents": [],
