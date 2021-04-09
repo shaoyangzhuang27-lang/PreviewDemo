@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "5dc6bf22-b47f-453f-b8e5-e8b36e59029d",
+  "uuid": "cd55aa35-e48d-4d2f-b272-1342df890fa1",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "5dc6bf22-b47f-453f-b8e5-e8b36e59029d@6c48a",
-      "displayName": "img_camp5",
+      "uuid": "cd55aa35-e48d-4d2f-b272-1342df890fa1@6c48a",
+      "displayName": "icon_hero_camp2",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "5dc6bf22-b47f-453f-b8e5-e8b36e59029d"
+        "imageUuidOrDatabaseUri": "cd55aa35-e48d-4d2f-b272-1342df890fa1"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "5dc6bf22-b47f-453f-b8e5-e8b36e59029d@f9941",
-      "displayName": "img_camp5",
+      "uuid": "cd55aa35-e48d-4d2f-b272-1342df890fa1@f9941",
+      "displayName": "icon_hero_camp2",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "5dc6bf22-b47f-453f-b8e5-e8b36e59029d@6c48a",
+        "imageUuidOrDatabaseUri": "cd55aa35-e48d-4d2f-b272-1342df890fa1@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "5dc6bf22-b47f-453f-b8e5-e8b36e59029d@f9941"
+    "redirect": "cd55aa35-e48d-4d2f-b272-1342df890fa1@f9941"
   }
 }

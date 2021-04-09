@@ -362,7 +362,8 @@ export class XConsts{
     public static KFragmentFrameSpriteName:string[] = new Array<string> ( "s_card_quality_1","s_card_quality_1", "s_card_quality_2","s_card_quality_3","s_card_quality_4");
     public static KFragmentQualitySpriteName:string[] = new Array<string> ( "s_card_quality_0","s_card_quality_1", "s_card_quality_2","s_card_quality_3","s_card_quality_4");
     public static KFragmentBgSpriteName:string[] = new Array<string> ( "小卡框_品质普通背景", "小卡框_品质金背景");
-    public static KFragmentCampIcon:string[] = new Array<string> ( "无", "icon_camp1", "icon_camp2", "icon_camp3", "icon_camp4", "icon_camp5" );
+    public static KFragmentCampIcon:string[] = new Array<string> ( "无", "icon_hero_camp1", "icon_hero_camp2", "icon_hero_camp3", "icon_hero_camp4", "icon_hero_camp5" );
+    public static KFragmentClassesSpriteName:string[] = new Array<string> ( "无", "无","icon_hero_occupation1", "icon_hero_occupation2", "icon_hero_occupation3", "icon_hero_occupation4", "icon_hero_occupation5" );
     public static GetFragmentQualityByStar(star:number) {
         let idx:number = 0;
         if(star == 0)
