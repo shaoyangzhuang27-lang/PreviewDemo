@@ -5,7 +5,7 @@ import { PopMgr } from '../../control/PopMgr';
 import { XFuns } from '../../model/const/XFuns';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
 const { ccclass, property } = _decorator;
-import { ItemEquipType,ItemEquipCell } from '../menu/ItemEquipCell';
+import { EquipPropType,ElementEquipProp } from '../common/ElementEquipProp';
 
 @ccclass('PopItemReward')
 export class PopItemReward extends PopBase {
@@ -35,11 +35,11 @@ export class PopItemReward extends PopBase {
     private _initView()
     {
         this.lab_Count.string = "x" +  XFuns.FormatNumber(this._count).toString();
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_equipprop', (err:any,res:any)=>{
             let itemEquipCell = instantiate(res) as Node;
             this.iconCell.addChild(itemEquipCell);
-            let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
-            script.setItemType(this._itemData.id, 0, ItemEquipType.goods, (id:number,num:number,objType:number)=>{
+            let script = itemEquipCell.getComponent("ElementEquipProp") as ElementEquipProp;
+            script.setItemType(this._itemData.id, 0, EquipPropType.goods, (id:number,num:number,objType:number)=>{
                 this._itemEqipCallBack(id,num,objType)
             });
         })
@@ -47,7 +47,7 @@ export class PopItemReward extends PopBase {
 
     private _itemEqipCallBack(itemID:number,itemType:number,objType:number = 0)
     {
-        if(itemType == ItemEquipType.goods)
+        if(itemType == EquipPropType.goods)
         {
             // PopMgr.getInstance().popItemRewardView(itemID,1212542001);
             PopMgr.getInstance().popItemUseSellView(itemID,objType);

@@ -4,7 +4,7 @@ import { XConsts } from "../const/XConsts";
 import { BaseModel } from "./BaseModel";
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { TableName, ValueMgr } from "../ValueMgr";
-import { ItemEquipType } from '../../view/menu/ItemEquipCell';
+import { EquipPropType } from '../../view/common/ElementEquipProp';
 import { instantiate } from "cc";
 
 export class BagItemModel extends BaseModel{
@@ -69,6 +69,7 @@ export class BagItemModel extends BaseModel{
                 classesName : "",
                 bg : "",
                 param : 0,
+                occupation : "",
             }  
             let value = msg.fragmentList[key];
 
@@ -122,7 +123,8 @@ export class BagItemModel extends BaseModel{
                 // info.frame = "ui/common/icon/" +  XConsts.GetQualityBgByStar(heroInfo.star) + "/spriteFrame";
                 info.quality = "ui/comm/hero/" + XConsts.GetFragmentQualityByStar(heroInfo.star) + "/spriteFrame";
                 info.icon = "ui/common/hero/" + heroInfo.image + "/spriteFrame";
-                // info.camp = "ui/common/team/" + XConsts.KHeroCampIcon[heroInfo.camp] + "/spriteFrame";
+                info.camp = "ui/comm/hero/" + XConsts.KFragmentCampIcon[heroInfo.camp] + "/spriteFrame";
+                info.occupation = "ui/comm/hero/" + XConsts.KFragmentClassesSpriteName[heroInfo.classes] + "/spriteFrame";
                 info.star = heroInfo.star;
                 info.maxNum = XConsts.KFragmentNumRequired[info.star ? info.star : 1];
                 info.curNum = value.num ? value.num : 0;
@@ -282,12 +284,12 @@ export class BagItemModel extends BaseModel{
      */
     public getItemCountByKey(key: number, itemType: number): number {
         let count:number = 0;
-        if (itemType == ItemEquipType.goods) {
+        if (itemType == EquipPropType.goods) {
             if (this._bagItemList.has(key)) {
                 count = Number(this._bagItemList.get(key));
             }
         }
-        else if (itemType == ItemEquipType.equip) {
+        else if (itemType == EquipPropType.equip) {
             if (this._bagEquipList.has(key)) {
                 count = Number(this._bagEquipList.get(key));
             }
@@ -325,7 +327,7 @@ export class BagItemModel extends BaseModel{
             if (newCount != 0) {
                 this._bagItemList.set(key,newCount)
             }
-            NotifyMgr.getInstance().notify(NotifyMgr.event_equip_item_change,[ItemEquipType.goods,key]);
+            NotifyMgr.getInstance().notify(NotifyMgr.event_equip_item_change,[EquipPropType.goods,key]);
         }        
     }
 
@@ -345,13 +347,13 @@ export class BagItemModel extends BaseModel{
             else {
                 this._bagEquipList.delete(key)
             }
-             NotifyMgr.getInstance().notify(NotifyMgr.event_equip_item_change,[ItemEquipType.equip,key]);
+             NotifyMgr.getInstance().notify(NotifyMgr.event_equip_item_change,[EquipPropType.equip,key]);
             //  NotifyMgr.getInstance().notify(NotifyMgr.event_coin_diamond_level_change);
          }        
         else {
             if (count < 0) { //当卸下装备的时候，背包里面没有该装备的时候，加一个出来 
                 this._bagEquipList.set(key, -count)
-                NotifyMgr.getInstance().notify(NotifyMgr.event_equip_item_change, [ItemEquipType.equip, key]);
+                NotifyMgr.getInstance().notify(NotifyMgr.event_equip_item_change, [EquipPropType.equip, key]);
      }
         }
     }

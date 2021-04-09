@@ -6,7 +6,7 @@ import { NotifyMgr } from '../../../control/NotifyMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
 import { XConsts } from '../../../model/const/XConsts';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
-import { ItemEquipCell, ItemEquipType } from '../../menu/ItemEquipCell';
+import { ElementEquipProp, EquipPropType } from '../../common/ElementEquipProp';
 import { ResMgr } from '../../../control/ResMgr';
 
 const { ccclass, property } = _decorator;
@@ -17,8 +17,8 @@ export class PopHeroEquipReplace extends PopBase {
     @property({ type: Label })
     public lab_title: Label | null = null;
 
-    @property({ type: ItemEquipCell })
-    public itemequip_cell_drag: ItemEquipCell = null as unknown as ItemEquipCell; //穿戴装备（当前穿戴的装备）
+    @property({ type: ElementEquipProp })
+    public itemequip_cell_drag: ElementEquipProp = null as unknown as ElementEquipProp; //穿戴装备（当前穿戴的装备）
 
     @property({ type: Node })
     public node_equip_drag: Node = null as unknown as Node; //拖装备Node（穿戴的装备）
@@ -36,8 +36,8 @@ export class PopHeroEquipReplace extends PopBase {
     public node_suit_drag: Node = null as unknown as Node; //穿戴装备套装属性Node
 
 
-    @property({ type: ItemEquipCell })
-    public itemequip_cell_wear: ItemEquipCell = null as unknown as ItemEquipCell; //替换的装备（当前要替换的的装备）
+    @property({ type: ElementEquipProp })
+    public itemequip_cell_wear: ElementEquipProp = null as unknown as ElementEquipProp; //替换的装备（当前要替换的的装备）
 
     @property({ type: Node })
     public node_equip_wear: Node = null as unknown as Node; //替换装备Node
@@ -180,12 +180,12 @@ export class PopHeroEquipReplace extends PopBase {
             }
         });
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err, res) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_equipprop', (err, res) => {
             for (var i = 0; i < curlocationEquipData.length; i++) {
                 let equip_item = instantiate(res as Prefab) as Node;
                 this.scroll_equip.content?.addChild(equip_item);
                 let equipData = curlocationEquipData[i];
-                equip_item.getComponent(ItemEquipCell)?.setItemType(equipData.id, 0, ItemEquipType.equip, (id: number, itemClickType: number, objClickType: number) => {
+                equip_item.getComponent(ElementEquipProp)?.setItemType(equipData.id, 0, EquipPropType.equip, (id: number, itemClickType: number, objClickType: number) => {
                     console.log(" 当前点击的背包装备ID=>", id);
                     this._refreshReplaceEquip(id)
                 });
@@ -245,7 +245,7 @@ export class PopHeroEquipReplace extends PopBase {
         var suitID = equipData.quality * 100 + equipData.star;
         if (suitID != 0) {
             this.itemequip_cell_drag.node.active = true;
-            this.itemequip_cell_drag.setItemType(equipData.id, 0, ItemEquipType.equip, null);
+            this.itemequip_cell_drag.setItemType(equipData.id, 0, EquipPropType.equip, null);
 
             let suitEquipData = ValueMgr.getInstance().getItemByField(TableName.suit, suitID) as Config.suit.Record;
             if (!suitEquipData) {
@@ -326,7 +326,7 @@ export class PopHeroEquipReplace extends PopBase {
             let nameData = ValueMgr.getInstance().getItemByField(TableName.language_data, equipData.name) as Config.language_data.Record;
             this.equip_name_wear.string = nameData.cn;
             this.equip_name_wear.color = XConsts.KQualityColor[equipData.quality];
-            this.itemequip_cell_wear.setItemType(equipData.id, 0, ItemEquipType.equip, null);
+            this.itemequip_cell_wear.setItemType(equipData.id, 0, EquipPropType.equip, null);
             var suitID = equipData.quality * 100 + equipData.star;
             if (suitID != 0) {
                 let suitEquipData = ValueMgr.getInstance().getItemByField(TableName.suit, suitID) as Config.suit.Record;

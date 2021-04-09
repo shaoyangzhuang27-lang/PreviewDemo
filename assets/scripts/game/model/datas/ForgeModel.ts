@@ -12,7 +12,7 @@ import { XConsts } from "../const/XConsts";
 import { BaseModel } from "./BaseModel";
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { TableName, ValueMgr } from "../ValueMgr";
-import { ItemEquipType } from '../../view/menu/ItemEquipCell';
+import { EquipPropType } from '../../view/common/ElementEquipProp';
 import { math } from "cc";
 
 // 合成所需要的的材料个数 在cs中是从 UniLua 配置中读取 KEquipComposeMaterialNum 数据

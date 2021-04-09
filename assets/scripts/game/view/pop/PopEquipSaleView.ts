@@ -5,7 +5,7 @@ import { MsgMgr } from '../../control/MsgMgr';
 import { PopMgr } from '../../control/PopMgr';
 import { GameModel } from '../../model/GameModel';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
-import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
+import { ElementEquipProp, EquipPropType } from '../common/ElementEquipProp';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopEquipSaleView')
@@ -55,7 +55,7 @@ export class PopEquipSaleView extends PopBase {
     public setEquipSaleType(id:number)
     {
         this._equipId = id;
-        this._maxCount = GameModel.getInstance().getBagModel().getItemCountByKey(this._equipId,ItemEquipType.equip);
+        this._maxCount = GameModel.getInstance().getBagModel().getItemCountByKey(this._equipId,EquipPropType.equip);
         this._selectCount = this._maxCount;
         this._equipData = ValueMgr.getInstance().getItemByField(TableName.equip,this._equipId) as Config.equip.Record;
         
@@ -70,11 +70,11 @@ export class PopEquipSaleView extends PopBase {
         this.lab_gold.string = (this._equipData.price * this._selectCount).toString();
         this.itemEditNode.string = this._selectCount.toString();
 
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_equipprop', (err:any,res:any)=>{
             let itemEquipCell = instantiate(res) as Node;
             this.iconNode.addChild(itemEquipCell);
-            let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
-            script.setItemType(this._equipId, 0, ItemEquipType.equip, null);
+            let script = itemEquipCell.getComponent("ElementEquipProp") as ElementEquipProp;
+            script.setItemType(this._equipId, 0, EquipPropType.equip, null);
         })
     }
 

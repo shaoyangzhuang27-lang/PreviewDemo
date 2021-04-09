@@ -4,7 +4,7 @@ import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { GameModel } from '../../../model/GameModel';
 import { ElementPubHeroIcon } from './ElementPubHeroIcon';
 import { ElementHeroIcon } from '../../common/ElementHeroIcon';
-import { ItemEquipType,ItemEquipCell } from '../../menu/ItemEquipCell';
+import { EquipPropType,ElementEquipProp } from '../../common/ElementEquipProp';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopPubWonderSummonSettle')
@@ -121,7 +121,8 @@ export class PopPubWonderSummonSettle extends Component {
                 campName : "",
                 classesName : "",
                 bg : "",
-                param : 0
+                param : 0,
+                occupation : "",
             }  
             info.type = data.param1; // Msg.TFragmentType.EFragmentType_Random;
             info.star = data.param3; //5
@@ -150,17 +151,17 @@ export class PopPubWonderSummonSettle extends Component {
 
     public initEquipIconInfo(data : any,node :Node)
     {
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_equipprop', (err:any,res:any)=>{
             let equipItem = instantiate(res); 
             // equipItem.setScale(0.4,0.4,1)
             let id = data.param1; 
             let num = data.num;
             // 设置装备点击回调
-            let script = equipItem.getComponent("ItemEquipCell") as ItemEquipCell;
-            script.setItemType(id, num, ItemEquipType.equip, 
+            let script = equipItem.getComponent("ElementEquipProp") as ElementEquipProp;
+            script.setItemType(id, num, EquipPropType.equip, 
                 ()=>{
                     console.log("装备")
-                    // PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.equip,false);
+                    // PopMgr.getInstance().popItemUseSellView(id,EquipPropType.equip,false);
             });  
             node.addChild(equipItem);
         })    
@@ -168,17 +169,17 @@ export class PopPubWonderSummonSettle extends Component {
 
     public initMagicDust(data : any, node : Node)
     {
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_equipprop', (err:any,res:any)=>{
             let equipItem = instantiate(res); 
             // equipItem.setScale(0.4,0.4,1)
             let id = Msg.TObjectType.EObject_MagicDust; //data.awardParam1; 
             let num = data.num;
             // 设置装备点击回调
-            let script = equipItem.getComponent("ItemEquipCell") as ItemEquipCell;
-            script.setItemType(id, num, ItemEquipType.goods, 
+            let script = equipItem.getComponent("ElementEquipProp") as ElementEquipProp;
+            script.setItemType(id, num, EquipPropType.goods, 
                 ()=>{
                     console.log("道具", Msg.TObjectType.EObject_MagicDust)
-                    // PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
+                    // PopMgr.getInstance().popItemUseSellView(id,EquipPropType.goods,false);
             });  
             node.addChild(equipItem);
         }) 
@@ -186,17 +187,17 @@ export class PopPubWonderSummonSettle extends Component {
 
     public initAdvanceExp(data : any, node : Node)
     {
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_equipprop', (err:any,res:any)=>{
             let equipItem = instantiate(res); 
             // equipItem.setScale(0.4,0.4,1)
             let id = Msg.TObjectType.EObject_AdvanceExp; //data.awardParam1; 
             let num = data.num;
             // 设置装备点击回调
-            let script = equipItem.getComponent("ItemEquipCell") as ItemEquipCell;
-            script.setItemType(id, num, ItemEquipType.goods, 
+            let script = equipItem.getComponent("ElementEquipProp") as ElementEquipProp;
+            script.setItemType(id, num, EquipPropType.goods, 
                 ()=>{
                     console.log("道具",Msg.TObjectType.EObject_AdvanceExp)
-                    //PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
+                    //PopMgr.getInstance().popItemUseSellView(id,EquipPropType.goods,false);
             });  
             node.addChild(equipItem);
         }) 
@@ -205,17 +206,17 @@ export class PopPubWonderSummonSettle extends Component {
 
     public initUsableItem(data : any, node : Node)
     {
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_equipprop', (err:any,res:any)=>{
             let equipItem = instantiate(res); 
             // equipItem.setScale(0.4,0.4,1)
             let id = data.param1; 
             let num = data.num;
             // 设置装备点击回调
-            let script = equipItem.getComponent("ItemEquipCell") as ItemEquipCell;
-            script.setItemType(id, num, ItemEquipType.goods, 
+            let script = equipItem.getComponent("ElementEquipProp") as ElementEquipProp;
+            script.setItemType(id, num, EquipPropType.goods, 
                 ()=>{
                     console.log("道具")
-                    //PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
+                    //PopMgr.getInstance().popItemUseSellView(id,EquipPropType.goods,false);
             });  
             node.addChild(equipItem);
         }) 

@@ -13,7 +13,7 @@ import { MsgMgr } from '../../control/MsgMgr';
 import { XConsts } from '../../model/const/XConsts';
 import { XFuns } from '../../model/const/XFuns';
 import { GameModel } from '../../model/GameModel';
-import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
+import { ElementEquipProp, EquipPropType } from '../common/ElementEquipProp';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopQuickCompose')
@@ -60,14 +60,14 @@ export class PopQuickCompose extends PopBase {
             element?.destroy()
         });
 
-        resources.load('prefabs_ui/main/itemequip_cell', (err: any, res: any) => {
+        resources.load('prefabs_ui/common/element_equipprop', (err: any, res: any) => {
             for (let [id, count] of composeMap){
                 let itemEquipCell = instantiate(res) as Node;
                 itemEquipCell.parent = this.layoutEquip
                 itemEquipCell.name = "equipCell" + id
                 // 设置装备点击回调
-                let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
-                script.setItemType(id, count, ItemEquipType.equip,
+                let script = itemEquipCell.getComponent("ElementEquipProp") as ElementEquipProp;
+                script.setItemType(id, count, EquipPropType.equip,
                     (id: number, itemType: number, obType: number) => {
                         console.log("点击装备回调，设置选中装备")
                     });

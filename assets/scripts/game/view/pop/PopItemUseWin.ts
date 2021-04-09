@@ -1,7 +1,7 @@
 
 import { _decorator, Component, Node, Label, instantiate, resources, EditBox, } from 'cc';
 const { ccclass, property } = _decorator;
-import { ItemEquipCell, ItemEquipType } from '../menu/ItemEquipCell';
+import { ElementEquipProp, EquipPropType } from '../common/ElementEquipProp';
 import { PopBase } from '../../../core/control/PopBase';
 import { MsgMgr } from '../../control/MsgMgr';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
@@ -61,7 +61,7 @@ export class PopItemUseWin extends PopBase {
         this._itemID = id;
         this._visit = isVisit;
         this._objectType = type;
-        this._maxCount = GameModel.getInstance().getBagModel().getItemCountByKey(this._itemID,ItemEquipType.goods);
+        this._maxCount = GameModel.getInstance().getBagModel().getItemCountByKey(this._itemID,EquipPropType.goods);
         this._useCount = this._maxCount;
         
         this._init();
@@ -125,12 +125,12 @@ export class PopItemUseWin extends PopBase {
         
         
 
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_equipprop', (err:any,res:any)=>{
             let itemEquipCell = instantiate(res) as Node;
             this.iconNode.addChild(itemEquipCell);
-            let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
+            let script = itemEquipCell.getComponent("ElementEquipProp") as ElementEquipProp;
             script.setItemUseType(this._objectType);
-            script.setItemType(this._itemID, 0, ItemEquipType.goods, null);
+            script.setItemType(this._itemID, 0, EquipPropType.goods, null);
         })
     }
 
