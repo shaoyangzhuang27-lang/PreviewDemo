@@ -2543,6 +2543,7 @@
       "__id__": 1
     },
     "_enabled": true,
+    "__prefab": null,
     "img_bg": {
       "__id__": 2
     },
@@ -2567,6 +2568,9 @@
     "img_point": {
       "__id__": 41
     },
+    "img_occupation": {
+      "__id__": 53
+    },
     "starlist": [
       {
         "__id__": 72
@@ -2584,7 +2588,7 @@
         "__id__": 60
       }
     ],
-    "_id": "4enLJxvzpCsJ0iKo9focO/"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

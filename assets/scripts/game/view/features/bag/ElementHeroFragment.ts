@@ -40,6 +40,9 @@ export class ElementHeroFragment extends Component {
     public img_point:Node = null as unknown as Node;
 
     @property({type :  Node})
+    public img_occupation:Node = null as unknown as Node;
+
+    @property({type :  Node})
     public starlist:Node[] = [];
 
 
@@ -112,6 +115,7 @@ export class ElementHeroFragment extends Component {
     {
         this._fragmentInfo = instantiate(info);  
         this.img_camp.active = false; 
+        this.img_occupation.active = false;
         console.log("vvvvvvvvvvvvv",this._fragmentInfo);
         Object.keys(this._fragmentInfo).forEach((val, idx, array) => {
             // val: 当前值
@@ -119,10 +123,11 @@ export class ElementHeroFragment extends Component {
             // array: Array
 
             val == "icon" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_icon);
-            val == "frame" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.btn_frame);
+            // val == "frame" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.btn_frame);
             val == "camp" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_camp);
             val == "quality" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_debris);
             val == "bg" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_bg);
+            val =="occupation"&& this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_occupation);
             
         });
 
