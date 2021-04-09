@@ -251,7 +251,7 @@ export class ElementHeroIcon extends Component {
         this._wonderHeartHeroId = id;
         let info = GameModel.getInstance().getHeroesModel().getHeroIconInfoByHeroId(id);
         this.img_camp.active = true;
-        let campIconPath:string = "ui/common/team/" + info.camp + "/spriteFrame";
+        let campIconPath:string = "ui/comm/hero/" + info.camp + "/spriteFrame";
         // ResMgr.getInstance().loadSpriteFrame(campIconPath, (err: Error | null, spriteFrame: SpriteFrame | null) =>
         // {
         //     if(!err)
