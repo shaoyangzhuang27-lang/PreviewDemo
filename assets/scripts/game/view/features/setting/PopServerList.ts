@@ -1,20 +1,22 @@
 
 import { Button, Color, game, instantiate, Prefab, resources, Size, Sprite, SpriteFrame } from 'cc';
 import { _decorator, Node, EventHandler, ToggleContainer, UITransform, Label } from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { MsgGame } from '../../control/msg/MsgGame';
-import { MsgLogin } from '../../control/msg/MsgLogin';
-import { MsgMgr } from '../../control/MsgMgr';
-import { PopMgr } from '../../control/PopMgr';
-import { ResMgr } from '../../control/ResMgr';
-import { DataMgr } from '../../model/DataMgr';
-import { GameModel } from '../../model/GameModel';
-import { AvatarNode } from '../menu/AvatarNode';
+import { PopBase } from '../../../../core/control/PopBase';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { PopMgr } from '../../../control/PopMgr';
+import { ResMgr } from '../../../control/ResMgr';
+import { DataMgr } from '../../../model/DataMgr';
+import { GameModel } from '../../../model/GameModel';
+import { AvatarNode } from '../../menu/AvatarNode';
+
 
 const { ccclass, property } = _decorator;
 
-@ccclass('PopServerListView')
-export class PopServerListView extends PopBase {
+@ccclass('PopServerList')
+export class PopServerList extends PopBase {
+
+    @property({ type:Label, displayName:"标题" })
+    public lab_title:Label = null as unknown as Label
 
     @property({ type:Node, displayName:"滚动内容节点" })
     public content:Node = null as unknown as Node
@@ -32,8 +34,8 @@ export class PopServerListView extends PopBase {
         super.onDestroy()
     }
 
-    public setData() {
-        ResMgr.getInstance().loadPrefab("prefabs_ui/main/server_item", (err:any, res:Prefab | null)=>{
+    public loadData() {
+        ResMgr.getInstance().loadPrefab("prefabs_ui/features/setting/cell_server", (err:any, res:Prefab | null)=>{
             this.item_res = res as Prefab
             
             this._initServerScrollView()

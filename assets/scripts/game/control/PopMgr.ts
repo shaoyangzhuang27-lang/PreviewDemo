@@ -36,8 +36,8 @@ import { TipShareHeroToChat } from '../view/features/heropromotion/TipShareHeroT
 import { PopPlayerLevelUpAward } from '../view/pop/PopPlayerLevelUpAward';
 import {PopPubWonderRewardList} from "../view/features/pub/PopPubWonderRewardList";
 import { ResMgr } from './ResMgr';
-import { PopSettingView } from '../view/pop/PopSettingView';
-import { PopServerListView } from '../view/pop/PopServerListView';
+import { PopSetting } from '../view/features/setting/PopSetting';
+import { PopServerList } from '../view/features/setting/PopServerList';
 import { PopfHeroPromotion } from '../view/features/heropromotion/PopfHeroPromotion';
 import { PopBattleTeam } from '../view/pop/PopBattleTeam';
 import {PopPubWonderHeartHero} from "../view/features/pub/PopPubWonderHeartHero";
@@ -99,25 +99,27 @@ export class PopMgr extends PopCore  {
 
     //弹出角色信息设置界面
     public popSettingView() {
-        resources.load('prefabs_ui/pop/pop_setting', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/setting/pop_setting', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
-            let script = p.getComponent("PopSettingView") as PopSettingView;
+            let script = p.getComponent("PopSetting") as PopSetting;
             script.setIsMaskClose(false);
+
+            // script.loadData()
         } );
     }
 
     //弹出服务器选择窗口
     public popServerListView() {
-        resources.load('prefabs_ui/pop/pop_serverlist', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/setting/pop_serverlist', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
-            let script = p.getComponent("PopServerListView") as PopServerListView;
+            let script = p.getComponent("PopServerList") as PopServerList;
             script.setIsMaskClose(false);
 
-            script.setData()
+            script.loadData()
         } );
     }
 
