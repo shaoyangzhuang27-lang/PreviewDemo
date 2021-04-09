@@ -119,12 +119,12 @@ export class PopSetting extends PopBase {
         this.lab_title.string = "角色信息"
 
         //默认显示信息
-        this._showSetView()
+        this._showInfoView()
 
         tween(this.node)
             .delay(0.01)
             .call(()=>{
-                this.loadData()
+                this._loadData()
             })
             .start()
     }
@@ -132,7 +132,7 @@ export class PopSetting extends PopBase {
         super.onDestroy()
     }
 
-    public loadData(){
+    public _loadData(){
         //赋值信息显示
         let playerInfo = GameModel.getInstance().getPlayerModel().getPlayerInfo()
 
@@ -273,36 +273,36 @@ export class PopSetting extends PopBase {
         }
     }
     private _onClick_quality(toggle:ToggleComponent){
-        if (toggle == this.toggle_max) {
-            console.log("点击 画质高" && toggle.isChecked)
+        if (toggle == this.toggle_max && toggle.isChecked) {
+            console.log("点击 画质高")
             
             localStorage.setItem("set_quality","max")
         }
-        else if (toggle == this.toggle_min) {
-            console.log("点击 画质低" && toggle.isChecked)
+        else if (toggle == this.toggle_min && toggle.isChecked) {
+            console.log("点击 画质低")
             
             localStorage.setItem("set_quality","min")
         }
     }
     private _onClick_handle(toggle:ToggleComponent){
-        if (toggle == this.toggle_left) {
+        if (toggle == this.toggle_left && toggle.isChecked) {
             console.log("点击 左边操作")
             
             localStorage.setItem("set_handle","left")
         }
-        else if (toggle == this.toggle_right) {
+        else if (toggle == this.toggle_right && toggle.isChecked) {
             console.log("点击 右边操作")
             
             localStorage.setItem("set_handle","right")
         }
     }
     private _onClick_camera(toggle:ToggleComponent){
-        if (toggle == this.toggle_static) {
+        if (toggle == this.toggle_static && toggle.isChecked) {
             console.log("点击 固定镜头")
             
             localStorage.setItem("set_camera","static")
         }
-        else if (toggle == this.toggle_move) {
+        else if (toggle == this.toggle_move && toggle.isChecked) {
             console.log("点击 跟随镜头")
             
             localStorage.setItem("set_camera","move")

@@ -1,5 +1,5 @@
 
-import { Button, Color, game, instantiate, Prefab, resources, Size, Sprite, SpriteFrame } from 'cc';
+import { Button, Color, game, instantiate, Prefab, resources, Size, Sprite, SpriteFrame, tween } from 'cc';
 import { _decorator, Node, EventHandler, ToggleContainer, UITransform, Label } from 'cc';
 import { PopBase } from '../../../../core/control/PopBase';
 import { MsgMgr } from '../../../control/MsgMgr';
@@ -21,20 +21,40 @@ export class PopServerList extends PopBase {
     @property({ type:Node, displayName:"滚动内容节点" })
     public content:Node = null as unknown as Node
 
+    @property({ type:Button, displayName:"确定按钮" })
+    public btn_sure:Button = null as unknown as Button
+
     //单项子节点预制体资源
     private item_res:Prefab = null as unknown as Prefab
 
+    //当前服务器id
+    private _curSelectServerID:number = 0
+    private _curAtServerID:number = 0
+
     onLoad() {
         super.onLoad()
+
+        //顶部标题
+        this.lab_title.string = "选择服务器"
+
+        //绑定事件
+        this.btn_sure.node.on(Button.EventType.CLICK, this._onClick_sure, this)
     }
     start () {
         super.start()
+
+        tween(this.node)
+            .delay(0.01)
+            .call(()=>{
+                this._loadData()
+            })
+            .start()
     }
-    onDestroy(){
+    onDestroy() {
         super.onDestroy()
     }
 
-    public loadData() {
+    public _loadData() {
         ResMgr.getInstance().loadPrefab("prefabs_ui/features/setting/cell_server", (err:any, res:Prefab | null)=>{
             this.item_res = res as Prefab
             
@@ -42,46 +62,70 @@ export class PopServerList extends PopBase {
         })
     }
 
+    private _onClick_sure(button:Button) {
+        if (this._curSelectServerID == this._curAtServerID) {
+            return
+        }
+        //弹窗确认
+        PopMgr.getInstance().popupSimpleWindow("注意","不同服务器之间角色数据不互通，是否确定切换？",()=>{
+            console.log("确认切换服务器 serverID=",this._curSelectServerID)
+
+            PopMgr.getInstance().deleteWindow()
+			MsgMgr.getInstance().getMsgLogin().requestChangeServer(this._curSelectServerID);
+        })
+    }
+
     //服务器列表
     private _initServerScrollView() {
         //最大服务器id 从1开始的
         let maxServerID = DataMgr.getInstance().getGameConfig()?.maxServerID as number
+        // console.log("maxServerID????????????????????",maxServerID)
 
         //当前所在服务器id
-        let curServerID = GameModel.getInstance().getPlayerModel().getPlayerInfo().serverID
-
-        //所有觉得信息
-        let allPlayerList = GameModel.getInstance().getSystemModel().getAllPlayerData()
-
-        console.log("maxServerID????????????????????",maxServerID)
+        this._curAtServerID = GameModel.getInstance().getPlayerModel().getPlayerInfo().serverID
+        this._curSelectServerID = this._curAtServerID
 
         for (let serverID = 1; serverID <= maxServerID; serverID++) {
-            let isCurServer = serverID == curServerID
-            let itemNode = this._createScrollItem(serverID, isCurServer)
+            let itemNode = this._createScrollItem(serverID)
             this.content?.addChild(itemNode)
+        }
+        this._highLightCell()
+    }
+
+    //高亮处理
+    private _highLightCell() {
+        let allCell = this.content.children
+        for (let index = 0; index < allCell.length; index++) {
+            const cell_item = allCell[index];
+            let serverID = Number(cell_item.name)
+            
+            //高亮底图
+            if (serverID == this._curSelectServerID) {
+                ResMgr.getInstance().loadSpriteFrame("ui/features/setting/bnt_biaoqianye_xuanzhong/spriteFrame", (err:any, spriteFrame:SpriteFrame | null)=>{
+                    if (!err && cell_item) {
+                        let spr = cell_item.getComponent(Sprite) as Sprite
+                        spr.spriteFrame = spriteFrame
+                    }
+                });
+            }
+            else {
+                ResMgr.getInstance().loadSpriteFrame("ui/features/setting/bnt_biaoqianye_weixuanzhong/spriteFrame", (err:any, spriteFrame:SpriteFrame | null)=>{
+                    if (!err && cell_item) {
+                        let spr = cell_item.getComponent(Sprite) as Sprite
+                        spr.spriteFrame = spriteFrame
+                    }
+                });
+            }
         }
     }
 
     //服务器cell
-    private _createScrollItem(serverID:number, isCurServer:boolean) {
+    private _createScrollItem(serverID:number) {
         let cell_item = instantiate( this.item_res as Prefab ) as Node
 
-        //高亮底图
-        if (isCurServer) {
-            ResMgr.getInstance().loadSpriteFrame("ui/common/halo/高亮底/spriteFrame", (err:any, spriteFrame:SpriteFrame | null)=>{
-                if (!err && cell_item) {
-                    let spr = cell_item.getComponent(Sprite) as Sprite
-                    spr.spriteFrame = spriteFrame
-                }
-            });
-        }
-        else {
-            //不是当前所在服务器 添加点击事件
-            cell_item.name = serverID.toString()
-            cell_item.on(Button.EventType.CLICK, this._onClick_server, this)
-        }
-
-        
+        //添加点击事件
+        cell_item.name = serverID.toString()
+        cell_item.on(Button.EventType.CLICK, this._onClick_server, this)
         
         //服务器名字：
         let serverName = "S"
@@ -131,13 +175,9 @@ export class PopServerList extends PopBase {
     private _onClick_server(button:Button){
         console.log("点击 服务器 id=",button.node.name)
         let serverID = Number(button.node.name)
-        //弹窗确认
-        PopMgr.getInstance().popupSimpleWindow("注意","不同服务器之间角色数据不互通，是否确定切换？",()=>{
-            console.log("确认切换服务器 serverID=",serverID)
 
-            PopMgr.getInstance().deleteWindow()
-			MsgMgr.getInstance().getMsgLogin().requestChangeServer(serverID);
-            // MsgMgr.getInstance().getMsgLogin().chenageServer(serverID)
-        })
+        this._curSelectServerID = serverID
+
+        this._highLightCell()
     }
 }

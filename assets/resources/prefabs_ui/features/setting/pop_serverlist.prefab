@@ -36,7 +36,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 88
+      "__id__": 87
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -863,10 +863,10 @@
     "_startAxis": 0,
     "_paddingLeft": 0,
     "_paddingRight": 0,
-    "_paddingTop": 5,
-    "_paddingBottom": 5,
+    "_paddingTop": 10,
+    "_paddingBottom": 10,
     "_spacingX": 0,
-    "_spacingY": 5,
+    "_spacingY": 10,
     "_verticalDirection": 1,
     "_horizontalDirection": 0,
     "_constraint": 0,
@@ -1107,7 +1107,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Button",
+    "_name": "btn_sure",
     "_objFlags": 0,
     "_parent": {
       "__id__": 14
@@ -1135,7 +1135,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": -345,
       "z": 0
     },
     "_lrot": {
@@ -1183,7 +1183,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 6,
       "z": 0
     },
     "_lrot": {
@@ -1253,22 +1253,24 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
+      "r": 9,
+      "g": 111,
+      "b": 50,
       "a": 255
     },
-    "_string": "button",
+    "_string": "确定",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 20,
-    "_fontSize": 20,
+    "_actualFontSize": 40,
+    "_fontSize": 40,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
     "_overflow": 1,
     "_enableWrapText": false,
-    "_font": null,
-    "_isSystemFontUsed": true,
+    "_font": {
+      "__uuid__": "a1bef9c3-f2e1-46c9-b6bf-5e3c19e6eddb"
+    },
+    "_isSystemFontUsed": false,
     "_isItalic": false,
     "_isBold": false,
     "_isUnderline": false,
@@ -1304,8 +1306,8 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 40
+      "width": 240,
+      "height": 106
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1341,7 +1343,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "20835ba4-6145-4fbc-a58a-051ce700aa3e@f9941"
+      "__uuid__": "bcaa4cf7-b432-42e3-839c-5c043b85bd05@f9941"
     },
     "_type": 1,
     "_fillType": 0,
@@ -1375,7 +1377,7 @@
     },
     "clickEvents": [],
     "_interactable": true,
-    "_transition": 2,
+    "_transition": 3,
     "_normalColor": {
       "__type__": "cc.Color",
       "r": 214,
@@ -1405,16 +1407,12 @@
       "a": 255
     },
     "_normalSprite": {
-      "__uuid__": "20835ba4-6145-4fbc-a58a-051ce700aa3e@f9941"
+      "__uuid__": "bcaa4cf7-b432-42e3-839c-5c043b85bd05@f9941"
     },
-    "_hoverSprite": {
-      "__uuid__": "20835ba4-6145-4fbc-a58a-051ce700aa3e@f9941"
-    },
-    "_pressedSprite": {
-      "__uuid__": "544e49d6-3f05-4fa8-9a9e-091f98fc2ce8@f9941"
-    },
+    "_hoverSprite": null,
+    "_pressedSprite": null,
     "_disabledSprite": {
-      "__uuid__": "951249e0-9f16-456d-8b85-a6ca954da16b@f9941"
+      "__uuid__": "89d32309-cd89-4388-a964-cd959cd76c20@f9941"
     },
     "_duration": 0.1,
     "_zoomScale": 1.2,
@@ -1636,9 +1634,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "__prefab": {
-      "__id__": 87
-    },
+    "__prefab": null,
     "btn_close": null,
     "btn_cancel": null,
     "window": {
@@ -1651,11 +1647,10 @@
     "content": {
       "__id__": 39
     },
+    "btn_sure": {
+      "__id__": 70
+    },
     "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "ffUezVXxtOEIeLT6mYm5TS"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1668,13 +1663,13 @@
     "fileId": "caHj1ZL55BiqlPCGdaOPLc",
     "targetOverrides": [
       {
-        "__id__": 89
+        "__id__": 88
       },
       {
-        "__id__": 91
+        "__id__": 90
       },
       {
-        "__id__": 93
+        "__id__": 92
       }
     ]
   },
@@ -1691,7 +1686,7 @@
       "__id__": 15
     },
     "targetInfo": {
-      "__id__": 90
+      "__id__": 89
     }
   },
   {
@@ -1713,7 +1708,7 @@
       "__id__": 15
     },
     "targetInfo": {
-      "__id__": 92
+      "__id__": 91
     }
   },
   {
@@ -1735,7 +1730,7 @@
       "__id__": 15
     },
     "targetInfo": {
-      "__id__": 94
+      "__id__": 93
     }
   },
   {

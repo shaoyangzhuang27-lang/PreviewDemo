@@ -105,8 +105,6 @@ export class PopMgr extends PopCore  {
 
             let script = p.getComponent("PopSetting") as PopSetting;
             script.setIsMaskClose(false);
-
-            // script.loadData()
         } );
     }
 
@@ -118,8 +116,6 @@ export class PopMgr extends PopCore  {
 
             let script = p.getComponent("PopServerList") as PopServerList;
             script.setIsMaskClose(false);
-
-            script.loadData()
         } );
     }
 
