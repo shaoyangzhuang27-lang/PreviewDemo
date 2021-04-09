@@ -90,7 +90,7 @@ export class BagItemModel extends BaseModel{
                 //param 阵营  star 星级
                 //阵营英雄
                 info.type = value.fragmentType;
-                info.camp = "ui/common/team/" + XConsts.KHeroCampIcon[value.param ? value.param : 1] + "/spriteFrame";
+                info.icon = "ui/comm/hero/" + XConsts.KFragmentCampIcon[value.param ? value.param : 1] + "/spriteFrame";
                 info.star = value.star;
                 info.maxNum = XConsts.KFragmentNumRequired[value.star ? value.star : 1];
                 info.curNum = value.num ? value.num : 0;
@@ -102,8 +102,8 @@ export class BagItemModel extends BaseModel{
                 //param 职业   star 星级
                 //传奇英雄
                 info.type = value.fragmentType;
-                info.frame = "ui/common/icon/" + XConsts.KFragmentFrameSpriteName[1] + "/spriteFrame";
-                info.quality = "ui/common/icon/" + XConsts.KFragmentQualitySpriteName[1] + "/spriteFrame";
+                // info.frame = "ui/common/icon/" + XConsts.KFragmentFrameSpriteName[1] + "/spriteFrame";
+                info.quality = "ui/comm/hero/" + XConsts.KFragmentQualitySpriteName[4] + "/spriteFrame";
 
                 info.star = value.star;
                 info.maxNum = XConsts.KFragmentNumRequired[value.star ? value.star : 1];
@@ -119,10 +119,10 @@ export class BagItemModel extends BaseModel{
                 info.type = value.fragmentType;
 
                 let heroInfo = ValueMgr.getInstance().getItemByField(TableName.heroes, value.param ? value.param : 5051402) as Config.heroes.Record;
-                info.frame = "ui/common/icon/" +  XConsts.GetQualityBgByStar(heroInfo.star) + "/spriteFrame";
-                info.quality = "ui/common/icon/" + XConsts.KFragmentQualitySpriteName[1] + "/spriteFrame";
+                // info.frame = "ui/common/icon/" +  XConsts.GetQualityBgByStar(heroInfo.star) + "/spriteFrame";
+                info.quality = "ui/comm/hero/" + XConsts.GetFragmentQualityByStar(heroInfo.star) + "/spriteFrame";
                 info.icon = "ui/common/hero/" + heroInfo.image + "/spriteFrame";
-                info.camp = "ui/common/team/" + XConsts.KHeroCampIcon[heroInfo.camp] + "/spriteFrame";
+                // info.camp = "ui/common/team/" + XConsts.KHeroCampIcon[heroInfo.camp] + "/spriteFrame";
                 info.star = heroInfo.star;
                 info.maxNum = XConsts.KFragmentNumRequired[info.star ? info.star : 1];
                 info.curNum = value.num ? value.num : 0;

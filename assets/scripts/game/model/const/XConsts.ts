@@ -359,9 +359,24 @@ export class XConsts{
 
     //星级合成消耗碎片
     public static KFragmentNumRequired : number[] = new Array<number> (0,5,10,20,30,50);
-    public static KFragmentFrameSpriteName:string[] = new Array<string> ( "小卡框_品质随机", "小卡框_品质橙");
-    public static KFragmentQualitySpriteName:string[] = new Array<string> ( "小卡框_碎片品质随机", "小卡框_碎片品质橙");
+    public static KFragmentFrameSpriteName:string[] = new Array<string> ( "s_card_quality_1","s_card_quality_1", "s_card_quality_2","s_card_quality_3","s_card_quality_4");
+    public static KFragmentQualitySpriteName:string[] = new Array<string> ( "s_card_quality_0","s_card_quality_1", "s_card_quality_2","s_card_quality_3","s_card_quality_4");
     public static KFragmentBgSpriteName:string[] = new Array<string> ( "小卡框_品质普通背景", "小卡框_品质金背景");
+    public static KFragmentCampIcon:string[] = new Array<string> ( "无", "icon_camp1", "icon_camp2", "icon_camp3", "icon_camp4", "icon_camp5" );
+    public static GetFragmentQualityByStar(star:number) {
+        let idx:number = 0;
+        if(star == 0)
+            idx = 0;
+        else if (star < 3)
+            idx = 1;
+        else if (star < 5)
+            idx = 2;
+        else if (star < 8)
+            idx = 3;
+        else 
+            idx = 4;
+        return XConsts.KFragmentQualitySpriteName[idx];
+    }
     //英雄置换消耗
     public static KClassesExchangeMiracleShard : number[] = new Array<number>(0, 0, 5, 20, 100, 500, 2000, 5000, 10000);
 
