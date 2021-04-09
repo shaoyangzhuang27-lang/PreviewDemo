@@ -1,0 +1,45 @@
+文件夹分类
+代码部分----------------------
+script/game/view
+通用控件-common/		
+游戏功能-features/ 	//每个功能分一个文件夹
+游戏场景-scene/		
+大厅ui-main/
+
+类命名
+弹窗-PopXxx.ts
+全屏弹窗-PopfXxx.ts
+弹窗拆分预制体类-ModXxx.ts
+提示窗-TipXxx.ts
+列表项-CellXxx.ts
+单控件-ElementXxx.ts
+
+
+
+ui预制体部分----------------------
+resource/prefabs_ui/
+通用控件-common/		
+
+
+游戏功能-features/ 	//每个功能分一个文件夹
+大厅ui-main/
+
+弹窗-pop_xxx.prefab
+全屏弹窗-popf_xxx.prefab
+弹窗拆分预制体-mod_xxx.prefab
+提示窗-tip_xxx.prefab
+列表项-cell_xxx.prefab
+单控件-element_xxx.prefab
+
+ui图片部分-------------------------
+resource/ui/
+初始图集-initial/
+通用图集-comm/
+游戏功能-features/ 	//每个功能分一个文件夹
+
+按钮-btn_xxx.png
+背景-bg_xxx.png
+图标-ico_xxx.png
+除背景外大图-img_xxx.png
+文字-txt_xxx.png
+fnt字体-fnt_xxx.png fnt_xxx.fnt
