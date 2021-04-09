@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "skill_bounty_hunter_end",
+    "_name": "skill_fly_bounty_hunter_end",
     "_objFlags": 0,
     "_parent": null,
     "_children": [

@@ -85,7 +85,7 @@ let HeroTestInfo: {[key: number]: any} = {
         prefab: "hero_zhangfei",
         normalAttack: "normal_attack_dark_knight",
         skillID: 1001,
-        hp: 100,
+        hp: 200,
         atk: 5,
         def: 2,
         range: 4,
@@ -144,7 +144,7 @@ let HeroTestInfo: {[key: number]: any} = {
         atk: 6,
         def: 2,
         range: 8,
-        speed: 1.3,
+        speed: 0.7,
         skillSpeed: 0.9,
     },
     25: {
@@ -342,21 +342,21 @@ let ArmyTestInfo =  [
         type: EHeroType.HERO,
         embattleedSite: 0,
     },
-    // {
-    //     id: 44,
-    //     type: EHeroType.HERO,
-    //     embattleedSite: 2,
-    // },
     {
-        id: 11,
+        id: 44,
         type: EHeroType.HERO,
         embattleedSite: 2,
     },
     // {
-    //     id: 13,
+    //     id: 11,
     //     type: EHeroType.HERO,
-    //     embattleedSite: 3,
+    //     embattleedSite: 2,
     // },
+    {
+        id: 13,
+        type: EHeroType.HERO,
+        embattleedSite: 3,
+    },
     {
         id: 11,
         type: EHeroType.HERO,
@@ -367,11 +367,11 @@ let ArmyTestInfo =  [
         type: EHeroType.HERO,
         embattleedSite: 5,
     },
-    {
-        id: 5,
-        type: EHeroType.HERO,
-        embattleedSite: 3,
-    },
+    // {
+    //     id: 5,
+    //     type: EHeroType.HERO,
+    //     embattleedSite: 3,
+    // },
     // {
     //     id: 5,
     //     type: EHeroType.HERO,
@@ -616,10 +616,6 @@ export class BattleTest {
         }
     }
 
-    // public static getLoadResList() {
-    //     return BattleTest.loadResList
-    // }
-
     public static getMapInfo() {
         return BattleTest.mapInfo;
     }
@@ -663,20 +659,10 @@ export class BattleTest {
     }
 
     public static buildTestBattle() {
-        // BattleTest.loadResList = [];
         BattleTest.buildMapInfo();
         BattleTest.buildArmy();
         BattleTest.buildEnemyInfo();
         BattleTest.buildBossInfo();
-
-
-        // TODO
-        // BattleTest.loadResList.push("prefabs/battle/hero/battle_hero");
-
-        // BattleTest.loadResList.push("prefabs/battle/skill/skill_0001");
-        // BattleTest.loadResList.push("prefabs/battle/skill/skill_warrior_shield");
-        // BattleTest.loadResList.push("prefabs/battle/buff/buff_frozen");
-        // BattleTest.loadResList.push("prefabs/battle/buff/buff_warrior_shield");
 
         BattleTest.isInit = true;
     }

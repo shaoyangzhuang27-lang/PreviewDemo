@@ -2,7 +2,7 @@
  * @Description: 英雄书院
  * @Author: 徐涛
  * @Date: 2021-03-30 19:49:03
- * @LastEditTime: 2021-04-07 11:24:48
+ * @LastEditTime: 2021-04-08 15:33:38
  */
 import { _decorator, Node, Label, instantiate, ScrollView, Vec3, UITransform, math, Prefab } from 'cc';
 const { ccclass, property } = _decorator;
@@ -209,7 +209,7 @@ export class PopfCollege extends PopBase {
 
         for (let index = 0; index < this._heroLvtxtArray.length; index++) {
             if (heroTop5.Get(index)) {
-                this._heroLvtxtArray[index].string = "Lv." + heroTop5.Get(index).level;
+                this._heroLvtxtArray[index].string = "等级:" + heroTop5.Get(index).level;
             } else {
                 this._heroLvtxtArray[index].string = "";
             }

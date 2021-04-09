@@ -2,7 +2,7 @@
  * @Description: 学院界面内待选择英雄槽位
  * @Author: 徐涛
  * @Date: 2021-03-30 16:03:26
- * @LastEditTime: 2021-04-06 20:25:22
+ * @LastEditTime: 2021-04-08 18:03:15
  */
 import { _decorator, Component, Node, Sprite, Label, Button, SpriteFrame, resources, math, UITransform, EventTouch, Vec3, instantiate, Prefab } from 'cc';
 const { ccclass, property } = _decorator;
@@ -133,9 +133,9 @@ export class CellCollege extends Component {
             return;
         }
         this._isLocked = isLocked;
-        let imgPath = "ui/college/阵型调整_出战阵容英雄背景/spriteFrame";
+        let imgPath = "ui/features/college/img_can_add/spriteFrame";
         if (isLocked) {
-            imgPath = "ui/college/阵型调整_未解锁背景/spriteFrame";
+            imgPath = "ui/features/college/img_locked/spriteFrame";
         }
         XFuns.ReplaceSpriteFrame(imgPath, this.img_bg);
     }

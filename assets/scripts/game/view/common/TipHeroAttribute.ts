@@ -8,7 +8,7 @@ import { _decorator, Node, math, Layout, instantiate, UITransform, Prefab } from
 import { ResMgr } from '../../control/ResMgr';
 import { HeroData } from '../../model/datas/HeroData';
 import { GameModel } from '../../model/GameModel';
-import { TipBase } from '../TipBase';
+import { TipBase } from '../../../core/control/TipBase';
 import { CellTipHeroAttribute } from './CellTipHeroAttribute';
 const { ccclass, property } = _decorator;
 

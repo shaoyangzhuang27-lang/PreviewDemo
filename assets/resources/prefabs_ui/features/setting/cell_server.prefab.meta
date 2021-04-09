@@ -2,12 +2,12 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-  "uuid": "0ea2757a-b4d1-4c3d-88fc-76e53835fd0c",
+  "uuid": "b84a467c-ceaa-4160-bb29-12bbb9726bb1",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "normal_attack_gun"
+    "syncNodeName": "cell_server"
   }
 }

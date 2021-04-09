@@ -39,6 +39,9 @@ export class PopHeroRollBack extends Component {
     @property({type :  Node, displayName: "重置获得的物品"})
     public goodsNodes:Node[] = [];
 
+    @property({type :  Node, displayName: "重置获得的物品节点"})
+    public node_goods:Node = null as unknown as Node;
+
     @property({type :  ScrollView})
     public scroll_HeroView:ScrollView = null as unknown as ScrollView;
 
@@ -89,6 +92,22 @@ export class PopHeroRollBack extends Component {
             this._selectBattleList = new Map<number, number>();
         }
         this._selectBattleList.clear();   
+
+        //物品栏
+        let posX = -164
+        let posY = -28
+        for(let i = 2;i <= 10;i++){
+            let node = instantiate(this.goodsNodes[0]) as Node;
+            node.name = "goods"+i
+            posX = posX + 80
+            if(i == 6){
+                posY = -93
+                posX = -164
+            }
+            node.setPosition(new Vec3(posX,posY,0))
+            this.goodsNodes.push(node)
+            this.node_goods?.addChild(node);
+        }
 
         this._initBottomHeros();
     }
@@ -166,6 +185,7 @@ export class PopHeroRollBack extends Component {
 
         if(scroll.content)
         {
+            scroll.content.removeAllChildren()
             scroll.content.destroyAllChildren()
         }
 

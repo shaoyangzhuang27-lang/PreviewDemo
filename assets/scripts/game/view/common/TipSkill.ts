@@ -7,7 +7,7 @@
 import { _decorator, Node, Label, Vec3, Sprite, Color, UITransform, math, resources, SpriteFrame } from 'cc';
 import { ResMgr } from '../../control/ResMgr';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
-import { TipBase } from '../TipBase';
+import { TipBase } from '../../../core/control/TipBase';
 const { ccclass, property } = _decorator;
 
 @ccclass('TipSkill')

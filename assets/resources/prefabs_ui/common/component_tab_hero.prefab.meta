@@ -2,12 +2,12 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-  "uuid": "b84a467c-ceaa-4160-bb29-12bbb9726bb1",
+  "uuid": "6d7335f5-e223-4b6b-b6e7-0ffa93fdf526",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "server_item"
+    "syncNodeName": "component_tab_hero"
   }
 }

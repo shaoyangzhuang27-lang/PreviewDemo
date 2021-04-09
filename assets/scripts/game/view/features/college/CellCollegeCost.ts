@@ -2,7 +2,7 @@
  * @Description: 英雄学院注意窗体消耗item
  * @Author: 徐涛
  * @Date: 2021-04-01 15:44:34
- * @LastEditTime: 2021-04-06 20:25:15
+ * @LastEditTime: 2021-04-08 16:45:47
  */
 import { _decorator, Component, Sprite, Label, Vec3, Color } from 'cc';
 const { ccclass, property } = _decorator;
@@ -26,6 +26,9 @@ export class CellCollegeCost extends Component {
     @property({ type: Label, displayName: "消耗" })
     public lab_cost: Label = null as unknown as Label;
 
+    @property({ type: Label, displayName: "花费字" })
+    public lab_title: Label = null as unknown as Label;
+    
     start() {
         // [3]
 
@@ -43,10 +46,12 @@ export class CellCollegeCost extends Component {
         this.lab_cost.string = "/" + nCost.toString();
 
         let imgPath = "ui/common/commonIcon/符文水晶/spriteFrame";
+        this.lab_title.node.active= true;
         let scale = new Vec3(0.9, 0.9, 1);
         if (type == Msg.TObjectType.EObject_VRmb) {
             imgPath = "ui/common/commonIcon/钻石/spriteFrame";
             scale = new Vec3(0.92, 0.92, 1);
+            this.lab_title.node.active= false;
         }
         XFuns.ReplaceSpriteFrame(imgPath, this.img_icon, () => {
             this.img_icon.node.setScale(scale);

@@ -168,6 +168,10 @@ export class PopHeroReplace extends PopBase {
             let heroReplaceModel = GameModel.getInstance().getHeroReplaceModel()
             let heroSortDatasMap: Map<Number, HeroData> = heroReplaceModel.sortHeroData();
             for (let heroData of heroSortDatasMap.values()) {
+                //过滤超过5星的英雄
+                if (heroReplaceModel?.isHeroStarOverFive(heroData)) {
+                    continue
+                }
                 let heroIcon = instantiate(res) as Node;
                 this.scrollContent?.addChild(heroIcon);
                 let heroSelectScript = heroIcon.getComponent("HeroSelectIcon") as HeroSelectIcon;  
