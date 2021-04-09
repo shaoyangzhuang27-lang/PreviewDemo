@@ -2,7 +2,7 @@
   "ver": "1.0.21",
   "importer": "image",
   "imported": true,
-  "uuid": "cd2c0c95-efcf-4654-b3d8-95028f228c3f",
+  "uuid": "1d0ff1bc-447e-480e-97ad-4065c63380a0",
   "files": [
     ".png",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "cd2c0c95-efcf-4654-b3d8-95028f228c3f@6c48a",
+      "uuid": "1d0ff1bc-447e-480e-97ad-4065c63380a0@6c48a",
       "displayName": "icon_camp5",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 1,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "cd2c0c95-efcf-4654-b3d8-95028f228c3f"
+        "imageUuidOrDatabaseUri": "1d0ff1bc-447e-480e-97ad-4065c63380a0"
       },
       "ver": "1.0.20",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "cd2c0c95-efcf-4654-b3d8-95028f228c3f@f9941",
+      "uuid": "1d0ff1bc-447e-480e-97ad-4065c63380a0@f9941",
       "displayName": "icon_camp5",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "cd2c0c95-efcf-4654-b3d8-95028f228c3f@6c48a",
+        "imageUuidOrDatabaseUri": "1d0ff1bc-447e-480e-97ad-4065c63380a0@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,6 +69,6 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "cd2c0c95-efcf-4654-b3d8-95028f228c3f@f9941"
+    "redirect": "1d0ff1bc-447e-480e-97ad-4065c63380a0@f9941"
   }
 }
