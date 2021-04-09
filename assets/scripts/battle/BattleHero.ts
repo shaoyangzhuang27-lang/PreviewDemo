@@ -15,6 +15,7 @@ import { BattleTest } from './test/BattleTest';
 import { BattleBuffer } from './BattleBuffer';
 import { BattleDelayDamage } from './BattleDelayDamage';
 import { BattleEffect } from './BattleEffect';
+import { common } from '../../../base_res/proto/protobuf';
 
 
 const RunSpeed = 7;
@@ -28,6 +29,8 @@ TODO
 1.  目标找完后，正在接近目标时候，目标发生移动或死了。
 2.  找完目标后，锁定的移动位置可能已被占用。
 */
+
+
 
 
 export enum EHeroType {
@@ -102,8 +105,6 @@ export enum EEffectType {
     CampUltimateExtraTarget     // 阵营技能大招额外目标 = 22
 }
 
-
-
 @ccclass('BattleHero')
 export class BattleHero extends Component {
 
@@ -116,8 +117,11 @@ export class BattleHero extends Component {
     private _heroBoxCollider: BoxCollider = null as unknown as BoxCollider;
     private _heroRigidBody: RigidBody = null as unknown as RigidBody;
 
-
+    // 内存复用
     private _tmpPos: Vec3 = new Vec3();
+    private _tmpDirVec: Vec3 = new Vec3();
+    private _tmpTargetPos: Vec3 = new Vec3();
+
     private _targetPos: Vec3 = new Vec3();
     private _dirVector: Vec3 = new Vec3();
 
@@ -125,7 +129,7 @@ export class BattleHero extends Component {
     private _target: BattleHero = null as unknown as BattleHero;
 
     private _armyList: Array<BattleHero> = [];
-
+    private _attackMap: Map<BattleHero, BattleHero> = new Map<BattleHero, BattleHero>();
     
     private _heroData: BaseHeroData = null as unknown as BaseHeroData;
 
@@ -134,38 +138,67 @@ export class BattleHero extends Component {
 
     private _actTime: number = 0;
     private _curActFunc: any = null;
+    private _bWillChangeTarget: boolean = false;
 
     private _heroType: EHeroType = EHeroType.HERO;
-    private maxHp: number = 0;
-    private maxPow: number = 100;
-    
-
     public embattleedSite: number = 0;
 
-    public hp: number = 0;
-    public pow: number = 0;
+
+    private _hpBase: number = 0;
+    private _atkBase: number = 0;
+    private _defBase: number = 0;
+    private _speedBase: number = 0;
+    private _critBase: number = 0;
+    private _critDamageBase: number = 0;
+    private _hitBase: number = 0;
+    private _dodgeBase: number = 0;
+    private _defBreakBase: number = 0;
+    private _damageReduceBase: number = 0;
+    private _skillEffectBase: number = 0;
+    private _campDamageBase: number = 0;
+    private _healEffectBase: number = 0;
+
+    private _skillSpeedBase: number = 0; // 战斗中不会发生改变
+    private _rangeBase: number = 0; // 战斗中不会发生改变
+
+    private maxHp: number = 0;
     public atk: number = 0;
     public def: number = 0;
-    public spd: number = 0;
-    public skillSpd: number = 0;
-    public crt: number = 0;
-    public crtDmg: number = 0;
+    public speed: number = 0;
+    public crit: number = 0;
+    public critDmg: number = 0;
     public hitRat: number = 0;
     public dodge: number = 0;
     public defBreak: number = 0;
+    public damageReduce: number = 0;
+    public skillEffect: number = 0;
+    public campDamage: number = 0;
+    public healEffect: number = 0;
+
+    private maxPow: number = 100;
+    public skillSpeed: number = 0;
     public range: number = 0;
+
+    public hp: number = 0;
+    public pow: number = 0;
 
     private _buffPropertyMap = new Map<Msg.THeroPropertyType, number>();
 
     private _recordSkill: Config.skill.Record | null = null;
 
+    private _prepareAttackPrefab: Prefab | null = null;
     private _normalAttackPrefab: Prefab | null = null;
+    private _prepareSkillPrefab: Prefab | null = null;
     private _skillPrefab: Prefab | null = null;
     
 
     private _buffList: BattleBuffer[] = [];
     private _flyDamagePool: Map<BattleDelayDamage, BattleDelayDamage> = new Map<BattleDelayDamage, BattleDelayDamage>();
     private _statusMap: Map<string, number> = new Map<string, number>();
+
+
+
+    
     // public static Event = {
     //     DIE: "DIE",
     // }
@@ -200,7 +233,7 @@ export class BattleHero extends Component {
 
     }
 
-    initHero(battleCtrl: BattleCtrl, heroData: any, heroType: EHeroType): void {
+    public initHero(battleCtrl: BattleCtrl, heroData: any, heroType: EHeroType): void {
         this._battleCtrl = battleCtrl;
         this._heroData = heroData;
         this._heroType = heroType;
@@ -215,7 +248,7 @@ export class BattleHero extends Component {
         this.refreshSkillSpeed();
     }
 
-    initHeroBase(): void {
+    private initHeroBase(): void {
         let heroBaseNode = instantiate(BattleResMgr.getInstance().getRes(this._heroData.getPrefabPath()));
         this.node.name =  heroBaseNode.name;
         heroBaseNode.name = "heroBase";
@@ -244,17 +277,35 @@ export class BattleHero extends Component {
         heroRigidBody.destroy();
         this._heroRigidBody.enabled = false;
 
-        this._heroBase.setSkillEventCallBack(() => {
-            this.onSkill();
-        })
+        this._heroBase.setPrepareAttackEventCallBack(() => {
+            this.onPrepareAttack();
+        });
 
         this._heroBase.setAttackEventCallBack(() => {
             this.onAttack();
-        })
+        });
+
+        this._heroBase.setPrepareSkillEventCallBack(() => {
+            this.onPrepareSkill();
+        });
+
+        this._heroBase.setSkillEventCallBack(() => {
+            this.onSkill();
+        });
+
+        
     }
 
-    initBattleData(): void {
+    private initBattleData(): void {
+        this.refreshBattleDataBase();
         this.refreshBattleData();
+
+        // 普通攻击蓄力特效
+        let prepareAttackParticleName = this._heroData.getPrepareAttackParticleName();
+        if (prepareAttackParticleName != "0") {
+            this._prepareAttackPrefab = BattleResMgr.getInstance().getRes(prepareAttackParticleName);
+        }
+
         // 普通攻击特效
         let normalAttackParticleName = this._heroData.getNormalAttackParticleName();
         if (normalAttackParticleName != "0") {
@@ -275,7 +326,15 @@ export class BattleHero extends Component {
                     }
                 } else {
                     this._recordSkill = null as unknown as Config.skill.Record;
-                    console.warn("技能id" + this._heroData.getSkillID() + "特效预制体测试路径不存在")
+                    console.warn("技能id" + this._heroData.getSkillID() + "技能特效预制体测试路径不存在")
+                }
+
+                path = BattleTest.getPrepareSkillPrefabPath(this._recordSkill.id);
+                if (path) {
+                    this._prepareSkillPrefab = BattleResMgr.getInstance().getRes(path);
+                    if (!this._prepareSkillPrefab) {
+                        console.warn("技能id:" + this._heroData.getSkillID() + "技能蓄力特效预制体不存在")
+                    }
                 }
                 
             } else {
@@ -291,74 +350,107 @@ export class BattleHero extends Component {
         
     }
 
-    refreshBattleData(): void {
-        this.maxHp = Math.ceil(this._heroData.getMaxHP());
+    public refreshBattleDataBase(): void {
+        this._hpBase = Math.ceil(this._heroData.getMaxHP());
+        this._atkBase = this._heroData.getATK();
+        this._defBase = this._heroData.getDEF();
+        this._speedBase = this._heroData.getSpeed();
+        this._critBase = this._heroData.getCrit();
+        this._critDamageBase = this._heroData.getCritDamage();
+        this._hitBase = this._heroData.getHit();
+        this._dodgeBase = this._heroData.getDodge();
+        this._defBreakBase = this._heroData.getDEFBreak();
+        this._damageReduceBase = this._heroData.getReduceDamage();
+        this._skillEffectBase = this._heroData.getSkillEffect();
+        this._campDamageBase = this._heroData.getCampDamage();
+        this._healEffectBase = this._heroData.getHealEffect();
+
+        this._skillSpeedBase = this._heroData.getSkillSpeed(); // 战斗中不会发生改变
+        this._rangeBase = this._heroData.getRange(); // 战斗中不会发生改变
+    }
+
+    public refreshBattleData(): void {
+        this.maxHp = this._hpBase;
         
-        this.atk = this._heroData.getATK();
-        this.def = this._heroData.getDEF();
-        this.range = this._heroData.getRange();
-        this.spd = this._heroData.getSpeed();
-        this.skillSpd = this._heroData.getSkillSpeed();
-        this.crt = 0;
-        this.crtDmg = 0;
-        this.hitRat = 0;
-        this.dodge = 0;
-        this.defBreak = 0;
+        this.atk = this._atkBase
+        this.def = this._defBase
+        this.speed = this._speedBase;
+        this.crit = this._critBase;
+        this.critDmg = this._critDamageBase;
+        this.hitRat = this._hitBase;
+        this.dodge = this._dodgeBase;
+        this.defBreak = this._defBreakBase;
+
+        this.skillSpeed = this._skillSpeedBase;
+        this.range = this._rangeBase;
     }
 
-    getHeroBase(): HeroBase {
-        return this._heroBase;
-    }
+    public refreshData(): void {
+        this._bWillChangeTarget = false;
+        this.removeTarget();
+        this.removeBattlePos();
 
-    setEmbattleedSite(sit: number): void {
-        this.embattleedSite = sit;
-    }
-
-    setLeaderNode(leaderNode: Node): void {
-        this._leaderNode = leaderNode;
-    }
-
-    refreshData(): void {
         this.setHp(this.maxHp);
         this.setPow(0);
         this.clearBuff();
         this.clearDelayDamage();
+        this.clearImmediatelyEffect();
     }
 
-    refreshAttackSpeed(): void {
+    public refreshAttackSpeed(): void {
         let a: AnimationState = this._heroSkeletalAnimation.getState("attack");
         if (a) {
-            a.speed = a.length / this.spd
+            a.speed = a.length / this.speed
         }
         
     }
 
-    refreshSkillSpeed(): void {
+    public refreshSkillSpeed(): void {
         let a: AnimationState = this._heroSkeletalAnimation.getState("skill");
         if (a) {
-            a.speed = a.length / this.skillSpd
+            a.speed = a.length / this.skillSpeed
         }
     }
 
-    revive(): void {
+    public revive(): void {
         this.refreshBattleData();
         this.refreshData();
         this._heroBase.playIdle();
     }
 
-    isEnemy(): boolean {
+    public getHeroBase(): HeroBase {
+        return this._heroBase;
+    }
+
+    public setEmbattleedSite(site: number): void {
+        this.embattleedSite = site;
+    }
+
+    public setLeaderNode(leaderNode: Node): void {
+        this._leaderNode = leaderNode;
+    }
+
+    public getActTime() {
+        return this._actTime;
+    }
+
+    public isEnemy(): boolean {
         return this._heroType != EHeroType.LEADER && this._heroType != EHeroType.HERO
     }
 
-    isHero(): boolean {
+    public isHero(): boolean {
         return this._heroType == EHeroType.HERO;
     }
 
-    getClasses(): number {
+    public getClasses(): number {
         return this._heroData.getClasses();
     }
 
-    initTitleBar(): void {
+    public isRunning(): boolean {
+        return this._curActFunc == this.doRunTo;
+    }
+
+    private initTitleBar(): void {
            
         this._battleTitleBar.createTitleBar(this._battleCtrl.camera, this._battleCtrl.battleUiNode, !this.isEnemy(), this._heroData.getCamp());
         
@@ -366,12 +458,49 @@ export class BattleHero extends Component {
         this._battleTitleBar.setPowPercent(0);
     }
 
-    setVisible(b: boolean): void {
+    public setVisible(b: boolean): void {
         this.node.active = b;
         this._battleTitleBar.setVisible(b);
     }
 
-    startSeekEnemy(): void {
+    public getTargetPos(): Vec3 {
+        return this._targetPos;
+    }
+
+    // public setTargetPos(targetPos: Vec3): void {
+    //     this._targetPos.set(targetPos);
+    // }
+
+    public getTarget(): BattleHero {
+        return this._target;
+    }
+
+    public setPosition(pos: Vec3): void {
+        this._targetPos.set(pos);
+        this.node.setPosition(pos);
+    }
+
+    public addAttack(attack: BattleHero): void {
+        this._attackMap.set(attack, attack);
+    }
+
+    public removeAttack(attack: BattleHero): void {
+        this._attackMap.delete(attack);
+    }
+
+    public clearAttack(): void {
+        this._attackMap.clear();
+    }
+
+    private postChangePos(): void {
+        this._attackMap.forEach((battleHero: BattleHero) => {
+            if (this.getTarget() != battleHero) {
+                battleHero.onTargetChangePos();
+            }
+        }) 
+    }
+
+    public startSeekEnemy(): void {
         this._heroBase.playRun();
         this._heroBoxCollider.enabled = true;
         this._heroRigidBody.enabled = true;
@@ -383,7 +512,7 @@ export class BattleHero extends Component {
         this._curActFunc = this.doSeekEnemy; 
     }
 
-    seekEnemy(): void {
+    private seekEnemy(): void {
         this._heroRigidBody.clearState();
 
         this._actTime = 1 + Math.random()*2;
@@ -405,7 +534,7 @@ export class BattleHero extends Component {
         // console.log(this._targetPos)
     }
 
-    doSeekEnemy(dt: number): void {
+    private doSeekEnemy(dt: number): void {
 
         this.node.getPosition(this._tmpPos);
         this._tmpPos.z += this._targetPos.z * dt;
@@ -441,7 +570,7 @@ export class BattleHero extends Component {
         // console.log(this.node.position, this.node.worldPosition);
     }
 
-    startEmbattle(embattlePos: Vec3, actTime: number): void {
+    public startEmbattle(embattlePos: Vec3, actTime: number): void {
         this._actTime = actTime;
         this._heroBase.playRun();
         this.embattle(embattlePos);
@@ -451,7 +580,7 @@ export class BattleHero extends Component {
         this._heroRigidBody.clearState();
     }
 
-    embattle(embattlePos: Vec3): void {
+    private embattle(embattlePos: Vec3): void {
         this._tmpPos.set(this.node.position);
         this._targetPos.set(embattlePos);
         Vec3.subtract(this._dirVector, this._targetPos, this._tmpPos)
@@ -459,7 +588,7 @@ export class BattleHero extends Component {
         this._dirVector.z /= this._actTime;
     }
 
-    doEmbattle(dt: number): void {
+    private doEmbattle(dt: number): void {
 
         this._actTime -= dt;
         if (this._actTime <= 0) {
@@ -472,17 +601,18 @@ export class BattleHero extends Component {
         }
     }
 
-    startRunToBattle(z: number, actTime: number): void {
+    public startRunToBattle(z: number, actTime: number): void {
         this._battleTitleBar.setVisible(true);
         // this._heroRigidBody.clearState();
         // this.node.setPosition(this._targetPos);
+        
         this._heroBase.playRun();
         this._actTime = actTime;
         this.runToBattle(z);
         this._curActFunc = this.doRunToBattle;
     }
 
-    runToBattle(z: number): void {
+    private runToBattle(z: number): void {
         this._tmpPos.set(this.node.position);
         this._targetPos.set(this.node.position);
         this._targetPos.z += z;
@@ -490,81 +620,333 @@ export class BattleHero extends Component {
         this._dirVector.z = z / this._actTime;
     }
 
-    doRunToBattle(dt: number): void {
+    private doRunToBattle(dt: number): void {
         this._actTime -= dt;
         if (this._actTime <= 0) {
             this._curActFunc = null; // TODO
 
             // this._heroRigidBody.clearState();
             this.node.setPosition(this._targetPos);
-
-            this._heroBase.playAttack();
         }  else {
             this._tmpPos.z += dt * this._dirVector.z
             this.node.setPosition(this._tmpPos);
         }
     }
 
-    startBattle(targetList: Array<BattleHero>, armyList: Array<BattleHero> ): void {
+    public startBattle(targetList: Array<BattleHero>, armyList: Array<BattleHero> ): void {
+        this._battleTitleBar.setVisible(true);
+        this._targetPos.set(this.node.position);
         this._curActFunc = null;
         this._targetList = targetList;
         this._armyList = armyList;
-        this.seekAttackTarget();
+
+        // this.seekAttackTarget();
     }
 
-    seekAttackTarget(): void {
-        this._curActFunc = null;
-        this._target = null as unknown as BattleHero;
-        this._dirVector.set(Vec3.ZERO);
-        let dirVec = new Vec3();
-        for (let i = 0; i < this._targetList.length; i++) {
-            // if (!this._targetList[i].isDie()) {
-                if(this._target) {
-                    Vec3.subtract(dirVec, this._targetList[i].node.position, this.node.position);
-                    if(dirVec.length() < this._dirVector.length()) {
-                        this._target = this._targetList[i];
-                        this._dirVector.set(dirVec);
-                    }
-                } else {
-                    this._target = this._targetList[i];
-                    Vec3.subtract(this._dirVector, this._target.node.position, this.node.position);
-                }
-            // }
+    public seekFirstTarget(): void {
+
+        if (this._targetList.length == 0) {
+            console.error("BattleHero-seekFirstTarget this._targetList.length == 0");
+            return;
         }
 
-        if (this._target) {
-            if (this.range < this._dirVector.length()) {
-                // 先简单处理了
-                dirVec.x = this._dirVector.x * this.range / this._dirVector.length()
-                dirVec.z = this._dirVector.z * this.range / this._dirVector.length()
-                this._dirVector.subtract(dirVec);
-                this._targetPos.set(this.node.position);
-                this._targetPos.add(this._dirVector);
-                this.startRunTo();
-            } else {
-                // 直接攻击
-                this.startAttack();
+        let target: BattleHero | null = this.getNearTarget();
+        if (!target) {
+            console.error("BattleHero-seekFirstTarget this.getNearTarget() == null");
+            return;
+        }
+
+
+        if (target.getTarget()) {
+            // 已经有目标则直接作为目标处理
+            Vec3.subtract(this._dirVector, target.getTargetPos(), this.node.position);
+            Vec3.lerp(this._tmpTargetPos, this.node.position, target.getTargetPos(), (this._dirVector.length() - this.range) / this._dirVector.length());
+
+        } else if (target.getNearTarget() == this) {
+            // 如果对方没目标且两者互为最短目标，则互为目标
+            let t1: BattleHero = this;
+            let t2: BattleHero = target;                         
+            let tmpRange1 = this.range;
+            let tmpRange2 = target.range; // TODO 需要做boss修正
+            if (tmpRange2 > tmpRange1) {
+                t1 = target;
+                t2 = this;
+                tmpRange1 = tmpRange2;
+                tmpRange2 = this.range;
             }
+
+            
+            Vec3.subtract(this._tmpDirVec, t2.node.position, t1.node.position);
+            // 是否在攻击范围内
+            if (tmpRange1 >= this._tmpDirVec.length()) {
+                this._tmpTargetPos.set(t1.node.position);
+                if (tmpRange2 >= this._tmpDirVec.length()) {
+                    this._dirVector.set(t2.node.position);
+                } else {
+                    Vec3.lerp(this._dirVector, t1.node.position, t2.node.position, tmpRange2 / this._tmpDirVec.length());
+                }
+            } else {
+                Vec3.lerp(this._tmpTargetPos, t1.node.position, t2.node.position, (this._tmpDirVec.length() - tmpRange1) / 2 / this._tmpDirVec.length());
+                Vec3.lerp(this._dirVector, t1.node.position, t2.node.position, ((this._tmpDirVec.length() - tmpRange1) / 2 + tmpRange2) / this._tmpDirVec.length());
+            }
+
+            if (t2 == this) {
+                t1.changeTarget(this._tmpTargetPos, this);
+                this._tmpTargetPos.set(this._dirVector);
                 
+            } else {
+                t2.changeTarget(this._dirVector, this);
+            }
         } else {
-            this._heroBase.playIdle();
+            // 等待第二轮
+            return;
         }
+
+        this.changeTarget(this._tmpTargetPos, target);
+    }
+
+    public getNearTarget(): BattleHero | null {
+        if (this._targetList.length == 0) {
+            return null;
+        }
+
+        let target: BattleHero = this._targetList[0];
+        Vec3.subtract(this._dirVector, target.node.position, this.node.position);
+
+        for (let i = 1; i < this._targetList.length; i++) {
+            Vec3.subtract(this._tmpDirVec, this._targetList[i].node.position, this.node.position);
+            if(this._tmpDirVec.length() < this._dirVector.length()) {
+                target = this._targetList[i];
+                this._dirVector.set(this._tmpDirVec);
+            }
+        }
+
+        return target;
+    }
+
+    public seekAttackTarget(): void {
+        // 先遍历攻击范围内离自己近的并且没在移动的
+        // 遍历目标位置离自己近的
+        // 如果没在移动就正常跑过去
+        // 互为目标重新算中间点
+        // 自己远程单位就跑到直接打了
+        // 自己是近战单位，如果是跑的时间比对方跑的时间长，就正常跑过去，否则互为目标，重新计算中间点
+        this._curActFunc = null;
+
+        if (this._targetList.length == 0) {
+            this.removeTarget();
+            this._heroBase.playIdle();
+            return;
+        }
+
+        let target: BattleHero = null as unknown as BattleHero;
+        this._dirVector.set(Vec3.ZERO);
+        this._tmpTargetPos.set(this.node.position);
+        
+        let range: number = this.range; // 先提取出来，有boss要做修正
+        for (let i = 0; i < this._targetList.length; i++) {
+            if (this._targetList[i].isRunning()) {
+                Vec3.subtract(this._tmpDirVec, this._targetList[i].getTargetPos(), this.node.position);
+                if (this._tmpDirVec.length() > range) {
+                    continue;
+                }
+            }
+
+            Vec3.subtract(this._tmpDirVec, this._targetList[i].node.position, this.node.position);
+            if (this._tmpDirVec.length() > range) {
+                continue;
+            }
+
+            if(target) {
+                if(this._tmpDirVec.length() < this._dirVector.length()) {
+                    target = this._targetList[i];
+                    this._dirVector.set(this._tmpDirVec);
+                }
+            } else {
+                target = this._targetList[i];
+                Vec3.subtract(this._dirVector, target.node.position, this.node.position);
+            }
+        }
+
+        if (target == null) {
+            target = this._targetList[0];
+            Vec3.subtract(this._dirVector, target.getTargetPos(), this.node.position);
+            // 遍历目标范围最短目标
+            for (let i = 1; i < this._targetList.length; i++) {
+                Vec3.subtract(this._tmpDirVec, this._targetList[i].getTargetPos(), this.node.position);
+                if(this._tmpDirVec.length() < this._dirVector.length()) {
+                    target = this._targetList[i];
+                    this._dirVector.set(this._tmpDirVec);
+                }
+            }
+
+            if (target) {
+                this._tmpDirVec.x = this._dirVector.x * (this._dirVector.length() - this.range) / this._dirVector.length();
+                this._tmpDirVec.z = this._dirVector.z * (this._dirVector.length() - this.range) / this._dirVector.length();
+
+                let bAttackEachOther = false;
+                if ((target.isRunning() && (target.getTarget() == this || (range < 8 && this._tmpDirVec.length() / RunSpeed < target.getActTime())))) {
+                    bAttackEachOther = true;
+                } else if(range < this._dirVector.length()) {
+                    // 处理死循环postChangePos
+                    if (this._attackMap.size > 0 && target.getTarget() && target.getTarget() != this) {
+                        let tmpTarget = target.getTarget();
+                        while (tmpTarget.getTarget() && !tmpTarget.getTarget().isDie() && tmpTarget.getTarget().getTarget() != tmpTarget && tmpTarget.getTarget() != this) {
+                            tmpTarget = tmpTarget.getTarget();
+                        }
+
+                        if (tmpTarget.getTarget() == this) {
+                            // 处理死循环
+                            target = tmpTarget.getTarget();
+                            if (target.isRunning()) {
+                                bAttackEachOther = true;
+                            } else {
+                                Vec3.subtract(this._dirVector, target.getTargetPos(), this.node.position);
+                                Vec3.lerp(this._tmpTargetPos, this.node.position, target.getTargetPos(), (this._dirVector.length() - this.range) / this._dirVector.length());
+                            }
+                        }
+                    } else {
+                        this._tmpTargetPos.add(this._tmpDirVec);
+                    }
+                }
+
+                if (bAttackEachOther) {
+
+                    let t1: BattleHero = this;
+                    let t2: BattleHero = target;                         
+                    let tmpRange1 = range;
+                    let tmpRange2 = target.range; // TODO 需要做boss修正
+                    if (tmpRange2 > tmpRange1) {
+                        t1 = target;
+                        t2 = this;
+                        tmpRange1 = tmpRange2;
+                        tmpRange2 = range;
+                    }
+
+                    
+                    Vec3.subtract(this._tmpDirVec, t2.node.position, t1.node.position);
+                    // 是否在攻击范围内
+                    if (tmpRange1 >= this._tmpDirVec.length()) {
+                        this._tmpTargetPos.set(t1.node.position);
+                        if (tmpRange2 >= this._tmpDirVec.length()) {
+                            this._dirVector.set(t2.node.position);
+                        } else {
+                            Vec3.lerp(this._dirVector, t1.node.position, t2.node.position, tmpRange2 / this._tmpDirVec.length());
+                        }
+                    } else {
+                        Vec3.lerp(this._tmpTargetPos, t1.node.position, t2.node.position, (this._tmpDirVec.length() - tmpRange1) / 2 / this._tmpDirVec.length());
+                        Vec3.lerp(this._dirVector, t1.node.position, t2.node.position, ((this._tmpDirVec.length() - tmpRange1) / 2 + tmpRange2) / this._tmpDirVec.length());
+                    }
+
+                    if (t2 == this) {
+                        t1.changeTarget(this._tmpTargetPos, this)
+                        this._tmpTargetPos.set(this._dirVector);
+                        
+                    } else {
+                        t2.changeTarget(this._dirVector, this);
+                    }
+
+                }   
+            }
+        } // else end: this._target != null
+
+        this.changeTarget(this._tmpTargetPos, target);
 
     }
 
-    startRunTo(): void {
+    public addTarget(target?: BattleHero) {
+        if (target) {
+            if (target != this._target) {
+                this.removeTarget();
+                target.addAttack(this);
+                this._target = target;
+            }
+        } else {
+            this.removeTarget();
+        }
+    }
+
+    public removeTarget(): void {
+        if (this._target) {
+            this._target.removeAttack(this);
+            this._target = null as unknown as BattleHero;
+        }
+    }
+
+    public changeTarget(targetPos: Vec3, target?: BattleHero): void {
+        this.addTarget(target);
+        if (!target) {
+            this._heroBase.playIdle();
+            this._curActFunc = null;
+            this._targetPos.set(this.node.position);
+            return;
+        }
+
+        this.changeTargetPos(targetPos);
+    }
+
+    private changeTargetPos(targetPos: Vec3): void {
+        let bPost = !this._targetPos.equals(targetPos);
+
+        
+        if (bPost) {
+            // console.log(targetPos, "++++++")
+            this._battleCtrl.buildBattlePos(targetPos, this._target.getTargetPos(), this.range, this);
+            // console.log(targetPos, "-------")
+        }
+        
+        this._targetPos.set(targetPos);
+        if (targetPos.equals(this.node.position)) {
+            this.startAttack();
+        } else {
+            this.startRunTo();
+        }
+
+        if (bPost) {
+            this.postChangePos();
+        }
+    }
+
+    public removeBattlePos(): void {
+        this._battleCtrl.removeBattlePos(this._targetPos);
+    }
+
+    public onTargetChangePos() {
+        Vec3.subtract(this._dirVector, this._target.getTargetPos(), this.node.position);
+        if (this.isRunning()) {
+            if (this.range < this._dirVector.length()) {
+                this._tmpTargetPos.x = this.node.position.x + this._dirVector.x * (this._dirVector.length() - this.range) / this._dirVector.length();
+                this._tmpTargetPos.z = this.node.position.z + this._dirVector.z * (this._dirVector.length() - this.range) / this._dirVector.length();
+            } else {
+                this._tmpTargetPos.set(this.node.position);
+            }
+
+            // 在seekAttackTarget中避免死循环
+            this.changeTargetPos(this._tmpTargetPos);
+        } else {
+            if (this.range < this._dirVector.length()) {
+                this._bWillChangeTarget = true;
+            }
+        }
+    }
+
+    public startRunTo(): void {
         this._heroBase.playRun();
         this._curActFunc = this.doRunTo;
         this.runTo();
+
+        this.postChangePos();
     }
 
-    runTo(): void {
+    private runTo(): void {
         this.node.lookAt(this._targetPos);
         this._tmpPos.set(this.node.position);
+        Vec3.subtract(this._dirVector, this._targetPos, this._tmpPos);
         this._actTime = this._dirVector.length() / RunSpeed;
     }
 
-    doRunTo(dt: number): void {
+    // 注意因为有doBuff, 只能被update调用！！！
+    private doRunTo(dt: number): void {
         this.doBuff(dt);
 
         if (this._target.isDie()) {
@@ -574,8 +956,15 @@ export class BattleHero extends Component {
 
         this._actTime -= dt;
         if (this._actTime <= 0) {
-            this.node.setPosition(this._tmpPos);
-            this.startAttack();
+            this.node.setPosition(this._targetPos);
+            
+            // Vec3.subtract(this._dirVector, this._target.getTargetPos(), this.node.position);
+            // if (this.range < this._dirVector.length()) {
+            //     this.seekAttackTarget();
+            // } else {
+                this.startAttack();
+            // }
+
         } else {
             this._tmpPos.x += this._dirVector.x * dt * RunSpeed / this._dirVector.length();
             this._tmpPos.z += this._dirVector.z * dt * RunSpeed / this._dirVector.length();
@@ -583,12 +972,12 @@ export class BattleHero extends Component {
         }
     }
 
-    startAttack(): void {
+    public startAttack(): void {
         this._curActFunc = this.doBuff;
         this.attack();
     }
 
-    attack(): void {
+    private attack(): void {
         if (!this._target) {
             // TODO
             console.error("call BattleHero.attack fail, this._target is null");
@@ -602,16 +991,22 @@ export class BattleHero extends Component {
         } else {
             this.doAttack();
         }
-
-        // 开始发动攻击时计算速度 TODO 有buffer刷新时候再计算
  
         this._heroSkeletalAnimation.on(SkeletalAnimation.EventType.LASTFRAME, (a: any, b: any, c: any) => {
-            if (this._target) {
+
+            if (this._bWillChangeTarget) {
+                this._heroSkeletalAnimation.off(SkeletalAnimation.EventType.LASTFRAME)
+                this.seekAttackTarget();
+                this._bWillChangeTarget = false;
+            } else if (this._target) {
                 if (this._target.isDie()) {
                     this._heroSkeletalAnimation.off(SkeletalAnimation.EventType.LASTFRAME)
                     this.seekAttackTarget();
                 } else {
-                    // 开始发动攻击时计算速度 TODO 有buffer刷新时候再计算
+
+
+                    this.node.lookAt(this._target.node.position);
+
                     if (this._heroBase.isInSkill()) {
                         this.doAttack();
                     }
@@ -619,6 +1014,7 @@ export class BattleHero extends Component {
                     if (this.isFullPow()) {
                         this.doSkill();
                     }
+                    
                 }
             } else {
                 this._heroSkeletalAnimation.off(SkeletalAnimation.EventType.LASTFRAME)
@@ -628,12 +1024,18 @@ export class BattleHero extends Component {
         })
     }
 
-    doSkill(): void {
+    private doSkill(): void {
         this.setPow(0);
         this._heroBase.playSkill();
     }
 
-    onSkill(): void {
+    private onPrepareSkill(): void {
+        if (this._prepareSkillPrefab) {
+            this.playEffect(instantiate(this._prepareSkillPrefab));
+        }
+    }
+
+    private onSkill(): void {
         
         // 到技能关键帧了
         // console.log("onSkill+++++++++++++++++++");
@@ -715,35 +1117,49 @@ export class BattleHero extends Component {
                     break;
             }
 
+            let skillPrefab: Prefab | null = this._skillPrefab;
             let skillEffectNode = instantiate(this._skillPrefab);
             let battleEffect: BattleEffect = skillEffectNode.getComponent("BattleEffect") as BattleEffect;
 
+
             if (battleEffect.isImmediately()) {
                 this.playEffect(skillEffectNode);
-                
+                skillPrefab = null;
+
                 if (targetList.length == 0) {
                     return;
                 }
+                
+                if (battleEffect.endEffectPrefab) {
+                    let endEffectNode = instantiate(battleEffect.endEffectPrefab);
+                    if ((endEffectNode.getComponent("BattleEffect") as BattleEffect).isImmediately()) {
+                        targetList[0].playEffect(endEffectNode);
+                        for (let i = 1; i < targetList.length; i++) {
+                            targetList[i].playEffect(instantiate(battleEffect.endEffectPrefab));
+                        }
 
-                for (let i = 0; i < targetList.length; i++) {
-                    if (battleEffect.endEffectPrefab) {
-                        targetList[i].playEffect(instantiate(battleEffect.endEffectPrefab));
+                        this.doSkillEffect(this._recordSkill, targetList);
+                    } else {
+                        skillPrefab = battleEffect.endEffectPrefab;
+                        skillEffectNode = endEffectNode;
+                        battleEffect = endEffectNode.getComponent("BattleEffect") as BattleEffect;
                     }
-                    
-                }
-
-                this.doSkillEffect(this._recordSkill, targetList);
-            } else {
+                } 
+            }
+            
+            
+            if (skillPrefab) {
                 for (let i = 0; i < targetList.length; i++) {
                     if (i > 0) {
-                        battleEffect = instantiate(this._skillPrefab).getComponent("BattleEffect") as BattleEffect;
+                        battleEffect = instantiate(skillPrefab).getComponent("BattleEffect") as BattleEffect;
                     }
 
                     let delayDamage = new BattleDelayDamage(battleEffect, this, targetList[i], (target: BattleHero)=> {
                         target.removeFlyDamagePool(delayDamage);
                         this.doSkillEffect(this._recordSkill as Config.skill.Record, [target]);
                     });
-    
+                    
+                    
                     targetList[i].addFlyDamagePool(delayDamage);
                 }        
             }
@@ -753,7 +1169,7 @@ export class BattleHero extends Component {
         }
     }
 
-    buildRandomList(targetList: Array<BattleHero>, count: number): void {
+    private buildRandomList(targetList: Array<BattleHero>, count: number): void {
         count = targetList.length - count;
         for (let i = 0; i < count; i++) {
             let idx = Math.floor(Math.random() * targetList.length);
@@ -761,7 +1177,7 @@ export class BattleHero extends Component {
         }
     }
 
-    buildAOEList(pos: Vec3, targetList: Array<BattleHero>, allList: Array<BattleHero>, range: number): void {
+    private buildAOEList(pos: Vec3, targetList: Array<BattleHero>, allList: Array<BattleHero>, range: number): void {
         for (let i = 0; i < allList.length; i++) {
             if(Vec3.distance(pos, allList[i].node.position) <= range) {
                 targetList.push(allList[i]);
@@ -769,19 +1185,17 @@ export class BattleHero extends Component {
         }
     }
 
-    buildLowerHpList(targetList: Array<BattleHero>, count: number): void {
+    private buildLowerHpList(targetList: Array<BattleHero>, count: number): void {
         if (count >= targetList.length) {
             return;
         }
 
-        targetList.sort((a: BattleHero, b: BattleHero) => {
-            return a.hp - b.hp;
-        });
+        targetList.sort((a: BattleHero, b: BattleHero) => a.hp - b.hp);
 
         targetList.splice(count, targetList.length - count);
     }
 
-    doSkillEffect(recordSkill: Config.skill.Record, targetList: Array<BattleHero>): void {
+    private doSkillEffect(recordSkill: Config.skill.Record, targetList: Array<BattleHero>): void {
 
         for (let i = 0; i < recordSkill.effectType.length; i++) {
             for (let j = 0; j < targetList.length; j++) {
@@ -838,7 +1252,7 @@ export class BattleHero extends Component {
         }
     }
 
-    doSkillTalentEffect(target: BattleHero, effectType: number, effectParam1: number, effectParam2: number
+    private doSkillTalentEffect(target: BattleHero, effectType: number, effectParam1: number, effectParam2: number
         , effect_levelup: number = 0, isGodSkill: boolean = false, isDelayShow: boolean = false): void {
         // Hero hero = attack as Hero;
         // Pet fs = attack as Pet;
@@ -917,7 +1331,7 @@ export class BattleHero extends Component {
         }
     }
 
-    doSkillDamage(target: BattleHero, effectParam1: number) {
+    private doSkillDamage(target: BattleHero, effectParam1: number) {
         if (!target.isDie()) {
             target.addHp(-this.atk*effectParam1/100, DamageType.Skill);
             // target.addPow(BeHitPowerUp);
@@ -929,13 +1343,13 @@ export class BattleHero extends Component {
         }
     }
 
-    doSkillHeal(target: BattleHero, effectParam1: number) {
+    private doSkillHeal(target: BattleHero, effectParam1: number) {
         if (!target.isDie() && !target.isFullHp()) {
             target.addHp(this.atk*effectParam1/100, DamageType.Heal);
         }
     }
 
-    checkEffectCondtion(attack: BattleHero, target: BattleHero, condType: number, condParam: number) {
+    private checkEffectCondtion(attack: BattleHero, target: BattleHero, condType: number, condParam: number) {
         switch (condType) {
             case EEffectCondType.Null:
                 return true;
@@ -979,28 +1393,45 @@ export class BattleHero extends Component {
         return false;
     }
 
-    doAttack(): void {
+    private doAttack(): void {
         this._heroBase.playAttack();
     }
 
-     onAttack(): void {
+    private onPrepareAttack(): void {
+        if (this._prepareAttackPrefab) {
+            this.playEffect(instantiate(this._prepareAttackPrefab));
+        }
+    }
+
+    private onAttack(): void {
         if (!this._target || this._target.isDie()) {
             return;
         }
 
         if (this._normalAttackPrefab) {
             let normalAttackEffect = instantiate(this._normalAttackPrefab);
-            let battleEffect = normalAttackEffect.getComponent("BattleEffect") as BattleEffect;
+            let battleEffect: BattleEffect | null = normalAttackEffect.getComponent("BattleEffect") as BattleEffect;
+
+            
             if (battleEffect.isImmediately()) {
-                // TODO 普通刀光
+                this.playEffect(normalAttackEffect);
                 this.doHitDamager(this._target);
 
-                this.playEffect(normalAttackEffect);
-
                 if (battleEffect.endEffectPrefab) {
-                    this._target.playEffect(instantiate(battleEffect.endEffectPrefab));
+                    let endEffectNode = instantiate(battleEffect.endEffectPrefab);
+                    battleEffect = endEffectNode.getComponent("BattleEffect") as BattleEffect;
+
+                    if (battleEffect.isImmediately()) {
+                        this._target.playEffect(endEffectNode);
+                        battleEffect = null;
+                    }
+   
+                } else {
+                    battleEffect = null;
                 }
-            } else {
+            } 
+
+            if (battleEffect) {
                 let delayDamage = new BattleDelayDamage(battleEffect, this, this._target, (target: BattleHero)=> {
                     this.doHitDamager(target);
                     target.removeFlyDamagePool(delayDamage);
@@ -1015,7 +1446,7 @@ export class BattleHero extends Component {
         this.doHitDamager(this._target);
     }
 
-    doHitDamager(target: BattleHero): void {
+    private doHitDamager(target: BattleHero): void {
         if (target && !target.isDie()) {
             target.addHp(-this.atk, DamageType.Hit);
             target.addPow(BeHitPowerUp);
@@ -1028,19 +1459,19 @@ export class BattleHero extends Component {
         } 
     }
 
-    isDie(): boolean {
+    public isDie(): boolean {
         return this.hp === 0;
     }
 
-    addFlyDamagePool(flyDelayDamage: BattleDelayDamage): void {
+    public addFlyDamagePool(flyDelayDamage: BattleDelayDamage): void {
         this._flyDamagePool.set(flyDelayDamage, flyDelayDamage);
     }
 
-    removeFlyDamagePool(flyDelayDamage: BattleDelayDamage): void {
+    public removeFlyDamagePool(flyDelayDamage: BattleDelayDamage): void {
         this._flyDamagePool.delete(flyDelayDamage);
     }
 
-    addBuff(attack: BattleHero, buffID: number): void {
+    public addBuff(attack: BattleHero, buffID: number): void {
         let record: Config.buff_new.Record = ValueMgr.getInstance().getItemByField(TableName.buff_new, buffID) as Config.buff_new.Record;
         if (!record) {
             console.error("数据表中buffID: " + buffID + " 不存在");
@@ -1088,23 +1519,36 @@ export class BattleHero extends Component {
                 }
             }
         }
+
+        // this._checkBuffundefined();
     }
 
-    removeBuff(buff: BattleBuffer): void {
+    public removeBuff(buff: BattleBuffer): void {
         for (let i = 0; i < this._buffList.length; i++) {
             if (this._buffList[i] == buff) {
                 this._buffList.splice(i, 1);
                 break;
             }
         }
+
+        // this._checkBuffundefined();
     }
 
-    getBuffList(): BattleBuffer[] {
+    // 测试代码
+    // private _checkBuffundefined(): void {
+    //     for (let i = 0; i < this._buffList.length; i++) {
+    //         if (!this._buffList[i]) {
+    //             console.error("_checkBuffundefined undefined !!!!!!!!!!!!!!!!!!!!!");
+    //         }
+    //     }
+    // }
+
+    public getBuffList(): BattleBuffer[] {
         return this._buffList;
     }
 
 
-    doBuff(dt: number) {
+    private doBuff(dt: number) {
         let now = Date.now();
         if (this._buffList.length == 0 || this._buffList[0].time > now) {
             return;
@@ -1116,6 +1560,8 @@ export class BattleHero extends Component {
             if (now > this._buffList[i].time) {
                 if (this._buffList[i].doBuff(this._buffList, i+1)) {
                     l.push(this._buffList[i]);
+                } else if (this.isDie()) {
+                    return;
                 }
             } else {
                 break;
@@ -1145,9 +1591,10 @@ export class BattleHero extends Component {
             }
         }
 
+        // this._checkBuffundefined();
     }
 
-    addBuffProperty(record: Config.buff_new.Record, bUp: boolean): void {
+    public addBuffProperty(record: Config.buff_new.Record, bUp: boolean): void {
         let value = this._buffPropertyMap.get(record.effectParam1);
         if (value == undefined) {
             value = 0;
@@ -1158,7 +1605,7 @@ export class BattleHero extends Component {
         this._battleTitleBar.addStatusIco(record.icon)
     }
 
-    removeBuffProperty(record: Config.buff_new.Record, bUp: boolean): void {
+    public removeBuffProperty(record: Config.buff_new.Record, bUp: boolean): void {
         let value = this._buffPropertyMap.get(record.effectParam1);
         if (value == undefined) {
             return;
@@ -1174,7 +1621,7 @@ export class BattleHero extends Component {
         this._battleTitleBar.removeStatusIco(record.icon)
     }
 
-    refreshBuffStatus(): void {
+    public refreshBuffStatus(): void {
         let str = "";
         this._buffPropertyMap.forEach((value: number, key: Msg.THeroPropertyType) => {
 
@@ -1182,7 +1629,7 @@ export class BattleHero extends Component {
     }
 
     // damage正数为加血
-    addHp(damage: number, damageType: DamageType): void {
+    public addHp(damage: number, damageType: DamageType): void {
         damage = Math.ceil(damage);
 
         // 处理护盾 TODO 之后内优化内存换时间
@@ -1216,7 +1663,7 @@ export class BattleHero extends Component {
         this._battleTitleBar.flyWords(damage, damageType);
     }
 
-    setHp(hp: number): void {
+    public setHp(hp: number): void {
         hp = Math.ceil(hp);
         this.hp = hp;
         if (this.hp > this.maxHp) {
@@ -1232,19 +1679,19 @@ export class BattleHero extends Component {
         }     
     }
 
-    isFullPow(): boolean {
+    public isFullPow(): boolean {
         return this.maxPow > 0 && this.pow == this.maxPow;
     }
 
-    isFullHp(): boolean {
+    public isFullHp(): boolean {
         return this.hp == this.maxHp;
     }
 
-    isFrontSite(): boolean {
+    public isFrontSite(): boolean {
         return this.embattleedSite < 3;
     }
 
-    addPow(pow: number): void {
+    public addPow(pow: number): void {
         if (this.maxPow == 0) {
             return;
         }
@@ -1258,7 +1705,7 @@ export class BattleHero extends Component {
         this._battleTitleBar.setPowPercent(this.pow / this.maxPow);
     }
 
-    setPow(pow: number): void {
+    public setPow(pow: number): void {
         this.pow = pow;
         if (this.pow > this.maxPow) {
             this.pow = this.maxPow;
@@ -1274,13 +1721,14 @@ export class BattleHero extends Component {
         
     }
 
-    die(): void {
+    public die(): void {
         if (this._heroBase.isInDie()) {
             return;
         }
 
         this._heroSkeletalAnimation.off(SkeletalAnimation.EventType.LASTFRAME)
-
+        this.removeTarget();
+        this.removeBattlePos();
         this._curActFunc = null;
         this._battleTitleBar.setVisible(false);
         this._heroBase.playDie();
@@ -1289,14 +1737,16 @@ export class BattleHero extends Component {
         this._battleCtrl.onHeroDie(this);
     }
 
-    clearBuff(): void {
+    public clearBuff(): void {
+        // this._checkBuffundefined();
+
         for (let i = 0; i < this._buffList.length; i++) {
             this._buffList[i].onClear();
         }
         this._buffList = [];
     }
 
-    clearDelayDamage(): void {    
+    public clearDelayDamage(): void {    
         this._flyDamagePool.forEach((v)=>{
             v.onClear();
         });
@@ -1304,26 +1754,16 @@ export class BattleHero extends Component {
         this._flyDamagePool.clear();
     }
 
-    playEffect(effectNode: Node): void {
-        this._heroBase.playEffect(effectNode);
+    public clearImmediatelyEffect(): void {
+        this._heroBase.clearImmediatelyEffect();
     }
 
-    stopAnim(): void {
+    public playEffect(effectNode: Node): boolean {
+        return this._heroBase.playEffect(effectNode);
+    }
+
+    public stopAnim(): void {
         this._heroBase.stopAnim();
-    }
-
-    onTargetDie() {
-
-    }
-
-   
-
-    addEvent(): void {
-
-    }
-
-    removeEvent(): void {
-
     }
 
 }

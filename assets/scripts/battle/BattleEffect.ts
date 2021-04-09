@@ -1,5 +1,5 @@
 
-import { _decorator, Component, CCFloat, Enum, Vec3, Node, Prefab, instantiate } from 'cc';
+import { _decorator, Component, CCFloat, Enum, Vec3, Node, Prefab, instantiate, CCBoolean } from 'cc';
 const { ccclass, property } = _decorator;
 
 import { HeroBase, HeroPot } from "../core/base/HeroBase";
@@ -22,6 +22,9 @@ export class BattleEffect extends Component {
 
     @property({type: CCFloat, min: 0.1, displayName: "自动销毁时间", tooltip: "如果是buff根据配置表duration销毁，飞行类型撞击时销毁"})
     public playTime: number = 5;
+
+    @property({type: CCBoolean, displayName: "是否跟随播放点", tooltip: "Immediately类型特效，是否跟随播放点移动"})
+    public bFollow: boolean = true;
 
     @property({type: CCFloat, displayName: "飞行速度", tooltip: "当类型为Fly时的飞行速度"})
     public flySpeed: number = 8;
@@ -93,6 +96,10 @@ export class BattleEffect extends Component {
         return this.effectType == EBattleEffectType.Immediately;
     }
 
+    isFly(): boolean {
+        return this.effectType == EBattleEffectType.Fly;
+    }
+
     addEndTarget(target: HeroBase): void {
         this._endTargetList.push(target);
     }
@@ -118,11 +125,8 @@ export class BattleEffect extends Component {
     initFly(attack: HeroBase, target: HeroBase, endFunc: Function): void { 
         this.setEndFunc(endFunc);
         this._targetNode = target.getPlayPot(HeroPot.Chest);
-        let parent = attack.node.parent?.parent;
         
-        if (parent) {      
-            parent.addChild(this.node);
-            this.node.setWorldPosition(attack.getPlayPot(this.playPot).getWorldPosition());
+        if (attack.playEffectInWorld(this.node)) {      
             this.refreshFlyData();
 
             if (this.endEffectPrefab) {
@@ -130,6 +134,9 @@ export class BattleEffect extends Component {
             }
 
             this._actFun = this.updateFly;
+        } else {
+            this.node.destroy();
+            console.error("飞行特效播放失败");
         }
     }
 

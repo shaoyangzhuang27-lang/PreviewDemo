@@ -12,7 +12,7 @@ import { XMsgExt } from '../../model/const/XMsgExt';
 import { HeroData } from '../../model/datas/HeroData';
 import { GameModel } from '../../model/GameModel';
 import { TableName, ValueMgr } from '../../model/ValueMgr';
-import { HeroIcon } from '../hero/HeroIcon';
+import { ElementHeroIcon } from '../common/ElementHeroIcon';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopBookUpGrade')
@@ -71,13 +71,13 @@ export class PopBookUpGrade extends PopBase {
         let lanData = ValueMgr.getInstance().getItemByField(TableName.language_data,heroInfo.name) as Config.language_data.Record;
         this.lab_heroName.string = lanData.cn;
 
-        resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
             let iconCell = instantiate(res) as Node;
             this.iconNode.addChild(iconCell);
             iconCell.scale = new Vec3(0.5,0.5,1);
 
             
-            let script = iconCell.getComponent("HeroIcon") as HeroIcon;
+            let script = iconCell.getComponent("ElementHeroIcon") as ElementHeroIcon;
             script.setHeroInfo(heroInfo,0);
         })
     }

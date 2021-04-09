@@ -1,0 +1,74 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "1e0c5729-ea86-4df6-8e99-ef804f47166b",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "1e0c5729-ea86-4df6-8e99-ef804f47166b@6c48a",
+      "displayName": "bg_fenjierenrong",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "1e0c5729-ea86-4df6-8e99-ef804f47166b"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "1e0c5729-ea86-4df6-8e99-ef804f47166b@f9941",
+      "displayName": "bg_fenjierenrong",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 435,
+        "height": 96,
+        "rawWidth": 435,
+        "rawHeight": 96,
+        "borderTop": 67,
+        "borderBottom": 24,
+        "borderLeft": 403,
+        "borderRight": 28,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "1e0c5729-ea86-4df6-8e99-ef804f47166b@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "1e0c5729-ea86-4df6-8e99-ef804f47166b@f9941"
+  }
+}

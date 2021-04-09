@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Vec3, Canvas, Prefab, instantiate, director, Button, Label } from 'cc';
+import { _decorator, Component, Node, Vec3, Canvas, Prefab, instantiate, director, Button, Label, math } from 'cc';
 const { ccclass, property } = _decorator;
 
 
@@ -18,10 +18,12 @@ const GroundLen = 300;
 
 let oldMainLoop: any = null;
 
+let tmpPos: Vec3 = new Vec3();
+
 @ccclass('BattleCtrl')
 export class BattleCtrl extends Component {
-    public static EmbattleCfg = [[-3, 0], [0, 0], [3, 0] 
-        ,[-3, 3], [0, 3], [3, 3]];
+    public static EmbattleCfg = [[-4, 0], [0, 0], [4, 0] 
+        ,[-4, 4], [0, 4], [4, 4]];
 
     @property(Node)
     public battleUiNode: Node = null as unknown as Node;
@@ -52,9 +54,13 @@ export class BattleCtrl extends Component {
     
     public camera: any = null;
     public cameraNode: any = null;
+    private _cameraPos: Vec3 = new Vec3();
 
     private _bSeekBoss: boolean = false;
     private _bossBtn: Node | null = null;
+
+
+    private _posMap: Map<number, BattleHero> = new Map<number, BattleHero>();
 
     onLoad() {
         // resources.load("prefabs/battle/pingtai01", Prefab, function name(e, res) {
@@ -134,10 +140,19 @@ export class BattleCtrl extends Component {
     }
 
     lateUpdate(): void {
-        if(!this._leaderNode) {
+        if(this._army.length == 0) {
             return;
         }
-        this.cameraNode.setPosition(this._leaderNode.position.x, 0, this._leaderNode.position.z);
+
+        this._cameraPos.x = 0;
+        this._cameraPos.z = 0;
+        for (let i = 0; i < this._army.length; i++) {
+            this._cameraPos.x += this._army[i].node.position.x;
+            this._cameraPos.z += this._army[i].node.position.z;
+        }
+
+
+        this.cameraNode.setPosition(this._cameraPos.x/this._army.length, 0, this._cameraPos.z/this._army.length);
     }
 
     initMap(): void {
@@ -179,7 +194,8 @@ export class BattleCtrl extends Component {
             }
             battleHero.setEmbattleedSite(k);
             this._army.push(battleHero);
-        })
+        });
+        this._army.sort((a: BattleHero, b:BattleHero) => a.embattleedSite - b.embattleedSite);
 
         for (let i = 0; i < this._army.length; i++) {
             if (this._army[i].isHero()) {
@@ -199,7 +215,8 @@ export class BattleCtrl extends Component {
             battleHero.setEmbattleedSite(k);
             this._monster.push(battleHero);
             battleHero.setVisible(false);
-        })
+        });
+        this._monster.sort((a: BattleHero, b:BattleHero) => a.embattleedSite - b.embattleedSite);
 
         let bossInfo = BattleMgr.getInstance().getIdleBossInfo();
         // 怪物提前生成，保证游戏顺畅
@@ -208,7 +225,136 @@ export class BattleCtrl extends Component {
             battleHero.setEmbattleedSite(k);
             this._boss.push(battleHero);
             battleHero.setVisible(false);
-        })
+        });
+        this._boss.sort((a: BattleHero, b:BattleHero) => a.embattleedSite - b.embattleedSite);
+    }
+
+    buildBattlePos(targetPos: Vec3, centerPos: Vec3, range: number, hero: BattleHero): void {
+        let sz = Math.round(targetPos.z/2);
+        let sx = Math.round(targetPos.x/2);
+
+        let cz = Math.round(centerPos.z/2);
+        let cx = Math.round(centerPos.x/2);
+
+        // if (sz >= cz) {
+        //     sz = cz + range;
+        // } else {
+        //     sz = cz - range;
+        // }
+
+        // if (sx >= cx) {
+        //     sx = cx + range;
+        // } else {
+        //     sx = cx - range;
+        // }
+        
+        if (this._posMap.has(sz * 100 + sx) && hero != this._posMap.get(sz * 100 + sx)) {
+            range/=2;
+
+            let px1 = sx;
+            let pz1 = sz;
+            let px2 = sx;
+            let pz2 = sz;
+
+            let ox1 = 0;
+            let oz1 = 0;
+            let ox2 = 0;
+            let oz2 = 0;
+
+            if (Math.abs(cz - sz) >= Math.abs(cx - sx)) {
+                ox1 = 1;
+                ox2 = -1;
+            } else {
+                oz1 = 1;
+                oz2 = -1;
+            }
+
+            for (let i = 0; i < 10; i++) {
+                if (i%2 == 0) {
+                    if (ox1 != 0) {
+                        px1 += ox1;
+
+                        if (Math.abs(cx - px1) >= range) {
+                            ox1 = 0;
+                            if (pz1 > cz) {
+                                oz1 = -1;
+                            } else {
+                                oz1 = 1;
+                            }
+                            pz1 += oz1;
+                        }
+
+                    } else {
+                        pz1 += oz1;
+
+                        if (Math.abs(cz - pz1) >= range) {
+                            oz1 = 0;
+                            if (pz1 > cz) {
+                                ox1 = -1;
+                            } else {
+                                ox1 = 1;
+                            }
+                            px1 += ox1;
+                        }
+                    }
+
+                    if (!this._posMap.has(pz1 * 100 + px1) || hero == this._posMap.get(pz1 * 100 + px1)) {
+                        sx = px1;
+                        sz = pz1;
+                        break;
+                    }
+
+                } else {
+                    if (ox2 != 0) {
+                        px2 += ox2;
+
+                        if (Math.abs(cx - px2) >= range) {
+                            ox2 = 0;
+                            if (pz2 > cz) {
+                                oz2 = -1;
+                            } else {
+                                oz2 = 1;
+                            }
+                            pz2 += oz2;
+                        }
+
+                    } else {
+                        pz2 += oz2;
+
+                        if (Math.abs(cz - pz2) >= range) {
+                            oz2 = 0;
+                            if (pz2 > cz) {
+                                ox2 = -1;
+                            } else {
+                                ox2 = 1;
+                            }
+                            px2 += ox2;
+                        }
+                    }
+
+                    if (!this._posMap.has(pz2 * 100 + px2) || hero == this._posMap.get(pz2 * 100 + px2)) {
+                        sx = px2;
+                        sz = pz2;
+                        break;
+                    }
+                }
+
+
+
+            }
+        }
+
+        targetPos.x = sx*2;
+        targetPos.z = sz*2;
+
+        this._posMap.delete(hero.getTargetPos().z/2 * 100 + hero.getTargetPos().x/2);
+        this._posMap.set(sz * 100 + sx, hero);
+        
+    }
+
+
+    removeBattlePos(targetPos: Vec3): void {
+        this._posMap.delete(targetPos.z/2 * 100 + targetPos.x/2);
     }
 
     seekEnemy(): void {
@@ -251,7 +397,7 @@ export class BattleCtrl extends Component {
             this._enemy[i].setVisible(true);
             this._enemy[i].node.setRotationFromEuler(0, 180);
             this._enemy[i].revive();
-            this._enemy[i].node.setPosition(new Vec3(BattleCtrl.EmbattleCfg[this._enemy[i].embattleedSite][0]
+            this._enemy[i].setPosition(new Vec3(BattleCtrl.EmbattleCfg[this._enemy[i].embattleedSite][0]
                 , 0 
                 , enemyZ - BattleCtrl.EmbattleCfg[this._enemy[i].embattleedSite][1]));
 
@@ -275,22 +421,24 @@ export class BattleCtrl extends Component {
         if (this._actTime <= 0) {
             this._actTime = 0;
             this.runToBattle();
+            // this.battle();
         }
     }
 
 
     runToBattle(): void {
-        this._actTime = 1.5
+        this._actTime = 0.7
         this._curActFunc = this.doRunToBattle;
 
-        let enemyZ = (-20 + 3)/2;
+        // let enemyZ = (-20 + 4)/2;
+        let enemyZ = -5;
         for(let i = 0; i < this._army.length; i++) {
-            this._army[i].startRunToBattle(enemyZ, this._actTime - 0.03);
+            this._army[i].startRunToBattle(enemyZ, this._actTime - 0.01);
         }
 
         enemyZ = -enemyZ;
         for(let i = 0; i < this._enemy.length; i++) {
-            this._enemy[i].startRunToBattle(enemyZ, this._actTime - 0.03);
+            this._enemy[i].startRunToBattle(enemyZ, this._actTime - 0.01);
         }
     }
 
@@ -305,12 +453,40 @@ export class BattleCtrl extends Component {
     battle(): void {
         // this._curActFunc = this.doBattle;
         this._curActFunc = null;
+        this._posMap.clear();
+
         for(let i = 0; i < this._army.length; i++) {
             this._army[i].startBattle(this._aliveEnemy, this._aliveArmy);
         }
 
         for(let i = 0; i < this._enemy.length; i++) {
             this._enemy[i].startBattle(this._aliveArmy, this._aliveEnemy);
+        }
+
+        // 先对位
+        for(let i = 0; i < this._army.length; i++) {
+            this._army[i].seekFirstTarget();
+        }
+
+        // 按位置顺序遍历
+        let a = 0;
+        let b = 0;
+        for(let i = 0; i < 6; i++) {
+            if (this._army.length > a && this._army[a].embattleedSite == i) {
+                if (!this._army[a].getTarget()) {
+                    this._army[a].seekFirstTarget();
+                }
+                
+                a++;
+            }
+
+            if (this._enemy.length > b && this._enemy[b].embattleedSite == i) {
+                if (!this._enemy[b].getTarget()) {
+                    this._enemy[b].seekFirstTarget();
+                }
+                
+                b++;
+            }
         }
     }
 

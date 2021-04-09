@@ -1,11 +1,12 @@
 
-import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, Vec3, tween, ScrollView, Game,Size, resources, instantiate, Layout ,UITransform} from 'cc';
+import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, Vec3, tween, ScrollView, Game,Size, resources, instantiate, Layout ,UITransform,Prefab} from 'cc';
 import { GameModel } from '../../model/GameModel';
 import { ItemEquipType,ItemEquipCell } from './ItemEquipCell';
 import { PopItemUseWin } from '../pop/PopItemUseWin';
 import { PopMgr } from '../../control/PopMgr';
 import { NotifyMgr } from '../../control/NotifyMgr';
-import { HeroFragment } from '../hero/HeroFragment';
+import { ElementHeroFragment } from '../features/bag/ElementHeroFragment';
+import { ResMgr } from '../../control/ResMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('BagMain')
@@ -228,17 +229,17 @@ export class BagMain extends Component {
     {
         if(this.scroll_fragment.content)
         {
-            this.scroll_fragment.content.removeAllChildren()
+            this.scroll_fragment.content.destroyAllChildren()
         }
 
          
 
     //    GameModel.getInstance().getBagModel().initTestFragmentList();
        let fragmentSysthesisiInfoList = GameModel.getInstance().getBagModel().getFragmentSynthesisInfoList();
-        resources.load('prefabs_ui/main/hero_fragment', (err:any,res:any)=>{
+       ResMgr.getInstance().loadPrefab('prefabs_ui/features/bag/element_herofragment', (err:Error | null,res:Prefab | null)=>{
             for (var i = 0 ; i < fragmentSysthesisiInfoList.length; i++) {
-                let fragment_item = instantiate( res );
-                let script = fragment_item.getComponent(HeroFragment);
+                let fragment_item = instantiate( res  as Prefab);
+                let script = fragment_item.getComponent(ElementHeroFragment) as ElementHeroFragment;
                 fragment_item.scale = new Vec3(0.7,0.7,1);
                 let subWidget = fragment_item.getComponent(UITransform) as UITransform;
                 subWidget.contentSize = new Size(105,126);
@@ -246,7 +247,7 @@ export class BagMain extends Component {
                 script.setBtnClick();
                 this.scroll_fragment.content?.addChild(fragment_item);
             }
-        });
+        },"BagMain");
     }
     // update (deltaTime: number) {
     //     // [4]

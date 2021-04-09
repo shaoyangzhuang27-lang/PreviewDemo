@@ -286,8 +286,7 @@ export class BattleTitleBar extends Component {
                     this._statusLabel.active = false;
                 }
                 this._statusStringMap.clear();
-                
-                this._fly_words_node?.removeAllChildren();
+                this._fly_words_node?.destroyAllChildren();
             }
         }
     }

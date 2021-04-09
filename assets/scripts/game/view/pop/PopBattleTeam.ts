@@ -4,7 +4,7 @@ const { ccclass, property } = _decorator;
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
 import { HeroData } from '../../model/datas/HeroData';
-import { HeroIcon } from '../hero/HeroIcon';
+import { ElementHeroIcon } from '../common/ElementHeroIcon';
 import { HeroSelectIcon } from '../hero/HeroSelectIcon';
 import { PopMgr } from '../../control/PopMgr';
 import { MsgMgr } from '../../control/MsgMgr';
@@ -147,8 +147,8 @@ export class PopBattleTeam extends PopBase {
             this._selectBattleHeroList.set(value.getDyncID(), key);
         });
        
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:any,res:Prefab | null)=>{
-        // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_heroicon', (err: Error | null, res: Prefab | null)=>{
+        // resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
 
             for (let index = 0; index < this.heroPosList.length; index++) {
                 this.heroPosList[index].removeAllChildren();
@@ -250,7 +250,7 @@ export class PopBattleTeam extends PopBase {
         subWidget.updateAlignment();
         heroIcon.name = childName;
 
-        let script = heroIcon.getComponent("HeroIcon") as HeroIcon; 
+        let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
         script.setHeroData(value as HeroData);
         script.setBtnCallBack((_data:HeroData)=>{
             this._heroSelect(_data,false);
@@ -377,8 +377,8 @@ export class PopBattleTeam extends PopBase {
             // console.log("点击滚动区域影响按时大多数",isSelect,heroStaticID,heroDyncID);
             let foremostHeroHomeIndex:number = this._getForemostHeroHomeIndex();
             let foremostHeroHome = this._getHeroHomeByIndex(foremostHeroHomeIndex);
-            ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_icon', (err:any,res:Prefab | null)=>{
-            // resources.load('prefabs_ui/main/hero_icon', (err:any,res:any)=>{
+            ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_heroicon', (err:any,res:Prefab | null)=>{
+            // resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
                 let heroIcon = instantiate(res as Prefab) as Node;
                 this._initTopHero(heroIcon, heroData);
                 foremostHeroHome.addChild(heroIcon);  

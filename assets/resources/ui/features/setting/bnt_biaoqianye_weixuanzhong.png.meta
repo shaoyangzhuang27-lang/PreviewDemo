@@ -1,0 +1,74 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "2d2be0e8-0143-49cf-be49-7dbf62282422",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "2d2be0e8-0143-49cf-be49-7dbf62282422@6c48a",
+      "displayName": "bnt_biaoqianye_weixuanzhong",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "2d2be0e8-0143-49cf-be49-7dbf62282422"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "2d2be0e8-0143-49cf-be49-7dbf62282422@f9941",
+      "displayName": "bnt_biaoqianye_weixuanzhong",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 29,
+        "height": 28,
+        "rawWidth": 29,
+        "rawHeight": 28,
+        "borderTop": 11,
+        "borderBottom": 11,
+        "borderLeft": 12,
+        "borderRight": 12,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "2d2be0e8-0143-49cf-be49-7dbf62282422@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "2d2be0e8-0143-49cf-be49-7dbf62282422@f9941"
+  }
+}

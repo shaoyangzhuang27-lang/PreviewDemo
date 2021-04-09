@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: xxxxxx
  * @Date: 2021-03-01 16:08:56
- * @LastEditTime: 2021-03-31 11:37:32
+ * @LastEditTime: 2021-04-01 10:57:22
  */
 import { NotifyMgr } from "../../control/NotifyMgr";
 import { GameModel } from "../GameModel";
@@ -666,35 +666,4 @@ export class PlayerModel extends BaseModel {
     }
 
 
-    /**
-     * @description: 英雄书院
-     * @param {Msg} msg
-     */
-    public setCollegeHeroInfo(msg: Msg.SetCollegeHeroA) {
-        // if (msg.err == Msg.TErrorCode.ERR_OK) {       
-        //     this._heroIDInCollege.clear();
-        //     forEach (var hic in msg.HeroIDInCollege) {
-        //         PlayerData.instance.HeroIDInCollege.Add(hic.Key, hic.Value);
-        //         HeroData hd = PlayerData.instance.GetHeroByID(hic.Key);
-        //         if (hd != null)
-        //             hd.CalcTalentSkillProperty();
-        //     }
-
-        //     PlayerData.instance.CollegeBlockLastAt.Clear();
-        //     foreach (var cbt in msg.CollegeBlockTimestamps)
-        //         PlayerData.instance.CollegeBlockLastAt.Add(cbt.Key, cbt.Value);
-
-        //     RefreshSlotNum();
-        //     Lsr.RefreshCells();
-
-            
-        //     //抛出通知 英雄书院 
-        //     NotifyMgr.getInstance().notify(NotifyMgr.event_net_set_college_hero, msg);                
-        //     // 通知主城3D书院模型tip提示
-        //     // UINotificationCenter.Instance().PostNotification((int) NotificationMsg.RPHeroCollege);
-        // } else {
-        //     // TipsMgr.instance.ShowErrDialog(msg.Err);
-        //     console.log(msg.errStr + " errCode=" + msg.err.toString());
-        // }        
-    }
 }

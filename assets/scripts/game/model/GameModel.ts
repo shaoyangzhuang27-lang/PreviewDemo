@@ -9,6 +9,7 @@ import { TableName, ValueMgr } from "./ValueMgr";
 import { OfflineModel } from "./datas/OfflineModel"
 import { ForgeModel } from "./datas/ForgeModel"
 import { SystemModel } from "./datas/SystemModel";
+import { HeroReplaceModel } from "./datas/HeroReplaceModel"
 
 export class GameModel{
     private static _instance: GameModel = new GameModel();
@@ -26,6 +27,7 @@ export class GameModel{
     private _offlineModel:OfflineModel = new OfflineModel(this);
     private _heroPubModel:HeroPubModel = new HeroPubModel(this);
     private _forgeModel: ForgeModel = new ForgeModel(this);
+    private _heroReplaceModel: HeroReplaceModel = new HeroReplaceModel(this);
 
     public getSystemModel(){
         return this._systemModel;
@@ -56,6 +58,10 @@ export class GameModel{
     // 锻造模块
     public getForgeModel(){
         return this._forgeModel;
+    }
+    // 英雄置换
+    public getHeroReplaceModel(){
+        return this._heroReplaceModel;
     }
     //数据类定义---------------------
     

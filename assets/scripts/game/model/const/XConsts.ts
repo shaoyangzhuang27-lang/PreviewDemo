@@ -111,10 +111,13 @@ export class XConsts{
     public static KHeroDetailTierSpriteName:string[] = new Array<string> ( "英雄详情_标题背景品质灰", "英雄详情_标题背景品质绿","英雄详情_标题背景品质蓝", "英雄详情_标题背景品质紫", "英雄详情_标题背景品质橙", "英雄详情_标题背景品质红" );
     public static KHeroDetailCampSpriteName:string[] = new Array<string> ( "英雄详情_背景", "英雄详情_背景图4", "英雄详情_背景图5", "英雄详情_背景图1", "英雄详情_背景图2", "英雄详情_背景图3" );
     public static KCampSpriteName:string[] = new Array<string> ( "无", "水属性", "火属性", "木属性", "光属性", "暗属性" );
+    public static KCampSpriteNameForHeroPromotion:string[] = new Array<string> ( "无", "ico_water", "ico_fire", "ico_tree", "ico_light", "ico_dark" );
     public static KCampFrameSpriteName:string[] = new Array<string> ( "无", "光环_水框", "光环_火框", "光环_木框", "光环_光框", "光环_暗框" );
     public static KCampLVSpriteName:string[] = new Array<string> ( "光环_骑士", "光环_水", "光环_火", "光环_木", "光环_光", "光环_暗" );
     public static KCampBGSpriteName:string[] = new Array<string> ( "无", "光环_水", "光环_火", "光环_木", "光环_光", "光环_暗" );
     public static KClassesSpriteName:string[] = new Array<string> ( "无", "无", "战士图标", "刺客图标", "法师图标", "游侠图标", "牧师图标" );
+	public static KClassesSpriteNameForHeroPromotion:string[] = new Array<string> ( "无", "无", "ico_zs", "ico_ck", "ico_fs", "ico_yx", "ico_ms" );
+    public static KNewClassesSpriteName:string[] = new Array<string> ( "无", "无", "icon_occupation5", "icon_occupation1", "icon_occupation2", "icon_occupation3", "icon_occupation4" );
     public static KClassesCombatSpriteName:string[] = new Array<string> ( "无", "无", "战斗_职业战士", "战斗_职业刺客", "战斗_职业法师", "战斗_职业游侠", "战斗_职业牧师" );
     public static KHeroQualityBgSpriteName:string[] = new Array<string> ( "小卡框_品质灰", "小卡框_品质绿", "小卡框_品质蓝", "小卡框_品质紫", "小卡框_品质橙", "小卡框_品质红", "小卡框_品质金");
     public static KItemHeroBookBGSpriteName:string[] = new Array<string> ( "无", "图鉴_新背景4", "图鉴_新背景5", "图鉴_新背景1", "图鉴_新背景2", "图鉴_新背景3");
@@ -182,7 +185,9 @@ export class XConsts{
     public static KLanguageShowString:string[] = new Array<string> ( "无", "English", "简体中文", "繁體中文", "日本語", "한국어");
     public static KPetBgSpriteName:string[] = new Array<string> ( "无", "宠物系统_龙背景水", "宠物系统_龙背景火", "宠物系统_龙背景木", "宠物系统_龙背景光", "宠物系统_龙背景暗");
     public static KHeroCampIcon:string[] = new Array<string> ( "无", "水", "火", "木", "光", "暗" );
+    public static KNewHeroCampIcon:string[] = new Array<string> ( "无", "icon_camp5", "icon_camp3", "icon_camp4", "icon_camp2", "icon_camp1" );
     public static KHeroCampRestrainIcon:string[] = new Array<string> ( "无", "阵营克制_水", "阵营克制_火", "阵营克制_木", "阵营克制_光", "阵营克制_暗" );
+    public static KHeroCampRestrainIconForHeroPromotion:string[] = new Array<string> ( "无", "ico_camp_restrain_water", "ico_camp_restrain_fire", "ico_camp_restrain_tree", "ico_camp_restrain_light", "ico_camp_restrain_dark" );
     public static KHeroClasses:string[] = new Array<string> ( "无", "无", "UI_Warrior", "UI_Assassin", "UI_Mage", "UI_Rogue", "UI_Pastor" );
     public static KCampColor:Color[] = new Array<Color>(
         Color.WHITE,
@@ -354,9 +359,27 @@ export class XConsts{
 
     //星级合成消耗碎片
     public static KFragmentNumRequired : number[] = new Array<number> (0,5,10,20,30,50);
-    public static KFragmentFrameSpriteName:string[] = new Array<string> ( "小卡框_品质随机", "小卡框_品质橙");
-    public static KFragmentQualitySpriteName:string[] = new Array<string> ( "小卡框_碎片品质随机", "小卡框_碎片品质橙");
+    public static KFragmentFrameSpriteName:string[] = new Array<string> ( "s_card_quality_1","s_card_quality_1", "s_card_quality_2","s_card_quality_3","s_card_quality_4");
+    public static KFragmentQualitySpriteName:string[] = new Array<string> ( "s_card_quality_0","s_card_quality_1", "s_card_quality_2","s_card_quality_3","s_card_quality_4");
     public static KFragmentBgSpriteName:string[] = new Array<string> ( "小卡框_品质普通背景", "小卡框_品质金背景");
+    public static KFragmentCampIcon:string[] = new Array<string> ( "无", "icon_hero_camp1", "icon_hero_camp2", "icon_hero_camp3", "icon_hero_camp4", "icon_hero_camp5" );
+    public static KFragmentClassesSpriteName:string[] = new Array<string> ( "无", "无","icon_hero_occupation1", "icon_hero_occupation2", "icon_hero_occupation3", "icon_hero_occupation4", "icon_hero_occupation5" );
+    public static GetFragmentQualityByStar(star:number) {
+        let idx:number = 0;
+        if(star == 0)
+            idx = 0;
+        else if (star < 3)
+            idx = 1;
+        else if (star < 5)
+            idx = 2;
+        else if (star < 8)
+            idx = 3;
+        else 
+            idx = 4;
+        return XConsts.KFragmentQualitySpriteName[idx];
+    }
+    //英雄置换消耗
+    public static KClassesExchangeMiracleShard : number[] = new Array<number>(0, 0, 5, 20, 100, 500, 2000, 5000, 10000);
 
     public static KFragmentClassesName : string[] = new Array<string>("UI_OrdinaryHero","UI_SeniorHero","UI_LegendHero")
     public static POP_SUMMON_TYPE  = {

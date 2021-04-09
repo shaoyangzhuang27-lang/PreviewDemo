@@ -32,6 +32,11 @@ let HeroModelPrefabPath: {[key: string]: string} = {
     "怪_狼骑兵_1": "monster_006",
 }
 
+let PrepareSkillPrefabPath: {[key: number]: string} = {
+    1001: "prepare_skill_mage_lightning", // 测试
+    // 534012: "prepare_skill_mage_lightning", // 测试
+}
+
 let SkillPrefabPath: {[key: number]: string} = {
     1001: "skill_0001",
     512011: "skill_warrior_shield",
@@ -39,7 +44,7 @@ let SkillPrefabPath: {[key: number]: string} = {
     546022: "skill_priest_aoe_heal", 
     534012: "skill_mage_lightning",
     523011: "skill_dark_knight",
-    525022: "skill_bounty_hunter"// 技能粒子/火赏金猎人技能施放
+    525022: "skill_bounty_hunter",// 技能粒子/火赏金猎人技能施放
 }
 
 let BuffPrefabPath: {[key: string]: string} = {
@@ -50,13 +55,17 @@ let BuffPrefabPath: {[key: string]: string} = {
     "新Buff粒子/流血": "buff_bleed",
 }
 
+let PrepareAttackPrefabPath: {[key: string]: string} = {
+    "prepare_attack_mage": "prepare_attack_mage", // 测试
+}
+
 let AttackPrefabPath: {[key: string]: string} = {
     "新普攻粒子/占星师普通攻击": "normal_attack_priest",
     "新普攻粒子/魔导师普通攻击": "normal_attack_mage", //  33 5093401 法师1_55_3
     "新普攻粒子/火枪手普通攻击": "normal_attack_gun",
 
 
-    "normal_attack_dark_knight": "normal_attack_dark_knight" // 测试
+    "normal_attack_dark_knight": "normal_attack_dark_knight", // 测试
     
 }
 
@@ -76,10 +85,10 @@ let HeroTestInfo: {[key: number]: any} = {
         prefab: "hero_zhangfei",
         normalAttack: "normal_attack_dark_knight",
         skillID: 1001,
-        hp: 100,
+        hp: 200,
         atk: 5,
         def: 2,
-        range: 3,
+        range: 4,
         speed: 1,
         skillSpeed: 0.9,
     },
@@ -90,7 +99,7 @@ let HeroTestInfo: {[key: number]: any} = {
         hp: 100,
         atk: 4,
         def: 2,
-        range: 3,
+        range: 4,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -101,7 +110,7 @@ let HeroTestInfo: {[key: number]: any} = {
         hp: 100,
         atk: 4,
         def: 2,
-        range: 3,
+        range: 4,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -110,7 +119,7 @@ let HeroTestInfo: {[key: number]: any} = {
         hp: 100,
         atk: 4,
         def: 2,
-        range: 3,
+        range: 4,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -122,7 +131,7 @@ let HeroTestInfo: {[key: number]: any} = {
         hp: 100,
         atk: 6,
         def: 2,
-        range: 6,
+        range: 8,
         speed: 1.3,
         skillSpeed: 1,
     },
@@ -134,8 +143,8 @@ let HeroTestInfo: {[key: number]: any} = {
         hp: 100,
         atk: 6,
         def: 2,
-        range: 6,
-        speed: 1.3,
+        range: 8,
+        speed: 0.7,
         skillSpeed: 0.9,
     },
     25: {
@@ -143,7 +152,7 @@ let HeroTestInfo: {[key: number]: any} = {
         hp: 100,
         atk: 6,
         def: 2,
-        range: 6,
+        range: 8,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -152,7 +161,7 @@ let HeroTestInfo: {[key: number]: any} = {
         hp: 100,
         atk: 6,
         def: 2,
-        range: 6,
+        range: 8,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -161,7 +170,7 @@ let HeroTestInfo: {[key: number]: any} = {
         hp: 100,
         atk: 6,
         def: 2,
-        range: 6,
+        range: 8,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -169,11 +178,12 @@ let HeroTestInfo: {[key: number]: any} = {
         // prefab: "hero_036",
         prefab: "hero_zhugeliang",
         normalAttack: "normal_attack_mage", // TODO
+        prepareAttack: "prepare_attack_mage", // TODO
         skillID: 534012,
         hp: 100,
         atk: 6,
         def: 2,
-        range: 6,
+        range: 8,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -187,7 +197,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         hp: 200,
         atk: 2,
         def: 2,
-        range: 3,
+        range: 4,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -197,17 +207,17 @@ let MonsterTestInfo: {[key: number]: any}= {
         hp: 300,
         atk: 8,
         def: 2,
-        range: 3,
+        range: 4,
         speed: 1,
         skillSpeed: 0.9,
     },
     9: { // 1204044
         // prefab: "monster_009",
         prefab: "hero_lvbu",
-        hp: 300,
+        hp: 100,
         atk: 8,
         def: 2,
-        range: 3,
+        range: 4,
         speed: 1,
         skillSpeed: 0.9,
     },
@@ -218,7 +228,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         hp: 400,
         atk: 10,
         def: 2,
-        range: 3,
+        range: 4,
         speed: 1,
         skillSpeed: 0.9,
     },
@@ -228,7 +238,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         hp: 200,
         atk: 2,
         def: 2,
-        range: 3,
+        range: 4,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -238,7 +248,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         hp: 200,
         atk: 2,
         def: 2,
-        range: 3,
+        range: 4,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -247,7 +257,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         hp: 300,
         atk: 2,
         def: 2,
-        range: 3,
+        range: 4,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -256,7 +266,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         hp: 300,
         atk: 2,
         def: 2,
-        range: 3,
+        range: 4,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -265,7 +275,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         hp: 300,
         atk: 2,
         def: 2,
-        range: 3,
+        range: 4,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -276,7 +286,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         hp: 150,
         atk: 3,
         def: 2,
-        range: 6,
+        range: 8,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -287,7 +297,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         hp: 150,
         atk: 3,
         def: 2,
-        range: 6,
+        range: 8,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -296,7 +306,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         hp: 200,
         atk: 3,
         def: 2,
-        range: 6,
+        range: 8,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -305,7 +315,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         hp: 150,
         atk: 3,
         def: 2,
-        range: 6,
+        range: 8,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -314,7 +324,7 @@ let MonsterTestInfo: {[key: number]: any}= {
         hp: 100,
         atk: 3,
         def: 2,
-        range: 6,
+        range: 8,
         speed: 1.3,
         skillSpeed: 0.9,
     },
@@ -337,6 +347,11 @@ let ArmyTestInfo =  [
         type: EHeroType.HERO,
         embattleedSite: 2,
     },
+    // {
+    //     id: 11,
+    //     type: EHeroType.HERO,
+    //     embattleedSite: 2,
+    // },
     {
         id: 13,
         type: EHeroType.HERO,
@@ -352,6 +367,21 @@ let ArmyTestInfo =  [
         type: EHeroType.HERO,
         embattleedSite: 5,
     },
+    // {
+    //     id: 5,
+    //     type: EHeroType.HERO,
+    //     embattleedSite: 3,
+    // },
+    // {
+    //     id: 5,
+    //     type: EHeroType.HERO,
+    //     embattleedSite: 4,
+    // },
+    // {
+    //     id: 5,
+    //     type: EHeroType.HERO,
+    //     embattleedSite: 5,
+    // },
 ]
 
 let EnemyTestInfo = [
@@ -365,10 +395,16 @@ let EnemyTestInfo = [
         type: EHeroType.MONSTER,
         embattleedSite: 1,
     },
+    // {
+    //     id: 14,
+    //     type: EHeroType.MONSTER,
+    //     embattleedSite: 2,
+    // },
     {
-        id: 14,
+        id: 5,
         type: EHeroType.MONSTER,
         embattleedSite: 2,
+
     },
     {
         id: 5,
@@ -432,8 +468,16 @@ for (let k in SkillPrefabPath) {
     SkillPrefabPath[k] = "prefabs/battle/skill/" + SkillPrefabPath[k];
 }
 
+for (let k in PrepareSkillPrefabPath) {
+    PrepareSkillPrefabPath[k] = "prefabs/battle/skill/" + PrepareSkillPrefabPath[k];
+}
+
 for (let k in BuffPrefabPath) {
     BuffPrefabPath[k] = "prefabs/battle/buff/" + BuffPrefabPath[k];
+}
+
+for (let k in PrepareAttackPrefabPath) {
+    PrepareAttackPrefabPath[k] = "prefabs/battle/attack/" + PrepareAttackPrefabPath[k];
 }
 
 for (let k in AttackPrefabPath) {
@@ -444,6 +488,10 @@ for (let k in HeroTestInfo) {
     HeroTestInfo[k].prefab = "prefabs/hero/" + HeroTestInfo[k].prefab;
     if (HeroTestInfo[k].normalAttack && HeroTestInfo[k].normalAttack != "0") {
         HeroTestInfo[k].normalAttack = "prefabs/battle/attack/" + HeroTestInfo[k].normalAttack;
+    }
+
+    if (HeroTestInfo[k].prepareAttack && HeroTestInfo[k].prepareAttack != "0") {
+        HeroTestInfo[k].prepareAttack = "prefabs/battle/attack/" + HeroTestInfo[k].prepareAttack;
     }   
 }
 
@@ -451,6 +499,10 @@ for (let k in MonsterTestInfo) {
     MonsterTestInfo[k].prefab = "prefabs/hero/" + MonsterTestInfo[k].prefab;
     if (MonsterTestInfo[k].normalAttack && MonsterTestInfo[k].normalAttack != "0") {
         MonsterTestInfo[k].normalAttack = "prefabs/battle/attack/" + MonsterTestInfo[k].normalAttack;
+    } 
+
+    if (MonsterTestInfo[k].prepareAttack && MonsterTestInfo[k].prepareAttack != "0") {
+        MonsterTestInfo[k].prepareAttack = "prefabs/battle/attack/" + MonsterTestInfo[k].prepareAttack;
     } 
 }
 
@@ -564,10 +616,6 @@ export class BattleTest {
         }
     }
 
-    // public static getLoadResList() {
-    //     return BattleTest.loadResList
-    // }
-
     public static getMapInfo() {
         return BattleTest.mapInfo;
     }
@@ -582,6 +630,10 @@ export class BattleTest {
 
     public static getBossFormation() {
         return BattleTest.bossFormation;
+    }
+
+    public static getPrepareSkillPrefabPath(skillID: number) {
+        return PrepareSkillPrefabPath[skillID];
     }
 
     public static getSkillPrefabPath(skillID: number) {
@@ -607,20 +659,10 @@ export class BattleTest {
     }
 
     public static buildTestBattle() {
-        // BattleTest.loadResList = [];
         BattleTest.buildMapInfo();
         BattleTest.buildArmy();
         BattleTest.buildEnemyInfo();
         BattleTest.buildBossInfo();
-
-
-        // TODO
-        // BattleTest.loadResList.push("prefabs/battle/hero/battle_hero");
-
-        // BattleTest.loadResList.push("prefabs/battle/skill/skill_0001");
-        // BattleTest.loadResList.push("prefabs/battle/skill/skill_warrior_shield");
-        // BattleTest.loadResList.push("prefabs/battle/buff/buff_frozen");
-        // BattleTest.loadResList.push("prefabs/battle/buff/buff_warrior_shield");
 
         BattleTest.isInit = true;
     }

@@ -235,6 +235,7 @@ export class XShare{
     public K5StarHeroDecomposeReqCopy = 1030;
     public K5StarHeroDecomposeReqVipLevel = 5;
     public KDailyRechargeDuration = 7 * 3600 * 24;
+    //--解锁一个英雄学院格子消耗钻石数
     public KCollegeUnlockBlockVrmb = 500;
     public KTechnologyResetVrmb = 100;
     public KTechnologyResetMoneyReturn = 50;

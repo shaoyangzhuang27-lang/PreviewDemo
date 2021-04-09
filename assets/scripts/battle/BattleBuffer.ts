@@ -113,6 +113,9 @@ export class BattleBuffer {
             } else {
                 this._target.addHp(this._atk * this._record.effectParam1 / 100, DamageType.Skill);
             }
+            if (this._target.isDie()) {
+                return false;
+            }
         }
 
         if (this.lastTime > this.time) {

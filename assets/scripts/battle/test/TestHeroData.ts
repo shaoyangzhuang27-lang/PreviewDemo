@@ -92,6 +92,11 @@ export class TestHeroData extends HeroData{
         return this.getTestCfgValueString("prefab");
     }
 
+    // 普通攻击蓄力粒子
+    public getPrepareAttackParticleName(): string {
+        return this.getTestCfgValueString("prepareAttack");
+    }
+
     // 普通攻击粒子
     public getNormalAttackParticleName(): string {
         return this.getTestCfgValueString("normalAttack");

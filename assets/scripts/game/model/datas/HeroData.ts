@@ -51,6 +51,15 @@ export class HeroData extends BaseHeroData {
         return this;
     }
 
+    public ClassesExchange(newStaticID: number) : void {
+        this._heroInfo.staticID = newStaticID
+        this._record = ValueMgr.getInstance().getItemByField(TableName.heroes, newStaticID) as Config.heroes.Record;
+        this._recordSkill = ValueMgr.getInstance().getItemByField(TableName.skill, this._record.skillId) as Config.skill.Record;
+
+        this.calcTalentSkillProperty();
+        // this.refreshEquipProperty();
+    }
+
     public initDataByKnight(pi: Msg.PlayerInfo, gameModel: GameModel) {
         this._heroInfo.id = 0;
         this._heroInfo.level = pi.level;
