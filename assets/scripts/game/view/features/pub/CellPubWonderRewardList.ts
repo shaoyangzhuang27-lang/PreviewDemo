@@ -44,7 +44,8 @@ export class CellPubWonderRewardList extends Component {
                 campName : "",
                 classesName : "",
                 bg : "",
-                param : 0
+                param : 0,
+                occupation : "",
             }  
             info.type = data.awardParam1; // Msg.TFragmentType.EFragmentType_Random;
             info.star = data.awardParam3; //5

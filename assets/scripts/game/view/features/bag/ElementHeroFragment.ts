@@ -40,6 +40,14 @@ export class ElementHeroFragment extends Component {
     public img_point:Node = null as unknown as Node;
 
     @property({type :  Node})
+    public img_occupation:Node = null as unknown as Node;
+
+
+    @property({type :  Node})
+    public img_quality:Node = null as unknown as Node;
+
+    
+    @property({type :  Node})
     public starlist:Node[] = [];
 
 
@@ -56,7 +64,8 @@ export class ElementHeroFragment extends Component {
         campName : "",
         classesName : "",
         bg : "",
-        param : 0
+        param : 0,
+        occupation : "",
     }  
     
     start () {
@@ -111,6 +120,7 @@ export class ElementHeroFragment extends Component {
     {
         this._fragmentInfo = instantiate(info);  
         this.img_camp.active = false; 
+        this.img_occupation.active = false;
         console.log("vvvvvvvvvvvvv",this._fragmentInfo);
         Object.keys(this._fragmentInfo).forEach((val, idx, array) => {
             // val: 当前值
@@ -118,10 +128,11 @@ export class ElementHeroFragment extends Component {
             // array: Array
 
             val == "icon" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_icon);
-            val == "frame" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.btn_frame);
+            // val == "frame" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.btn_frame);
             val == "camp" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_camp);
-            val == "quality" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_debris);
+            val == "quality" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_quality);
             val == "bg" && this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_bg);
+            val =="occupation"&& this._fragmentInfo[val] && this._resourceLoad(this._fragmentInfo[val],this.img_occupation);
             
         });
 
@@ -203,7 +214,7 @@ export class ElementHeroFragment extends Component {
             }
 
             let bar = this.probar_fragment.node.getChildByName("bar");
-            let path = nPreocess !=1 ? "ui/common/icon/" + "碎片未满进度条" + "/spriteFrame" : "ui/common/icon/" + "碎片已满进度条" + "/spriteFrame";
+            let path = nPreocess !=1 ? "ui/comm/hero/img_jingdutiao_suipian01/spriteFrame" : "ui/comm/hero/img_jingdutiao_suipian02/spriteFrame";
             this._resourceLoad(path,bar);
            
             var barCompoent =  this.probar_fragment?.getComponent(ProgressBar);

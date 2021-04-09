@@ -81,7 +81,8 @@ export class PopFragmentSynthesis extends PopBase {
         campName : "",
         classesName : "",
         bg : "",
-        param : 0
+        param : 0,
+        occupation : "",
     }  
 
     public setIsWonderSummonShow(bState : boolean)

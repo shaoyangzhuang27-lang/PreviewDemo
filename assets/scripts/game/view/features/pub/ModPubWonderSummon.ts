@@ -244,7 +244,8 @@ export class ModPubWonderSummon extends Component {
                     campName : "",
                     classesName : "",
                     bg : "",
-                    param : 0
+                    param : 0,
+                    occupation : "",
                 }  
                 info.type = Msg.TFragmentType.EFragmentType_Random;
                 info.star = 4;
