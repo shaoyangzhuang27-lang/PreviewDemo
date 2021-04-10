@@ -22,7 +22,7 @@ import { PopHeroPub } from "../view/features/pub/PopHeroPub";
 import { PopRecLineUp } from "../view/features/pub/PopRecLineUp";
 import { PopSummonSettle } from "../view/common/PopSummonSettle";
 import { PopFragmentSynthesis } from "../view/features/bag/PopFragmentSynthesis";
-import { PopBookActive } from '../view/pop/PopBookActive';
+import { PopBookActive } from '../view/features/herobook/PopBookActive';
 import { PopHeroEquipReplace } from '../view/features/heropromotion/PopHeroEquipReplace';
 import { PopBookUpGrade } from '../view/pop/PopBookUpgrade';
 import { PopMultiItemReward } from "../view/common/PopMultiItemReward";
@@ -406,7 +406,7 @@ export class PopMgr extends PopCore  {
 
     //弹出图鉴界面
     public popBookLibraryView() {
-        resources.load('prefabs_ui/pop/pop_bookview', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/herobook/pop_bookview', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
@@ -590,7 +590,7 @@ export class PopMgr extends PopCore  {
      * @param id 英雄id
      */
     public popBookHeroActiveView(id: number) {
-        resources.load('prefabs_ui/pop/pop_bookactive', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/herobook/pop_bookactive', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 
@@ -604,7 +604,7 @@ export class PopMgr extends PopCore  {
      * @param id 
      */
     public popBookHeroUpgradeView(id: number) {
-         resources.load('prefabs_ui/pop/pop_bookupgrade', (err:any,res:any)=>{
+         resources.load('prefabs_ui/features/herobook/pop_bookupgrade', (err:any,res:any)=>{
              let p = instantiate( res );
              this.pushWindow(p);
  
@@ -693,7 +693,7 @@ export class PopMgr extends PopCore  {
      * @param sid 英雄静态id
      */
     public popOpenBookHeroDetail(sid: number) {
-        resources.load('prefabs_ui/pop/pop_bookherodetail', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/herobook/pop_bookherodetail', (err:any,res:any)=>{
             console.log("sssssssssss",sid);
             let p = instantiate( res );
             this.pushWindow(p);
@@ -740,7 +740,7 @@ export class PopMgr extends PopCore  {
      * 打开图鉴总加成属性界面
      */
     public popOpenBookAllPropretyUI() {
-        resources.load('prefabs_ui/pop/pop_bookallproperty', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/herobook/pop_bookallproperty', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 
@@ -752,7 +752,7 @@ export class PopMgr extends PopCore  {
      * 打开图鉴属性总等级加成界面
      */
     public popOpenBookPropretyLevelUI() {
-         resources.load('prefabs_ui/pop/pop_bookallpropretyview', (err:any,res:any)=>{
+         resources.load('prefabs_ui/features/herobook/pop_bookallpropretyview', (err:any,res:any)=>{
              let p = instantiate( res );
              this.pushWindow(p);
  

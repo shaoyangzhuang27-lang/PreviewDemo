@@ -4,10 +4,6 @@
  * @version 1.0.0,2021.3.17
  */
 import { _decorator, Component, Node, Label, instantiate,resources,SpriteFrame,Sprite, Vec3, UITransform } from 'cc';
-import { HeroData } from '../../model/datas/HeroData';
-import { HeroBookCell } from './HeroBookCell';
-import { XMsgExt } from '../../model/const/XMsgExt'
-import { GameModel } from '../../model/GameModel';
 const { ccclass, property } = _decorator;
 
 @ccclass('HeroBookTitleCell')

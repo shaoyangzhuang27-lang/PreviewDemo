@@ -4,15 +4,14 @@
  * @version 1.0.0,2021.3.18
  */
 import { _decorator, Component, Node, Label, resources, instantiate, Vec3, Button } from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { MsgMgr } from '../../control/MsgMgr';
-import { NotifyMgr } from '../../control/NotifyMgr';
-import { XConsts } from '../../model/const/XConsts';
-import { XMsgExt } from '../../model/const/XMsgExt';
-import { HeroData } from '../../model/datas/HeroData';
-import { GameModel } from '../../model/GameModel';
-import { TableName, ValueMgr } from '../../model/ValueMgr';
-import { ElementHeroIcon } from '../common/ElementHeroIcon';
+import { PopBase } from '../../../../core/control/PopBase';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { NotifyMgr } from '../../../control/NotifyMgr';
+import { XMsgExt } from '../../../model/const/XMsgExt';
+import { HeroData } from '../../../model/datas/HeroData';
+import { GameModel } from '../../../model/GameModel';
+import { TableName, ValueMgr } from '../../../model/ValueMgr';
+import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopBookUpGrade')

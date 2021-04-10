@@ -4,8 +4,8 @@
  * @version 1.0.0,2021.3.19
  */
 import { _decorator, Component, Node, Label } from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { GameModel } from '../../model/GameModel';
+import { PopBase } from '../../../../core/control/PopBase';
+import { GameModel } from '../../../model/GameModel';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopBookProUI')

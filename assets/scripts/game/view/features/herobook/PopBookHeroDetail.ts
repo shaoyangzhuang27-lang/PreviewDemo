@@ -1,8 +1,8 @@
 
 import { _decorator, Component, Node, Label } from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { PopMgr } from '../../control/PopMgr';
-import { TableName, ValueMgr } from '../../model/ValueMgr';
+import { PopBase } from '../../../../core/control/PopBase';
+import { PopMgr } from '../../../control/PopMgr';
+import { TableName, ValueMgr } from '../../../model/ValueMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopBookHeroDetail')

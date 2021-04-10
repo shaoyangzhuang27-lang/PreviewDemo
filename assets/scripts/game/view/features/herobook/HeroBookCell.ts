@@ -4,11 +4,10 @@
  * @version 1.0.0,2021.3.17
  */
 import { _decorator, Component, Node, Label, resources, SpriteFrame, Sprite } from 'cc';
+import { XConsts } from '../../../model/const/XConsts';
+import { GameModel } from '../../../model/GameModel';
+import { TableName, ValueMgr } from '../../../model/ValueMgr';
 const { ccclass, property } = _decorator;
-import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { XMsgExt } from '../../model/const/XMsgExt'
-import { XConsts } from '../../model/const/XConsts';
-import { GameModel } from '../../model/GameModel';
 
 @ccclass('HeroBookCell')
 export class HeroBookCell extends Component {

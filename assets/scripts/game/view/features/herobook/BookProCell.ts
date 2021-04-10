@@ -4,7 +4,7 @@
  * @version 1.0.0,2021.3.22
  */
 import { _decorator, Component, Label } from 'cc';
-import { TableName, ValueMgr } from '../../model/ValueMgr';
+import { TableName, ValueMgr } from '../../../model/ValueMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('BookProCell')
