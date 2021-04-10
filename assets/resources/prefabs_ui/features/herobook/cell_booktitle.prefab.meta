@@ -2,12 +2,12 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-  "uuid": "0d4cff39-3984-4bde-8063-321bdc930bd0",
+  "uuid": "3f9894b3-ef1b-4493-aad4-9dc558929a58",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "bookcell"
+    "syncNodeName": "cell_booktitle"
   }
 }

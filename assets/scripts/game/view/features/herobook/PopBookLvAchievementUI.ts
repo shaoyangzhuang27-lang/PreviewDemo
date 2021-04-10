@@ -72,7 +72,7 @@ export class PopBookLvAchievementUI extends PopBase {
             }
         }
 
-        resources.load('prefabs_ui/main/bookpropretycell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/herobook/cell_bookproprety', (err:any,res:any)=>{
             for (let key of this._propretyListMap.keys()) {
                 let propretyCell = instantiate(res) as Node;
                 this.scrov_book.content?.addChild(propretyCell);

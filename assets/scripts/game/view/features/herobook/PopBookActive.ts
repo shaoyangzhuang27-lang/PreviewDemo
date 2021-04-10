@@ -28,7 +28,7 @@ export class PopBookActive extends PopBase {
 
     private _initIcon(id:number)
     {
-        resources.load('prefabs_ui/main/bookcell', (err:any,res:any)=>{  
+        resources.load('prefabs_ui/features/herobook/cell_book', (err:any,res:any)=>{  
             let bookcell = instantiate(res) as Node;
             this.iconNode.addChild(bookcell)
             bookcell.scale = new Vec3(0.75,0.75,1);

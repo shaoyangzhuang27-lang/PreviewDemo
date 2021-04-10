@@ -141,7 +141,7 @@ export class PopHeroBookView extends PopBase {
         {
             this.scrov_book.content.removeAllChildren()
         }
-        resources.load('prefabs_ui/main/booktitlecell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/herobook/cell_booktitle', (err:any,res:any)=>{
             let k = new Array<[number,Node]>();     //排序存储对象
             for (let key of this._itemHeroListForBook.keys()) {  
                 let bookTitleCell = instantiate(res) as Node;
@@ -162,7 +162,7 @@ export class PopHeroBookView extends PopBase {
                 }
                 bookTitleCell.name = sortIndex.toString()
                 k.push([sortIndex,bookTitleCell]);
-                resources.load('prefabs_ui/main/bookcell', (err:any,res:any)=>{                    
+                resources.load('prefabs_ui/features/herobook/cell_book', (err:any,res:any)=>{                    
                     for (let index = 0; index < value.length; index++) {
                         let bookcell = instantiate(res) as Node;
                         this.scrov_book.content?.addChild(bookcell);
