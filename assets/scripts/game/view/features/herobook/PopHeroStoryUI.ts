@@ -4,12 +4,12 @@
  * @version 1.0.0,2021.3.19
  */
 import { _decorator, Component, Node, Label, Game, resources, SpriteFrame, Sprite } from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { MsgMgr } from '../../control/MsgMgr';
-import { NotifyMgr } from '../../control/NotifyMgr';
-import { HeroData } from '../../model/datas/HeroData';
-import { GameModel } from '../../model/GameModel';
-import { TableName, ValueMgr } from '../../model/ValueMgr';
+import { PopBase } from '../../../../core/control/PopBase';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { NotifyMgr } from '../../../control/NotifyMgr';
+import { HeroData } from '../../../model/datas/HeroData';
+import { GameModel } from '../../../model/GameModel';
+import { TableName, ValueMgr } from '../../../model/ValueMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopHeroStoryUI')

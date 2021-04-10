@@ -9,8 +9,8 @@ import { GameModel } from '../../../model/GameModel';
 import { TableName, ValueMgr } from '../../../model/ValueMgr';
 const { ccclass, property } = _decorator;
 
-@ccclass('HeroBookCell')
-export class HeroBookCell extends Component {
+@ccclass('CellHeroBook')
+export class CellHeroBook extends Component {
     @property({type :  Node})
     public img_bg:Node = null as unknown as Node;
 

@@ -7,11 +7,9 @@ import { PopHeroReset } from "../view/features/decompose/PopHeroReset";
 import { PopCommonOne } from "../view/common/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from './NetLoading';
-import { TipDemo } from '../view/TipDemo';
 import { TipHeroAttribute } from '../view/common/TipHeroAttribute';
 import { XConsts } from '../model/const/XConsts';
 import { TipSkill } from '../view/common/TipSkill';
-import { PopHeroBookView } from "../view/pop/PopHeroBookView";
 import { PopItemUseWin } from "../view/pop/PopItemUseWin";
 import { PopEquipInfoWin } from "../view/pop/PopEquipInfoWin";
 import { PopEquipSaleView } from "../view/pop/PopEquipSaleView";
@@ -24,12 +22,8 @@ import { PopSummonSettle } from "../view/common/PopSummonSettle";
 import { PopFragmentSynthesis } from "../view/features/bag/PopFragmentSynthesis";
 import { PopBookActive } from '../view/features/herobook/PopBookActive';
 import { PopHeroEquipReplace } from '../view/features/heropromotion/PopHeroEquipReplace';
-import { PopBookUpGrade } from '../view/pop/PopBookUpgrade';
 import { PopMultiItemReward } from "../view/common/PopMultiItemReward";
-import { PopBookHeroDetail } from '../view/pop/PopBookHeroDetail';
-import { PopHeroStoryUI } from '../view/pop/PopHeroStoryUI';
 import { PopForge } from '../view/features/forge/PopForge';
-import { PopBookProUI } from '../view/pop/PopBookProUI';
 import { TipCampOrCareer } from '../view/features/heropromotion/TipCampOrCareer';
 import { PopHaloView } from '../view/pop/PopHaloView';
 import { TipShareHeroToChat } from '../view/features/heropromotion/TipShareHeroToChat';
@@ -47,6 +41,10 @@ import { PopfCollege } from '../view/features/college/PopfCollege';
 import { PopCollegeNotice } from '../view/features/college/PopCollegeNotice';
 import { PopCollegeUnload } from '../view/features/college/PopCollegeUnload';
 import { PopCollegeSelectHero } from '../view/features/college/PopCollegeSelectHero';
+import { PopHeroBookView } from '../view/features/herobook/PopHeroBookView';
+import { PopBookUpGrade } from '../view/features/herobook/PopBookUpgrade';
+import { PopBookHeroDetail } from '../view/features/herobook/PopBookHeroDetail';
+import { PopHeroStoryUI } from '../view/features/herobook/PopHeroStoryUI';
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
@@ -710,7 +708,7 @@ export class PopMgr extends PopCore  {
      * @param sid 英雄静态id
      */
     public popOpenHeroStoryUI(sid: number) {
-        resources.load('prefabs_ui/pop/pop_herostory', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/herobook/pop_herostory', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 

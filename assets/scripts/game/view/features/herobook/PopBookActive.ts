@@ -5,7 +5,7 @@
  */
 import { _decorator, Component, Node, resources, instantiate, Vec3 } from 'cc';
 import { PopBase } from '../../../../core/control/PopBase';
-import { HeroBookCell } from './CellHeroBook';
+import { CellHeroBook } from './CellHeroBook';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopBookActive')
@@ -33,7 +33,7 @@ export class PopBookActive extends PopBase {
             this.iconNode.addChild(bookcell)
             bookcell.scale = new Vec3(0.75,0.75,1);
 
-            let script = bookcell.getComponent("HeroBookCell") as HeroBookCell; 
+            let script = bookcell.getComponent("CellHeroBook") as CellHeroBook; 
             script.setHeroBookData(3,id,null);
         })
     }

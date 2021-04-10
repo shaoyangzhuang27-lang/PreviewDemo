@@ -6,7 +6,7 @@
  import { _decorator, Component, Node, Label, resources, instantiate, ScrollView } from 'cc';
 import { PopBase } from '../../../../core/control/PopBase';
 import { TableName, ValueMgr } from '../../../model/ValueMgr';
-import { BookProCell } from './CellBookPro';
+import { CellBookPro } from './CellBookPro';
  const { ccclass, property } = _decorator;
 
 @ccclass('PopBookLvAchievementUI')
@@ -78,7 +78,7 @@ export class PopBookLvAchievementUI extends PopBase {
                 this.scrov_book.content?.addChild(propretyCell);
 
                 let value = this._propretyListMap.get(key) as Array<[number,number]>;
-                let script = propretyCell.getComponent("BookProCell") as BookProCell;
+                let script = propretyCell.getComponent("CellBookPro") as CellBookPro;
                 script.setData(key,value);
             }
         })

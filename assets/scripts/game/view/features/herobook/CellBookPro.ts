@@ -7,8 +7,8 @@ import { _decorator, Component, Label } from 'cc';
 import { TableName, ValueMgr } from '../../../model/ValueMgr';
 const { ccclass, property } = _decorator;
 
-@ccclass('BookProCell')
-export class BookProCell extends Component {
+@ccclass('CellBookPro')
+export class CellBookPro extends Component {
     @property({type: Label})
     public lab_titleName:Label = null as unknown as Label;
 

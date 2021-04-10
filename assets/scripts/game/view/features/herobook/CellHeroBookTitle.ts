@@ -6,8 +6,8 @@
 import { _decorator, Component, Node, Label, instantiate,resources,SpriteFrame,Sprite, Vec3, UITransform } from 'cc';
 const { ccclass, property } = _decorator;
 
-@ccclass('HeroBookTitleCell')
-export class HeroBookTitleCell extends Component {
+@ccclass('CellHeroBookTitle')
+export class CellHeroBookTitle extends Component {
     @property({type :  Node})
     public imgBg:Node = null as unknown as Node;
 

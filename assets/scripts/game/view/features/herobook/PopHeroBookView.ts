@@ -4,19 +4,18 @@
  * @version 1.0.0,2021.3.17
  */
 import { _decorator, Component, Node, ToggleContainer, Label, instantiate, EventHandler,Toggle,resources,ScrollView } from 'cc';
+import { PopBase } from '../../../../core/control/PopBase';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { NotifyMgr } from '../../../control/NotifyMgr';
+import { PopMgr } from '../../../control/PopMgr';
+import { XConsts } from '../../../model/const/XConsts';
+import { XMsgExt } from '../../../model/const/XMsgExt';
+import { HeroData } from '../../../model/datas/HeroData';
+import { GameModel } from '../../../model/GameModel';
+import { TableName, ValueMgr } from '../../../model/ValueMgr';
+import { CellHeroBook } from './CellHeroBook';
+import { CellHeroBookTitle } from './CellHeroBookTitle';
 const { ccclass, property } = _decorator;
-import { HeroData } from '../../model/datas/HeroData';
-import { PopBase } from '../../../core/control/PopBase';
-import { GameModel } from '../../model/GameModel';
-import { MsgMgr } from '../../control/MsgMgr';
-import { XConsts } from "../../model/const/XConsts";
-import { XFuns } from "../../model/const/XFuns";
-import { TableName, ValueMgr } from "../../model/ValueMgr";
-import { XMsgExt } from "../../model/const/XMsgExt";
-import { NotifyMgr } from '../../control/NotifyMgr';
-import { PopMgr } from '../../control/PopMgr';
-import { CellHeroBook } from '../features/herobook/CellHeroBook';
-import { CellHeroBookTitle } from '../features/herobook/CellHeroBookTitle';
 
 @ccclass('PopHeroBookView')
 export class PopHeroBookView extends PopBase {
