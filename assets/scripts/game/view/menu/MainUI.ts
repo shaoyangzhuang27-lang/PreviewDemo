@@ -7,7 +7,7 @@ import { GameModel } from '../../model/GameModel';
 import { BagMain } from '../menu/BagMain';
 import { KnightMain } from '../menu/KnightMain';
 import { TeamMain } from '../menu/TeamMain';
-import { FlyItem } from '../pop/FlyItem';
+import { FlyItem } from '../features/battle/FlyItem';
 import { PopOffLineBonus} from '../pop/PopOffLineBonus';
 import { OfflineModel } from '../../model/datas/OfflineModel';
 import { UINodeMgr } from '../UINodeMgr';

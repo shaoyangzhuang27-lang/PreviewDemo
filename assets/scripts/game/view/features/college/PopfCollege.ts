@@ -2,7 +2,7 @@
  * @Description: 英雄书院
  * @Author: 徐涛
  * @Date: 2021-03-30 19:49:03
- * @LastEditTime: 2021-04-08 15:33:38
+ * @LastEditTime: 2021-04-10 16:52:10
  */
 import { _decorator, Node, Label, instantiate, ScrollView, Vec3, UITransform, math, Prefab } from 'cc';
 const { ccclass, property } = _decorator;
@@ -10,7 +10,7 @@ import { PopBase } from '../../../../core/control/PopBase';
 import { GameModel } from '../../../model/GameModel';
 import { PopMgr } from '../../../control/PopMgr';
 import { NotifyMgr } from '../../../control/NotifyMgr';
-import { HeroModel } from '../../hero/HeroModel';
+import { HeroModel } from '../../common/HeroModel';
 import { ValueMgr } from '../../../model/ValueMgr';
 import { XShare } from '../../../model/const/XShare';
 import { CellCollege } from './CellCollege';

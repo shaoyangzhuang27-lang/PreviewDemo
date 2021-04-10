@@ -28,7 +28,7 @@ import { PopBookUpGrade } from '../view/pop/PopBookUpgrade';
 import { PopMultiItemReward } from "../view/common/PopMultiItemReward";
 import { PopBookHeroDetail } from '../view/pop/PopBookHeroDetail';
 import { PopHeroStoryUI } from '../view/pop/PopHeroStoryUI';
-import { PopForge } from '../view/pop/PopForge';
+import { PopForge } from '../view/features/forge/PopForge';
 import { PopBookProUI } from '../view/pop/PopBookProUI';
 import { TipCampOrCareer } from '../view/features/heropromotion/TipCampOrCareer';
 import { PopHaloView } from '../view/pop/PopHaloView';

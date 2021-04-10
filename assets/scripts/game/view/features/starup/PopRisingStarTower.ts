@@ -14,7 +14,7 @@ import { PopMgr } from '../../../control/PopMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
 import { XConsts } from "../../../model/const/XConsts";
 import { NotifyMgr } from '../../../control/NotifyMgr';
-import { HeroModel } from '../../hero/HeroModel';
+import { HeroModel } from '../../common/HeroModel';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { ResMgr } from '../../../control/ResMgr';
 

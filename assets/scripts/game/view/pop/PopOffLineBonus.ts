@@ -3,9 +3,9 @@ import { _decorator, Node, LabelComponent, resources, tween, instantiate, Quat, 
 import { PopBase } from '../../../core/control/PopBase';
 import { GameModel } from '../../model/GameModel';
 import { XConsts } from "../../model/const/XConsts";
-import { BonusDetail } from "./BonusDetail";
+import { BonusDetail } from "../features/battle/BonusDetail";
 import { MsgMgr } from '../../control/MsgMgr';
-import { BonusIcon } from './BonusIcon';
+import { BonusIcon } from '../features/battle/BonusIcon';
 
 const { ccclass, property } = _decorator;
 
