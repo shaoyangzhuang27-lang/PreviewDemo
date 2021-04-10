@@ -176,18 +176,18 @@ export class ModPubWonderSummon extends Component {
             this.node_hero?.addChild(_heroIcon);   
         },"ModPubWonderSummon");
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_equipprop', (err: Error | null, res: Prefab | null)=>{
             let itemEquipCell = instantiate(res as Prefab );
             //钻石 
             itemEquipCell.setScale(0.6,0.6,1)
             let id = Msg.TObjectType.EObject_VRmb; 
             let num = XConsts.PUB_UI_WONDER_DEFAULT_DIAMOND_REWARD;
             // 设置装备点击回调
-            let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
-            script.setItemType(id, num, ItemEquipType.goods, 
+            let script = itemEquipCell.getComponent("ElementEquipProp") as ElementEquipProp;
+            script.setItemType(id, num, EquipPropType.goods, 
                 ()=>{
                     this.node_parent_window.setIsNeedHide(false);
-                    PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
+                    PopMgr.getInstance().popItemUseSellView(id,EquipPropType.goods,false);
             });  
 
             this.node_dimond?.addChild(itemEquipCell);   
@@ -195,14 +195,14 @@ export class ModPubWonderSummon extends Component {
 
         for(let i = 0; i < 3; i++)
         {
-            ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err: Error | null, res: Prefab | null)=>{
+            ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_equipprop', (err: Error | null, res: Prefab | null)=>{
                 let itemEquipCell = instantiate(res as Prefab); 
                 itemEquipCell.setScale(0.4,0.4,1)
                 let id = 45 + i; 
                 let num = 1;
                 // 设置装备点击回调
-                let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
-                script.setItemType(id, num, ItemEquipType.equip, 
+                let script = itemEquipCell.getComponent("ElementEquipProp") as ElementEquipProp;
+                script.setItemType(id, num, EquipPropType.equip, 
                     ()=>{
                         console.log("装备")
                         this.node_parent_window.setIsNeedHide(false);

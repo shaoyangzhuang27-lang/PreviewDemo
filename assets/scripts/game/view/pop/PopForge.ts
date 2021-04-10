@@ -144,14 +144,14 @@ export class PopForge extends PopBase {
         // 切换页签后默认第一个为选择
         this.selectEquipData = list[0]
 
-        resources.load('prefabs_ui/main/itemequip_cell', (err: any, res: any) => {
+        resources.load('prefabs_ui/common/element_equipprop', (err: any, res: any) => {
             this.curPageEquipData.forEach((element: Config.equip.Record) => {
                 let itemEquipCell = instantiate(res) as Node;
                 itemEquipCell.parent = this.layoutEquip
                 itemEquipCell.name = "equipCell" + element.id
                 // 设置装备点击回调
-                let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
-                script.setItemType(element.id, 0, ItemEquipType.equip, 
+                let script = itemEquipCell.getComponent("ElementEquipProp") as ElementEquipProp;
+                script.setItemType(element.id, 0, EquipPropType.equip, 
                     (id:number, itemType:number, obType:number)=>{
                         console.log("点击装备回调，设置选中装备")
                         if (this.selectEquipData.id != id){
@@ -189,13 +189,13 @@ export class PopForge extends PopBase {
         // 记录当前选中数据
         this.selectEquipData = equipData
         // 绘制装备图标
-        resources.load('prefabs_ui/main/itemequip_cell', (err: any, res: any) => {
+        resources.load('prefabs_ui/common/element_equipprop', (err: any, res: any) => {
             // 绘制选中图标
             let equipSelect = instantiate(res) as Node;
             equipSelect.parent = this.nodeSelect
             this.nodeSelect.scale = new Vec3(1.2, 1.2, 1)
-            let script = equipSelect.getComponent("ItemEquipCell") as ItemEquipCell;
-            script.setItemType(equipData.id, 0, ItemEquipType.equip, 
+            let script = equipSelect.getComponent("ElementEquipProp") as ElementEquipProp;
+            script.setItemType(equipData.id, 0, EquipPropType.equip, 
                 (id: number, itemType: number, obType: number) => {
                     console.log("点击装备回调,弹出装备详情界面")
             });
@@ -203,8 +203,8 @@ export class PopForge extends PopBase {
             // 绘制对应材料图标
             let equipForward = instantiate(res) as Node;
             equipForward.parent = this.nodeForward
-            let scriptForward = equipForward.getComponent("ItemEquipCell") as ItemEquipCell;
-            scriptForward.setItemType(forwardData.id, 0, ItemEquipType.equip, 
+            let scriptForward = equipForward.getComponent("ElementEquipProp") as ElementEquipProp;
+            scriptForward.setItemType(forwardData.id, 0, EquipPropType.equip, 
                 (id: number, itemType: number, obType: number) => {
                 console.log("点击装备回调，弹出装备详情界面")
             });

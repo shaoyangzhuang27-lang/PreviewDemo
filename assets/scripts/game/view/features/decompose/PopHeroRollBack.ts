@@ -451,9 +451,9 @@ export class PopHeroRollBack extends Component {
         return money; 
     }
 
-    private _initPrefab(iconNode:Node,key:number,value:number,itemType:ItemEquipType, objType:number)
+    private _initPrefab(iconNode:Node,key:number,value:number,itemType:EquipPropType, objType:number)
     {        
-        let script = iconNode.getComponent("ItemEquipCell") as ItemEquipCell;
+        let script = iconNode.getComponent("ElementEquipProp") as ElementEquipProp;
         script.setItemUseType(objType)
       
         script.setItemType(Number(key),Number(value),itemType,(id:number,itemClickType:number,objClickType:number)=>{
@@ -463,7 +463,7 @@ export class PopHeroRollBack extends Component {
 
     private _itemEqipCallBack(itemID:number,itemType:number,objType:number)
     {
-        if(itemType == ItemEquipType.goods)
+        if(itemType == EquipPropType.goods)
         {
             PopMgr.getInstance().popItemUseSellView(itemID,objType);
         }

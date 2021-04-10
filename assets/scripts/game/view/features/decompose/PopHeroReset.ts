@@ -325,7 +325,7 @@ export class PopHeroReset extends PopBase {
             heroIcon.name = "heroIcon";
         });
         //其他物品
-        resources.load('prefabs_ui/main/itemequip_cell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_equipprop', (err:any,res:any)=>{
             let index = 1;
             //金币
             let ID = Msg.TObjectType.EObject_Money;
@@ -334,7 +334,7 @@ export class PopHeroReset extends PopBase {
             equipCell.setScale(new Vec3(0.8, 0.8, 0.8))
             equipCell.name = "heroIcon";
             this.goodsNodes[index]?.addChild(equipCell);
-            this._initPrefab(equipCell, Number(ID), Number(num), ItemEquipType.goods,
+            this._initPrefab(equipCell, Number(ID), Number(num), EquipPropType.goods,
              Number(Msg.TObjectType.EObject_Money)); 
              index++;
              //升级点
@@ -349,7 +349,7 @@ export class PopHeroReset extends PopBase {
                 equipCell.setScale(new Vec3(0.8, 0.8, 0.8))
                 equipCell.name = "heroIcon";
                 this.goodsNodes[index]?.addChild(equipCell);
-                this._initPrefab(equipCell, Number(ID), Number(num), ItemEquipType.goods,
+                this._initPrefab(equipCell, Number(ID), Number(num), EquipPropType.goods,
                 Number(Msg.TObjectType.EObject_UpgradePoint)); 
                 index++;
             }
@@ -366,7 +366,7 @@ export class PopHeroReset extends PopBase {
                 equipCell.setScale(new Vec3(0.8, 0.8, 0.8))
                 equipCell.name = "heroIcon";
                 this.goodsNodes[index]?.addChild(equipCell);
-                this._initPrefab(equipCell, Number(ID), Number(num), ItemEquipType.goods,
+                this._initPrefab(equipCell, Number(ID), Number(num), EquipPropType.goods,
                 Number(Msg.TObjectType.EObject_AdvanceExp)); 
                 index++;
             }
@@ -379,7 +379,7 @@ export class PopHeroReset extends PopBase {
                     equipCell.setScale(new Vec3(0.8, 0.8, 0.8))
                     this.goodsNodes[index]?.addChild(equipCell);
                     equipCell.name = "heroIcon";
-                    this._initPrefab(equipCell, Number(key), Number(value), ItemEquipType.equip, Number(Msg.TObjectType.EObject_Equip)); 
+                    this._initPrefab(equipCell, Number(key), Number(value), EquipPropType.equip, Number(Msg.TObjectType.EObject_Equip)); 
                     index++;
                 }
              }
@@ -404,9 +404,9 @@ export class PopHeroReset extends PopBase {
         return money; 
     }
 
-    private _initPrefab(iconNode:Node,key:number,value:number,itemType:ItemEquipType, objType:number)
+    private _initPrefab(iconNode:Node,key:number,value:number,itemType:EquipPropType, objType:number)
     {        
-        let script = iconNode.getComponent("ItemEquipCell") as ItemEquipCell;
+        let script = iconNode.getComponent("ElementEquipProp") as ElementEquipProp;
         script.setItemUseType(objType)
       
         script.setItemType(Number(key),Number(value),itemType,(id:number,itemClickType:number,objClickType:number)=>{
@@ -416,7 +416,7 @@ export class PopHeroReset extends PopBase {
 
     private _itemEqipCallBack(itemID:number,itemType:number,objType:number)
     {
-        if(itemType == ItemEquipType.goods)
+        if(itemType == EquipPropType.goods)
         {
             PopMgr.getInstance().popItemUseSellView(itemID,objType);
         }

@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "element_equipProp",
+    "_name": "element_equipprop",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -307,7 +307,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "66acef5a-9110-46d8-b0ba-0307080e2545@f9941"
+      "__uuid__": "8e700414-a6a4-4080-a518-f800cd89407e@f9941"
     },
     "_type": 1,
     "_fillType": 0,
@@ -627,7 +627,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "03939ded-4000-480d-a455-51066b2ff809@f9941"
+      "__uuid__": "b19d2fa3-ff85-48a6-953d-bef9f945204e@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -818,7 +818,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "65675868-7674-4013-934f-2bfecbe8a78d@f9941"
+      "__uuid__": "f5618902-30f3-49e5-a808-1c265d0fd406@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -948,7 +948,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "65675868-7674-4013-934f-2bfecbe8a78d@f9941"
+      "__uuid__": "f5618902-30f3-49e5-a808-1c265d0fd406@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -1078,7 +1078,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "65675868-7674-4013-934f-2bfecbe8a78d@f9941"
+      "__uuid__": "f5618902-30f3-49e5-a808-1c265d0fd406@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -1208,7 +1208,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "65675868-7674-4013-934f-2bfecbe8a78d@f9941"
+      "__uuid__": "f5618902-30f3-49e5-a808-1c265d0fd406@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -1338,7 +1338,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "65675868-7674-4013-934f-2bfecbe8a78d@f9941"
+      "__uuid__": "f5618902-30f3-49e5-a808-1c265d0fd406@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -1642,7 +1642,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "bcb43f1f-da3d-4fbc-a7af-d51032caefcf@f9941"
+      "__uuid__": "8a86400f-1061-4787-a0c1-c937898529a2@f9941"
     },
     "_type": 1,
     "_fillType": 0,

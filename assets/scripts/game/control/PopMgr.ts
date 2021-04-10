@@ -312,17 +312,17 @@ export class PopMgr extends PopCore  {
 
 
     //弹出提示窗放这里-------------------------------------------------
-    public tipSimpleWindow(pos:Vec3){
+    // public tipSimpleWindow(pos:Vec3){
         
-        resources.load('prefabs_ui/pop/tip_demo', (err:any,res:any)=>{
-            let p = instantiate( res ) as Node;
-            this._parent?.addChild(p);
-            p.setSiblingIndex(XConsts.OrderTip);
+    //     resources.load('prefabs_ui/pop/tip_demo', (err:any,res:any)=>{
+    //         let p = instantiate( res ) as Node;
+    //         this._parent?.addChild(p);
+    //         p.setSiblingIndex(XConsts.OrderTip);
 
-            let script = p.getComponent("TipDemo") as TipDemo;
-            script.setWinPos(pos);
-        });
-            }
+    //         let script = p.getComponent("TipDemo") as TipDemo;
+    //         script.setWinPos(pos);
+    //     });
+    // }
 
     /**
      * @description: 英雄属性值弹窗tip

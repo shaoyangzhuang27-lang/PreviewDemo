@@ -75,14 +75,14 @@ export class CellPubWonderRewardList extends Component {
 
     public initEquipIconInfo(data : any,node :Node)
     {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_equipprop', (err: Error | null, res: Prefab | null)=>{
             let equipItem = instantiate(res as Prefab); 
             // equipItem.setScale(0.4,0.4,1)
             let id = data.awardParam1; 
             let num = data.awardNum;
             // 设置装备点击回调
-            let script = equipItem.getComponent("ItemEquipCell") as ItemEquipCell;
-            script.setItemType(id, num, ItemEquipType.equip, 
+            let script = equipItem.getComponent("ElementEquipProp") as ElementEquipProp;
+            script.setItemType(id, num, EquipPropType.equip, 
                 ()=>{
                     console.log("装备")
                     this._node_parent.setIsNeedHide(false);
@@ -94,18 +94,18 @@ export class CellPubWonderRewardList extends Component {
 
     public initMagicDust(data : any, node : Node)
     {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_equipprop', (err: Error | null, res: Prefab | null)=>{
             let equipItem = instantiate(res as Prefab); 
             // equipItem.setScale(0.4,0.4,1)
             let id = Msg.TObjectType.EObject_MagicDust; //data.awardParam1; 
             let num = data.awardNum;
             // 设置装备点击回调
-            let script = equipItem.getComponent("ItemEquipCell") as ItemEquipCell;
-            script.setItemType(id, num, ItemEquipType.goods, 
+            let script = equipItem.getComponent("ElementEquipProp") as ElementEquipProp;
+            script.setItemType(id, num, EquipPropType.goods, 
                 ()=>{
                     console.log("道具")
                     this._node_parent.setIsNeedHide(false);
-                    PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
+                    PopMgr.getInstance().popItemUseSellView(id,EquipPropType.goods,false);
             });  
             node.addChild(equipItem);
         },"CellPubWonderRewardList") 
@@ -113,18 +113,18 @@ export class CellPubWonderRewardList extends Component {
 
     public initAdvanceExp(data : any, node : Node)
     {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_equipprop', (err: Error | null, res: Prefab | null)=>{
             let equipItem = instantiate(res as Prefab); 
             // equipItem.setScale(0.4,0.4,1)
             let id = Msg.TObjectType.EObject_AdvanceExp; //data.awardParam1; 
             let num = data.awardNum;
             // 设置装备点击回调
-            let script = equipItem.getComponent("ItemEquipCell") as ItemEquipCell;
-            script.setItemType(id, num, ItemEquipType.goods, 
+            let script = equipItem.getComponent("ElementEquipProp") as ElementEquipProp;
+            script.setItemType(id, num, EquipPropType.goods, 
                 ()=>{
                     console.log("道具")
                     this._node_parent.setIsNeedHide(false);
-                    PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
+                    PopMgr.getInstance().popItemUseSellView(id,EquipPropType.goods,false);
             });  
             node.addChild(equipItem);
         },"CellPubWonderRewardList") 
@@ -132,19 +132,19 @@ export class CellPubWonderRewardList extends Component {
 
     public initUsableItem(data : any, node : Node)
     {
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_equipprop', (err: Error | null, res: Prefab | null)=>{
             let equipItem = instantiate(res as Prefab); 
             // equipItem.setScale(0.4,0.4,1)
             let id = data.awardParam1; 
             let num = data.awardNum;
             // 设置装备点击回调
-            let script = equipItem.getComponent("ItemEquipCell") as ItemEquipCell;
+            let script = equipItem.getComponent("ElementEquipProp") as ElementEquipProp;
             script.setItemUseType(data.awardType);
-            script.setItemType(id, num, ItemEquipType.goods, 
+            script.setItemType(id, num, EquipPropType.goods, 
                 ()=>{
                     console.log("道具")
                     this._node_parent.setIsNeedHide(false);
-                    PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
+                    PopMgr.getInstance().popItemUseSellView(id,EquipPropType.goods,false);
             });  
             node.addChild(equipItem);
         },"CellPubWonderRewardList") 
@@ -169,19 +169,19 @@ export class CellPubWonderRewardList extends Component {
                this.node_list[4]?.addChild(_heroIcon);   
             },"CellPubWonderRewardList");
 
-            ResMgr.getInstance().loadPrefab('prefabs_ui/main/itemequip_cell', (err: Error | null, res: Prefab | null)=>{
+            ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_equipprop', (err: Error | null, res: Prefab | null)=>{
                 let itemEquipCell = instantiate(res as Prefab);
                 //钻石 
                  itemEquipCell.setScale(1.2,1.2,1)
                 let id = this._infoArray[1].awardType; //Msg.TObjectType.EObject_VRmb; 
                 let num = this._infoArray[1].awardNum; //XConsts.PUB_UI_WONDER_DEFAULT_DIAMOND_REWARD;
                 // 设置装备点击回调
-                let script = itemEquipCell.getComponent("ItemEquipCell") as ItemEquipCell;
-                script.setItemType(id, num, ItemEquipType.goods, 
+                let script = itemEquipCell.getComponent("ElementEquipProp") as ElementEquipProp;
+                script.setItemType(id, num, EquipPropType.goods, 
                     ()=>{
                         console.log("点击钻石显示道具信息")
                         this._node_parent.setIsNeedHide(false);
-                        PopMgr.getInstance().popItemUseSellView(id,ItemEquipType.goods,false);
+                        PopMgr.getInstance().popItemUseSellView(id,EquipPropType.goods,false);
                 });  
     
                 this.node_list[5]?.addChild(itemEquipCell);   
