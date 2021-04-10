@@ -6,7 +6,7 @@
  import { _decorator, Component, Node, Label, resources, instantiate, ScrollView } from 'cc';
 import { PopBase } from '../../../../core/control/PopBase';
 import { TableName, ValueMgr } from '../../../model/ValueMgr';
-import { BookProCell } from './BookProCell';
+import { BookProCell } from './CellBookPro';
  const { ccclass, property } = _decorator;
 
 @ccclass('PopBookLvAchievementUI')

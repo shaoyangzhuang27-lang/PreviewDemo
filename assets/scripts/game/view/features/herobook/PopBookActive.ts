@@ -5,7 +5,7 @@
  */
 import { _decorator, Component, Node, resources, instantiate, Vec3 } from 'cc';
 import { PopBase } from '../../../../core/control/PopBase';
-import { HeroBookCell } from './HeroBookCell';
+import { HeroBookCell } from './CellHeroBook';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopBookActive')

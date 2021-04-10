@@ -13,10 +13,10 @@ import { XConsts } from "../../model/const/XConsts";
 import { XFuns } from "../../model/const/XFuns";
 import { TableName, ValueMgr } from "../../model/ValueMgr";
 import { XMsgExt } from "../../model/const/XMsgExt";
-import { HeroBookTitleCell} from '../../view/hero/HeroBookTitleCell';
-import { HeroBookCell } from '../hero/HeroBookCell';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { PopMgr } from '../../control/PopMgr';
+import { HeroBookCell } from '../features/herobook/CellHeroBook';
+import { HeroBookTitleCell } from '../features/herobook/CellHeroBookTitle';
 
 @ccclass('PopHeroBookView')
 export class PopHeroBookView extends PopBase {
