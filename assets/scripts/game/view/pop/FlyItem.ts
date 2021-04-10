@@ -162,7 +162,7 @@ export class FlyItem extends Component {
      * @param parent            指定父节点
      */
     static showActionFlyWihtObject(srcWPos: Vec3, items: Msg.ILootObject[], parent: Node): void {
-        resources.load('prefabs_ui/fly_item', (err: any, res: any) => {
+        resources.load('prefabs_ui/features/battle/fly_item', (err: any, res: any) => {
             let p = instantiate(res);
             // 当前running的scene上？
             p.parent = parent

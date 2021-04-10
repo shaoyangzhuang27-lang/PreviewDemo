@@ -725,7 +725,7 @@ export class PopMgr extends PopCore  {
      * @param p1
      */
     public popForge() {
-        resources.load('prefabs_ui/pop/pop_forge', (err: any, res: any) => {
+        resources.load('prefabs_ui/features/forge/pop_forge', (err: any, res: any) => {
             let p = instantiate(res);
             this.pushWindow(p)
             let script = p.getComponent("PopForge") as PopForge;

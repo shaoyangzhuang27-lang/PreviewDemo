@@ -85,7 +85,7 @@ export class PopOffLineBonus extends PopBase {
         arrBonusData.push({ nCount : (configBonusInfo as any).idleExp,     strPath : XConsts.KObjectIconSpriteName[Msg.TObjectType.EObject_Exp]});
         arrBonusData.push({ nCount : (configBonusInfo as any).idleUpgradePoint, strPath : XConsts.KObjectIconSpriteName[Msg.TObjectType.EObject_UpgradePoint]});
 
-        resources.load('prefabs_ui/offline/bonus_detail', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/battle/offline/bonus_detail', (err:any,res:any)=>{
             // 通过预制体创建node
             for(let data of arrBonusData) {
                 if (data.nCount == undefined || data.nCount == 0) {
@@ -114,7 +114,7 @@ export class PopOffLineBonus extends PopBase {
         //     HeroInfo extent = 6;
         // }
 
-        resources.load('prefabs_ui/offline/bonus_icon', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/battle/offline/bonus_icon', (err:any,res:any)=>{
             // 通过预制体创建node
             for (let data of bonusInfo) {
                 let p = instantiate(res) as Node;

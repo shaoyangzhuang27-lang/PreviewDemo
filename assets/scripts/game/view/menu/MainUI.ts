@@ -144,7 +144,7 @@ export class MainUI extends Component {
     }
 
     openOfflineBonus(){
-        resources.load('prefabs_ui/offline/pop_offline', (err: any, res: any) => {
+        resources.load('prefabs_ui/features/battle/offline/pop_offline', (err: any, res: any) => {
             let p = instantiate(res);
             let script = p.getComponent("PopOffLineBonus") as PopOffLineBonus
             script.popSelf()
