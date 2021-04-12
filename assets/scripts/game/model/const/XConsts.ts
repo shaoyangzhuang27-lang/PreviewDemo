@@ -117,7 +117,6 @@ export class XConsts{
     public static KCampBGSpriteName:string[] = new Array<string> ( "无", "光环_水", "光环_火", "光环_木", "光环_光", "光环_暗" );
     public static KClassesSpriteName:string[] = new Array<string> ( "无", "无", "战士图标", "刺客图标", "法师图标", "游侠图标", "牧师图标" );
 	public static KClassesSpriteNameForHeroPromotion:string[] = new Array<string> ( "无", "无", "ico_zs", "ico_ck", "ico_fs", "ico_yx", "ico_ms" );
-    public static KNewClassesSpriteName:string[] = new Array<string> ( "无", "无", "icon_occupation5", "icon_occupation1", "icon_occupation2", "icon_occupation3", "icon_occupation4" );
     public static KClassesCombatSpriteName:string[] = new Array<string> ( "无", "无", "战斗_职业战士", "战斗_职业刺客", "战斗_职业法师", "战斗_职业游侠", "战斗_职业牧师" );
     public static KHeroQualityBgSpriteName:string[] = new Array<string> ( "小卡框_品质灰", "小卡框_品质绿", "小卡框_品质蓝", "小卡框_品质紫", "小卡框_品质橙", "小卡框_品质红", "小卡框_品质金");
     public static KItemHeroBookBGSpriteName:string[] = new Array<string> ( "无", "图鉴_新背景4", "图鉴_新背景5", "图鉴_新背景1", "图鉴_新背景2", "图鉴_新背景3");
@@ -185,7 +184,6 @@ export class XConsts{
     public static KLanguageShowString:string[] = new Array<string> ( "无", "English", "简体中文", "繁體中文", "日本語", "한국어");
     public static KPetBgSpriteName:string[] = new Array<string> ( "无", "宠物系统_龙背景水", "宠物系统_龙背景火", "宠物系统_龙背景木", "宠物系统_龙背景光", "宠物系统_龙背景暗");
     public static KHeroCampIcon:string[] = new Array<string> ( "无", "水", "火", "木", "光", "暗" );
-    public static KNewHeroCampIcon:string[] = new Array<string> ( "无", "icon_camp5", "icon_camp3", "icon_camp4", "icon_camp2", "icon_camp1" );
     public static KHeroCampRestrainIcon:string[] = new Array<string> ( "无", "阵营克制_水", "阵营克制_火", "阵营克制_木", "阵营克制_光", "阵营克制_暗" );
     public static KHeroCampRestrainIconForHeroPromotion:string[] = new Array<string> ( "无", "ico_camp_restrain_water", "ico_camp_restrain_fire", "ico_camp_restrain_tree", "ico_camp_restrain_light", "ico_camp_restrain_dark" );
     public static KHeroClasses:string[] = new Array<string> ( "无", "无", "UI_Warrior", "UI_Assassin", "UI_Mage", "UI_Rogue", "UI_Pastor" );
