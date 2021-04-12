@@ -20,7 +20,7 @@ import { PopHeroEquipReplace } from '../view/features/heropromotion/PopHeroEquip
 import { PopMultiItemReward } from "../view/common/PopMultiItemReward";
 import { PopForge } from '../view/features/forge/PopForge';
 import { TipCampOrCareer } from '../view/features/heropromotion/TipCampOrCareer';
-import { PopHaloView } from '../view/pop/PopHaloView';
+import { PopHaloView } from '../view/features/lineup/PopHaloView';
 import { TipShareHeroToChat } from '../view/features/heropromotion/TipShareHeroToChat';
 import { PopPlayerLevelUpAward } from '../view/pop/PopPlayerLevelUpAward';
 import {PopPubWonderRewardList} from "../view/features/pub/PopPubWonderRewardList";
@@ -28,7 +28,7 @@ import { ResMgr } from './ResMgr';
 import { PopSetting } from '../view/features/setting/PopSetting';
 import { PopServerList } from '../view/features/setting/PopServerList';
 import { PopfHeroPromotion } from '../view/features/heropromotion/PopfHeroPromotion';
-import { PopBattleTeam } from '../view/pop/PopBattleTeam';
+import { PopBattleTeam } from '../view/features/lineup/PopBattleTeam';
 import {PopPubWonderHeartHero} from "../view/features/pub/PopPubWonderHeartHero";
 // import {PopPubWonderSummonSettle} from "../view/features/pub/PopPubWonderSummonSettle";
 import { PopHeroReplace } from '../view/features/herosummon/PopHeroReplace';
@@ -123,7 +123,7 @@ export class PopMgr extends PopCore  {
      * @param typeIndex 当前使用的阵型索引 数值参考XConsts的阵容索引
      */
     public popBattleTeamView(typeIndex: number | null = null) {
-        resources.load('prefabs_ui/pop/pop_battleteam', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/lineup/pop_battleteam', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 
@@ -415,7 +415,7 @@ export class PopMgr extends PopCore  {
 
     //弹出光环界面
     public popHaloView(heroIds: [] = [], isHideSkill: boolean = false) {
-        resources.load('prefabs_ui/pop/pop_halo', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/lineup/pop_halo', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 

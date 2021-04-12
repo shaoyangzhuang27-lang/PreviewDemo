@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "hero_packchoice",
+    "_name": "cell_herogiftchoice",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -1399,7 +1399,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "5ftrOJPyhE6K4+FJXMEpPd"
+    "fileId": "16SYTfQ19L977nn6pmvNKC"
   },
   {
     "__type__": "cc.PrefabInfo",

@@ -56,7 +56,7 @@ export class PopHeroChoiceGiftView extends PopBase {
 
     private _initScrollview()
     {
-        resources.load('prefabs_ui/main/hero_packchoice', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/props/cell_herogiftchoice', (err:any,res:any)=>{
             if(this._giftData && this._giftData.objType)
             {
                 for (let index = 0; index < this._giftData.objType.length; index++) {

@@ -1,16 +1,15 @@
 
 import { _decorator, Component, Node, Label, ToggleContainer, EventHandler, Toggle, sys, resources, instantiate, Vec3, ScrollView, v3, math, Widget, SystemEventType, Prefab } from 'cc';
+import { PopBase } from '../../../../core/control/PopBase';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { PopMgr } from '../../../control/PopMgr';
+import { ResMgr } from '../../../control/ResMgr';
+import { XFuns } from '../../../model/const/XFuns';
+import { HeroData } from '../../../model/datas/HeroData';
+import { GameModel } from '../../../model/GameModel';
+import { ElementHeroIcon } from '../../common/ElementHeroIcon';
+import { HeroSelectIcon } from './HeroSelectIcon';
 const { ccclass, property } = _decorator;
-import { PopBase } from '../../../core/control/PopBase';
-import { GameModel } from '../../model/GameModel';
-import { HeroData } from '../../model/datas/HeroData';
-import { ElementHeroIcon } from '../common/ElementHeroIcon';
-import { HeroSelectIcon } from '../hero/HeroSelectIcon';
-import { PopMgr } from '../../control/PopMgr';
-import { MsgMgr } from '../../control/MsgMgr';
-import { XConsts } from "../../model/const/XConsts";
-import { XFuns } from '../../model/const/XFuns';
-import { ResMgr } from '../../control/ResMgr';
 
 @ccclass('PopBattleTeam')
 export class PopBattleTeam extends PopBase {
@@ -176,8 +175,8 @@ export class PopBattleTeam extends PopBase {
             this.scroll_HeroView.content.removeAllChildren()
         }
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_selecticon', (err:any,res:Prefab | null)=>{
-        // resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/hero_selecticon', (err:any,res:Prefab | null)=>{
+        // resources.load('prefabs_ui/common/hero_selecticon', (err:any,res:any)=>{
             this._bottomHeroItemList.clear()
             let k = new Array<[number,Node]>();     //排序存储对象
             for (let heroData of this._allHeroList.values()) {

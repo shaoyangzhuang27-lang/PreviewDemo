@@ -118,7 +118,7 @@ export class PopPubWonderHeartHero extends PopBase {
         }
 
         let heroIdList = GameModel.getInstance().getHeroPubModel().getWonderHeartHeroIdByCamp(nCamp);
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_selecticon', (err: Error | null, res: Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/hero_selecticon', (err: Error | null, res: Prefab | null)=>{
             for(var i=0; i < heroIdList.length; i++ )
             {
                 let _heroIcon = instantiate(res as Prefab) ;

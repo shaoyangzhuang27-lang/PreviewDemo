@@ -4,13 +4,13 @@
  * @version 1.0.0,2021.3.16
  */
 import { _decorator, Component, Node, Label, Button, resources, instantiate, Widget, EventTouch } from 'cc';
-import { PopMgr } from '../../control/PopMgr';
-import { TableName, ValueMgr } from '../../model/ValueMgr';
-import { ElementHeroIcon } from './ElementHeroIcon';
+import { PopMgr } from '../../../control/PopMgr';
+import { TableName, ValueMgr } from '../../../model/ValueMgr';
+import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 const { ccclass, property } = _decorator;
 
-@ccclass('HeroGiftChoiceCell')
-export class HeroGiftChoiceCell extends Component {
+@ccclass('CellHeroGiftChoice')
+export class CellHeroGiftChoice extends Component {
     @property({type :  Node})
     public img_blueBg:Node = null as unknown as Node;
 

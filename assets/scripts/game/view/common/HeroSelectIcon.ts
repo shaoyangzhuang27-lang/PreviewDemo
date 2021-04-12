@@ -1,10 +1,10 @@
 
 import { _decorator, Component, Node, resources, SpriteFrame,Sprite,instantiate,Vec3 } from 'cc';
-const { ccclass, property } = _decorator;
-import { ElementHeroIcon } from '../common/ElementHeroIcon';
 import { XConsts } from '../../model/const/XConsts';
 import { HeroData } from '../../model/datas/HeroData';
 import { GameModel } from '../../model/GameModel';
+import { ElementHeroIcon } from './ElementHeroIcon';
+const { ccclass, property } = _decorator;
 
 @ccclass('HeroSelectIcon')
 export class HeroSelectIcon extends Component {

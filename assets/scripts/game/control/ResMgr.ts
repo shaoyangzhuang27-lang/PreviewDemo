@@ -34,7 +34,7 @@ export class ResMgr extends ResCore{
     public loadCommonPrefabs(){
         if(sys.platform === sys.DESKTOP_BROWSER)return;
         this.pushRes("prefabs_ui/common/element_heroicon",ResType.prefab,true,null,"英雄头像");
-        this.pushRes("prefabs_ui/main/hero_selecticon",ResType.prefab,true,null,"英雄选择框");
+        this.pushRes("prefabs_ui/common/hero_selecticon",ResType.prefab,true,null,"英雄选择框");
         this.pushRes("prefabs_ui/main/team",ResType.prefab,true,null,"英雄队伍1");
         this.pushRes('prefabs_ui/features/heropromotion/popf_heropromotion',ResType.prefab,true,null,"英雄队伍2");
     }

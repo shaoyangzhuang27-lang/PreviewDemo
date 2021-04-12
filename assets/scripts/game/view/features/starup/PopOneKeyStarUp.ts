@@ -56,7 +56,7 @@ export class PopOneKeyStarUp extends PopBase {
     private _getAllHeroList(){
         this._allHeroList = GameModel.getInstance().getHeroList();
 
-        resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/hero_selecticon', (err:any,res:any)=>{
             this._copyAllHeroList.clear()
             let k = new Array<[number,Node]>();     //排序存储对象
             let isShowOneKey = 0;       //是否显示一键升星按钮
