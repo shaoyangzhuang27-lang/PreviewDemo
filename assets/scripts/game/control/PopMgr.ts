@@ -33,7 +33,7 @@ import { PopBookProUI } from '../view/pop/PopBookProUI';
 import { TipCampOrCareer } from '../view/features/heropromotion/TipCampOrCareer';
 import { PopHaloView } from '../view/pop/PopHaloView';
 import { TipShareHeroToChat } from '../view/features/heropromotion/TipShareHeroToChat';
-import { PopPlayerLevelUpAward } from '../view/pop/PopPlayerLevelUpAward';
+import { PopfPlayerLevelUpAward } from '../view/features/system/PopfPlayerLevelUpAward';
 import {PopPubWonderRewardList} from "../view/features/pub/PopPubWonderRewardList";
 import { ResMgr } from './ResMgr';
 import { PopSetting } from '../view/features/setting/PopSetting';
@@ -767,10 +767,10 @@ export class PopMgr extends PopCore  {
     
     public popPlayerLevelUpWindow(msgData :Msg.NotifyLevelUpAward){
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/pop/pop_player_levelup_award', (err: any, res: any) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/system/popf_player_levelup_award', (err: any, res: any) => {
             let p = instantiate(res);
             this.pushWindow(p);
-            let script = p.getComponent("PopPlayerLevelUpAward") as PopPlayerLevelUpAward;
+            let script = p.getComponent("PopfPlayerLevelUpAward") as PopfPlayerLevelUpAward;
             script.setInitData(msgData);
             // script.setIsMaskClose(true);
 
