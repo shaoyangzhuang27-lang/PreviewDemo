@@ -65,6 +65,9 @@ export class PopHeroReset extends PopBase {
     @property({type :  Node})
     public btnFrame:Node = null as unknown as Node;
 
+    @property({type :  Node})
+    public scroll_HeroViewNode:Node = null as unknown as Node;
+
     @property({type :  ScrollView})
     public scroll_HeroView:ScrollView = null as unknown as ScrollView;
 
@@ -174,7 +177,6 @@ export class PopHeroReset extends PopBase {
             scroll.content.removeAllChildren()
             scroll.content.destroyAllChildren()
         }
-        this.scroll_HeroView.view?.getComponent(UITransform)?.setContentSize(view.getVisibleSize().width-20,view.getVisibleSize().height/2.6)
 
         resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
             this._bottomHeroItemList.clear()
@@ -255,6 +257,7 @@ export class PopHeroReset extends PopBase {
             let framePath: string = "ui/comm/hall/other/img_hero_selected/spriteFrame"
             this._resourceLoad(framePath, sprNode);
             sprNode.name = "StateSprNode"
+            sprNode.setScale(1.2,1.2,1.2)
             Node.addChild(sprNode)
         }
     }
@@ -578,9 +581,11 @@ export class PopHeroReset extends PopBase {
         if(!(this.top_reset) )return;
         if(tog.node.name == "Toggle1"){
             this.top_reset.active = true;
+            this.scroll_HeroViewNode.active = true;
             this._initBottomHeros();
         } else if (tog.node.name == "Toggle2"){
             this.top_reset.active = false;
+            this.scroll_HeroViewNode.active = false;
             resources.load('prefabs_ui/features/decompose/pop_decompose', (err:any,res:any)=>{
                 let p = instantiate( res );
                 p.name = "pop_decompose"
@@ -589,6 +594,7 @@ export class PopHeroReset extends PopBase {
             } );
         }else if (tog.node.name == "Toggle3"){
             this.top_reset.active = false;
+            this.scroll_HeroViewNode.active = false;
             resources.load('prefabs_ui/features/decompose/pop_herorollback', (err:any,res:any)=>{
                 let p = instantiate( res );
                 p.name = "pop_herorollback"

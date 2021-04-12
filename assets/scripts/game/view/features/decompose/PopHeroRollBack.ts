@@ -189,7 +189,6 @@ export class PopHeroRollBack extends Component {
             scroll.content.removeAllChildren()
             scroll.content.destroyAllChildren()
         }
-        this.scroll_HeroView.view?.getComponent(UITransform)?.setContentSize(view.getVisibleSize().width-20,view.getVisibleSize().height/2.6)
         resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
             this._bottomHeroItemList.clear()
             let k = new Array<[number,Node]>();     //排序存储对象
@@ -267,6 +266,7 @@ export class PopHeroRollBack extends Component {
             let framePath: string = "ui/comm/hall/other/img_hero_selected/spriteFrame"
             this._resourceLoad(framePath, sprNode);
             sprNode.name = "StateSprNode"
+            sprNode.setScale(1.2,1.2,1.2)
             Node.addChild(sprNode)
         }
     }

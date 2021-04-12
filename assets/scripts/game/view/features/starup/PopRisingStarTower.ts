@@ -241,7 +241,6 @@ export class PopRisingStarTower extends PopBase {
         {
             this.scroll_HeroView.content.destroyAllChildren()
         }
-        this.scroll_HeroView.view?.getComponent(UITransform)?.setContentSize(view.getVisibleSize().width-20,view.getVisibleSize().height/3)
 
         resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
             this._bottomHeroItemList.clear()
@@ -365,12 +364,14 @@ export class PopRisingStarTower extends PopBase {
             let framePath: string = "ui/comm/hall/other/img_hero_selected/spriteFrame"
             this._resourceLoad(framePath, sprNode);
             sprNode.name = "StateSprNode"
+            sprNode.setScale(1.2,1.2,1.2)
             Node.addChild(sprNode)
         }else if(number == 3){//升星主体
             var sprNode = instantiate(this.btnFrame)
             let framePath: string = "ui/comm/hall/other/img_hero_selected/spriteFrame"
             this._resourceLoad(framePath, sprNode);
             sprNode.name = "StateSprNode"
+            sprNode.setScale(1.2,1.2,1.2)
             Node.addChild(sprNode)
         }
     }
@@ -663,6 +664,9 @@ export class PopRisingStarTower extends PopBase {
                     }else{
                         heroNode.active = false;
                     }
+                }
+                if(this._risingdyncMaiID == heroData.getDyncID()){
+                    heroNode.active = true;
                 }
             }  
         });

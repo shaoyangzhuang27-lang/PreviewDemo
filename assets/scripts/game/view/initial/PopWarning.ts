@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node,LabelComponent } from 'cc';
+import { _decorator, view,UITransform, Component, Node,LabelComponent } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 const { ccclass, property } = _decorator;
 
@@ -18,6 +18,7 @@ export class PopWarning extends PopBase {
 
     start () {
         super.start();
+        this.window.getComponent(UITransform)?.setContentSize(view.getVisibleSize().width,view.getVisibleSize().height)
         this.btn_submit?.on(Node.EventType.TOUCH_END, this._onSubmit, this);
     }
     private _onSubmit(){
