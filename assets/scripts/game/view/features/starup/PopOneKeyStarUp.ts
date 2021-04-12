@@ -10,7 +10,6 @@ import { GameModel } from '../../../model/GameModel';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { MsgMgr } from '../../../control/MsgMgr';
-import { HeroSelectIcon } from '../../common/HeroSelectIcon';
 import { PopMgr } from '../../../control/PopMgr';
 const { ccclass, property } = _decorator;
 
@@ -56,7 +55,7 @@ export class PopOneKeyStarUp extends PopBase {
     private _getAllHeroList(){
         this._allHeroList = GameModel.getInstance().getHeroList();
 
-        resources.load('prefabs_ui/common/hero_selecticon', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
             this._copyAllHeroList.clear()
             let k = new Array<[number,Node]>();     //排序存储对象
             let isShowOneKey = 0;       //是否显示一键升星按钮
@@ -64,9 +63,8 @@ export class PopOneKeyStarUp extends PopBase {
                 let isDeleteHero = this._isDeleteHero(heroData)
                 if(isDeleteHero){continue}
                 let heroIcon = instantiate(res) as Node;
-                let heroSelectScript = heroIcon.getComponent("HeroSelectIcon") as HeroSelectIcon;  
-
-                heroSelectScript.setSelectData(heroData as HeroData,()=>{});
+                let heroSelectScript = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon;  
+                heroSelectScript.setHeroData(heroData as HeroData); 
                 let sortIndex_1:number = heroData.getLevel() * 10000 + heroData.getStar()*1000 + heroData.getCamp() * 10 + heroData.getClasses();
                 let sortIndex_2:number = 3000000 - sortIndex_1;
                 k.push([sortIndex_2,heroIcon]);

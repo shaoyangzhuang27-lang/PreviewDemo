@@ -3,9 +3,9 @@
  * @author 施敏昭
  * @version 1.0.0,2021.3.26
  */
-import { _decorator,Label,Size,UITransform, Button,instantiate,Widget,Vec3, Node,resources,ToggleContainer,EventHandler,Toggle,ScrollView } from 'cc';
+import { _decorator,Label,SpriteFrame,Sprite, Button,instantiate,Widget,Vec3, Node,resources,ToggleContainer,EventHandler,Toggle,ScrollView } from 'cc';
 import { PopBase } from '../../../../core/control/PopBase';
-import { HeroSelectIcon } from '../../common/HeroSelectIcon';
+import { ResMgr } from '../../../control/ResMgr';
 import { GameModel } from '../../../model/GameModel';
 import { HeroData } from '../../../model/datas/HeroData';
 import { ElementHeroIcon } from '../../common/ElementHeroIcon';
@@ -61,6 +61,9 @@ export class PopHeroReset extends PopBase {
 
     @property({type :  Node, displayName: "重置获得的物品节点"})
     public node_goods:Node = null as unknown as Node;
+
+    @property({type :  Node})
+    public btnFrame:Node = null as unknown as Node;
 
     @property({type :  ScrollView})
     public scroll_HeroView:ScrollView = null as unknown as ScrollView;
@@ -171,7 +174,7 @@ export class PopHeroReset extends PopBase {
             scroll.content.destroyAllChildren()
         }
 
-        resources.load('prefabs_ui/common/hero_selecticon', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
             this._bottomHeroItemList.clear()
             let k = new Array<[number,Node]>();     //排序存储对象
             let isShowOneKey = 0;       //是否显示一键升星按钮
@@ -179,30 +182,36 @@ export class PopHeroReset extends PopBase {
                 let isDeleteHero = this._isDeleteHero(heroData)
                 if(isDeleteHero){continue}
                 let heroIcon = instantiate(res) as Node;
-                scroll.content?.addChild(heroIcon);
-                let heroSelectScript = heroIcon.getComponent("HeroSelectIcon") as HeroSelectIcon;  
-                let itemType =  this._getItemType(heroData);
+                heroIcon.setScale(0.5,0.5,0.5)
+                heroIcon.addComponent(Widget);
 
-                heroSelectScript.setItemType(itemType);
-                heroSelectScript.setSelectData(heroData as HeroData,(data:any,itemType:number)=>{
-                    let isSelect = null;
-                    if(itemType == 0){
-                        isSelect = true;
-                    }else if(itemType == 1){
-                        isSelect = false;
-                    }
-                    
-                    if(isSelect != null){
-                        this._heroSelect(heroData,isSelect);
-                    }            
-                });
+                let FrameNode = instantiate(this.btnFrame) as Node;
+                FrameNode.addComponent(Button);
+                FrameNode.addChild(heroIcon);
+                FrameNode.name = ""+heroData.getDyncID()
+
+                scroll.content?.addChild(FrameNode);
+                let heroSelectScript = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon;  
+                heroSelectScript.setHeroData(heroData as HeroData); 
+
+                //添加按钮事件
+                var clickEventHandler = new EventHandler();
+                clickEventHandler.target = this.node; //这个 node 节点是你的事件处理代码组件所属的节点
+                clickEventHandler.component = "PopHeroReset";//这个是代码文件名
+                clickEventHandler.handler = "heroiconClick";
+                clickEventHandler.customEventData = heroData.getDyncID().toString();
+                let btnItem = FrameNode.getComponent(Button);;
+                if(btnItem){
+                    btnItem.clickEvents.push(clickEventHandler);
+                }
+
                 let sortIndex_1:number = heroData.getLevel() * 10000 + heroData.getStar()*1000 + heroData.getCamp() * 10 + heroData.getClasses();
                 let sortIndex_2:number = 3000000 - sortIndex_1;
-                k.push([sortIndex_2,heroIcon]);
+                k.push([sortIndex_2,FrameNode]);
                 
 
 
-                this._bottomHeroItemList.set(heroData.getDyncID(), heroIcon);
+                this._bottomHeroItemList.set(heroData.getDyncID(), FrameNode);
             }
             
             k.sort((n1,n2) => n1[0] - n2[0])
@@ -212,26 +221,63 @@ export class PopHeroReset extends PopBase {
         });
     }
 
+    //滚动区域头像点击事件
+    private heroiconClick(event: Event, customEventData: string){
+        let heroData = this._getHeroData(Number(customEventData))as HeroData
+        let itemType =  this._getItemType(heroData);
+        
+        let isSelect = null;
+        if(itemType == 0){
+            isSelect = true;
+        }else if(itemType == 1){
+            isSelect = false;
+        }
+        
+        if(isSelect != null){
+            this._heroSelect(heroData,isSelect);
+        } 
+    }
+
+    //设置头像状态
+    private setItemState(heroData:HeroData,number : number){
+        let Node = this.scroll_HeroView.content?.getChildByName(String(heroData.getDyncID()))
+        if(!Node){return}
+        if(Node.getChildByName("StateSprNode")){
+            Node.getChildByName("StateSprNode")?.removeFromParent()
+            Node.getChildByName("StateSprNode")?.destroy()
+        }
+        //选中状态
+        if(number == 1){
+            var sprNode = instantiate(this.btnFrame)
+            let framePath: string = "ui/comm/hall/other/img_hero_selected/spriteFrame"
+            this._resourceLoad(framePath, sprNode);
+            sprNode.name = "StateSprNode"
+            Node.addChild(sprNode)
+        }
+    }
+    //资源替换
+    private _resourceLoad(path:string,obj:any)
+    {
+        ResMgr.getInstance().loadSpriteFrame(path,(err,spriteFrame:SpriteFrame | null) =>
+        {
+            if(!err)
+            {
+                let sprite = obj.getComponent(Sprite) as Sprite;
+                sprite.spriteFrame = spriteFrame;
+            }
+        });
+    }
+
     //点选英雄
     private _heroSelect(heroData:HeroData,isSelect:boolean)
     {
         if(isSelect == null)return;
 
         this._heroToTop(heroData,isSelect);
-        this._getBottomHeroItemScript(heroData)?.setSelect(isSelect);
-        this._frushButtonHero();
-    }
-
-    //根据herodata获取拥有英雄代码
-    private _getBottomHeroItemScript(heroData:HeroData){
-        for (let value of this._bottomHeroItemList.values()) {
-            let script = value.getComponent("HeroSelectIcon") as HeroSelectIcon; 
-            let scriptHeroInfo = script.getCurHeroInfo() as HeroData;
-            if(scriptHeroInfo.getDyncID() == heroData.getDyncID())
-            {
-                return script;
-            }
+        if(isSelect){
+            this.setItemState(heroData,1)
         }
+        this._frushButtonHero();
     }
 
     //top英雄上下阵
@@ -315,7 +361,7 @@ export class PopHeroReset extends PopBase {
         resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
             let Info = ValueMgr.getInstance().getItemByField(TableName.heroes,HeroInfo.getStaticID()) as Config.heroes.Record;
             let heroIcon = instantiate(res) as Node;
-            heroIcon.scale = new Vec3(0.5,0.5,1);
+            heroIcon.scale = new Vec3(0.42,0.42,1);
             heroIcon.addComponent(Widget);
 
             let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
@@ -331,7 +377,7 @@ export class PopHeroReset extends PopBase {
             let ID = Msg.TObjectType.EObject_Money;
             let num = this._getHeroUpgradeMoney(HeroInfo.getLevel(),HeroInfo.tier);  //数量   
             let equipCell = instantiate(res) as Node;
-            equipCell.setScale(new Vec3(0.8, 0.8, 0.8))
+            equipCell.setScale(new Vec3(0.6, 0.6, 0.7))
             equipCell.name = "heroIcon";
             this.goodsNodes[index]?.addChild(equipCell);
             this._initPrefab(equipCell, Number(ID), Number(num), EquipPropType.goods,
@@ -346,7 +392,7 @@ export class PopHeroReset extends PopBase {
             }
             if(num > 0){
                 equipCell = instantiate(res) as Node;
-                equipCell.setScale(new Vec3(0.8, 0.8, 0.8))
+                equipCell.setScale(new Vec3(0.6, 0.6, 0.8))
                 equipCell.name = "heroIcon";
                 this.goodsNodes[index]?.addChild(equipCell);
                 this._initPrefab(equipCell, Number(ID), Number(num), EquipPropType.goods,
@@ -363,7 +409,7 @@ export class PopHeroReset extends PopBase {
             }
             if(num > 0){
                 equipCell = instantiate(res) as Node;
-                equipCell.setScale(new Vec3(0.8, 0.8, 0.8))
+                equipCell.setScale(new Vec3(0.6, 0.6, 0.8))
                 equipCell.name = "heroIcon";
                 this.goodsNodes[index]?.addChild(equipCell);
                 this._initPrefab(equipCell, Number(ID), Number(num), EquipPropType.goods,
@@ -376,7 +422,7 @@ export class PopHeroReset extends PopBase {
                 for (let key of HeroInfo.getEquipPropertyList().keys()) {
                     let value = HeroInfo.getEquipPropertyList().get(key);  //数量   
                     let equipCell = instantiate(res) as Node;
-                    equipCell.setScale(new Vec3(0.8, 0.8, 0.8))
+                    equipCell.setScale(new Vec3(0.6, 0.6, 0.8))
                     this.goodsNodes[index]?.addChild(equipCell);
                     equipCell.name = "heroIcon";
                     this._initPrefab(equipCell, Number(key), Number(value), EquipPropType.equip, Number(Msg.TObjectType.EObject_Equip)); 
@@ -427,16 +473,11 @@ export class PopHeroReset extends PopBase {
 
     //根据动态ID获取HeroData
     private _getHeroData(heroID:number){
-        let HeroInfo;
-        for (let value of this._bottomHeroItemList.values()) {
-            let script = value.getComponent("HeroSelectIcon") as HeroSelectIcon; 
-            let scriptHeroInfo = script.getCurHeroInfo() as HeroData;
-            if(scriptHeroInfo.getDyncID() == heroID)
-            {
-                HeroInfo = scriptHeroInfo;
+        for (let heroData of this._allHeroList.values()) {
+            if(heroData.getDyncID() == heroID){
+                return heroData;
             }
         }
-        return HeroInfo;
     }
 
     //0未选中 1选中 2锁定
@@ -467,10 +508,9 @@ export class PopHeroReset extends PopBase {
     }
     private _frushButtonHero(){
         this._bottomHeroItemList.forEach((heroNode,dyncid)=>{
-            let heroSelectScript = heroNode.getComponent("HeroSelectIcon") as HeroSelectIcon;
-            let heroData = heroSelectScript.getHeroData() as HeroData;
+            let heroData = this._getHeroData(dyncid)as HeroData
             let itemType =  this._getItemType(heroData);
-            heroSelectScript.setItemType(itemType);
+            this.setItemState(heroData,itemType)
             
             if(this._getCampType() == Msg.TCampType.ECampType_NULL){
                 heroNode.active = true;

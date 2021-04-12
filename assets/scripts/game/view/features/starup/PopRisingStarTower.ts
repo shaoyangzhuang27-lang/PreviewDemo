@@ -251,15 +251,14 @@ export class PopRisingStarTower extends PopBase {
                 let heroIcon = instantiate(res) as Node;
                 heroIcon.setScale(0.5,0.5,0.5)
                 heroIcon.addComponent(Widget);
-                let Node = instantiate(this.btnFrame) as Node;
-                Node.addComponent(Button);
-                Node.addChild(heroIcon);
-                Node.name = ""+heroData.getDyncID()
+                let FrameNode = instantiate(this.btnFrame) as Node;
+                FrameNode.addComponent(Button);
+                FrameNode.addChild(heroIcon);
+                FrameNode.name = ""+heroData.getDyncID()
 
-                this.scroll_HeroView.content?.addChild(Node);
+                this.scroll_HeroView.content?.addChild(FrameNode);
                 let heroSelectScript = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon;  
                 heroSelectScript.setHeroData(heroData as HeroData); 
-                let itemType =  this._getItemType(heroData);
                 let isStarUp = this._isStarUp(heroData);
                 if(isStarUp){
                     isShowOneKey = 1;
@@ -281,7 +280,7 @@ export class PopRisingStarTower extends PopBase {
                 clickEventHandler.component = "PopRisingStarTower";//这个是代码文件名
                 clickEventHandler.handler = "heroiconClick";
                 clickEventHandler.customEventData = heroData.getDyncID().toString();
-                let btnItem = Node.getComponent(Button);;
+                let btnItem = FrameNode.getComponent(Button);;
                 if(btnItem){
                     btnItem.clickEvents.push(clickEventHandler);
                 }
@@ -292,11 +291,11 @@ export class PopRisingStarTower extends PopBase {
                 if(isStarUp){
                     sortIndex_2 -= 10000000;
                 }
-                k.push([sortIndex_2,Node]);
+                k.push([sortIndex_2,FrameNode]);
                 
 
 
-                this._bottomHeroItemList.set(heroData.getDyncID(), Node);
+                this._bottomHeroItemList.set(heroData.getDyncID(), FrameNode);
             }
             if(this.btn_submit && isShowOneKey == 1){
                 this.btn_submit.interactable = true;
