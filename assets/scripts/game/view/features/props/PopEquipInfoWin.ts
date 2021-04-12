@@ -1,13 +1,11 @@
 
 import { _decorator, Component, Node, Label, instantiate, resources, } from 'cc';
+import { PopBase } from '../../../../core/control/PopBase';
+import { PopMgr } from '../../../control/PopMgr';
+import { XConsts } from '../../../model/const/XConsts';
+import { TableName, ValueMgr } from '../../../model/ValueMgr';
+import { ElementEquipProp, EquipPropType } from '../../common/ElementEquipProp';
 const { ccclass, property } = _decorator;
-import { EquipPropType,ElementEquipProp } from '../common/ElementEquipProp';
-import { PopBase } from '../../../core/control/PopBase';
-import { MsgMgr } from '../../control/MsgMgr';
-import { XConsts } from '../../model/const/XConsts';
-import { TableName, ValueMgr } from '../../model/ValueMgr';
-import { GameModel } from '../../model/GameModel';
-import { PopMgr } from '../../control/PopMgr';
 
 @ccclass('PopEquipInfoWin')
 export class PopEquipInfoWin extends PopBase {

@@ -1,11 +1,11 @@
 
 import { _decorator, Component, Node, EditBox, Label, resources, instantiate } from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { MsgMgr } from '../../control/MsgMgr';
-import { PopMgr } from '../../control/PopMgr';
-import { GameModel } from '../../model/GameModel';
-import { TableName, ValueMgr } from '../../model/ValueMgr';
-import { ElementEquipProp, EquipPropType } from '../common/ElementEquipProp';
+import { PopBase } from '../../../../core/control/PopBase';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { PopMgr } from '../../../control/PopMgr';
+import { GameModel } from '../../../model/GameModel';
+import { TableName, ValueMgr } from '../../../model/ValueMgr';
+import { ElementEquipProp, EquipPropType } from '../../common/ElementEquipProp';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopEquipSaleView')
