@@ -1,21 +1,17 @@
 
-import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, Vec3, tween, ScrollView, Game,Size, resources, instantiate, Layout ,UITransform,Prefab} from 'cc';
-import { GameModel } from '../../model/GameModel';
-import { EquipPropType,ElementEquipProp } from '../common/ElementEquipProp';
-import { PopMgr } from '../../control/PopMgr';
-import { NotifyMgr } from '../../control/NotifyMgr';
-import { ElementHeroFragment } from '../features/bag/ElementHeroFragment';
-import { ResMgr } from '../../control/ResMgr';
+import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, Vec3, tween, ScrollView, Game,Size, resources, instantiate, Layout ,UITransform,Prefab, find} from 'cc';
+import { GameModel } from '../../../model/GameModel';
+import { PopMgr } from '../../../control/PopMgr';
+import { NotifyMgr } from '../../../control/NotifyMgr';
+import { ResMgr } from '../../../control/ResMgr';
+import { PopBase } from '../../../../core/control/PopBase';
+import { ElementHeroFragment } from '../../features/bag/ElementHeroFragment';
+import { ElementEquipProp, EquipPropType } from '../../common/ElementEquipProp';
 const { ccclass, property } = _decorator;
 
-@ccclass('BagMain')
-export class BagMain extends Component {
-    // [1]
-    // dummy = '';
-
-    // [2]
-    // @property
-    // serializableDummy = 0;
+@ccclass('PopBag')
+export class PopBag extends PopBase {
+    
     @property({type: ToggleContainer })
     public selectGroup:ToggleContainer | null = null;
     
@@ -27,12 +23,6 @@ export class BagMain extends Component {
     
     @property({type: Node })
     public propsNode:Node | null = null;
-    
-    @property({type: Node })
-    public pNode:Node | null = null;
-    
-    @property({type: Node })
-    public btnClose:Node | null = null;
 
     @property({type :  ScrollView})
     public scroll_EquipView:ScrollView = null as unknown as ScrollView;
@@ -42,9 +32,6 @@ export class BagMain extends Component {
 
     @property({type :  ScrollView})
     public scroll_fragment:ScrollView = null as unknown as ScrollView;
-    
-    @property({type: Node })
-    public bgMask:Node = null as unknown as Node;
 
     //拥有的所有道具显示对象
     private _bagItemNodeList:Map<number, Node> = new Map<number, Node>();
@@ -54,20 +41,22 @@ export class BagMain extends Component {
 
     onLoad()
     {
+        super.onLoad()
+
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_equip_item_change,this._changeScrollviewItemData,this);
     }
 
     start () {
-        // [3]
+        super.start()
+        
         const containerEventHandler = new EventHandler();
         containerEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
-        containerEventHandler.component = 'BagMain';// 这个是代码文件名
+        containerEventHandler.component = 'PopBag';// 这个是代码文件名
         containerEventHandler.handler = 'tabClick';
         containerEventHandler.customEventData = '';
         this.selectGroup?.checkEvents.push(containerEventHandler);
-        this.btnClose?.on(Node.EventType.TOUCH_END, this.closeHandle, this);
-        this.bgMask.on(Node.EventType.TOUCH_END, this.closeHandle, this);
-        this.show();
+
+        this._initScrollview()
     }
     
     tabClick(event: Event, customEventData: string){
@@ -88,24 +77,6 @@ export class BagMain extends Component {
             this.propsNode.active = true;
         }
     }
-    show(){
-        tween(this.pNode)
-        .to(0.1,{position:new Vec3(this.pNode?.getPosition().x,-340,0)})
-        .call(() => {
-            this._initScrollview()
-        }).start()
-    }
-    hide(){
-        
-        tween(this.pNode)
-        .to(0.1,{position:new Vec3(this.pNode?.getPosition().x,-900,0)})
-        .call(() => {
-            this.node.removeFromParent();
-        }).start()
-    }
-    closeHandle(){
-        this.hide();
-    }
 
     private _initScrollview()
     {
@@ -118,7 +89,7 @@ export class BagMain extends Component {
     {
         this._bagEquipNodeList.clear()
         let allEquipList = GameModel.getInstance().getBagModel().getBagEquipList();
-        resources.load('prefabs_ui/common/element_equipprop', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_equipprop', (err:any,res:any)=>{
             for (let key of allEquipList.keys()) {
                 let value = allEquipList.get(key);  //数量   
                 let equipCell = instantiate(res) as Node;
@@ -135,7 +106,7 @@ export class BagMain extends Component {
     {
         let allGoodsList = GameModel.getInstance().getBagModel().getAllGoods();
         this._bagItemNodeList.clear()
-        resources.load('prefabs_ui/common/element_equipprop', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/element_equipprop', (err:any,res:any)=>{
             for (let index = 0; index < allGoodsList.length; index++) {
                 let itemGoods = allGoodsList[index];
 
@@ -196,6 +167,7 @@ export class BagMain extends Component {
                 {
                     this._bagItemNodeList.delete(id);
                     cell.removeFromParent();
+                    cell.destroy();
                 }
                 else{
                     script.resetItemCount(count);
@@ -210,7 +182,8 @@ export class BagMain extends Component {
                 if(count == 0)
                 {
                     this._bagItemNodeList.delete(id);
-                    cell.removeFromParent()
+                    cell.removeFromParent();
+                    cell.destroy();
                 }
                 else{
                     script.resetItemCount(count);
@@ -221,6 +194,8 @@ export class BagMain extends Component {
 
     onDestroy()
     {
+        super.onDestroy()
+
         NotifyMgr.getInstance().removeNotifyHandler(NotifyMgr.event_equip_item_change,this._changeScrollviewItemData,this);
     }
 
@@ -231,24 +206,19 @@ export class BagMain extends Component {
             this.scroll_fragment.content.destroyAllChildren()
         }
 
-         
-
     //    GameModel.getInstance().getBagModel().initTestFragmentList();
        let fragmentSysthesisiInfoList = GameModel.getInstance().getBagModel().getFragmentSynthesisInfoList();
        ResMgr.getInstance().loadPrefab('prefabs_ui/features/bag/element_herofragment', (err:Error | null,res:Prefab | null)=>{
             for (var i = 0 ; i < fragmentSysthesisiInfoList.length; i++) {
                 let fragment_item = instantiate( res  as Prefab);
-                let script = fragment_item.getComponent(ElementHeroFragment) as ElementHeroFragment;
-                fragment_item.scale = new Vec3(0.7,0.7,1);
-                let subWidget = fragment_item.getComponent(UITransform) as UITransform;
-                subWidget.contentSize = new Size(105,126);
+                let script = fragment_item.getComponent(ElementHeroFragment) as ElementHeroFragment;;
+                // fragment_item.scale = new Vec3(0.7,0.7,1);
+                // let subWidget = fragment_item.getComponent(UITransform) as UITransform;
+                // subWidget.contentSize = new Size(105,126);
                 script.setFragmentInfo(fragmentSysthesisiInfoList[i]);
                 script.setBtnClick();
                 this.scroll_fragment.content?.addChild(fragment_item);
             }
-        },"BagMain");
+        },"PopBag");
     }
-    // update (deltaTime: number) {
-    //     // [4]
-    // }
 }

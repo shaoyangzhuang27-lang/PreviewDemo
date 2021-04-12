@@ -2,10 +2,10 @@
  * 游戏组件:道具装备cell
  * @author 黄志清
  * @version 1.0.0,2021.3.15
- * @LastEditTime: 2021-04-09
+ * @LastEditTime: 2021-04-12
  * @LastEditors: 庄佳福
  */
-import { _decorator, Component, Node, Label, resources, SpriteFrame, Sprite, UITransform, Vec3 } from 'cc';
+import { _decorator, Component, Node, Label, resources, SpriteFrame, Sprite, UITransform, Vec3, size } from 'cc';
 import { ResMgr } from '../../control/ResMgr';
 import { XConsts } from '../../model/const/XConsts';
 import { XFuns } from '../../model/const/XFuns';
@@ -37,6 +37,9 @@ export class ElementEquipProp extends Component {
 
     @property({type :  Node})
     public img_infoBg:Node = null as unknown as Node;
+
+    @property({type: Node, displayName: '下方数量的节点'})
+    public node_count:Node = null as unknown as Node;
 
     private _itemType : number = 1;     //区分道具:1 、装备:2 EquipPropType.equip
     private _itemID:number = -1;
@@ -91,6 +94,8 @@ export class ElementEquipProp extends Component {
         if(this._itemCount == 0)       //不需要显示数量时  数量设置为0
         {
             this.lab_count.active = false;
+            
+            this.hideCountNode();
         }
         let iconPath:string = "";
         let qualityPath:string = "";
@@ -157,7 +162,7 @@ export class ElementEquipProp extends Component {
                     sprite.spriteFrame = spriteFrame;
                 }
             }
-        });
+        }, 'ElementEquipProp');
         
         ResMgr.getInstance().loadSpriteFrame(qualityPath, (err: any, spriteFrame: SpriteFrame | null) =>
         {
@@ -169,7 +174,7 @@ export class ElementEquipProp extends Component {
                     sprite.spriteFrame = spriteFrame;
                 }
             }
-        });
+        }, 'ElementEquipProp');
     }
 
     private _openItemEquipInfoView()
@@ -215,7 +220,22 @@ export class ElementEquipProp extends Component {
         this._itemCount = count;
         let labCount:Label = this.lab_count.getComponent(Label) as Label;
         labCount.string = 'x' + XFuns.FormatNumber(this._itemCount);
+        if (count == 0){
+            this.hideCountNode()
+        }
     }
+
+    /**
+     * 数量为0时，隐藏数量以及数量的背景
+     */
+    public hideCountNode (){
+        this.node_count.active = false
+        
+        // 缩小尺寸
+        let transform = this.node.getComponent(UITransform);
+        transform?.setContentSize(116, 119);
+    }
+
 }
 
 /**

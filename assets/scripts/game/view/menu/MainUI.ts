@@ -4,7 +4,6 @@ import { XFuns } from '../../model/const/XFuns';
 import { MsgMgr } from '../../control/MsgMgr';
 import { DataMgr } from '../../model/DataMgr';
 import { GameModel } from '../../model/GameModel';
-import { BagMain } from '../menu/BagMain';
 import { KnightMain } from '../menu/KnightMain';
 import { TeamMain } from '../menu/TeamMain';
 import { FlyItem } from '../features/battle/FlyItem';
@@ -13,6 +12,7 @@ import { UINodeMgr } from '../UINodeMgr';
 import { ResMgr } from '../../control/ResMgr';
 import { ElementAvatar } from '../common/ElementAvatar';
 import { PopOffLineBonus } from '../features/battle/PopOffLineBonus';
+import { PopMgr } from '../../control/PopMgr';
 
 const { ccclass, property } = _decorator;
 
@@ -234,18 +234,21 @@ export class MainUI extends Component {
                 this.closeKnight();
                 this.closeTeam();
 
-                resources.load('prefabs_ui/main/bag', (err:any,res:any)=>{
-                    
-                    let nodeTeam = this.node.getChildByName("node_bag")
-                    if(nodeTeam){
-                        return;
-                    }
+                // 背包改成弹窗显示
+                PopMgr.getInstance().popBag();
 
-                    let p = instantiate( res );
-                    p.name = "node_bag"
-                    this.node.addChild(p);
-                    p.setSiblingIndex(0);
-                } );
+                // resources.load('prefabs_ui/main/bag', (err:any,res:any)=>{
+                    
+                //     let nodeTeam = this.node.getChildByName("node_bag")
+                //     if(nodeTeam){
+                //         return;
+                //     }
+
+                //     let p = instantiate( res );
+                //     p.name = "node_bag"
+                //     this.node.addChild(p);
+                //     p.setSiblingIndex(0);
+                // } );
                 break;
             case this.btn_guild:
 
@@ -277,11 +280,11 @@ export class MainUI extends Component {
         }
     }
     closeBag(){
-        let nodeBag = this.node.getChildByName("node_bag")
-        if(nodeBag){
-            let script =  nodeBag.getComponent("BagMain") as BagMain;
-            script.hide();
-        }
+        // let nodeBag = this.node.getChildByName("node_bag")
+        // if(nodeBag){
+        //     let script =  nodeBag.getComponent("BagMain") as BagMain;
+        //     script.hide();
+        // }
     }
 
     locateMenu(){

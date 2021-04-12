@@ -45,6 +45,7 @@ import { PopEquipInfoWin } from '../view/features/props/PopEquipInfoWin';
 import { PopEquipSaleView } from '../view/features/props/PopEquipSaleView';
 import { PopHeroChoiceGiftView } from '../view/features/props/PopHeroChoiceGiftView';
 import { PopWarning } from '../view/common/PopWarning';
+import { PopBag } from '../view/features/bag/PopBag';
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
@@ -731,6 +732,18 @@ export class PopMgr extends PopCore  {
             // script.setCloseCallBack(()=>{
             //     console.log("关闭窗口回调")
             // });
+        });
+    }
+
+    /**
+     * 背包
+     */
+     public popBag() {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/features/bag/pop_bag', (err: any, res: any) => {
+            let p = instantiate(res);
+            this.pushWindow(p)
+            let script = p.getComponent("PopBag") as PopBag;
+            script.setIsMaskClose(false);
         });
     }
 
