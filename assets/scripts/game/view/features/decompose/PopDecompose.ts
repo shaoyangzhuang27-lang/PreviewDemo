@@ -4,7 +4,7 @@
  * @version 1.0.0,2021.3.26
  */
 import { _decorator,Label,Component,Size,UITransform, Button,instantiate,Widget,Vec3, Node,resources,ToggleContainer,EventHandler,Toggle,ScrollView } from 'cc';
-import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
+import { HeroSelectIcon } from '../../common/HeroSelectIcon';
 import { GameModel } from '../../../model/GameModel';
 import { HeroData } from '../../../model/datas/HeroData';
 import { ElementHeroIcon } from '../../common/ElementHeroIcon';

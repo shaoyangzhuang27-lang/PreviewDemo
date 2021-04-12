@@ -3,7 +3,7 @@
  * @author 施敏昭
  * @version 1.0.0,2021.3.13
  */
-import { _decorator, Component, Node, Sprite,SpriteFrame, Label, ToggleContainer, EventHandler, Toggle, sys, resources, instantiate, Vec3, ScrollView, v3, math, Widget, Button } from 'cc';
+import { _decorator, tween, Node, Sprite,SpriteFrame, Label, ToggleContainer, EventHandler, Toggle, sys, resources, instantiate, Vec3, ScrollView, v3, math, Widget, Button } from 'cc';
 const { ccclass, property } = _decorator;
 import { PopBase } from '../../../../core/control/PopBase';
 import { GameModel } from '../../../model/GameModel';
@@ -11,7 +11,6 @@ import { HeroData } from '../../../model/datas/HeroData';
 import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { PopMgr } from '../../../control/PopMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
-import { XConsts } from "../../../model/const/XConsts";
 import { NotifyMgr } from '../../../control/NotifyMgr';
 import { HeroModel } from '../../common/HeroModel';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
@@ -679,6 +678,7 @@ export class PopRisingStarTower extends PopBase {
         }
 
         let _iconName:string = HeroInfo?.getName() as string;
+        let scale = 0.4
 
         if(this._selectBattleList.size == 1)
         {
@@ -709,6 +709,7 @@ export class PopRisingStarTower extends PopBase {
             this._showStarUpInfo(HeroInfo);
             this._changeStarUpState();
 
+            
             //同类型英雄
             if(this._curStarupType == 1){
                 let heroInfo5  = new Msg.HeroInfo();
@@ -721,7 +722,7 @@ export class PopRisingStarTower extends PopBase {
                 hero.initDataByHero(heroInfo5 as Msg.HeroInfo, GameModel.getInstance());
                 resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
                     let heroIcon = instantiate(res) as Node;
-                    heroIcon.scale = new Vec3(0.5,0.5,1);
+                    heroIcon.scale = new Vec3(scale,scale,1);
                     heroIcon.addComponent(Widget);
         
                     let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
@@ -739,7 +740,7 @@ export class PopRisingStarTower extends PopBase {
                     this.btn_head3.active = true;
                     resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
                         let heroIcon = instantiate(res) as Node;
-                        heroIcon.scale = new Vec3(0.5,0.5,1);
+                        heroIcon.scale = new Vec3(scale,scale,1);
                         heroIcon.addComponent(Widget);
             
                         let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
@@ -753,7 +754,7 @@ export class PopRisingStarTower extends PopBase {
             }else if(this._curStarupType == 2){ //同星级英雄
                 resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
                     let heroIcon = instantiate(res) as Node;
-                    heroIcon.scale = new Vec3(0.5,0.5,1);
+                    heroIcon.scale = new Vec3(scale,scale,1);
                     heroIcon.addComponent(Widget);
         
                     let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
@@ -771,7 +772,7 @@ export class PopRisingStarTower extends PopBase {
                     this.btn_head3.active = true;
                     resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
                         let heroIcon = instantiate(res) as Node;
-                        heroIcon.scale = new Vec3(0.5,0.5,1);
+                        heroIcon.scale = new Vec3(scale,scale,1);
                         heroIcon.addComponent(Widget);
             
                         let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
@@ -789,7 +790,7 @@ export class PopRisingStarTower extends PopBase {
                 this.btn_head2.getChildByName("heroIcon2")?.destroy();
                 resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
                     let heroIcon = instantiate(res) as Node;
-                    heroIcon.scale = new Vec3(0.5,0.5,1);
+                    heroIcon.scale = new Vec3(scale,scale,1);
                     heroIcon.addComponent(Widget);
         
                     let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 
@@ -803,7 +804,7 @@ export class PopRisingStarTower extends PopBase {
                 this.btn_head3.getChildByName("heroIcon3")?.destroy();
                 resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
                     let heroIcon = instantiate(res) as Node;
-                    heroIcon.scale = new Vec3(0.5,0.5,1);
+                    heroIcon.scale = new Vec3(scale,scale,1);
                     heroIcon.addComponent(Widget);
         
                     let script = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon; 

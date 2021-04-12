@@ -6709,7 +6709,7 @@
         "__id__": 306
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 312
@@ -6975,7 +6975,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "76c4fe29-1804-4a67-8796-4e85314d7e06@f9941"
+      "__uuid__": "bcb43f1f-da3d-4fbc-a7af-d51032caefcf@f9941"
     },
     "_type": 0,
     "_fillType": 0,
@@ -7523,7 +7523,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "76c4fe29-1804-4a67-8796-4e85314d7e06@f9941"
+      "__uuid__": "bcb43f1f-da3d-4fbc-a7af-d51032caefcf@f9941"
     },
     "_type": 0,
     "_fillType": 0,

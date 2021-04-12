@@ -5,7 +5,7 @@
  */
 import { _decorator,Label,Size,Component, Button,instantiate,Widget,Vec3, Node,resources,ToggleContainer,EventHandler,Toggle,ScrollView } from 'cc';
 import { PopBase } from '../../../../core/control/PopBase';
-import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
+import { HeroSelectIcon } from '../../common/HeroSelectIcon';
 import { GameModel } from '../../../model/GameModel';
 import { HeroData } from '../../../model/datas/HeroData';
 import { ElementHeroIcon } from '../../common/ElementHeroIcon';
