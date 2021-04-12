@@ -3,8 +3,8 @@ import { _decorator, Component, Node,LabelComponent } from 'cc';
 import { PopBase } from '../../../core/control/PopBase';
 const { ccclass, property } = _decorator;
 
-@ccclass('PopSimple')
-export class PopSimple extends PopBase {
+@ccclass('PopWarning')
+export class PopWarning extends PopBase {
     @property({type: LabelComponent})
     public lab_title:LabelComponent | null = null;
 

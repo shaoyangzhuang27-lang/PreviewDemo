@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "pop_prompt",
+    "_name": "spin_prompt",
     "_objFlags": 0,
     "_parent": null,
     "_children": [

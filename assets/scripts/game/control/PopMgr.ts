@@ -1,5 +1,4 @@
 import {  Node,resources,instantiate,LabelComponent,Vec3,tween,Scene, Script, Prefab } from 'cc';
-import { PopSimple } from "../view/pop/PopSimple";
 import { PopRisingStarTower } from "../view/features/starup/PopRisingStarTower";
 import { PopStarUpResult } from "../view/features/starup/PopStarUpResult";
 import { PopOneKeyStarUp } from "../view/features/starup/PopOneKeyStarUp";
@@ -45,6 +44,7 @@ import { PopItemReward } from '../view/features/props/PopItemReward';
 import { PopEquipInfoWin } from '../view/features/props/PopEquipInfoWin';
 import { PopEquipSaleView } from '../view/features/props/PopEquipSaleView';
 import { PopHeroChoiceGiftView } from '../view/features/props/PopHeroChoiceGiftView';
+import { PopWarning } from '../view/common/PopWarning';
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
@@ -78,11 +78,11 @@ export class PopMgr extends PopCore  {
     //弹窗放这里------------------------------------------------------------
     public popupSimpleWindow(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-        resources.load('prefabs_ui/pop/pop_simple', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/pop_warning', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 
-            let script = p.getComponent("PopSimple") as PopSimple;
+            let script = p.getComponent("PopWarning") as PopWarning;
             script.setTitle(title);
             script.setContent(content);
             script.setSubmitCallBack(submitCallBack);
@@ -285,7 +285,7 @@ export class PopMgr extends PopCore  {
             let p = instantiate( res );
             this.pushWindow(p);
 
-            let script = p.getComponent("PopSimple") as PopSimple;
+            let script = p.getComponent("PopWarning") as PopWarning;
             script.setTitle(title);
             script.setContent(content);
             script.setSubmitCallBack(submitCallBack);
