@@ -11,10 +11,10 @@ import { GameModel } from '../../../model/GameModel';
 import { HeroData } from '../../../model/datas/HeroData';
 import { NotifyMgr } from '../../../control/NotifyMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
-import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
 import { ValueMgr } from '../../../model/ValueMgr';
 import { PopMgr } from '../../../control/PopMgr';
 import { ResMgr } from '../../../control/ResMgr';
+import { HeroSelectIcon } from '../../common/HeroSelectIcon';
 
 @ccclass('PopCollegeSelectHero')
 export class PopCollegeSelectHero extends PopBase {

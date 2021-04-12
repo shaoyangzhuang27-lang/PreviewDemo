@@ -20,8 +20,8 @@ import { XConsts } from "../../../model/const/XConsts";
 import { HeroData } from '../../../model/datas/HeroData';
 import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { HeroModel } from '../../common/HeroModel';
-import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
 import { ResCore } from '../../../../core/control/ResCore';
+import { HeroSelectIcon } from '../../common/HeroSelectIcon';
 
 @ccclass('PopHeroReplace')
 export class PopHeroReplace extends PopBase {

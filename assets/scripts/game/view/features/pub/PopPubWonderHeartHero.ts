@@ -4,12 +4,12 @@ import { PopBase } from '../../../../core/control/PopBase';
 import { XConsts } from '../../../model/const/XConsts';
 import { GameModel } from '../../../model/GameModel';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
-import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
 import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { PopMgr } from '../../../control/PopMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
 import { NotifyMgr } from '../../../control/NotifyMgr';
 import { ResMgr } from '../../../control/ResMgr';
+import { HeroSelectIcon } from '../../common/HeroSelectIcon';
 
 const { ccclass, property } = _decorator;
 

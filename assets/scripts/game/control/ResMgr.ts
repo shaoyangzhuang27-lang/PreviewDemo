@@ -22,12 +22,16 @@ export class ResMgr extends ResCore{
     public loadGameNecessaryRes(){
         if(sys.platform === sys.DESKTOP_BROWSER)return;
         // if(sys.platform === sys.WECHAT_GAME){
-        this.pushRes("ui/common",ResType.spriteframes,true,null,"通用资源");
+        this.pushRes("ui/comm/hall",ResType.spriteframes,true,null,"大厅通用资源");
+        this.pushRes("ui/comm/hero",ResType.spriteframes,true,null,"英雄头像通用资源");
+        this.pushRes("ui/comm/equip_prop",ResType.spriteframes,true,null,"英雄头像通用资源");
     }
     //卸载游戏必要资源(主ui资源)
     public releaseGameNecessaryRes(){
         if(sys.platform === sys.DESKTOP_BROWSER)return;
-        this.popRes("ui/common");
+        this.popRes("ui/comm/hall");
+        this.popRes("ui/comm/hero");
+        this.popRes("ui/comm/equip_prop");
         
     }
 
