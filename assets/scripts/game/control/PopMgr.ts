@@ -44,7 +44,7 @@ import { PopItemReward } from '../view/features/props/PopItemReward';
 import { PopEquipInfoWin } from '../view/features/props/PopEquipInfoWin';
 import { PopEquipSaleView } from '../view/features/props/PopEquipSaleView';
 import { PopHeroChoiceGiftView } from '../view/features/props/PopHeroChoiceGiftView';
-import { PopWarning } from '../view/common/PopWarning';
+import { PopWarning } from '../view/initial/PopWarning';
 import { PopBag } from '../view/features/bag/PopBag';
 
 export class PopMgr extends PopCore  {
@@ -79,7 +79,7 @@ export class PopMgr extends PopCore  {
     //弹窗放这里------------------------------------------------------------
     public popupSimpleWindow(title:string,content:string,submitCallBack:Function,closeCallBack:Function|null = null,isMaskClose:boolean = true){
 
-        resources.load('prefabs_ui/common/pop_warning', (err:any,res:any)=>{
+        resources.load('prefabs_ui/initial/pop_warning', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 

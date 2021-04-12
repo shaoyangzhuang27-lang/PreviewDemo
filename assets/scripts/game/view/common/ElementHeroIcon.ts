@@ -92,7 +92,7 @@ export class ElementHeroIcon extends Component {
         let qualityIconPath:string = "ui/comm/hero/" + qualityName + "/spriteFrame"
         this._resourceLoad(qualityIconPath,this.img_quality);
         
-        let heroIconPath:string = "ui/common/hero/" + iconName + "/spriteFrame";
+        let heroIconPath:string = "ui/comm/hero/heroicos/" + iconName + "/spriteFrame";
         this._resourceLoad(heroIconPath,this.img_icon);
         
         let lvColor= Color.BLACK;
@@ -203,7 +203,7 @@ export class ElementHeroIcon extends Component {
         let campIconPath:string = "ui/common/team/" + campName + "/spriteFrame";
         this._resourceLoad(campIconPath,this.img_camp);
         
-        let heroIconPath:string = "ui/common/hero/" + iconName + "/spriteFrame";
+        let heroIconPath:string = "ui/comm/hero/heroicos/" + iconName + "/spriteFrame";
         this._resourceLoad(heroIconPath,this.img_icon);
         
         this.lab_level.string = lv.toString();
@@ -305,7 +305,7 @@ export class ElementHeroIcon extends Component {
         // let framePath:string = "ui/common/icon/" + info.frame + "/spriteFrame"
         // this._resourceLoad(framePath,this.btn_frame);
 
-        let heroIconPath:string = "ui/common/hero/" + info.icon + "/spriteFrame";
+        let heroIconPath:string = "ui/comm/hero/heroicos/" + info.icon + "/spriteFrame";
         this._resourceLoad(heroIconPath,this.img_icon);
 
         // this.lab_level.node.active = false;

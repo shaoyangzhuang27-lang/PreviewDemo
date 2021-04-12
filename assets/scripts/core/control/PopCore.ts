@@ -104,7 +104,7 @@ export class PopCore {
 
     public popupPrompt(content:string){
 
-        resources.load('prefabs_ui/common/spin_prompt', (err:Error | null,res:any)=>{
+        resources.load('prefabs_ui/initial/spin_prompt', (err:Error | null,res:any)=>{
             let p = instantiate( res ) as Node;
             this._parent?.addChild(p)
             p.setSiblingIndex(XConsts.OrderToash);

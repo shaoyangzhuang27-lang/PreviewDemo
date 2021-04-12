@@ -151,7 +151,7 @@ export class CellMultiItemReward extends Component {
                     let heroInfo = ValueMgr.getInstance().getItemByField(TableName.heroes, this._propInfo.nPropId ? this._propInfo.nPropId : 0) as Config.heroes.Record;
                     let star = heroInfo.star;
                     frame = "ui/common/icon/" +  XConsts.GetQualityBgByStar(heroInfo.star) + "/spriteFrame";
-                    icon = "ui/common/hero/" + heroInfo.image + "/spriteFrame";
+                    icon = "ui/comm/hero/heroicos/" + heroInfo.image + "/spriteFrame";
                     camp = "ui/common/team/" + XConsts.KHeroCampIcon[heroInfo.camp]  + "/spriteFrame"
                     this.lab_level.string = String(this._propInfo.nLevel);
                     this._resourceLoad(frame,this.btn_frame);
@@ -194,7 +194,7 @@ export class CellMultiItemReward extends Component {
                     this.img_camp.active = false;
                     this.lab_level.node.active = false;
                     let equipData = GameModel.getInstance().getForgeModel().getConfigEquipDataById(this._propInfo.nPropId as number)
-                    icon = "ui/common/equip/" + equipData.imageName + "/spriteFrame"
+                    icon = "ui/comm/equip_prop/equip/" + equipData.imageName + "/spriteFrame"
                     bg = "ui/common/icon/" + XConsts.KQualityBgSpriteName[this._propInfo.nPropQuality ? this._propInfo.nPropQuality : 2] + "/spriteFrame"
                     this._resourceLoad(icon, this.img_icon);
                     this._resourceLoad(bg, this.img_bg);

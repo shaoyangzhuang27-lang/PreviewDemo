@@ -122,7 +122,7 @@ export class BagItemModel extends BaseModel{
                 let heroInfo = ValueMgr.getInstance().getItemByField(TableName.heroes, value.param ? value.param : 5051402) as Config.heroes.Record;
                 // info.frame = "ui/common/icon/" +  XConsts.GetQualityBgByStar(heroInfo.star) + "/spriteFrame";
                 info.quality = "ui/comm/hero/" + XConsts.GetFragmentQualityByStar(heroInfo.star) + "/spriteFrame";
-                info.icon = "ui/common/hero/" + heroInfo.image + "/spriteFrame";
+                info.icon = "ui/comm/hero/heroicos/" + heroInfo.image + "/spriteFrame";
                 info.camp = "ui/comm/hero/" + XConsts.KFragmentCampIcon[heroInfo.camp] + "/spriteFrame";
                 info.occupation = "ui/comm/hero/" + XConsts.KFragmentClassesSpriteName[heroInfo.classes] + "/spriteFrame";
                 info.star = heroInfo.star;
