@@ -19,7 +19,7 @@ import { XFuns } from '../../../model/const/XFuns';
 import { XConsts } from "../../../model/const/XConsts";
 import { HeroData } from '../../../model/datas/HeroData';
 import { ElementHeroIcon } from '../../common/ElementHeroIcon';
-import { HeroModel } from '../../hero/HeroModel';
+import { HeroModel } from '../../common/HeroModel';
 import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
 import { ResCore } from '../../../../core/control/ResCore';
 
@@ -162,7 +162,7 @@ export class PopHeroReplace extends PopBase {
 
     private _initHeroItems() : void {
         this.scrollContent.destroyAllChildren()
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/hero_selecticon', (err:any,res:any)=>{
             this._heroItemsMap.clear()
 
             let heroReplaceModel = GameModel.getInstance().getHeroReplaceModel()

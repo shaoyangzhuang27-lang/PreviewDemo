@@ -181,7 +181,7 @@ export class PopCollegeSelectHero extends PopBase {
             this.scroll_HeroView.content.removeAllChildren()
         }
 
-        ResMgr.getInstance().loadPrefab('prefabs_ui/main/hero_selecticon', (err: any, res: any) => {
+        ResMgr.getInstance().loadPrefab('prefabs_ui/common/hero_selecticon', (err: any, res: any) => {
             this._bottomHeroItemList.clear();
             let k = new Array<[number, Node]>();     //排序存储对象
             for (let heroData of this._allHeroList.values()) {

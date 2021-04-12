@@ -7,7 +7,7 @@ import { GameModel } from '../../model/GameModel';
 import { BagMain } from '../menu/BagMain';
 import { KnightMain } from '../menu/KnightMain';
 import { TeamMain } from '../menu/TeamMain';
-import { FlyItem } from '../pop/FlyItem';
+import { FlyItem } from '../features/battle/FlyItem';
 import { PopOffLineBonus} from '../pop/PopOffLineBonus';
 import { OfflineModel } from '../../model/datas/OfflineModel';
 import { UINodeMgr } from '../UINodeMgr';
@@ -144,7 +144,7 @@ export class MainUI extends Component {
     }
 
     openOfflineBonus(){
-        resources.load('prefabs_ui/offline/pop_offline', (err: any, res: any) => {
+        resources.load('prefabs_ui/features/battle/offline/pop_offline', (err: any, res: any) => {
             let p = instantiate(res);
             let script = p.getComponent("PopOffLineBonus") as PopOffLineBonus
             script.popSelf()

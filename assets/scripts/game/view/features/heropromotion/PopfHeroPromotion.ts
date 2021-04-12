@@ -2,7 +2,7 @@
  * @Description: 英雄升级/升阶/装备弹窗
  * @Author: 徐涛
  * @Date: 2021-03-09 19:30:14
- * @LastEditTime: 2021-04-07 19:39:14
+ * @LastEditTime: 2021-04-10 16:51:53
  */
 import { _decorator, Vec3, instantiate, Node, ToggleContainer, EventHandler, Toggle, UITransform, math, Sprite, Layout, Label, Color, Prefab } from 'cc';
 import { PopBase } from '../../../../core/control/PopBase';
@@ -10,7 +10,7 @@ import { GameModel } from '../../../model/GameModel';
 import { HeroData } from '../../../model/datas/HeroData';
 import { PopMgr } from '../../../control/PopMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
-import { HeroModel } from '../../hero/HeroModel';
+import { HeroModel } from '../../common/HeroModel';
 import { ElementSkill } from '../../common/ElementSkill';
 import { NotifyMgr } from '../../../control/NotifyMgr';
 import { XShare } from '../../../model/const/XShare';

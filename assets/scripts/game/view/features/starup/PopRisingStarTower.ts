@@ -9,12 +9,11 @@ import { PopBase } from '../../../../core/control/PopBase';
 import { GameModel } from '../../../model/GameModel';
 import { HeroData } from '../../../model/datas/HeroData';
 import { ElementHeroIcon } from '../../common/ElementHeroIcon';
-import { HeroSelectIconStarUp } from '../../hero/HeroSelectIconStarUp';
 import { PopMgr } from '../../../control/PopMgr';
 import { MsgMgr } from '../../../control/MsgMgr';
 import { XConsts } from "../../../model/const/XConsts";
 import { NotifyMgr } from '../../../control/NotifyMgr';
-import { HeroModel } from '../../hero/HeroModel';
+import { HeroModel } from '../../common/HeroModel';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { ResMgr } from '../../../control/ResMgr';
 
@@ -104,6 +103,9 @@ export class PopRisingStarTower extends PopBase {
 
     @property({type :  Node})
     public heroPosList:Node[] = [];
+
+    @property({type :  Node})
+    public btnFrame:Node = null as unknown as Node;
 
     @property({type :  ScrollView})
     public scroll_HeroView:ScrollView = null as unknown as ScrollView;
@@ -240,7 +242,7 @@ export class PopRisingStarTower extends PopBase {
             this.scroll_HeroView.content.destroyAllChildren()
         }
 
-        resources.load('prefabs_ui/main/hero_selecticonstarup', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
             this._bottomHeroItemList.clear()
             let k = new Array<[number,Node]>();     //排序存储对象
             let isShowOneKey = 0;       //是否显示一键升星按钮
@@ -248,58 +250,54 @@ export class PopRisingStarTower extends PopBase {
                 let isDeleteHero = this._isDeleteHero(heroData)
                 if(isDeleteHero){continue}
                 let heroIcon = instantiate(res) as Node;
-                this.scroll_HeroView.content?.addChild(heroIcon);
-                let heroSelectScript = heroIcon.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp;  
+                heroIcon.setScale(0.5,0.5,0.5)
+                heroIcon.addComponent(Widget);
+                let Node = instantiate(this.btnFrame) as Node;
+                Node.addComponent(Button);
+                Node.addChild(heroIcon);
+                Node.name = ""+heroData.getDyncID()
+
+                this.scroll_HeroView.content?.addChild(Node);
+                let heroSelectScript = heroIcon.getComponent("ElementHeroIcon") as ElementHeroIcon;  
+                heroSelectScript.setHeroData(heroData as HeroData); 
                 let itemType =  this._getItemType(heroData);
                 let isStarUp = this._isStarUp(heroData);
                 if(isStarUp){
                     isShowOneKey = 1;
                 }
-                heroSelectScript.setItemType(itemType);
-                heroSelectScript.setItemSymbol(Number(isStarUp));
-                heroSelectScript.setSelectData(heroData as HeroData,(data:any,itemType:number)=>{
-                    //第一个是升星主体 型号3
-                    if(this._risingdyncMaiID == heroData.getDyncID() && itemType != 3)
-                    {
-                        itemType = 3;
-                        this._platformExhibition();
-                        heroSelectScript.setItemType(itemType);
-                        return 
-                    }
 
-                    let isSelect = null;
-                    if(itemType == 0){
-                        //升星材料已满
-                        if(this._selectBattleList.size == this._curStarupNum+1)
-                        {
-                            console.log("升星材料已满",this._selectBattleList.size);
-                            return;
-                        }
-                        isSelect = true;
-                    }else if(itemType == 1){
-                        isSelect = false;
-                    }else if(itemType == 3){
-                        isSelect = false;
-                        this._platformMainHeadHandle()
-                    }
+                if(isStarUp){
+                    var sprNode = instantiate(this.btnFrame)
+                    sprNode.setScale(0.4,0.4,1)
+                    sprNode.setPosition(70,-70,0)
+                    let framePath: string = "ui/comm/hall/other/img_red/spriteFrame"
+                    this._resourceLoad(framePath, sprNode);
+                    sprNode.name = "StarUpStateSprNode"
+                    heroIcon.addChild(sprNode)
+                }
 
-                    
-                    if(isSelect != null){
-                        this._heroSelect(heroData,isSelect);
-                    }  
-                    this._platformExhibition();               
-                });
+                //添加按钮事件
+                var clickEventHandler = new EventHandler();
+                clickEventHandler.target = this.node; //这个 node 节点是你的事件处理代码组件所属的节点
+                clickEventHandler.component = "PopRisingStarTower";//这个是代码文件名
+                clickEventHandler.handler = "heroiconClick";
+                clickEventHandler.customEventData = heroData.getDyncID().toString();
+                let btnItem = Node.getComponent(Button);;
+                if(btnItem){
+                    btnItem.clickEvents.push(clickEventHandler);
+                }
+
                 let sortIndex_1:number = heroData.getLevel() * 10000 + heroData.getStar()*1000 + heroData.getCamp() * 10 + heroData.getClasses();
                 let sortIndex_2:number = 3000000 - sortIndex_1;
                 //排序 可以升星的放前面
                 if(isStarUp){
                     sortIndex_2 -= 10000000;
                 }
-                k.push([sortIndex_2,heroIcon]);
+                k.push([sortIndex_2,Node]);
                 
 
 
-                this._bottomHeroItemList.set(heroData.getDyncID(), heroIcon);
+                this._bottomHeroItemList.set(heroData.getDyncID(), Node);
             }
             if(this.btn_submit && isShowOneKey == 1){
                 this.btn_submit.interactable = true;
@@ -312,6 +310,68 @@ export class PopRisingStarTower extends PopBase {
                 value[1].setSiblingIndex(key);
             })
         });
+    }
+    //滚动区域头像点击事件
+    private heroiconClick(event: Event, customEventData: string){
+        let heroData = this._getHeroData(Number(customEventData))as HeroData
+        let itemType =  this._getItemType(heroData);
+        
+
+        this.setItemState(heroData,itemType);
+        //第一个是升星主体 型号3
+        if(this._risingdyncMaiID == heroData.getDyncID() && itemType != 3)
+        {
+            itemType = 3;
+            this._platformExhibition();
+            this.setItemState(heroData,itemType);
+            return 
+        }
+
+        let isSelect = null;
+        if(itemType == 0){
+            //升星材料已满
+            if(this._selectBattleList.size == this._curStarupNum+1)
+            {
+                console.log("升星材料已满",this._selectBattleList.size);
+                return;
+            }
+            isSelect = true;
+        }else if(itemType == 1){
+            isSelect = false;
+        }else if(itemType == 3){
+            isSelect = false;
+            this._platformMainHeadHandle()
+        }
+
+        
+        if(isSelect != null){
+            this._heroSelect(heroData,isSelect);
+        }  
+        this._platformExhibition();
+    }
+
+    //设置头像状态
+    private setItemState(heroData:HeroData,number : number){
+        let Node = this.scroll_HeroView.content?.getChildByName(String(heroData.getDyncID()))
+        if(!Node){return}
+        if(Node.getChildByName("StateSprNode")){
+            Node.getChildByName("StateSprNode")?.removeFromParent()
+            Node.getChildByName("StateSprNode")?.destroy()
+        }
+        //选中状态
+        if(number == 1){
+            var sprNode = instantiate(this.btnFrame)
+            let framePath: string = "ui/comm/hall/other/img_hero_selected/spriteFrame"
+            this._resourceLoad(framePath, sprNode);
+            sprNode.name = "StateSprNode"
+            Node.addChild(sprNode)
+        }else if(number == 3){//升星主体
+            var sprNode = instantiate(this.btnFrame)
+            let framePath: string = "ui/comm/hall/other/img_hero_selected/spriteFrame"
+            this._resourceLoad(framePath, sprNode);
+            sprNode.name = "StateSprNode"
+            Node.addChild(sprNode)
+        }
     }
 
     //是否能升星
@@ -363,7 +423,9 @@ export class PopRisingStarTower extends PopBase {
         if(isSelect == null)return;
 
         this._heroToTop(heroData,isSelect);
-        this._getBottomHeroItemScript(heroData)?.setSelect(isSelect);
+        if(isSelect){
+            this.setItemState(heroData,1)
+        }
         this._frushButtonHero();
     }
 
@@ -430,23 +492,11 @@ export class PopRisingStarTower extends PopBase {
         }
     }
 
-    //根据herodata获取拥有英雄代码
-    private _getBottomHeroItemScript(heroData:HeroData){
-        for (let value of this._bottomHeroItemList.values()) {
-            let script = value.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp; 
-            let scriptHeroInfo = script.getCurHeroInfo() as HeroData;
-            if(scriptHeroInfo.getDyncID() == heroData.getDyncID())
-            {
-                return script;
-            }
-        }
-    }
     private _frushButtonHero(){
         this._bottomHeroItemList.forEach((heroNode,dyncid)=>{
-            let heroSelectScript = heroNode.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp;
-            let heroData = heroSelectScript.getHeroData() as HeroData;
+            let heroData = this._getHeroData(dyncid)as HeroData
             let itemType =  this._getItemType(heroData);
-            heroSelectScript.setItemType(itemType);
+            this.setItemState(heroData,itemType)
             
             if(this._getCampType() == Msg.TCampType.ECampType_NULL){
                 heroNode.active = true;
@@ -505,10 +555,9 @@ export class PopRisingStarTower extends PopBase {
             return;
         }
         this._risingdyncMaiID = 0;
-        for (let value2 of this._bottomHeroItemList.values()) {
-            let script2 = value2.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp; 
-            let scriptHeroInfo = script2.getCurHeroInfo() as HeroData;
-            script2.setItemType(0);
+        for (let key of this._bottomHeroItemList.keys()) {
+            let heroData = this._getHeroData(key)as HeroData
+            this.setItemState(heroData,0)
         }
         this._selectBattleList.clear();
         this.btn_head2.getChildByName("heroIcon2")?.destroy();
@@ -580,25 +629,19 @@ export class PopRisingStarTower extends PopBase {
 
     //根据动态ID获取HeroData
     private _getHeroData(heroID:number){
-        let HeroInfo;
-        for (let value of this._bottomHeroItemList.values()) {
-            let script = value.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp; 
-            let scriptHeroInfo = script.getCurHeroInfo() as HeroData;
-            if(scriptHeroInfo.getDyncID() == heroID)
-            {
-                HeroInfo = scriptHeroInfo;
+        for (let heroData of this._allHeroList.values()) {
+            if(heroData.getDyncID() == heroID){
+                return heroData;
             }
         }
-        return HeroInfo;
     }
 
     //滚动区域英雄变化
     private _bottomHeroChange(){
         this._bottomHeroItemList.forEach((heroNode,dyncid)=>{
-            let heroSelectScript = heroNode.getComponent("HeroSelectIconStarUp") as HeroSelectIconStarUp;
-            let heroData = heroSelectScript.getHeroData() as HeroData;
+            let heroData = this._getHeroData(dyncid)as HeroData
             let itemType =  this._getItemType(heroData);
-            heroSelectScript.setItemType(itemType);
+            this.setItemState(heroData,itemType)
 
             if(this._risingdyncMaiID != 0){
                 let HeroInfo = this._getHeroData(this._risingdyncMaiID) as HeroData
@@ -635,15 +678,12 @@ export class PopRisingStarTower extends PopBase {
             return;
         }
 
-        let _campName:string = XConsts.KNewHeroCampIcon[HeroInfo?.getCamp() as number];
-        let _classesName:string = XConsts.KNewClassesSpriteName[HeroInfo?.getClasses() as number];
         let _iconName:string = HeroInfo?.getName() as string;
-        let _starNum:number = HeroInfo?.getStar() as number;
 
         if(this._selectBattleList.size == 1)
         {
             this.img_camp.active = true;
-            let campIconPath:string = "ui/comm/icon/" + _campName + "/spriteFrame"
+            let campIconPath:string = "ui/comm/hero/icon_hero_camp" + HeroInfo?.getClasses() + "/spriteFrame"
             resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
             {
                 if(!err)
@@ -653,7 +693,7 @@ export class PopRisingStarTower extends PopBase {
                 }
             });   
             this.img_classes.active = true;
-            let classesIconPath:string = "ui/comm/icon/" + _classesName + "/spriteFrame"
+            let classesIconPath:string = "ui/comm/hero/icon_hero_occupation" + HeroInfo?.getClasses() + "/spriteFrame"
             resources.load(classesIconPath, (err,spriteFrame:SpriteFrame) =>
             {
                 if(!err)
@@ -782,9 +822,9 @@ export class PopRisingStarTower extends PopBase {
         let grade:number = Math.ceil(star/5) - 1;
         let yu:number = (star - 1) % 5 + 1;
         let starNameList:string[] = new Array<string>();
-        starNameList = ["icon_star1","icon_star2","icon_star3"]
+        starNameList = ["s_card_xinxin_01","s_card_xinxin_02","s_card_xinxin_03"]
         let starName = starNameList[grade];
-        let starPath = "ui/comm/icon/" + starName + "/spriteFrame"
+        let starPath = "ui/comm/hero/" + starName + "/spriteFrame"
 
         for (let index = 0; index < nodes.length; index++) {
             if(index >= yu && yu != 0)

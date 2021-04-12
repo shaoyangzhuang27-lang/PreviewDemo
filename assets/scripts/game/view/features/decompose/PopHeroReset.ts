@@ -171,7 +171,7 @@ export class PopHeroReset extends PopBase {
             scroll.content.destroyAllChildren()
         }
 
-        resources.load('prefabs_ui/main/hero_selecticon', (err:any,res:any)=>{
+        resources.load('prefabs_ui/common/hero_selecticon', (err:any,res:any)=>{
             this._bottomHeroItemList.clear()
             let k = new Array<[number,Node]>();     //排序存储对象
             let isShowOneKey = 0;       //是否显示一键升星按钮

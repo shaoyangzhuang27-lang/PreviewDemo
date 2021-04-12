@@ -281,6 +281,7 @@ export class ResCore{
     }
     //记录临时资源
     private _recordRes(url:string,obj:Asset,key:string){
+        console.log("res core _recordRes :", url)
         let m = this._viewArr.get(key);
         if(!m){
             m = new Map<string,Asset>();

@@ -7,31 +7,20 @@ import { PopHeroReset } from "../view/features/decompose/PopHeroReset";
 import { PopCommonOne } from "../view/common/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from './NetLoading';
-import { TipDemo } from '../view/TipDemo';
 import { TipHeroAttribute } from '../view/common/TipHeroAttribute';
 import { XConsts } from '../model/const/XConsts';
 import { TipSkill } from '../view/common/TipSkill';
-import { PopHeroBookView } from "../view/pop/PopHeroBookView";
-import { PopItemUseWin } from "../view/pop/PopItemUseWin";
-import { PopEquipInfoWin } from "../view/pop/PopEquipInfoWin";
-import { PopEquipSaleView } from "../view/pop/PopEquipSaleView";
-import { PopItemReward } from '../view/pop/popItemReward';
 import { HeroData } from '../model/datas/HeroData';
-import { PopHeroChoiceGiftView } from '../view/pop/PopHeroChoiceGiftView';
 import { PopHeroPub } from "../view/features/pub/PopHeroPub";
 import { PopRecLineUp } from "../view/features/pub/PopRecLineUp";
 import { PopSummonSettle } from "../view/common/PopSummonSettle";
 import { PopFragmentSynthesis } from "../view/features/bag/PopFragmentSynthesis";
-import { PopBookActive } from '../view/pop/PopBookActive';
+import { PopBookActive } from '../view/features/herobook/PopBookActive';
 import { PopHeroEquipReplace } from '../view/features/heropromotion/PopHeroEquipReplace';
-import { PopBookUpGrade } from '../view/pop/PopBookUpgrade';
 import { PopMultiItemReward } from "../view/common/PopMultiItemReward";
-import { PopBookHeroDetail } from '../view/pop/PopBookHeroDetail';
-import { PopHeroStoryUI } from '../view/pop/PopHeroStoryUI';
-import { PopForge } from '../view/pop/PopForge';
-import { PopBookProUI } from '../view/pop/PopBookProUI';
+import { PopForge } from '../view/features/forge/PopForge';
 import { TipCampOrCareer } from '../view/features/heropromotion/TipCampOrCareer';
-import { PopHaloView } from '../view/pop/PopHaloView';
+import { PopHaloView } from '../view/features/lineup/PopHaloView';
 import { TipShareHeroToChat } from '../view/features/heropromotion/TipShareHeroToChat';
 import { PopfPlayerLevelUpAward } from '../view/features/system/PopfPlayerLevelUpAward';
 import {PopPubWonderRewardList} from "../view/features/pub/PopPubWonderRewardList";
@@ -39,7 +28,7 @@ import { ResMgr } from './ResMgr';
 import { PopSetting } from '../view/features/setting/PopSetting';
 import { PopServerList } from '../view/features/setting/PopServerList';
 import { PopfHeroPromotion } from '../view/features/heropromotion/PopfHeroPromotion';
-import { PopBattleTeam } from '../view/pop/PopBattleTeam';
+import { PopBattleTeam } from '../view/features/lineup/PopBattleTeam';
 import {PopPubWonderHeartHero} from "../view/features/pub/PopPubWonderHeartHero";
 // import {PopPubWonderSummonSettle} from "../view/features/pub/PopPubWonderSummonSettle";
 import { PopHeroReplace } from '../view/features/herosummon/PopHeroReplace';
@@ -47,6 +36,15 @@ import { PopfCollege } from '../view/features/college/PopfCollege';
 import { PopCollegeNotice } from '../view/features/college/PopCollegeNotice';
 import { PopCollegeUnload } from '../view/features/college/PopCollegeUnload';
 import { PopCollegeSelectHero } from '../view/features/college/PopCollegeSelectHero';
+import { PopHeroBookView } from '../view/features/herobook/PopHeroBookView';
+import { PopBookUpGrade } from '../view/features/herobook/PopBookUpgrade';
+import { PopBookHeroDetail } from '../view/features/herobook/PopBookHeroDetail';
+import { PopHeroStoryUI } from '../view/features/herobook/PopHeroStoryUI';
+import { PopItemUseWin } from '../view/features/props/PopItemUseWin';
+import { PopItemReward } from '../view/features/props/PopItemReward';
+import { PopEquipInfoWin } from '../view/features/props/PopEquipInfoWin';
+import { PopEquipSaleView } from '../view/features/props/PopEquipSaleView';
+import { PopHeroChoiceGiftView } from '../view/features/props/PopHeroChoiceGiftView';
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
@@ -125,7 +123,7 @@ export class PopMgr extends PopCore  {
      * @param typeIndex 当前使用的阵型索引 数值参考XConsts的阵容索引
      */
     public popBattleTeamView(typeIndex: number | null = null) {
-        resources.load('prefabs_ui/pop/pop_battleteam', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/lineup/pop_battleteam', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 
@@ -406,7 +404,7 @@ export class PopMgr extends PopCore  {
 
     //弹出图鉴界面
     public popBookLibraryView() {
-        resources.load('prefabs_ui/pop/pop_bookview', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/herobook/pop_bookview', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
@@ -417,7 +415,7 @@ export class PopMgr extends PopCore  {
 
     //弹出光环界面
     public popHaloView(heroIds: [] = [], isHideSkill: boolean = false) {
-        resources.load('prefabs_ui/pop/pop_halo', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/lineup/pop_halo', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
@@ -434,7 +432,7 @@ export class PopMgr extends PopCore  {
      * @param isVisit   参观模式 不可使用、出售       
      */
     public popItemUseSellView(id: number, objType: number, isVisit: boolean | null = null) {
-        resources.load('prefabs_ui/pop/pop_itemuse', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/props/pop_itemuse', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
@@ -445,7 +443,7 @@ export class PopMgr extends PopCore  {
 
     
     public popItemRewardView(id: number, num: number) {
-        resources.load('prefabs_ui/pop/pop_itemreward', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/props/pop_itemreward', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
@@ -460,7 +458,7 @@ export class PopMgr extends PopCore  {
      * @param isVisit   参观模式   不显示出售按钮
      */
     public popEquipInfoView(id: number, isVisit: boolean | null = null) {
-        resources.load('prefabs_ui/pop/pop_equipinfo', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/props/pop_equipinfo', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
@@ -474,7 +472,7 @@ export class PopMgr extends PopCore  {
      * @param id  装备id
      */
     public popEquipSellView(id: number) {
-        resources.load('prefabs_ui/pop/pop_equipsell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/props/pop_equipsell', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
@@ -489,7 +487,7 @@ export class PopMgr extends PopCore  {
      * @param visit 预览/参观模式
      */
     public popOpenHeroGiftView(giftId: number, visit: boolean = false) {
-        resources.load('prefabs_ui/pop/pop_herogiftview', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/props/pop_herogiftview', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
@@ -590,7 +588,7 @@ export class PopMgr extends PopCore  {
      * @param id 英雄id
      */
     public popBookHeroActiveView(id: number) {
-        resources.load('prefabs_ui/pop/pop_bookactive', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/herobook/pop_bookactive', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 
@@ -604,7 +602,7 @@ export class PopMgr extends PopCore  {
      * @param id 
      */
     public popBookHeroUpgradeView(id: number) {
-         resources.load('prefabs_ui/pop/pop_bookupgrade', (err:any,res:any)=>{
+         resources.load('prefabs_ui/features/herobook/pop_bookupgrade', (err:any,res:any)=>{
              let p = instantiate( res );
              this.pushWindow(p);
  
@@ -693,7 +691,7 @@ export class PopMgr extends PopCore  {
      * @param sid 英雄静态id
      */
     public popOpenBookHeroDetail(sid: number) {
-        resources.load('prefabs_ui/pop/pop_bookherodetail', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/herobook/pop_bookherodetail', (err:any,res:any)=>{
             console.log("sssssssssss",sid);
             let p = instantiate( res );
             this.pushWindow(p);
@@ -710,7 +708,7 @@ export class PopMgr extends PopCore  {
      * @param sid 英雄静态id
      */
     public popOpenHeroStoryUI(sid: number) {
-        resources.load('prefabs_ui/pop/pop_herostory', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/herobook/pop_herostory', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 
@@ -725,7 +723,7 @@ export class PopMgr extends PopCore  {
      * @param p1
      */
     public popForge() {
-        resources.load('prefabs_ui/pop/pop_forge', (err: any, res: any) => {
+        resources.load('prefabs_ui/features/forge/pop_forge', (err: any, res: any) => {
             let p = instantiate(res);
             this.pushWindow(p)
             let script = p.getComponent("PopForge") as PopForge;
@@ -740,7 +738,7 @@ export class PopMgr extends PopCore  {
      * 打开图鉴总加成属性界面
      */
     public popOpenBookAllPropretyUI() {
-        resources.load('prefabs_ui/pop/pop_bookallproperty', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/herobook/pop_bookallproperty', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p);
 
@@ -752,7 +750,7 @@ export class PopMgr extends PopCore  {
      * 打开图鉴属性总等级加成界面
      */
     public popOpenBookPropretyLevelUI() {
-         resources.load('prefabs_ui/pop/pop_bookallpropretyview', (err:any,res:any)=>{
+         resources.load('prefabs_ui/features/herobook/pop_bookallpropretyview', (err:any,res:any)=>{
              let p = instantiate( res );
              this.pushWindow(p);
  
