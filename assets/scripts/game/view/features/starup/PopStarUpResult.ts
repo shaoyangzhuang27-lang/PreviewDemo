@@ -134,12 +134,10 @@ export class PopStarUpResult extends PopBase {
     //平台显示英雄信息
     private _showHeroInfo(){
         let HeroInfo = this._newHeroData;
-        let _campName:string = XConsts.KNewHeroCampIcon[HeroInfo?.getCamp() as number];
-        let _classesName:string = XConsts.KNewClassesSpriteName[HeroInfo?.getClasses() as number];
         let _iconName:string = HeroInfo?.getName() as string;
         let _starNum:number = HeroInfo?.getStar() as number;
         this.img_camp.active = true;
-        let campIconPath:string = "ui/comm/icon/" + _campName + "/spriteFrame"
+        let campIconPath:string = "ui/comm/hero/icon_hero_camp" + HeroInfo?.getClasses() + "/spriteFrame"
         resources.load(campIconPath, (err,spriteFrame:SpriteFrame) =>
         {
             if(!err)
@@ -149,7 +147,7 @@ export class PopStarUpResult extends PopBase {
             }
         });   
         this.img_classes.active = true;
-        let classesIconPath:string = "ui/comm/icon/" + _classesName + "/spriteFrame"
+        let classesIconPath:string = "ui/comm/hero/icon_hero_occupation" + HeroInfo?.getClasses() + "/spriteFrame"
         resources.load(classesIconPath, (err,spriteFrame:SpriteFrame) =>
         {
             if(!err)
@@ -170,9 +168,9 @@ export class PopStarUpResult extends PopBase {
         let yu:number = (star - 1) % 5 + 1;
 
         let starNameList:string[] = new Array<string>();
-        starNameList = ["icon_star1","icon_star2","icon_star3"]
+        starNameList = ["s_card_xinxin_01","s_card_xinxin_02","s_card_xinxin_03"]
         let starName = starNameList[grade];
-        let starPath = "ui/comm/icon/" + starName + "/spriteFrame"
+        let starPath = "ui/comm/hero/" + starName + "/spriteFrame"
 
         for (let index = 0; index < this.starlist.length; index++) {
             if(index >= yu && yu != 0)
