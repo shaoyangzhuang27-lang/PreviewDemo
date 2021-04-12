@@ -3,7 +3,7 @@
  * @author 施敏昭
  * @version 1.0.0,2021.3.26
  */
-import { _decorator,Label,Sprite,SpriteFrame,Component, Button,instantiate,Widget,Vec3, Node,resources,ToggleContainer,EventHandler,Toggle,ScrollView } from 'cc';
+import { _decorator,UITransform,view,Label,Sprite,SpriteFrame,Component, Button,instantiate,Widget,Vec3, Node,resources,ToggleContainer,EventHandler,Toggle,ScrollView } from 'cc';
 import { ResMgr } from '../../../control/ResMgr';
 import { GameModel } from '../../../model/GameModel';
 import { HeroData } from '../../../model/datas/HeroData';
@@ -189,7 +189,7 @@ export class PopHeroRollBack extends Component {
             scroll.content.removeAllChildren()
             scroll.content.destroyAllChildren()
         }
-
+        this.scroll_HeroView.view?.getComponent(UITransform)?.setContentSize(view.getVisibleSize().width-20,view.getVisibleSize().height/2.6)
         resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
             this._bottomHeroItemList.clear()
             let k = new Array<[number,Node]>();     //排序存储对象
@@ -198,9 +198,10 @@ export class PopHeroRollBack extends Component {
                 let isDeleteHero = this._isDeleteHero(heroData)
                 if(isDeleteHero){continue}
                 let heroIcon = instantiate(res) as Node;
-                heroIcon.setScale(0.5,0.5,0.5)
+                heroIcon.setScale(0.6,0.6,0.5)
                 heroIcon.addComponent(Widget);
                 let FrameNode = instantiate(this.btnFrame) as Node;
+                FrameNode.getComponent(UITransform)?.setContentSize(122,122)
                 FrameNode.addComponent(Button);
                 FrameNode.addChild(heroIcon);
                 FrameNode.name = ""+heroData.getDyncID()

@@ -174,6 +174,7 @@ export class PopHeroReset extends PopBase {
             scroll.content.removeAllChildren()
             scroll.content.destroyAllChildren()
         }
+        this.scroll_HeroView.view?.getComponent(UITransform)?.setContentSize(view.getVisibleSize().width-20,view.getVisibleSize().height/2.6)
 
         resources.load('prefabs_ui/common/element_heroicon', (err:any,res:any)=>{
             this._bottomHeroItemList.clear()
@@ -183,10 +184,11 @@ export class PopHeroReset extends PopBase {
                 let isDeleteHero = this._isDeleteHero(heroData)
                 if(isDeleteHero){continue}
                 let heroIcon = instantiate(res) as Node;
-                heroIcon.setScale(0.5,0.5,0.5)
+                heroIcon.setScale(0.6,0.6,0.5)
                 heroIcon.addComponent(Widget);
 
                 let FrameNode = instantiate(this.btnFrame) as Node;
+                FrameNode.getComponent(UITransform)?.setContentSize(122,122)
                 FrameNode.addComponent(Button);
                 FrameNode.addChild(heroIcon);
                 FrameNode.name = ""+heroData.getDyncID()
