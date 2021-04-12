@@ -2,12 +2,12 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-  "uuid": "dfd8b33c-cc18-49bb-8430-1908cd4a39dd",
+  "uuid": "56c0c649-a7bb-4b8e-90d0-2e530c9f9e60",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "element_equipProp"
+    "syncNodeName": "element_shop_goods"
   }
 }

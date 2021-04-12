@@ -2,12 +2,12 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-  "uuid": "dfd8b33c-cc18-49bb-8430-1908cd4a39dd",
+  "uuid": "c38bcdae-a0d8-498b-a1bb-aecb34301a6d",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "element_equipProp"
+    "syncNodeName": "popf_player_levelup_award"
   }
 }

@@ -2,12 +2,12 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-  "uuid": "dfd8b33c-cc18-49bb-8430-1908cd4a39dd",
+  "uuid": "c4f4f38e-e93f-4182-8c68-71987a46627c",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "element_equipProp"
+    "syncNodeName": "popf_shop"
   }
 }

@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "item_shop_goods",
+    "_name": "element_shop_goods",
     "_objFlags": 0,
     "_parent": null,
     "_children": [

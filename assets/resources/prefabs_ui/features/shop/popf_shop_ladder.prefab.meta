@@ -2,12 +2,12 @@
   "ver": "1.1.27",
   "importer": "prefab",
   "imported": true,
-  "uuid": "56c0c649-a7bb-4b8e-90d0-2e530c9f9e60",
+  "uuid": "e7e62708-4e70-4e08-876d-d9ba8ca90ebb",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "item_shop_goods"
+    "syncNodeName": "popf_shop_ladder"
   }
 }
