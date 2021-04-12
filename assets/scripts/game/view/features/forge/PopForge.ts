@@ -15,7 +15,7 @@ import { XConsts } from '../../../model/const/XConsts';
 import { XFuns } from '../../../model/const/XFuns';
 import { GameModel } from '../../../model/GameModel';
 import { ElementEquipProp, EquipPropType } from '../../common/ElementEquipProp';
-import { PopQuickCompose } from '../../pop/PopQuickCompose';
+import { PopQuickCompose } from './PopQuickCompose';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopForge')
@@ -307,7 +307,7 @@ export class PopForge extends PopBase {
             console.log("没有可以快捷合成的装备")
             return
         }
-        resources.load('prefabs_ui/pop/pop_quick_compose', (err: any, res: any) => {
+        resources.load('prefabs_ui/features/forge/pop_quick_compose', (err: any, res: any) => {
             let p = instantiate(res);
             let script = p.getComponent("PopQuickCompose") as PopQuickCompose
             script.popSelf()

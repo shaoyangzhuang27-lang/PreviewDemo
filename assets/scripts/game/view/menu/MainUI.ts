@@ -8,11 +8,11 @@ import { BagMain } from '../menu/BagMain';
 import { KnightMain } from '../menu/KnightMain';
 import { TeamMain } from '../menu/TeamMain';
 import { FlyItem } from '../features/battle/FlyItem';
-import { PopOffLineBonus} from '../pop/PopOffLineBonus';
 import { OfflineModel } from '../../model/datas/OfflineModel';
 import { UINodeMgr } from '../UINodeMgr';
 import { ResMgr } from '../../control/ResMgr';
 import { ElementAvatar } from '../common/ElementAvatar';
+import { PopOffLineBonus } from '../features/battle/PopOffLineBonus';
 
 const { ccclass, property } = _decorator;
 
