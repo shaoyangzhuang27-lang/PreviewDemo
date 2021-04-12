@@ -2,7 +2,6 @@
 import { _decorator, Component, Node, ToggleContainer, EventHandler, Toggle, Vec3, tween, ScrollView, Game,Size, resources, instantiate, Layout ,UITransform,Prefab} from 'cc';
 import { GameModel } from '../../model/GameModel';
 import { EquipPropType,ElementEquipProp } from '../common/ElementEquipProp';
-import { PopItemUseWin } from '../pop/PopItemUseWin';
 import { PopMgr } from '../../control/PopMgr';
 import { NotifyMgr } from '../../control/NotifyMgr';
 import { ElementHeroFragment } from '../features/bag/ElementHeroFragment';

@@ -1,12 +1,12 @@
 
 import { _decorator, Component, Node, Label, instantiate, resources, EditBox, } from 'cc';
+import { PopBase } from '../../../../core/control/PopBase';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { PopMgr } from '../../../control/PopMgr';
+import { GameModel } from '../../../model/GameModel';
+import { TableName, ValueMgr } from '../../../model/ValueMgr';
+import { ElementEquipProp, EquipPropType } from '../../common/ElementEquipProp';
 const { ccclass, property } = _decorator;
-import { ElementEquipProp, EquipPropType } from '../common/ElementEquipProp';
-import { PopBase } from '../../../core/control/PopBase';
-import { MsgMgr } from '../../control/MsgMgr';
-import { TableName, ValueMgr } from '../../model/ValueMgr';
-import { GameModel } from '../../model/GameModel';
-import { PopMgr } from '../../control/PopMgr';
 
 @ccclass('PopItemUseWin')
 export class PopItemUseWin extends PopBase {
@@ -194,14 +194,3 @@ export class PopItemUseWin extends PopBase {
         this._useCount = inputNum;
     }
 }
-
-/**
- * [1] Class member could be defined like this.
- * [2] Use `property` decorator if your want the member to be serializable.
- * [3] Your initialization goes here.
- * [4] Your update function goes here.
- *
- * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
- * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
- * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
- */

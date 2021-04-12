@@ -10,12 +10,7 @@ import { NetLoading } from './NetLoading';
 import { TipHeroAttribute } from '../view/common/TipHeroAttribute';
 import { XConsts } from '../model/const/XConsts';
 import { TipSkill } from '../view/common/TipSkill';
-import { PopItemUseWin } from "../view/pop/PopItemUseWin";
-import { PopEquipInfoWin } from "../view/pop/PopEquipInfoWin";
-import { PopEquipSaleView } from "../view/pop/PopEquipSaleView";
-import { PopItemReward } from '../view/pop/popItemReward';
 import { HeroData } from '../model/datas/HeroData';
-import { PopHeroChoiceGiftView } from '../view/pop/PopHeroChoiceGiftView';
 import { PopHeroPub } from "../view/features/pub/PopHeroPub";
 import { PopRecLineUp } from "../view/features/pub/PopRecLineUp";
 import { PopSummonSettle } from "../view/common/PopSummonSettle";
@@ -45,6 +40,11 @@ import { PopHeroBookView } from '../view/features/herobook/PopHeroBookView';
 import { PopBookUpGrade } from '../view/features/herobook/PopBookUpgrade';
 import { PopBookHeroDetail } from '../view/features/herobook/PopBookHeroDetail';
 import { PopHeroStoryUI } from '../view/features/herobook/PopHeroStoryUI';
+import { PopItemUseWin } from '../view/features/props/PopItemUseWin';
+import { PopItemReward } from '../view/features/props/PopItemReward';
+import { PopEquipInfoWin } from '../view/features/props/PopEquipInfoWin';
+import { PopEquipSaleView } from '../view/features/props/PopEquipSaleView';
+import { PopHeroChoiceGiftView } from '../view/features/props/PopHeroChoiceGiftView';
 
 export class PopMgr extends PopCore  {
     private static _instance: PopMgr = new PopMgr();
@@ -432,7 +432,7 @@ export class PopMgr extends PopCore  {
      * @param isVisit   参观模式 不可使用、出售       
      */
     public popItemUseSellView(id: number, objType: number, isVisit: boolean | null = null) {
-        resources.load('prefabs_ui/pop/pop_itemuse', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/props/pop_itemuse', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
@@ -443,7 +443,7 @@ export class PopMgr extends PopCore  {
 
     
     public popItemRewardView(id: number, num: number) {
-        resources.load('prefabs_ui/pop/pop_itemreward', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/props/pop_itemreward', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
@@ -458,7 +458,7 @@ export class PopMgr extends PopCore  {
      * @param isVisit   参观模式   不显示出售按钮
      */
     public popEquipInfoView(id: number, isVisit: boolean | null = null) {
-        resources.load('prefabs_ui/pop/pop_equipinfo', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/props/pop_equipinfo', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
@@ -472,7 +472,7 @@ export class PopMgr extends PopCore  {
      * @param id  装备id
      */
     public popEquipSellView(id: number) {
-        resources.load('prefabs_ui/pop/pop_equipsell', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/props/pop_equipsell', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 
@@ -487,7 +487,7 @@ export class PopMgr extends PopCore  {
      * @param visit 预览/参观模式
      */
     public popOpenHeroGiftView(giftId: number, visit: boolean = false) {
-        resources.load('prefabs_ui/pop/pop_herogiftview', (err:any,res:any)=>{
+        resources.load('prefabs_ui/features/props/pop_herogiftview', (err:any,res:any)=>{
             let p = instantiate( res );
             this.pushWindow(p)
 

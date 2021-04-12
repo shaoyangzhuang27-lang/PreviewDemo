@@ -1,11 +1,11 @@
 //使用道具返回
 import { _decorator, Component, Node, Label, resources, instantiate } from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { PopMgr } from '../../control/PopMgr';
-import { XFuns } from '../../model/const/XFuns';
-import { TableName, ValueMgr } from '../../model/ValueMgr';
+import { PopBase } from '../../../../core/control/PopBase';
+import { PopMgr } from '../../../control/PopMgr';
+import { XFuns } from '../../../model/const/XFuns';
+import { TableName, ValueMgr } from '../../../model/ValueMgr';
+import { ElementEquipProp, EquipPropType } from '../../common/ElementEquipProp';
 const { ccclass, property } = _decorator;
-import { EquipPropType,ElementEquipProp } from '../common/ElementEquipProp';
 
 @ccclass('PopItemReward')
 export class PopItemReward extends PopBase {
@@ -58,14 +58,3 @@ export class PopItemReward extends PopBase {
         
     } 
 }
-
-/**
- * [1] Class member could be defined like this.
- * [2] Use `property` decorator if your want the member to be serializable.
- * [3] Your initialization goes here.
- * [4] Your update function goes here.
- *
- * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
- * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
- * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
- */

@@ -4,11 +4,11 @@
  * @version 1.0.0,2021.3.16
  */
 import { _decorator, Component, Node, ScrollView, resources, instantiate, EventTouch } from 'cc';
-import { PopBase } from '../../../core/control/PopBase';
-import { MsgMgr } from '../../control/MsgMgr';
-import { PopMgr } from '../../control/PopMgr';
-import { TableName, ValueMgr } from '../../model/ValueMgr';
-import { HeroGiftChoiceCell } from '../hero/HeroGiftChoiceCell';
+import { PopBase } from '../../../../core/control/PopBase';
+import { MsgMgr } from '../../../control/MsgMgr';
+import { PopMgr } from '../../../control/PopMgr';
+import { TableName, ValueMgr } from '../../../model/ValueMgr';
+import { HeroGiftChoiceCell } from '../../hero/HeroGiftChoiceCell';
 const { ccclass, property } = _decorator;
 
 @ccclass('PopHeroChoiceGiftView')
