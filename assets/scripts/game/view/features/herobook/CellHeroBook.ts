@@ -90,7 +90,7 @@ export class CellHeroBook extends Component {
         let heroCampBgName:string = XConsts.KItemHeroBookBGSpriteName[this._record.camp];
 
         let careerPath:string = "ui/book/" + careerName + "/spriteFrame"
-        let modelPath:string = "ui/hero/" + modelName+"_image" + "/spriteFrame"
+        let modelPath:string = "ui/comm/hero_big/" + modelName+"_image" + "/spriteFrame"
         let campBgPath:string = "ui/book/" + heroCampBgName + "/spriteFrame"
         this._resourceLoad(careerPath,this.img_career);
         this._resourceLoad(modelPath,this.img_icon);

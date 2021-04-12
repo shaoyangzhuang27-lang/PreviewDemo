@@ -107,7 +107,7 @@ export class PopHeroStoryUI extends PopBase {
         this.lab_content.string = heroContentData.cn;
 
         let heroImg = this._heroInfo.image + "_image"
-        let heroPath = "ui/hero/" + heroImg + "/spriteFrame"
+        let heroPath = "ui/comm/hero_big/" + heroImg + "/spriteFrame"
         resources.load(heroPath,(err,spriteFrame:SpriteFrame) =>
         {
             if(!err)
