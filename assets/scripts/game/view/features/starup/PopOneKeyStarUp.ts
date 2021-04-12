@@ -10,7 +10,7 @@ import { GameModel } from '../../../model/GameModel';
 import { TableName, ValueMgr } from "../../../model/ValueMgr";
 import { ElementHeroIcon } from '../../common/ElementHeroIcon';
 import { MsgMgr } from '../../../control/MsgMgr';
-import { HeroSelectIcon } from '../../hero/HeroSelectIcon';
+import { HeroSelectIcon } from '../../common/HeroSelectIcon';
 import { PopMgr } from '../../../control/PopMgr';
 const { ccclass, property } = _decorator;
 
