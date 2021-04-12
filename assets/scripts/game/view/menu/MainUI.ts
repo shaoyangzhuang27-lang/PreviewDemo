@@ -11,8 +11,8 @@ import { FlyItem } from '../features/battle/FlyItem';
 import { PopOffLineBonus} from '../pop/PopOffLineBonus';
 import { OfflineModel } from '../../model/datas/OfflineModel';
 import { UINodeMgr } from '../UINodeMgr';
-import { AvatarNode } from './AvatarNode';
 import { ResMgr } from '../../control/ResMgr';
+import { ElementAvatar } from '../common/ElementAvatar';
 
 const { ccclass, property } = _decorator;
 
@@ -124,11 +124,11 @@ export class MainUI extends Component {
         this.txt_level.string = String(GameModel.getInstance().getPlayerModel().getPlayerInfo().level + "级");
 
         //载入头像
-        ResMgr.getInstance().loadPrefab("prefabs_ui/main/node_avatar", (err:any, res:Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab("prefabs_ui/common/element_avatar", (err:any, res:Prefab | null)=>{
             let avatarNode = instantiate( res as Prefab ) as Node
             this.node_head.addChild(avatarNode)
 
-            let script = avatarNode.getComponent("AvatarNode") as AvatarNode;
+            let script = avatarNode.getComponent("ElementAvatar") as ElementAvatar;
             script.hideLevel()
             script.openClick()
         })

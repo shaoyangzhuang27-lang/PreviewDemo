@@ -4,8 +4,8 @@ import { _decorator, Node, Label } from 'cc';
 import { PopMgr } from '../../control/PopMgr';
 const { ccclass, property } = _decorator;
 
-@ccclass('AvatarNode')
-export class AvatarNode extends Component {
+@ccclass('ElementAvatar')
+export class ElementAvatar extends Component {
 
     @property({ type:Sprite, displayName:"头像精灵" })
     public spr_avatar:Sprite = null as unknown as Sprite

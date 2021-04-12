@@ -7,7 +7,7 @@ import { PopMgr } from '../../../control/PopMgr';
 import { ResMgr } from '../../../control/ResMgr';
 import { DataMgr } from '../../../model/DataMgr';
 import { GameModel } from '../../../model/GameModel';
-import { AvatarNode } from '../../menu/AvatarNode';
+import { ElementAvatar } from '../../common/ElementAvatar';
 
 
 const { ccclass, property } = _decorator;
@@ -143,14 +143,14 @@ export class PopServerList extends PopBase {
         let playerData = GameModel.getInstance().getSystemModel().getPlayerDataByServerID(serverID)
 
         //载入头像
-        ResMgr.getInstance().loadPrefab("prefabs_ui/main/node_avatar", (err:any, res:Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab("prefabs_ui/common/element_avatar", (err:any, res:Prefab | null)=>{
             if (!cell_item) { return }
             let p = instantiate( res as Prefab ) as Node
 
             let node_avatar = cell_item.getChildByName("node_avatar") as Node
             node_avatar.addChild(p)
 
-            let script = p.getComponent("AvatarNode") as AvatarNode;
+            let script = p.getComponent("ElementAvatar") as ElementAvatar;
             if (playerData) {
                 script.setBriefPlayerData(playerData)
             }

@@ -6,7 +6,7 @@ import { PopMgr } from '../../../control/PopMgr';
 import { ResMgr } from '../../../control/ResMgr';
 import { GameModel } from '../../../model/GameModel';
 import { TableName, ValueMgr } from '../../../model/ValueMgr';
-import { AvatarNode } from '../../menu/AvatarNode';
+import { ElementAvatar } from '../../common/ElementAvatar';
 
 const { ccclass, property } = _decorator;
 
@@ -137,11 +137,11 @@ export class PopSetting extends PopBase {
         let playerInfo = GameModel.getInstance().getPlayerModel().getPlayerInfo()
 
         //头像
-        ResMgr.getInstance().loadPrefab("prefabs_ui/main/node_avatar", (err:any, res:Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab("prefabs_ui/common/element_avatar", (err:any, res:Prefab | null)=>{
             let p = instantiate( res as Prefab ) as Node
             this.node_avatar.addChild(p)
 
-            let script = p.getComponent("AvatarNode") as AvatarNode;
+            let script = p.getComponent("ElementAvatar") as ElementAvatar;
             //当前所在服务器id
             let curServerID = GameModel.getInstance().getPlayerModel().getPlayerInfo().serverID
             //此服务器的玩家数据

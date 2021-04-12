@@ -135,7 +135,7 @@ export class PopHaloView extends PopBase {
             this._updateAllProperty()
         }
 
-        ResMgr.getInstance().loadPrefab("prefabs_ui/halo/halo_item", (err:any, res:Prefab | null)=>{
+        ResMgr.getInstance().loadPrefab("prefabs_ui/features/lineup/halo_item", (err:any, res:Prefab | null)=>{
             this.item_res = res as Prefab
             // console.log("PopHaloView 加载子项目资源完成")
             this._initHaloView()
