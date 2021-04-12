@@ -3,7 +3,7 @@
  * @author 施敏昭
  * @version 1.0.0,2021.3.15
  */
-import { _decorator,EventHandler,Button, Sprite,Vec3,tween, Component,SpriteFrame,Label,Node, resources,LabelComponent } from 'cc';
+import { _decorator, view,UITransform,EventHandler,Button, Sprite,Vec3,tween, Component,SpriteFrame,Label,Node, resources,LabelComponent } from 'cc';
 import { PopBase } from '../../../../core/control/PopBase';
 import { HeroModel } from '../../common/HeroModel';
 import { HeroData } from '../../../model/datas/HeroData';
@@ -99,6 +99,7 @@ export class PopStarUpResult extends PopBase {
 
     start () {
         super.start(); 
+        this.window.getComponent(UITransform)?.setContentSize(view.getVisibleSize().width,view.getVisibleSize().height)
         var clickEventHandler = new EventHandler();
         clickEventHandler.target = this.node; //这个 node 节点是你的事件处理代码组件所属的节点
         clickEventHandler.component = "PopStarUpResult";//这个是代码文件名

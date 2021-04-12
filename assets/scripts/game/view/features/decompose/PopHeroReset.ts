@@ -3,7 +3,7 @@
  * @author 施敏昭
  * @version 1.0.0,2021.3.26
  */
-import { _decorator,Label,SpriteFrame,Sprite, Button,instantiate,Widget,Vec3, Node,resources,ToggleContainer,EventHandler,Toggle,ScrollView } from 'cc';
+import { _decorator, view,UITransform,Label,SpriteFrame,Sprite, Button,instantiate,Widget,Vec3, Node,resources,ToggleContainer,EventHandler,Toggle,ScrollView } from 'cc';
 import { PopBase } from '../../../../core/control/PopBase';
 import { ResMgr } from '../../../control/ResMgr';
 import { GameModel } from '../../../model/GameModel';
@@ -111,6 +111,7 @@ export class PopHeroReset extends PopBase {
     }
     start () {
         super.start();
+        this.window.getComponent(UITransform)?.setContentSize(view.getVisibleSize().width,view.getVisibleSize().height)
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_hero_reset_change,this._notifyResetChangeHandle,this);
         
         if(this._selectBattleList == null)

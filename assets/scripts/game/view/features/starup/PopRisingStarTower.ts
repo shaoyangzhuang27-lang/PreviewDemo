@@ -3,7 +3,7 @@
  * @author 施敏昭
  * @version 1.0.0,2021.3.13
  */
-import { _decorator, tween, Node, Sprite,SpriteFrame, Label, ToggleContainer, EventHandler, Toggle, sys, resources, instantiate, Vec3, ScrollView, v3, math, Widget, Button } from 'cc';
+import { _decorator, view,UITransform, Node, Sprite,SpriteFrame, Label, ToggleContainer, EventHandler, Toggle, sys, resources, instantiate, Vec3, ScrollView, v3, math, Widget, Button } from 'cc';
 const { ccclass, property } = _decorator;
 import { PopBase } from '../../../../core/control/PopBase';
 import { GameModel } from '../../../model/GameModel';
@@ -179,6 +179,7 @@ export class PopRisingStarTower extends PopBase {
     start()
     {
         super.start();
+        this.window.getComponent(UITransform)?.setContentSize(view.getVisibleSize().width,view.getVisibleSize().height)
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_starUp_change,this._notifyStarUpChangeHandle,this);
         NotifyMgr.getInstance().addNotifyHandler(NotifyMgr.event_net_OneKeyStarUp_change,this._notifyOneKeyStarUpChangeHandle,this);
         
