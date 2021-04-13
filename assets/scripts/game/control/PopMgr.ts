@@ -3,6 +3,7 @@ import { PopRisingStarTower } from "../view/features/starup/PopRisingStarTower";
 import { PopStarUpResult } from "../view/features/starup/PopStarUpResult";
 import { PopOneKeyStarUp } from "../view/features/starup/PopOneKeyStarUp";
 import { PopHeroReset } from "../view/features/decompose/PopHeroReset";
+import { PopEventCopy } from "../view/features/eventcopy/PopEventCopy";
 import { PopCommonOne } from "../view/common/PopCommonOne";
 import { PopCore } from "../../core/control/PopCore";
 import { NetLoading } from './NetLoading';
@@ -215,6 +216,20 @@ export class PopMgr extends PopCore  {
             this.pushWindow(p)
 
             let script = p.getComponent("PopHeroReset") as PopHeroReset;
+            script.setIsMaskClose(isMaskClose);
+        } );
+    }
+
+    /**
+     * @description: 弹出活动副本界面 
+     * @param {boolean} isMaskClose
+     */
+     public popEventCopyView(isMaskClose: boolean = true) {
+        resources.load('prefabs_ui/features/eventcopy/pop_eventcopy', (err:any,res:any)=>{
+            let p = instantiate( res );
+            this.pushWindow(p)
+
+            let script = p.getComponent("PopEventCopy") as PopEventCopy;
             script.setIsMaskClose(isMaskClose);
         } );
     }

@@ -90,6 +90,10 @@ export class MainCity extends Component {
             PopMgr.getInstance().popStarUpView();
             return;
         }
+        if(buildName == "building_06"){
+            PopMgr.getInstance().popEventCopyView();
+            return;
+        }
         if(buildName == "building_12"){
             PopMgr.getInstance().popHeroResetView();
             return;
