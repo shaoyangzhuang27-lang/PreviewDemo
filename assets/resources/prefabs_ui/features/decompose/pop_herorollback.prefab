@@ -990,7 +990,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -317.08299999999997,
+      "y": -308.66599999999994,
       "z": 0
     },
     "_lrot": {
@@ -1030,7 +1030,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 720,
-      "height": 90
+      "height": 110
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1041,7 +1041,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "27DYin+c1MKrgDjCAC+ocM"
+    "fileId": "c4sCQjxKJNhLoprtre2M7m"
   },
   {
     "__type__": "cc.Sprite",
@@ -1085,7 +1085,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "c1CMQENixHwL6+CWKSbvV2"
+    "fileId": "99e9Vb1sVKF6iRn4A7G4+g"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1095,7 +1095,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "22ySVmXoFBXr0iBaonClP+"
+    "fileId": "fbqzY84WRHm4a4wQERnCgY"
   },
   {
     "__type__": "cc.Node",
@@ -1120,7 +1120,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -246.39099999999996,
+      "y": -238.471,
       "z": 0
     },
     "_lrot": {
@@ -1160,7 +1160,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 720,
-      "height": 87
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1171,7 +1171,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "f2mocHZY9OtKmq02mJRtWe"
+    "fileId": "5fueSYZJ5BZ4/GVodse4lL"
   },
   {
     "__type__": "cc.Sprite",
@@ -1215,7 +1215,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "66JTTXdc1JWp0b71CY9NTk"
+    "fileId": "65L8UTGtFD943MuFxRldmO"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1225,7 +1225,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "59C0f3USVJEIdezHslOXbJ"
+    "fileId": "6aDtf1HyxNFbCchvtL4SWJ"
   },
   {
     "__type__": "cc.Node",
@@ -3566,7 +3566,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 12.995000000000005,
       "z": 0
     },
     "_lrot": {
@@ -3725,7 +3725,7 @@
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 590,
+    "_top": 577.005,
     "_bottom": 0,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
